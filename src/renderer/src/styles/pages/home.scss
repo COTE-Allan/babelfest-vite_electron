@@ -13,7 +13,7 @@
     align-items: center;
     font-family: 'Kimberly Bl', sans-serif;
     position: fixed;
-    top: calc(50% + 15px);
+    top: calc(50% + 25px);
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -188,9 +188,9 @@
 
   .grid-leaderboard {
     grid-area: 1 / 1 / 6 / 2;
-
     display: block;
-    padding: 20px 10px;
+    padding: 5px;
+    padding-top: 15px;
     overflow: auto;
 
     &-content {
@@ -204,9 +204,9 @@
       width: 100%;
 
       & .rank {
-        font-size: 30px;
+        font-size: 25px;
         font-weight: bold;
-        width: 40px;
+        width: 30px;
         /* Vous pouvez également envisager d'utiliser min-width ici si nécessaire */
       }
 
@@ -227,7 +227,7 @@
         }
 
         & h2 {
-          font-size: 20px;
+          font-size: 16px;
           margin: 0;
         }
 

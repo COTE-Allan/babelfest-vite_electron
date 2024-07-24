@@ -1,37 +1,53 @@
-import { app, shell, BrowserWindow, ipcMain, Menu } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, Menu, screen } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png'
 import { setupTitlebar, attachTitlebarToWindow } from 'custom-electron-titlebar/main'
+import Store from 'electron-store'
+
+const store = new Store()
 
 setupTitlebar()
 
+let mainWindow
+
 function createWindow() {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 1536,
-    height: 864,
-    minWidth: 1536,
-    minHeight: 864,
+  const screenMode = store.get('screenMode', 'windowed')
+  const resolution = store.get('resolution', '1536x864').split('x')
+  const width = parseInt(resolution[0])
+  const height = parseInt(resolution[1])
+
+  mainWindow = new BrowserWindow({
+    width,
+    height,
+    minWidth: 800,
+    minHeight: 600,
     show: false,
     autoHideMenuBar: true,
-    resizable: false,
+    maximizable: true,
+    resizable: true, // Allow resizing initially
+    fullscreen: screenMode === 'fullscreen',
     titleBarStyle: 'hidden',
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/index.mjs'),
       sandbox: false,
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: true
     }
   })
+
   const menu = new Menu()
   Menu.setApplicationMenu(menu)
   attachTitlebarToWindow(mainWindow)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+    // Disable resizing after the window is shown
+    setTimeout(() => {
+      mainWindow.setResizable(false)
+    }, 100)
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -39,49 +55,85 @@ function createWindow() {
     return { action: 'deny' }
   })
 
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  return mainWindow
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
-  // Default open or close DevTools by F12 in development
-  // and ignore CommandOrControl + R in production.
-  // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.handle('get-settings', () => {
+    console.log('get-settings called')
+    const settings = {
+      sfxVolume: store.get('sfxVolume', 0.5),
+      bgOn: store.get('bgOn', true),
+      tutorial: store.get('tutorial', true),
+      screenMode: store.get('screenMode', 'windowed'),
+      resolution: store.get('resolution', '1536x864')
+    }
+    console.log(settings)
+    return settings
+  })
+
+  ipcMain.on('settings', (_, settings) => {
+    console.log('ah!', settings)
+
+    // Enregistrement des paramètres
+    store.set('screenMode', settings.screenMode)
+    store.set('resolution', settings.resolution)
+    store.set('sfxVolume', settings.sfxVolume)
+    store.set('tutorial', settings.tutorial)
+    store.set('bgOn', settings.bgOn)
+
+    // Enable resizing temporarily to change the size
+    mainWindow.setResizable(true)
+
+    if (settings.screenMode === 'fullscreen') {
+      // Passer en mode plein écran
+      const { width, height } = screen.getPrimaryDisplay().workAreaSize
+      mainWindow.setFullScreen(false) // Pour éviter les problèmes potentiels de redimensionnement
+      mainWindow.setSize(width, height)
+      mainWindow.setFullScreen(true)
+    }
+
+    if (settings.screenMode === 'windowed') {
+      // Passer en mode fenêtre avec la résolution choisie
+      mainWindow.setFullScreen(false)
+      const [width, height] = settings.resolution.split('x').map(Number)
+      mainWindow.setSize(width, height)
+      mainWindow.center() // Pour recentrer la fenêtre après redimensionnement
+    }
+
+    // Disable resizing again after applying the new size
+    mainWindow.setResizable(false)
+
+    // Envoyer les paramètres mis à jour à React via IPC
+    mainWindow.webContents.send('settings-updated', settings)
+  })
+
+  // Ajoutez le gestionnaire d'événements IPC pour fermer l'application
+  ipcMain.on('close-app', () => {
+    app.quit()
+  })
 
   createWindow()
 
   app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.

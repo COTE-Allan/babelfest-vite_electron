@@ -1,15 +1,24 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import winIcon from '../../resources/babelfest_w.ico'
 import pkg from 'custom-electron-titlebar'
 const { Titlebar } = pkg
 const { TitlebarColor } = pkg
-// Custom APIs for renderer
-const api = {}
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
+console.log('Preload script loaded')
+
+// Custom APIs for renderer
+const api = {
+  send: (channel, data) => {
+    console.log(`Sending ${channel} with data: ${JSON.stringify(data)}`)
+    ipcRenderer.send(channel, data)
+  },
+  invoke: (channel, data) => {
+    console.log(`Invoking ${channel} with data: ${JSON.stringify(data)}`)
+    return ipcRenderer.invoke(channel, data)
+  }
+}
+
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
@@ -26,12 +35,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const options = {
     backgroundColor: TitlebarColor.fromHex('#000'),
     icon: winIcon,
-    tooltips: {
-      minimize: 'Réduire',
-      maximize: 'Agrandir',
-      restoreDown: 'Restaurer',
-      close: 'Fermer'
-    }
+    minimizable: false,
+    maximizable: false
   }
   new Titlebar(options)
 })

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Cheghel",
+    "title": "L'omniscient",
+    "desc": "Ajoutée au jeu pour commémorer la sortie de la campagne de Liminalis.",
+    "atk": 0,
+    "dep": 1,
+    "hp": 6,
+    "baseatk": 0,
+    "basedep": 1,
+    "basehp": 6,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1720122709/babelfest/promo/babelfest_promo_1.webp",
+    "rarity": 2,
+    "collection": "Promo",
+    "author": "Neald",
+    "shiny": "foil",
+    "effects": [
+      {
+        "type": "randomATK",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 3, 3, 3, 3],
+        "spawnUsed": false
+      },
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "name": "Éclaireur",
+        "target": "rival"
+      },
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      }
+    ]
+  }
+]

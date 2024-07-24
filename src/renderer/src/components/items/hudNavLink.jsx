@@ -16,6 +16,7 @@ export default function HudNavLink(props) {
       onMouseEnter={hover}
       className={'hudNavLink ' + props.className}
       onClick={() => {
+        console.log(userSettings.sfxVolume)
         select()
         if (props.onClick) {
           props.onClick()

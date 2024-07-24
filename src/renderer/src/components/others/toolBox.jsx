@@ -16,6 +16,7 @@ import originCards from '../../jsons/cards/originCards.json'
 import reinforcementCards from '../../jsons/cards/reinforcementCards.json'
 import babelfish from '../../jsons/cards/babelfish.json'
 import mecanicaCards from '../../jsons/cards/mecanicaCards.json'
+import promoCards from '../../jsons/cards/promoCards.json'
 
 import bordersData from '../../jsons/skins/borderProfile.json'
 import colorsData from '../../jsons/skins/colorsSkins.json'
@@ -135,7 +136,8 @@ export function getAllCards() {
     ...originCards.map(addUniqueId),
     ...reinforcementCards.map(addUniqueId),
     ...babelfish.map(addUniqueId),
-    ...mecanicaCards.map(addUniqueId)
+    ...mecanicaCards.map(addUniqueId),
+    ...promoCards.map(addUniqueId)
   )
 
   return cards

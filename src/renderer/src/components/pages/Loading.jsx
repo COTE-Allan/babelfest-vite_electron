@@ -5,8 +5,7 @@ import { toast } from 'react-toastify'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 
 export default function Loading(params) {
-  const { loading, userInfo, updateOnlineStatus, resetUserState, user, tryAuth } =
-    useContext(AuthContext)
+  const { loading, userInfo, updateOnlineStatus, user, tryAuth } = useContext(AuthContext)
   const navigate = useNavigate()
 
   async function handleUpdateOnlineStatus() {
@@ -30,7 +29,6 @@ export default function Loading(params) {
         }
         await updateOnlineStatus(user.uid, false)
       } else if (user) {
-        resetUserState()
         toast.error(
           'Connexion interrompue, rafraichissez ou quittez les autres instances de Babelfest.'
         )
@@ -42,6 +40,7 @@ export default function Loading(params) {
     } else if (user === false) {
       goToHomePage()
     }
+    console.log(user)
   }, [userInfo])
 
   useEffect(() => {

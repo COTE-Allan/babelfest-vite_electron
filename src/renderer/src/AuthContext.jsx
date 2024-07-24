@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged, updateEmail } from 'firebase/auth'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ref, onValue, set, onDisconnect } from 'firebase/database'
@@ -11,12 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [userInfo, setUserInfo] = useState({})
-  const [userSettings, setUserSettings] = useState({
-    sfxVolume: 0.5,
-    bgOn: true,
-    tutorial: true,
-    musicPlayer: false
-  })
+  const [userSettings, setUserSettings] = useState({})
 
   const tryAuth = async () => {
     const auth = getAuth()
@@ -34,6 +29,27 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe()
   }
+
+  useEffect(() => {
+    // Charger les paramètres depuis Electron Store au démarrage
+    window.api.invoke('get-settings').then((settings) => {
+      console.log(settings)
+      setUserSettings(settings)
+    })
+
+    // Initialiser l'authentification
+    const auth = getAuth()
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        console.log('Utilisateur connecté:', currentUser)
+        await updateUserState(currentUser)
+      } else {
+        console.log('Utilisateur déconnecté')
+      }
+    })
+
+    return () => unsubscribe()
+  }, [])
 
   const updateUserState = async (currentUser) => {
     setUser(currentUser)
@@ -65,43 +81,20 @@ export const AuthProvider = ({ children }) => {
         status: userData.status,
         currentLobby: userData.currentLobby
       })
-      setUserSettings({
-        sfxVolume: userData.settings.sfxVolume ?? 0.5,
-        bgOn: userData.settings.bgOn ?? true,
-        tutorial: userData.settings.tutorial ?? true,
-        musicPlayer: userData.settings.musicPlayer ?? false
-      })
     }
   }
 
   const resetUserState = () => {
+    console.log('reset')
     setUser(false)
-    setUserInfo({
-      email: null,
-      username: 'unlog',
-      profilePic: null,
-      primaryColor: null,
-      secondaryColor: null,
-      flags: [],
-      title: null,
-      banner: null,
-      friends: [],
-      level: 0,
-      xp: 0,
-      stats: {
-        gamesPlayed: 0,
-        victories: 0,
-        mmr: 'NaN',
-        winStreak: 0,
-        longestWinStreak: 0
-      }
-    })
-    setUserSettings({
-      sfxVolume: 0.5,
-      bgOn: true,
-      tutorial: true,
-      musicPlayer: false
-    })
+    setUserInfo(false)
+    // setUserSettings({
+    //   sfxVolume: 0.5,
+    //   bgOn: true,
+    //   tutorial: true,
+    //   screenMode: 'windowed',
+    //   resolution: '1536x864'
+    // })
   }
 
   const updateOnlineStatus = async (userId, isDisconnecting) => {
@@ -124,20 +117,6 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  // const loadUserFriends = async (friendsRefs) => {
-  //   if (friendsRefs && friendsRefs.length > 0) {
-  //     const friendsData = await Promise.all(
-  //       friendsRefs.map((friendRef) =>
-  //         getDoc(friendRef).then((friendDoc) => (friendDoc.exists() ? friendDoc.data() : null))
-  //       )
-  //     )
-  //     setUserInfo((prev) => ({
-  //       ...prev,
-  //       friends: friendsData.filter((friend) => friend !== null)
-  //     }))
-  //   }
-  // }
-
   const updateUser = async (updates) => {
     if (!user) return
     const userRef = doc(db, 'users', user.uid)
@@ -159,10 +138,9 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const saveSettings = async () => {
-    if (!user) return
-    const userRef = doc(db, 'users', user.uid)
-    await updateDoc(userRef, { settings: userSettings })
+  const saveSettings = () => {
+    // Sauvegarder les paramètres dans Electron Store
+    window.api.send('settings', userSettings)
     toast.success('Les modifications ont correctement été appliquées.')
   }
 
@@ -212,7 +190,6 @@ export const AuthProvider = ({ children }) => {
     updateUser,
     saveSettings,
     assignUserToLobby,
-    resetUserState,
     tryAuth
   }
 

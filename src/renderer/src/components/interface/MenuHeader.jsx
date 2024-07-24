@@ -12,69 +12,28 @@ import { FaPlay, FaSearch, FaUser, FaUserFriends } from 'react-icons/fa'
 import { SiCodemagic } from 'react-icons/si'
 import { IoMdSettings } from 'react-icons/io'
 import { MdArticle, MdMusicNote } from 'react-icons/md'
-import { getAuth, signOut } from 'firebase/auth'
-import { toast } from 'react-toastify'
 import Modal from '../items/ClassicModal'
 import Button from '../items/Button'
 import Clock from '../esthetics/Clock'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
-import { PiArticleNyTimesFill } from 'react-icons/pi'
 
 export default function MenuHeader() {
-  const [scrolled, setScrolled] = useState(false)
   const [musicPlayer, setMusicPlayer] = useState(false)
   const [askForLogout, setAskForLogout] = useState(false)
-
-  const navigate = useNavigate()
 
   const { user, updateOnlineStatus } = useContext(AuthContext)
   const { matchmakingSearch, searchTime } = useContext(MatchmakingContext)
 
-  const handleScroll = () => {
-    const offset = window.scrollY
-    if (offset > 50) {
-      setScrolled(true)
-    } else {
-      setScrolled(false)
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
   const handleSignOut = () => {
     if (askForLogout) {
-      const auth = getAuth()
-      const userId = auth.currentUser.uid // Assurez-vous d'obtenir l'ID de l'utilisateur actuel de manière appropriée.
-
-      // Mise à jour du statut de l'utilisateur sur "offline" avant la déconnexion
-      updateOnlineStatus(userId, true).then(() => {
-        signOut(auth)
-          .then(() => {
-            // Ici, vous pouvez naviguer ou afficher un message de succès après la mise à jour du statut et la déconnexion
-            navigate('/home')
-            toast.success('Vous avez correctement été deconnecté, au revoir !')
-          })
-          .catch((error) => {
-            // Gestion des erreurs de déconnexion
-            toast.error('Erreur lors de la déconnexion')
-          })
-      })
-
+      // Envoyer un événement IPC pour fermer l'application
+      window.api.send('close-app')
       setAskForLogout(false)
     } else {
       setAskForLogout(true)
     }
   }
-
   let headerClasses = 'menuHeader fade-in'
-  if (scrolled) {
-    headerClasses += ' black'
-  }
 
   return (
     <header className={headerClasses}>
@@ -133,17 +92,15 @@ export default function MenuHeader() {
             <span className="hidden-span"> Paramètres</span>
             <IoMdSettings size={40} />
           </HudNavLink>
+          <HudNavLink onClick={handleSignOut}>
+            <span className="hidden-span">Quitter</span>
+            <IoLogOut size={40} />
+          </HudNavLink>
           {user ? (
-            <>
-              <HudNavLink onClick={handleSignOut}>
-                <span className="hidden-span">Deconnexion</span>
-                <IoLogOut size={40} />
-              </HudNavLink>
-              <HudNavLink to={'/account'}>
-                <span className="hidden-span">Profil</span>
-                <ProfilePicture size={80} />
-              </HudNavLink>
-            </>
+            <HudNavLink to={'/account'}>
+              <span className="hidden-span">Profil</span>
+              <ProfilePicture size={80} />
+            </HudNavLink>
           ) : (
             <HudNavLink to={'/login'}>
               <span className="hidden-span"> Connexion</span>
@@ -158,7 +115,7 @@ export default function MenuHeader() {
       {askForLogout && (
         <Modal>
           <div className="modal-container">
-            <span>Se déconnecter ?</span>
+            <span>Voulez-vous vraiment quitter Babelfest ?</span>
             <Button onClick={handleSignOut}>Confirmer</Button>
             <Button onClick={() => setAskForLogout(false)}>Retour</Button>
           </div>

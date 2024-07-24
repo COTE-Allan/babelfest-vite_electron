@@ -1,21 +1,19 @@
 .foil .img-container {
   clip-path: url(#myClip);
-  background: linear-gradient(
-    48deg,
-    #e3c1f46d,
-    #d9d7ed6d,
-    #dff7f16d,
-    #acf0ff6d,
-    #e3c1f46d,
-    #d9d7ed6d,
-    #dff7f16d,
-    #acf0ff6d,
-    #e3c1f46d,
-    #d9d7ed6d,
-    #dff7f16d,
-    #acf0ff6d,
-    #e3c1f46d
-  );
+  background: linear-gradient(48deg,
+      #e3c1f46d,
+      #d9d7ed6d,
+      #dff7f16d,
+      #acf0ff6d,
+      #e3c1f46d,
+      #d9d7ed6d,
+      #dff7f16d,
+      #acf0ff6d,
+      #e3c1f46d,
+      #d9d7ed6d,
+      #dff7f16d,
+      #acf0ff6d,
+      #e3c1f46d);
   /* Répéter les couleurs pour doubler la longueur */
   animation: foil 2s linear infinite;
   background-size: 400% 400%;
@@ -54,12 +52,10 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(
-        ellipse farthest-corner at right bottom,
+    background: radial-gradient(ellipse farthest-corner at right bottom,
         #c0c0c0 0%,
         #a8a8a8 40%,
-        transparent 80%
-      ),
+        transparent 80%),
       radial-gradient(ellipse farthest-corner at left top, #e6e6e6 0%, #b0b0b0 62.5%, #b0b0b0 100%);
 
     animation: gold-foil 5s ease-in-out infinite;
@@ -75,12 +71,10 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(
-        ellipse farthest-corner at right bottom,
+    background: radial-gradient(ellipse farthest-corner at right bottom,
         #c0c0c0 0%,
         #a8a8a8 40%,
-        transparent 80%
-      ),
+        transparent 80%),
       radial-gradient(ellipse farthest-corner at left top, #e6e6e6 0%, #b0b0b0 62.5%, #b0b0b0 100%);
     animation: gold-foil 5s ease-in-out infinite;
     animation-delay: 70ms;
@@ -98,12 +92,10 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(
-        ellipse farthest-corner at right bottom,
+    background: radial-gradient(ellipse farthest-corner at right bottom,
         #9f7928 0%,
         #8a6e2f 40%,
-        transparent 80%
-      ),
+        transparent 80%),
       radial-gradient(ellipse farthest-corner at left top, #d1b464 0%, #5d4a1f 62.5%, #5d4a1f 100%);
     animation: gold-foil 5s ease-in-out infinite;
     mix-blend-mode: overlay;
@@ -118,12 +110,10 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(
-        ellipse farthest-corner at right bottom,
+    background: radial-gradient(ellipse farthest-corner at right bottom,
         #9f7928 0%,
         #8a6e2f 40%,
-        transparent 80%
-      ),
+        transparent 80%),
       radial-gradient(ellipse farthest-corner at left top, #d1b464 0%, #5d4a1f 62.5%, #5d4a1f 100%);
     animation: gold-foil 5s ease-in-out infinite;
     animation-delay: 70ms;
@@ -148,6 +138,7 @@
 }
 
 @keyframes shiner {
+
   0%,
   100% {
     filter: brightness(1) saturate(1);
@@ -175,5 +166,42 @@
     opacity: 0;
     top: -40%;
     left: -40%;
+  }
+}
+
+
+
+
+.rainbow_text_animated {
+  background: linear-gradient(48deg,
+      #e3c1f4,
+      #d9d7ed,
+      #dff7f1,
+      #acf0ff,
+      #e3c1f4,
+      #d9d7ed,
+      #dff7f1,
+      #acf0ff,
+      #e3c1f4,
+      #d9d7ed,
+      #dff7f1,
+      #acf0ff,
+      #e3c1f4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 0;
   }
 }

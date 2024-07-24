@@ -277,6 +277,11 @@ export default function Library() {
               <h1 className={`txt-rarity-${selected.rarity}`}>{selected.name}</h1>
               <h2 className={`txt-rarity-${selected.rarity}`}>{selected.title}</h2>
               <span>par {selected.author}</span>
+
+              {selected.desc && (
+                <p className="rainbow_text_animated library-detail-infos-desc">{selected.desc}</p>
+              )}
+
               {selected.rarity !== 5 ? (
                 <h2>Coût d'invocation : {selected.rarity}</h2>
               ) : (

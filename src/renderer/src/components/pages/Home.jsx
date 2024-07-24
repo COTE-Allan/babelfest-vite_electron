@@ -247,12 +247,7 @@ const HomeGridItem = ({ bg, onClick, className, children, isButton, needLogin, l
       onClick={() => {
         if (isButton) {
           select()
-          if (needLogin && !user) {
-            sendErrorMessage('Vous devez être connecté pour accéder à cette fonctionnalité.')
-            navigate('/login')
-          } else if (onClick) {
-            onClick()
-          }
+          onClick()
         }
       }}
       onMouseEnter={() => isButton && hover()}
