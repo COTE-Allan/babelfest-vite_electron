@@ -1,0 +1,117 @@
+@import '../variables.scss';
+
+.musicPlayer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+
+  &-container {
+    padding: 20px;
+    border-radius: 0 15px 15px 0;
+    transform: translateX(-100%);
+    position: absolute;
+    top: 15vh;
+    background-color: $black;
+    transition: transform 0.2s ease-in-out;
+    border: 3px solid rgb(215, 215, 215);
+    border-left: none;
+    z-index: 1;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+
+  &-infos {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 300px;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    font-family: 'Kimberly Bl', sans-serif;
+
+    &.active span {
+      animation: textTranslate 15s linear infinite;
+    }
+  }
+
+  & span {
+    display: inline-block;
+  }
+
+  &-controller {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-slider {
+      margin-top: 5px;
+      width: 50%;
+    }
+
+    & button {
+      background-color: transparent;
+      border: none;
+      margin: 2px;
+      padding: 0;
+      height: 50px;
+      width: 50px;
+
+      &:hover {
+        background-color: $grey;
+      }
+    }
+  }
+}
+
+@keyframes textTranslate {
+  from {
+    transform: translateX(100%);
+    /* Démarre de l'extérieur du cadre à droite */
+  }
+
+  to {
+    transform: translateX(-100%);
+    /* Termine à l'extérieur du cadre à gauche */
+  }
+}
+
+#particles {
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.note {
+  position: absolute;
+  font-size: 15px;
+  /* Taille de la note de musique */
+  animation: moveNote linear infinite;
+  opacity: 0.7;
+  /* Légère transparence pour un meilleur effet */
+  color: white;
+  /* Couleur de la note, choisissez selon votre préférence */
+}
+
+@keyframes moveNote {
+  0% {
+    transform: translateY(70px) scale(0.5);
+    /* Démarre juste en dessous du conteneur */
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(0px) scale(2);
+    /* Termine juste au-dessus du conteneur */
+    opacity: 0;
+  }
+}

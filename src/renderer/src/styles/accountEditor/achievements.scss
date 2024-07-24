@@ -1,0 +1,137 @@
+@import '../variables.scss';
+
+.achievements {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    & h2 {
+      font-family: 'Kimberly Bl', sans-serif;
+      margin: 0;
+      font-size: 30px;
+      margin-top: 10px;
+    }
+  }
+
+  &-infos {
+    & h3 {
+      font-family: 'Kimberly Bl', sans-serif;
+      margin: 0;
+      font-size: 20px;
+    }
+  }
+
+  &-list {
+    padding: 10px 0;
+    display: flex;
+
+    &-item {
+      opacity: 0.4;
+      filter: grayscale(100%);
+      margin-right: 15px;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      & img {
+        width: 75px;
+        height: 75px;
+        @include greyBorders();
+        border-radius: 15px;
+      }
+    }
+  }
+
+  &-levels {
+    display: flex;
+    border-radius: 15px;
+    // flex-wrap: wrap;
+    padding: 10px 0;
+    padding-bottom: 20px;
+    overflow-x: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:hover {
+      cursor: grab;
+    }
+
+    &-wrapper {
+      height: 100%;
+      position: relative;
+    }
+
+    &-item {
+      flex-shrink: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 200px;
+      font-family: 'Kimberly Bl', sans-serif;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 10px 5px;
+      opacity: 0.8;
+      transition:
+        background-color 150ms ease-in-out,
+        opacity 50ms ease-in-out;
+      margin: 10px;
+      border-radius: 10px;
+
+      & hr {
+        width: 80%;
+        margin: 10px 0;
+        margin-top: 0;
+      }
+
+      &:hover,
+      &.unlocked {
+        opacity: 1;
+      }
+
+      &.unlocked {
+        display: none;
+      }
+
+      & img {
+        margin: auto 0;
+        max-width: 90%;
+        max-height: 70px;
+      }
+
+      & .color {
+        margin: auto 0;
+        height: 70px;
+        width: 70px;
+      }
+
+      & .name {
+        margin-top: 5px;
+        font-size: 18px;
+        text-align: center;
+      }
+
+      & .type {
+        font-size: 13px;
+      }
+
+      & .level {
+        font-size: 20px;
+        height: 30px;
+      }
+
+      & .title {
+        margin: auto 0;
+        font-size: 25px;
+        text-align: center;
+        line-height: 35px;
+      }
+    }
+  }
+}

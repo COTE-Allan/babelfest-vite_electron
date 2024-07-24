@@ -1,0 +1,139 @@
+/* Rang Bronze */
+.bronze {
+  color: #cd7f32;
+  /* Couleur du texte bronze */
+  text-shadow:
+    1px 1px 2px #000,
+    /* Ombre noire pour du contraste */ 0 0 1em #805a34,
+    /* Lueur externe légère */ 0 0 0.2em #805a34;
+  /* Lueur externe plus sombre */
+}
+
+/* Rang Argent */
+.argent {
+  color: #c0c0c0;
+  /* Couleur du texte argent */
+  text-shadow:
+    1px 1px 2px #000,
+    /* Ombre noire pour du contraste */ 0 0 1em #b3b3b3,
+    /* Lueur externe légère */ 0 0 0.2em #b3b3b3;
+  /* Lueur externe plus sombre */
+}
+
+/* Rang Or */
+.or {
+  color: #eaad20;
+  /* Couleur du texte or */
+  text-shadow:
+    1px 1px 2px #000,
+    /* Ombre noire pour du contraste */ 0 0 1em #e5c100,
+    /* Lueur externe dorée */ 0 0 0.2em #e5c100;
+  /* Lueur externe plus intense */
+}
+
+/* Rang Diamant */
+.diamant {
+  color: #b9f2ff;
+  /* Couleur du texte diamant */
+  text-shadow:
+    1px 1px 2px #000,
+    /* Ombre noire pour du contraste */ 0 0 1em #a7e7ff,
+    /* Lueur externe bleu clair */ 0 0 0.2em #a7e7ff;
+  /* Lueur externe plus intense */
+}
+
+/* Rang Maître (Arc-en-ciel animé pour l'ombre de texte) */
+.maitre {
+  color: #fff;
+  /* Couleur du texte */
+  text-shadow:
+    0 0 8px #ff0000,
+    /* Rouge */ 0 0 8px #ff7f00,
+    /* Orange */ 0 0 8px #ffff00,
+    /* Jaune */ 0 0 8px #00ff00,
+    /* Vert */ 0 0 8px #0000ff,
+    /* Bleu */ 0 0 8px #4b0082,
+    /* Indigo */ 0 0 8px #9400d3;
+  /* Violet */
+  animation: rainbowTextShadow 6s linear infinite;
+}
+
+@keyframes rainbowTextShadow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 8px #ff0000,
+      0 0 8px #ff7f00,
+      0 0 8px #ffff00,
+      0 0 8px #00ff00,
+      0 0 8px #0000ff,
+      0 0 8px #4b0082,
+      0 0 8px #9400d3;
+  }
+
+  14% {
+    text-shadow:
+      0 0 8px #9400d3,
+      0 0 8px #ff0000,
+      0 0 8px #ff7f00,
+      0 0 8px #ffff00,
+      0 0 8px #00ff00,
+      0 0 8px #0000ff,
+      0 0 8px #4b0082;
+  }
+
+  28% {
+    text-shadow:
+      0 0 8px #4b0082,
+      0 0 8px #9400d3,
+      0 0 8px #ff0000,
+      0 0 8px #ff7f00,
+      0 0 8px #ffff00,
+      0 0 8px #00ff00,
+      0 0 8px #0000ff;
+  }
+
+  42% {
+    text-shadow:
+      0 0 8px #0000ff,
+      0 0 8px #4b0082,
+      0 0 8px #9400d3,
+      0 0 8px #ff0000,
+      0 0 8px #ff7f00,
+      0 0 8px #ffff00,
+      0 0 8px #00ff00;
+  }
+
+  56% {
+    text-shadow:
+      0 0 8px #00ff00,
+      0 0 8px #0000ff,
+      0 0 8px #4b0082,
+      0 0 8px #9400d3,
+      0 0 8px #ff0000,
+      0 0 8px #ff7f00,
+      0 0 8px #ffff00;
+  }
+
+  70% {
+    text-shadow:
+      0 0 8px #ffff00,
+      0 0 8px #00ff00,
+      0 0 8px #0000ff,
+      0 0 8px #4b0082,
+      0 0 8px #9400d3,
+      0 0 8px #ff0000,
+      0 0 8px #ff7f00;
+  }
+
+  84% {
+    text-shadow:
+      0 0 8px #ff7f00,
+      0 0 8px #ffff00,
+      0 0 8px #00ff00,
+      0 0 8px #0000ff,
+      0 0 8px #4b0082,
+      0 0 8px #9400d3,
+      0 0 8px #ff0000;
+  }
+}

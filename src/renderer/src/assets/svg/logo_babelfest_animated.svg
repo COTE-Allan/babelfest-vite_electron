@@ -1,0 +1,30 @@
+<svg id="e10IrckFRYo1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 200 200" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+    <style><![CDATA[
+#e10IrckFRYo4_to {animation: e10IrckFRYo4_to__to 3000ms linear infinite normal forwards}@keyframes e10IrckFRYo4_to__to { 0% {offset-distance: 0%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 25% {offset-distance: 25%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 50% {offset-distance: 50%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 75% {offset-distance: 75%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 100% {offset-distance: 100%}} #e10IrckFRYo5_to {animation: e10IrckFRYo5_to__to 3000ms linear infinite normal forwards}@keyframes e10IrckFRYo5_to__to { 0% {offset-distance: 0%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 25% {offset-distance: 25%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 50% {offset-distance: 50%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 75% {offset-distance: 75%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 100% {offset-distance: 100%}} #e10IrckFRYo6_to {animation: e10IrckFRYo6_to__to 3000ms linear infinite normal forwards}@keyframes e10IrckFRYo6_to__to { 0% {offset-distance: 0%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 25% {offset-distance: 25%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 50% {offset-distance: 50%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 75% {offset-distance: 75%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 100% {offset-distance: 100%}} #e10IrckFRYo7_to {animation: e10IrckFRYo7_to__to 3000ms linear infinite normal forwards}@keyframes e10IrckFRYo7_to__to { 0% {offset-distance: 0%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 25% {offset-distance: 25%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 50% {offset-distance: 50%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 75% {offset-distance: 75%;animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 100% {offset-distance: 100%}}
+]]></style>
+    <g transform="matrix(1.372738 0 0 1.372738-37.437804-37.445261)">
+        <g>
+            <g id="e10IrckFRYo4_to"
+                style="offset-path:path('M65.534993,134.709382L65.534994,65.540424L134.703953,65.540425L134.703952,134.709384L65.534993,134.709382');offset-rotate:0deg">
+                <rect width="59.11" height="59.11" rx="16.02" ry="16.02"
+                    transform="translate(-29.555004,-29.554999)" fill="#ff1d25" />
+            </g>
+            <g id="e10IrckFRYo5_to"
+                style="offset-path:path('M134.703953,134.709382L65.534994,134.709384L65.534992,65.540426L134.70395,65.540423L134.703953,134.709382');offset-rotate:0deg">
+                <rect width="59.11" height="59.11" rx="16.02" ry="16.02" fill="#fff"
+                    transform="translate(-29.554997,-29.555001)" />
+            </g>
+            <g id="e10IrckFRYo6_to"
+                style="offset-path:path('M134.703951,65.540425L134.703951,134.709384L65.534993,134.709384L65.534993,65.540425L134.703951,65.540425');offset-rotate:0deg">
+                <rect width="59.11" height="59.11" rx="16.02" ry="16.02"
+                    transform="translate(-29.555006,-29.555003)" fill="#3fa9f5" />
+            </g>
+            <g id="e10IrckFRYo7_to"
+                style="offset-path:path('M65.534993,65.540425L134.703952,65.540425L134.703952,134.709384L65.534993,134.709384L65.534993,65.540425');offset-rotate:0deg">
+                <rect width="59.11" height="59.11" rx="16.02" ry="16.02" fill="#fff"
+                    transform="translate(-29.554998,-29.555002)" />
+            </g>
+        </g>
+    </g>
+</svg>

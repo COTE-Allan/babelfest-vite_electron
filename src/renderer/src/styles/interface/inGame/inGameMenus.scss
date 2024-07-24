@@ -1,0 +1,81 @@
+@import '../../variables.scss';
+
+.ig-menu {
+  position: absolute;
+  display: flex;
+  font-size: 25px;
+
+  $pos: 15px;
+
+  &.bottom {
+    bottom: $pos;
+    right: $pos;
+  }
+
+  &.top {
+    top: $pos;
+    left: $pos;
+  }
+
+  &-button {
+    display: flex;
+    align-items: center;
+    transition:
+      color 200ms ease-in-out,
+      background-color 200ms ease-in-out,
+      border 200ms ease-in-out;
+    border-radius: 10px;
+    border-color: rgb(215, 215, 215);
+
+    &.active {
+      border-color: white;
+      background-color: rgb(120, 120, 120);
+      animation: pulsate-fwd 0.15s ease-in-out both;
+
+      color: white;
+    }
+
+    & span {
+      display: inline-block;
+      max-width: 0;
+      overflow: hidden;
+      transition:
+        max-width 200ms ease-in-out,
+        margin 200ms ease-in-out;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      & span {
+        max-width: 250px;
+        margin: 0 5px;
+      }
+    }
+  }
+
+  & .costCounter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 5px;
+    border-radius: 10px;
+    font-family: 'Kimberly Bl', sans-serif;
+    font-size: 17px;
+
+    &-infos {
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & span {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

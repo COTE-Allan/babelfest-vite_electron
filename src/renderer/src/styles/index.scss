@@ -1,0 +1,549 @@
+@import 'variables.scss';
+
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: black;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  width: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+img {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: calc(100vw - (20px * 2));
+  min-height: calc(100vh - (20px * 2));
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  text-align: center;
+  background-color: $black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; // width: 100%;
+  border-radius: 5px;
+  border: solid 2px rgb(255, 255, 255);
+  font-family: 'Kimberly Bl', sans-serif;
+  color: white;
+  font-size: 20px;
+  transition:
+    background-color 200ms ease-in-out,
+    color 200ms ease-in-out;
+  @include greyBorders();
+
+  &.selected {
+    background-color: rgb(81, 81, 81);
+    border-color: white;
+  }
+
+  &:hover {
+    border-color: white;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: black;
+  }
+
+  &.flex-button {
+    display: flex;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+button:hover {
+  border-color: #ffffff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.gameContainer {
+  $borderWidth: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100vw);
+  height: calc(100vh);
+  // overflow: hidden;
+
+  &-filter,
+  &-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-filter {
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transition: background-color 200ms ease-in-out;
+    opacity: 60%;
+    mix-blend-mode: multiply;
+  }
+
+  &-bg {
+    z-index: -2;
+    opacity: 50%;
+    filter: blur(5px);
+    height: 100%;
+    width: 100%;
+    background-color: white;
+  }
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f5f5f5 #000000;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #f5f5f5;
+  border-radius: 7px;
+  border: 3px solid #ffffff;
+}
+
+// Déclaration de la police
+@font-face {
+  font-family: 'Kimberly Bl';
+  src: url('../assets/fonts/kimberleybl.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Badaboom';
+  src: url('../assets/fonts/BADABB__.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.waiting {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  width: auto;
+  margin: 0;
+  padding: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  font-family: 'Kimberly Bl', sans-serif;
+}
+
+input,
+select {
+  height: 35px;
+  padding: 10px;
+  font-size: 15px;
+  background-color: $black;
+  border-radius: 5px;
+  border: solid 2px rgb(255, 255, 255);
+  font-family: 'Kimberly Bl', sans-serif;
+  color: white;
+
+  &::placeholder {
+    color: rgb(226, 226, 226, 0.7);
+    opacity: 1;
+    /* Firefox */
+  }
+}
+
+select {
+  height: 60px;
+}
+
+.flex {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+  }
+}
+
+.btn-icon {
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  height: 35%;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.tip {
+  margin: 5px 0;
+  font-size: 15px;
+  display: block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.link {
+  margin: 10px;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.ingame {
+  &-button {
+    color: white;
+    font-family: 'Kimberly Bl', sans-serif;
+    width: 350px;
+    background-color: $black;
+    padding: 15px;
+    font-size: 20px;
+
+    & a {
+      padding: 0;
+      margin: 0;
+      color: white;
+      font-family: 'Kimberly Bl', sans-serif;
+    }
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mobile-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Kimberly Bl', sans-serif;
+  background-color: black;
+  position: fixed;
+  overflow: hidden;
+  padding: 0 10px;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 20px);
+  height: 100vh;
+  z-index: 5;
+
+  @include for-desktop-up {
+    display: none;
+  }
+}
+
+.warning {
+  color: rgb(255, 36, 36);
+  font-family: 'Kimberly Bl', sans-serif;
+  font-size: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.disabled {
+  opacity: 20%;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+@include txt-rarities();
+
+span.alert {
+  color: red;
+  font-family: 'Kimberly Bl', sans-serif;
+}
+
+button.alert {
+  box-shadow: rgb(226, 167, 5) 0 0 20px;
+  background-color: rgba(175, 137, 32, 0.5);
+
+  &:hover {
+    color: white;
+  }
+}
+
+.loadingScreen {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+
+  & h1 {
+    margin: 0;
+    margin-top: 10px;
+    font-size: 17px;
+    text-transform: uppercase;
+    font-family: 'Kimberly Bl', sans-serif;
+  }
+
+  & img {
+    height: 100px;
+  }
+}
+
+.spinner {
+  height: 100px;
+}
+
+.zoom-in {
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.fade-out {
+  animation: fade-out 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.fade-in {
+  animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.fade-in-out {
+  animation: fade-in-out 2s ease-in-out both;
+}
+
+.window {
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  padding: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 22vw;
+  height: 65vh;
+  background-color: $black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgb(215, 215, 215);
+
+  &.right {
+    border-radius: 10px 0 0 10px;
+    right: 0;
+    border-right: none;
+  }
+
+  &.left {
+    border-radius: 0 10px 10px 0;
+    left: 0;
+    border-left: none;
+  }
+
+  & img {
+    width: 100%;
+  }
+
+  & h1 {
+    font-family: 'Kimberly Bl', sans-serif;
+    text-align: center;
+    font-size: 30px;
+    padding: 15px;
+  }
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.windowTransitionRight-enter {
+  transform: translateX(100%) translateY(-50%);
+}
+
+.windowTransitionRight-enter-active {
+  transform: translateX(0) translateY(-50%);
+  transition: transform 200ms;
+}
+
+.windowTransitionRight-exit {
+  transform: translateX(0) translateY(-50%);
+}
+
+.windowTransitionRight-exit-active {
+  transform: translateX(100%) translateY(-50%);
+  transition: transform 200ms;
+}
+
+.windowTransitionLeft-enter {
+  transform: translateX(-100%) translateY(-50%);
+}
+
+.windowTransitionLeft-enter-active {
+  transform: translateX(0) translateY(-50%);
+  transition: transform 200ms;
+}
+
+.windowTransitionLeft-exit {
+  transform: translateX(0) translateY(-50%);
+}
+
+.windowTransitionLeft-exit-active {
+  transform: translateX(-100%) translateY(-50%);
+  transition: transform 200ms;
+}
+
+.xp-bar {
+  margin: 20px 0;
+  width: 100%;
+  font-family: 'Kimberly Bl', sans-serif;
+
+  &-infos {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+}
+
+// Couleurs animés
+
+.rainbow {
+  animation: rainbow 20s linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+  100%,
+  0% {
+    background-color: hsl(0, 100%, 75%);
+    /* More pastel red */
+  }
+
+  8% {
+    background-color: hsl(30, 100%, 70%);
+    /* More pastel orange */
+  }
+
+  16% {
+    background-color: hsl(60, 100%, 75%);
+    /* More pastel yellow */
+  }
+
+  25% {
+    background-color: hsl(90, 100%, 70%);
+    /* More pastel lime green */
+  }
+
+  33% {
+    background-color: hsl(120, 100%, 75%);
+    /* More pastel green */
+  }
+
+  41% {
+    background-color: hsl(150, 100%, 70%);
+    /* More pastel spring green */
+  }
+
+  50% {
+    background-color: hsl(180, 100%, 75%);
+    /* More pastel cyan */
+  }
+
+  58% {
+    background-color: hsl(210, 100%, 70%);
+    /* More pastel sky blue */
+  }
+
+  66% {
+    background-color: hsl(231, 90%, 70%);
+    /* More pastel blue */
+  }
+
+  75% {
+    background-color: hsl(270, 100%, 70%);
+    /* More pastel violet */
+  }
+
+  83% {
+    background-color: hsl(300, 100%, 75%);
+    /* More pastel magenta */
+  }
+
+  91% {
+    background-color: hsl(330, 100%, 70%);
+    /* More pastel rose */
+  }
+}
+
+.cet-container {
+  overflow: hidden !important;
+}

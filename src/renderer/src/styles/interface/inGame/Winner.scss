@@ -1,0 +1,44 @@
+@import '../../variables.scss';
+
+.winner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadein 1s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.95) !important;
+
+  & > div {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & .xp-bar_container {
+    width: 100%;
+  }
+
+  & h1,
+  h2 {
+    margin: 5px;
+    text-align: center;
+    font-family: 'Kimberly Bl', sans-serif;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

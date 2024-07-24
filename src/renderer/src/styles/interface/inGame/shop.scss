@@ -1,0 +1,38 @@
+.shop {
+  &-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &-item {
+    margin: 5px;
+    position: relative;
+    flex: 0 0 calc(33% - 10px);
+    transition: transform 120ms ease-in-out;
+    // width: 50%;
+
+    &.selected {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        background-color: rgba(102, 218, 102, 0.5);
+        border-radius: 5px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

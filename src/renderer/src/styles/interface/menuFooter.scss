@@ -1,0 +1,14 @@
+.menuFooter {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  width: calc(100vw - 30px);
+  justify-content: space-between;
+  padding: 10px;
+  bottom: 0;
+  font-family: 'Kimberly Bl', sans-serif;
+
+  & nav {
+    display: flex;
+  }
+}

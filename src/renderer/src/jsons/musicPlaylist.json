@@ -1,0 +1,92 @@
+[
+  {
+    "url": "src/assets/songs/Fade_to_white.mp3",
+    "name": "Neon White OST: Fade To White",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/alice_in_the_alice.mp3",
+    "name": "Crash Fever - Alice in the ALICE",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/beat_em_up.mp3",
+    "name": "floopy, Cynax - Beat 'Em Up",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/spacecube.mp3",
+    "name": "THE FINALS - SpaceCube",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/floatingbits.mp3",
+    "name": "THE FINALS - FloatingBits",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/Fortress_of_lies.mp3",
+    "name": "Keiichi Okabe - Fortress of Lies",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/finalver2b.mp3",
+    "name": "THE FINALS - FinalVer2b",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/dreamer.mp3",
+    "name": "Throttle - Dreamer",
+    "role": "menu"
+  },
+  {
+    "url": "src/assets/songs/ordinary_days.mp3",
+    "name": "Klaus Veen - Ordinary Days V2",
+    "role": "any"
+  },
+  {
+    "url": "src/assets/songs/DL_yami_yugi.mp3",
+    "name": "Yu-Gi-Oh! Duel Links - Yami Yugi Theme",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/preliminary_duel.mp3",
+    "name": "Yu-Gi-Oh! 5D's Decade Duels Soundtrack - Preliminary Duel B",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/nearing_victory.mp3",
+    "name": "Yu-Gi-Oh! 5D's Decade Duels Soundtrack - Nearing Victory A",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/follow_the_white_rabbit.mp3",
+    "name": "Crash Fever - Follow the White Rabbit",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/cyber_grind.mp3",
+    "name": "meganeko - The Cyber Grind (Ultrakill Soundtrack)",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/elimination_duel.mp3",
+    "name": "Yu-Gi-Oh! 5D's Decade Duels Soundtrack - Elimination Duel A",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/virtual_paradise.mp3",
+    "name": "Neon White OST: Virtual Paradise",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/funky_beat.mp3",
+    "name": "Hideki Naganuma - AIN'T NOTHIN' LIKE A FUNKY BEAT",
+    "role": "ingame"
+  },
+  {
+    "url": "src/assets/songs/battle_colress.mp3",
+    "name": "Battle! Colress - Pokemon Masters EX (With Countdown)",
+    "role": "ingame"
+  }
+]

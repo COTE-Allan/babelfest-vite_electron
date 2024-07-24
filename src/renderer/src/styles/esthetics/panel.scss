@@ -1,0 +1,42 @@
+@import '../variables.scss';
+
+.panel {
+  &.middle {
+    & .panel-header {
+      justify-content: center;
+    }
+  }
+
+  background-color: $black;
+  border-radius: 15px;
+
+  @include for-desktop-up {
+    padding: 5px 10px;
+  }
+
+  @include for-big-desktop-up {
+    padding: 10px 20px;
+  }
+
+  margin: 10px;
+  position: relative;
+  overflow-y: auto;
+  max-height: calc(90vh - 20px);
+
+  &-content {
+    margin: 5px 0;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+
+    & span {
+      font-weight: 700;
+      font-size: 23px;
+      font-family: 'Kimberly Bl', sans-serif;
+    }
+  }
+}

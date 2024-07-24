@@ -1,0 +1,32 @@
+.target {
+  // width: 500px;
+  // height: 100px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 5px;
+  flex-grow: 1;
+  & img {
+    width: 150px;
+  }
+
+  & span {
+    text-align: center;
+  }
+
+  &.red {
+    background-color: #e62e31;
+  }
+
+  &.blue {
+    background-color: #40a8f5;
+  }
+
+  &.true {
+    background-color: green;
+    & img {
+      opacity: 70%;
+    }
+  }
+}

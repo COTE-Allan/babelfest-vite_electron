@@ -1,0 +1,1222 @@
+[
+  {
+    "name": "Amine",
+    "title": "Sous-chef de La Falaise",
+    "atk": 1,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Cielesis",
+    "effects": [{ "when": ["attacked"], "type": "trap", "reusable": true }]
+  },
+  {
+    "name": "Xav",
+    "title": "Colère Enfouie",
+    "atk": 2,
+    "dep": 3,
+    "hp": 1,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped2.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Sailorblue"
+  },
+  {
+    "name": "Tuto",
+    "title": "Soutien psychologique",
+    "atk": 1,
+    "dep": 3,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 3,
+    "basehp": 1,
+    "ghost": true,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped3.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Kiba",
+    "effects": [
+      {
+        "when": [3],
+        "type": "atkBuff",
+        "value": 1,
+        "target": "ally"
+      },
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "name": "Compteuse à trois cordes",
+    "title": "Épopée du guerrier et Fable du mage",
+    "atk": 1,
+    "dep": 2,
+    "hp": 4,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped4.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Bobbyjack",
+    "effects": [
+      {
+        "when": ["attack"],
+        "type": "swapStats"
+      }
+    ]
+  },
+  {
+    "name": "Joelle",
+    "title": "Rat de bibliothèque",
+    "atk": 1,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped5.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Chouchanna",
+    "effects": [
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "name": "Éclaireur",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Coeur de Kerak",
+    "title": "Faim insoutenable",
+    "atk": 3,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped6.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Nerrkha"
+  },
+  {
+    "name": "Eple",
+    "title": "Éclaireur",
+    "atk": 1,
+    "dep": 4,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 4,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped7.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Powmes",
+    "effects": [
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "target": "rival",
+        "name": "Éclaireur"
+      }
+    ]
+  },
+  {
+    "name": "Rainy",
+    "title": "Enfant de la pluie",
+    "atk": 1,
+    "dep": 1,
+    "hp": 2,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped8.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Onigami",
+    "effects": [
+      {
+        "when": [3],
+        "type": "atkBuff",
+        "value": 2,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "Silence Goodbye",
+    "title": "Charme Hasardeux",
+    "atk": 1,
+    "dep": 4,
+    "hp": 2,
+    "baseatk": 1,
+    "basedep": 4,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped9.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "JetDXT",
+    "effects": [{ "when": ["attacked"], "type": "trap", "reusable": true }]
+  },
+  {
+    "name": "Odasun",
+    "title": "Imbattable",
+    "atk": 6,
+    "dep": 1,
+    "hp": 5,
+    "baseatk": 6,
+    "basedep": 1,
+    "basehp": 5,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped10.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Seilongk",
+    "deathCounter": 2,
+    "effects": [
+      {
+        "when": [1],
+        "type": "deathCounter"
+      }
+    ]
+  },
+  {
+    "name": "Le conseil des Primats",
+    "title": "Béni par l'intrus",
+    "atk": 1,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped11.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Neald",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Mira l'alchimiste",
+    "title": "Breuvage régénérateur",
+    "atk": 1,
+    "dep": 3,
+    "hp": 2,
+    "baseatk": 1,
+    "basedep": 3,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped12.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Nanas-sama",
+    "healer": true,
+    "effects": [
+      {
+        "type": "healer"
+      }
+    ]
+  },
+  {
+    "name": "L'alien",
+    "title": "Tout sauf imaginaire",
+    "atk": 0,
+    "dep": 1,
+    "hp": 5,
+    "baseatk": 0,
+    "basedep": 1,
+    "basehp": 5,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped13.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Hugo Mollet",
+    "effects": [
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 1,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "La reine meurtrie",
+    "title": "Volonté de fer",
+    "atk": 2,
+    "dep": 1,
+    "hp": 4,
+    "baseatk": 2,
+    "basedep": 1,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped14.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Storlyv",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "deathSummon",
+        "location": "self",
+        "cards": [{ "name": "L'épée de légende", "title": "Puissance inexpliquée" }]
+      }
+    ]
+  },
+  {
+    "name": "Xyphias Tonitruo",
+    "title": "Impossible à surprendre",
+    "atk": 2,
+    "dep": 3,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped15.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Xyphias_"
+  },
+  {
+    "name": "Prince Déchu",
+    "title": "Pouvoir en sommeil",
+    "atk": 1,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped16.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Micami",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "freeze",
+        "value": 1,
+        "amount": 1,
+        "target": "rival",
+        "spawnUsed": false,
+        "choice": "target"
+      }
+    ]
+  },
+  {
+    "name": "Mendy Asimov",
+    "title": "Haine des faibles",
+    "atk": 2,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434653/babelfest/revamped/babelfest_origine_revamped17.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Trickster",
+    "effects": [
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Igor",
+    "title": "Immortel",
+    "atk": 1,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434654/babelfest/revamped/babelfest_origine_revamped18.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "ZeCailloux",
+    "fortress": true,
+    "effects": [
+      {
+        "type": "fortress"
+      }
+    ]
+  },
+  {
+    "name": "Lorenzoni Tiflaurs",
+    "title": "Sous les projecteurs",
+    "atk": 2,
+    "dep": 1,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 1,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434655/babelfest/revamped/babelfest_origine_revamped19.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Arouma",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Seven Cat",
+    "title": "Reposé",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434658/babelfest/revamped/babelfest_origine_revamped20.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Echo le faux",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "taser",
+        "alreadyUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Erika",
+    "title": "Guerrière solitaire",
+    "atk": 4,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 4,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434654/babelfest/revamped/babelfest_origine_revamped21.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Eli and the crows"
+  },
+  {
+    "name": "Patato",
+    "title": "Simiesque",
+    "atk": 2,
+    "dep": 3,
+    "hp": 1,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 1,
+    "ghost": true,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434653/babelfest/revamped/babelfest_origine_revamped22.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Patato",
+    "effects": [
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "name": "Panier Automate",
+    "title": "En balade",
+    "atk": 1,
+    "dep": 4,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 4,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434653/babelfest/revamped/babelfest_origine_revamped23.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Kreos",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "deathSummonDeck",
+        "location": "self"
+      }
+    ]
+  },
+  {
+    "name": "Sac Automate",
+    "title": "En mission",
+    "atk": 0,
+    "dep": 3,
+    "hp": 2,
+    "baseatk": 0,
+    "basedep": 3,
+    "basehp": 2,
+    "ghost": true,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434653/babelfest/revamped/babelfest_origine_revamped24.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Kreos",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "deathSummon",
+        "location": "self",
+        "cards": [{ "name": "Panier Automate", "title": "En balade" }]
+      },
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "name": "Phoebe",
+    "title": "Acrobate",
+    "atk": 2,
+    "dep": 4,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 4,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701434653/babelfest/revamped/babelfest_origine_revamped25.webp",
+    "rarity": 1,
+    "collection": "Origine",
+    "author": "Nymphyart"
+  },
+  {
+    "name": "Le démon des jeux-vidéo",
+    "title": "Sous pression",
+    "atk": 4,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 4,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701699726/babelfest/revamped/babelfest_origine_revamped26.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Child",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "freeze",
+        "value": 2,
+        "amount": 1,
+        "target": "rival",
+        "spawnUsed": false,
+        "choice": "target"
+      }
+    ]
+  },
+  {
+    "name": "Bahma Aïda",
+    "title": "Galvanisée",
+    "atk": 2,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701699729/babelfest/revamped/babelfest_origine_revamped27.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "SoulBerryRun",
+    "effects": [
+      {
+        "when": [3],
+        "type": "defDebuff",
+        "value": -1,
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Will",
+    "title": "De l'Outremonde",
+    "atk": 6,
+    "dep": 1,
+    "hp": 4,
+    "baseatk": 6,
+    "basedep": 1,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701699730/babelfest/revamped/babelfest_origine_revamped28.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Renart de rien"
+  },
+  {
+    "name": "Kingu",
+    "title": "Étoile porte-malheur",
+    "atk": 0,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 0,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701699726/babelfest/revamped/babelfest_origine_revamped29.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Bobbyjack",
+    "healer": true,
+    "effects": [
+      {
+        "type": "healer"
+      },
+      {
+        "type": "randomATK",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 2, 3, 3],
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Super Fighting Mermaid",
+    "title": "Combattante confiante",
+    "atk": 2,
+    "dep": 2,
+    "hp": 4,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719522099/babelfest/revamped/babelfest_origine_revamped30.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Hugo Mollet",
+    "attackCount": 2,
+    "baseAttackCount": 2,
+    "effects": [
+      {
+        "type": "doubleSword"
+      }
+    ]
+  },
+  {
+    "name": "Akumu",
+    "title": "Dragon des cauchemars",
+    "atk": 1,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701859226/babelfest/revamped/babelfest_origine_revamped31.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "ChouetteBlancheRoliste",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "taser",
+        "alreadyUsed": false
+      },
+      {
+        "when": ["death"],
+        "type": "deathSummonGhost",
+        "location": "self"
+      }
+    ]
+  },
+  {
+    "name": "Iméra",
+    "title": "Étoile d'or",
+    "atk": 4,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 4,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701859223/babelfest/revamped/babelfest_origine_revamped32.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Shawny193",
+    "effects": [
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "name": "Éclaireur",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Ikéa",
+    "title": "Adorable tabouret",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701859223/babelfest/revamped/babelfest_origine_revamped33.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Woodsmen",
+    "effects": [
+      {
+        "when": [3],
+        "type": "atkBuff",
+        "value": 1,
+        "target": "ally"
+      },
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 2,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "Dai",
+    "title": "Rockstar dans l'âme",
+    "atk": 3,
+    "dep": 1,
+    "hp": 2,
+    "baseatk": 3,
+    "basedep": 1,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701859223/babelfest/revamped/babelfest_origine_revamped34.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Lyzeur",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "moreReach"
+      }
+    ]
+  },
+  {
+    "name": "Joël",
+    "title": "Impénétrable",
+    "atk": 1,
+    "dep": 1,
+    "hp": 6,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 6,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701859223/babelfest/revamped/babelfest_origine_revamped35.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Mimo",
+    "fortress": true,
+    "effects": [
+      {
+        "type": "fortress"
+      },
+      {
+        "when": [3],
+        "type": "rageShield",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Améthyste",
+    "title": "Soeur cadette",
+    "atk": 2,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702386899/babelfest/revamped/babelfest_origine_revamped36.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Naelle Owska",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "spawnSummon",
+        "cards": [
+          { "name": "Hayuza", "title": "Soeur ainée" },
+          { "name": "Atsuko", "title": "Soeur benjamine" }
+        ],
+        "value": 2,
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Éma",
+    "title": "Invocatrice de portails",
+    "atk": 1,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702386899/babelfest/revamped/babelfest_origine_revamped37.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Erepiv",
+    "ghost": true,
+    "effects": [
+      {
+        "type": "ghost"
+      },
+      {
+        "type": "stomp",
+        "when": [3],
+        "target": "any"
+      }
+    ]
+  },
+  {
+    "name": "Tulip",
+    "title": "Volonté de Krone",
+    "atk": 0,
+    "dep": 0,
+    "hp": 3,
+    "baseatk": 0,
+    "basedep": 0,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702386901/babelfest/revamped/babelfest_origine_revamped38.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Antoine Bordon",
+    "effects": [
+      {
+        "type": "randomATK",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 2, 3, 3, 4],
+        "spawnUsed": false
+      },
+      {
+        "type": "randomDEP",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 2, 3, 3, 4],
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "William",
+    "title": "Jusqu'au bout du monde",
+    "atk": 0,
+    "dep": 4,
+    "hp": 3,
+    "baseatk": 0,
+    "basedep": 4,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702386899/babelfest/revamped/babelfest_origine_revamped39.webp",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Matthieu Otsen",
+    "effects": [
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "name": "Éclaireur",
+        "target": "rival"
+      },
+      {
+        "when": ["spawn"],
+        "type": "shopSummon",
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Mun-eo",
+    "title": "Tueur de krakens",
+    "atk": 5,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 5,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702386899/babelfest/revamped/babelfest_origine_revamped40.png",
+    "rarity": 2,
+    "collection": "Origine",
+    "author": "Kizaru_mt"
+  },
+  {
+    "name": "Clémentine",
+    "title": "Survivante",
+    "atk": 2,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped41.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Cielesis",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "deathSummon",
+        "location": "self",
+        "cards": [{ "name": "Clémentine", "title": "Démon Blanc" }]
+      }
+    ]
+  },
+  {
+    "name": "Keiji",
+    "title": "Avance sans se retourner",
+    "atk": 6,
+    "dep": 3,
+    "hp": 1,
+    "baseatk": 6,
+    "basedep": 3,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719522099/babelfest/revamped/babelfest_origine_revamped42.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "14zbra",
+    "fortress": true,
+    "effects": [
+      {
+        "type": "fortress"
+      }
+    ]
+  },
+  {
+    "name": "Ragnarock",
+    "title": "Voleuse de pouvoirs",
+    "atk": 2,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481579/babelfest/revamped/babelfest_origine_revamped43.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Stain",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      },
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      },
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Soleil",
+    "title": "Guerrier gravitationnel",
+    "atk": 4,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 4,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481579/babelfest/revamped/babelfest_origine_revamped44.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Elie Vigneron",
+    "deathScythe": true,
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "taser",
+        "alreadyUsed": false
+      },
+      {
+        "type": "deathScythe"
+      },
+      {
+        "when": ["spawn"],
+        "type": "freeze",
+        "value": 3,
+        "amount": 1,
+        "target": "rival",
+        "spawnUsed": false,
+        "choice": "target"
+      }
+    ]
+  },
+  {
+    "name": "Shape",
+    "title": "Maître des cartes",
+    "atk": 2,
+    "dep": 4,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 4,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481579/babelfest/revamped/babelfest_origine_revamped45.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Kiba",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "moreReach"
+      },
+      {
+        "when": ["spawn"],
+        "type": "shopSummon",
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Blaire Witcher",
+    "title": "Plasma Breaker",
+    "atk": 2,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481579/babelfest/revamped/babelfest_origine_revamped46.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Okaah",
+    "timerSummon": 3,
+    "effects": [
+      {
+        "when": [1],
+        "type": "timerSummon",
+        "cards": [{ "name": "Blaire Witcher", "title": "Démone sanglante" }]
+      }
+    ]
+  },
+  {
+    "name": "Boadicée",
+    "title": "Cheffe de guerre",
+    "atk": 2,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702482866/babelfest/revamped/babelfest_origine_revamped47.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Chouchanna",
+    "healer": true,
+    "effects": [
+      {
+        "type": "healer"
+      },
+      {
+        "when": [3],
+        "type": "atkBuff",
+        "value": 2,
+        "target": "ally"
+      },
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 2,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "Mandarine-man",
+    "title": "Prêt au combat",
+    "atk": 3,
+    "dep": 3,
+    "hp": 6,
+    "baseatk": 3,
+    "basedep": 3,
+    "basehp": 6,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719522099/babelfest/revamped/babelfest_origine_revamped48.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Adsanman & Hannequin Nolwenn",
+    "attackCount": 3,
+    "baseAttackCount": 3,
+    "effects": [
+      {
+        "type": "tripleSword"
+      }
+    ]
+  },
+  {
+    "name": "Zaf",
+    "title": "Peur enfouie",
+    "atk": 3,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702483037/babelfest/revamped/babelfest_origine_revamped49.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Sailorblue",
+    "effects": [
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      },
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Lown",
+    "title": "Rage écarlate",
+    "atk": 4,
+    "dep": 1,
+    "hp": 2,
+    "baseatk": 4,
+    "basedep": 1,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702483037/babelfest/revamped/babelfest_origine_revamped50.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Karel Barreau",
+    "effects": [
+      {
+        "when": ["cardDeath"],
+        "byme": false,
+        "type": "leader",
+        "reusable": true
+      }
+    ]
+  },
+  {
+    "name": "Clémentine",
+    "title": "Démon Blanc",
+    "atk": 4,
+    "dep": 4,
+    "hp": 4,
+    "baseatk": 4,
+    "basedep": 4,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719522099/babelfest/revamped/babelfest_origine_revamped51.webp",
+    "rarity": 5,
+    "explaination": "Cette carte est invoqué via l'effet de 'Clémentine : Survivante'.",
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Cielesis",
+    "deathCounter": 3,
+    "effects": [
+      {
+        "when": [1],
+        "type": "deathCounter"
+      },
+      {
+        "when": [3],
+        "type": "rageShield",
+        "target": "rival"
+      },
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Blaire Witcher",
+    "title": "Démone sanglante",
+    "atk": 3,
+    "dep": 2,
+    "hp": 4,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702481576/babelfest/revamped/babelfest_origine_revamped52.webp",
+    "rarity": 5,
+    "explaination": "Cette carte est invoqué via l'effet de 'Blaire Witcher : Plasma Breaker'.",
+    "shiny": "metal",
+    "collection": "Origine",
+    "author": "Okaah",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "moreReach"
+      },
+      {
+        "when": ["attack"],
+        "type": "areaAttack",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "L'épée de légende",
+    "title": "Puissance inexpliquée",
+    "atk": 0,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 0,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1701262121/babelfest/revamped/babelfest_origine_revamped53.webp",
+    "rarity": 5,
+    "collection": "Origine",
+    "author": "Storlyv",
+    "explaination": "Cette carte est invoqué via l'effet de 'La Reine Meurtrie : Volonté de fer'.",
+    "effects": [
+      {
+        "when": [3],
+        "type": "atkBuff",
+        "value": 3,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "Atsuko",
+    "title": "Soeur benjamine",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702395504/babelfest/revamped/babelfest_origine_revamped54.webp",
+    "rarity": 5,
+    "explaination": "Cette carte est invoqué via l'effet de 'Améthyste : Soeur cadette'.",
+    "collection": "Origine",
+    "author": "Naelle Owska"
+  },
+  {
+    "name": "Hayuza",
+    "title": "Soeur ainée",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702395504/babelfest/revamped/babelfest_origine_revamped55.webp",
+    "explaination": "Cette carte est invoqué via l'effet de 'Améthyste : Soeur cadette'.",
+    "rarity": 5,
+    "collection": "Origine",
+    "author": "Naelle Owska"
+  }
+]

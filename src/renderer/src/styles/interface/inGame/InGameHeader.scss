@@ -1,0 +1,150 @@
+@import '../variables.scss';
+
+.header {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  top: 0;
+
+  background-color: $black;
+
+  @include for-desktop-up {
+    width: calc(100vw - 30px);
+    padding: 10px 15px;
+  }
+
+  @include for-big-desktop-up {
+    width: calc(100vw - 60px);
+    padding: 10px 30px;
+  }
+
+  &-turns {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    flex: 1;
+
+    &-state {
+      margin-right: 5px;
+
+      & > div {
+        display: flex;
+      }
+
+      &-playerOne {
+        margin-bottom: 10px;
+      }
+
+      &-playerTwo {
+        margin-top: 10px;
+      }
+
+      &-phase {
+        background-color: rgb(131, 131, 131);
+        margin: 0 5px;
+        display: block;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
+        transition:
+          transform 150ms ease-in-out,
+          background-color 150ms ease-in-out;
+
+        &.active {
+          transform: scale(1.5);
+        }
+      }
+    }
+  }
+
+  &-stats {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+
+    &-item {
+      margin: 0 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 20px;
+
+      &-cards {
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+
+        & span {
+          margin: 0 2.5px;
+        }
+
+        &-username {
+          font-size: 20px;
+        }
+
+        & img {
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  &-param {
+    flex: 1;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &-item {
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 13px;
+      margin: 0 10px;
+      transition: 200ms transform ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+
+    & .setting-icon {
+      margin: 2px;
+    }
+
+    &-window {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  // height: 50px;
+  font-family: 'Kimberly Bl', sans-serif;
+
+  &-activePlayer {
+    @include for-desktop-up {
+      font-size: 18px;
+    }
+
+    @include for-big-desktop-up {
+      font-size: 20px;
+    }
+  }
+
+  &-actualPhase {
+    @include for-desktop-up {
+      font-size: 13px;
+    }
+
+    @include for-big-desktop-up {
+      font-size: 15px;
+    }
+  }
+}

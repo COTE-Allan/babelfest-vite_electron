@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Clémerde",
+    "title": "Artiste en herbe",
+    "atk": 2,
+    "dep": 4,
+    "hp": 3,
+    "baseatk": 2,
+    "basedep": 4,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711978340/babelfest/babelfish/babelfest_renfort21.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Babelfish",
+    "author": "Cielesis",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "metamorphSummon",
+        "target": "any",
+        "spawnUsed": false,
+        "choice": "target",
+        "amount": 1,
+        "cards": [{ "name": "Création", "title": "Chef d'oeuvre de Clémerde" }]
+      }
+    ]
+  },
+  {
+    "name": "Création",
+    "title": "Chef d'oeuvre de Clémerde",
+    "atk": 2,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711979179/babelfest/babelfish/babelfest_renfort22.webp",
+    "explaination": "Cette carte est invoqué via l'effet Métamorphose de 'Clémerde : Artiste en herbe'.",
+    "rarity": 5,
+    "collection": "Babelfish",
+    "author": "Cielesis"
+  }
+]

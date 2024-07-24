@@ -1,0 +1,87 @@
+[
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704879945/babelfest/skins/borders/cadreBabelfest.webp",
+    "name": "Cadre Classique",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705236361/babelfest/skins/borders/Cadre_Babelfest_Super_Fighting_Mermaid_.webp",
+    "name": "Super Fighting Mermaid",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705324416/babelfest/skins/borders/cadre_babel_oddCards.webp",
+    "name": "Tech Odd Cards",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181119/babelfest/skins/borders/cadre_babelRock.webp",
+    "name": "Babelfest Tigré",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704812609/babelfest/skins/borders/cadreTest.webp",
+    "name": "Cadre Alpha",
+    "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
+    "flag": "betaTest"
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704895508/babelfest/skins/borders/cadreClemHair.webp",
+    "name": "Perruque Clémentine",
+    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1708631748/babelfest/skins/borders/cadreBabelfestHugoGeek.webp",
+    "name": "Hurdes.psd",
+    "unlockTip": "Obtenu en atteignant le niveau 8.",
+    "level": 8
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711478804/babelfest/skins/borders/cadres_alt_lukas.webp",
+    "name": "Acier trempé",
+    "unlockTip": "Obtenu en atteignant le niveau 12.",
+    "level": 12
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711699337/babelfest/skins/borders/Honneur_Chtonien.webp",
+    "name": "Honneur Chtonien",
+    "unlockTip": "Obtenu en atteignant le niveau 18.",
+    "level": 18
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181119/babelfest/skins/borders/cadre_volt.webp",
+    "name": "Énergie Voltaïque",
+    "unlockTip": "Obtenu en atteignant le niveau 21.",
+    "level": 21
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711699336/babelfest/skins/borders/Garde_Imp%C3%A9riale.webp",
+    "name": "Garde Impériale",
+    "unlockTip": "Obtenu en atteignant le niveau 27.",
+    "level": 27
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181120/babelfest/skins/borders/cadre_steampunk.webp",
+    "name": "Alliage Steampunk",
+    "unlockTip": "Obtenu en atteignant le niveau 31.",
+    "level": 31
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323312/babelfest/skins/borders/04_-_Initiation_des_Plaines.webp",
+    "name": "Initiation des Plaines",
+    "unlockTip": "Obtenu en récompense du succès : 'Bienvenue sur Babelfest'",
+    "achievement": "HF_firstGame"
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323313/babelfest/skins/borders/01_-_Archives_Akashiques.webp",
+    "name": "Archives Akashiques",
+    "unlockTip": "Obtenu en récompense du succès : 'Le début de l'addiction'",
+    "achievement": "HF_50Games"
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181119/babelfest/skins/borders/cadre_neoBabelfest.webp",
+    "name": "Neo-Babelfest",
+    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
+    "flag": "alphaTest"
+  }
+]

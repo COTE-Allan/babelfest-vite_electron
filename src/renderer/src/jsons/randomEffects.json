@@ -1,0 +1,212 @@
+[
+  {
+    "when": ["spawn"],
+    "type": "processorAlly",
+    "target": "ally",
+    "value": 1,
+    "spawnUsed": false,
+    "name": "Processeur de bataille"
+  },
+  {
+    "when": ["spawn"],
+    "type": "processorRival",
+    "target": "rival",
+    "value": 1,
+    "spawnUsed": false,
+    "name": "Processeur de pression"
+  },
+  {
+    "when": ["spawn"],
+    "type": "permAtk",
+    "value": 1,
+    "target": "ally",
+    "spawnUsed": false,
+    "name": "Griffes d'acier"
+  },
+  {
+    "when": ["spawn"],
+    "type": "permHP",
+    "value": 1,
+    "target": "ally",
+    "spawnUsed": false,
+    "name": "Cœur d'acier"
+  },
+  {
+    "when": ["death"],
+    "name": "Taser Post-Mortem",
+    "type": "taser"
+  },
+  {
+    "when": ["death"],
+    "type": "deathSummonDeck",
+    "name": "Pioche Post-Mortem",
+    "location": "self"
+  },
+  {
+    "when": [3],
+    "type": "rageSword",
+    "target": "rival",
+    "name": "Rage du berserk",
+    "onePerTurn": true
+  },
+  {
+    "when": [3],
+    "type": "defBuff",
+    "value": 1,
+    "name": "Bouclier Protecteur",
+    "target": "ally",
+    "onePerTurn": true
+  },
+  {
+    "when": [3],
+    "type": "atkBuff",
+    "value": 1,
+    "target": "ally",
+    "name": "Renforcement",
+    "onePerTurn": true
+  },
+  {
+    "when": ["attacked"],
+    "name": "Piège à ours",
+    "type": "trap"
+  },
+  {
+    "when": ["attack"],
+    "name": "Inversion",
+    "type": "swapStats"
+  },
+  {
+    "speParams": [
+      ["attackCount", 2],
+      ["baseAttackCount", 2]
+    ],
+    "type": "doubleSword",
+    "name": "Lames Doubles"
+  },
+  {
+    "speParams": [["healer", true]],
+    "type": "healer",
+    "name": "Potion de soin"
+  },
+  {
+    "speParams": [["ghost", true]],
+    "type": "ghost",
+    "name": "Intangible"
+  },
+  {
+    "type": "randomATK",
+    "when": ["spawn", 1],
+    "range": [1, 1, 1, 1, 2, 3],
+    "name": "Attaque désordonnée"
+  },
+  {
+    "type": "randomDEP",
+    "when": ["spawn", 1],
+    "range": [1, 1, 1, 1, 2, 3],
+    "name": "Déplacement désordonné"
+  },
+  {
+    "type": "randomATK",
+    "when": ["spawn", 1],
+    "range": [1, 1, 1, 1, 1, 2, 2, 3, 4],
+    "name": "Attaque désordonnée"
+  },
+  {
+    "type": "randomDEP",
+    "when": ["spawn", 1],
+    "range": [1, 1, 1, 1, 1, 2, 2, 3, 4],
+    "name": "Déplacement désordonné"
+  },
+  {
+    "when": [3],
+    "type": "rageShield",
+    "target": "rival",
+    "name": "Volonté d'acier"
+  },
+  {
+    "speParams": [["reach", 1]],
+    "type": "moreReach",
+    "name": "Archer"
+  },
+  {
+    "when": ["death"],
+    "type": "deathSummonGhost",
+    "location": "self",
+    "name": "Invocation Miroir"
+  },
+  {
+    "speParams": [["deathScythe", true]],
+    "type": "deathScythe",
+    "name": "Force du dieu de la mort"
+  },
+  {
+    "speParams": [
+      ["attackCount", 3],
+      ["baseAttackCount", 3]
+    ],
+    "type": "tripleSword",
+    "name": "Lames Triples"
+  },
+  {
+    "when": ["attack"],
+    "type": "areaAttack",
+    "target": "rival",
+    "name": "Pluie de flèches"
+  },
+  {
+    "type": "stomp",
+    "when": [3],
+    "target": "any",
+    "name": "Piètinement"
+  },
+  {
+    "when": ["cardDeath"],
+    "byme": false,
+    "type": "leader",
+    "name": "Leader",
+    "reusable": true
+  },
+  {
+    "when": [2],
+    "type": "seeingEye",
+    "name": "Éclaireur",
+    "target": "rival"
+  },
+  {
+    "when": [2],
+    "type": "depBuff",
+    "name": "Turbo",
+    "value": 1,
+    "target": "ally"
+  },
+  {
+    "speParams": [["fortress", true]],
+    "type": "fortress",
+    "name": "Forteresse"
+  },
+  {
+    "type": "rageSwordAlly",
+    "name": "Tous pour un",
+    "when": [3],
+    "target": "ally"
+  },
+  {
+    "speParams": [["diving", true]],
+    "when": [1],
+    "type": "diving",
+    "name": "Plongeon"
+  },
+  {
+    "when": ["spawn"],
+    "type": "shopSummon",
+    "spawnUsed": false,
+    "name": "Soldes"
+  },
+  {
+    "type": "randomHP",
+    "when": ["spawn"],
+    "range": [1, 2, 3, 4],
+    "spawnUsed": false,
+    "name": "Médecine douteuse"
+  }
+]

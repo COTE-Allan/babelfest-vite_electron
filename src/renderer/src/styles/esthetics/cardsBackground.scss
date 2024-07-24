@@ -1,0 +1,45 @@
+.carousel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: -3;
+  overflow: hidden;
+  height: 100vh;
+  top: 0;
+  opacity: 70%;
+  background-color: black;
+
+  &-picture {
+    min-width: 100vw;
+    min-height: 100%;
+    filter: blur(3px);
+  }
+
+  animation: fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.carousel-filter {
+  position: fixed;
+  top: 0;
+  z-index: -2;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carouselLine {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 50%;
+  will-change: transform;
+  filter: blur(5px);
+  animation: scroll 100s linear infinite;
+}
+
+.card {
+  // width: 100px;
+  /* Ajustez selon vos besoins */
+  height: 100%;
+  margin-right: 10px;
+  /* Espace entre les cartes */
+}

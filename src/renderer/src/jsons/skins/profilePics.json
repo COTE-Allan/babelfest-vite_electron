@@ -1,0 +1,99 @@
+[
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705073934/babelfest/skins/profilePics/avatarLogoBabel.webp",
+    "name": "Babelfest",
+    "unlockTip": "Image de profil par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704721911/babelfest/skins/profilePics/guest_babelfest_profile.webp",
+    "name": "Anonyme",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705074808/babelfest/skins/profilePics/avatarAkumu.webp",
+    "name": "Akumu",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705236246/babelfest/skins/profilePics/avatarAds.webp",
+    "name": "Mandarine et les chats",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230255/babelfest/skins/profilePics/babelfest_origine_revamped36.webp",
+    "name": "Améthyste",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705074808/babelfest/skins/profilePics/avatarOdasun.webp",
+    "name": "Odasun",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230254/babelfest/skins/profilePics/babelfest_origine_revamped44.webp",
+    "name": "Soleil",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1710943134/babelfest/skins/profilePics/Banshee.webp",
+    "name": "Banshee",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230254/babelfest/skins/profilePics/babelfest_origine_revamped35.webp",
+    "name": "Joël",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1708632876/babelfest/skins/profilePics/HugoAvatar.webp",
+    "name": "Yūjō",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704710169/babelfest/skins/profilePics/illu_vecto_carr%C3%A9.webp",
+    "name": "Clémentine",
+    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711462427/babelfest/skins/profilePics/Shiro.webp",
+    "name": "Shiro",
+    "unlockTip": "Obtenu en atteignant le niveau 3.",
+    "level": 3
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230254/babelfest/skins/profilePics/babelfest_origine_revamped46.webp",
+    "name": "Blaire Witcher",
+    "unlockTip": "Obtenu en atteignant le niveau 7.",
+    "level": 7
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711536240/babelfest/skins/profilePics/johod_avatar.webp",
+    "name": "Johod Jay",
+    "unlockTip": "Obtenu en atteignant le niveau 9.",
+    "level": 9
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711543864/babelfest/skins/profilePics/LOWN_KENNEDY_1.webp",
+    "name": "Lown Kennedy",
+    "unlockTip": "Obtenu en atteignant le niveau 14.",
+    "level": 14
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_500,h_500/v1711563192/babelfest/skins/profilePics/avatar_prince.webp",
+    "name": "Le Prince Déchu",
+    "unlockTip": "Obtenu en atteignant le niveau 17.",
+    "level": 17
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_500,h_500/v1719995186/babelfest/skins/profilePics/mec_dans_sa_fusee.webp",
+    "name": "Le mec dans sa fusée",
+    "unlockTip": "Obtenu en atteignant le niveau 23.",
+    "level": 23
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp",
+    "name": "Tuto",
+    "unlockTip": "Obtenu en récompense du succès : 'Joueur 1 - Tuto 0'",
+    "achievement": "HF_tutorial"
+  }
+]

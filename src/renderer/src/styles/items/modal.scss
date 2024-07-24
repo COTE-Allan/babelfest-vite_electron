@@ -1,0 +1,104 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 6;
+  font-family: 'Kimberly Bl', sans-serif;
+
+  &-window {
+    font-family: 'Kimberly Bl', sans-serif;
+    position: absolute;
+    padding: 20px;
+    border-radius: 15px;
+    width: 600px;
+    font-size: 15px;
+    bottom: 50px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 6;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &-icons {
+      margin-right: 20px;
+
+      & img {
+        width: 75px;
+        max-height: 75px;
+      }
+    }
+
+    & h1 {
+      font-size: 28px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    & h2 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    $w: 350px;
+
+    & input,
+    button {
+      width: $w;
+      margin: 7px 0;
+    }
+
+    & input {
+      width: calc($w - 20px);
+    }
+  }
+
+  &-showArenaInModal {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    transition: 150ms ease-in-out transform;
+    z-index: 7;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 5px 10px;
+
+    &:hover {
+      transform: translateX(-50%) scale(1.1);
+      cursor: pointer;
+    }
+  }
+
+  &-label {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,179 @@
+.foil .img-container {
+  clip-path: url(#myClip);
+  background: linear-gradient(
+    48deg,
+    #e3c1f46d,
+    #d9d7ed6d,
+    #dff7f16d,
+    #acf0ff6d,
+    #e3c1f46d,
+    #d9d7ed6d,
+    #dff7f16d,
+    #acf0ff6d,
+    #e3c1f46d,
+    #d9d7ed6d,
+    #dff7f16d,
+    #acf0ff6d,
+    #e3c1f46d
+  );
+  /* Répéter les couleurs pour doubler la longueur */
+  animation: foil 2s linear infinite;
+  background-size: 400% 400%;
+  /* Agrandir pour permettre un défilement fluide */
+
+  img {
+    mix-blend-mode: overlay;
+  }
+}
+
+@keyframes foil {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.img-container {
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.metal .img-container {
+  &::before {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 15%;
+    filter: blur(10px) brightness(1.2);
+    height: calc(100% + 100px);
+    transform: rotate(10deg);
+    content: '';
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
+        #c0c0c0 0%,
+        #a8a8a8 40%,
+        transparent 80%
+      ),
+      radial-gradient(ellipse farthest-corner at left top, #e6e6e6 0%, #b0b0b0 62.5%, #b0b0b0 100%);
+
+    animation: gold-foil 5s ease-in-out infinite;
+    mix-blend-mode: overlay;
+  }
+
+  &::after {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 7%;
+    filter: blur(10px) brightness(1.2);
+    height: calc(100% + 100px);
+    transform: rotate(10deg);
+    content: '';
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
+        #c0c0c0 0%,
+        #a8a8a8 40%,
+        transparent 80%
+      ),
+      radial-gradient(ellipse farthest-corner at left top, #e6e6e6 0%, #b0b0b0 62.5%, #b0b0b0 100%);
+    animation: gold-foil 5s ease-in-out infinite;
+    animation-delay: 70ms;
+    mix-blend-mode: overlay;
+  }
+}
+
+.gold .img-container {
+  &::before {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 15%;
+    filter: blur(10px) brightness(2.5);
+    height: calc(100% + 100px);
+    transform: rotate(10deg);
+    content: '';
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
+        #9f7928 0%,
+        #8a6e2f 40%,
+        transparent 80%
+      ),
+      radial-gradient(ellipse farthest-corner at left top, #d1b464 0%, #5d4a1f 62.5%, #5d4a1f 100%);
+    animation: gold-foil 5s ease-in-out infinite;
+    mix-blend-mode: overlay;
+  }
+
+  &::after {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 7%;
+    filter: blur(10px) brightness(3);
+    height: calc(100% + 100px);
+    transform: rotate(10deg);
+    content: '';
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
+        #9f7928 0%,
+        #8a6e2f 40%,
+        transparent 80%
+      ),
+      radial-gradient(ellipse farthest-corner at left top, #d1b464 0%, #5d4a1f 62.5%, #5d4a1f 100%);
+    animation: gold-foil 5s ease-in-out infinite;
+    animation-delay: 70ms;
+    mix-blend-mode: overlay;
+  }
+}
+
+@keyframes gold-foil {
+  0% {
+    left: -150%;
+  }
+
+  30% {
+    // filter: brightness(2);
+
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes shiner {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+
+  50% {
+    filter: brightness(1.1) saturate(1.05);
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+    top: -110%;
+    left: -210%;
+  }
+
+  50% {
+    opacity: 0.7;
+    top: -40%;
+    left: -40%;
+  }
+
+  100% {
+    opacity: 0;
+    top: -40%;
+    left: -40%;
+  }
+}

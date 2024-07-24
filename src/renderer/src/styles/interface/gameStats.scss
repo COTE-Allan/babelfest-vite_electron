@@ -1,0 +1,16 @@
+@import '../variables.scss';
+
+.gameStats {
+  &-item {
+    font-size: 18px;
+
+    &-title {
+      font-family: 'Kimberly Bl';
+    }
+  }
+
+  &-players {
+    font-family: 'Kimberly Bl';
+    font-size: 25px;
+  }
+}

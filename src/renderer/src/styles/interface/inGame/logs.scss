@@ -1,0 +1,152 @@
+@import '../../variables.scss';
+
+.logs {
+  &-messages {
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  &-item {
+    // margin: 5px 0;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 2px solid white;
+    width: 95%;
+
+    &-content {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      width: calc(100% - 10px);
+      height: 0;
+      transition:
+        height 150ms ease-in-out,
+        opacity 150ms ease-in-out,
+        padding 150ms ease-in-out;
+      opacity: 0;
+    }
+
+    &:hover &-content {
+      height: 100px;
+      opacity: 100%;
+      padding: 5px 5px;
+    }
+
+    & svg {
+      font-size: 20px;
+      margin: 0 7px;
+    }
+
+    & .icon {
+      &-action {
+        font-size: 30px;
+        margin: 5px;
+
+        &-img {
+          width: 25px;
+          margin: 5px;
+        }
+
+        &-label {
+          margin: 0 2px;
+          font-size: 14px;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    &-turn {
+      margin-top: 10px;
+      font-family: 'Kimberly Bl', sans-serif;
+
+      & p {
+        margin: 0;
+      }
+
+      & hr {
+        margin: 5px 0;
+      }
+    }
+
+    &-action {
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+    }
+
+    &-card {
+      margin: 5px;
+      height: 60px;
+      min-width: 60px;
+      background-color: rgba(0, 0, 0, 0.65);
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 10px;
+      position: relative;
+
+      border: 2px solid white;
+
+      & img {
+        top: -10px;
+        position: absolute;
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+
+        &.hidden {
+          top: 50%;
+          height: 80%;
+          width: 80%;
+          transform: translateY(-50%);
+        }
+      }
+
+      &-separator {
+        font-size: 25px;
+        margin: 0 10px;
+      }
+    }
+
+    &-coords {
+      margin: 0 7px;
+      font-size: 30px;
+      font-family: 'Kimberly Bl', sans-serif;
+    }
+
+    &-result {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-family: 'Kimberly Bl', sans-serif;
+
+      &-value {
+        display: flex;
+        min-width: 50px;
+        text-align: center;
+      }
+
+      & img {
+        width: 35px;
+        margin: 0 5px;
+      }
+
+      & svg {
+        font-size: 35px;
+
+        &.icon-direction {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

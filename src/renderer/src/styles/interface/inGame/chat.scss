@@ -1,0 +1,61 @@
+@import '../variables.scss';
+
+$fontSize: 17px;
+
+.chat {
+  &-messages {
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  &-item {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    // width: 90%;
+
+    & label {
+      font-weight: 700;
+      font-size: $fontSize;
+      font-family: 'Kimberly Bl';
+    }
+
+    & p {
+      font-size: $fontSize;
+      margin: 0;
+    }
+  }
+
+  &-messages * {
+    overflow-anchor: none;
+  }
+
+  &-anchor {
+    overflow-anchor: auto;
+    height: 1px;
+  }
+
+  &-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & input {
+      width: 85%;
+      height: 25px;
+    }
+
+    & button {
+      width: 15%;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+    }
+
+    &.disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+  }
+}

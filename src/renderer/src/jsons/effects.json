@@ -1,0 +1,324 @@
+[
+  {
+    "slug": "atkBuff",
+    "name": "Renforcement",
+    "desc": "Au début d'une phase d'attaque, cette carte renforce l'attaque de ses alliés adjacents de la valeur indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520356/babelfest/icons/forge_yoef1f.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "freeze",
+    "name": "Regard de glace",
+    "desc": "À l'invocation, ciblez une carte ennemie, bloquez tout ses mouvements pendant le nombre de tour indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520364/babelfest/icons/froid_hs932w.webp",
+    "type": "Débuffs"
+  },
+  {
+    "slug": "swapStats",
+    "name": "Inversion",
+    "desc": "Quand cette carte attaque, elle inverse son ATK et ses HP.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/inversion_w05qvg.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "trap",
+    "name": "Piège à ours",
+    "desc": "Quand cette carte subie une attaque, elle inflige un point de dégâts en retour.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/trap_buzj7i.webp",
+    "type": "Pièges"
+  },
+  {
+    "slug": "depBuff",
+    "name": "Turbo",
+    "desc": "Au début d'une phase de déplacement, cette carte renforce le déplacement de ses alliés adjacents de la valeur indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950667/babelfest/icons/turbo.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "defBuff",
+    "name": "Bouclier Protecteur",
+    "desc": "Au début d'une phase d'attaque, cette carte ajoute un point de défense à ses alliés adjacents.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/shield_hueeo5.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "deathSummon",
+    "name": "Ange ressucité",
+    "desc": "Quand cette carte est détruite, elle invoque une carte précise.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/ange_xhsz7u.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "deathCounter",
+    "name": "Compte à rebours",
+    "desc": "Après invocation, cette carte sera détruite dans le nombre de tour indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/countdown_dphplq.webp",
+    "type": "Malus"
+  },
+  {
+    "slug": "healer",
+    "name": "Potion de soin",
+    "desc": "Cette carte soigne les carte qu'elle attaque de la valeur de sa propre attaque.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/heal_ruslfb.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "ghost",
+    "name": "Intangible",
+    "desc": "Cette carte peut traverser les cases occupées.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520372/babelfest/icons/intangible_ersfsp.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "rageSword",
+    "name": "Rage du berserk",
+    "desc": "Au début d'une phase d'attaque, cette carte obtient un point d'ATK par ennemi adjacent.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/zeusSword_rhktvz.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "fortress",
+    "name": "Forteresse",
+    "desc": "Les premiers dégâts que cette carte subira seront annulés.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/fortress_by4lr8.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "taser",
+    "name": "Taser Post-Mortem",
+    "desc": "Tuer cette carte tue l'attaquant.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/defribilateur_c50qh9.webp",
+    "type": "Pièges"
+  },
+  {
+    "slug": "deathSummonDeck",
+    "name": "Pioche Post-Mortem",
+    "desc": "Quand cette carte est détruite, elle invoque une carte aléatoire parmis les cartes de la pioche.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520369/babelfest/icons/pioche_juypzo.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "random",
+    "name": "Dé à six faces",
+    "desc": "À l'invocation, cette carte obtient un effet aléatoire.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520365/babelfest/icons/d%C3%A9_r3sqg6.webp",
+    "type": "Aléatoires"
+  },
+  {
+    "slug": "randomATK",
+    "name": "Attaque désordonnée",
+    "desc": "À l'invocation et au début d'une phase de préparation, cette carte obtient une valeur d'attaque aléatoire.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/random_nb5zhf.webp",
+    "type": "Aléatoires"
+  },
+  {
+    "slug": "randomDEP",
+    "name": "Déplacement désordonné",
+    "desc": "À l'invocation et au début d'une phase de préparation, cette carte obtient une valeur de déplacement aléatoire.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/random_nb5zhf.webp",
+    "type": "Aléatoires"
+  },
+  {
+    "slug": "deathSummonGhost",
+    "name": "Invocation Miroir",
+    "desc": "Quand cette carte est détruite, elle invoque la carte qui la tué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/ghost_vhg6cb.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "defDebuff",
+    "name": "Brise-Bouclier",
+    "desc": "Au début d'une phase d'attaque, cette carte baisse la défense des cartes ennemies adjacentes de la valeur indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp",
+    "type": "Débuffs"
+  },
+  {
+    "slug": "rageShield",
+    "name": "Volonté d'acier",
+    "desc": "Au début d'une phase d'attaque, cette carte obtient un point de défense par ennemi adjacent.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520356/babelfest/icons/shieldbuff_shjii7.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "moreReach",
+    "name": "Archer",
+    "desc": "Cette carte peut attaquer en diagonale.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520358/babelfest/icons/archer_j7sz66.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "spawnSummon",
+    "name": "Incantation de minions",
+    "desc": "À l'invocation, cette carte invoque le nombre indiqué de cartes dans l'arène.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520365/babelfest/icons/minions_mr31r0.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "stomp",
+    "name": "Piétinement",
+    "desc": "Au début d'une phase d'attaque, cette carte inflige un point de dégâts à TOUTES les cartes adjacentes.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/stomp_tgd0eg.webp",
+    "type": "Offensifs"
+  },
+  {
+    "slug": "doubleSword",
+    "name": "Lames Doubles",
+    "desc": "Cette carte peut attaquer deux fois par tour.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520358/babelfest/icons/dualsword_bdpzxx.webp",
+    "type": "Offensifs"
+  },
+  {
+    "slug": "tripleSword",
+    "name": "Lames Triples",
+    "desc": "Cette carte peut attaquer trois fois par tour.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/triplesword_j6m5wj.webp",
+    "type": "Offensifs"
+  },
+  {
+    "slug": "areaAttack",
+    "name": "Pluie de flèches",
+    "desc": "Après une attaque, les cartes ennemies adjacentes à cette carte subissent un point de dégât.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520360/babelfest/icons/arrows_xrker8.webp",
+    "type": "Offensifs"
+  },
+  {
+    "slug": "timerSummon",
+    "name": "Chronomètre de puissance",
+    "desc": "Cette carte évoluera en une forme plus puissante après le nombre de tours indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520369/babelfest/icons/chrono_ocydlb.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "deathScythe",
+    "name": "Force du dieu de la mort",
+    "desc": "Cette carte ignore l'effet Forteresse et la défense des cartes qu'elle attaque.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520366/babelfest/icons/faux_jtztul.webp",
+    "type": "Offensifs"
+  },
+  {
+    "slug": "leader",
+    "name": "Leader",
+    "desc": "Cette carte obtient un point permanent supplémentaire dans une stat aléatoire quand une carte alliée est détruite.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520370/babelfest/icons/leader_gyvy5j.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "seeingEye",
+    "name": "Troisième œil",
+    "desc": "Au début d'une phase de déplacement, révélez les cartes ennemies adjacentes dissimulées et supprimez leurs effets.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950666/babelfest/icons/seeingEye.webp",
+    "type": "Pièges"
+  },
+  {
+    "slug": "shopSummon",
+    "name": "Soldes",
+    "desc": "A l'invocation, cette carte invoque une copie d'une carte aléatoire de la boutique sur la case la plus proche.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950666/babelfest/icons/soldes.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "randomHP",
+    "name": "Médecine douteuse",
+    "desc": "À l'invocation, cette carte obtient une valeur de points de vies aléatoire.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/random_nb5zhf.webp",
+    "type": "Aléatoires"
+  },
+  {
+    "slug": "chaosTP",
+    "name": "Téléportations Chaotiques",
+    "desc": "À l'invocation, cette carte échange les positions de toutes les cartes dans l'arène. (sauf les cartes sur les bases.)",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1704926036/babelfest/icons/misdirection.webp",
+    "type": "Aléatoires"
+  },
+  {
+    "slug": "rageSwordAlly",
+    "name": "Tous pour un",
+    "desc": "Au début d'une phase d'attaque, cette carte obtient un point d'ATK par allié adjacent.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1705089497/babelfest/icons/all-for-one.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "revealed",
+    "name": "Dévoilé",
+    "desc": "Cette carte ne possède plus d'effets car elle a été révélée par le Troisième œil.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705564482/babelfest/icons/muted.webp",
+    "type": "Malus"
+  },
+  {
+    "slug": "freeze",
+    "name": "Congelé",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702647583/babelfest/icons/freeze.webp",
+    "desc": "Cette carte ne peut pas bouger pendant encore X tours.",
+    "type": "Malus"
+  },
+  {
+    "slug": "dieTogether",
+    "name": "Mourir ensemble",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707128021/babelfest/icons/deathReaper.webp",
+    "desc": "Quand cette carte attaque, elle meurt.",
+    "type": "Malus"
+  },
+  {
+    "slug": "grapple",
+    "name": "Grappin",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707128021/babelfest/icons/grapple.webp",
+    "desc": "À l'invocation, ciblez une carte, téléportez là sur la case la plus proche de cette carte.",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "diving",
+    "name": "Plongeon",
+    "desc": "À l'invocation et au début d'une phase de préparation sur deux, cette carte obtient l'effet 'Sous l'eau' (elle ne peut ni attaquer ni être attaqué.)",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/whale-tail.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "underwater",
+    "name": "Sous l'eau",
+    "desc": "Cette carte peut traverser les cases occupées mais elle ne peut ni attaquer ni être attaqué jusqu'à la prochaine phase de préparation.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1708444045/babelfest/icons/water-splash.webp",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "metamorphSummon",
+    "name": "Métamorphose",
+    "desc": "À l'invocation, ciblez une carte et métamorphosez-la.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1711978902/babelfest/icons/metarmorph.webp",
+    "type": "Invocations"
+  },
+  {
+    "slug": "flame",
+    "name": "Surchauffe",
+    "desc": "Quand cette carte en détruit une autre, brûlez la case de la cible, une case brûlée inflige un dégât quand une carte se déplace dessus.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1717594834/babelfest/icons/flame.webp",
+    "type": "Offensifs"
+  },
+  {
+    "slug": "permAtk",
+    "name": "Griffes d'acier",
+    "desc": "A l'invocation, augmentez l'attaque max des aliés adjacents de la valeur indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/monster-grasp.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "permHP",
+    "name": "Cœur d'acier",
+    "desc": "A l'invocation, augmentez les points de vies max des aliés adjacents de la valeur indiqué.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1718009120/babelfest/icons/heart-shield.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "processorAlly",
+    "name": "Processeur de bataille",
+    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiqué pour chaque carte Typique alliée.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1718009120/babelfest/icons/processor.webp",
+    "type": "Buffs"
+  },
+  {
+    "slug": "processorRival",
+    "name": "Processeur de pression",
+    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiqué pour chaque carte Épique ou Légendaire adverse.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/cpu-shot.webp",
+    "type": "Buffs"
+  }
+]

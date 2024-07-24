@@ -1,0 +1,27 @@
+@import '../variables.scss';
+
+.infosPanel {
+  position: absolute;
+  top: 90px;
+  z-index: 1;
+
+  @include for-desktop-up {
+    width: 450px;
+  }
+
+  @include for-big-desktop-up {
+    width: 500px;
+  }
+
+  &-upperLayer {
+    z-index: 6;
+  }
+
+  &.right {
+    right: 20px;
+  }
+
+  &.left {
+    left: 20px;
+  }
+}

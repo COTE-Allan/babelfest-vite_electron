@@ -1,0 +1,65 @@
+[
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1708684919/babelfest/skins/banner/defaultBanner.webp",
+    "name": "Babelfest",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt2.png",
+    "name": "Babelfest Bleu",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt1.png",
+    "name": "Babelfest Rouge",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711456964/babelfest/skins/banner/bannerEvilMat.webp",
+    "name": "Le bout du monde",
+    "unlockTip": "Obtenu en atteignant le niveau 2.",
+    "level": 2
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1708695860/babelfest/skins/banner/bannerBabelfestHugoGeek.webp",
+    "name": "Gribouillages",
+    "unlockTip": "Obtenu en atteignant le niveau 4.",
+    "level": 4
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Go_With_The_Flow.webp",
+    "name": "Go With The Flow",
+    "unlockTip": "Obtenu en atteignant le niveau 6.",
+    "level": 6
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Rigor_of_Life.webp",
+    "name": "Rigor of Life",
+    "unlockTip": "Obtenu en atteignant le niveau 11.",
+    "level": 11
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711476989/babelfest/skins/banner/banner_abuse_1.webp",
+    "name": "Forêt enneigée",
+    "unlockTip": "Obtenu en atteignant le niveau 16.",
+    "level": 16
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024466/babelfest/skins/banner/In_The_Darkness.webp",
+    "name": "In the Darkness",
+    "unlockTip": "Obtenu en atteignant le niveau 22.",
+    "level": 22
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Regal_Sanctity.webp",
+    "name": "Regal Sanctity",
+    "unlockTip": "Obtenu en atteignant le niveau 36.",
+    "level": 36
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_315/v1711380216/babelfest/skins/banner/bannerFondateur.webp",
+    "name": "Akumu VS Odasun",
+    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
+    "flag": "alphaTest"
+  }
+]

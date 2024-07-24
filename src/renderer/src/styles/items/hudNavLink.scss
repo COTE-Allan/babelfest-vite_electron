@@ -1,0 +1,40 @@
+.hudNavLink {
+  display: flex;
+  align-items: center;
+  margin: 0 3px;
+  padding: 5px;
+  border-radius: 10px;
+  transition:
+    color 200ms ease-in-out,
+    background-color 200ms ease-in-out;
+
+  & .hidden-span {
+    display: inline-block;
+    max-width: 0;
+    overflow: hidden;
+    transition:
+      max-width 200ms ease-in-out,
+      margin 200ms ease-in-out;
+    font-size: 20px;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background-color: white;
+    color: black;
+
+    & .hidden-span {
+      max-width: 200px;
+      margin: 0 10px;
+    }
+
+    & .profilePic {
+      border: 3px white solid;
+      transform: scale(1.05) rotate(5deg);
+    }
+  }
+
+  &.special {
+    color: rgb(193, 135, 27);
+  }
+}

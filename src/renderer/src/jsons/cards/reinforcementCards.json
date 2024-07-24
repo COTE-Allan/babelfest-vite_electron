@@ -1,0 +1,508 @@
+[
+  {
+    "name": "Ravitaillement éclair",
+    "title": "Barman du tonnerre",
+    "atk": 1,
+    "dep": 3,
+    "hp": 2,
+    "baseatk": 1,
+    "basedep": 3,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort1.webp",
+    "rarity": 1,
+    "collection": "Renfort",
+    "author": "Hampoule",
+    "ghost": true,
+    "effects": [
+      {
+        "when": [2],
+        "type": "depBuff",
+        "value": 1,
+        "target": "ally"
+      },
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "name": "Tifi Lalin",
+    "title": "Éclipse protectrice",
+    "atk": 2,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort2.webp",
+    "rarity": 1,
+    "collection": "Renfort",
+    "author": "Vavouart",
+    "effects": [
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 1,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "Yūjō",
+    "title": "Yujal des Yūjōs",
+    "atk": 0,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 0,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort3.webp",
+    "rarity": 1,
+    "collection": "Renfort",
+    "author": "TheHug0Geek",
+    "healer": true,
+    "effects": [
+      {
+        "type": "rageSwordAlly",
+        "when": [3],
+        "target": "ally"
+      },
+      {
+        "type": "healer"
+      }
+    ]
+  },
+  {
+    "name": "Gladys Goldtrog",
+    "title": "Maîtresse suprême de la magie",
+    "atk": 3,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort4.webp",
+    "rarity": 1,
+    "collection": "Renfort",
+    "author": "Tortiliowius",
+    "effects": [
+      {
+        "when": [2],
+        "type": "depBuff",
+        "value": 1,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "name": "The Outsider",
+    "title": "Le dévoreur de rêves",
+    "atk": 4,
+    "dep": 3,
+    "hp": 1,
+    "baseatk": 4,
+    "basedep": 3,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort5.webp",
+    "rarity": 1,
+    "collection": "Renfort",
+    "author": "Clem-San",
+    "deathScythe": true,
+    "effects": [
+      {
+        "type": "deathScythe"
+      }
+    ]
+  },
+  {
+    "name": "Nephilim",
+    "title": "Panthère Fouisseuse",
+    "atk": 2,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort6.webp",
+    "rarity": 1,
+    "collection": "Renfort",
+    "author": "Lucy Shade",
+    "diving": true,
+    "effects": [
+      {
+        "when": [1],
+        "type": "diving"
+      }
+    ]
+  },
+  {
+    "name": "Banshee",
+    "title": "Fleur Vestale",
+    "atk": 1,
+    "dep": 4,
+    "hp": 2,
+    "baseatk": 1,
+    "basedep": 4,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort7.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "RID",
+    "diving": true,
+    "effects": [
+      {
+        "when": [3],
+        "type": "defDebuff",
+        "value": -2,
+        "target": "rival"
+      },
+      {
+        "when": [1],
+        "type": "diving"
+      }
+    ]
+  },
+  {
+    "name": "Katy Kilgis",
+    "title": "Voleuse infernale",
+    "atk": 3,
+    "dep": 3,
+    "hp": 2,
+    "baseatk": 3,
+    "basedep": 3,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort8.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Tortiliowius",
+    "ghost": true,
+    "effects": [
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "name": "Fixman",
+    "title": "Héros élastique",
+    "atk": 1,
+    "dep": 4,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 4,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort9.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Xyphias_",
+    "timerSummon": 1,
+    "effects": [
+      {
+        "when": [1],
+        "type": "timerSummon",
+        "cards": [{ "name": "Le Parasite", "title": "Alien déchainé" }]
+      }
+    ]
+  },
+  {
+    "name": "Kenshi",
+    "title": "Faucon noir",
+    "atk": 3,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort10.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Djalel",
+    "effects": [
+      {
+        "when": ["attack"],
+        "type": "swapStats"
+      },
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Lukas",
+    "title": "Surcadençé",
+    "atk": 2,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort11.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Cielesis",
+    "effects": [
+      {
+        "when": [3],
+        "type": "defDebuff",
+        "value": -1,
+        "target": "rival"
+      },
+      { "when": ["attacked"], "type": "trap" }
+    ]
+  },
+  {
+    "name": "Le cirque de Barjo",
+    "title": "Prêt au spectacle",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort12.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Woodsmen",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "random",
+        "spawnUsed": false
+      },
+      {
+        "when": ["cardDeath"],
+        "byme": false,
+        "type": "leader",
+        "reusable": true
+      },
+      {
+        "when": [3],
+        "type": "rageShield",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Keyslan",
+    "title": "à un Emporio par hasard",
+    "atk": 2,
+    "dep": 3,
+    "hp": 4,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort13.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Dat",
+    "ghost": true,
+    "effects": [
+      {
+        "type": "ghost"
+      },
+      {
+        "when": ["attack"],
+        "type": "areaAttack",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Robert-kun",
+    "title": "Amoureux de l'amour",
+    "atk": 0,
+    "dep": 3,
+    "hp": 4,
+    "baseatk": 0,
+    "basedep": 3,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort14.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Gabriel Bargiel",
+    "deathScythe": true,
+    "effects": [
+      {
+        "type": "rageSwordAlly",
+        "when": [3],
+        "target": "ally"
+      },
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "name": "Nemid",
+    "title": "(et ses clones)",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort15.webp",
+    "rarity": 2,
+    "collection": "Renfort",
+    "author": "Fusette",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "deathSummonGhost",
+        "location": "self"
+      }
+    ]
+  },
+  {
+    "name": "Bahma Aïda",
+    "title": "La Lame Véloce",
+    "atk": 10,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 10,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort16.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Renfort",
+    "author": "SoulBerryRun",
+    "dieTogether": true,
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "grapple",
+        "target": "any",
+        "spawnUsed": false,
+        "choice": "target"
+      },
+      {
+        "when": ["spawn"],
+        "type": "freeze",
+        "value": 1,
+        "amount": 1,
+        "target": "rival",
+        "spawnUsed": false,
+        "choice": "target"
+      },
+      {
+        "type": "dieTogether"
+      }
+    ]
+  },
+  {
+    "name": "Limsse",
+    "title": "Flammes infernales",
+    "atk": 4,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 4,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719522072/babelfest/renfort/babelfest_renfort17.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Renfort",
+    "author": "TheLimsse",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "moreReach"
+      }
+    ]
+  },
+  {
+    "name": "Shiro",
+    "title": "Héraut du blizzard",
+    "atk": 1,
+    "dep": 2,
+    "hp": 8,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 8,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort18.webp",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Renfort",
+    "author": "RID",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "freeze",
+        "value": 3,
+        "amount": 1,
+        "target": "rival",
+        "spawnUsed": false,
+        "choice": "target"
+      }
+    ]
+  },
+  {
+    "name": "Krone",
+    "title": "Intruse cosmique",
+    "atk": 0,
+    "dep": 0,
+    "hp": 0,
+    "baseatk": 0,
+    "basedep": 0,
+    "basehp": 0,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort19.webp",
+    "rarity": 4,
+    "shiny": "gold",
+    "collection": "Renfort",
+    "author": "Antoine Bordon",
+    "effects": [
+      {
+        "type": "randomATK",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 3, 3, 3, 3, 4, 5],
+        "spawnUsed": false
+      },
+      {
+        "type": "randomDEP",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 3, 3, 3, 3, 4, 4],
+        "spawnUsed": false
+      },
+      {
+        "type": "randomHP",
+        "when": ["spawn"],
+        "range": [2, 3, 4],
+        "spawnUsed": false
+      },
+      {
+        "type": "chaosTP",
+        "when": ["spawn"],
+        "target": "any",
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "name": "Le Parasite",
+    "title": "Alien déchainé",
+    "atk": 4,
+    "dep": 3,
+    "hp": 1,
+    "baseatk": 4,
+    "basedep": 3,
+    "basehp": 1,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1711980264/babelfest/renfort/babelfest_renfort20.webp",
+    "rarity": 5,
+    "explaination": "Cette carte est invoqué via l'effet de 'Fixman : Héros élastique', elle redevient Fixman en fin de tour.",
+    "collection": "Renfort",
+    "author": "Xyphias_",
+    "timerSummon": 1,
+    "effects": [
+      {
+        "when": [1],
+        "type": "timerSummon",
+        "cards": [{ "name": "Fixman", "title": "Héros élastique" }]
+      }
+    ]
+  }
+]

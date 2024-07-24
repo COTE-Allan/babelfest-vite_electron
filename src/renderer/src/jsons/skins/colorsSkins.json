@@ -1,0 +1,115 @@
+[
+  {
+    "hex": "#e62e31",
+    "name": "Rouge Babelfest",
+    "unlockTip": "Couleur primaire par défaut."
+  },
+  {
+    "hex": "#40a8f5",
+    "name": "Bleu Babelfest",
+    "unlockTip": "Couleur secondaire par défaut."
+  },
+  {
+    "hex": "#4FCA3E",
+    "name": "Vert Pomme",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "hex": "#FF7F00",
+    "name": "Orange Fruité",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "hex": "#1630a4",
+    "name": "Bleu Sombre",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "hex": "#B11ACB",
+    "name": "Violet Flashy",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "hex": "#CF4D6F",
+    "name": "Rose Framboise",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "hex": "#197E31",
+    "name": "Vert Feuille",
+    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
+  },
+  {
+    "hex": "#E7CA0F",
+    "name": "Jaune Flashy",
+    "unlockTip": "Obtenu en atteignant le niveau 5.",
+    "level": 5
+  },
+  {
+    "hex": "#af6c2a",
+    "name": "Bronze",
+    "unlockTip": "Obtenu en atteignant le niveau 10.",
+    "level": 10
+  },
+  {
+    "hex": "#b48cff",
+    "name": "Violet Pastel",
+    "unlockTip": "Obtenu en atteignant le niveau 13.",
+    "level": 13
+  },
+  {
+    "hex": "#30D5C8",
+    "name": "Turquoise Océan",
+    "unlockTip": "Obtenu en atteignant le niveau 15.",
+    "level": 15
+  },
+  {
+    "hex": "#999999",
+    "name": "Argent",
+    "unlockTip": "Obtenu en atteignant le niveau 20.",
+    "level": 20
+  },
+  {
+    "hex": "#F59AFF",
+    "name": "Rose Bonbon",
+    "unlockTip": "Obtenu en atteignant le niveau 26.",
+    "level": 26
+  },
+  {
+    "hex": "#D0870A",
+    "name": "Or",
+    "unlockTip": "Obtenu en atteignant le niveau 30.",
+    "level": 30
+  },
+  {
+    "hex": "#94d3e1",
+    "name": "Diamant",
+    "unlockTip": "Obtenu en atteignant le niveau 40.",
+    "level": 40
+  },
+  {
+    "hex": "#E9E9E9",
+    "name": "Blanc Pureté",
+    "unlockTip": "Obtenu en atteignant le niveau 70.",
+    "level": 70
+  },
+  {
+    "hex": "#fff",
+    "classes": "rainbow",
+    "name": "Arc-en-ciel",
+    "unlockTip": "Obtenu en atteignant le niveau 100.",
+    "level": 100
+  },
+  {
+    "hex": "#c12527",
+    "name": "Rouge Babelfest Assombri",
+    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
+    "flag": "alphaTest"
+  },
+  {
+    "hex": "#2c75aa",
+    "name": "Bleu Babelfest Assombri",
+    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
+    "flag": "alphaTest"
+  }
+]

@@ -1,0 +1,193 @@
+@import '../variables.scss';
+
+.library {
+  width: 100%;
+  display: flex;
+  height: calc(85vh - 40px);
+  padding: 20px;
+
+  &-nav {
+    display: flex;
+    padding: 10px 0;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kimberly Bl', sans-serif;
+
+    &-link {
+      &.selected {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: black;
+      }
+
+      width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: black;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-controller {
+    padding: 10px 20px;
+    width: 15vw;
+
+    &-zoom {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+
+    &-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+
+      &-item {
+        background: $black;
+        border-radius: 5px;
+        border: solid 2px rgb(255, 255, 255);
+        font-family: 'Kimberly Bl', sans-serif;
+        text-align: center;
+        font-family: 'Kimberly Bl', sans-serif;
+        justify-content: center;
+        cursor: pointer;
+        padding: 7px;
+        font-size: 15px;
+        margin: 3px;
+        user-select: none;
+        transition:
+          background-color 120ms ease-in-out,
+          color 120ms ease-in-out;
+
+        &.checked {
+          color: white;
+          background: rgb(81, 81, 81);
+          border: 2px white solid;
+          @include bg-rarities();
+        }
+
+        &:hover {
+          cursor: pointer;
+          background: white !important;
+          color: black;
+        }
+
+        & input[type='checkbox'] {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &-inputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-item {
+        margin: 7px 0;
+        display: flex;
+        flex-direction: column;
+
+        &-title {
+          font-family: 'Kimberly Bl';
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  & .navigation-buttons {
+    margin-top: 20px;
+  }
+
+  &-detail {
+    &-effects {
+      display: flex;
+      position: fixed;
+      top: 50%;
+      left: 0;
+    }
+
+    &-tilt {
+      & img {
+        width: 100%;
+        height: 80vh;
+      }
+    }
+
+    display: flex;
+    flex-direction: row-reverse;
+
+    & p {
+      margin-bottom: 0;
+    }
+
+    & ul,
+    li {
+      margin: 5px;
+    }
+
+    & h1,
+    h3,
+    h2 {
+      margin-bottom: 0px;
+    }
+
+    & h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    &-infos {
+      margin-left: 30px;
+      width: 400px;
+    }
+
+    & li {
+      transition: font-weight 50ms ease-in-out;
+      font-weight: 500;
+
+      &:hover {
+        font-weight: 800;
+
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: center;
+    height: 85vh;
+    width: 85vw;
+    overflow-y: scroll;
+    padding: 0 10px;
+
+    &-item {
+      margin: 3px;
+      transition: transform 150ms ease-in-out;
+      position: relative;
+      border: 3px solid transparent;
+
+      @include for-tablet-landscape-up {
+        margin: 5px;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        border: 3px solid white;
+        cursor: pointer;
+      }
+    }
+  }
+}

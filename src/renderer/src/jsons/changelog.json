@@ -1,0 +1,110 @@
+[
+  {
+    "title": "0.1-alpha",
+    "desc": "Bienvenue sur l'alpha de Babelfest, des bugs sont à prévoir, mais ne vous inquiétez pas, c'est normal !",
+    "list": [
+      "Ajouté : 64 cartes des sets Origine et Booster #1.",
+      "Ajouté : Système de compte et de skins",
+      "Bug connu : Plusieurs bugs liés à la mort d'une carte sont connus, ils seront corrigés le plus vite possible."
+    ]
+  },
+  {
+    "title": "0.2-alpha",
+    "desc": "Ce patch sort après reçu les premiers retours sur plusieurs aspects du jeu, l'objectif des changements apportés sert principalement à améliorer l'expérience utilisateur.",
+    "list": [
+      "Ajout d'un mode expérimental spectateur. Rejoindre une partie pleine permet d'y accéder en spectateur.",
+      "Ajout d'un bouton 'Demander un mulligan', pour repiocher de nouvelles cartes au début d'une partie.",
+      "Modification de la caméra afin de pouvoir zoomer et déplacer l'arène plus librement.",
+      "Les cartes gêlées ont désormais un icône sur leur case.",
+      "Les cartes dévoilées par Troisième Oeil posséderont maintenant l'effet 'Dévoilé'.",
+      "L'attaque de Keyslan passe de 1 à 2."
+    ]
+  },
+  {
+    "title": "0.3-alpha",
+    "desc": "Ce patch étend la mise à jour 0.2-alpha en améliorant encore la qualité de vie ainsi que l'aide aux nouveaux joueurs.",
+    "list": [
+      "Ajout d'une section 'aide' pendant une partie, qui affiche contrôles et conseils sur la phase en cours.",
+      "Un bug qui rendait les images géantes sur un petit écran à été patché.",
+      "L'arène est maintenant transparente quand l'adversaire joue.",
+      "La main du joueur à été visuellement repensée.",
+      "Les détails d'une carte s'affichent maintenant au survol de celle-ci.",
+      "Un bouton permettant de manipuler le comportement des détails de cartes à été ajouté.",
+      "Les cartes liées (via une invocation) sont maintenant affichés dans les détails d'une carte.",
+      "Un bug ou les cartes posées sur des cases opposés sur deux lignes différentes étaient considérés commes adjacentes à été corrigé."
+    ]
+  },
+  {
+    "title": "0.4-alpha",
+    "desc": "La 0.4-alpha rajoute un nouveau type de cosmétique ainsi que de nouvelles cartes, en plus de complètement repenser l'interface et la communication avec le serveur.",
+    "list": [
+      "Refonte totale des menus.",
+      "Le serveur communique maintenant avec le jeu en temps réel pour gérer les joueurs et les lobbies.",
+      "Ajout des parties personnalisées",
+      "Ajout des skins d'arènes",
+      "Ajout des cartes 6 nouvelles cartes.",
+      "Ajout des effets 'Mourir ensemble', 'Plongeon' et 'Grappin'.",
+      "Correction d'un bug dans lequel l'effet Tous pour un ne fonctionnait pas.",
+      "Refonte du système de gestion des effets pour améliorer la stabilité."
+    ]
+  },
+  {
+    "title": "0.5-alpha",
+    "desc": "Ce patch étend le patch 0.4 en repensant complètement l'interface en jeu, en ajoutant de l'XP et en corrigeant des bugs liés à la 0.4.",
+    "list": [
+      "Refonte totale de l'interface en jeu.",
+      "Ajout d'une vraie page d'accueil",
+      "Ajout du système d'XP.",
+      "Ajout des titres.",
+      "Ajout des bannières.",
+      "Ajout de deux nouvelles cartes.",
+      "Déblocage des skins Ulule Alternative.",
+      "Refonte du système de morts afin de corriger les bugs liés à la mort d'une carte.",
+      "Correction des bugs liés aux lobbys.",
+      "Les phases de préparations et de troc seront passés si le joueur n'a pas de carte en main.",
+      "Vous pouvez maintenant inverser le position de deux de vos cartes dans l'arène pendant une phase de déplacement.",
+      "Certains cosmétiques seront maintenant débloqués en fonction de votre niveau actuel.",
+      "Tous les comptes ont étés wipe pour l'ajout de l'XP."
+    ]
+  },
+  {
+    "title": "0.5.1-alpha",
+    "desc": "Ce petit correctif rajoute quelques cosmétiques et fonctionnalités manquantes de la 0.5-alpha.",
+    "list": [
+      "Ajout de la page statistiques sur votre profil.",
+      "Ajout de la page progression sur votre profil.",
+      "Le filtre gris sur les boutons de la page d'accueil à été retiré.",
+      "Le skip auto des phases à été désactivé suite à un bug.",
+      "Ajout d'un écran quand vous arrivez sur le site, empêchant un joueur d'être connecté sur deux pages différentes.",
+      "Ajout du coût de la carte dans les détails de celle-ci.",
+      "Ajout de plusieurs nouveaux skins.",
+      "Corrections de bugs."
+    ]
+  },
+  {
+    "title": "0.5.2-alpha",
+    "desc": "Ce petit correctif rajoute quelques cosmétiques et fonctionnalités manquantes de la 0.5-alpha.",
+    "list": [
+      "Vous pouvez maintenant modifier certains paramètres dans une partie customisée.",
+      "L'arène affiche maintenant les coordonées des cases.",
+      "Corrections de bugs.",
+      "Joyeux Babelfish 2024 !"
+    ]
+  },
+  {
+    "title": "0.6-alpha",
+    "desc": "La 0.6-alpha améliore la qualité de vie en rajoutant des fonctionnalitées très demandées. Les deux prochaines mise à jour ajouteront les fonctionnalitées finales avant la sortie du jeu.",
+    "list": [
+      "Vous pouvez maintenant vous reconnecter la partie en cours si vous quittez Babelfest par erreur.",
+      "L'historique de la partie est maintenant plus clair et détaillé.",
+      "Vous pouvez maintenant rejoindre une partie custom pleine en tant que spectateur.",
+      "Corrections de bugs.",
+      "Ajout de la partie 1 de collection Mécanica.",
+      "Ajout des effets liés à la collection Mécanica.",
+      "Les stats de Ragnarock sont passés de 1-1-1 à 2-3-3."
+    ]
+  },
+  {
+    "title": "0.7-alpha"
+  }
+]

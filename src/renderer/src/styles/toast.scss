@@ -1,0 +1,12 @@
+@import 'variables.scss';
+
+.Toastify__toast {
+  border-radius: 10px !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  @include greyBorders();
+}
+
+.Toastify__close-button {
+  margin: auto 0 !important;
+  width: 24px;
+}

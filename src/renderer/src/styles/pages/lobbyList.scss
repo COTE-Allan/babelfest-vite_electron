@@ -1,0 +1,60 @@
+@import '../variables.scss';
+
+.lobbies {
+  height: calc(85vh - 40px);
+  padding: 20px;
+
+  &-btn {
+    display: inline-flex;
+    align-items: center;
+    & svg {
+      margin-right: 5px;
+    }
+  }
+  &-content {
+    width: 500px;
+  }
+
+  & h2 {
+    margin: 10px 0 5px 0;
+    font-family: 'Kimberly Bl', sans-serif;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    & p {
+      font-size: 30px;
+      font-family: 'Kimberly Bl', sans-serif;
+      margin: 0;
+      color: black;
+      padding: 10px;
+      text-align: center;
+      background-color: white;
+    }
+
+    &-item {
+      margin: 5px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      list-style-type: none;
+      background-color: $black;
+      font-size: 18px;
+      font-family: 'Kimberly Bl', sans-serif;
+      @include greyBorders();
+      @include whiteHovering();
+      & span {
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+      }
+      & svg {
+        margin-left: 10px;
+      }
+    }
+  }
+}

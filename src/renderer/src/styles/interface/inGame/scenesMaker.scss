@@ -1,0 +1,50 @@
+@import '../../variables.scss';
+
+.scenesMaker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &.slideAnim {
+    animation: slide-in-out-left 2s linear both;
+  }
+
+  &.effectAnim {
+    animation: scale-in-out-center 2s linear both;
+
+    & .scenesMaker-card {
+      animation: golden-aura 2s linear both;
+    }
+  }
+
+  &-cards {
+    display: flex;
+    align-items: center;
+  }
+
+  &-icon {
+    font-size: 80px;
+  }
+
+  &-value {
+    margin-left: 10px;
+    font-size: 80px;
+  }
+
+  &-card {
+    width: 400px;
+    margin: 20px;
+  }
+
+  &-action {
+    margin-top: 10px;
+    font-size: 35px;
+  }
+
+  &-desc {
+    max-width: 500px;
+    text-align: center;
+    margin: 0;
+  }
+}

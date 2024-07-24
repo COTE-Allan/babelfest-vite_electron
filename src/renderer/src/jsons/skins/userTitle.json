@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Débutant",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "name": "Féru de cartes",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "name": "Babelomaniaque",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "name": "Talent.exe",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
+    "name": "Alpha-testeur",
+    "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
+    "flag": "betaTest"
+  },
+  {
+    "name": "Fondateur",
+    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
+    "flag": "alphaTest"
+  },
+  {
+    "name": "Anomalie",
+    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
+  },
+  {
+    "name": "Démon des jeux-vidéo",
+    "level": 9,
+    "unlockTip": "Obtenu en atteignant le niveau 9."
+  },
+  {
+    "name": "Intermédiaire",
+    "level": 10,
+    "unlockTip": "Obtenu en atteignant le niveau 10."
+  },
+  {
+    "name": "Expert",
+    "level": 20,
+    "unlockTip": "Obtenu en atteignant le niveau 20."
+  },
+  {
+    "name": "Pro",
+    "level": 30,
+    "unlockTip": "Obtenu en atteignant le niveau 30."
+  },
+  {
+    "name": "Champion",
+    "level": 50,
+    "unlockTip": "Obtenu en atteignant le niveau 50."
+  },
+  {
+    "name": "Maître",
+    "level": 75,
+    "unlockTip": "Obtenu en atteignant le niveau 50."
+  },
+  {
+    "name": "Beaucoup trop impliqué",
+    "level": 100,
+    "unlockTip": "Obtenu en atteignant le niveau 100."
+  }
+]
