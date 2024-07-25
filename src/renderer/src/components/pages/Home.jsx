@@ -103,7 +103,7 @@ const Home = () => {
   }
 
   return (
-    <div className="home fade-in">
+    <div className="home">
       <div className="home-content">
         <div className="home-grid">
           <HomeGridItem

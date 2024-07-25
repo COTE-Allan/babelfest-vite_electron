@@ -15,11 +15,11 @@ export default function MenuFooter() {
       <nav>
         <HudNavLink to={'https://twitter.com/babelfest_'}>
           <span className="hidden-span">Twitter</span>
-          <BsTwitter size={40} />
+          <BsTwitter size={30} />
         </HudNavLink>
         <HudNavLink to={'https://discord.gg/DF7GyJdG28'}>
           <span className="hidden-span">Discord</span>
-          <FaDiscord size={40} />
+          <FaDiscord size={30} />
         </HudNavLink>
       </nav>
     </footer>

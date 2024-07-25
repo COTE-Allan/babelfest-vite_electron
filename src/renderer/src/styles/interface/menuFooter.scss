@@ -2,11 +2,12 @@
   display: flex;
   position: fixed;
   align-items: center;
-  width: calc(100vw - 30px);
+  width: calc(100vw - 50px);
   justify-content: space-between;
-  padding: 10px;
-  bottom: 0;
+  padding: 10px 25px;
+  bottom: 5px;
   font-family: 'Kimberly Bl', sans-serif;
+  font-size: 13px;
 
   & nav {
     display: flex;
