@@ -72,7 +72,6 @@ app.whenReady().then(() => {
   })
 
   ipcMain.handle('get-settings', () => {
-    console.log('get-settings called')
     const settings = {
       sfxVolume: store.get('sfxVolume', 0.5),
       bgOn: store.get('bgOn', true),
@@ -80,13 +79,10 @@ app.whenReady().then(() => {
       screenMode: store.get('screenMode', 'windowed'),
       resolution: store.get('resolution', '1536x864')
     }
-    console.log(settings)
     return settings
   })
 
   ipcMain.on('settings', (_, settings) => {
-    console.log('ah!', settings)
-
     // Enregistrement des paramètres
     store.set('screenMode', settings.screenMode)
     store.set('resolution', settings.resolution)

@@ -5,9 +5,10 @@ import '../../styles/pages/home.scss'
 import MenuFooter from '../interface/MenuFooter'
 import { useState } from 'react'
 import { doc, setDoc } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from '../items/Button'
+import CardsBackground from '../esthetics/CardsBackground'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -62,6 +63,7 @@ const Register = () => {
   return (
     <div className="home">
       <div className="home-content">
+        <h1>Inscription</h1>
         <div className="home-form">
           <div className="home-form-input">
             <input
@@ -91,9 +93,10 @@ const Register = () => {
             Inscription
           </Button>
           {error && <div>Error: {error}</div>}
+          <NavLink to={'/login'}>Retour à la connexion</NavLink>
         </div>
       </div>
-      <MenuFooter />
+      <CardsBackground animate={false} />
     </div>
   )
 }

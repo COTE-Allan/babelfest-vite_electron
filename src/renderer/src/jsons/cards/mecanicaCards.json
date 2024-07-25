@@ -227,5 +227,41 @@
         "type": "doubleSword"
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Hélicoballes",
+    "title": "en déploiement",
+    "atk": 3,
+    "dep": 4,
+    "hp": 4,
+    "baseatk": 3,
+    "basedep": 4,
+    "basehp": 4,
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1721836217/babelfest/mecanica/babelfest_mecanica10.webp",
+    "rarity": 3,
+    "collection": "Mécanica",
+    "author": "Ciryto",
+    "shiny": "metal",
+    "healer": true,
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "permATK",
+        "value": 1,
+        "target": "ally",
+        "spawnUsed": false
+      },
+      {
+        "when": ["spawn"],
+        "type": "permHP",
+        "value": 1,
+        "target": "ally",
+        "spawnUsed": false
+      },
+      {
+        "type": "healer"
+      }
+    ]
   }
 ]

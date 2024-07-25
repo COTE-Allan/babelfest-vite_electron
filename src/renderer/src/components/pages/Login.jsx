@@ -2,11 +2,11 @@ import { auth } from '../../Firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
 import '../../styles/pages/home.scss'
-import MenuFooter from '../interface/MenuFooter'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from '../items/Button'
+import CardsBackground from '../esthetics/CardsBackground'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -17,9 +17,9 @@ const Login = () => {
   const [error, setError] = useState('')
 
   const login = async () => {
-    navigate('/')
     try {
       await signInWithEmailAndPassword(auth, email, password)
+      navigate('/')
       toast.success('Vous êtes maintenant connecté, bonne visite !')
     } catch (error) {
       setError(error.message)
@@ -30,6 +30,7 @@ const Login = () => {
   return (
     <div className="home">
       <div className="home-content">
+        <h1>Connexion</h1>
         <div className="home-form">
           <div className="home-form-input">
             <input
@@ -50,10 +51,10 @@ const Login = () => {
           <Button className="home-button" onClick={login}>
             Connexion
           </Button>
-          <NavLink to={'/register'}>Vous n'avez pas de compte ? Inscrivez-vous !</NavLink>
+          <NavLink to={'/register'}>Vous n'avez pas de compte, inscrivez-vous !</NavLink>
         </div>
       </div>
-      <MenuFooter />
+      <CardsBackground animate={false} />
     </div>
   )
 }

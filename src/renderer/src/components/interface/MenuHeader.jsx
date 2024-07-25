@@ -1,14 +1,14 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import bbfLogoSm from '../../assets/svg/babelfest_small.svg'
 import '../../styles/interface/menuHeader.scss'
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import MusicPlayer from './musicPlayer'
 import HudNavLink from '../items/hudNavLink'
 import { AuthContext } from '../../AuthContext'
 import ProfilePicture from '../esthetics/profilePicture'
 
 import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
-import { FaPlay, FaSearch, FaUser, FaUserFriends } from 'react-icons/fa'
+import { FaPlay, FaSearch, FaUserFriends } from 'react-icons/fa'
 import { SiCodemagic } from 'react-icons/si'
 import { IoMdSettings } from 'react-icons/io'
 import { MdArticle, MdMusicNote } from 'react-icons/md'
@@ -21,10 +21,10 @@ export default function MenuHeader() {
   const [musicPlayer, setMusicPlayer] = useState(false)
   const [askForLogout, setAskForLogout] = useState(false)
 
-  const { user, updateOnlineStatus } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const { matchmakingSearch, searchTime } = useContext(MatchmakingContext)
 
-  const handleSignOut = () => {
+  const handleLeaveGame = () => {
     if (askForLogout) {
       // Envoyer un événement IPC pour fermer l'application
       window.api.send('close-app')
@@ -92,19 +92,14 @@ export default function MenuHeader() {
             <span className="hidden-span"> Paramètres</span>
             <IoMdSettings size={40} />
           </HudNavLink>
-          <HudNavLink onClick={handleSignOut}>
+          <HudNavLink onClick={handleLeaveGame}>
             <span className="hidden-span">Quitter</span>
             <IoLogOut size={40} />
           </HudNavLink>
-          {user ? (
+          {user && (
             <HudNavLink to={'/account'}>
               <span className="hidden-span">Profil</span>
               <ProfilePicture size={80} />
-            </HudNavLink>
-          ) : (
-            <HudNavLink to={'/login'}>
-              <span className="hidden-span"> Connexion</span>
-              <FaUser size={35} />
             </HudNavLink>
           )}
         </nav>
@@ -116,7 +111,7 @@ export default function MenuHeader() {
         <Modal>
           <div className="modal-container">
             <span>Voulez-vous vraiment quitter Babelfest ?</span>
-            <Button onClick={handleSignOut}>Confirmer</Button>
+            <Button onClick={handleLeaveGame}>Confirmer</Button>
             <Button onClick={() => setAskForLogout(false)}>Retour</Button>
           </div>
         </Modal>

@@ -64,6 +64,7 @@ export default function UserSettingsController() {
   return (
     <div className="userSettings">
       <div className="userSettings-list">
+        <h1>Modifier mon compte</h1>
         <div className="userSettings-input">
           <label htmlFor="usernameInput">Nom d'utilisateur</label>
           <input
@@ -73,15 +74,6 @@ export default function UserSettingsController() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        {/* <div className="userSettings-input">
-          <label htmlFor="usernameInput">Adresse mail</label>
-          <input
-            id="usernameInput"
-            type="mail"
-            defaultValue={user.email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div> */}
         <div className="userSettings-input">
           <label htmlFor="usernameInput">Définir un mot de passe</label>
           <input

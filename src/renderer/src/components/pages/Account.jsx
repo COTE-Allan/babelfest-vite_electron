@@ -80,6 +80,7 @@ const Account = () => {
         </div>
         <ExperienceBar />
         <PlayerBanner user={userData} color={userData.primaryColor} />
+        <Button className="account-profile-logout">Déconnexion</Button>
       </div>
       <div className="account-main">
         <nav className="account-main-nav">
@@ -105,7 +106,7 @@ const Account = () => {
             onClick={() => handleSwitchPage(3)}
             className={`account-main-nav-link ${page === 3 && 'selected'}`}
           >
-            Paramètres
+            Modifier mon compte
           </Button>
         </nav>
         <div className="account-main-content">

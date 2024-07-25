@@ -62,7 +62,7 @@ button {
   border: solid 2px rgb(255, 255, 255);
   font-family: 'Kimberly Bl', sans-serif;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   transition:
     background-color 200ms ease-in-out,
     color 200ms ease-in-out;
@@ -482,6 +482,7 @@ button.alert {
 }
 
 @keyframes rainbow {
+
   100%,
   0% {
     background-color: hsl(0, 100%, 75%);

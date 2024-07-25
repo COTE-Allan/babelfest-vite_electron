@@ -38,7 +38,7 @@ export default function Loading(params) {
     if (user) {
       connectPlayer()
     } else if (user === false) {
-      goToHomePage()
+      navigate('/login')
     }
     console.log(user)
   }, [userInfo])
