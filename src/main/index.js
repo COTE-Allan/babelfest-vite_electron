@@ -4,12 +4,21 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png'
 import { setupTitlebar, attachTitlebarToWindow } from 'custom-electron-titlebar/main'
 import Store from 'electron-store'
+import log from 'electron-log'
+import pkg from 'electron-updater'
 
+const { autoUpdater } = pkg
 const store = new Store()
 
 setupTitlebar()
 
 let mainWindow
+
+// Configure electron-log to output to console
+log.transports.console.level = 'info'
+log.transports.file.level = true
+
+autoUpdater.logger = log
 
 function createWindow() {
   const screenMode = store.get('screenMode', 'windowed')
@@ -25,7 +34,7 @@ function createWindow() {
     show: false,
     autoHideMenuBar: true,
     maximizable: true,
-    resizable: true, // Allow resizing initially
+    resizable: true,
     fullscreen: screenMode === 'fullscreen',
     titleBarStyle: 'hidden',
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -44,7 +53,6 @@ function createWindow() {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
-    // Disable resizing after the window is shown
     setTimeout(() => {
       mainWindow.setResizable(false)
     }, 100)
@@ -64,8 +72,43 @@ function createWindow() {
   return mainWindow
 }
 
+function checkForUpdates() {
+  autoUpdater.checkForUpdatesAndNotify()
+
+  autoUpdater.on('update-available', (info) => {
+    log.info('Update available.')
+    if (mainWindow) {
+      mainWindow.webContents.send('update_available', info)
+    }
+  })
+
+  autoUpdater.on('download-progress', (progress) => {
+    log.info(`Download speed: ${progress.bytesPerSecond} - Downloaded ${progress.percent}%`)
+    if (mainWindow) {
+      mainWindow.webContents.send('download_progress', progress)
+    }
+  })
+
+  autoUpdater.on('update-downloaded', (info) => {
+    log.info('Update downloaded; will install in 5 seconds')
+    if (mainWindow) {
+      mainWindow.webContents.send('update_downloaded', info)
+      setTimeout(() => {
+        autoUpdater.quitAndInstall()
+      }, 5000)
+    }
+  })
+
+  autoUpdater.on('error', (err) => {
+    log.error('Error in auto-updater. ' + err)
+    if (mainWindow) {
+      mainWindow.webContents.send('update_error', err)
+    }
+  })
+}
+
 app.whenReady().then(() => {
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.coteallan.babelfest')
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -83,40 +126,32 @@ app.whenReady().then(() => {
   })
 
   ipcMain.on('settings', (_, settings) => {
-    // Enregistrement des paramètres
     store.set('screenMode', settings.screenMode)
     store.set('resolution', settings.resolution)
     store.set('sfxVolume', settings.sfxVolume)
     store.set('tutorial', settings.tutorial)
     store.set('bgOn', settings.bgOn)
 
-    // Enable resizing temporarily to change the size
     mainWindow.setResizable(true)
 
     if (settings.screenMode === 'fullscreen') {
-      // Passer en mode plein écran
       const { width, height } = screen.getPrimaryDisplay().workAreaSize
-      mainWindow.setFullScreen(false) // Pour éviter les problèmes potentiels de redimensionnement
+      mainWindow.setFullScreen(false)
       mainWindow.setSize(width, height)
       mainWindow.setFullScreen(true)
     }
 
     if (settings.screenMode === 'windowed') {
-      // Passer en mode fenêtre avec la résolution choisie
       mainWindow.setFullScreen(false)
       const [width, height] = settings.resolution.split('x').map(Number)
       mainWindow.setSize(width, height)
-      mainWindow.center() // Pour recentrer la fenêtre après redimensionnement
+      mainWindow.center()
     }
 
-    // Disable resizing again after applying the new size
     mainWindow.setResizable(false)
-
-    // Envoyer les paramètres mis à jour à React via IPC
     mainWindow.webContents.send('settings-updated', settings)
   })
 
-  // Ajoutez le gestionnaire d'événements IPC pour fermer l'application
   ipcMain.on('close-app', () => {
     app.quit()
   })
@@ -126,6 +161,8 @@ app.whenReady().then(() => {
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
+  checkForUpdates()
 })
 
 app.on('window-all-closed', () => {

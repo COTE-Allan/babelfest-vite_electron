@@ -21,6 +21,7 @@ import Lobby from './components/pages/Lobby'
 import LobbyList from './components/pages/LobbyList'
 import Loading from './components/pages/Loading'
 import { MatchmakingProvider } from './components/providers/MatchmakingProvider'
+import UpdateNotifier from './UpdateNotifier'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -29,6 +30,7 @@ const Layout = ({ children }) => {
     <MatchmakingProvider>
       <MenuHeader />
       {children}
+      <UpdateNotifier />
       <CardsBackground animate={userSettings.bgOn} />
     </MatchmakingProvider>
   )
@@ -87,8 +89,24 @@ const App = () => {
             }
           />
           <Route path="/lobby/:lobbyId" element={<Lobby />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Login />
+                <UpdateNotifier />
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <Register />
+                <UpdateNotifier />
+              </>
+            }
+          />
           <Route
             path="/account"
             element={

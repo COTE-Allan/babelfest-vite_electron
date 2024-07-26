@@ -6,6 +6,7 @@ const { Titlebar } = pkg
 const { TitlebarColor } = pkg
 
 console.log('Preload script loaded')
+ipcRenderer.setMaxListeners(30)
 
 // Custom APIs for renderer
 const api = {
@@ -16,6 +17,12 @@ const api = {
   invoke: (channel, data) => {
     console.log(`Invoking ${channel} with data: ${JSON.stringify(data)}`)
     return ipcRenderer.invoke(channel, data)
+  },
+  on: (channel, callback) => {
+    ipcRenderer.on(channel, (event, ...args) => callback(...args))
+  },
+  removeListener: (channel, callback) => {
+    ipcRenderer.removeListener(channel, callback)
   }
 }
 

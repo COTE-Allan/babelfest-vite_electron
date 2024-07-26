@@ -9,8 +9,6 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import {
   getFeaturedCards,
   getOnlineUsersCount,
-  getTopUsersByLevel,
-  getTopUsersByMMR,
   getTopUsersByMMRAndLevel,
   useSendErrorMessage
 } from '../others/toolBox'
@@ -237,17 +235,42 @@ export default Home
 
 const HomeGridItem = ({ bg, onClick, className, children, isButton, needLogin, link }) => {
   const { userSettings, user } = useContext(AuthContext)
+  const [isUpdating, setIsUpdating] = useState(false)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const sendErrorMessage = useSendErrorMessage()
-  const navigate = useNavigate()
+
+  useEffect(() => {
+    const handleUpdateAvailable = () => {
+      setIsUpdating(true)
+    }
+
+    const handleUpdateFinished = () => {
+      setIsUpdating(false)
+    }
+
+    window.api.on('update_available', handleUpdateAvailable)
+    window.api.on('update_downloaded', handleUpdateFinished)
+    window.api.on('update_error', handleUpdateFinished)
+
+    return () => {
+      window.api.removeListener('update_available', handleUpdateAvailable)
+      window.api.removeListener('update_downloaded', handleUpdateFinished)
+      window.api.removeListener('update_error', handleUpdateFinished)
+    }
+  }, [])
+
   return (
     <div
       className={`home-grid-item ${className} ${isButton ? 'grid-button' : ''}`}
       onClick={() => {
         if (isButton) {
           select()
-          onClick()
+          if (isUpdating) {
+            sendErrorMessage('Attendez la fin du téléchargement pour continuer.')
+          } else {
+            onClick()
+          }
         }
       }}
       onMouseEnter={() => isButton && hover()}

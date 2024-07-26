@@ -12,6 +12,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica1.webp",
     "rarity": 1,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Kuroda"
   },
   {
@@ -27,6 +28,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica2.webp",
     "rarity": 1,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "RID",
     "effects": [
       {
@@ -58,6 +60,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica3.webp",
     "rarity": 1,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Rougenuit",
     "deathCounter": 1,
     "deathScythe": true,
@@ -88,6 +91,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica4.webp",
     "rarity": 1,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Kiba",
     "effects": [
       {
@@ -112,6 +116,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica5.webp",
     "rarity": 1,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Vavouart",
     "effects": [
       {
@@ -136,6 +141,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica6.webp",
     "rarity": 2,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Stain",
     "effects": [
       {
@@ -159,6 +165,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica7.webp",
     "rarity": 2,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Erzack",
     "deathCounter": 3,
     "effects": [
@@ -188,6 +195,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica8.webp",
     "rarity": 2,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "ZeCailloux",
     "effects": [
       {
@@ -212,6 +220,7 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica9.webp",
     "rarity": 3,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Helyaus",
     "shiny": "metal",
     "attackCount": 2,
@@ -234,20 +243,21 @@
     "title": "en déploiement",
     "atk": 3,
     "dep": 4,
-    "hp": 4,
+    "hp": 2,
     "baseatk": 3,
     "basedep": 4,
-    "basehp": 4,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1721836217/babelfest/mecanica/babelfest_mecanica10.webp",
+    "basehp": 2,
+    "url": "./cards/babelfest_mecanica10.png",
     "rarity": 3,
     "collection": "Mécanica",
+    "year": 2024,
     "author": "Ciryto",
     "shiny": "metal",
     "healer": true,
     "effects": [
       {
         "when": ["spawn"],
-        "type": "permATK",
+        "type": "permAtk",
         "value": 1,
         "target": "ally",
         "spawnUsed": false

@@ -6,11 +6,11 @@ import HudNavLink from '../items/hudNavLink'
 
 export default function MenuFooter() {
   const verName = changelog.slice(-1)[0].title
-
+  console.log(process.env.PUBLIC_URL)
   return (
     <footer className="menuFooter">
       <a href="https://cielesis.fr" target="_blank" rel="noreferrer">
-        BABELFEST {verName}, conçu par Cielesis.
+        BABELFEdqzdzqdzqdzST {verName}, conçu par Cielesis.
       </a>
       <nav>
         <HudNavLink to={'https://twitter.com/babelfest_'}>

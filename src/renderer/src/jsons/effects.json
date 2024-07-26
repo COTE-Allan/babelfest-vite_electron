@@ -23,7 +23,7 @@
   {
     "slug": "trap",
     "name": "Piège à ours",
-    "desc": "Quand cette carte subie une attaque, elle inflige un point de dégâts en retour.",
+    "desc": "Quand cette carte est ciblé par une attaque ou un soin, elle inflige un point de dégâts en retour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/trap_buzj7i.webp",
     "type": "Pièges"
   },
@@ -79,7 +79,7 @@
   {
     "slug": "fortress",
     "name": "Forteresse",
-    "desc": "Les premiers dégâts que cette carte subira seront annulés.",
+    "desc": "La première attaque subie par cette carte sera annulé, l'effet est supprimé après utilisation.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/fortress_by4lr8.webp",
     "type": "Tactiques"
   },

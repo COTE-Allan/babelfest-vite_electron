@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/pages/library.scss'
 import Modal from '../items/ClassicModal'
 import { MdZoomIn } from 'react-icons/md'
@@ -16,6 +16,7 @@ export default function Library() {
   const [loading, setLoading] = useState(true)
   const [selectedCollections, setSelectedCollections] = useState([])
   const [selectedRarities, setSelectedRarities] = useState([])
+  const [selectedYears, setSelectedYears] = useState([]) // Nouvel état pour les années sélectionnées
   const [sortMethod, setSortMethod] = useState('rarity')
   const [cardScale, setCardScale] = useState(125)
   const [selected, setSelected] = useState(null)
@@ -23,7 +24,12 @@ export default function Library() {
 
   const location = useLocation()
 
+  // Déterminer les collections et les années
   const collections = [...new Set(allCards.map((card) => card.collection))]
+  const years = [
+    ...new Set(allCards.filter((card) => card.year).map((card) => card.year.toString()))
+  ]
+
   const trait = {
     1: 'combatif',
     2: 'érudit',
@@ -83,10 +89,17 @@ export default function Library() {
       filteredCards = filteredCards.filter((card) => selectedCollections.includes(card.collection))
     }
 
+    if (selectedYears.length > 0) {
+      filteredCards = filteredCards.filter((card) =>
+        selectedYears.includes(card.year ? card.year.toString() : '')
+      )
+    }
+
     if (search !== '') {
       const searchLower = search.toLowerCase()
       filteredCards = filteredCards.filter(
         (card) =>
+          (card.year && card.year.toString().includes(searchLower)) ||
           card.collection.toLowerCase().includes(searchLower) ||
           card.name.toLowerCase().includes(searchLower) ||
           card.author.toLowerCase().includes(searchLower) ||
@@ -117,7 +130,7 @@ export default function Library() {
     }
 
     setCards(filteredCards)
-  }, [search, selectedRarities, selectedCollections, allCards, sortMethod])
+  }, [search, selectedRarities, selectedCollections, selectedYears, allCards, sortMethod])
 
   const handleCollectionChange = (event) => {
     const value = event.target.value
@@ -152,6 +165,22 @@ export default function Library() {
     }
   }
 
+  const handleYearChange = (event) => {
+    const value = event.target.value
+    setSelectedYears((currentYears) =>
+      event.target.checked
+        ? [...currentYears, value]
+        : currentYears.filter((year) => year !== value)
+    )
+    // Ajouter ou supprimer une classe CSS pour le parent
+    const parentDiv = event.target.parentNode
+    if (event.target.checked) {
+      parentDiv.classList.add('checked')
+    } else {
+      parentDiv.classList.remove('checked')
+    }
+  }
+
   // Gestionnaire de chargement des images
   const handleImageLoad = () => {
     const allImagesLoaded = cards.every((card, index) => {
@@ -168,8 +197,7 @@ export default function Library() {
     <div className="library">
       <div className="library-controller">
         <span>
-          {cards.length} carte{cards.length > 1 && 's'} trouvée
-          {cards.length > 1 && 's'}
+          {cards.length} carte{cards.length > 1 && 's'} trouvée{cards.length > 1 && 's'}
         </span>
         <div className="library-controller-zoom">
           <MdZoomIn color="white" size={40} />
@@ -223,7 +251,22 @@ export default function Library() {
               ))}
             </div>
           </div>
-
+          <div className="library-controller-inputs-item">
+            <span className="library-controller-inputs-item-title">Années :</span>
+            <div className="library-controller-checkboxes">
+              {years.map((year, key) => (
+                <label key={key} className="library-controller-checkboxes-item">
+                  <input
+                    type="checkbox"
+                    value={year}
+                    checked={selectedYears.includes(year)}
+                    onChange={handleYearChange}
+                  />
+                  <span>{year}</span>
+                </label>
+              ))}
+            </div>
+          </div>
           <div className="library-controller-inputs-item">
             <span className="library-controller-inputs-item-title">Raretés :</span>
             <div className="library-controller-checkboxes">
@@ -259,7 +302,7 @@ export default function Library() {
               <img
                 id={`card-img-${key}`}
                 className="library-list-item-img"
-                src={card.url.replace('w_auto', 'w_' + cardScale)}
+                src={card.url}
                 alt={`Carte ${card.name} de la collection ${card.collection}`}
                 style={{ width: `${cardScale}px` }}
                 onLoad={handleImageLoad}

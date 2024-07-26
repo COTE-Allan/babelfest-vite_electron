@@ -3,8 +3,8 @@
 .library {
   width: 100%;
   display: flex;
-  height: calc(85vh - 40px);
-  padding: 20px;
+  height: calc(85vh);
+  padding: 0 20px;
 
   &-nav {
     display: flex;
@@ -35,8 +35,8 @@
   }
 
   &-controller {
-    padding: 10px 20px;
-    width: 15vw;
+    padding: 10px;
+    width: 20vw;
 
     &-zoom {
       display: flex;
@@ -54,11 +54,10 @@
         border: solid 2px rgb(255, 255, 255);
         font-family: 'Kimberly Bl', sans-serif;
         text-align: center;
-        font-family: 'Kimberly Bl', sans-serif;
         justify-content: center;
         cursor: pointer;
         padding: 7px;
-        font-size: 15px;
+        font-size: 14px;
         margin: 3px;
         user-select: none;
         transition:
@@ -174,8 +173,6 @@
     flex-wrap: wrap;
     align-content: flex-start;
     align-items: center;
-    height: 85vh;
-    width: 85vw;
     overflow-y: scroll;
     padding: 0 10px;
 

@@ -1,0 +1,30 @@
+.updateBanner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: calc(100vw - 40px);
+    height: 50px;
+    padding: 0 20px;
+    background-color: #e62e31;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Kimberly Bl', sans-serif;
+    font-size: 14px;
+    z-index: 10;
+
+    & span,
+    & div {
+        width: 33.333333%;
+    }
+
+    & span {
+        text-align: center;
+    }
+
+    &-download {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+    }
+}
