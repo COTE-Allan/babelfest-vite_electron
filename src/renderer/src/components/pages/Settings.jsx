@@ -22,11 +22,11 @@ const Settings = () => {
     setSmthChanged(true)
   }
 
-  const handleSliderChange = (value) => {
+  const handleSliderChange = (settingKey, value) => {
     select()
     setUserSettings((prevSettings) => ({
       ...prevSettings,
-      sfxVolume: value
+      [settingKey]: value
     }))
     setSmthChanged(true)
   }
@@ -67,7 +67,7 @@ const Settings = () => {
           <label className="settings-list-item-label">Volume des bruitages</label>
           <div className="settings-list-item-input">
             <Slider
-              onChange={handleSliderChange}
+              onChange={(value) => handleSliderChange('sfxVolume', value)}
               min={0}
               max={1}
               value={userSettings.sfxVolume}
@@ -75,6 +75,30 @@ const Settings = () => {
               railStyle={{ backgroundColor: 'rgba(255,255,255, 0.5)' }}
               handleStyle={{ borderColor: 'white', backgroundColor: 'white' }}
               trackStyle={{ backgroundColor: 'white' }}
+            />
+          </div>
+        </div>
+        <div className="settings-list-item">
+          <label className="settings-list-item-label">Volume de la musique</label>
+          <div className="settings-list-item-input">
+            <Slider
+              onChange={(value) => handleSliderChange('musicVolume', value)}
+              min={0}
+              max={0.5}
+              value={userSettings.musicVolume}
+              step={0.01}
+              railStyle={{ backgroundColor: 'rgba(255,255,255, 0.5)' }}
+              handleStyle={{ borderColor: 'white', backgroundColor: 'white' }}
+              trackStyle={{ backgroundColor: 'white' }}
+            />
+          </div>
+        </div>
+        <div className="settings-list-item">
+          <label className="settings-list-item-label">Musique au démarrage</label>
+          <div className="settings-list-item-input">
+            <Switch
+              checked={userSettings.musicOnLaunch}
+              onChange={() => handleToggleChange('musicOnLaunch')}
             />
           </div>
         </div>

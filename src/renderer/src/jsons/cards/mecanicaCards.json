@@ -1,6 +1,5 @@
 [
   {
-    "featured": true,
     "name": "Karmine Jirr",
     "title": "Leader du mouvement rogue",
     "atk": 3,
@@ -9,14 +8,13 @@
     "baseatk": 3,
     "basedep": 2,
     "basehp": 4,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica1.webp",
+    "url": "./cards/mecanica/babelfest_mecanica1.png",
     "rarity": 1,
     "collection": "Mécanica",
     "year": 2024,
     "author": "Kuroda"
   },
   {
-    "featured": true,
     "name": "A.V.A",
     "title": "Administratrice Vestale Automatisée",
     "atk": -1,
@@ -25,7 +23,7 @@
     "baseatk": -1,
     "basedep": 2,
     "basehp": 1,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica2.webp",
+    "url": "./cards/mecanica/babelfest_mecanica2.png",
     "rarity": 1,
     "collection": "Mécanica",
     "year": 2024,
@@ -48,7 +46,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "M3ch4 Y45",
     "title": "Présidente dernier cri",
     "atk": 5,
@@ -57,7 +54,7 @@
     "baseatk": 5,
     "basedep": 3,
     "basehp": 1,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica3.webp",
+    "url": "./cards/mecanica/babelfest_mecanica3.png",
     "rarity": 1,
     "collection": "Mécanica",
     "year": 2024,
@@ -79,7 +76,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Tuto",
     "title": "Pète un câble",
     "atk": 2,
@@ -88,7 +84,7 @@
     "baseatk": 2,
     "basedep": 2,
     "basehp": 4,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica4.webp",
+    "url": "./cards/mecanica/babelfest_mecanica4.png",
     "rarity": 1,
     "collection": "Mécanica",
     "year": 2024,
@@ -104,7 +100,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "N-12",
     "title": "Laissé à l'eau",
     "atk": 2,
@@ -113,7 +108,7 @@
     "baseatk": 2,
     "basedep": 4,
     "basehp": 4,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica5.webp",
+    "url": "./cards/mecanica/babelfest_mecanica5.png",
     "rarity": 1,
     "collection": "Mécanica",
     "year": 2024,
@@ -129,7 +124,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Zéro",
     "title": "Unique gantelé de la foudre",
     "atk": 4,
@@ -138,7 +132,7 @@
     "baseatk": 4,
     "basedep": 4,
     "basehp": 3,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica6.webp",
+    "url": "./cards/mecanica/babelfest_mecanica6.png",
     "rarity": 2,
     "collection": "Mécanica",
     "year": 2024,
@@ -153,7 +147,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Agent Cobalt",
     "title": "Soldat cyborg d'Atomos",
     "atk": 3,
@@ -162,7 +155,7 @@
     "baseatk": 3,
     "basedep": 3,
     "basehp": 5,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica7.webp",
+    "url": "./cards/mecanica/babelfest_mecanica7.png",
     "rarity": 2,
     "collection": "Mécanica",
     "year": 2024,
@@ -183,7 +176,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Bebot",
     "title": "Musicien Mécanique",
     "atk": 2,
@@ -192,7 +184,7 @@
     "baseatk": 2,
     "basedep": 2,
     "basehp": 4,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica8.webp",
+    "url": "./cards/mecanica/babelfest_mecanica8.png",
     "rarity": 2,
     "collection": "Mécanica",
     "year": 2024,
@@ -208,7 +200,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Kitsubot F-450",
     "title": "Désoudeur espiègle",
     "atk": 3,
@@ -217,7 +208,7 @@
     "baseatk": 3,
     "basedep": 4,
     "basehp": 5,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1719521731/babelfest/mecanica/babelfest_mecanica9.webp",
+    "url": "./cards/mecanica/babelfest_mecanica9.png",
     "rarity": 3,
     "collection": "Mécanica",
     "year": 2024,
@@ -238,7 +229,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Hélicoballes",
     "title": "en déploiement",
     "atk": 3,
@@ -247,7 +237,7 @@
     "baseatk": 3,
     "basedep": 4,
     "basehp": 2,
-    "url": "./cards/babelfest_mecanica10.png",
+    "url": "./cards/mecanica/babelfest_mecanica10.png",
     "rarity": 3,
     "collection": "Mécanica",
     "year": 2024,

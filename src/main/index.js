@@ -120,7 +120,9 @@ app.whenReady().then(() => {
       bgOn: store.get('bgOn', true),
       tutorial: store.get('tutorial', true),
       screenMode: store.get('screenMode', 'windowed'),
-      resolution: store.get('resolution', '1536x864')
+      resolution: store.get('resolution', '1536x864'),
+      musicOnLaunch: store.get('musicOnLaunch', 'true'),
+      musicVolume: store.get('musicVolume', 0.25)
     }
     return settings
   })
@@ -131,6 +133,8 @@ app.whenReady().then(() => {
     store.set('sfxVolume', settings.sfxVolume)
     store.set('tutorial', settings.tutorial)
     store.set('bgOn', settings.bgOn)
+    store.set('musicOnLaunch', settings.musicOnLaunch)
+    store.set('musicVolume', settings.musicVolume)
 
     mainWindow.setResizable(true)
 

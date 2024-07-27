@@ -13,7 +13,6 @@ import {
   IoVolumeMute
 } from 'react-icons/io5'
 import { MdRepeat, MdRepeatOne } from 'react-icons/md'
-import Slider from 'rc-slider'
 import Button from '../items/Button'
 import { GlobalContext } from '../providers/GlobalProvider'
 import { AuthContext } from '../../AuthContext'
@@ -22,13 +21,18 @@ export default function MusicPlayer(props) {
   const player = useRef(null)
   const { userSettings } = useContext(AuthContext)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [volume, setVolume] = useState(0.1)
+  const [volume, setVolume] = useState(userSettings.musicVolume)
   const [mute, setMute] = useState(false)
   const [repeat, setRepeat] = useState(false)
   const [playlist, setPlaylist] = useState(
     shuffleArray(musicPlaylist.filter((music) => music.role === props.role || music.role === 'any'))
   )
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(userSettings.musicOnLaunch)
+
+
+  useEffect(() => {
+    setVolume(userSettings.musicVolume)
+  }, [userSettings.musicVolume])
 
   function createNote() {
     const note = document.createElement('div')
@@ -115,23 +119,6 @@ export default function MusicPlayer(props) {
               <MdRepeat size={30} color="white" />
             )}
           </Button>
-        </div>
-
-        <div className="musicPlayer-controller-slider">
-          <Slider
-            onChange={(nextValues) => {
-              setVolume(nextValues)
-            }}
-            min={0}
-            max={0.2}
-            defaultValue={0.05}
-            step={0.01}
-            styles={{
-              handle: { backgroundColor: 'white', borderColor: 'white' },
-              track: { backgroundColor: 'white', borderColor: 'white' },
-              rail: { backgroundColor: 'rgba(255,255,255, 0.5' }
-            }}
-          />
         </div>
       </div>
       <ReactPlayer

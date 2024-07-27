@@ -2,13 +2,14 @@
   display: flex;
   position: fixed;
   align-items: center;
-  width: calc(100vw - 50px);
+  width: calc(95vw);
   justify-content: space-between;
-  padding: 10px 25px;
-  bottom: 5px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: 'Kimberly Bl', sans-serif;
   font-size: 13px;
-
+  height: 5vh;
   & nav {
     display: flex;
   }

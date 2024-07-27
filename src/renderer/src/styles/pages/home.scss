@@ -76,8 +76,7 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     width: 95vw;
-    height: 75vh;
-    margin-top: 5px;
+    height: 80vh;
 
     &-item {
       border-radius: 5px;
@@ -247,6 +246,7 @@
     & .home-grid-item-content {
       height: 100%;
       display: flex;
+      justify-content: center;
       flex-direction: column;
     }
 

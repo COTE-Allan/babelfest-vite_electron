@@ -17,6 +17,7 @@ import reinforcementCards from '../../jsons/cards/reinforcementCards.json'
 import babelfish from '../../jsons/cards/babelfish.json'
 import mecanicaCards from '../../jsons/cards/mecanicaCards.json'
 import promoCards from '../../jsons/cards/promoCards.json'
+import twentyfourCards from '../../jsons/cards/twentyfourCards.json'
 
 import bordersData from '../../jsons/skins/borderProfile.json'
 import colorsData from '../../jsons/skins/colorsSkins.json'
@@ -34,6 +35,32 @@ const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title]
 import useSound from 'use-sound'
 import errorSfx from '../../assets/sfx/menu_unauthorized.mp3'
 import { toast } from 'react-toastify'
+
+
+// obtenir toute les cartes du jeu
+export function getAllCards() {
+  let cards = []
+  let idCounter = 1 // Start the counter at 1
+
+  // Function to add unique ID to each card and increment the counter
+  const addUniqueId = (card) => {
+    const cardWithId = { ...card, id: idCounter } // Add the current counter as the ID
+    idCounter++ // Increment the counter for the next card
+    return cardWithId
+  }
+
+  // Add unique IDs to all cards and combine them into one array
+  cards.push(
+    ...originCards.map(addUniqueId),
+    ...reinforcementCards.map(addUniqueId),
+    ...babelfish.map(addUniqueId),
+    ...mecanicaCards.map(addUniqueId),
+    // ...promoCards.map(addUniqueId),
+    ...twentyfourCards.map(addUniqueId)
+  )
+
+  return cards
+}
 
 export function deepEqual(obj1, obj2) {
   if (obj1 === obj2) {
@@ -119,29 +146,7 @@ export async function updateHand(newHand, team, room) {
   })
 }
 
-// obtenir toute les cartes du jeu
-export function getAllCards() {
-  let cards = []
-  let idCounter = 1 // Start the counter at 1
 
-  // Function to add unique ID to each card and increment the counter
-  const addUniqueId = (card) => {
-    const cardWithId = { ...card, id: idCounter } // Add the current counter as the ID
-    idCounter++ // Increment the counter for the next card
-    return cardWithId
-  }
-
-  // Add unique IDs to all cards and combine them into one array
-  cards.push(
-    ...originCards.map(addUniqueId),
-    ...reinforcementCards.map(addUniqueId),
-    ...babelfish.map(addUniqueId),
-    ...mecanicaCards.map(addUniqueId),
-    ...promoCards.map(addUniqueId)
-  )
-
-  return cards
-}
 
 export function shuffleArray(array) {
   let newArray = [...array] // Crée une copie du tableau

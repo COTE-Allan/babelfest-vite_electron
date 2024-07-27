@@ -1,0 +1,51 @@
+[
+  {
+    "featured": true,
+    "name": "Luna",
+    "title": " Guerrière de Fantasyland",
+    "atk": 4,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 4,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "./cards/series/babelfest_2024series1.png",
+    "collection": "Series",
+    "rarity": 3,
+    "year": 2024,
+    "author": "Cielesis",
+    "shiny": "metal",
+    "deathScythe": true,
+    "effects": [
+      {
+        "type": "deathScythe"
+      },
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Papillon",
+    "title": "Une nuit de folie",
+    "atk": 3,
+    "dep": 4,
+    "hp": 1,
+    "baseatk": 3,
+    "basedep": 4,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series2.png",
+    "collection": "Series",
+    "rarity": 1,
+    "year": 2024,
+    "author": "Baydir",
+    "effects": [
+      {
+        "type": "deathScythe"
+      }
+    ]
+  }
+]
