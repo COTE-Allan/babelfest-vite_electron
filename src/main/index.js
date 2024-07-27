@@ -44,7 +44,8 @@ function createWindow() {
       contextIsolation: true,
       enableRemoteModule: false,
       nodeIntegration: true
-    }
+    },
+    icon: join(__dirname, '../renderer/babelfest_w.ico')
   })
 
   const menu = new Menu()

@@ -91,6 +91,12 @@
     },
     "nsis": {
       "oneClick": false,
+      "installerIcon": "resources/babelfest.ico",
+      "uninstallerIcon": "resources/babelfest.ico",
+      "uninstallDisplayName": "Babelfest",
+      "installerSidebar": "resources/installerSidebar.bmp",
+      "uninstallerSidebar": "resources/installerSidebar.bmp",
+      "license": "resources/license.md",
       "allowToChangeInstallationDirectory": true
     }
   }
