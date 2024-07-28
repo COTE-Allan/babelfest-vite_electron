@@ -7,7 +7,9 @@
   position: relative;
   border: white 7px solid;
   transform: rotate(var(--rotation));
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     transform: scale(1.1) rotate(var(--rotation));
     z-index: 1;
@@ -177,8 +179,8 @@
   }
 
   &.selected {
-    background-color: rgba(16, 110, 13, 0.767);
-    border-color: rgba(16, 110, 13, 0.767);
+    background-color: rgba(16, 110, 13, 0.767) !important;
+    border-color: rgba(16, 110, 13, 0.767) !important;
     animation: vibrate-1 0.5s linear infinite both;
 
     &.reversed {

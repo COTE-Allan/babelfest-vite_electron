@@ -22,6 +22,7 @@ import LobbyList from './components/pages/LobbyList'
 import Loading from './components/pages/Loading'
 import { MatchmakingProvider } from './components/providers/MatchmakingProvider'
 import UpdateNotifier from './UpdateNotifier'
+import { TutorialProvider } from './components/providers/TutorialProvider'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -80,6 +81,7 @@ const App = () => {
           />
           <Route path="/game/:room" element={<GlobalProvider />} />
           <Route path="/gameSpectator/:room" element={<SpectatorProvider />} />
+          <Route path="/tutorial" element={<TutorialProvider />} />
           <Route
             path="/lobbyList"
             element={

@@ -166,10 +166,10 @@ const Home = () => {
           <HomeGridItem
             isButton
             needLogin
-            className="grid-tuto disabled"
+            className="grid-tuto"
             bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718098167/bouton_tuto.webp"
             onClick={() => {
-              sendErrorMessage("Cette fonctionnalité n'est pas encore disponible.")
+              handleItemClick('/tutorial')
             }}
           >
             <h1>Tutoriel</h1>
