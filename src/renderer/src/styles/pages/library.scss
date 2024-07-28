@@ -3,7 +3,7 @@
 .library {
   width: 100%;
   display: flex;
-  height: calc(85vh);
+  height: 90%;
   padding: 0 20px;
 
   &-nav {
@@ -35,8 +35,9 @@
   }
 
   &-controller {
-    padding: 10px;
+    padding: 0 10px;
     width: 20vw;
+    padding-top: 25px;
 
     &-zoom {
       display: flex;
@@ -89,7 +90,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-
       &-item {
         margin: 7px 0;
         display: flex;
@@ -175,7 +175,7 @@
     align-items: center;
     overflow-y: scroll;
     padding: 0 10px;
-
+    width: 80vw;
     &-item {
       margin: 3px;
       transition: transform 150ms ease-in-out;

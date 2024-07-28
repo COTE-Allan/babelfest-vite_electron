@@ -4,8 +4,8 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  max-width: 400px;
-  width: 100%;
+  // max-width: 400px;
+  width: calc(100% - 10px);
   z-index: 0;
   // padding: 0 10px 0 0;
   border-radius: 10px;
@@ -15,7 +15,7 @@
     position: absolute;
     max-width: 400px;
     width: 100%;
-    $pos: 30px;
+    $pos: 10px;
 
     &.self {
       bottom: $pos;

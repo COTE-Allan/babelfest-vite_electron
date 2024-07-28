@@ -2,10 +2,11 @@
 
 .menuHeader {
   width: calc(100% - 50px);
-  height: 10vh;
+  height: calc(10% - 25px);
   position: sticky;
   z-index: 1;
   padding: 0 25px;
+  padding-top: 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,6 +82,7 @@
   & .profilePic {
     border: 3px transparent solid;
     transition: transform 200ms ease-in-out;
+    margin: 0;
   }
 
   &-musicBox {

@@ -134,7 +134,6 @@ const Settings = () => {
           <Button onClick={handleSave}>Sauvegarder</Button>
         </div>
       )}
-      <MenuFooter />
     </div>
   )
 }

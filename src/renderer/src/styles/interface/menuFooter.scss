@@ -1,15 +1,15 @@
 .menuFooter {
   display: flex;
-  position: fixed;
+  // position: fixed;
   align-items: center;
-  width: calc(95vw);
+  width: calc(100% - 100px);
   justify-content: space-between;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  padding: 0 50px;
+  padding-bottom: 15px;
+  // transform: translateX(-50%);
   font-family: 'Kimberly Bl', sans-serif;
-  font-size: 13px;
-  height: 5vh;
+  font-size: 17px;
+  height: calc(7% - 15px);
   & nav {
     display: flex;
   }

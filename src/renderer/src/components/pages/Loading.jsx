@@ -28,12 +28,14 @@ export default function Loading(params) {
           askToRejoin = userInfo?.currentLobby.id
         }
         await updateOnlineStatus(user.uid, false)
+        goToHomePage(askToRejoin)
       } else if (user) {
         toast.error(
-          'Connexion interrompue, rafraichissez ou quittez les autres instances de Babelfest.'
+          "Connexion interrompue, vérifiez que vous n'êtes pas connecté ailleurs."
         )
+        navigate('/login')
+
       }
-      goToHomePage(askToRejoin)
     }
     if (user) {
       connectPlayer()

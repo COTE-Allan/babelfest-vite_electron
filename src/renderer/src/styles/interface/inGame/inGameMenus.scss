@@ -79,3 +79,30 @@
     }
   }
 }
+
+
+.ig-settings {
+  height: 100%;
+  h1 {
+    text-align: left;
+    margin: 10px 0;
+    padding: 0;
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  .volume-settings {
+    &-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+  }
+  label {
+    font-family: 'Kimberly Bl', sans-serif;
+    margin-bottom: 5px;
+  }
+  span {
+    text-align: center;
+    font-size: 14px;
+  }
+}

@@ -101,6 +101,7 @@ const Home = () => {
   }
 
   return (
+    <>
     <div className="home">
       <div className="home-content">
         <div className="home-grid">
@@ -216,7 +217,6 @@ const Home = () => {
           </HomeGridItem>
         </div>
       </div>
-      <MenuFooter />
 
       {state?.askToRejoin && (
         <ClassicModal>
@@ -228,6 +228,9 @@ const Home = () => {
         </ClassicModal>
       )}
     </div>
+    <MenuFooter />
+    </>
+
   )
 }
 

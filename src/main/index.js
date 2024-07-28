@@ -35,7 +35,7 @@ function createWindow() {
     autoHideMenuBar: true,
     maximizable: true,
     resizable: true,
-    fullscreen: screenMode === 'fullscreen',
+    fullscreen: screenMode === 'fullscreen', // Start in fullscreen if it was last used in fullscreen
     titleBarStyle: 'hidden',
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -57,6 +57,22 @@ function createWindow() {
     setTimeout(() => {
       mainWindow.setResizable(false)
     }, 100)
+
+    // Hide titlebar if in fullscreen mode
+    if (screenMode === 'fullscreen') {
+      mainWindow.setFullScreen(true)
+      mainWindow.webContents.send('fullscreen-changed', true)
+    }
+  })
+
+  mainWindow.on('enter-full-screen', () => {
+    store.set('screenMode', 'fullscreen')
+    mainWindow.webContents.send('fullscreen-changed', true)
+  })
+
+  mainWindow.on('leave-full-screen', () => {
+    store.set('screenMode', 'windowed')
+    mainWindow.webContents.send('fullscreen-changed', false)
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -126,6 +142,10 @@ app.whenReady().then(() => {
       musicVolume: store.get('musicVolume', 0.25)
     }
     return settings
+  })
+
+  ipcMain.handle('is-fullscreen', () => {
+    return mainWindow.isFullScreen()
   })
 
   ipcMain.on('settings', (_, settings) => {

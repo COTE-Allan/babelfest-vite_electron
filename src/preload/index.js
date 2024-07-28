@@ -6,7 +6,7 @@ const { Titlebar } = pkg
 const { TitlebarColor } = pkg
 
 console.log('Preload script loaded')
-ipcRenderer.setMaxListeners(30)
+ipcRenderer.setMaxListeners(35)
 
 // Custom APIs for renderer
 const api = {
@@ -23,6 +23,12 @@ const api = {
   },
   removeListener: (channel, callback) => {
     ipcRenderer.removeListener(channel, callback)
+  },
+  onFullScreenChange: (callback) => {
+    ipcRenderer.on('fullscreen-changed', (event, isFullScreen) => callback(isFullScreen))
+  },
+  isFullScreen: async () => {
+    return await ipcRenderer.invoke('is-fullscreen')
   }
 }
 
@@ -45,5 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
     minimizable: false,
     maximizable: false
   }
-  new Titlebar(options)
+
+  const titlebar = new Titlebar(options)
+  // titlebar.onWindowFullScreen(true)
 })

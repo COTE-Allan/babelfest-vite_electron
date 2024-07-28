@@ -44,7 +44,7 @@ export default function ShopCard({ card }) {
       onContextMenu={(e) => {
         e.preventDefault()
         setAdvancedDetailCard(card)
-        setRightWindow(rightWindow === 'details' ? null : 'details')
+        setRightWindow('details')
       }}
       onMouseEnter={() => {
         hover()

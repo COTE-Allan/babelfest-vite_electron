@@ -71,6 +71,7 @@ export default function LobbyList() {
     const foundLobby = lobbies.find((lobby) => lobby.id === lobbyID)
     if (foundLobby.version !== verName) {
       // joinGameAsSpectator(foundLobby.gameRef);
+      joinLobby(lobbyID)
       sendErrorMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
     } else {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {

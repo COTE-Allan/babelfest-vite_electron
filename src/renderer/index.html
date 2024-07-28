@@ -13,6 +13,26 @@
 
 <body>
   <div id="root"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const rootElement = document.getElementById('root');
+
+      // Check if fullscreen at startup
+      const isFullScreen = await window.api.invoke('is-fullscreen');
+      if (isFullScreen) {
+        rootElement.classList.add('fullscreen');
+      }
+
+      // Handle fullscreen changes
+      window.api.onFullScreenChange((isFullScreen) => {
+        if (isFullScreen) {
+          rootElement.classList.add('fullscreen');
+        } else {
+          rootElement.classList.remove('fullscreen');
+        }
+      });
+    });
+  </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

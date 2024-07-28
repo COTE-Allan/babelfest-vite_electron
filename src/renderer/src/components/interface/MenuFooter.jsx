@@ -18,7 +18,7 @@ export default function MenuFooter() {
             rel="noreferrer"
           >
           <span className="hidden-span">Twitter</span>
-          <BsTwitter size={30} />
+          <BsTwitter size={40} />
           </a>
           <a
             className="hudNavLink"
@@ -27,7 +27,7 @@ export default function MenuFooter() {
             rel="noreferrer"
           >
           <span className="hidden-span">Discord</span>
-          <FaDiscord size={30} />
+          <FaDiscord size={40} />
           </a>
       </nav>
     </footer>

@@ -61,7 +61,7 @@ const Register = () => {
   }
 
   return (
-    <div className="home">
+    <div className="home fullscreen">
       <div className="home-content">
         <h1>Inscription</h1>
         <div className="home-form">
