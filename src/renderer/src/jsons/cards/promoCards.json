@@ -9,7 +9,7 @@
     "baseatk": 0,
     "basedep": 1,
     "basehp": 6,
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1720122709/babelfest/promo/babelfest_promo_1.webp",
+    "url": "./cards/promo/babelfest_promo1.png",
     "rarity": 2,
     "collection": "Promo",
     "year": 2024,

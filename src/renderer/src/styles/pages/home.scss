@@ -204,16 +204,21 @@
     padding: 5px;
     padding-top: 15px;
     overflow: auto;
-
+    overflow-x: hidden;
     &-content {
+      margin-top: 10px;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     &-user {
       display: flex;
       align-items: center;
-      margin: 20px 0;
-      width: 100%;
+      margin: 10px auto;
+      width: 300px;
 
       & .rank {
         font-size: 25px;
@@ -221,7 +226,14 @@
         width: 30px;
         /* Vous pouvez également envisager d'utiliser min-width ici si nécessaire */
       }
-
+&-banner {
+  position: absolute;
+  z-index: -1;
+  // width: 205px;
+  height: 60px;
+  left: 100px;
+  opacity: 0.4;
+}
       &-infos {
         text-align: start;
         display: flex;

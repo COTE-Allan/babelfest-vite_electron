@@ -183,8 +183,9 @@ const Home = () => {
                   <ProfilePicture customUser={user} size={60} />
                   <div className="grid-leaderboard-user-infos">
                     <h2>{user.username}</h2>
-                    <span>Niveau {user.level}</span>
+                    <span>{user.title === "level" ? "Niveau " + user.level : user.title}</span>
                   </div>
+                    <img  className='grid-leaderboard-user-banner' src={user.banner} alt="bannière du joueur" />
                 </div>
               ))}
             </div>

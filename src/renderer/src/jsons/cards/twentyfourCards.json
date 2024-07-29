@@ -42,9 +42,40 @@
     "rarity": 1,
     "year": 2024,
     "author": "Baydir",
+    "deathScythe": true,
     "effects": [
       {
         "type": "deathScythe"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Taika",
+    "title": "Le titan des jeux-vidéo",
+    "atk": 2,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "./cards/series/babelfest_2024series3.png",
+    "collection": "Série Infinie",
+    "rarity": 1,
+    "year": 2024,
+    "author": "Child",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "processorRival",
+        "target": "rival",
+        "value": 1,
+        "spawnUsed": false
+      },
+      {
+        "type": "stomp",
+        "when": [3],
+        "target": "any"
       }
     ]
   }

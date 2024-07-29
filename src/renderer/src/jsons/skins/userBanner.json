@@ -5,12 +5,12 @@
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt2.png",
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt2.webp",
     "name": "Babelfest Bleu",
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt1.png",
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt1.webp",
     "name": "Babelfest Rouge",
     "unlockTip": "Débloqué par défaut."
   },
@@ -51,10 +51,28 @@
     "level": 22
   },
   {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270963/babelfest/skins/banner/eau_banniere.webp",
+    "name": "Bulles",
+    "unlockTip": "Obtenu en atteignant le niveau 24.",
+    "level": 24
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270961/babelfest/skins/banner/Banniere_japon.webp",
+    "name": "Nippon",
+    "unlockTip": "Obtenu en atteignant le niveau 29.",
+    "level": 29
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Regal_Sanctity.webp",
     "name": "Regal Sanctity",
     "unlockTip": "Obtenu en atteignant le niveau 36.",
     "level": 36
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270962/babelfest/skins/banner/Banniere_tuto.webp",
+    "name": "Tuto",
+    "unlockTip": "Obtenu en récompense du succès : 'Joueur 1 - Tuto 0'",
+    "achievement": "HF_tutorial"
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_315/v1711380216/babelfest/skins/banner/bannerFondateur.webp",

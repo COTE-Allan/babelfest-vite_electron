@@ -55,7 +55,7 @@ export function getAllCards() {
     ...reinforcementCards.map(addUniqueId),
     ...babelfish.map(addUniqueId),
     ...mecanicaCards.map(addUniqueId),
-    // ...promoCards.map(addUniqueId),
+    ...promoCards.map(addUniqueId),
     ...twentyfourCards.map(addUniqueId)
   )
 
