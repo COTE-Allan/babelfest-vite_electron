@@ -6,7 +6,7 @@ const { Titlebar } = pkg
 const { TitlebarColor } = pkg
 
 console.log('Preload script loaded')
-ipcRenderer.setMaxListeners(35)
+ipcRenderer.setMaxListeners(40)
 
 // Custom APIs for renderer
 const api = {
