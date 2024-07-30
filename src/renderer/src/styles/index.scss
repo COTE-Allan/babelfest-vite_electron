@@ -596,6 +596,30 @@ button.alert {
     font-family: 'Kimberly Bl', sans-serif;
     text-align: center;
   }
+
+
+}
+
+.tutorial {
+  &-shop {
+    transform: translate(0px, -50%);
+    transition: transform 250ms ease-in-out;
+
+    &.hidden {
+      transform: translate(-500px, -50%);
+
+    }
+  }
+
+  &-win {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 5;
+  }
 }
 
 @keyframes blink {

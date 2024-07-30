@@ -138,6 +138,163 @@ export const TutorialProvider = () => {
   const [turn, setTurn] = useState(1)
   const [detailCard, setDetailCard] = useState(null)
   const [phase, setPhase] = useState(0)
+  const [shopCard, setShopCard] = useState([
+    {
+      name: 'Gladys Goldtrog',
+      title: 'Maîtresse suprême de la magie',
+      atk: 3,
+      dep: 2,
+      hp: 3,
+      baseatk: 3,
+      basedep: 2,
+      basehp: 3,
+      url: './cards/renfort/babelfest_renfort4.png',
+      rarity: 1,
+      collection: 'Renfort',
+      year: 2024,
+      author: 'Tortiliowius',
+      effects: [
+        {
+          when: [2],
+          type: 'depBuff',
+          value: 1,
+          target: 'ally'
+        }
+      ]
+    },
+    {
+      name: 'Zéro',
+      title: 'Unique gantelé de la foudre',
+      atk: 4,
+      dep: 4,
+      hp: 3,
+      baseatk: 4,
+      basedep: 4,
+      basehp: 3,
+      url: './cards/mecanica/babelfest_mecanica6.png',
+      rarity: 2,
+      collection: 'Mécanica',
+      year: 2024,
+      author: 'Stain',
+      effects: [
+        {
+          when: ['cardDeath'],
+          byme: true,
+          type: 'flame',
+          alreadyUsed: false
+        }
+      ]
+    },
+    {
+      name: 'Agent Cobalt',
+      title: "Soldat cyborg d'Atomos",
+      atk: 3,
+      dep: 3,
+      hp: 5,
+      baseatk: 3,
+      basedep: 3,
+      basehp: 5,
+      url: './cards/mecanica/babelfest_mecanica7.png',
+      rarity: 2,
+      collection: 'Mécanica',
+      year: 2024,
+      author: 'Erzack',
+      deathCounter: 3,
+      effects: [
+        {
+          when: [1],
+          type: 'deathCounter'
+        },
+        {
+          when: ['spawn'],
+          type: 'processorRival',
+          target: 'rival',
+          value: 1,
+          spawnUsed: false
+        }
+      ]
+    },
+    {
+      name: 'Bebot',
+      title: 'Musicien Mécanique',
+      atk: 2,
+      dep: 2,
+      hp: 4,
+      baseatk: 2,
+      basedep: 2,
+      basehp: 4,
+      url: './cards/mecanica/babelfest_mecanica8.png',
+      rarity: 2,
+      collection: 'Mécanica',
+      year: 2024,
+      author: 'ZeCailloux',
+      effects: [
+        {
+          when: ['spawn'],
+          type: 'grapple',
+          target: 'any',
+          spawnUsed: false,
+          choice: 'target'
+        }
+      ]
+    },
+    {
+      name: 'Kitsubot F-450',
+      title: 'Désoudeur espiègle',
+      atk: 3,
+      dep: 4,
+      hp: 5,
+      baseatk: 3,
+      basedep: 4,
+      basehp: 5,
+      url: './cards/mecanica/babelfest_mecanica9.png',
+      rarity: 3,
+      collection: 'Mécanica',
+      year: 2024,
+      author: 'Helyaus',
+      shiny: 'metal',
+      attackCount: 2,
+      baseAttackCount: 2,
+      effects: [
+        {
+          when: ['cardDeath'],
+          byme: true,
+          type: 'flame',
+          alreadyUsed: false
+        },
+        {
+          type: 'doubleSword'
+        }
+      ]
+    },
+    {
+      name: 'Clémerde',
+      title: 'Artiste en herbe',
+      atk: 2,
+      dep: 4,
+      hp: 3,
+      baseatk: 2,
+      basedep: 4,
+      basehp: 3,
+      url: './cards/babelfish/babelfest_babelfish1.png',
+      rarity: 4,
+      shiny: 'gold',
+      collection: 'Babelfish',
+      year: 2024,
+      author: 'Cielesis',
+      effects: [
+        {
+          when: ['spawn'],
+          type: 'metamorphSummon',
+          target: 'any',
+          spawnUsed: false,
+          choice: 'target',
+          amount: 1,
+          cards: [{ name: 'Création', title: "Chef d'oeuvre de Clémerde" }]
+        }
+      ]
+    }
+  ])
 
   function generateLocalArena(cellsToRemove, bases) {
     const amount = 32
@@ -186,7 +343,9 @@ export const TutorialProvider = () => {
     setRivalHand,
     setDetailCard,
     setTurn,
-    setMovesCostLeft
+    setMovesCostLeft,
+    shopCard,
+    setShopCard
   }
   return (
     <TutorialContext.Provider value={propsList}>

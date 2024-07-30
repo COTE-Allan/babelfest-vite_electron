@@ -6,6 +6,7 @@ import { AuthContext } from '../../AuthContext'
 import '../../styles/interface/inGame/arena.scss'
 import '../../styles/items/cell.scss'
 import '../../styles/items/card.scss'
+import '../../styles/interface/inGame/shop.scss'
 import '../../styles/interface/inGame/inGameMenus.scss'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import Details from '../interface/inGame/Details'
@@ -13,6 +14,8 @@ import { IoIosFlash } from 'react-icons/io'
 import { TiArrowBack } from 'react-icons/ti'
 import { useNavigate } from 'react-router-dom'
 import IconButton from '../items/iconButton'
+import { PiFlagCheckeredFill } from 'react-icons/pi'
+import { BsQuestionLg } from 'react-icons/bs'
 
 const TutorialText = ({ children, onClickNext, clickable }) => {
   const renderText = (text) => {
@@ -61,14 +64,20 @@ export default function TutorialRoom() {
     phase,
     setPhase,
     movesCostLeft,
-    setMovesCostLeft
+    setMovesCostLeft,
+    shopCard,
+    setShopCard
   } = useContext(TutorialContext)
   const { user, userInfo } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const [tutorialStep, setTutorialStep] = useState(1)
+  const [selectedCard, setSelectedCard] = useState(null)
   const [selectedCell, setSelectedCell] = useState(null)
   const [selectedCellCard, setSelectedCellCard] = useState(null)
+  const [selectedShopCard, setSelectedShopCard] = useState(null)
+  const [selectedTradeCard, setSelectedTradeCard] = useState(null)
+  const [tutorialWin, setTutorialWin] = useState(false)
 
   const stepsConfig = [
     {
@@ -77,7 +86,7 @@ export default function TutorialRoom() {
       action: () => setTutorialStep(2)
     },
     {
-      text: `Babelfest c’est un jeu mystérieux, on y retrouve plein de gens étranges qui disent tous venir d’univers différents, moi je préfère cet endroit perso, mon monde d’origine... IL ETAIT TERRIFIANT.
+      text: `Babelfest c’est un jeu mystérieux, on y retrouve plein de gens étranges qui disent tous venir d’univers différents, moi je préfère cet endroit perso, mon monde d’origine... IL ÉTAIT TERRIFIANT.
 
 En tout cas, ici les gens jouent aux cartes avec... eux-mêmes, cherche pas à comprendre. Chaque tour d’une partie de Babelfest est séparé en 4 phases, on devrait d’abord faire une session d’échange de cartes, mais pour cette fois, on va la passer.
 
@@ -205,6 +214,7 @@ Tu as dépensé deux énergies pour ce déplacement, il t'en reste encore deux, 
         )
         setTurn(1)
         setTutorialStep(14)
+        setPhase(3)
       }
     },
     {
@@ -244,17 +254,104 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
     ...Passons à la dernière phase, la phase de troc.`,
       clickable: true,
       action: () => {
-        setTurn(1)
-        // Suite du tuto ici
+        setTurn(2)
+        setTutorialStep(18)
+      }
+    },
+    {
+      text: `Tu vois ça ? C'est la boutique, elle te permet d'échanger une carte de ta main avec la liste présente pour optimiser tes stratégies.
+      
+      Pour échanger, tu peut choisir une carte de ta main, une de la boutique, et cliquer sur le bouton échanger.
+      
+      Vas-y, tente le coup. Je devrait échanger en premier mais je vais garder ma carte.`,
+      clickable: false
+    },
+    {
+      text: `Et voilà !
+      
+      Tu viens de terminer ta première manche de Babelfest. Maintenant la partie continue en répétant chaque phase, invocation, déplacement, attaque, troc.
+
+      Le premier joueur qui capture la base adverse ou qui détruit les 8 cartes de l'adversaire gagne !`,
+      clickable: true,
+      action: () => {
+        setPhase(1)
+        setPlacementCostLeft(4)
+        setMovesCostLeft(4)
+        setTutorialStep(20)
+      }
+    },
+    {
+      text: `Comme j'ai commencé en premier au tour précédent, c'est à toi de commencer chaque phases de ce tour.
+      
+      Vas-y, invoque ta dernière carte inutile !`,
+      clickable: false
+    },
+    {
+      text: `Tu protège ta base...
+      
+      Il faut croire que le ton jeu ne contient aucune carte inutile finalement.
+      
+      Bon, mon tour d'invoquer... Eh. je vais garder ma carte en main. Tu va être très surpris au prochain tour.`,
+      clickable: true,
+      action: () => {
+        setTurn(2)
+        setPhase(2)
+        setMovesCostLeft(4)
+        setTutorialStep(22)
+      }
+    },
+    {
+      text: `Allez, déplace tes misérables cartes de noob.
+      
+      Attend... Phoebe, elle peut...
+      
+      Oh non.`,
+      clickable: false
+    },
+    {
+      text: `Eh... l'ami.
+      
+      T'es pas obligé de faire ça tu sais.`,
+      clickable: false
+    },
+    {
+      text: `...`,
+      clickable: true,
+      action: () => {
+        setTutorialStep(25)
+      }
+    },
+    {
+      text: `C'EST PAS VRAI J'AI PERDU !!!
+
+...c'était juste la chance du débutant !`,
+      clickable: true,
+      action: () => {
+        setTutorialStep(26)
+      }
+    },
+    {
+      text: `... AH AH AH ! Allez, gamin, t'es prêt, je t'ai parfaitement entraîné.
+      
+      Va affronter le monde, je t'attendrait au sommet.`,
+      clickable: true,
+      action: () => {
+        setTutorialWin(true)
       }
     }
   ]
 
-  const handleCardClick = (index) => {
+  const handleCardClick = (index, card) => {
     if (tutorialStep === 5 && index === 0) {
       setTutorialStep(6)
     } else if (tutorialStep === 7 && index === 0) {
       setTutorialStep(8)
+    }
+    if (tutorialStep === 18) {
+      setSelectedTradeCard(card)
+    }
+    if (tutorialStep === 20) {
+      setSelectedCard(card)
     }
   }
 
@@ -329,6 +426,42 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       } else {
         setSelectedCell(id)
       }
+    } else if (tutorialStep === 20 && id === 29 && selectedCard) {
+      if (selectedCell === id) {
+        setPattern(
+          pattern.map((cell) => (cell.id === 29 ? { ...cell, card: hand[0], owner: 1 } : cell))
+        )
+        setHand([])
+        setTurn(1)
+        setTutorialStep(21)
+        setSelectedCard(null)
+        setSelectedCell(null)
+        setPlacementCostLeft(4 - selectedCard.rarity)
+      } else {
+        setSelectedCell(id)
+      }
+    } else if (tutorialStep === 22 && id === 9) {
+      setSelectedCellCard(id)
+      setTutorialStep(23)
+    } else if (tutorialStep === 23 && id === 2) {
+      if (selectedCell) {
+        const cardToMove = pattern.find((cell) => cell.id === 9).card
+        setPattern(
+          pattern.map((cell) =>
+            cell.id === 2
+              ? { ...cell, card: cardToMove, owner: 1 }
+              : cell.id === 9
+                ? { ...cell, card: null, owner: 0 }
+                : cell
+          )
+        )
+        setTutorialStep(24)
+        setMovesCostLeft(2)
+        setSelectedCell(null)
+        setSelectedCellCard(null)
+      } else {
+        setSelectedCell(id)
+      }
     }
   }
 
@@ -337,6 +470,15 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       stepsConfig[tutorialStep - 1].action()
     }
   }, [tutorialStep])
+
+  useEffect(() => {
+    if (tutorialWin) {
+      // Succès ici
+      setTimeout(() => {
+        navigate('/home')
+      }, 2000)
+    }
+  }, [tutorialWin])
 
   return (
     <>
@@ -347,10 +489,10 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
               key={index}
               className={`card ${placementCostLeft - card.rarity < 0 ? 'card-unusable' : ''} ${card.shiny ? card.shiny : ''} ${
                 tutorialStep === 5 && index === 0 ? 'important' : ''
-              } ${(tutorialStep === 6 || tutorialStep === 8) && index === 0 ? 'card-selected' : ''} ${
-                tutorialStep === 7 && index === 0 ? 'important' : ''
+              } ${(tutorialStep === 6 || tutorialStep === 8 || selectedTradeCard || (selectedCard && selectedCard.name === card.name)) && index === 0 ? 'card-selected' : ''} ${
+                (tutorialStep === 7 || tutorialStep === 20) && index === 0 ? 'important' : ''
               }`}
-              onClick={() => handleCardClick(index)}
+              onClick={() => handleCardClick(index, card)}
               onMouseEnter={() => {
                 setDetailCard(card)
               }}
@@ -363,9 +505,11 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
                   <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
                 </div>
                 <img className="card-visual" src={card.url} alt={`card-${index}`} />
-                {(tutorialStep === 6 || tutorialStep === 8) && index === 0 && (
-                  <div className="card-filter"></div>
-                )}
+                {(tutorialStep === 6 ||
+                  tutorialStep === 8 ||
+                  selectedTradeCard ||
+                  (selectedCard && selectedCard.name === card.name)) &&
+                  index === 0 && <div className="card-filter"></div>}
               </div>
             </div>
           ))}
@@ -400,7 +544,10 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
                       (tutorialStep === 11 && cellId === 17) ||
                       (tutorialStep === 12 && cellId === 9) ||
                       (tutorialStep === 16 && cellId === 10) ||
-                      (tutorialStep === 15 && cellId === 9)
+                      (tutorialStep === 15 && cellId === 9) ||
+                      (tutorialStep === 20 && cellId === 29 && selectedCard !== null) ||
+                      (tutorialStep === 22 && cellId === 9) ||
+                      (tutorialStep === 23 && cellId === 2)
                     )
                   }
 
@@ -430,7 +577,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
                     >
                       {isImportantCell(cell.id) && <div className="cell-placementTrigger yellow" />}
                       {selectedCell === cell.id && <GiConfirmed className="above" size={90} />}
-                      {cell.card && (
+                      {cell.card && cell.card.recto !== false && (
                         <div
                           className="cell-card"
                           onMouseEnter={() => {
@@ -453,6 +600,14 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
                             alt={`card-${cell.id}`}
                           />
                         </div>
+                      )}
+                      {cell.card && cell.card.recto === false && (
+                        <BsQuestionLg
+                          onMouseEnter={() => setDetailCard('hidden')}
+                          onMouseLeave={() => setDetailCard(null)}
+                          size={90}
+                          className="hidden-icon"
+                        />
                       )}
                     </div>
                   )
@@ -480,28 +635,59 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
           </TransformWrapper>
         </div>
         {detailCard && <Details detailCard={detailCard} />}
-        <>
-          <div className="ig-menu bottom">
-            {(phase === 1 || phase === 2) && turn === 2 && (
-              <div className="costCounter">
-                <div className="costCounter-infos">
-                  <IoIosFlash />
-                  <span>{phase === 1 ? placementCostLeft : movesCostLeft}</span>
-                </div>
-                énergies
+
+        <div className="ig-menu bottom">
+          {(phase === 1 || phase === 2) && (
+            <div className="costCounter">
+              <div className="costCounter-infos">
+                <IoIosFlash />
+                <span>{phase === 1 ? placementCostLeft : movesCostLeft}</span>
               </div>
-            )}
-          </div>
-          <div className="ig-menu top">
+              énergies
+            </div>
+          )}
+          {tutorialStep === 18 && (
             <IconButton
+              className={selectedShopCard && selectedTradeCard ? '' : 'disabled'}
               onClick={() => {
-                navigate('/home')
+                if (selectedShopCard && selectedTradeCard) {
+                  setHand([selectedShopCard])
+                  setShopCard((prevShopCard) => {
+                    return [
+                      ...prevShopCard.filter((card) => card.name !== selectedShopCard.name),
+                      selectedTradeCard
+                    ]
+                  })
+                  setSelectedShopCard(null)
+                  setSelectedTradeCard(null)
+                  setTutorialStep(19)
+                }
               }}
             >
-              <TiArrowBack size={45} />
-              <span>Quitter</span>
+              {selectedShopCard && selectedTradeCard ? (
+                <>
+                  <span>Valider l'échange</span>
+                  <GiConfirmed size={45} />
+                </>
+              ) : (
+                <>
+                  <span>Fin de phase</span>
+                  <PiFlagCheckeredFill size={45} />
+                </>
+              )}
             </IconButton>
-            {/* <IconButton
+          )}
+        </div>
+        <div className="ig-menu top">
+          <IconButton
+            onClick={() => {
+              navigate('/home')
+            }}
+          >
+            <TiArrowBack size={45} />
+            <span>Quitter</span>
+          </IconButton>
+          {/* <IconButton
               onClick={() => {
                 setLeftWindow(leftWindow === 'shop' ? null : 'shop')
                 setMusicPlayer(false)
@@ -511,8 +697,28 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
               <GiPriceTag size={45} />
               <span>Boutique</span>
             </IconButton> */}
+        </div>
+        <div className={`window left tutorial-shop ${tutorialStep === 18 ? '' : 'hidden'}`}>
+          <div className="shop-list">
+            {shopCard.map((card) => (
+              <div
+                className={`shop-item ${selectedShopCard && selectedShopCard.name === card.name ? 'selected' : ''}`}
+                onClick={() => {
+                  setSelectedShopCard(card)
+                }}
+                onMouseEnter={() => setDetailCard(card)}
+                onMouseLeave={() => setDetailCard(null)}
+              >
+                <div className="img-container">
+                  <div className={`card-cost`}>
+                    <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
+                  </div>
+                  <img src={card.url} alt="shop card" />
+                </div>
+              </div>
+            ))}
           </div>
-        </>
+        </div>
       </div>
       <div
         className="gameContainer-filter"
@@ -529,6 +735,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       >
         {stepsConfig[tutorialStep - 1].text}
       </TutorialText>
+      {tutorialWin && <div className="tutorial-win fade-in"></div>}
     </>
   )
 }

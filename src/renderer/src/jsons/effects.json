@@ -58,7 +58,7 @@
   {
     "slug": "healer",
     "name": "Potion de soin",
-    "desc": "Cette carte soigne les carte qu'elle attaque de la valeur de sa propre attaque.",
+    "desc": "Cette carte n'inflige aucun dégâts, à la place, elle soigne ses cibles de la valeur de sa propre attaque.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/heal_ruslfb.webp",
     "type": "Tactiques"
   },
