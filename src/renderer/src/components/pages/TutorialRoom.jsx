@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { GiConfirmed, GiPriceTag } from 'react-icons/gi'
+import { GiConfirmed } from 'react-icons/gi'
 import Hand from '../interface/inGame/Hand'
 import { TutorialContext } from '../providers/TutorialProvider'
 import { AuthContext } from '../../AuthContext'
@@ -18,6 +18,7 @@ import IconButton from '../items/iconButton'
 import { PiFlagCheckeredFill } from 'react-icons/pi'
 import { BsQuestionLg } from 'react-icons/bs'
 import { getAchievementById } from '../controllers/AchievementsController'
+import ReactPlayer from 'react-player'
 
 const TutorialText = ({ children, onClickNext, clickable }) => {
   const renderText = (text) => {
@@ -70,7 +71,7 @@ export default function TutorialRoom() {
     shopCard,
     setShopCard
   } = useContext(TutorialContext)
-  const { user, userInfo, giveAchievement } = useContext(AuthContext)
+  const { user, userInfo, giveAchievement, userSettings } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const [tutorialStep, setTutorialStep] = useState(1)
@@ -754,6 +755,14 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
         {stepsConfig[tutorialStep - 1].text}
       </TutorialText>
       {tutorialWin && <div className="tutorial-win fade-in"></div>}
+      <ReactPlayer
+        volume={userSettings.musicVolume}
+        url={'https://www.youtube.com/watch?v=Tb4herBVRGY'}
+        playing={true}
+        width={0}
+        height={0}
+        loop={true}
+      />
     </>
   )
 }

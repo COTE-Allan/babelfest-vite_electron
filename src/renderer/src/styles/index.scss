@@ -315,12 +315,13 @@ select {
 }
 
 .disabled {
-  opacity: 20%;
+  opacity: 30%;
 
   &:hover {
     cursor: not-allowed;
   }
 }
+
 
 @include txt-rarities();
 

@@ -160,7 +160,7 @@ export function defEdit(user, value, targets) {
     }
     ;(target.card.affected = target.card.affected || []).push({
       text: `DEF ${value >= 0 ? '+' : ''}${value} par ${user}`,
-      colorCode: value >= 0 ? '#3FA9F6' : '#FB1D25'
+      colorCode: value >= 0 ? '#67D367' : '#E63D3D'
     })
   })
   return targets
@@ -171,7 +171,7 @@ export function atkEdit(user, value, targets) {
     target.card.atk = target.card.atk + value
     ;(target.card.affected = target.card.affected || []).push({
       text: `ATK ${value >= 0 ? '+' : ''}${value} par ${user}`,
-      colorCode: value >= 0 ? '#3FA9F6' : '#FB1D25'
+      colorCode: value >= 0 ? '#67D367' : '#E63D3D'
     })
   })
   return targets
@@ -182,7 +182,7 @@ export function depEdit(user, value, targets) {
     target.card.dep = target.card.dep + value
     ;(target.card.affected = target.card.affected || []).push({
       text: `DEP ${value >= 0 ? '+' : ''}${value} par ${user}`,
-      colorCode: value >= 0 ? '#3FA9F6' : '#FB1D25'
+      colorCode: value >= 0 ? '#67D367' : '#E63D3D'
     })
   })
   return targets

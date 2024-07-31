@@ -12,13 +12,14 @@ export default function SkinsButton({
   selected,
   children,
   isArena,
-  isBanner
+  isBanner,
+  isColor
 }) {
   const sendErrorMessage = useSendErrorMessage()
 
   return (
     <Button
-      className={`skins-button ${isBanner ? 'skins-button-banner' : ''} ${
+      className={`skins-button ${isBanner ? 'skins-button-banner' : ''} ${!lockedCondition && !isColor ? 'disabled' : ''} ${
         selected ? 'selected' : ''
       } ${className}`}
       onClick={() => {
@@ -40,7 +41,7 @@ export default function SkinsButton({
       }}
       style={style}
     >
-      {!lockedCondition && <FaLock className="btn-icon" />}
+      {!lockedCondition && isColor && <FaLock className="btn-icon" />}
       {children}
     </Button>
   )

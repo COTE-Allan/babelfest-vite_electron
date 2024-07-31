@@ -16,16 +16,6 @@
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "name": "Alpha-testeur",
-    "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
-    "flag": "betaTest"
-  },
-  {
-    "name": "Fondateur",
-    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
-    "flag": "alphaTest"
-  },
-  {
     "name": "Anomalie",
     "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
   },
@@ -63,5 +53,15 @@
     "name": "Beaucoup trop impliqué",
     "level": 100,
     "unlockTip": "Obtenu en atteignant le niveau 100."
+  },
+  {
+    "name": "Alpha-testeur",
+    "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
+    "flag": "betaTest"
+  },
+  {
+    "name": "Fondateur",
+    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
+    "flag": "alphaTest"
   }
 ]

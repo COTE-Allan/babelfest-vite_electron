@@ -23,6 +23,7 @@ import axios from 'axios'
 
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
+import { toast } from 'react-toastify'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -39,6 +40,9 @@ const Home = () => {
   const [lastBlogPostDate, setLastBlogPostDate] = useState(null)
   const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
     useContext(MatchmakingContext)
+  const { userInfo } = useContext(AuthContext)
+
+  let isTutorialFinished = userInfo.achievements.includes('HF_tutorial')
 
   useEffect(() => {
     const unsubscribe = getOnlineUsersCount(setPlayerCount)
@@ -118,10 +122,15 @@ const Home = () => {
             <HomeGridItem
               isButton
               needLogin
-              className={`grid-qp ${matchmakingSearch === 'quick' && 'active'}`}
+              className={`grid-qp ${matchmakingSearch === 'quick' && 'active'} ${!isTutorialFinished && 'disabled'}`}
               bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711031517/bouton_rapide.webp"
               onClick={() => {
-                if (matchmakingSearch === 'quick') {
+                if (!isTutorialFinished) {
+                  sendErrorMessage(
+                    'Terminez le tutoriel pour débloquer cette fonctionnalité.',
+                    'info'
+                  )
+                } else if (matchmakingSearch === 'quick') {
                   handleStopMatchmaking()
                 } else {
                   handleStartMatchmaking('quick')
@@ -140,10 +149,15 @@ const Home = () => {
             <HomeGridItem
               isButton
               needLogin
-              className="grid-custom"
+              className={`grid-custom ${!isTutorialFinished && 'disabled'}`}
               bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711032350/bouton_custom.webp"
               onClick={() => {
-                if (matchmakingSearch) {
+                if (!isTutorialFinished) {
+                  sendErrorMessage(
+                    'Terminez le tutoriel pour débloquer cette fonctionnalité.',
+                    'info'
+                  )
+                } else if (matchmakingSearch) {
                   sendErrorMessage(
                     "Quittez la file d'attente pour accéder à cette fonctionnalitée."
                   )

@@ -34,8 +34,10 @@ const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title]
 
 import useSound from 'use-sound'
 import errorSfx from '../../assets/sfx/menu_unauthorized.mp3'
+import infoSfx from '../../assets/sfx/info_notification.mp3'
 import { toast } from 'react-toastify'
-
+import { useContext } from 'react'
+import { AuthContext } from '../../AuthContext'
 
 // obtenir toute les cartes du jeu
 export function getAllCards() {
@@ -146,8 +148,6 @@ export async function updateHand(newHand, team, room) {
   })
 }
 
-
-
 export function shuffleArray(array) {
   let newArray = [...array] // Crée une copie du tableau
   let currentIndex = newArray.length,
@@ -176,11 +176,22 @@ export function defineWinner(room, player) {
 }
 
 export function useSendErrorMessage() {
-  const [error] = useSound(errorSfx)
+  const { userSettings } = useContext(AuthContext)
+  const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
+  const [info] = useSound(infoSfx, { volume: userSettings.sfxVolume })
 
-  const sendErrorMessage = (msg) => {
-    error()
-    toast.error(msg)
+  const sendErrorMessage = (msg, type = 'error') => {
+    switch (type) {
+      case 'error':
+        error()
+        toast.error(msg)
+        break
+      case 'info':
+        info()
+        toast.info(msg)
+      default:
+        break
+    }
   }
 
   return sendErrorMessage

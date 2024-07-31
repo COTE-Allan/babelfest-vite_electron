@@ -94,13 +94,6 @@
     "level": 70
   },
   {
-    "hex": "#fff",
-    "classes": "rainbow",
-    "name": "Arc-en-ciel",
-    "unlockTip": "Obtenu en atteignant le niveau 100.",
-    "level": 100
-  },
-  {
     "hex": "#c12527",
     "name": "Rouge Babelfest Assombri",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",

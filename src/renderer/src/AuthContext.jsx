@@ -180,10 +180,25 @@ export const AuthProvider = ({ children }) => {
 
   const giveAchievement = async (achievement) => {
     if (!user) return
+
     const userRef = doc(db, 'users', user.uid)
+
+    // Récupérer les données utilisateur actuelles
+    const userSnap = await getDoc(userRef)
+    if (!userSnap.exists()) return
+
+    const userData = userSnap.data()
+
+    // Vérifier si l'utilisateur a déjà l'achievement
+    if (userData.achievements && userData.achievements.includes(achievement.id)) {
+      return
+    }
+
+    // Ajouter l'achievement à la liste des achievements de l'utilisateur
     await updateDoc(userRef, {
       achievements: arrayUnion(achievement.id)
     })
+
     playAchievementSound()
     toast.success(
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -198,6 +213,7 @@ export const AuthProvider = ({ children }) => {
         icon: false
       }
     )
+
     setUserInfo((prev) => ({
       ...prev,
       achievements: [...prev.achievements, achievement.id]

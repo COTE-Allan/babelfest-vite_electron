@@ -36,6 +36,7 @@ export default function ColorSkins({
             // TODO: couleur arc en ciel en jeu (faut stocker la classe avec le hex (ou juste la classe ?))
             return (
               <SkinsButton
+                isColor
                 lockedCondition={lockedCondition}
                 className={`color ${color.classes ? color.classes : ''}`}
                 style={{ backgroundColor: color.hex }}

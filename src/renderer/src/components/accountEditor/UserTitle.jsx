@@ -48,7 +48,7 @@ export default function UserTitle({ title, setTitle }) {
 
             return (
               <button
-                className={`skins-title-item ${title === t.name ? 'selected' : ''}`}
+                className={`skins-title-item ${title === t.name ? 'selected' : ''} ${!lockedCondition ? 'disabled' : ''}`}
                 onMouseEnter={() => {
                   hover()
                   setPictureLabel([t.name, t.unlockTip, lockedCondition])
@@ -63,7 +63,6 @@ export default function UserTitle({ title, setTitle }) {
                 }}
               >
                 <span>{t.name}</span>
-                {!lockedCondition && <FaLock size={25} />}
               </button>
             )
           })}
