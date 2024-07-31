@@ -77,13 +77,14 @@ export default function LobbyList() {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {
         joinLobby(lobbyID)
       } else {
-        if (foundLobby.gameRef) {
-          joinGameAsSpectator(foundLobby.gameRef)
-        } else {
-          sendErrorMessage(
-            'Attendez que cette partie commence pour la rejoindre en tant que spectateur.'
-          )
-        }
+        // rejoindre en spec LOCKED
+        // if (foundLobby.gameRef) {
+        //   joinGameAsSpectator(foundLobby.gameRef)
+        // } else {
+        //   sendErrorMessage(
+        //     'Attendez que cette partie commence pour la rejoindre en tant que spectateur.'
+        //   )
+        // }
       }
     }
   }

@@ -5,7 +5,6 @@ import './styles/index.scss'
 import Home from './components/pages/Home'
 import Library from './components/pages/Library'
 import { GlobalProvider } from './components/providers/GlobalProvider'
-import { SpectatorProvider } from './components/providers/SpectatorProvider'
 import MenuHeader from './components/interface/MenuHeader'
 import Login from './components/pages/Login'
 import { AuthContext, AuthProvider } from './AuthContext'
@@ -80,7 +79,6 @@ const App = () => {
             }
           />
           <Route path="/game/:room" element={<GlobalProvider />} />
-          <Route path="/gameSpectator/:room" element={<SpectatorProvider />} />
           <Route path="/tutorial" element={<TutorialProvider />} />
           <Route
             path="/lobbyList"

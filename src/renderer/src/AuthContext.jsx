@@ -1,9 +1,11 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
 import { getAuth, onAuthStateChanged, updateEmail } from 'firebase/auth'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { ref, onValue, set, onDisconnect } from 'firebase/database'
 import { db, realtimeDb } from './Firebase'
 import { toast } from 'react-toastify'
+import useSound from 'use-sound'
+import achievementSfx from './assets/sfx/notification_achievement.mp3'
 
 export const AuthContext = createContext()
 
@@ -12,6 +14,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [userInfo, setUserInfo] = useState({})
   const [userSettings, setUserSettings] = useState({})
+
+  const [playAchievementSound] = useSound(achievementSfx, {
+    volume: userSettings.sfxVolume
+  })
 
   const tryAuth = async () => {
     const auth = getAuth()
@@ -79,7 +85,8 @@ export const AuthProvider = ({ children }) => {
           longestWinStreak: userData.stats?.longestWinStreak || 0
         },
         status: userData.status,
-        currentLobby: userData.currentLobby
+        currentLobby: userData.currentLobby,
+        achievements: userData.achievements || []
       })
     }
   }
@@ -88,13 +95,6 @@ export const AuthProvider = ({ children }) => {
     console.log('reset')
     setUser(false)
     setUserInfo(false)
-    // setUserSettings({
-    //   sfxVolume: 0.5,
-    //   bgOn: true,
-    //   tutorial: true,
-    //   screenMode: 'windowed',
-    //   resolution: '1536x864'
-    // })
   }
 
   const updateOnlineStatus = async (userId, isDisconnecting) => {
@@ -178,6 +178,32 @@ export const AuthProvider = ({ children }) => {
     console.log('Utilisateur assigné au lobby avec succès')
   }
 
+  const giveAchievement = async (achievement) => {
+    if (!user) return
+    const userRef = doc(db, 'users', user.uid)
+    await updateDoc(userRef, {
+      achievements: arrayUnion(achievement.id)
+    })
+    playAchievementSound()
+    toast.success(
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img
+          width={50}
+          style={{ marginRight: '10px' }}
+          src="https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp"
+        />
+        <span>Succès obtenu : {achievement.name}</span>
+      </div>,
+      {
+        icon: false
+      }
+    )
+    setUserInfo((prev) => ({
+      ...prev,
+      achievements: [...prev.achievements, achievement.id]
+    }))
+  }
+
   const contextValue = {
     user,
     userInfo,
@@ -190,7 +216,8 @@ export const AuthProvider = ({ children }) => {
     updateUser,
     saveSettings,
     assignUserToLobby,
-    tryAuth
+    tryAuth,
+    giveAchievement
   }
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

@@ -102,136 +102,141 @@ const Home = () => {
 
   return (
     <>
-    <div className="home">
-      <div className="home-content">
-        <div className="home-grid">
-          <HomeGridItem
-            isButton
-            needLogin
-            className="grid-ranked disabled"
-            bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718097337/bouton_ranked.webp"
-            onClick={() => sendErrorMessage("Cette fonctionnalité n'est pas encore disponible.")}
-          >
-            <h1>PARTIE CLASSÉE</h1>
-            <span className="ranked bronze">BRONZE IV</span>
-          </HomeGridItem>
-          <HomeGridItem
-            isButton
-            needLogin
-            className={`grid-qp ${matchmakingSearch === 'quick' && 'active'}`}
-            bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711031517/bouton_rapide.webp"
-            onClick={() => {
-              if (matchmakingSearch === 'quick') {
-                handleStopMatchmaking()
-              } else {
-                handleStartMatchmaking('quick')
-              }
-            }}
-          >
-            <h1>PARTIE RAPIDE</h1>
-            {matchmakingSearch && (
-              <>
-                <span>Recherche en cours - {searchTime}</span>
-                <br />
-                <span>Appuyez pour annuler</span>
-              </>
-            )}
-          </HomeGridItem>
-          <HomeGridItem
-            isButton
-            needLogin
-            className="grid-custom"
-            bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711032350/bouton_custom.webp"
-            onClick={() => {
-              if (matchmakingSearch) {
-                sendErrorMessage("Quittez la file d'attente pour accéder à cette fonctionnalitée.")
-              } else {
-                handleItemClick('/lobbyList')
-              }
-            }}
-          >
-            <h1>PARTIE CUSTOM</h1>
-          </HomeGridItem>
-          <HomeGridItem
-            isButton
-            needLogin
-            className="grid-bot disabled"
-            bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718097996/bouton_solo.webp"
-            onClick={() => {
-              sendErrorMessage("Cette fonctionnalité n'est pas encore disponible.")
-            }}
-          >
-            <h1>Solo</h1>
-          </HomeGridItem>
-          <HomeGridItem
-            isButton
-            needLogin
-            className="grid-tuto"
-            bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718098167/bouton_tuto.webp"
-            onClick={() => {
-              handleItemClick('/tutorial')
-            }}
-          >
-            <h1>Tutoriel</h1>
-          </HomeGridItem>
-          <HomeGridItem className="grid-leaderboard">
-            <h1>CLASSEMENT</h1>
-            <div className="grid-leaderboard-content">
-              {topUsers.map((user, index) => (
-                <div key={user.id} className="grid-leaderboard-user">
-                  <span className={`rank ${getRankClass(index)}`}>{index + 1}</span>
-                  <ProfilePicture customUser={user} size={60} />
-                  <div className="grid-leaderboard-user-infos">
-                    <h2>{user.username}</h2>
-                    <span>{user.title === "level" ? "Niveau " + user.level : user.title}</span>
-                  </div>
-                    <img  className='grid-leaderboard-user-banner' src={user.banner} alt="bannière du joueur" />
-                </div>
-              ))}
-            </div>
-          </HomeGridItem>
-          <HomeGridItem className="grid-featured">
-            <FeaturedCards />
-          </HomeGridItem>
-
-          {lastBlogPost ? (
+      <div className="home">
+        <div className="home-content">
+          <div className="home-grid">
             <HomeGridItem
-              className="grid-news"
-              bg={lastBlogPost.featured_media_src_url}
-              link={lastBlogPost.link}
               isButton
+              needLogin
+              className="grid-ranked disabled"
+              bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718097337/bouton_ranked.webp"
+              onClick={() => sendErrorMessage("Cette fonctionnalité n'est pas encore disponible.")}
             >
-              <>
-                <h1>{lastBlogPost.title.rendered}</h1>
-                <span className="date">{lastBlogPostDate}</span>
-                <span className="grid-link-button">Lire l'article...</span>
-              </>
+              <h1>PARTIE CLASSÉE</h1>
+              <span className="ranked bronze">BRONZE IV</span>
             </HomeGridItem>
-          ) : (
-            <HomeGridItem className="grid-news" bg="">
-              <img src={LogoAnimate} alt="logo animé de chargement" className="spinner" />
+            <HomeGridItem
+              isButton
+              needLogin
+              className={`grid-qp ${matchmakingSearch === 'quick' && 'active'}`}
+              bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711031517/bouton_rapide.webp"
+              onClick={() => {
+                if (matchmakingSearch === 'quick') {
+                  handleStopMatchmaking()
+                } else {
+                  handleStartMatchmaking('quick')
+                }
+              }}
+            >
+              <h1>PARTIE RAPIDE</h1>
+              {matchmakingSearch && (
+                <>
+                  <span>Recherche en cours - {searchTime}</span>
+                  <br />
+                  <span>Appuyez pour annuler</span>
+                </>
+              )}
             </HomeGridItem>
-          )}
+            <HomeGridItem
+              isButton
+              needLogin
+              className="grid-custom"
+              bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1711032350/bouton_custom.webp"
+              onClick={() => {
+                if (matchmakingSearch) {
+                  sendErrorMessage(
+                    "Quittez la file d'attente pour accéder à cette fonctionnalitée."
+                  )
+                } else {
+                  handleItemClick('/lobbyList')
+                }
+              }}
+            >
+              <h1>PARTIE CUSTOM</h1>
+            </HomeGridItem>
+            <HomeGridItem
+              isButton
+              needLogin
+              className="grid-bot disabled"
+              bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718097996/bouton_solo.webp"
+              onClick={() => {
+                sendErrorMessage("Cette fonctionnalité n'est pas encore disponible.")
+              }}
+            >
+              <h1>Solo</h1>
+            </HomeGridItem>
+            <HomeGridItem
+              isButton
+              needLogin
+              className="grid-tuto"
+              bg="https://res.cloudinary.com/dxdtcakuv/image/upload/w_500/v1718098167/bouton_tuto.webp"
+              onClick={() => {
+                handleItemClick('/tutorial')
+              }}
+            >
+              <h1>Tutoriel</h1>
+            </HomeGridItem>
+            <HomeGridItem className="grid-leaderboard">
+              <h1>CLASSEMENT</h1>
+              <div className="grid-leaderboard-content">
+                {topUsers.map((user, index) => (
+                  <div key={user.id} className="grid-leaderboard-user">
+                    <span className={`rank ${getRankClass(index)}`}>{index + 1}</span>
+                    <ProfilePicture customUser={user} size={60} />
+                    <div className="grid-leaderboard-user-infos">
+                      <h2>{user.username}</h2>
+                      <span>{user.title === 'level' ? 'Niveau ' + user.level : user.title}</span>
+                    </div>
+                    <img
+                      className="grid-leaderboard-user-banner"
+                      src={user.banner}
+                      alt="bannière du joueur"
+                    />
+                  </div>
+                ))}
+              </div>
+            </HomeGridItem>
+            <HomeGridItem className="grid-featured">
+              <FeaturedCards />
+            </HomeGridItem>
 
-          <HomeGridItem className="grid-playerCount">
-            <span>EN LIGNE : {playerCount}</span>
-          </HomeGridItem>
-        </div>
-      </div>
+            {lastBlogPost ? (
+              <HomeGridItem
+                className="grid-news"
+                bg={lastBlogPost.featured_media_src_url}
+                link={lastBlogPost.link}
+                isButton
+              >
+                <>
+                  <h1>{lastBlogPost.title.rendered}</h1>
+                  <span className="date">{lastBlogPostDate}</span>
+                  <span className="grid-link-button">Lire l'article...</span>
+                </>
+              </HomeGridItem>
+            ) : (
+              <HomeGridItem className="grid-news" bg="">
+                <img src={LogoAnimate} alt="logo animé de chargement" className="spinner" />
+              </HomeGridItem>
+            )}
 
-      {state?.askToRejoin && (
-        <ClassicModal>
-          <p>Il semblerait que vous étiez déjà dans un lobby, voulez-vous le rejoindre ?</p>
-          <div>
-            <Button onClick={() => joinLobby(state?.askToRejoin, true)}>Rejoindre</Button>
-            <Button onClick={() => leaveLobby(state?.askToRejoin)}>Quitter</Button>
+            <HomeGridItem className="grid-playerCount">
+              <span>EN LIGNE : {playerCount}</span>
+            </HomeGridItem>
           </div>
-        </ClassicModal>
-      )}
-    </div>
-    <MenuFooter />
-    </>
+        </div>
 
+        {state?.askToRejoin && (
+          <ClassicModal>
+            <p>Il semblerait que vous étiez déjà dans un lobby, voulez-vous le rejoindre ?</p>
+            <div>
+              <Button onClick={() => joinLobby(state?.askToRejoin, true)}>Rejoindre</Button>
+              <Button onClick={() => leaveLobby(state?.askToRejoin)}>Quitter</Button>
+            </div>
+          </ClassicModal>
+        )}
+      </div>
+      <MenuFooter />
+    </>
   )
 }
 

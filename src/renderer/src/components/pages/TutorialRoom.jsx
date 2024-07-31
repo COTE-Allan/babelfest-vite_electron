@@ -8,6 +8,7 @@ import '../../styles/items/cell.scss'
 import '../../styles/items/card.scss'
 import '../../styles/interface/inGame/shop.scss'
 import '../../styles/interface/inGame/inGameMenus.scss'
+import '../../styles/pages/tutorialRoom.scss'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import Details from '../interface/inGame/Details'
 import { IoIosFlash } from 'react-icons/io'
@@ -16,6 +17,7 @@ import { useNavigate } from 'react-router-dom'
 import IconButton from '../items/iconButton'
 import { PiFlagCheckeredFill } from 'react-icons/pi'
 import { BsQuestionLg } from 'react-icons/bs'
+import { getAchievementById } from '../controllers/AchievementsController'
 
 const TutorialText = ({ children, onClickNext, clickable }) => {
   const renderText = (text) => {
@@ -68,7 +70,7 @@ export default function TutorialRoom() {
     shopCard,
     setShopCard
   } = useContext(TutorialContext)
-  const { user, userInfo } = useContext(AuthContext)
+  const { user, userInfo, giveAchievement } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const [tutorialStep, setTutorialStep] = useState(1)
@@ -274,6 +276,11 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       Le premier joueur qui capture la base adverse ou qui détruit les 8 cartes de l'adversaire gagne !`,
       clickable: true,
       action: () => {
+        setPattern(
+          pattern.map((cell) =>
+            cell.id === 14 ? { ...cell, card: { ...cell.card, atk: 3 }, owner: 2 } : cell
+          )
+        )
         setPhase(1)
         setPlacementCostLeft(4)
         setMovesCostLeft(4)
@@ -473,7 +480,9 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
 
   useEffect(() => {
     if (tutorialWin) {
-      // Succès ici
+      const achievement = getAchievementById('HF_tutorial')
+      giveAchievement(achievement)
+
       setTimeout(() => {
         navigate('/home')
       }, 2000)
@@ -588,12 +597,21 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
                           }}
                         >
                           <div className="cell-card-stats">
-                            {[cell.card.atk, cell.card.dep, cell.card.hp].map((stat, key) => (
-                              <div key={key} className="cell-card-stats-item">
-                                {stat}
-                              </div>
-                            ))}
+                            {[cell.card.atk, cell.card.dep, cell.card.hp].map((stat, key) => {
+                              let className = 'cell-card-stats-item'
+                              if (key === 0 && stat > cell.card.baseatk) {
+                                // Vérifie si c'est le premier élément (atk) et s'il est supérieur à baseatk
+                                className += ' buff'
+                              }
+
+                              return (
+                                <div key={key} className={className}>
+                                  {stat}
+                                </div>
+                              )
+                            })}
                           </div>
+
                           <img
                             className="cell-card-visual"
                             src={cell.card.url}

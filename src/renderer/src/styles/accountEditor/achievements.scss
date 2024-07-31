@@ -28,8 +28,14 @@
     display: flex;
 
     &-item {
-      opacity: 0.4;
+      opacity: 0.3;
       filter: grayscale(100%);
+
+      &.unlocked {
+        filter: none;
+        opacity: 1;
+      }
+
       margin-right: 15px;
 
       &:hover {

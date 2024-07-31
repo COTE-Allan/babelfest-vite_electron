@@ -38,7 +38,6 @@ const UpdateNotifier = () => {
     }
   }, [])
 
-  console.log(updateInfo)
   if (updateInfo) {
     return (
       <div className="updateBanner">

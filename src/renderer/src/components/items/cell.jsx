@@ -41,9 +41,10 @@ export default function Cell({ active, confirmModal, cell }) {
   const card = cell.card
   const owner = cell.owner
   const player = host ? 1 : 2
-  let stats
+  let stats, basestats
   if (card != null) {
     stats = [card.atk, card.dep, card.hp]
+    basestats = [card.baseatk, card.basehp, card.basehp]
   }
   const checkIfMyCard = useMemo(
     () => (host && owner === 1) || (!host && owner === 2),
@@ -208,11 +209,21 @@ export default function Cell({ active, confirmModal, cell }) {
                 <img src={card.url} className="cell-card-visual" alt="Card" />
               </div>
               <div className="cell-card-stats">
-                {stats.map((stat, key) => (
-                  <div key={key} className="cell-card-stats-item">
-                    {stat}
-                  </div>
-                ))}
+                {stats.map((stat, key) => {
+                  const baseStat = basestats[key]
+                  let className = 'cell-card-stats-item'
+                  if (stat < baseStat) {
+                    className += ' nerf'
+                  } else if (stat > baseStat) {
+                    className += ' buff'
+                  }
+
+                  return (
+                    <div key={key} className={className}>
+                      {stat}
+                    </div>
+                  )
+                })}
               </div>
             </>
           ) : (

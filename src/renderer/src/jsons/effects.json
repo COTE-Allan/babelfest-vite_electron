@@ -2,7 +2,7 @@
   {
     "slug": "atkBuff",
     "name": "Renforcement",
-    "desc": "Au début d'une phase d'attaque, cette carte renforce l'attaque de ses alliés adjacents de la valeur indiqué.",
+    "desc": "Au début d'une phase d'attaque, cette carte renforce l'attaque de ses alliés adjacents de la valeur indiqué jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520356/babelfest/icons/forge_yoef1f.webp",
     "type": "Buffs"
   },
@@ -30,14 +30,14 @@
   {
     "slug": "depBuff",
     "name": "Turbo",
-    "desc": "Au début d'une phase de déplacement, cette carte renforce le déplacement de ses alliés adjacents de la valeur indiqué.",
+    "desc": "Au début d'une phase de déplacement, cette carte renforce le déplacement de ses alliés adjacents de la valeur indiqué jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950667/babelfest/icons/turbo.webp",
     "type": "Buffs"
   },
   {
     "slug": "defBuff",
     "name": "Bouclier Protecteur",
-    "desc": "Au début d'une phase d'attaque, cette carte ajoute un point de défense à ses alliés adjacents.",
+    "desc": "Au début d'une phase d'attaque, cette carte ajoute un point de défense à ses alliés adjacents jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/shield_hueeo5.webp",
     "type": "Buffs"
   },
@@ -72,7 +72,7 @@
   {
     "slug": "rageSword",
     "name": "Rage du berserk",
-    "desc": "Au début d'une phase d'attaque, cette carte obtient un point d'ATK par ennemi adjacent.",
+    "desc": "Au début d'une phase d'attaque, cette carte obtient un point d'ATK par ennemi adjacent jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/zeusSword_rhktvz.webp",
     "type": "Buffs"
   },
@@ -233,7 +233,7 @@
   {
     "slug": "rageSwordAlly",
     "name": "Tous pour un",
-    "desc": "Au début d'une phase d'attaque, cette carte obtient un point d'ATK par allié adjacent.",
+    "desc": "Au début d'une phase d'attaque, cette carte obtient un point d'ATK par allié adjacent jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1705089497/babelfest/icons/all-for-one.webp",
     "type": "Buffs"
   },
