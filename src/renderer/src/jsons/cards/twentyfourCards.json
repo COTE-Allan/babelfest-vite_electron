@@ -78,5 +78,35 @@
         "target": "any"
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Hector Ranger",
+    "title": "Harponnage Capilaire",
+    "atk": 2,
+    "dep": 1,
+    "hp": 4,
+    "baseatk": 2,
+    "basedep": 1,
+    "basehp": 4,
+    "url": "./cards/series/babelfest_2024series4.png",
+    "collection": "Série Infinie",
+    "rarity": 2,
+    "year": 2024,
+    "author": "Okaah",
+    "effects": [
+      {
+        "when": [3],
+        "type": "rageShield",
+        "target": "rival"
+      },
+      {
+        "when": ["spawn"],
+        "type": "grapple",
+        "target": "any",
+        "spawnUsed": false,
+        "choice": "target"
+      }
+    ]
   }
 ]

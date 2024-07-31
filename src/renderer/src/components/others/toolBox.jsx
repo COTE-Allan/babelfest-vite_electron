@@ -242,7 +242,7 @@ export function getFeaturedCards() {
   // Filtrer pour obtenir seulement les cartes avec 'featured' = true
   const featuredCards = allCards.filter((card) => card.featured)
 
-  return featuredCards
+  return shuffleArray(featuredCards)
 }
 
 export async function getTopUsersByMMRAndLevel() {

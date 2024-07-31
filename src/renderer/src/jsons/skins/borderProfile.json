@@ -67,6 +67,18 @@
     "level": 31
   },
   {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1722455063/babelfest/skins/borders/cadres_sang.webp",
+    "name": "Blessures",
+    "unlockTip": "Obtenu en atteignant le niveau 45.",
+    "level": 45
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1722455064/babelfest/skins/borders/cadres_eclair_voyageur.webp",
+    "name": "Énergie du Voyageur",
+    "unlockTip": "Obtenu en atteignant le niveau 55.",
+    "level": 55
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323312/babelfest/skins/borders/04_-_Initiation_des_Plaines.webp",
     "name": "Initiation des Plaines",
     "unlockTip": "Obtenu en récompense du succès : 'Bienvenue sur Babelfest'",

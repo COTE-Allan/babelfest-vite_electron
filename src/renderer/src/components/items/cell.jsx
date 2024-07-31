@@ -44,7 +44,7 @@ export default function Cell({ active, confirmModal, cell }) {
   let stats, basestats
   if (card != null) {
     stats = [card.atk, card.dep, card.hp]
-    basestats = [card.baseatk, card.basehp, card.basehp]
+    basestats = [card.baseatk, card.basedep, card.basehp]
   }
   const checkIfMyCard = useMemo(
     () => (host && owner === 1) || (!host && owner === 2),
