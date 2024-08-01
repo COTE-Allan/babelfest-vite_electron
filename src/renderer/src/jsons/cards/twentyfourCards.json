@@ -108,5 +108,51 @@
         "choice": "target"
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Aaydin",
+    "title": "Aal de lumière",
+    "atk": 2,
+    "dep": 1,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 1,
+    "basehp": 2,
+    "url": "./cards/series/babelfest_2024series5.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "YunenDraws",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "moreReach"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Azuki",
+    "title": "Anemoi Gryphus",
+    "atk": 3,
+    "dep": 0,
+    "hp": 2,
+    "baseatk": 3,
+    "basedep": 0,
+    "basehp": 2,
+    "url": "./cards/series/babelfest_2024series6.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "RID",
+    "effects": [
+      {
+        "type": "randomDEP",
+        "when": [1, "spawn"],
+        "range": [1, 2, 3, 3, 4],
+        "spawnUsed": false
+      }
+    ]
   }
 ]
