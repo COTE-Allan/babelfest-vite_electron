@@ -74,7 +74,7 @@ export const useEndTurn = () => {
   async function EndTurn(nextPhase = true) {
     const updates = {}
     const batch = writeBatch(db)
-
+    console.log('endturn,', nextPhase)
     if (myTurn) {
       updates.activePlayer = switchActivePlayer()
     }

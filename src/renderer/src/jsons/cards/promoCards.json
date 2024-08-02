@@ -17,12 +17,6 @@
     "shiny": "foil",
     "effects": [
       {
-        "type": "randomATK",
-        "when": [1, "spawn"],
-        "range": [1, 2, 2, 3, 3, 3, 3],
-        "spawnUsed": false
-      },
-      {
         "when": [2],
         "type": "seeingEye",
         "name": "Éclaireur",
@@ -31,6 +25,12 @@
       {
         "when": ["spawn"],
         "type": "random",
+        "spawnUsed": false
+      },
+      {
+        "type": "randomATK",
+        "when": [1, "spawn"],
+        "range": [1, 2, 2, 3, 3, 3, 3],
         "spawnUsed": false
       }
     ]

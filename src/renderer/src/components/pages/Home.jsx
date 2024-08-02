@@ -320,19 +320,29 @@ const FeaturedCards = () => {
   const { userSettings } = useContext(AuthContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
-  const [currentIndex, setCurrentIndex] = useState(0)
+
+  // Initialiser l'index de la carte courante de manière aléatoire
+  const [currentIndex, setCurrentIndex] = useState(() =>
+    Math.floor(Math.random() * featuredCards.length)
+  )
   const [inProp, setInProp] = useState(false)
   const nodeRef = useRef(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     setInProp(true)
+    let previousIndex = currentIndex
     const interval = setInterval(() => {
       setInProp(false)
 
-      // Mettez à jour l'index après une légère attente pour permettre à la transition de sortie de se terminer
+      // Mettre à jour l'index après une légère attente pour permettre à la transition de sortie de se terminer
       setTimeout(() => {
-        setCurrentIndex((currentIndex) => (currentIndex + 1) % featuredCards.length)
+        let nextIndex
+        do {
+          nextIndex = Math.floor(Math.random() * featuredCards.length)
+        } while (nextIndex === previousIndex)
+        previousIndex = nextIndex
+        setCurrentIndex(nextIndex)
         setInProp(true)
       }, 500)
     }, 10000)

@@ -8,6 +8,9 @@ import { getCardBasedOnNameAndTitle } from './basics'
 import randomEffects from '../../jsons/randomEffects.json'
 import { usePushLogsIntoBatch } from '../controllers/LogsController'
 
+let red = '#bb2424'
+let green = '#4ead35'
+
 // Retirer une carte du plateau
 export function removeCardAndBatch(cellID, room, batchInstance) {
   const cellRef = doc(db, `games/${room}/arena`, `cell-${cellID}`)
@@ -25,6 +28,44 @@ export async function drawRandomCards(deck, amount) {
     drawnCards.push(deck[random])
     deck.splice(random, 1)
   }
+  return drawnCards
+}
+
+// Pioche des cartes aléatoires en fonction de leur rareté
+export async function drawCardsByRarity(deck, amount) {
+  const rarityProbabilities = [
+    { rarity: 1, probability: 50 },
+    { rarity: 2, probability: 30 },
+    { rarity: 3, probability: 15 },
+    { rarity: 4, probability: 5 }
+  ]
+
+  // Convert probabilities to cumulative probabilities
+  let cumulativeProbability = 0
+  const cumulativeProbabilities = rarityProbabilities.map(({ rarity, probability }) => {
+    cumulativeProbability += probability
+    return { rarity, cumulativeProbability }
+  })
+
+  const drawnCards = []
+  for (let i = 0; i < amount; i++) {
+    const random = Math.random() * 100
+    const selectedRarity = cumulativeProbabilities.find(
+      ({ cumulativeProbability }) => random <= cumulativeProbability
+    ).rarity
+
+    const cardsOfSelectedRarity = deck.filter((card) => card.rarity === selectedRarity)
+    if (cardsOfSelectedRarity.length === 0) continue // In case no card of the selected rarity is found
+
+    const randomIndex = Math.floor(Math.random() * cardsOfSelectedRarity.length)
+    const drawnCard = cardsOfSelectedRarity[randomIndex]
+    drawnCards.push(drawnCard)
+
+    // Remove the drawn card from the deck
+    const cardIndexInDeck = deck.indexOf(drawnCard)
+    deck.splice(cardIndexInDeck, 1)
+  }
+
   return drawnCards
 }
 
@@ -159,8 +200,8 @@ export function defEdit(user, value, targets) {
       target.card.def = value
     }
     ;(target.card.affected = target.card.affected || []).push({
-      text: `DEF ${value >= 0 ? '+' : ''}${value} par ${user}`,
-      colorCode: value >= 0 ? '#67D367' : '#E63D3D'
+      text: `DEF ${value >= 0 ? '+' : ''}${value}`,
+      colorCode: value >= 0 ? green : red
     })
   })
   return targets
@@ -170,8 +211,8 @@ export function atkEdit(user, value, targets) {
   targets.forEach((target) => {
     target.card.atk = target.card.atk + value
     ;(target.card.affected = target.card.affected || []).push({
-      text: `ATK ${value >= 0 ? '+' : ''}${value} par ${user}`,
-      colorCode: value >= 0 ? '#67D367' : '#E63D3D'
+      text: `ATK ${value >= 0 ? '+' : ''}${value}`,
+      colorCode: value >= 0 ? green : red
     })
   })
   return targets
@@ -181,22 +222,23 @@ export function depEdit(user, value, targets) {
   targets.forEach((target) => {
     target.card.dep = target.card.dep + value
     ;(target.card.affected = target.card.affected || []).push({
-      text: `DEP ${value >= 0 ? '+' : ''}${value} par ${user}`,
-      colorCode: value >= 0 ? '#67D367' : '#E63D3D'
+      text: `DEP ${value >= 0 ? '+' : ''}${value}`,
+      colorCode: value >= 0 ? green : red
     })
   })
   return targets
 }
 
 // Ajouter aux hp existants
-export function hpEdit(value, targets, room) {
+export function hpEdit(value, targets, room, specialDeath = false) {
   targets.forEach(async (target) => {
     target.card.hp = target.card.hp + value
     if (target.card.hp <= 0) {
       target.card.dead = {
         cell: target.id,
         id: target.card.id,
-        uniqueID: target.card.uniqueID
+        uniqueID: target.card.uniqueID,
+        specialDeath: specialDeath
       }
     }
   })

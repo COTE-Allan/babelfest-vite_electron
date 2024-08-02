@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  
+
   & h1,
   h2,
   h3,
@@ -28,6 +28,7 @@
     height: 100%;
     margin: 5px 0;
     margin-top: 15px;
+    margin-bottom: 5px;
   }
 
   & .details-card-back {
@@ -56,6 +57,22 @@
   ul {
     margin: 5px 0;
     margin-left: 35px;
+
+    &.details-card-afflictions-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 0;
+
+      & li {
+        text-align: center;
+        flex: 15% 0 0;
+        list-style-type: none;
+        margin: 5px;
+        margin-right: 10px;
+        padding: 5px 10px;
+        border-radius: 7px;
+      }
+    }
   }
 
   & .details-card-effect-container {
@@ -73,6 +90,6 @@
   & .details-card-effectsList {
     flex-wrap: nowrap;
     flex-direction: column;
-  padding-bottom: 10px;
+    padding-bottom: 10px;
   }
 }

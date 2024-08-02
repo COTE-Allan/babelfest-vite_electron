@@ -19,6 +19,9 @@ import { PiFlagCheckeredFill } from 'react-icons/pi'
 import { BsQuestionLg } from 'react-icons/bs'
 import { getAchievementById } from '../controllers/AchievementsController'
 import ReactPlayer from 'react-player'
+import useSound from 'use-sound'
+import selectSfx from '../../assets/sfx/card_select.wav'
+import hoverSfx from '../../assets/sfx/card_hover.wav'
 
 const TutorialText = ({ children, onClickNext, clickable }) => {
   const renderText = (text) => {
@@ -81,6 +84,9 @@ export default function TutorialRoom() {
   const [selectedShopCard, setSelectedShopCard] = useState(null)
   const [selectedTradeCard, setSelectedTradeCard] = useState(null)
   const [tutorialWin, setTutorialWin] = useState(false)
+
+  const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
+  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
 
   const stepsConfig = [
     {
@@ -350,6 +356,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
   ]
 
   const handleCardClick = (index, card) => {
+    select()
     if (tutorialStep === 5 && index === 0) {
       setTutorialStep(6)
     } else if (tutorialStep === 7 && index === 0) {
@@ -365,11 +372,13 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
 
   const handleTextClick = () => {
     if (stepsConfig[tutorialStep - 1].clickable) {
+      select()
       stepsConfig[tutorialStep - 1].action()
     }
   }
 
   const handleCellClick = (id) => {
+    select()
     if (tutorialStep === 6 && id === 18) {
       if (selectedCell === id) {
         setPattern(
@@ -504,6 +513,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
               }`}
               onClick={() => handleCardClick(index, card)}
               onMouseEnter={() => {
+                hover()
                 setDetailCard(card)
               }}
               onMouseLeave={() => {
@@ -591,6 +601,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
                         <div
                           className="cell-card"
                           onMouseEnter={() => {
+                            hover()
                             setDetailCard(cell.card)
                           }}
                           onMouseLeave={() => {
@@ -723,9 +734,13 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
               <div
                 className={`shop-item ${selectedShopCard && selectedShopCard.name === card.name ? 'selected' : ''}`}
                 onClick={() => {
+                  select()
                   setSelectedShopCard(card)
                 }}
-                onMouseEnter={() => setDetailCard(card)}
+                onMouseEnter={() => {
+                  hover()
+                  setDetailCard(card)
+                }}
                 onMouseLeave={() => setDetailCard(null)}
               >
                 <div className="img-container">

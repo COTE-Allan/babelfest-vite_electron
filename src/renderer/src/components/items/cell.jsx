@@ -146,6 +146,7 @@ export default function Cell({ active, confirmModal, cell }) {
       }}
       onContextMenu={(e) => {
         e.preventDefault()
+        if (card && !card.isRecto && player !== owner) return
         setAdvancedDetailCard(card)
         setRightWindow('details')
       }}

@@ -59,7 +59,7 @@ export async function TaserPostMortem({ item, killer, effectInfos }) {
 
 export function Pietinement({ item, pattern, effect, effectInfos }) {
   let targets = getAdjacentCells(item, effect.target, pattern)
-  targets = hpEdit(-1, targets, item)
+  targets = hpEdit(-1, targets, item, true)
   return {
     targets: targets,
     log: {

@@ -69,18 +69,19 @@ export function AdvancedDetails({ card }) {
       <span className="details-card-credits">
         Carte de la collection {detailCard.collection}, dessinée par {detailCard.author}
       </span>
-      <img className="card-visual" src={detailCard.url} alt={`Visuel de la carte sélectionnée.`} />
 
       {detailCard.affected && (
         <div className="details-card-afflictions">
           <h3>Buffs / Débuffs actifs :</h3>
           <ul className="details-card-afflictions-list">
             {detailCard.affected.map((affliction) => (
-              <li style={{ color: affliction.colorCode }}>{affliction.text}</li>
+              <li style={{ backgroundColor: affliction.colorCode }}>{affliction.text}</li>
             ))}
           </ul>
         </div>
       )}
+
+      <img className="card-visual" src={detailCard.url} alt={`Visuel de la carte sélectionnée.`} />
 
       {detailCard.effects && (
         <div className="details-card-effectsList">

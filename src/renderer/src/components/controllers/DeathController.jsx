@@ -11,13 +11,16 @@ import { getPattern } from '../others/toolBox'
 export default function DeathController() {
   const { playerID, processDeath, room, phase, pattern, myTurn } = useContext(GlobalContext)
   const tryEffect = useTryEffect()
-  let endTurn = useEndTurn()
+  let EndTurn = useEndTurn()
 
   useEffect(() => {
     async function killingCards() {
       let deadCells = pattern.filter((cell) => cell.card && cell.card.dead)
 
       if (deadCells.length > 0 && processDeath === playerID) {
+        // Check for specialDeath at the beginning
+        const hasSpecialDeath = deadCells.some((cell) => cell.card.dead.specialDeath)
+
         await goingStandby(room, playerID === 1 ? 2 : 1, false)
         let continueProcessDeath = true
 
@@ -42,8 +45,10 @@ export default function DeathController() {
 
         await finishStandby(room)
         await updateDoc(doc(db, 'games', room), { processDeath: null })
-        if (phase !== 2) {
-          endTurn(phase === 3 ? false : true)
+
+        // Use the initial hasSpecialDeath value
+        if (phase !== 2 && !hasSpecialDeath) {
+          EndTurn(phase === 3 ? false : true)
         }
       }
     }

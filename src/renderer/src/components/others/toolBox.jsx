@@ -51,14 +51,15 @@ export function getAllCards() {
     return cardWithId
   }
 
+  // TOUTES LES CARTES
   // Add unique IDs to all cards and combine them into one array
   cards.push(
     ...originCards.map(addUniqueId),
     ...reinforcementCards.map(addUniqueId),
     ...babelfish.map(addUniqueId),
     ...mecanicaCards.map(addUniqueId),
-    ...promoCards.map(addUniqueId),
-    ...twentyfourCards.map(addUniqueId)
+    ...promoCards.map(addUniqueId)
+    // ...twentyfourCards.map(addUniqueId)
   )
 
   return cards
@@ -242,7 +243,7 @@ export function getFeaturedCards() {
   // Filtrer pour obtenir seulement les cartes avec 'featured' = true
   const featuredCards = allCards.filter((card) => card.featured)
 
-  return shuffleArray(featuredCards)
+  return featuredCards
 }
 
 export async function getTopUsersByMMRAndLevel() {
