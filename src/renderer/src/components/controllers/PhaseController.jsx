@@ -25,8 +25,8 @@ export function DefinePhaseRule(phase, cardPerHand) {
       maxSelectableCardInArena = 1
       break
     case 4:
-      maxSelectableCardInHand = 1
-      maxSelectableCardInShop = 1
+      maxSelectableCardInHand = 20
+      maxSelectableCardInShop = 20
       break
   }
   rules.push(maxSelectableCardInHand, maxSelectableCardInArena, maxSelectableCardInShop)
@@ -55,7 +55,7 @@ export const useEndTurn = () => {
     setGreenCells,
     setSelectedCards,
     setSelectedCells,
-    setSelectedShopCard,
+    setSelectedShopCards,
     firstToPlay,
     setPlacementCostLeft,
     setMovesLeft,
@@ -174,7 +174,7 @@ export const useEndTurn = () => {
     batch.commit()
     setGreenCells([])
     setSelectedCards([])
-    setSelectedShopCard([])
+    setSelectedShopCards([])
     setSelectedCells([])
   }
 

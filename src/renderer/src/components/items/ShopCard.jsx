@@ -1,51 +1,85 @@
-import { useContext, useEffect, useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import '../../styles/items/card.scss'
 import { GlobalContext } from '../providers/GlobalProvider'
-import { deepEqual } from '../others/toolBox'
 import { AuthContext } from '../../AuthContext'
+
 import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/card_select.wav'
 import hoverSfx from '../../assets/sfx/card_hover.wav'
 
 export default function ShopCard({ card }) {
-  const [selected, setSelected] = useState(false)
-  const {
-    setDetailCard,
-    selectedShopCard,
-    setSelectedShopCard,
-    setAdvancedDetailCard,
-    phaseRules,
-    myTurn,
-    rightWindow,
-    setRightWindow
-  } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
 
-  function handleClick() {
-    if (phaseRules[2] === 0 || !myTurn) return
-    select()
-    if (deepEqual(card, selectedShopCard)) {
-      setSelectedShopCard([])
-    } else {
-      setSelectedShopCard(card)
+  const [selected, setSelected] = useState(false)
+  const [max, setMax] = useState(0)
+  const {
+    selectedShopCards,
+    setSelectedShopCards,
+    setDetailCard,
+    setAdvancedDetailCard,
+    myTurn,
+    phase,
+    phaseRules,
+    placementCostLeft,
+    setRightWindow,
+    rightWindow,
+    setShopCardsCredits
+  } = useContext(GlobalContext)
+
+  useEffect(() => {
+    setMax(phaseRules[2])
+  }, [phaseRules])
+
+  function selectShopCard() {
+    console.log(max)
+    if (max === 0) return
+    if (myTurn || phase === 0) {
+      select()
+      const cardId = card.id
+      const isSelected = selectedShopCards.some((e) => e.id === cardId)
+
+      if (placementCostLeft - card.rarity < 0) return
+
+      let updatedCards
+
+      if (isSelected) {
+        // Si la carte est déjà sélectionnée, la désélectionner
+        updatedCards = selectedShopCards.filter((item) => item.id !== cardId)
+      } else {
+        // Si la carte n'est pas sélectionnée
+        if (selectedShopCards.length < max) {
+          // Si le nombre maximum de cartes n'est pas encore atteint, ajouter la carte à la sélection
+          updatedCards = [...selectedShopCards, card]
+        } else {
+          // Si le nombre maximum de cartes est atteint, retirer la première carte et ajouter la nouvelle carte
+          updatedCards = [...selectedShopCards.slice(1), card]
+        }
+      }
+
+      setSelectedShopCards(updatedCards)
     }
   }
+
   useEffect(() => {
-    if (deepEqual(card, selectedShopCard)) {
-      setSelected('selected')
-    } else {
-      setSelected('')
+    const isSelected = selectedShopCards.some((selectedCard) => selectedCard.id === card.id)
+    setSelected(isSelected)
+  }, [selectedShopCards])
+
+  useEffect(() => {
+    if (phase === 4) {
+      const selectedShopCardsRarity = selectedShopCards.reduce((acc, card) => acc + card.rarity, 0)
+      setShopCardsCredits(selectedShopCardsRarity)
     }
-  }, [selectedShopCard])
+  }, [selectedShopCards, phase, setShopCardsCredits])
+
   return (
     <div
-      className={`shop-item ${selected ? selected : ''} ${card.shiny ? card.shiny : ''}`}
-      onContextMenu={(e) => {
-        e.preventDefault()
-        setAdvancedDetailCard(card)
-        setRightWindow('details')
-      }}
+      className={`shop-item ${
+        placementCostLeft - card.rarity < 0 ? 'card-unusable' : ''
+      } ${selected ? 'shop-item-selected' : ''} ${card.shiny ? card.shiny : ''}`}
+      onClick={selectShopCard}
       onMouseEnter={() => {
         hover()
         setDetailCard(card)
@@ -53,13 +87,18 @@ export default function ShopCard({ card }) {
       onMouseLeave={() => {
         setDetailCard(null)
       }}
-      onClick={handleClick}
+      onContextMenu={(e) => {
+        e.preventDefault()
+        setAdvancedDetailCard(card)
+        setRightWindow('details')
+      }}
     >
+      {selected && <div className="card-filter"></div>}
       <div className="img-container">
         <div className={`card-cost`}>
           <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
         </div>
-        <img src={card.url} alt="" />
+        <img className="card-visual" src={card.url} />
       </div>
     </div>
   )

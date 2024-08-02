@@ -38,7 +38,9 @@ export const GlobalProvider = () => {
   const [processDeath, setProcessDeath] = useState(false)
   // Gestion du shop
   const [shop, setShop] = useState([])
-  const [selectedShopCard, setSelectedShopCard] = useState([])
+  const [selectedShopCards, setSelectedShopCards] = useState([])
+  const [handCardsCredits, setHandCardsCredits] = useState([])
+  const [shopCardsCredits, setShopCardsCredits] = useState([])
   // Système de standby
   const [standby, setStandby] = useState(false)
   const [phaseEffects, setPhaseEffects] = useState(false)
@@ -282,8 +284,8 @@ export const GlobalProvider = () => {
     rivalEndedAttack,
     setRivalEndedAttack,
     shop,
-    selectedShopCard,
-    setSelectedShopCard,
+    selectedShopCards,
+    setSelectedShopCards,
     standby,
     phaseEffects,
     setPhaseEffects,
@@ -323,7 +325,11 @@ export const GlobalProvider = () => {
     turn,
     scenes,
     tradeButton,
-    setTradeButton
+    setTradeButton,
+    handCardsCredits,
+    setHandCardsCredits,
+    shopCardsCredits,
+    setShopCardsCredits
   }
   return (
     <GlobalContext.Provider value={propsList}>

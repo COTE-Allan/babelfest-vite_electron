@@ -23,7 +23,7 @@ export default function InGameMenus() {
     useStartWatchingTradePhase,
     setRightWindow,
     rightWindow,
-    selectedShopCard,
+    selectedShopCards,
     setLeftWindow,
     leftWindow,
     setPhaseRules,
@@ -34,7 +34,9 @@ export default function InGameMenus() {
     musicPlayer,
     setMusicPlayer,
     tradeButton,
-    setTradeButton
+    setTradeButton,
+    handCardsCredits,
+    shopCardsCredits
   } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
 
@@ -43,6 +45,13 @@ export default function InGameMenus() {
   const EndTurn = useEndTurn()
 
   const isTradeValid = selectedCards.length === phaseRules[0]
+  const isExchangeValid = handCardsCredits >= shopCardsCredits
+
+  const differentialColor = isExchangeValid
+    ? selectedShopCards.length !== 0 && selectedCards.length !== 0
+      ? '#4ead35'
+      : '#ffffff'
+    : '#bb2424'
 
   return (
     <>
@@ -65,21 +74,23 @@ export default function InGameMenus() {
         {phase === 4 && myTurn && (
           <IconButton
             onClick={() => {
-              if (selectedShopCard.length !== 0 && selectedCards.length !== 0) {
+              if (isExchangeValid && selectedShopCards.length !== 0 && selectedCards.length !== 0) {
                 tradeCard('Shop&Player').then(() => EndTurn(true))
               } else {
+                if (!isExchangeValid) return
                 EndTurn(true)
               }
             }}
+            className={`${!isExchangeValid ? 'disabled' : ''}`}
           >
-            {selectedShopCard.length !== 0 && selectedCards.length !== 0 ? (
+            {selectedShopCards.length !== 0 && selectedCards.length !== 0 && isExchangeValid ? (
               <>
                 <span>Valider l'échange</span>
                 <GiConfirmed size={45} />
               </>
             ) : (
               <>
-                <span>Fin de phase</span>
+                <span>{!isExchangeValid ? 'Échange invalide' : 'Fin de phase'}</span>
                 <PiFlagCheckeredFill size={45} />
               </>
             )}
@@ -122,6 +133,15 @@ export default function InGameMenus() {
               <span>{phase === 1 ? placementCostLeft : movesLeft}</span>
             </div>
             énergies
+          </div>
+        )}
+        {phase === 4 && myTurn && (
+          <div className="costCounter">
+            <div className="costCounter-infos" style={{ color: differentialColor }}>
+              <GiPriceTag />
+              <span>{handCardsCredits - shopCardsCredits}</span>
+            </div>
+            différentiel
           </div>
         )}
       </div>

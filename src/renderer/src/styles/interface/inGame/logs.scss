@@ -1,5 +1,3 @@
-@import '../../variables.scss';
-
 .logs {
   &-messages {
     overflow-y: auto;
@@ -11,7 +9,6 @@
   }
 
   &-item {
-    // margin: 5px 0;
     font-size: 17px;
     display: flex;
     flex-direction: column;
@@ -31,6 +28,12 @@
         opacity 150ms ease-in-out,
         padding 150ms ease-in-out;
       opacity: 0;
+
+      // Ajoutez ceci pour que les flèches aient une largeur minimale
+      & .icon-direction {
+        flex-shrink: 0;
+        width: 20px; // ajustez selon vos besoins
+      }
     }
 
     &:hover &-content {
@@ -145,6 +148,8 @@
 
         &.icon-direction {
           font-size: 20px;
+          flex-shrink: 0;
+          width: 20px; // ajustez selon vos besoins
         }
       }
     }

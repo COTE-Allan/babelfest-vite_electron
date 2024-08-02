@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext } from 'react'
 import '../../../styles/interface/inGame/logs.scss'
 import { GlobalContext } from '../../providers/GlobalProvider'
 import { FaArrowRight } from 'react-icons/fa'
@@ -52,7 +52,7 @@ export default function Logs(props) {
     ),
     trade: (cardName) => (
       <>
-        <GiPriceTag className="icon-action" />
+        <GiPriceTag size={20} className="icon-action" />
         <span className="icon-action-label">Troc</span>
       </>
     )
@@ -81,7 +81,7 @@ export default function Logs(props) {
           const previousLogExists = index > 0
           const previousLogHasNoTurn = previousLogExists && !logs[index - 1].turn
           if (log.turn && !previousLogHasNoTurn) {
-            return
+            return null
           }
 
           const isMine = log.owner === playerID
@@ -90,7 +90,7 @@ export default function Logs(props) {
 
           return (
             <div
-              className={`logs-item`}
+              className="logs-item"
               key={index}
               style={{
                 borderColor: itemColor,
@@ -99,23 +99,12 @@ export default function Logs(props) {
             >
               {log.turn && previousLogHasNoTurn ? (
                 <div className="logs-item-turn">
-                  <p
-                    style={{
-                      color: itemColor
-                    }}
-                  >
-                    {`TOUR ${log.turn} - ${phases[log.phase]} de
-                                      ${
-                                        log.owner === playerID
-                                          ? playerSelf.username
-                                          : playerRival.username
-                                      }`}
+                  <p style={{ color: itemColor }}>
+                    {`TOUR ${log.turn} - ${phases[log.phase]} de ${
+                      log.owner === playerID ? playerSelf.username : playerRival.username
+                    }`}
                   </p>
-                  <hr
-                    style={{
-                      borderColor: itemColor
-                    }}
-                  />
+                  <hr style={{ borderColor: itemColor }} />
                 </div>
               ) : (
                 <>
@@ -128,20 +117,43 @@ export default function Logs(props) {
                     >
                       {log.action === 'effect' ? (
                         <>
-                          <img
-                            className="icon-action-img"
-                            src={
-                              isVisible
-                                ? log.effectInfos.icon
-                                : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
-                            }
-                            alt="icone de l'effet"
-                          />
-                          <span className="icon-action-label">
-                            {isVisible
-                              ? log.effectInfos.name + ' de ' + log.trigger.name
-                              : 'Effet de ???'}
-                          </span>
+                          {Array.isArray(log.trigger) ? (
+                            log.trigger.map((trigger, idx) => (
+                              <div key={idx}>
+                                <img
+                                  className="icon-action-img"
+                                  src={
+                                    isVisible
+                                      ? log.effectInfos.icon
+                                      : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                                  }
+                                  alt="icone de l'effet"
+                                />
+                                <span className="icon-action-label">
+                                  {isVisible
+                                    ? log.effectInfos.name + ' de ' + trigger.name
+                                    : 'Effet de ???'}
+                                </span>
+                              </div>
+                            ))
+                          ) : (
+                            <div>
+                              <img
+                                className="icon-action-img"
+                                src={
+                                  isVisible
+                                    ? log.effectInfos.icon
+                                    : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                                }
+                                alt="icone de l'effet"
+                              />
+                              <span className="icon-action-label">
+                                {isVisible
+                                  ? log.effectInfos.name + ' de ' + log.trigger.name
+                                  : 'Effet de ???'}
+                              </span>
+                            </div>
+                          )}
                         </>
                       ) : (
                         actions[log.action](isVisible ? log.trigger.name : '???')
@@ -151,17 +163,33 @@ export default function Logs(props) {
                   <div className="logs-item-content">
                     {log.trigger && (
                       <>
-                        <div className="logs-item-card">
-                          <img
-                            src={
-                              isVisible || log.action === 'trade'
-                                ? log.trigger.url
-                                : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
-                            }
-                            className={!isVisible && log.action !== 'trade' ? 'hidden' : ''}
-                            alt={`carte qui active l'action ${log.trigger.name}`}
-                          />
-                        </div>
+                        {Array.isArray(log.trigger) ? (
+                          log.trigger.map((trigger, idx) => (
+                            <div className="logs-item-card" key={idx}>
+                              <img
+                                src={
+                                  isVisible || log.action === 'trade'
+                                    ? trigger.url
+                                    : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                                }
+                                className={!isVisible && log.action !== 'trade' ? 'hidden' : ''}
+                                alt={`carte qui active l'action ${trigger.name}`}
+                              />
+                            </div>
+                          ))
+                        ) : (
+                          <div className="logs-item-card">
+                            <img
+                              src={
+                                isVisible || log.action === 'trade'
+                                  ? log.trigger.url
+                                  : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                              }
+                              className={!isVisible && log.action !== 'trade' ? 'hidden' : ''}
+                              alt={`carte qui active l'action ${log.trigger.name}`}
+                            />
+                          </div>
+                        )}
                       </>
                     )}
                     {log.from && (

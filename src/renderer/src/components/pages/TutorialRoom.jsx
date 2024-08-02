@@ -23,7 +23,13 @@ import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/card_select.wav'
 import hoverSfx from '../../assets/sfx/card_hover.wav'
 
-const TutorialText = ({ children, onClickNext, clickable }) => {
+import TutoBlase from '../../assets/img/Tuto_blase.jpg'
+import TutoHautain from '../../assets/img/Tuto_hautain.jpg'
+import TutoEffraye from '../../assets/img/Tuto_effraye.jpg'
+import TutoRire from '../../assets/img/Tuto_rire.jpg'
+import TutoMalsain from '../../assets/img/Tuto_malsain.jpg'
+
+const TutorialText = ({ children, onClickNext, clickable, image }) => {
   const renderText = (text) => {
     return text.split('\n\n').map((paragraph, index) => (
       <p key={index}>
@@ -43,7 +49,7 @@ const TutorialText = ({ children, onClickNext, clickable }) => {
       onClick={clickable ? onClickNext : null}
     >
       <div className="tutorial-text-speaker">
-        <img src="" className="tutorial-text-speaker-img" alt="Speaker" />
+        <img src={image} className="tutorial-text-speaker-img" alt="Speaker" />
         <h1>Tuto</h1>
       </div>
       <hr />
@@ -90,11 +96,13 @@ export default function TutorialRoom() {
 
   const stepsConfig = [
     {
+      img: TutoHautain,
       text: 'Tiens, tiens... Un nouvel adversaire. Tu cherchais un adversaire à ta... ah tu n’as jamais joué ? Bon ok, on va y aller lentement dans ce cas, tu sais je suis un peu un expert à ce jeu.',
       clickable: true,
       action: () => setTutorialStep(2)
     },
     {
+      img: TutoBlase,
       text: `Babelfest c’est un jeu mystérieux, on y retrouve plein de gens étranges qui disent tous venir d’univers différents, moi je préfère cet endroit perso, mon monde d’origine... IL ÉTAIT TERRIFIANT.
 
 En tout cas, ici les gens jouent aux cartes avec... eux-mêmes, cherche pas à comprendre. Chaque tour d’une partie de Babelfest est séparé en 4 phases, on devrait d’abord faire une session d’échange de cartes, mais pour cette fois, on va la passer.
@@ -112,6 +120,7 @@ Le but du jeu est de détruire toutes les cartes adverses ou de capturer la base
       }
     },
     {
+      img: TutoHautain,
       text: `La première phase d’un tour c’est le placement, tu as 4 énergies, qui te servent à invoquer. Regarde tes cartes, le petit chiffre indique le coût d’invocation.
 
 Je commence par invoquer une première carte, Dai : Rockstar ! Cette carte coûte 2 énergies, il m’en reste donc 2 autres.
@@ -126,6 +135,7 @@ Vu que tu es un peu un... débutant, laisse un pro comme moi t’expliquer, les 
       }
     },
     {
+      img: TutoMalsain,
       text: `Je profite de mes énergies restantes pour invoquer une deuxième carte face vecto, sur ma base cette fois-ci.
 
 Tu dois te dire que j’y vais trop fort avec toi... excuse-moi, c’est juste de la mémoire musculaire à force tu sais.`,
@@ -136,30 +146,35 @@ Tu dois te dire que j’y vais trop fort avec toi... excuse-moi, c’est juste d
       }
     },
     {
+      img: TutoBlase,
       text: `Bien, mon tour est terminé, cette phase se termine quand je n'ai plus d'énergie ou que j'y mets fin manuellement, évidemment, tu ne sais pas ce que j'ai fait.
 
 C'est à toi d'invoquer, commence par choisir une carte de ta main, perso je jouerais la carte que j'ai marquée en bleu mais tu sais, t'es pas obligé.`,
       clickable: false
     },
     {
+      img: TutoHautain,
       text: `Une fois ta carte choisie, place-la quelque part sur ta moitié de l'arène. Encore une fois, je la placerais sur cette case bleue, mais un débutant comme toi ne le fera sûrement pas.
 
 Après l'invocation, tes énergies seront dépensées, s'il t'en reste, tu pourras réinvoquer.`,
       clickable: false
     },
     {
+      img: TutoRire,
       text: `La compteuse à trois cordes... c'est... je vois. Enfin je veux dire... JE LE SAVAIS AHAHAH !
 
 Hum, hum. Revenons au jeu, cette carte typique coûte une énergie, il t'en reste donc encore trois. Tu peux donc invoquer à nouveau, mais bon, t'es trop bête pour faire ça.`,
       clickable: false
     },
     {
+      img: TutoEffraye,
       text: `Attends, tu vas vraiment le faire ?
 
 Mince, t'es plus malin que je pensais.`,
       clickable: false
     },
     {
+      img: TutoHautain,
       text: `Phoebe, cette carte a une très bonne mobilité. C'est... pas mal, pour un débutant.
 
 Bon je crois que ça suffit les invocations ! On va dire que tu as fini ton tour hein.
@@ -183,6 +198,7 @@ Regarde, je te montre.`,
       }
     },
     {
+      img: TutoRire,
       text: `Ahah ! Tu t'y attendais pas à celle-là, espèce de... Hum.
 
 Comme tu peux voir, j'ai déplacé ma carte verso de deux cases, cela m'a coûté deux énergies. En se déplaçant, la carte a été révélée. C'était moi ! Tuto !
@@ -195,12 +211,14 @@ Il me reste encore deux énergies, mais je vais mettre fin manuellement à mon t
       }
     },
     {
+      img: TutoHautain,
       text: `T'es pas obligé, mais tu devrais déplacer l'une de tes cartes, chaque carte peut se déplacer une fois par tour, la distance possible que cette carte peut traverser est basée sur ses points de déplacements, le chiffre du milieu sur la carte.
 
       Par contre si tu déplaces CETTE carte, je suis mal. Heureusement que tu l'as pas vue.`,
       clickable: false
     },
     {
+      img: TutoEffraye,
       text: `Attends... ! Non pas cette carte !
 
 Euh... Quand tu... Quand tu as choisi ta carte, tu peux la déplacer suivant ses points de déplacement, donc là, 4 cases autour d'elle.
@@ -209,6 +227,7 @@ Bon, déplace-la où tu veux mais pas sur la case que je marque en bleu hein.`,
       clickable: false
     },
     {
+      img: TutoEffraye,
       text: `Non ! Espèce de sale.... Bon, ok, ok.
 
 Tu as dépensé deux énergies pour ce déplacement, il t'en reste encore deux, mais encore une fois, on va mettre fin à ton tour, pas besoin de déplacer ta deuxième carte hein.`,
@@ -227,6 +246,7 @@ Tu as dépensé deux énergies pour ce déplacement, il t'en reste encore deux, 
       }
     },
     {
+      img: TutoBlase,
       text: `Bon, la phase suivante, c'est l'attaque. Tu peux attaquer une fois avec chacune de tes cartes, chaque carte peut attaquer les 4 cartes adjacentes. Dai, avec son effet Archer, est une exception qui peut attaquer aussi en diagonale.
 
 Vu qu'on vient de démarrer la phase d'attaque, l'effet de Tuto s'active ! Il renforce tous ses alliés adjacents d'un point d'attaque jusqu'à la fin du tour. Je suis fier de moi, Tuto c'est vraiment le meilleur.
@@ -244,16 +264,19 @@ Je choisis une carte qui attaque, puis sa cible, TA COMPTEUSE !`,
       }
     },
     {
+      img: TutoRire,
       text: `BAM ! Et voilà ! Ta compteuse a subi 4 points de dégâts, elle avait 4 points de vie, je l'ai détruite. Maintenant que j'ai attaqué, c'est à ton tour d'attaquer...
 
 S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je t'en prie !!!`,
       clickable: false
     },
     {
+      img: TutoEffraye,
       text: `Arrête, ne fais pas ça !`,
       clickable: false
     },
     {
+      img: TutoHautain,
       text: `Non non non !
     
     T'es content maintenant ?! T'as attaqué donc c'est à mon tour d'attaquer de nouveau, mais vu que Dai a déjà attaqué, il ne peut pas attaquer de nouveau, je suis obligé de conclure mon tour...
@@ -268,6 +291,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       }
     },
     {
+      img: TutoHautain,
       text: `Tu vois ça ? C'est la boutique, elle te permet d'échanger une carte de ta main avec la liste présente pour optimiser tes stratégies.
       
       Pour échanger, tu peut choisir une carte de ta main, une de la boutique, et cliquer sur le bouton échanger.
@@ -276,6 +300,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       clickable: false
     },
     {
+      img: TutoBlase,
       text: `Et voilà !
       
       Tu viens de terminer ta première manche de Babelfest. Maintenant la partie continue en répétant chaque phase, invocation, déplacement, attaque, troc.
@@ -295,12 +320,14 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       }
     },
     {
+      img: TutoHautain,
       text: `Comme j'ai commencé en premier au tour précédent, c'est à toi de commencer chaque phases de ce tour.
       
       Vas-y, invoque ta dernière carte inutile !`,
       clickable: false
     },
     {
+      img: TutoMalsain,
       text: `Tu protège ta base...
       
       Il faut croire que le ton jeu ne contient aucune carte inutile finalement.
@@ -315,6 +342,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       }
     },
     {
+      img: TutoHautain,
       text: `Allez, déplace tes misérables cartes de noob.
       
       Attend... Phoebe, elle peut...
@@ -323,12 +351,14 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       clickable: false
     },
     {
+      img: TutoEffraye,
       text: `Eh... l'ami.
       
       T'es pas obligé de faire ça tu sais.`,
       clickable: false
     },
     {
+      img: TutoEffraye,
       text: `...`,
       clickable: true,
       action: () => {
@@ -336,6 +366,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       }
     },
     {
+      img: TutoEffraye,
       text: `C'EST PAS VRAI J'AI PERDU !!!
 
 ...c'était juste la chance du débutant !`,
@@ -345,6 +376,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       }
     },
     {
+      img: TutoRire,
       text: `... AH AH AH ! Allez, gamin, t'es prêt, je t'ai parfaitement entraîné.
       
       Va affronter le monde, je t'attendrait au sommet.`,
@@ -766,6 +798,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       <TutorialText
         onClickNext={handleTextClick}
         clickable={stepsConfig[tutorialStep - 1].clickable}
+        image={stepsConfig[tutorialStep - 1].img}
       >
         {stepsConfig[tutorialStep - 1].text}
       </TutorialText>

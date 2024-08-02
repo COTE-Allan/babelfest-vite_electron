@@ -138,8 +138,10 @@ export default function Tutorial(props) {
       {phase === 4 && (
         <>
           <p>
-            Afin d'améliorer votre jeu, vous pouvez échanger une carte de votre main et une carte de
-            la boutique.
+            Afin d'améliorer votre jeu, vous pouvez échanger une ou plusieurs cartes de votre main
+            et une ou plusieurs cartes de la boutique. Le coût total des cartes de la boutique
+            choisies doit être égal ou supérieurs aux cartes choisies en main pour un échange
+            valide.
           </p>
           <p>
             <b>Si vous le souhaitez,</b> sélectionnez une carte de votre main et de la boutique puis

@@ -27,7 +27,8 @@ export default function Card({ card }) {
     phaseRules,
     placementCostLeft,
     setRightWindow,
-    rightWindow
+    rightWindow,
+    setHandCardsCredits
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -75,6 +76,13 @@ export default function Card({ card }) {
     })
     setSelected(isSelected)
   }, [selectedCards])
+
+  useEffect(() => {
+    if (phase === 4) {
+      const selectedCardsRarity = selectedCards.reduce((acc, card) => acc + card.rarity, 0)
+      setHandCardsCredits(selectedCardsRarity)
+    }
+  }, [selectedCards, phase, setHandCardsCredits])
 
   return (
     <div

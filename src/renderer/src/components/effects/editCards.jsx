@@ -91,7 +91,7 @@ export async function drawSingleCardAndUpdateDeck(room) {
 export const useTradeCard = () => {
   const {
     selectedCards,
-    selectedShopCard,
+    selectedShopCards,
     shop,
     playerSelf,
     playerRival,
@@ -119,16 +119,16 @@ export const useTradeCard = () => {
     switch (type) {
       case 'Shop&Player':
         const handFilteredSP = playerSelf.hand.filter((item) => !selectedCards.includes(item))
-        const shopFiltered = shop.filter((item) => selectedShopCard !== item)
+        const shopFiltered = shop.filter((item) => !selectedShopCards.includes(item))
 
         await pushLogsIntoBatch(batch, {
-          trigger: selectedCards[0],
+          trigger: selectedCards,
           action: 'trade',
-          targets: [selectedShopCard]
+          targets: selectedShopCards
         })
 
-        updatePayload[targetHand] = [...handFilteredSP, selectedShopCard]
-        updatePayload.shop = [...shopFiltered, selectedCards[0]]
+        updatePayload[targetHand] = [...handFilteredSP, ...selectedShopCards]
+        updatePayload.shop = [...shopFiltered, ...selectedCards]
         break
 
       case 'Player&Player':
@@ -150,6 +150,7 @@ export const useTradeCard = () => {
       default:
         return
     }
+
     if (nextPhase) updatePayload.phase = phase + 1
     await pushLogsIntoBatch(
       batch,

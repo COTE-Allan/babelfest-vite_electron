@@ -103,7 +103,7 @@ export default function Cell({ active, confirmModal, cell }) {
       tiredClass = 'tired'
     }
 
-    return `cell ${isSelected ? 'selected' : ''}
+    return `cell ${isSelected || confirmModal ? 'selected' : ''}
       ${!host && 'reversed'}
       ${card && card.isRecto && card.fortress ? 'shield' : ''} 
       ${card && card.freeze ? 'freeze' : ''}
@@ -111,7 +111,7 @@ export default function Cell({ active, confirmModal, cell }) {
       ${tiredClass}
       ${card && card.isRecto && card.diving ? 'diving' : ''}
       `
-  }, [card, owner, isSelected, isBase, team, player, phase])
+  }, [card, owner, isSelected, isBase, team, player, phase, confirmModal])
 
   const bgColor = useMemo(() => {
     if (isBase) {

@@ -71,6 +71,7 @@
       justify-content: center;
 
       & span {
+        margin-left: 5px;
         height: 40px;
         display: flex;
         align-items: center;
@@ -83,6 +84,7 @@
 
 .ig-settings {
   height: 100%;
+
   h1 {
     text-align: left;
     margin: 10px 0;
@@ -90,6 +92,7 @@
     margin-top: 20px;
     font-size: 30px;
   }
+
   .volume-settings {
     &-item {
       display: flex;
@@ -97,10 +100,12 @@
       margin-bottom: 10px;
     }
   }
+
   label {
     font-family: 'Kimberly Bl', sans-serif;
     margin-bottom: 5px;
   }
+
   span {
     text-align: center;
     font-size: 14px;
