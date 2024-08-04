@@ -12,7 +12,8 @@
   &-picture {
     min-width: 100vw;
     min-height: 100%;
-    filter: blur(3px);
+    width: 100%;
+
   }
 
   animation: fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -35,6 +36,7 @@
   filter: blur(5px);
   animation: scroll 100s linear infinite;
 }
+
 
 .card {
   // width: 100px;

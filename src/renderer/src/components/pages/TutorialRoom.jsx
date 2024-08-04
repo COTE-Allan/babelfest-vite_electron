@@ -23,11 +23,14 @@ import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/card_select.wav'
 import hoverSfx from '../../assets/sfx/card_hover.wav'
 
-import TutoBlase from '../../assets/img/Tuto_blase.jpg'
-import TutoHautain from '../../assets/img/Tuto_hautain.jpg'
-import TutoEffraye from '../../assets/img/Tuto_effraye.jpg'
-import TutoRire from '../../assets/img/Tuto_rire.jpg'
-import TutoMalsain from '../../assets/img/Tuto_malsain.jpg'
+import TutoNonchalent from '../../assets/img/Tuto_nonchalent.png'
+import TutoHautain from '../../assets/img/Tuto_hautain.png'
+import TutoPleure from '../../assets/img/Tuto_pleure.png'
+import TutoRire from '../../assets/img/Tuto_rire.png'
+import TutoSournois from '../../assets/img/Tuto_sournois.png'
+import TutoStress from '../../assets/img/Tuto_stress.png'
+
+import BabelfestBackground from "../../assets/img/fond_babelfest.png"
 
 const TutorialText = ({ children, onClickNext, clickable, image }) => {
   const renderText = (text) => {
@@ -102,7 +105,7 @@ export default function TutorialRoom() {
       action: () => setTutorialStep(2)
     },
     {
-      img: TutoBlase,
+      img: TutoNonchalent,
       text: `Babelfest c’est un jeu mystérieux, on y retrouve plein de gens étranges qui disent tous venir d’univers différents, moi je préfère cet endroit perso, mon monde d’origine... IL ÉTAIT TERRIFIANT.
 
 En tout cas, ici les gens jouent aux cartes avec... eux-mêmes, cherche pas à comprendre. Chaque tour d’une partie de Babelfest est séparé en 4 phases, on devrait d’abord faire une session d’échange de cartes, mais pour cette fois, on va la passer.
@@ -135,7 +138,7 @@ Vu que tu es un peu un... débutant, laisse un pro comme moi t’expliquer, les 
       }
     },
     {
-      img: TutoMalsain,
+      img: TutoSournois,
       text: `Je profite de mes énergies restantes pour invoquer une deuxième carte face vecto, sur ma base cette fois-ci.
 
 Tu dois te dire que j’y vais trop fort avec toi... excuse-moi, c’est juste de la mémoire musculaire à force tu sais.`,
@@ -146,7 +149,7 @@ Tu dois te dire que j’y vais trop fort avec toi... excuse-moi, c’est juste d
       }
     },
     {
-      img: TutoBlase,
+      img: TutoNonchalent,
       text: `Bien, mon tour est terminé, cette phase se termine quand je n'ai plus d'énergie ou que j'y mets fin manuellement, évidemment, tu ne sais pas ce que j'ai fait.
 
 C'est à toi d'invoquer, commence par choisir une carte de ta main, perso je jouerais la carte que j'ai marquée en bleu mais tu sais, t'es pas obligé.`,
@@ -167,7 +170,7 @@ Hum, hum. Revenons au jeu, cette carte typique coûte une énergie, il t'en rest
       clickable: false
     },
     {
-      img: TutoEffraye,
+      img: TutoStress,
       text: `Attends, tu vas vraiment le faire ?
 
 Mince, t'es plus malin que je pensais.`,
@@ -218,7 +221,7 @@ Il me reste encore deux énergies, mais je vais mettre fin manuellement à mon t
       clickable: false
     },
     {
-      img: TutoEffraye,
+      img: TutoStress,
       text: `Attends... ! Non pas cette carte !
 
 Euh... Quand tu... Quand tu as choisi ta carte, tu peux la déplacer suivant ses points de déplacement, donc là, 4 cases autour d'elle.
@@ -227,7 +230,7 @@ Bon, déplace-la où tu veux mais pas sur la case que je marque en bleu hein.`,
       clickable: false
     },
     {
-      img: TutoEffraye,
+      img: TutoPleure,
       text: `Non ! Espèce de sale.... Bon, ok, ok.
 
 Tu as dépensé deux énergies pour ce déplacement, il t'en reste encore deux, mais encore une fois, on va mettre fin à ton tour, pas besoin de déplacer ta deuxième carte hein.`,
@@ -246,7 +249,7 @@ Tu as dépensé deux énergies pour ce déplacement, il t'en reste encore deux, 
       }
     },
     {
-      img: TutoBlase,
+      img: TutoNonchalent,
       text: `Bon, la phase suivante, c'est l'attaque. Tu peux attaquer une fois avec chacune de tes cartes, chaque carte peut attaquer les 4 cartes adjacentes. Dai, avec son effet Archer, est une exception qui peut attaquer aussi en diagonale.
 
 Vu qu'on vient de démarrer la phase d'attaque, l'effet de Tuto s'active ! Il renforce tous ses alliés adjacents d'un point d'attaque jusqu'à la fin du tour. Je suis fier de moi, Tuto c'est vraiment le meilleur.
@@ -271,12 +274,12 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       clickable: false
     },
     {
-      img: TutoEffraye,
+      img: TutoPleure,
       text: `Arrête, ne fais pas ça !`,
       clickable: false
     },
     {
-      img: TutoHautain,
+      img: TutoStress,
       text: `Non non non !
     
     T'es content maintenant ?! T'as attaqué donc c'est à mon tour d'attaquer de nouveau, mais vu que Dai a déjà attaqué, il ne peut pas attaquer de nouveau, je suis obligé de conclure mon tour...
@@ -300,7 +303,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       clickable: false
     },
     {
-      img: TutoBlase,
+      img: TutoNonchalent,
       text: `Et voilà !
       
       Tu viens de terminer ta première manche de Babelfest. Maintenant la partie continue en répétant chaque phase, invocation, déplacement, attaque, troc.
@@ -327,7 +330,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       clickable: false
     },
     {
-      img: TutoMalsain,
+      img: TutoSournois ,
       text: `Tu protège ta base...
       
       Il faut croire que le ton jeu ne contient aucune carte inutile finalement.
@@ -351,14 +354,14 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       clickable: false
     },
     {
-      img: TutoEffraye,
+      img: TutoStress,
       text: `Eh... l'ami.
       
       T'es pas obligé de faire ça tu sais.`,
       clickable: false
     },
     {
-      img: TutoEffraye,
+      img: TutoStress,
       text: `...`,
       clickable: true,
       action: () => {
@@ -366,7 +369,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       }
     },
     {
-      img: TutoEffraye,
+      img: TutoPleure,
       text: `C'EST PAS VRAI J'AI PERDU !!!
 
 ...c'était juste la chance du débutant !`,
@@ -792,7 +795,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
       ></div>
       <img
         className={`gameContainer-bg`}
-        src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={BabelfestBackground}
         alt={'background du menu'}
       />
       <TutorialText
