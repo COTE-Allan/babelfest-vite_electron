@@ -252,7 +252,6 @@
         flex-direction: column;
         margin-left: 5px;
         overflow: hidden;
-        z-index: 1;
 
         & h2,
         & span {
@@ -314,11 +313,15 @@
       }
 
       & h2 {
-        font-size: 18px;
+        font-size: 15px;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+        width: 300px;
       }
 
       & span {
-        font-size: 15px;
+        font-size: 13px;
       }
 
       & .tilt {

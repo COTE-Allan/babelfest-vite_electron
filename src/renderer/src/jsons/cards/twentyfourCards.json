@@ -54,11 +54,11 @@
     "name": "Taika",
     "title": "Le titan des jeux-vidéo",
     "atk": 2,
-    "dep": 2,
-    "hp": 2,
+    "dep": 1,
+    "hp": 1,
     "baseatk": 2,
-    "basedep": 2,
-    "basehp": 2,
+    "basedep": 1,
+    "basehp": 1,
     "url": "./cards/series/babelfest_2024series3.png",
     "collection": "Série Infinie",
     "rarity": 1,
@@ -151,6 +151,120 @@
         "type": "randomDEP",
         "when": [1, "spawn"],
         "range": [1, 2, 3, 3, 4],
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Vehemon",
+    "title": "Réminiscence des puissances déchues",
+    "atk": 3,
+    "dep": 4,
+    "hp": 1,
+    "baseatk": 3,
+    "basedep": 4,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series7.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Abuse",
+    "deathCounter": 2,
+    "effects": [
+      {
+        "when": [1],
+        "type": "deathCounter"
+      },
+      {
+        "when": ["death"],
+        "type": "taser",
+        "alreadyUsed": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Mhor",
+    "title": "Ombre frêle de la destruction",
+    "atk": 5,
+    "dep": 0,
+    "hp": 1,
+    "baseatk": 5,
+    "basedep": 0,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series8.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Haeri3rd"
+  },
+  {
+    "featured": true,
+    "name": "Gann",
+    "title": "Ombre douce de la raison",
+    "atk": 1,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series9.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Haeri3rd",
+    "healer": true,
+    "ghost": true,
+    "effects": [
+      {
+        "type": "healer"
+      },
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 1,
+        "target": "ally"
+      },
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Haeri",
+    "title": "Génie du bonheur",
+    "atk": 1,
+    "dep": 4,
+    "hp": 0,
+    "baseatk": 1,
+    "basedep": 4,
+    "basehp": 0,
+    "url": "./cards/series/babelfest_2024series10.png",
+    "rarity": 3,
+    "shiny": "metal",
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Haeri3rd",
+    "effects": [
+      {
+        "type": "randomHP",
+        "when": ["spawn"],
+        "range": [1, 2, 2, 3, 3, 4],
+        "spawnUsed": false
+      },
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "name": "Éclaireur",
+        "target": "rival"
+      },
+      {
+        "when": ["spawn"],
+        "type": "permHP",
+        "value": 2,
+        "target": "ally",
         "spawnUsed": false
       }
     ]

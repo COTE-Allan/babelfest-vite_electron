@@ -321,6 +321,7 @@ S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je
         setMovesCostLeft(4)
         setTutorialStep(20)
       }
+      
     },
     {
       img: TutoHautain,
