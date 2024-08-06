@@ -9,6 +9,14 @@ import { AuthContext } from '../../AuthContext'
 import Button from '../items/Button'
 import UserTitle from './UserTitle'
 import UserBanner from './UserBanner'
+import HudNavLink from '../items/hudNavLink'
+import { FaTshirt } from 'react-icons/fa'
+import { BiSolidUserRectangle } from 'react-icons/bi'
+import { FaBorderTopLeft } from 'react-icons/fa6'
+import { MdOutlineTitle } from 'react-icons/md'
+import { PiFlagBannerFill } from 'react-icons/pi'
+import { IoIosColorPalette } from 'react-icons/io'
+import { AiFillGold } from 'react-icons/ai'
 
 export default function CosmecticsController({
   profile,
@@ -96,45 +104,39 @@ export default function CosmecticsController({
     <div className="cosmetics">
       <nav className="cosmetics-nav">
         <div className="cosmetics-nav-list">
-          <Button
-            onClick={() => handleSwitchPage(1)}
-            className={`cosmetics-nav-link ${page === 1 && 'selected'}`}
-          >
-            Avatar
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(2)}
-            className={`cosmetics-nav-link ${page === 2 && 'selected'}`}
-          >
-            Cadre d'avatar
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(5)}
-            className={`cosmetics-nav-link ${page === 5 && 'selected'}`}
-          >
-            Titre de joueur
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(6)}
-            className={`cosmetics-nav-link ${page === 6 && 'selected'}`}
-          >
-            Bannière de joueur
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(3)}
-            className={`cosmetics-nav-link ${page === 3 && 'selected'}`}
-          >
-            Couleurs d'arène
-          </Button>
+          <HudNavLink onClick={() => handleSwitchPage(1)} selected={page === 1} permOpen>
+            <BiSolidUserRectangle size={45} />
+            <span className="hidden-span">Avatar</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(2)} selected={page === 2} permOpen>
+            <FaBorderTopLeft size={45} />
+            <span className="hidden-span">Cadre</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(5)} selected={page === 5} permOpen>
+            <MdOutlineTitle size={45} />
+            <span className="hidden-span">Titre</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(6)} selected={page === 6} permOpen>
+            <PiFlagBannerFill size={45} />
+            <span className="hidden-span">Bannière</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(3)} selected={page === 3} permOpen>
+            <IoIosColorPalette size={45} />
+            <span className="hidden-span">Couleurs</span>
+          </HudNavLink>
+          <HudNavLink selected={page === 7} className={'disabled'} permOpen>
+            <AiFillGold size={45} />
+            <span className="hidden-span">Prestige</span>
+          </HudNavLink>
         </div>
         {needUpdate && (
           <div className="cosmetics-controls">
             <span className="warning">Vous avez des changements non sauvegardés !</span>
             <Button onClick={handleUpdateUser}>
-              <GiConfirmed size={30} /> Valider
+              <GiConfirmed size={25} /> Valider
             </Button>
             <Button onClick={cancelUpdate}>
-              <GiCancel size={30} /> Annuler
+              <GiCancel size={25} /> Annuler
             </Button>
           </div>
         )}

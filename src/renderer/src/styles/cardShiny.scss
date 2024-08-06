@@ -205,3 +205,74 @@
     background-position: 100% 0;
   }
 }
+
+// Couleurs animés
+
+.rainbow {
+  animation: rainbow 20s linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+
+  100%,
+  0% {
+    background-color: hsl(0, 100%, 75%);
+    border-color: hsl(0, 100%, 75%);
+  }
+
+  8% {
+    background-color: hsl(30, 100%, 70%);
+    border-color: hsl(30, 100%, 70%)
+  }
+
+  16% {
+    background-color: hsl(60, 100%, 75%);
+    border-color: hsl(60, 100%, 75%);
+  }
+
+  25% {
+    background-color: hsl(90, 100%, 70%);
+    border-color: hsl(90, 100%, 70%);
+  }
+
+  33% {
+    background-color: hsl(120, 100%, 75%);
+    border-color: hsl(120, 100%, 75%);
+  }
+
+  41% {
+    background-color: hsl(150, 100%, 70%);
+    border-color: hsl(150, 100%, 70%);
+  }
+
+  50% {
+    background-color: hsl(180, 100%, 75%);
+    border-color: hsl(180, 100%, 75%);
+  }
+
+  58% {
+    background-color: hsl(210, 100%, 70%);
+    /* More pastel sky blue */
+  }
+
+  66% {
+    background-color: hsl(231, 90%, 70%);
+    /* More pastel blue */
+  }
+
+  75% {
+    background-color: hsl(270, 100%, 70%);
+    /* More pastel violet */
+  }
+
+  83% {
+    background-color: hsl(300, 100%, 75%);
+    /* More pastel magenta */
+  }
+
+  91% {
+    background-color: hsl(330, 100%, 70%);
+    /* More pastel rose */
+  }
+}

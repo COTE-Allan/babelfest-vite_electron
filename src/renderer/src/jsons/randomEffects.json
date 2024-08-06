@@ -78,7 +78,7 @@
   {
     "speParams": [
       ["attackCount", 2],
-      ["baseAttackCount", 2]
+      ["baseattackCount", 2]
     ],
     "type": "doubleSword",
     "name": "Lames Doubles"
@@ -142,7 +142,7 @@
   {
     "speParams": [
       ["attackCount", 3],
-      ["baseAttackCount", 3]
+      ["baseattackCount", 3]
     ],
     "type": "tripleSword",
     "name": "Lames Triples"

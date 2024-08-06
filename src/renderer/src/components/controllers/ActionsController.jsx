@@ -370,7 +370,7 @@ export const useTryAttack = () => {
       cardAttacker.attackCount = attackCount
       if (attackCount <= 0) {
         cardAttacker.attackedThisTurn = true
-        cardAttacker.attackCount = cardAttacker.baseAttackCount
+        cardAttacker.attackCount = cardAttacker.baseattackCount
       }
     } else {
       cardAttacker.attackedThisTurn = true

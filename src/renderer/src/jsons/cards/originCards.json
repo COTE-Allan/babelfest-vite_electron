@@ -623,7 +623,7 @@
     "year": 2023,
     "author": "Hugo Mollet",
     "attackCount": 2,
-    "baseAttackCount": 2,
+    "baseattackCount": 2,
     "effects": [
       {
         "type": "doubleSword"
@@ -1097,7 +1097,7 @@
     "year": 2023,
     "author": "Adsanman & Hannequin Nolwenn",
     "attackCount": 3,
-    "baseAttackCount": 3,
+    "baseattackCount": 3,
     "effects": [
       {
         "type": "tripleSword"

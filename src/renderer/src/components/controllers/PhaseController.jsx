@@ -56,6 +56,7 @@ export const useEndTurn = () => {
     setSelectedCards,
     setSelectedCells,
     setSelectedShopCards,
+    setConfirmModal,
     firstToPlay,
     setPlacementCostLeft,
     setMovesLeft,
@@ -116,7 +117,7 @@ export const useEndTurn = () => {
           const arenaColRef = doc(db, `games/${room}/arena`, `cell-${cell.id}`)
           let shouldUpdate = false
 
-          ;['atk', 'dep'].forEach((attr) => {
+          ;['atk', 'dep', 'attackCount'].forEach((attr) => {
             if (cell.card[attr] !== cell.card[`base${attr}`]) {
               cell.card[attr] = cell.card[`base${attr}`]
               shouldUpdate = true
@@ -176,6 +177,7 @@ export const useEndTurn = () => {
     setSelectedCards([])
     setSelectedShopCards([])
     setSelectedCells([])
+    setConfirmModal(null)
   }
 
   return EndTurn

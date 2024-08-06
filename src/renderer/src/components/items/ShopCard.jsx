@@ -76,9 +76,7 @@ export default function ShopCard({ card }) {
 
   return (
     <div
-      className={`shop-item ${
-        placementCostLeft - card.rarity < 0 ? 'card-unusable' : ''
-      } ${selected ? 'shop-item-selected' : ''} ${card.shiny ? card.shiny : ''}`}
+      className={`shop-item ${selected ? 'shop-item-selected' : ''} ${card.shiny ? card.shiny : ''}`}
       onClick={selectShopCard}
       onMouseEnter={() => {
         hover()

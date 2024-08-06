@@ -254,7 +254,7 @@ export const TutorialProvider = () => {
       author: 'Helyaus',
       shiny: 'metal',
       attackCount: 2,
-      baseAttackCount: 2,
+      baseattackCount: 2,
       effects: [
         {
           when: ['cardDeath'],

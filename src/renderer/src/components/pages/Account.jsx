@@ -14,6 +14,8 @@ import PlayerBanner from '../interface/inGame/PlayerBanner'
 import ExperienceBar from '../interface/ExperienceBar'
 import UserStatsController from '../accountEditor/UserStatsController'
 import UserAchievements from '../accountEditor/UserAchievements'
+import { FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
+import HudNavLink from '../items/hudNavLink'
 
 const Account = () => {
   const { userInfo } = useContext(AuthContext)
@@ -84,30 +86,22 @@ const Account = () => {
       </div>
       <div className="account-main">
         <nav className="account-main-nav">
-          <Button
-            onClick={() => handleSwitchPage(1)}
-            className={`account-main-nav-link ${page === 1 && 'selected'}`}
-          >
-            Statistiques
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(2)}
-            className={`account-main-nav-link ${page === 2 && 'selected'}`}
-          >
-            Cosmétiques
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(4)}
-            className={`account-main-nav-link ${page === 4 && 'selected'}`}
-          >
-            Progression
-          </Button>
-          <Button
-            onClick={() => handleSwitchPage(3)}
-            className={`account-main-nav-link ${page === 3 && 'selected'}`}
-          >
-            Modifier mon compte
-          </Button>
+          <HudNavLink onClick={() => handleSwitchPage(1)} selected={page === 1} permOpen>
+            <FaUserAlt size={45} />
+            <span className="hidden-span">Statistiques</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(2)} selected={page === 2} permOpen>
+            <FaTshirt size={45} />
+            <span className="hidden-span">Customisation</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(4)} selected={page === 4} permOpen>
+            <FaTrophy size={45} />
+            <span className="hidden-span">Progression</span>
+          </HudNavLink>
+          <HudNavLink onClick={() => handleSwitchPage(3)} selected={page === 3} permOpen>
+            <FaCog size={45} />
+            <span className="hidden-span">Modifier Profil</span>
+          </HudNavLink>
         </nav>
         <div className="account-main-content">
           {page === 1 && <UserStatsController />}

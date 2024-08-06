@@ -272,7 +272,7 @@ export function randomBoost(target, value) {
 export function removeEffects(target) {
   delete target.card.fortress
   delete target.card.attackCount
-  delete target.card.baseAttackCount
+  delete target.card.baseattackCount
   delete target.card.deathScythe
   delete target.card.reach
   delete target.card.ghost
@@ -304,7 +304,7 @@ export function randomEffect(target, index) {
   if (effect.speParams) {
     effect.speParams.forEach((speParam) => {
       let [key, value] = speParam
-      if (target.card[key] && (key === 'attackCount' || key === 'baseAttackCount')) {
+      if (target.card[key] && (key === 'attackCount' || key === 'baseattackCount')) {
         target.card[key] = target.card[key] + value
       } else {
         target.card[key] = value

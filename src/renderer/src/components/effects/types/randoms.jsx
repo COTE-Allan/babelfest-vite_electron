@@ -13,7 +13,7 @@ export function EffetRandom({ item, index }) {
   if (newEffect.speParams) {
     newEffect.speParams.forEach((speParam) => {
       let [key, value] = speParam
-      if (target.card[key] && (key === 'attackCount' || key === 'baseAttackCount')) {
+      if (target.card[key] && (key === 'attackCount' || key === 'baseattackCount')) {
         target.card[key] = target.card[key] + value
       } else {
         target.card[key] = value

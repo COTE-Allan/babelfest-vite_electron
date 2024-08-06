@@ -475,76 +475,7 @@ button.alert {
   }
 }
 
-// Couleurs animés
 
-.rainbow {
-  animation: rainbow 20s linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes rainbow {
-
-  100%,
-  0% {
-    background-color: hsl(0, 100%, 75%);
-    /* More pastel red */
-  }
-
-  8% {
-    background-color: hsl(30, 100%, 70%);
-    /* More pastel orange */
-  }
-
-  16% {
-    background-color: hsl(60, 100%, 75%);
-    /* More pastel yellow */
-  }
-
-  25% {
-    background-color: hsl(90, 100%, 70%);
-    /* More pastel lime green */
-  }
-
-  33% {
-    background-color: hsl(120, 100%, 75%);
-    /* More pastel green */
-  }
-
-  41% {
-    background-color: hsl(150, 100%, 70%);
-    /* More pastel spring green */
-  }
-
-  50% {
-    background-color: hsl(180, 100%, 75%);
-    /* More pastel cyan */
-  }
-
-  58% {
-    background-color: hsl(210, 100%, 70%);
-    /* More pastel sky blue */
-  }
-
-  66% {
-    background-color: hsl(231, 90%, 70%);
-    /* More pastel blue */
-  }
-
-  75% {
-    background-color: hsl(270, 100%, 70%);
-    /* More pastel violet */
-  }
-
-  83% {
-    background-color: hsl(300, 100%, 75%);
-    /* More pastel magenta */
-  }
-
-  91% {
-    background-color: hsl(330, 100%, 70%);
-    /* More pastel rose */
-  }
-}
 
 .cet-container {
   overflow: hidden !important;

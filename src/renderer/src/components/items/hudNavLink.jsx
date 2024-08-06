@@ -14,7 +14,7 @@ export default function HudNavLink(props) {
     <NavLink
       to={props.to}
       onMouseEnter={hover}
-      className={'hudNavLink ' + props.className}
+      className={`hudNavLink ${props.className} ${props.selected ? 'selected' : ''} ${props.permOpen ? 'open' : ''}`}
       onClick={() => {
         console.log(userSettings.sfxVolume)
         select()

@@ -19,7 +19,17 @@
     white-space: nowrap;
   }
 
-  &:hover {
+
+  &.open {
+
+    & .hidden-span {
+      max-width: 200px;
+      margin: 0 10px;
+    }
+  }
+
+  &:hover,
+  &.selected {
     background-color: white;
     color: black;
 
