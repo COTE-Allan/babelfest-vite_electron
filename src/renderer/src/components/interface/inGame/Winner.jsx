@@ -11,6 +11,7 @@ import ExperienceBar from '../ExperienceBar'
 import useSound from 'use-sound'
 import levelupSfx from '../../../assets/sfx/level_up.mp3'
 import { deleteAllLogs } from '../../others/manageFirestore'
+import useCheckForAchievements from '../../controllers/AchievementsController'
 
 export default function Winner() {
   const {
@@ -37,6 +38,7 @@ export default function Winner() {
 
   const createGame = useCreateGame()
   const leaveLobby = useLeaveLobby()
+  const checkForAchievements = useCheckForAchievements()
 
   const winnerPlayer = playerID === winner ? playerSelf.username : playerRival.username
 
@@ -102,13 +104,14 @@ export default function Winner() {
       currentMMR = userInfo.stats.mmr
     }
 
-    // Handle win streak
+    // Handle win streak and MMR only for non-custom game modes
     let currentStreak = userInfo.stats?.winStreak || 0
     let longestStreak = userInfo.stats?.longestWinStreak || 0
-    let mmrChangeValue = 15 // Base MMR change
+    let mmrChangeValue = 0 // Base MMR change
     let newMMR = currentMMR
 
     if (gameMode !== 'custom') {
+      mmrChangeValue = 15
       if (gameWon) {
         currentStreak += 1
         mmrChangeValue += currentStreak * 2
@@ -135,15 +138,23 @@ export default function Winner() {
       'stats.mmr': newMMR,
       'stats.winStreak': currentStreak,
       'stats.longestWinStreak': longestStreak,
-      ...gamesPlayedUpdate, // Spread the updated games played counters
+      ...gamesPlayedUpdate,
       'stats.victories': newVictories
     })
 
-    setTimeout(() => {
-      updateUserState(user)
+    setTimeout(async () => {
+      await updateUserState(user)
       levelup()
     }, 1000)
   }
+
+  useEffect(() => {
+    if (winner !== null) {
+      console.log('checking')
+
+      checkForAchievements()
+    }
+  }, [userInfo])
 
   useEffect(() => {
     if (winner !== null) {
@@ -152,7 +163,6 @@ export default function Winner() {
       setMovesLeft(4)
       setPlacementCostLeft(4)
       setTradeButton(true)
-
       handleExpAndStats()
     } else {
       setXpGained(0)

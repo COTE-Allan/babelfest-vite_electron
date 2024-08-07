@@ -1,20 +1,68 @@
 [
   {
     "id": "HF_tutorial",
-    "name": "Joueur 1 - Tuto 0",
+    "name": "Le match du siècle",
     "desc": "Terminez le tutoriel.",
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp"
   },
   {
     "id": "HF_firstGame",
     "name": "Bienvenue sur Babelfest",
-    "desc": "Terminez votre première partie.",
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323312/babelfest/skins/borders/04_-_Initiation_des_Plaines.webp"
+    "desc": "Terminez votre première partie dans n'importe quel mode.",
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323312/babelfest/skins/borders/04_-_Initiation_des_Plaines.webp",
+    "objective": {
+      "stat": "totalGamesPlayed",
+      "value": 1
+    }
+  },
+  {
+    "id": "HF_5win",
+    "name": "Le meilleur joueur du monde",
+    "desc": "Gagnez 5 parties dans n'importe quel mode.",
+    "url": "./skins/avatars/avatar_tuto_2.png",
+    "objective": {
+      "stat": "victories",
+      "value": 5
+    }
   },
   {
     "id": "HF_50Games",
     "name": "Le début de l'addiction",
-    "desc": "Jouez 50 parties.",
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323313/babelfest/skins/borders/01_-_Archives_Akashiques.webp"
+    "desc": "Jouez 50 parties dans n'importe quel mode.",
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323313/babelfest/skins/borders/01_-_Archives_Akashiques.webp",
+    "objective": {
+      "stat": "totalGamesPlayed",
+      "value": 50
+    }
+  },
+  {
+    "id": "HF_5winStreak",
+    "name": "Sérial Winner",
+    "desc": "Gagnez 5 parties d'affilée en rapide et/ou classé.",
+    "url": "./skins/icon_success_title.png",
+    "objective": {
+      "stat": "longestWinStreak",
+      "value": 5
+    }
+  },
+  {
+    "id": "HF_10winStreak",
+    "name": "Dix sur dix",
+    "desc": "Gagnez 10 parties d'affilée en rapide et/ou classé.",
+    "url": "./skins/icon_success_title.png",
+    "objective": {
+      "stat": "longestWinStreak",
+      "value": 10
+    }
+  },
+  {
+    "id": "HF_15winStreak",
+    "name": "Domination totale",
+    "desc": "Gagnez 15 parties d'affilée en rapide et/ou classé.",
+    "url": "./skins/icon_success_title.png",
+    "objective": {
+      "stat": "longestWinStreak",
+      "value": 15
+    }
   }
 ]

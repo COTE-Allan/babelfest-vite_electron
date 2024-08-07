@@ -428,3 +428,31 @@ export async function reconnectInGame(room, disconnected, id) {
     disconnected: filteredDisconnected
   })
 }
+
+export function getPlayerStats(stats) {
+  const totalGamesPlayed = Object.values(stats.gamesPlayed).reduce(
+    (total, current) => total + current,
+    0
+  )
+
+  // Calcul du nombre de défaites
+  const defeats = totalGamesPlayed - stats.victories
+
+  // Calcul du pourcentage de victoires
+  const winPercentage = totalGamesPlayed > 0 ? (stats.victories / totalGamesPlayed) * 100 : 0
+
+  return {
+    totalGamesPlayed,
+    victories: stats.victories,
+    defeats,
+    winPercentage: winPercentage.toFixed(1),
+    gamesPlayed: {
+      quick: stats.gamesPlayed.quick ?? 0,
+      ranked: stats.gamesPlayed.ranked ?? 0,
+      custom: stats.gamesPlayed.custom ?? 0
+    },
+    mmr: stats.mmr,
+    winStreak: stats.winStreak ?? 0,
+    longestWinStreak: stats.longestWinStreak ?? 0
+  }
+}

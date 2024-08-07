@@ -1,4 +1,7 @@
+import { useContext } from 'react'
 import achievements from '../../jsons/achievements.json'
+import { AuthContext } from '../../AuthContext'
+import { getPlayerStats } from '../others/toolBox'
 
 export function getAchievementById(id) {
   const achievement = achievements.find((ach) => ach.id === id)
@@ -8,4 +11,29 @@ export function getAchievementById(id) {
   return achievement
 }
 
-export default getAchievementById
+export const useCheckForAchievements = () => {
+  const { userInfo, giveAchievement } = useContext(AuthContext)
+
+  const checkForAchievements = async () => {
+    const userAchievements = userInfo.achievements
+    const achievementsToCheck = achievements.filter((achievement) => {
+      if (!achievement.objective) return false
+      if (!Array.isArray(userAchievements)) return true
+      return !userAchievements.includes(achievement.id)
+    })
+    const playerStats = getPlayerStats(userInfo.stats)
+
+    for (const ach of achievementsToCheck) {
+      const objective = ach.objective
+      if (objective.stat && playerStats[ach.objective.stat] >= objective.value) {
+        await giveAchievement(ach)
+      }
+    }
+
+    return achievementsToCheck
+  }
+
+  return checkForAchievements
+}
+
+export default useCheckForAchievements

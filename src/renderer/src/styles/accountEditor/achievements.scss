@@ -45,6 +45,7 @@
       & img {
         width: 75px;
         height: 75px;
+        object-fit: cover;
         @include greyBorders();
         border-radius: 15px;
       }

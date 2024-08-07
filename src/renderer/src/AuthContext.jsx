@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [userInfo, setUserInfo] = useState({})
   const [userSettings, setUserSettings] = useState({})
-
   const [playAchievementSound] = useSound(achievementSfx, {
     volume: userSettings.sfxVolume
   })
@@ -64,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
     if (docSnap.exists()) {
       const userData = docSnap.data()
-      setUserInfo({
+      const userInfo = {
         email: currentUser.email,
         username: userData.username || 'blank',
         primaryColor: userData.primaryColor,
@@ -87,7 +86,8 @@ export const AuthProvider = ({ children }) => {
         status: userData.status,
         currentLobby: userData.currentLobby,
         achievements: userData.achievements || []
-      })
+      }
+      setUserInfo(userInfo)
     }
   }
 
@@ -202,11 +202,7 @@ export const AuthProvider = ({ children }) => {
     playAchievementSound()
     toast.success(
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img
-          width={50}
-          style={{ marginRight: '10px' }}
-          src="https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp"
-        />
+        <img width={50} style={{ marginRight: '10px' }} src={achievement.url} />
         <span>Succès obtenu : {achievement.name}</span>
       </div>,
       {

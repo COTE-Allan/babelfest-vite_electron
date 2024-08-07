@@ -3,7 +3,6 @@ import { getSkinsWithLevel } from '../others/toolBox'
 import '../../styles/accountEditor/achievements.scss'
 import achievements from '../../jsons/achievements.json'
 import { AuthContext } from '../../AuthContext'
-import ScrollContainer from 'react-indiana-drag-scroll'
 import { FaEye, FaEyeSlash, FaLock, FaLockOpen } from 'react-icons/fa'
 
 // Composant pour chaque skin
@@ -53,7 +52,6 @@ export default function UserAchievements() {
   const [filteredSkinsWithLevel, setFilteredSkinsWithLevel] = useState([])
 
   useEffect(() => {
-    console.log(skinsWithLevel)
     if (showUnlocked) {
       setFilteredSkinsWithLevel(skinsWithLevel)
     } else {
