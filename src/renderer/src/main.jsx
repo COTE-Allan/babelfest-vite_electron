@@ -22,6 +22,7 @@ import Loading from './components/pages/Loading'
 import { MatchmakingProvider } from './components/providers/MatchmakingProvider'
 import UpdateNotifier from './UpdateNotifier'
 import { TutorialProvider } from './components/providers/TutorialProvider'
+import UserProfile from './components/pages/UserProfile'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -89,6 +90,14 @@ const App = () => {
             }
           />
           <Route path="/lobby/:lobbyId" element={<Lobby />} />
+          <Route
+            path="/userProfile/:userId"
+            element={
+              <Layout>
+                <UserProfile />
+              </Layout>
+            }
+          />
           <Route
             path="/login"
             element={

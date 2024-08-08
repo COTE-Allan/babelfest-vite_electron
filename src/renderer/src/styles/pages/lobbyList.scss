@@ -1,18 +1,16 @@
 @import '../variables.scss';
 
 .lobbies {
-  height: calc(85vh - 40px);
-  padding: 20px;
+  height: calc(85vh - 80px);
+  padding: 40px 50px;
 
   &-btn {
     display: inline-flex;
     align-items: center;
+
     & svg {
       margin-right: 5px;
     }
-  }
-  &-content {
-    width: 500px;
   }
 
   & h2 {
@@ -22,9 +20,10 @@
 
   &-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 0;
     margin: 0;
+
     & p {
       font-size: 30px;
       font-family: 'Kimberly Bl', sans-serif;
@@ -47,11 +46,13 @@
       font-family: 'Kimberly Bl', sans-serif;
       @include greyBorders();
       @include whiteHovering();
+
       & span {
         margin: 0 10px;
         display: flex;
         align-items: center;
       }
+
       & svg {
         margin-left: 10px;
       }

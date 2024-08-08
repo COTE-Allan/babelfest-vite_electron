@@ -1,0 +1,15 @@
+.userProfile {
+    padding: 50px;
+    display: flex;
+
+    & .playerBanner {
+        margin-top: 15px;
+    }
+
+    &-avatar {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

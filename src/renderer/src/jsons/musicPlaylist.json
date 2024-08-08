@@ -1,7 +1,12 @@
 [
   {
+    "url": "./songs/babelfest_welcome.mp3",
+    "name": "Babelfest OST - Bienvenue !",
+    "role": "menu"
+  },
+  {
     "url": "./songs/Fade_to_white.mp3",
-    "name": "Neon White OST: Fade To White",
+    "name": "Neon White OST - Fade To White",
     "role": "menu"
   },
   {

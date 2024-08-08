@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import ProfilePicture from '../esthetics/profilePicture'
 
 import '../../styles/pages/home.scss'
@@ -194,7 +194,11 @@ const Home = () => {
               <h1>CLASSEMENT</h1>
               <div className="grid-leaderboard-content">
                 {topUsers.map((user, index) => (
-                  <div key={user.id} className="grid-leaderboard-user">
+                  <NavLink
+                    key={user.id}
+                    className="grid-leaderboard-user"
+                    to={`/userProfile/${user.id}`}
+                  >
                     <span className={`rank ${getRankClass(index)}`}>{index + 1}</span>
                     <ProfilePicture customUser={user} size={60} />
                     <div className="grid-leaderboard-user-infos">
@@ -206,7 +210,7 @@ const Home = () => {
                       src={user.banner}
                       alt="bannière du joueur"
                     />
-                  </div>
+                  </NavLink>
                 ))}
               </div>
             </HomeGridItem>

@@ -92,8 +92,7 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     width: 95vw;
-    height: 90%;
-    margin-top: 10px;
+    height: 80%;
 
     &-item {
       border-radius: 5px;
@@ -228,6 +227,13 @@
       align-items: center;
       margin: 10px auto;
       width: 300px;
+      padding: 0;
+      justify-content: flex-start;
+      transition: transform 200ms ease-in-out;
+
+      &:hover {
+        text-decoration: none;
+      }
 
       & .rank {
         font-size: 25px;
@@ -291,7 +297,7 @@
       justify-content: center;
       flex-direction: column;
       overflow: hidden;
-      margin-top: 15px;
+      margin-top: 10px;
 
       /* Ajustez selon vos besoins */
       &-item {
@@ -331,7 +337,7 @@
       }
 
       & .img-container {
-        max-width: 95%;
+        max-width: 90%;
         // background-color: ;
         margin: 15px 0;
       }
