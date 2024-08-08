@@ -80,6 +80,27 @@ export const TutorialProvider = () => {
           choice: 'target'
         }
       ]
+    },
+    {
+      name: 'Katy Kilgis',
+      title: 'Voleuse infernale',
+      atk: 3,
+      dep: 3,
+      hp: 2,
+      baseatk: 3,
+      basedep: 3,
+      basehp: 2,
+      url: './cards/renfort/babelfest_renfort8.png',
+      rarity: 2,
+      collection: 'Renfort',
+      year: 2024,
+      author: 'Tortiliowius',
+      ghost: true,
+      effects: [
+        {
+          type: 'ghost'
+        }
+      ]
     }
   ])
   const [rivalHand, setRivalHand] = useState([
