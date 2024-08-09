@@ -317,27 +317,43 @@ export async function getTopUsersByLevel() {
 
 export async function getPlayerRank(userId) {
   const usersRef = collection(db, 'users')
-  const q = query(
-    usersRef,
-    orderBy('stats.mmr', 'desc'),
-    orderBy('level', 'desc'),
-    orderBy('xp', 'desc')
-  )
-  const querySnapshot = await getDocs(q)
 
-  let rank = 0
-  let found = false
+  // Requête pour le classement basé sur le MMR
+  const mmrQuery = query(usersRef, orderBy('stats.mmr', 'desc'))
+  const mmrQuerySnapshot = await getDocs(mmrQuery)
 
-  for (const doc of querySnapshot.docs) {
-    rank++
+  let mmrRank = 0
+  let foundMmr = false
+
+  for (const doc of mmrQuerySnapshot.docs) {
+    mmrRank++
 
     if (doc.id === userId) {
-      found = true
+      foundMmr = true
       break
     }
   }
 
-  return found ? rank : null
+  // Requête pour le classement basé sur le niveau et l'XP
+  const levelXpQuery = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'))
+  const levelXpQuerySnapshot = await getDocs(levelXpQuery)
+
+  let levelXpRank = 0
+  let foundLevelXp = false
+
+  for (const doc of levelXpQuerySnapshot.docs) {
+    levelXpRank++
+
+    if (doc.id === userId) {
+      foundLevelXp = true
+      break
+    }
+  }
+
+  return {
+    mmrRank: foundMmr ? mmrRank : null,
+    levelXpRank: foundLevelXp ? levelXpRank : null
+  }
 }
 
 export async function getTotalPlayers() {

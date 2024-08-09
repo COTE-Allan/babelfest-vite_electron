@@ -91,6 +91,12 @@
     "achievement": "HF_50Games"
   },
   {
+    "url": "./skins/borders/cardre_or_honor.png",
+    "name": "Plaqué Hon'OR",
+    "unlockTip": "Obtenu en récompense du succès : 'Digne'",
+    "achievement": "HF_50honors"
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181119/babelfest/skins/borders/cadre_neoBabelfest.webp",
     "name": "Neo-Babelfest",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",

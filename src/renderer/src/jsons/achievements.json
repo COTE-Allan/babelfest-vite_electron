@@ -64,5 +64,25 @@
       "stat": "longestWinStreak",
       "value": 15
     }
+  },
+  {
+    "id": "HF_10honors",
+    "name": "Respecté",
+    "desc": "Obtenez 10 honneurs de la part d'autres joueurs.",
+    "url": "./skins/icon_success_title.png",
+    "objective": {
+      "profile": "honor",
+      "value": 10
+    }
+  },
+  {
+    "id": "HF_50honors",
+    "name": "Digne",
+    "desc": "Obtenez 50 honneurs de la part d'autres joueurs.",
+    "url": "./skins/borders/cardre_or_honor.png",
+    "objective": {
+      "profile": "honor",
+      "value": 50
+    }
   }
 ]

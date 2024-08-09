@@ -1,0 +1,94 @@
+.statsDisplayer {
+    font-family: 'Kimberly Bl', sans-serif;
+
+    &-content {
+        display: flex;
+        margin-top: 15px;
+    }
+
+    &-category {
+        flex-grow: 1;
+        margin: 5px 0;
+        margin-right: 20px;
+        font-size: 16px;
+
+        &.smaller {
+            font-size: 13px;
+        }
+
+        &.smaller &-list-item-value {
+            font-size: 20px;
+        }
+
+        &-list {
+            list-style-type: none;
+            padding-inline-start: 20px;
+            margin: 0;
+
+            &-item {
+                margin: 2px;
+                vertical-align: middle;
+                display: flex;
+                align-items: center;
+
+                &-value {
+                    display: block;
+                    min-width: 25px;
+                    font-size: 30px;
+                    text-align: center;
+                    margin-right: 5px;
+                }
+
+                &-rank {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    &-user {
+        display: flex;
+        position: relative;
+        align-items: center;
+    }
+
+    &-banner {
+        position: absolute;
+        z-index: -1;
+        left: 7px;
+        width: 500px;
+        height: 75px;
+        object-fit: cover;
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    }
+
+    & h1,
+    & h2,
+    h3 {
+        font-family: 'Kimberly Bl', sans-serif;
+        margin: 0;
+    }
+
+    & h1 {
+        font-size: 35px;
+    }
+
+    & h2 {
+        font-size: 18px;
+    }
+
+
+    & h1,
+    & h2 {
+        text-shadow:
+            2px 0 #000000d5,
+            -2px 0 #000000d5,
+            0 2px #000000d5,
+            0 -2px #000000d5,
+            1px 1px #000000d5,
+            -1px -1px #000000d5,
+            1px -1px #000000d5,
+            -1px 1px #000000d5;
+    }
+
+}

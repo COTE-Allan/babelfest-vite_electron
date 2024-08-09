@@ -7,9 +7,53 @@
     }
 
     &-avatar {
-        width: 400px;
+        margin-right: 10px;
+        width: calc(25% - 10px);
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 10px;
     }
+
+    &-content,
+    &-control,
+    &-profile-avatar {
+        margin: 10px 5px;
+        border-radius: 20px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &-profile-avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Kimberly Bl', sans-serif;
+
+        & h1 {
+            font-size: 25px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+            margin-top: 15px;
+        }
+    }
+
+    &-control {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        & .hudNavLink {
+            margin: 5px;
+            width: 100%;
+            justify-content: flex-start;
+        }
+    }
+
+    &-content {
+        width: 100%;
+    }
+
+
 }

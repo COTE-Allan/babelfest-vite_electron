@@ -74,8 +74,11 @@ export const AuthProvider = ({ children }) => {
         title: userData.title,
         banner: userData.banner,
         friends: [],
+        honor: userData.honor || 0,
+        honored: userData.honored || 0,
         level: userData.level,
         xp: userData.xp,
+        honor: userData.honor,
         stats: {
           gamesPlayed: userData.stats?.gamesPlayed || 0,
           victories: userData.stats?.victories || 0,

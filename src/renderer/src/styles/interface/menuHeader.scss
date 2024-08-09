@@ -1,12 +1,12 @@
 @import '../variables.scss';
 
 .menuHeader {
-  width: calc(100% - 50px);
-  height: calc(10% - 25px);
+  width: calc(100% - 70px);
+  height: calc(10% - 30px);
   position: sticky;
   z-index: 1;
-  padding: 0 25px;
-  padding-top: 25px;
+  padding: 0 35px;
+  padding-top: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;

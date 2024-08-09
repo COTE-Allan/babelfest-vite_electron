@@ -70,6 +70,11 @@
     "achievement": "HF_15winStreak"
   },
   {
+    "name": "Respecté",
+    "unlockTip": "Obtenu en récompense du succès : 'Respecté'",
+    "achievement": "HF_10honors"
+  },
+  {
     "name": "Alpha-testeur",
     "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
     "flag": "betaTest"

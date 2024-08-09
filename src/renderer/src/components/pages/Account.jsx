@@ -66,20 +66,13 @@ const Account = () => {
   return (
     <div className="account">
       <div className="account-profile">
-        <div
-          className="account-profile-pictureContainer"
-          style={{
-            background: `linear-gradient(180deg, ${userData.primaryColor} 50%, ${userData.secondaryColor} 50%`
+        <ProfilePicture
+          size={300}
+          customUser={{
+            profilePic: userData.profilePic,
+            profileBorder: userData.profileBorder
           }}
-        >
-          <ProfilePicture
-            size={'100%'}
-            customUser={{
-              profilePic: userData.profilePic,
-              profileBorder: userData.profileBorder
-            }}
-          />
-        </div>
+        />
         <ExperienceBar />
         <PlayerBanner user={userData} color={userData.primaryColor} />
         <Button className="account-profile-logout">Déconnexion</Button>

@@ -11,7 +11,6 @@
       font-family: 'Kimberly Bl', sans-serif;
       margin: 0;
       font-size: 30px;
-      margin-top: 10px;
     }
   }
 
@@ -30,6 +29,7 @@
     &-item {
       opacity: 0.3;
       filter: grayscale(100%);
+      transition: opacity 200ms ease-in-out, filter 200ms ease-in-out;
 
       &.unlocked {
         filter: none;
@@ -40,6 +40,7 @@
 
       &:hover {
         opacity: 1;
+        filter: none;
       }
 
       & img {
