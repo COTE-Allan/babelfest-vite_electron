@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import '../../styles/interface/statsDisplayer.scss'
 import { getPlayerRank } from '../others/toolBox'
 import ProfilePicture from '../esthetics/profilePicture'
+import achievements from '../../jsons/achievements.json'
 
 export default function StatsDisplayer({ user, stats }) {
   const [playerRank, setPlayerRank] = useState(0)
@@ -77,7 +78,7 @@ export default function StatsDisplayer({ user, stats }) {
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">
                 {stats.winPercentage}%
-              </span>{' '}
+              </span>
               Ratio de victoire
             </li>
           </ul>
@@ -113,6 +114,12 @@ export default function StatsDisplayer({ user, stats }) {
           <h3>Perfomances</h3>
           <hr />
           <ul className="statsDisplayer-category-list">
+            <li className="statsDisplayer-category-list-item">
+              <span className="statsDisplayer-category-list-item-value">
+                {user.achievements.length}
+              </span>
+              sur {achievements.length} succès obtenus
+            </li>
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">{stats.winStreak}</span>
               Série de victoires actuelle

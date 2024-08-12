@@ -251,7 +251,7 @@
       {
         "type": "randomHP",
         "when": ["spawn"],
-        "range": [1, 2, 2, 3, 3, 4],
+        "range": [2, 2, 3, 3, 4],
         "spawnUsed": false
       },
       {

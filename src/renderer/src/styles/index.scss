@@ -482,8 +482,22 @@ button.alert {
 }
 
 .important {
-  box-shadow: rgba(0, 183, 255, 1) 0 0 20px;
+  box-shadow: rgb(255, 64, 0) 0px 0px 0px 7px;
+  border-radius: 5px;
+  animation: important 2s ease-in-out both infinite;
+}
 
+@keyframes important {
+
+  0%,
+  100% {
+    box-shadow: rgb(27, 96, 255) 0px 0px 0px 7px;
+  }
+
+  50% {
+    box-shadow: rgb(0, 208, 255) 0px 0px 0px 7px;
+
+  }
 }
 
 .rc-slider-handle {

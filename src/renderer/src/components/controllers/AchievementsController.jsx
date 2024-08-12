@@ -28,6 +28,9 @@ export const useCheckForAchievements = () => {
       if (objective.stat && playerStats[ach.objective.stat] >= objective.value) {
         await giveAchievement(ach)
       }
+      if (objective.profile && userInfo[ach.objective.profile] >= objective.value) {
+        await giveAchievement(ach)
+      }
     }
 
     return achievementsToCheck

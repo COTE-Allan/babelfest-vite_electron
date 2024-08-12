@@ -112,9 +112,8 @@ export default function TutorialRoom() {
     },
     {
       img: TutoNonchalent,
-      text: `Babelfest est un jeu mystérieux, on y retrouve plein de gens étranges qui disent tous venir d’univers différents. Moi, je préfère cet endroit, mon monde d’origine... IL ÉTAIT TERRIFIANT.§
-      Chaque tour d’une partie de Babelfest est séparé en 4 phases. On devrait d’abord faire une session d’échange de cartes, mais pour cette fois, on va la passer.§
-      Normalement, on doit jouer 8 cartes, mais pour cette fois on en piochera 4 chacun.§
+      text: `Bien alors...§
+      Chaque tour d’une partie de Babelfest est séparé en 4 phases, avant de commencer, chaque joueur pioche 8 cartes du paquet commun mais pour cette fois, on en piochera 4.§
       Le but du jeu est de détruire toutes les cartes adverses ou de capturer la base adverse, la case colorée à l’opposé du terrain.`,
       clickable: true,
       modal: true,
@@ -153,7 +152,7 @@ export default function TutorialRoom() {
     {
       img: TutoNonchalent,
       text: `Bien, mon tour est terminé, cette phase se termine quand je n'ai plus d'énergie ou que j'y mets fin manuellement, évidemment, tu ne sais pas ce que j'ai fait.§
-      C'est à toi d'invoquer, commence par choisir une carte de ta main. Personnellement, je jouerais la carte que j'ai marquée en bleu, mais tu sais, t'es pas obligé.`,
+      C'est à toi d'invoquer, commence par choisir une carte de ta main. Personnellement, je jouerais la carte que j'ai marquée en bleu.`,
       clickable: false,
       modal: true,
       zindex: ['cards']
@@ -212,7 +211,7 @@ export default function TutorialRoom() {
     },
     {
       img: TutoHautain,
-      text: `T'es pas obligé, mais tu devrais déplacer l'une de tes cartes. Chaque carte peut se déplacer une fois par tour, la distance possible que cette carte peut traverser est basée sur ses points de déplacement, le chiffre du milieu sur la carte.§
+      text: `Tu devrais déplacer l'une de tes cartes. Chaque carte peut se déplacer une fois par tour, la distance possible que cette carte peut traverser est basée sur ses points de déplacement, le chiffre du milieu sur la carte.§
       Par contre si tu déplaces CETTE carte, je suis mal. Heureusement que tu l'as pas vue.`,
       clickable: false
     },
@@ -243,10 +242,9 @@ export default function TutorialRoom() {
     },
     {
       img: TutoNonchalent,
-      text: `Bon, la phase suivante, c'est l'attaque. Tu peux attaquer une fois avec chacune de tes cartes. Chaque carte peut attaquer les 4 cartes adjacentes. Dai, avec son effet Archer, est une exception qui peut attaquer aussi en diagonale.§
-      Vu qu'on vient de démarrer la phase d'attaque, l'effet de Tuto s'active ! Il renforce tous ses alliés adjacents d'un point d'attaque jusqu'à la fin du tour. Je suis fier de moi, Tuto c'est vraiment le meilleur.§
-      Mon Dai aura donc 4 points d'attaque jusqu'à la fin du tour, pas de chance pour ta Compteuse à trois cordes.
-      Je choisis une carte qui attaque, puis sa cible, TA COMPTEUSE !`,
+      text: `Bon, la phase suivante, c'est l'attaque. Tu peux attaquer une fois avec chacune de tes cartes. Chaque carte peut attaquer les 4 cartes adjacentes.§
+      Vu qu'on vient de démarrer la phase d'attaque, l'effet de Tuto s'active ! Il renforce tous ses alliés adjacents d'un point d'attaque jusqu'à la fin du tour. Tuto c'est vraiment le meilleur.§
+      Mon Dai aura donc 4 points d'attaque jusqu'à la fin du tour, pas de chance pour ta Compteuse à trois cordes.`,
       clickable: true,
       action: () => {
         setPattern(
@@ -270,8 +268,8 @@ export default function TutorialRoom() {
     {
       img: TutoStress,
       text: `Non non non !
-      T'es content maintenant ?! T'as attaqué donc c'est à mon tour d'attaquer de nouveau, mais vu que Dai a déjà attaqué, il ne peut pas attaquer de nouveau, je suis obligé de conclure mon tour...§
-      De même, vu que Phoebe a déjà attaqué, tu n'as aucune carte pouvant attaquer, donc tu dois toi aussi mettre fin à ton tour.§
+      T'es content maintenant ?! T'as attaqué donc c'est à mon tour d'attaquer de nouveau, mais Dai ne peut pas attaquer deux fois, je suis obligé de conclure mon tour...§
+      De même, tu n'as aucune carte pouvant attaquer, donc tu dois toi aussi mettre fin à ton tour.§
       ...Passons à la dernière phase, la phase de troc.`,
       clickable: true,
       action: () => {
@@ -658,7 +656,9 @@ export default function TutorialRoom() {
                       }}
                       onClick={() => handleCellClick(cell.id)}
                     >
-                      {isImportantCell(cell.id) && <div className="cell-placementTrigger yellow" />}
+                      {isImportantCell(cell.id) && (!cell.card || cell.owner !== 1) && (
+                        <div className="cell-placementTrigger" />
+                      )}
                       {selectedCell === cell.id && <GiConfirmed className="above" size={90} />}
                       {cell.card && cell.card.recto !== false && (
                         <div

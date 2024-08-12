@@ -61,12 +61,14 @@
   }
 
   &-logo {
-    width: 100px;
+    width: 50px;
     transition: transform 350ms ease-in-out;
+    margin-right: 10px;
 
     &-container {
       padding: 10px;
       display: flex;
+      align-items: center;
 
       & a {
         padding: 0;
@@ -74,7 +76,7 @@
     }
 
     &:hover {
-      transform: rotate(-180deg) scale(1.2);
+      transform: rotate(-180deg) scale(1.15);
       cursor: pointer;
     }
   }

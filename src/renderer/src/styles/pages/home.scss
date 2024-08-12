@@ -202,6 +202,20 @@
 
   .grid-playerCount {
     grid-area: 6 / 1 / 7 / 2;
+
+    .home-grid-item-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & span {
+      display: flex;
+      align-items: center;
+    }
+
+    & svg {
+      margin-right: 5px;
+    }
   }
 
   .grid-leaderboard {
@@ -211,6 +225,11 @@
     padding-top: 25px;
     overflow: auto;
     overflow-x: hidden;
+
+    & h2 {
+      font-size: 13px;
+      margin: 0;
+    }
 
     &-content {
       z-index: 1;
@@ -233,6 +252,11 @@
 
       &:hover {
         text-decoration: none;
+
+      }
+
+      &:hover .grid-leaderboard-user-banner {
+        opacity: 1;
       }
 
       & .rank {
@@ -245,11 +269,13 @@
       &-banner {
         position: absolute;
         z-index: -1;
+        opacity: 0.7;
         width: calc(80% - 60px);
         height: 60px;
         object-fit: cover;
         left: 100px;
         mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+        transition: opacity 150ms ease-in-out;
       }
 
       &-infos {
@@ -379,11 +405,19 @@
   .grid-news {
     grid-area: 5 / 2 / 7 / 4;
 
+    &:hover a {
+      text-decoration: none;
+    }
+
     & h1 {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       width: 90%;
+    }
+
+    & .grid-link-button {
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
 

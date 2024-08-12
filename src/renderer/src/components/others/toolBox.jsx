@@ -223,6 +223,31 @@ export function generateUniqueID() {
   return now + random
 }
 
+export async function getTotalAndOnlinePlayers() {
+  const usersRef = collection(db, 'users')
+
+  // Récupère toutes les données de la collection
+  const snapshot = await getDocs(usersRef)
+
+  // Compte total des utilisateurs
+  const totalPlayers = snapshot.size
+
+  // Compte des utilisateurs en ligne
+  let onlinePlayers = 0
+  snapshot.forEach((doc) => {
+    const userData = doc.data()
+    if (userData.status && userData.status.state === 'online') {
+      onlinePlayers++
+    }
+  })
+
+  // Retourne les deux valeurs
+  return {
+    totalPlayers,
+    onlinePlayers
+  }
+}
+
 export function getOnlineUsersCount(setCountCallback) {
   const usersRef = collection(db, 'users')
   const q = query(usersRef, where('status.state', '==', 'online'))
@@ -246,24 +271,21 @@ export function getFeaturedCards() {
   return featuredCards
 }
 
-export async function getTopUsersByMMRAndLevel() {
+export async function getTopUsersByMMR(amount = 10) {
   const usersRef = collection(db, 'users')
 
-  // Utilisez d'abord orderBy pour le MMR, puis pour le niveau, puis pour l'XP pour gérer les égalités
-  const q = query(
-    usersRef,
-    orderBy('stats.mmr', 'desc'),
-    orderBy('level', 'desc'),
-    orderBy('xp', 'desc'),
-    limit(10)
-  )
+  const q = query(usersRef, orderBy('stats.mmr', 'desc'), limit(amount))
 
   try {
     const querySnapshot = await getDocs(q)
     const topUsers = []
+    let rank = 1
+
     querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, ...doc.data() })
+      topUsers.push({ id: doc.id, rank, ...doc.data() })
+      rank++
     })
+
     return topUsers
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs :', error)
@@ -271,43 +293,22 @@ export async function getTopUsersByMMRAndLevel() {
   }
 }
 
-export async function getTopUsersByMMR() {
-  const usersRef = collection(db, 'users')
-
-  // Utilisez d'abord orderBy pour le MMR, puis pour le niveau, puis pour l'XP pour gérer les égalités
-  const q = query(
-    usersRef,
-    orderBy('stats.mmr', 'desc'),
-    orderBy('level', 'desc'),
-    orderBy('xp', 'desc'),
-    limit(10)
-  )
-
-  try {
-    const querySnapshot = await getDocs(q)
-    const topUsers = []
-    querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, ...doc.data() })
-    })
-    return topUsers
-  } catch (error) {
-    console.error('Erreur lors de la récupération des utilisateurs :', error)
-    return []
-  }
-}
-
-export async function getTopUsersByLevel() {
+export async function getTopUsersByLevel(amount = 10) {
   const usersRef = collection(db, 'users')
 
   // Utilisez d'abord orderBy pour le niveau, puis pour l'xp pour gérer les égalités
-  const q = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'), limit(10))
+  const q = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'), limit(amount))
 
   try {
     const querySnapshot = await getDocs(q)
     const topUsers = []
+    let rank = 1
+
     querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, ...doc.data() })
+      topUsers.push({ id: doc.id, rank, ...doc.data() })
+      rank++
     })
+
     return topUsers
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs :', error)
@@ -475,5 +476,22 @@ export function getPlayerStats(stats) {
     mmr: stats.mmr,
     winStreak: stats.winStreak ?? 0,
     longestWinStreak: stats.longestWinStreak ?? 0
+  }
+}
+
+export const getRankClass = (index) => {
+  switch (index) {
+    case 0:
+      return 'maitre'
+    case 1:
+      return 'diamant'
+    case 2:
+      return 'or'
+    case 3:
+      return 'argent'
+    case 4:
+      return 'bronze'
+    default:
+      return ''
   }
 }

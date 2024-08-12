@@ -3,16 +3,19 @@ import { AuthContext } from '../../AuthContext'
 import { useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
+import useCheckForAchievements from '../controllers/AchievementsController'
 
 export default function Loading(params) {
   const { loading, userInfo, updateOnlineStatus, user, tryAuth } = useContext(AuthContext)
   const navigate = useNavigate()
+  const checkForAchievements = useCheckForAchievements()
 
   async function handleUpdateOnlineStatus() {
     tryAuth()
   }
 
   async function goToHomePage(askToRejoin) {
+    checkForAchievements()
     if (askToRejoin) {
       navigate('/home', { state: { askToRejoin: askToRejoin } })
     } else {
@@ -30,11 +33,8 @@ export default function Loading(params) {
         await updateOnlineStatus(user.uid, false)
         goToHomePage(askToRejoin)
       } else if (user) {
-        toast.error(
-          "Connexion interrompue, vérifiez que vous n'êtes pas connecté ailleurs."
-        )
+        toast.error("Connexion interrompue, vérifiez que vous n'êtes pas connecté ailleurs.")
         navigate('/login')
-
       }
     }
     if (user) {

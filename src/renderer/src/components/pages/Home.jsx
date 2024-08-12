@@ -9,7 +9,9 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import {
   getFeaturedCards,
   getOnlineUsersCount,
-  getTopUsersByMMRAndLevel,
+  getRankClass,
+  getTopUsersByMMR,
+  getTotalAndOnlinePlayers,
   useSendErrorMessage
 } from '../others/toolBox'
 import { CSSTransition } from 'react-transition-group'
@@ -23,7 +25,7 @@ import axios from 'axios'
 
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
-import { toast } from 'react-toastify'
+import { FaCircle } from 'react-icons/fa'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -51,7 +53,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchTopUsers = async () => {
-      const users = await getTopUsersByMMRAndLevel()
+      const users = await getTopUsersByMMR()
       setTopUsers(users)
     }
     fetchTopUsers()
@@ -86,23 +88,6 @@ const Home = () => {
       )
     }
   }, [lastBlogPost])
-
-  const getRankClass = (index) => {
-    switch (index) {
-      case 0:
-        return 'maitre'
-      case 1:
-        return 'diamant'
-      case 2:
-        return 'or'
-      case 3:
-        return 'argent'
-      case 4:
-        return 'bronze'
-      default:
-        return ''
-    }
-  }
 
   return (
     <>
@@ -192,6 +177,7 @@ const Home = () => {
             </HomeGridItem>
             <HomeGridItem className="grid-leaderboard">
               <h1>CLASSEMENT</h1>
+              <h2>(par MMR)</h2>
               <div className="grid-leaderboard-content">
                 {topUsers.map((user, index) => (
                   <NavLink
@@ -238,7 +224,9 @@ const Home = () => {
             )}
 
             <HomeGridItem className="grid-playerCount">
-              <span>EN LIGNE : {playerCount}</span>
+              <span>
+                <FaCircle color="4ead35" size={20} /> EN LIGNE : {playerCount}
+              </span>
             </HomeGridItem>
           </div>
         </div>

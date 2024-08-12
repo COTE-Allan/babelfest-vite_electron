@@ -1,29 +1,31 @@
-import { doc, getDoc, updateDoc, arrayUnion, increment } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
 import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../../Firebase'
 import { getPlayerStats, useSendErrorMessage } from '../others/toolBox'
 import '../../styles/pages/UserProfile.scss'
-import PlayerBanner from '../interface/inGame/PlayerBanner'
 import ProfilePicture from '../esthetics/profilePicture'
 import StatsDisplayer from '../interface/StatsDisplayer'
 import HudNavLink from '../items/hudNavLink'
-import { MdAddReaction } from 'react-icons/md'
 import { FaBookOpen, FaThumbsUp, FaUserPlus } from 'react-icons/fa'
 import { AuthContext } from '../../AuthContext'
 import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import successSfx from '../../assets/sfx/info_notification.mp3'
+import Button from '../items/Button'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 const UserProfile = () => {
   const { user, userInfo, updateUserState, userSettings } = useContext(AuthContext)
   const { userId } = useParams()
   const [targetUser, setTargetUser] = useState(null)
-  const [isHonored, setIsHonored] = useState(false)
+  const [canHonor, setCanHonor] = useState(false)
   const sendErrorMessage = useSendErrorMessage()
   const [playSuccess] = useSound(successSfx, {
     volume: userSettings.sfxVolume
   })
+  const navigate = useNavigate()
+
   async function GetUser() {
     const userRef = doc(db, 'users', userId)
     const docSnap = await getDoc(userRef)
@@ -53,42 +55,54 @@ const UserProfile = () => {
       userInfo.stats = stats
       userInfo.id = userId
       setTargetUser(userInfo)
+
+      // Vérifie si l'utilisateur peut honorer un autre joueur
+      console.log(user.honored)
     }
   }
 
   useEffect(() => {
     GetUser()
-
-    // Vérifier si l'utilisateur a déjà honoré cette personne
-    if (userInfo.honored && userInfo.honored.includes(userId)) {
-      setIsHonored(true)
+    const currentTime = Date.now()
+    if (!userInfo.honored || currentTime - userInfo.honored >= 24 * 60 * 60 * 1000) {
+      setCanHonor(true)
+    } else {
+      setCanHonor(false)
     }
-  }, [userId, userInfo])
+  }, [userId])
 
   const handleHonor = async () => {
-    if (!isHonored) {
-      try {
-        const userRef = doc(db, 'users', user.uid)
-        const targetUserRef = doc(db, 'users', userId)
+    const currentTime = Date.now()
 
-        // Ajouter userId à la liste honored de l'utilisateur
-        await updateDoc(userRef, {
-          honored: arrayUnion(userId)
-        })
+    if (!canHonor) {
+      const nextAvailableTime = new Date(userInfo.honored + 24 * 60 * 60 * 1000)
+      sendErrorMessage(
+        `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString()}.`
+      )
 
-        // Incrémenter le compteur honor de targetUser
-        await updateDoc(targetUserRef, {
-          honor: increment(1)
-        })
-        playSuccess()
-        toast.success(`Vous avez honoré ${targetUser.username} !`)
-        await updateUserState(user)
-        setIsHonored(true) // Désactiver le bouton après avoir honoré
-      } catch (error) {
-        console.error("Erreur lors de l'honoration:", error)
-      }
-    } else {
-      sendErrorMessage('Vous avez déjà honoré ce joueur.')
+      return
+    }
+
+    try {
+      const userRef = doc(db, 'users', user.uid)
+      const targetUserRef = doc(db, 'users', userId)
+
+      // Mettre à jour le timestamp dans honored
+      await updateDoc(userRef, {
+        honored: currentTime
+      })
+
+      // Incrémenter le compteur honor de targetUser
+      await updateDoc(targetUserRef, {
+        honor: increment(1)
+      })
+
+      playSuccess()
+      toast.success(`Vous avez honoré ${targetUser.username} !`)
+      await updateUserState(user)
+      setCanHonor(false)
+    } catch (error) {
+      console.error("Erreur lors de l'honoration:", error)
     }
   }
 
@@ -96,13 +110,16 @@ const UserProfile = () => {
 
   return (
     <div className="userProfile">
+      <Button onClick={() => navigate(-1)}>
+        <IoMdArrowRoundBack size={40} />
+      </Button>
       <div className="userProfile-profile">
         <div className="userProfile-profile-avatar">
           <ProfilePicture customUser={targetUser} size={200} border={targetUser.primaryColor} />
           <h1>{targetUser.username}</h1>
         </div>
         <div className="userProfile-control">
-          <HudNavLink permOpen className={isHonored ? 'disabled' : ''} onClick={handleHonor}>
+          <HudNavLink permOpen onClick={handleHonor} className={!canHonor ? 'disabled' : ''}>
             <FaThumbsUp size={35} />
             <span className="hidden-span">Honorer</span>
           </HudNavLink>

@@ -11,7 +11,7 @@ import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
 import { FaPlay, FaSearch, FaUserFriends } from 'react-icons/fa'
 import { SiCodemagic } from 'react-icons/si'
 import { IoMdSettings } from 'react-icons/io'
-import { MdArticle, MdMusicNote } from 'react-icons/md'
+import { MdArticle, MdLeaderboard, MdMusicNote } from 'react-icons/md'
 import Modal from '../items/ClassicModal'
 import Button from '../items/Button'
 import Clock from '../esthetics/Clock'
@@ -64,6 +64,10 @@ export default function MenuHeader() {
           <HudNavLink to={'/effects'}>
             <SiCodemagic size={40} />
             <span className="hidden-span">Effets</span>
+          </HudNavLink>
+          <HudNavLink to={'/leaderboards'}>
+            <MdLeaderboard size={40} />
+            <span className="hidden-span">Classements</span>
           </HudNavLink>
           {matchmakingSearch && (
             <HudNavLink to={'/home'} className="special">

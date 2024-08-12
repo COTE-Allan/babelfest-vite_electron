@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-  viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{fill:#FF1D25;}
@@ -10,14 +9,14 @@
 </style>
 <g id="logo_1">
 	<g id="Carrés">
-		<path class="st0" id="square_1" d="M121.8,37.2h27.1c8.8,0,16,7.2,16,16v27.1c0,8.8-7.2,16-16,16h-27.1c-8.8,0-16-7.2-16-16V53.2
-			C105.8,44.4,113,37.2,121.8,37.2z"/>
-		<path class="st1" id="square_2" d="M52.8,36.3h27.1c8.8,0,16,7.2,16,16v27.1c0,8.8-7.2,16-16,16H52.8c-8.8,0-16-7.2-16-16V52.4
-			C36.7,43.5,43.9,36.3,52.8,36.3z"/>
-		<path class="st2" id="square_3" d="M121.2,104.2h27.1c8.8,0,16,7.2,16,16v27.1c0,8.8-7.2,16-16,16h-27.1c-8.8,0-16-7.2-16-16v-27.1
-			C105.2,111.4,112.3,104.2,121.2,104.2z"/>
-		<path class="st0" id="square_4" d="M52,105.5h27.1c8.8,0,16,7.2,16,16v27.1c0,8.8-7.2,16-16,16H52c-8.8,0-16-7.2-16-16v-27.1
-			C36,112.6,43.2,105.5,52,105.5z"/>
+		<path id="square_1" class="st0" d="M133.2,1.4h42c13.6,0,24.8,11.2,24.8,24.8v42c0,13.6-11.2,24.8-24.8,24.8h-42
+			c-13.6,0-24.8-11.2-24.8-24.8v-42C108.4,12.6,119.6,1.4,133.2,1.4z"/>
+		<path id="square_2" class="st1" d="M26.2,0h42c13.6,0,24.8,11.2,24.8,24.8v42c0,13.6-11.2,24.8-24.8,24.8h-42
+			c-13.6,0-24.8-11.2-24.8-24.8V25C1.3,11.2,12.4,0,26.2,0z"/>
+		<path id="square_3" class="st2" d="M132.3,105.3h42c13.6,0,24.8,11.2,24.8,24.8v42c0,13.6-11.2,24.8-24.8,24.8h-42
+			c-13.6,0-24.8-11.2-24.8-24.8v-42C107.5,116.4,118.5,105.3,132.3,105.3z"/>
+		<path id="square_4" class="st0" d="M25,107.3h42c13.6,0,24.8,11.2,24.8,24.8v42c0,13.6-11.2,24.8-24.8,24.8H25
+			c-13.6,0-24.8-11.2-24.8-24.8v-42C0.2,118.3,11.4,107.3,25,107.3z"/>
 	</g>
 </g>
 <g id="Cubes">

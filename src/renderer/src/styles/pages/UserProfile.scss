@@ -2,6 +2,11 @@
     padding: 50px;
     display: flex;
 
+    & button {
+        display: flex;
+        align-items: center;
+    }
+
     & .playerBanner {
         margin-top: 15px;
     }
