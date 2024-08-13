@@ -50,22 +50,21 @@ const UserProfile = () => {
           longestWinStreak: userData.stats?.longestWinStreak || 0
         },
         status: userData.status,
-        achievements: userData.achievements || []
+        achievements: userData.achievements || [],
+        honored: userData.honored || { timestamp: 0, quantity: 0 }
       }
       let stats = getPlayerStats(userInfo.stats)
       userInfo.stats = stats
       userInfo.id = userId
       setTargetUser(userInfo)
 
-      // Vérifie si l'utilisateur peut honorer un autre joueur
-      console.log(user.honored)
     }
   }
 
   useEffect(() => {
     GetUser()
     const currentTime = Date.now()
-    if (!userInfo.honored || currentTime - userInfo.honored >= 24 * 60 * 60 * 1000) {
+    if (!userInfo.honored.timestamp || currentTime - userInfo.honored.timestamp >= 24 * 60 * 60 * 1000) {
       setCanHonor(true)
     } else {
       setCanHonor(false)
@@ -74,30 +73,32 @@ const UserProfile = () => {
 
   const handleHonor = async () => {
     const currentTime = Date.now()
-
+  
     if (!canHonor) {
-      const nextAvailableTime = new Date(userInfo.honored + 24 * 60 * 60 * 1000)
+      const nextAvailableTime = new Date(userInfo.honored.timestamp + 24 * 60 * 60 * 1000)
       sendErrorMessage(
         `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`
       )
-
       return
     }
-
+  
     try {
       const userRef = doc(db, 'users', user.uid)
       const targetUserRef = doc(db, 'users', userId)
-
-      // Mettre à jour le timestamp dans honored
+  
+      // Mettre à jour le timestamp et incrémenter la quantité dans honored
       await updateDoc(userRef, {
-        honored: currentTime
+        honored: {
+          timestamp: currentTime,
+          quantity: increment(1)
+        }
       })
-
+  
       // Incrémenter le compteur honor de targetUser
       await updateDoc(targetUserRef, {
         honor: increment(1)
       })
-
+  
       playSuccess()
       toast.success(`Vous avez honoré ${targetUser.username} !`)
       await updateUserState(user)
@@ -106,6 +107,7 @@ const UserProfile = () => {
       console.error("Erreur lors de l'honoration:", error)
     }
   }
+  
 
   if (targetUser === null) return null
 

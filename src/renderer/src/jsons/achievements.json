@@ -84,5 +84,25 @@
       "profile": "honor",
       "value": 50
     }
+  },
+  {
+    "id": "HF_1honored",
+    "name": "Fair play",
+    "desc": "Honorez un autre joueur depuis son profil.",
+    "url": "./skins/icon_success_title.png",
+    "objective": {
+      "profile": "honored.quantity",
+      "value": 1
+    }
+  },
+  {
+    "id": "HF_50honored",
+    "name": "Prend mon respect",
+    "desc": "Honorez 50 fois.",
+    "url": "./skins/icon_success_title.png",
+    "objective": {
+      "profile": "honored.quantity",
+      "value": 50
+    }
   }
 ]

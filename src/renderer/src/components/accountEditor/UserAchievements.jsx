@@ -7,7 +7,6 @@ import { FaEye, FaEyeSlash, FaLock, FaLockOpen } from 'react-icons/fa'
 import ProgressBar from '@ramonak/react-progress-bar'
 import { useCheckAchievementValue } from '../controllers/AchievementsController'
 
-// Composant pour chaque skin
 function SkinItem({ skin }) {
   const { userInfo } = useContext(AuthContext)
   const { level, url, hex, name } = skin
@@ -47,8 +46,10 @@ export default function UserAchievements() {
   const skinsWithLevel = getSkinsWithLevel()
   const { userInfo } = useContext(AuthContext)
   const [achievementInfos, setAchievementInfos] = useState({
+    id: null,
     name: 'Bienvenue sur Babelfest',
-    desc: 'Terminez le tutoriel.'
+    desc: 'Terminez le tutoriel.',
+    objective: { value: 1 },
   })
   const [showUnlocked, setShowUnlocked] = useState(false)
   const [filteredSkinsWithLevel, setFilteredSkinsWithLevel] = useState([])
@@ -60,7 +61,7 @@ export default function UserAchievements() {
     } else {
       setFilteredSkinsWithLevel(skinsWithLevel.filter((skin) => userInfo.level < skin.level))
     }
-  }, [showUnlocked])
+  }, [showUnlocked, skinsWithLevel, userInfo.level])
 
   const calculateAchievementCompletion = () => {
     if (!userInfo.achievements || userInfo.achievements.length === 0) return 0
@@ -77,7 +78,9 @@ export default function UserAchievements() {
 
   const achievementCompletion = calculateAchievementCompletion()
   const levelCompletion = calculateLevelCompletion()
-  const achievementValue = checkAchievementValue(achievementInfos.id)
+  const achievementValue = achievementInfos.id
+    ? checkAchievementValue(achievementInfos.id)
+    : 0
 
   return (
     <div className="achievements-container">

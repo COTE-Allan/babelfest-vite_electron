@@ -129,7 +129,11 @@ export default function StatsDisplayer({ user, stats }) {
             </li>
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">{user.honor ?? 0}</span>
-              Honneurs
+              Honneurs reçus
+            </li>
+            <li className="statsDisplayer-category-list-item">
+              <span className="statsDisplayer-category-list-item-value">{user.honored.quantity ?? 0}</span>
+              Honneurs envoyés
             </li>
           </ul>
         </div>
