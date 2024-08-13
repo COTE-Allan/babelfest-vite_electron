@@ -116,21 +116,22 @@
   flex-wrap: wrap;
   overflow-y: auto;
   max-height: 100%;
-  padding: 20px;
+  padding: 20px 100px;
 
   &-item {
-    margin: 20px;
+
+    margin: 8px; // Réduction de la margin
     background-color: white;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    width: 135px; // Réduction de la width
     opacity: 0.5;
     transition:
       transform 150ms ease-in-out,
       opacity 50ms ease-in-out;
-    padding: 5px;
+    padding: 2px; // Réduction de la padding
 
     &:hover {
       cursor: pointer;
@@ -142,21 +143,26 @@
     }
 
     &-container {
+      border-radius: 13px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 4px;
       display: flex;
       flex-direction: column-reverse;
       align-items: center;
+      margin: 8px;
+      font-family: 'Kimberly Bl', sans-serif;
 
       & span {
-        font-size: 25px;
+        font-size: 16px; // Réduction de la font size
       }
     }
 
     &-cell {
-      width: 40px;
-      height: 40px;
+      width: 27px; // Réduction de la width
+      height: 27px; // Réduction de la height
       background-color: black;
-      border-radius: 5px;
-      margin: 5px;
+      border-radius: 3px; // Réduction du border-radius
+      margin: 2px; // Réduction de la margin
       box-sizing: border-box;
 
       &.gone {

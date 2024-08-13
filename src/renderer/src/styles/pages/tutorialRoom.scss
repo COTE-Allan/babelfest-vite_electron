@@ -17,6 +17,36 @@
         }
     }
 
+    strong {
+        font-weight: 800;
+
+        &.white {
+            color: white;
+        }
+
+        &.blue {
+            color: rgb(28, 162, 245);
+
+        }
+
+        &.red {
+            color: rgb(241, 34, 34);
+
+        }
+
+        &.green {
+            color: rgb(28, 170, 20);
+        }
+
+        &.gold {
+            color: goldenrod;
+        }
+
+        &.purple {
+            color: rgb(194, 38, 194);
+        }
+    }
+
     &-speaker {
         font-family: 'Kimberly Bl', sans-serif;
         display: flex;

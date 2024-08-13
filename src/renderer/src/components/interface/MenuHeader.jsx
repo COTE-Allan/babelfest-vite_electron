@@ -16,6 +16,7 @@ import Modal from '../items/ClassicModal'
 import Button from '../items/Button'
 import Clock from '../esthetics/Clock'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
+import { GiArena } from 'react-icons/gi'
 
 export default function MenuHeader() {
   const [musicPlayer, setMusicPlayer] = useState(false)
@@ -49,6 +50,21 @@ export default function MenuHeader() {
             <FaPlay size={35} />
             <span className="hidden-span">Jouer</span>
           </HudNavLink>
+          <HudNavLink to={'/library'}>
+            <IoLibrarySharp size={40} /> <span className="hidden-span">Catalogue</span>
+          </HudNavLink>
+          <HudNavLink to={'/effects'}>
+            <SiCodemagic size={40} />
+            <span className="hidden-span">Effets</span>
+          </HudNavLink>
+          <HudNavLink to={'/arenasList'}>
+            <GiArena size={40} />
+            <span className="hidden-span">Arènes</span>
+          </HudNavLink>
+          <HudNavLink to={'/leaderboards'}>
+            <MdLeaderboard size={40} />
+            <span className="hidden-span">Classements</span>
+          </HudNavLink>
           <a
             className="hudNavLink"
             href="https://blog.babelfest.fr"
@@ -58,17 +74,6 @@ export default function MenuHeader() {
             <MdArticle size={40} />
             <span className="hidden-span">Blog</span>
           </a>
-          <HudNavLink to={'/library'}>
-            <IoLibrarySharp size={40} /> <span className="hidden-span">Catalogue</span>
-          </HudNavLink>
-          <HudNavLink to={'/effects'}>
-            <SiCodemagic size={40} />
-            <span className="hidden-span">Effets</span>
-          </HudNavLink>
-          <HudNavLink to={'/leaderboards'}>
-            <MdLeaderboard size={40} />
-            <span className="hidden-span">Classements</span>
-          </HudNavLink>
           {matchmakingSearch && (
             <HudNavLink to={'/home'} className="special">
               <FaSearch size={40} />

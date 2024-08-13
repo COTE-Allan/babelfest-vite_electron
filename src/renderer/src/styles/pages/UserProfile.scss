@@ -11,6 +11,16 @@
         margin-top: 15px;
     }
 
+    &-content {
+        position: relative;
+    }
+
+    & .close {
+        position: absolute;
+        right: 10px;
+        z-index: 1;
+    }
+
     &-avatar {
         margin-right: 10px;
         width: calc(25% - 10px);

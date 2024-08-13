@@ -14,7 +14,7 @@ import PlayerBanner from '../interface/inGame/PlayerBanner'
 import ExperienceBar from '../interface/ExperienceBar'
 import UserStatsController from '../accountEditor/UserStatsController'
 import UserAchievements from '../accountEditor/UserAchievements'
-import { FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
+import { FaBookOpen, FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
 import HudNavLink from '../items/hudNavLink'
 
 const Account = () => {
@@ -82,6 +82,10 @@ const Account = () => {
           <HudNavLink onClick={() => handleSwitchPage(1)} selected={page === 1} permOpen>
             <FaUserAlt size={45} />
             <span className="hidden-span">Statistiques</span>
+          </HudNavLink>
+          <HudNavLink permOpen className={'disabled'}>
+            <FaBookOpen size={45} />
+            <span className="hidden-span">Historique</span>
           </HudNavLink>
           <HudNavLink onClick={() => handleSwitchPage(2)} selected={page === 2} permOpen>
             <FaTshirt size={45} />

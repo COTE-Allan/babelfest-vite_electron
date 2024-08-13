@@ -4,6 +4,8 @@ import '../../styles/accountEditor/achievements.scss'
 import achievements from '../../jsons/achievements.json'
 import { AuthContext } from '../../AuthContext'
 import { FaEye, FaEyeSlash, FaLock, FaLockOpen } from 'react-icons/fa'
+import ProgressBar from '@ramonak/react-progress-bar'
+import { useCheckAchievementValue } from '../controllers/AchievementsController'
 
 // Composant pour chaque skin
 function SkinItem({ skin }) {
@@ -50,6 +52,7 @@ export default function UserAchievements() {
   })
   const [showUnlocked, setShowUnlocked] = useState(false)
   const [filteredSkinsWithLevel, setFilteredSkinsWithLevel] = useState([])
+  const checkAchievementValue = useCheckAchievementValue()
 
   useEffect(() => {
     if (showUnlocked) {
@@ -74,6 +77,7 @@ export default function UserAchievements() {
 
   const achievementCompletion = calculateAchievementCompletion()
   const levelCompletion = calculateLevelCompletion()
+  const achievementValue = checkAchievementValue(achievementInfos.id)
 
   return (
     <div className="achievements-container">
@@ -81,16 +85,29 @@ export default function UserAchievements() {
       <div className="achievements-infos">
         <h3>{achievementInfos.name}</h3>
         <span>{achievementInfos.desc}</span>
+        <ProgressBar
+          transitionDuration="0s"
+          height="17px"
+          padding={2}
+          completed={achievementValue}
+          bgColor={userInfo.primaryColor}
+          labelColor="#fff"
+          maxCompleted={achievementInfos.objective ? achievementInfos.objective.value : 1}
+          className="progress"
+          customLabel={`${achievementValue}/${achievementInfos.objective ? achievementInfos.objective.value : 1}`}
+        />
       </div>
       <div className="achievements-list">
         {achievements.map((achievement) => (
           <div
             onMouseEnter={() => {
               setAchievementInfos({
+                id: achievement.id,
                 name: userInfo.achievements?.includes(achievement.id)
                   ? achievement.name
                   : achievement.name + ' (Non atteint)',
-                desc: achievement.desc
+                desc: achievement.desc,
+                objective: achievement.objective
               })
             }}
             className={`achievements-list-item ${

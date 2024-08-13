@@ -6,12 +6,10 @@ import { getAllCards } from '../others/toolBox'
 import Tilt from 'react-parallax-tilt'
 import Slider from 'rc-slider'
 import { getCardBasedOnNameAndTitle, getEffectInfo } from '../effects/basics'
-import Button from '../items/Button'
 import { useLocation } from 'react-router'
-import { IoMdClose } from 'react-icons/io'
 import HudNavLink from '../items/hudNavLink'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 export default function Library() {
   const [allCards, setAllCards] = useState(getAllCards())
@@ -410,8 +408,8 @@ export default function Library() {
             </Tilt>
           </div>
           <HudNavLink onClick={handleCloseModal} className="close">
-            <ImCross size={40} />
             <span className="hidden-span">Fermer</span>
+            <ImCross size={40} color="#e62e31" />
           </HudNavLink>
           <HudNavLink onClick={handlePreviousCard} className="previous">
             <FaArrowLeft size={45} />

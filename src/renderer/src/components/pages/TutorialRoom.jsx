@@ -39,7 +39,32 @@ const TutorialText = ({ children, onClickNext, clickable, image }) => {
       <p key={index}>
         {paragraph.split('\n').map((line, lineIndex) => (
           <React.Fragment key={lineIndex}>
-            {line}
+            {line.split(/(\*\*.*?\*\*)/g).map((part, i) => {
+              const match = part.match(/^\*\*(\d)(.*?)\*\*$/)
+              if (match) {
+                const [_, digit, content] = match
+                const className =
+                  digit === '1'
+                    ? 'red'
+                    : digit === '2'
+                      ? 'blue'
+                      : digit === '3'
+                        ? 'green'
+                        : digit === '0'
+                          ? 'white'
+                          : digit === '4'
+                            ? 'gold'
+                            : digit === '5'
+                              ? 'purple'
+                              : ''
+                return (
+                  <strong key={i} className={className}>
+                    {content}
+                  </strong>
+                )
+              }
+              return <React.Fragment key={i}>{part}</React.Fragment>
+            })}
             <br />
           </React.Fragment>
         ))}
@@ -113,8 +138,8 @@ export default function TutorialRoom() {
     {
       img: TutoNonchalent,
       text: `Bien alors...§
-      Chaque tour d’une partie de Babelfest est séparé en 4 phases, avant de commencer, chaque joueur pioche 8 cartes du paquet commun mais pour cette fois, on en piochera 4.§
-      Le but du jeu est de détruire toutes les cartes adverses ou de capturer la base adverse, la case colorée à l’opposé du terrain.`,
+      Chaque tour d’une partie de Babelfest est séparé en **04 phases**, avant de commencer, **0chaque joueur pioche 8 cartes du paquet commun** mais pour cette fois, on en piochera 4.§
+      Le but du jeu est de **0détruire toutes les cartes adverses** ou de **0capturer la base adverse**, la **4case colorée** à l’opposé du terrain.`,
       clickable: true,
       modal: true,
       zindex: ['arena'],
@@ -128,9 +153,9 @@ export default function TutorialRoom() {
     },
     {
       img: TutoHautain,
-      text: `La première phase d’un tour, c’est le placement. Tu as 4 énergies qui te servent à invoquer. Regarde tes cartes, le petit chiffre indique le coût d’invocation.§
-      Je commence par invoquer une première carte, Dai : Rockstar ! Cette carte coûte 2 énergies, il m’en reste donc 2.§
-      Vu que tu es un peu... débutant, laisse un pro comme moi t’expliquer : les chiffres que tu peux voir sur la carte sont, dans l’ordre : Attaque, Déplacement et Points de vie.`,
+      text: `La première phase d’un tour, c’est le **0placement**. Tu as **04 énergies** qui te servent à invoquer. Regarde tes cartes, le petit chiffre indique **0le coût d’invocation.**§
+      Je commence par invoquer une première carte, Dai : Rockstar ! **0Cette carte coûte 2 énergies, il m’en reste donc 2.**§
+      Vu que tu es un peu... débutant, laisse un pro comme moi t’expliquer : les chiffres que tu peux voir sur la carte sont, dans l’ordre : **1Attaque**, **3Déplacement** et **2Points de vie.**`,
       clickable: true,
       action: () => {
         setPattern(
@@ -141,7 +166,7 @@ export default function TutorialRoom() {
     },
     {
       img: TutoSournois,
-      text: `Je profite de mes énergies restantes pour invoquer une deuxième carte face verso, sur ma base cette fois-ci.§
+      text: `Je profite de mes énergies restantes pour invoquer une deuxième carte **0face verso**, sur ma base cette fois-ci.§
       Tu dois te dire que j’y vais trop fort avec toi... excuse-moi, c’est juste de la mémoire musculaire à force, tu sais.`,
       clickable: true,
       action: () => {
@@ -151,16 +176,16 @@ export default function TutorialRoom() {
     },
     {
       img: TutoNonchalent,
-      text: `Bien, mon tour est terminé, cette phase se termine quand je n'ai plus d'énergie ou que j'y mets fin manuellement, évidemment, tu ne sais pas ce que j'ai fait.§
-      C'est à toi d'invoquer, commence par choisir une carte de ta main. Personnellement, je jouerais la carte que j'ai marquée en bleu.`,
+      text: `Bien, mon tour est terminé, **0cette phase se termine quand je n'ai plus d'énergie ou que j'y mets fin manuellement**, évidemment, tu ne sais pas ce que j'ai fait.§
+      C'est à toi d'invoquer, **0commence par choisir une carte de ta main.** Personnellement, je jouerais la carte que j'ai marquée en **2bleu.**`,
       clickable: false,
       modal: true,
       zindex: ['cards']
     },
     {
       img: TutoHautain,
-      text: `Une fois ta carte choisie, place-la quelque part sur ta moitié de l'arène. Encore une fois, je la placerais sur cette case bleue, mais un débutant comme toi ne le fera sûrement pas.§
-      Après l'invocation, tes énergies seront dépensées. S'il t'en reste, tu pourras réinvoquer.`,
+      text: `Une fois ta carte choisie, place-la quelque part sur **0ta moitié de l'arène.** Encore une fois, je la placerais sur **2cette case bleue**, mais un débutant comme toi ne le fera sûrement pas.§
+      **0Après l'invocation, tes énergies seront dépensées. S'il t'en reste, tu pourras réinvoquer.**`,
       clickable: false,
       modal: true,
       zindex: ['cards', 'arena']
@@ -168,7 +193,7 @@ export default function TutorialRoom() {
     {
       img: TutoRire,
       text: `La Compteuse à trois cordes... c'est... je vois. Enfin je veux dire... JE LE SAVAIS AHAHAH !§
-      Hum, hum. Revenons au jeu, cette carte typique coûte une énergie, il t'en reste donc encore trois. Tu peux donc invoquer à nouveau, mais bon, t'es trop bête pour faire ça.`,
+      Hum, hum. Revenons au jeu, cette carte typique coûte une énergie, il t'en reste donc encore trois. **0Tu peux donc invoquer à nouveau**, mais bon, t'es trop bête pour faire ça.`,
       clickable: false
     },
     {
@@ -179,9 +204,9 @@ export default function TutorialRoom() {
     },
     {
       img: TutoHautain,
-      text: `Phoebe, cette carte a une très bonne mobilité. C'est... pas mal, pour un débutant.§
+      text: `Phoebe, cette carte a une très bonne **3mobilité**. C'est... pas mal, pour un débutant.§
       Bon je crois que ça suffit les invocations ! On va dire que tu as fini ton tour hein.§
-      Après avoir invoqué, on va jouer un tour de déplacement. Tu peux déplacer tes cartes en dépensant de l'énergie de déplacement. Comme pour l'invocation, tu as quatre énergies, une case coûte une énergie.
+      Après avoir invoqué, on va jouer un tour de **3déplacement**. Tu peux déplacer tes cartes en dépensant de **3l'énergie de déplacement**. Comme pour l'invocation, tu as 4 énergies, **0traverser une case coûte une énergie.**
       Regarde, je te montre.`,
       clickable: true,
       action: () => {
@@ -196,12 +221,14 @@ export default function TutorialRoom() {
         )
         setPhase(2)
         setTutorialStep(10)
-      }
+      },
+      modal: true,
+      zindex: ['menu']
     },
     {
       img: TutoRire,
       text: `Ahah ! Tu t'y attendais pas à celle-là, espèce de... Hum.§
-      Comme tu peux voir, j'ai déplacé ma carte verso de deux cases, cela m'a coûté deux énergies. En se déplaçant, la carte a été révélée. C'était moi ! Tuto !§
+      Comme tu peux voir, j'ai déplacé ma carte verso de deux cases, cela m'a coûté **3deux énergies**. **0En se déplaçant, la carte a été révélée.** C'était moi ! Tuto !§
       Il me reste encore deux énergies, mais je vais mettre fin manuellement à mon tour. À toi.`,
       clickable: true,
       action: () => {
@@ -211,8 +238,8 @@ export default function TutorialRoom() {
     },
     {
       img: TutoHautain,
-      text: `Tu devrais déplacer l'une de tes cartes. Chaque carte peut se déplacer une fois par tour, la distance possible que cette carte peut traverser est basée sur ses points de déplacement, le chiffre du milieu sur la carte.§
-      Par contre si tu déplaces CETTE carte, je suis mal. Heureusement que tu l'as pas vue.`,
+      text: `Tu devrais déplacer l'une de tes cartes. **0Chaque carte peut se déplacer une fois par tour,** la distance possible que cette carte peut traverser est basée sur **3ses points de déplacement**, le chiffre du milieu sur la carte.§
+      Par contre si tu déplaces **2CETTE** carte, je suis mal. Heureusement que tu l'as pas vue.`,
       clickable: false
     },
     {
@@ -225,7 +252,7 @@ export default function TutorialRoom() {
     {
       img: TutoPleure,
       text: `Non ! Espèce de sale... Bon, ok, ok.§
-      Tu as dépensé deux énergies pour ce déplacement, il t'en reste encore deux, mais encore une fois, on va mettre fin à ton tour, pas besoin de déplacer ta deuxième carte hein.`,
+      Tu as dépensé **32 énergies** pour ce déplacement, il t'en reste encore 2, mais encore une fois, on va mettre fin à ton tour, pas besoin de déplacer ta deuxième carte hein.`,
       clickable: true,
       action: () => {
         setPattern(
@@ -242,8 +269,8 @@ export default function TutorialRoom() {
     },
     {
       img: TutoNonchalent,
-      text: `Bon, la phase suivante, c'est l'attaque. Tu peux attaquer une fois avec chacune de tes cartes. Chaque carte peut attaquer les 4 cartes adjacentes.§
-      Vu qu'on vient de démarrer la phase d'attaque, l'effet de Tuto s'active ! Il renforce tous ses alliés adjacents d'un point d'attaque jusqu'à la fin du tour. Tuto c'est vraiment le meilleur.§
+      text: `Bon, la phase suivante, c'est **1l'attaque**. **0Tu peux attaquer une fois avec chacune de tes cartes**. Chaque carte peut attaquer **0les 4 cartes adjacentes.**§
+      Vu qu'on vient de démarrer **1la phase d'attaque**, **5l'effet** de Tuto s'active ! Il renforce tous ses alliés adjacents **1d'un point d'attaque** jusqu'à la fin du tour. Tuto c'est vraiment le meilleur.§
       Mon Dai aura donc 4 points d'attaque jusqu'à la fin du tour, pas de chance pour ta Compteuse à trois cordes.`,
       clickable: true,
       action: () => {
@@ -256,7 +283,7 @@ export default function TutorialRoom() {
     },
     {
       img: TutoRire,
-      text: `BAM ! Et voilà ! Ta compteuse a subi 4 points de dégâts, elle avait 4 points de vie, je l'ai détruite. Maintenant que j'ai attaqué, c'est à ton tour d'attaquer...§
+      text: `BAM ! Et voilà ! **1Ta compteuse a subi 4 points de dégâts**, elle avait **24 points de vie**, je l'ai détruite. Maintenant que j'ai attaqué, c'est à ton tour d'attaquer...§
       S'il te plaît, ne fais pas ça ! N'attaque pas ma carte Tuto avec ta Phoebe, je t'en prie !!!`,
       clickable: false
     },
@@ -268,9 +295,9 @@ export default function TutorialRoom() {
     {
       img: TutoStress,
       text: `Non non non !
-      T'es content maintenant ?! T'as attaqué donc c'est à mon tour d'attaquer de nouveau, mais Dai ne peut pas attaquer deux fois, je suis obligé de conclure mon tour...§
-      De même, tu n'as aucune carte pouvant attaquer, donc tu dois toi aussi mettre fin à ton tour.§
-      ...Passons à la dernière phase, la phase de troc.`,
+      T'es content maintenant ?! **0T'as attaqué donc c'est à mon tour d'attaquer de nouveau**, mais **0Dai ne peut pas attaquer deux fois**, je suis obligé de conclure mon tour...§
+      De même, **0tu n'as aucune carte pouvant attaquer**, donc tu dois toi aussi mettre fin à ton tour.§
+      ...Passons à la dernière phase, **4la phase de troc**.`,
       clickable: true,
       action: () => {
         setTurn(2)
@@ -279,18 +306,18 @@ export default function TutorialRoom() {
     },
     {
       img: TutoHautain,
-      text: `Tu vois ça ? C'est la boutique, elle te permet d'échanger une carte de ta main avec la liste présente pour optimiser tes stratégies.§
-      Un échange doit toujours avantager la boutique. Le différentiel d'échange, basé sur le coût d'invocation des cartes échangés, doit être supérieur ou égal à 0.§
-      Le différentiel augmente quand tu sélectionne une carte de ta main, il baisse quand tu en choisie une de la boutique.
+      text: `Tu vois ça ? C'est la boutique, **4elle te permet d'échanger une carte de ta main avec la liste présente pour optimiser tes stratégies.**§
+      **0Un échange doit toujours avantager la boutique.** Le **4différentiel d'échange**, basé sur le coût d'invocation des cartes échangés, **0doit être supérieur ou égal à 0.**§
+      Le différentiel **3augmente** quand tu sélectionne une carte de ta main, il **1baisse** quand tu en choisie une de la boutique.
       Vas-y, tente le coup. Je devrais échanger en premier, mais je vais garder ma carte.`,
       clickable: false,
       modal: true,
-      zindex: ['cards', 'shop']
+      zindex: ['cards', 'shop', 'menu']
     },
     {
       img: TutoNonchalent,
-      text: `Tu viens de terminer ta première manche de Babelfest. Maintenant la partie continue en répétant chaque phase : invocation, déplacement, attaque, troc.§
-      Le premier joueur qui capture la base adverse ou qui détruit les 8 cartes de l'adversaire gagne !`,
+      text: `Tu viens de terminer ta première manche de Babelfest. Maintenant **0la partie continue en répétant chaque phase** : **0invocation, **2déplacement**, **1attaque**, **4troc**.§
+      **0Le premier joueur qui capture la **4base** adverse ou qui détruit les 8 cartes de l'adversaire gagne !**`,
       clickable: true,
       action: () => {
         setPattern(
@@ -306,7 +333,7 @@ export default function TutorialRoom() {
     },
     {
       img: TutoHautain,
-      text: `Comme j'ai commencé en premier au tour précédent, c'est à toi de commencer chaque phase de ce tour.§
+      text: `Comme j'ai commencé en premier au tour précédent, **0c'est à toi de commencer chaque phase de ce tour.**§
       Vas-y, invoque ta dernière carte inutile !`,
       clickable: false
     },
@@ -728,7 +755,10 @@ export default function TutorialRoom() {
         </div>
         {detailCard && <Details detailCard={detailCard} />}
 
-        <div className="ig-menu bottom">
+        <div
+          className="ig-menu bottom"
+          style={{ zIndex: stepsConfig[tutorialStep - 1]?.zindex?.includes('menu') ? 11 : 0 }}
+        >
           {(phase === 1 || phase === 2) && (
             <div className="costCounter">
               <div className="costCounter-infos">

@@ -24,6 +24,7 @@ import UpdateNotifier from './UpdateNotifier'
 import { TutorialProvider } from './components/providers/TutorialProvider'
 import UserProfile from './components/pages/UserProfile'
 import Leaderboards from './components/pages/Leaderboards'
+import ArenasList from './components/pages/ArenasList'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -96,6 +97,14 @@ const App = () => {
             element={
               <Layout>
                 <UserProfile />
+              </Layout>
+            }
+          />
+          <Route
+            path="/arenasList"
+            element={
+              <Layout>
+                <ArenasList />
               </Layout>
             }
           />

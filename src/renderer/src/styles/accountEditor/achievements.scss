@@ -15,10 +15,16 @@
   }
 
   &-infos {
+
     & h3 {
       font-family: 'Kimberly Bl', sans-serif;
       margin: 0;
       font-size: 20px;
+    }
+
+    & .progress {
+      width: 300px;
+      margin: 10px 0;
     }
   }
 

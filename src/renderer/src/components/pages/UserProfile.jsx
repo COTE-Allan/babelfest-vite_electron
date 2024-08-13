@@ -14,6 +14,7 @@ import useSound from 'use-sound'
 import successSfx from '../../assets/sfx/info_notification.mp3'
 import Button from '../items/Button'
 import { IoMdArrowRoundBack } from 'react-icons/io'
+import { ImCross } from 'react-icons/im'
 
 const UserProfile = () => {
   const { user, userInfo, updateUserState, userSettings } = useContext(AuthContext)
@@ -77,7 +78,7 @@ const UserProfile = () => {
     if (!canHonor) {
       const nextAvailableTime = new Date(userInfo.honored + 24 * 60 * 60 * 1000)
       sendErrorMessage(
-        `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString()}.`
+        `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`
       )
 
       return
@@ -110,9 +111,6 @@ const UserProfile = () => {
 
   return (
     <div className="userProfile">
-      <Button onClick={() => navigate(-1)}>
-        <IoMdArrowRoundBack size={40} />
-      </Button>
       <div className="userProfile-profile">
         <div className="userProfile-profile-avatar">
           <ProfilePicture customUser={targetUser} size={200} border={targetUser.primaryColor} />
@@ -135,6 +133,10 @@ const UserProfile = () => {
       </div>
 
       <div className="userProfile-content">
+        <HudNavLink to={-1} className="close">
+          <span className="hidden-span">Page précédente</span>
+          <ImCross size={40} color="#e62e31" />
+        </HudNavLink>
         <StatsDisplayer user={targetUser} stats={targetUser.stats} />
       </div>
     </div>

@@ -42,7 +42,9 @@ const Home = () => {
   const [lastBlogPostDate, setLastBlogPostDate] = useState(null)
   const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
     useContext(MatchmakingContext)
-  const { userInfo } = useContext(AuthContext)
+  const { userInfo, userSettings } = useContext(AuthContext)
+  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
+  const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
 
   let isTutorialFinished = userInfo.achievements.includes('HF_tutorial')
 
@@ -183,7 +185,9 @@ const Home = () => {
                   <NavLink
                     key={user.id}
                     className="grid-leaderboard-user"
-                    to={`/userProfile/${user.id}`}
+                    to={user.id !== userInfo.id ? `/userProfile/${user.id}` : '/home'}
+                    onMouseEnter={hover}
+                    onClick={select}
                   >
                     <span className={`rank ${getRankClass(index)}`}>{index + 1}</span>
                     <ProfilePicture customUser={user} size={60} />

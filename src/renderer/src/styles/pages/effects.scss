@@ -1,9 +1,44 @@
 @import '../variables.scss';
 
 .effects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: calc(85vh - 40px);
   overflow-y: scroll;
   padding: 20px;
+  font-family: 'Kimberly Bl', sans-serif;
+
+  &-categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 70%;
+  }
+
+  & h1 {
+    margin-bottom: 10px;
+  }
+
+  & .hudNavLink {
+    position: absolute;
+    z-index: 1;
+  }
+
+  & .close {
+    top: 50px;
+    right: 20px;
+  }
+
+  & .previous {
+    left: 20px;
+  }
+
+  & .next {
+    right: 20px;
+  }
 
   & h2 {
     display: inline-flex;
@@ -45,17 +80,42 @@
   }
 
   &-category {
+    padding: 20px 50px;
+    margin: 10px;
+    justify-content: center;
     border-radius: 10px;
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
+
+    & img {
+      margin-right: 10px;
+      transition: mix-blend-mode 200ms ease-in-out;
+    }
+
+    &:hover {
+      color: black;
+      background-color: white;
+      cursor: pointer;
+
+      & img {
+        mix-blend-mode: difference;
+      }
+    }
   }
 
   &-list {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0;
     padding: 5px;
     list-style-type: none;
     overflow-y: hidden;
     transition: height 0.2s ease-in-out;
+    width: 80%;
 
     &-item {
       margin: 10px;

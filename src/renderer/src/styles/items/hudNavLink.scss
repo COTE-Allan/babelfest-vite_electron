@@ -20,7 +20,8 @@
   }
 
 
-  &.open {
+  &.open,
+  &.active {
 
     & .hidden-span {
       max-width: 200px;
@@ -29,7 +30,8 @@
   }
 
   &:hover,
-  &.selected {
+  &.selected,
+  &.active {
     background-color: white;
     color: black;
 
@@ -46,5 +48,6 @@
 
   &.special {
     color: rgb(193, 135, 27);
+    z-index: 10;
   }
 }

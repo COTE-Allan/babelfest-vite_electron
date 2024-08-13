@@ -9,13 +9,19 @@ import '../../styles/pages/leaderboards.scss'
 import { AuthContext } from '../../AuthContext'
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 import LoadingLogo from '../items/LoadingLogo'
+import useSound from 'use-sound'
+import hoverSfx from '../../assets/sfx/button_hover.wav'
+import selectSfx from '../../assets/sfx/menu_select.wav'
 
 const Leaderboards = () => {
-  const { user, userInfo } = useContext(AuthContext)
+  const { user, userInfo, userSettings } = useContext(AuthContext)
   const [MMRUsers, setMMRUsers] = useState(null)
   const [LevelUsers, setLevelUsers] = useState(null)
   const [myRank, setMyRank] = useState(0)
   const myId = user.uid
+
+  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
+  const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
 
   useEffect(() => {
     const fetchTopUsers = async () => {
@@ -27,7 +33,7 @@ const Leaderboards = () => {
       setMyRank(myRank)
     }
     fetchTopUsers()
-  }, [])
+  }, [user.uid])
 
   return (
     <div className="leaderboard">
@@ -38,8 +44,16 @@ const Leaderboards = () => {
             <h1>Matchmaking Rank (MMR)</h1>
             <div className="leaderboard-list">
               {MMRUsers.map((user) => (
-                <div className="leaderboard-list-item">
-                  <span className={`rank ${getRankClass(user.rank)} leaderboard-rank `}>
+                <div
+                  key={user.id}
+                  className="leaderboard-list-item"
+                  onMouseEnter={hover}
+                  onClick={() => {
+                    select()
+                    // Add any other click handling logic here
+                  }}
+                >
+                  <span className={`rank ${getRankClass(user.rank)} leaderboard-rank`}>
                     {user.rank}
                   </span>
                   <LeaderboardPlayerBanner user={user} accessProfile={user.id !== myId} />
@@ -48,7 +62,7 @@ const Leaderboards = () => {
               ))}
             </div>
             <div className="leaderboard-self">
-              <span className={`rank ${getRankClass(myRank.mmrRank)} leaderboard-rank `}>
+              <span className={`rank ${getRankClass(myRank.mmrRank)} leaderboard-rank`}>
                 {myRank.mmrRank}
               </span>
               <LeaderboardPlayerBanner user={userInfo} />
@@ -65,8 +79,16 @@ const Leaderboards = () => {
             <h1>Niveau de joueur</h1>
             <div className="leaderboard-list">
               {LevelUsers.map((user) => (
-                <div className="leaderboard-list-item">
-                  <span className={`rank ${getRankClass(user.rank)} leaderboard-rank `}>
+                <div
+                  key={user.id}
+                  className="leaderboard-list-item"
+                  onMouseEnter={hover}
+                  onClick={() => {
+                    select()
+                    // Add any other click handling logic here
+                  }}
+                >
+                  <span className={`rank ${getRankClass(user.rank)} leaderboard-rank`}>
                     {user.rank}
                   </span>
                   <LeaderboardPlayerBanner user={user} accessProfile={user.id !== myId} />
@@ -75,7 +97,7 @@ const Leaderboards = () => {
               ))}
             </div>
             <div className="leaderboard-self">
-              <span className={`rank ${getRankClass(myRank.levelXpRank)} leaderboard-rank `}>
+              <span className={`rank ${getRankClass(myRank.levelXpRank)} leaderboard-rank`}>
                 {myRank.levelXpRank}
               </span>
               <LeaderboardPlayerBanner user={userInfo} />

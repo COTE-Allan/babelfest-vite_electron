@@ -10,13 +10,17 @@ export default function HudNavLink(props) {
   const { userSettings } = useContext(AuthContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
+
   return (
     <NavLink
-      to={props.to}
+      to={props.to || '#'}
       onMouseEnter={hover}
-      className={`hudNavLink ${props.className} ${props.selected ? 'selected' : ''} ${props.permOpen ? 'open' : ''}`}
+      className={({ isActive }) =>
+        `hudNavLink ${props.className} ${props.selected ? 'selected' : ''} ${props.permOpen ? 'open' : ''} ${
+          !props.to || props.to === -1 || !isActive ? '' : 'active'
+        }`
+      }
       onClick={() => {
-        console.log(userSettings.sfxVolume)
         select()
         if (props.onClick) {
           props.onClick()

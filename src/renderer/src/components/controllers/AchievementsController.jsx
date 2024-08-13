@@ -39,4 +39,28 @@ export const useCheckForAchievements = () => {
   return checkForAchievements
 }
 
+export const useCheckAchievementValue = () => {
+  const { userInfo } = useContext(AuthContext)
+
+  const checkAchievementValue = (achievementId) => {
+    const achievement = achievements.find((ach) => ach.id === achievementId)
+    if (!achievement || !achievement.objective) {
+      return userInfo.achievements.includes(achievementId) ? 1 : 0
+    }
+
+    const playerStats = getPlayerStats(userInfo.stats)
+    const objective = achievement.objective
+
+    if (objective.stat && playerStats[objective.stat] !== undefined) {
+      return playerStats[objective.stat]
+    } else if (objective.profile && userInfo[objective.profile] !== undefined) {
+      return userInfo[objective.profile]
+    }
+
+    return userInfo.achievements.includes(achievementId) ? 1 : 0
+  }
+
+  return checkAchievementValue
+}
+
 export default useCheckForAchievements
