@@ -77,10 +77,12 @@ const Lobby = () => {
           disconnected: arrayRemove(user.uid)
         })
           .then(() => {
-            // TODO timeout que en QP
-            setTimeout(() => {
-              navigate(`/game/${lobbyData.gameRef}`)
-            }, 4000);
+            setTimeout(
+              () => {
+                navigate(`/game/${lobbyData.gameRef}`)
+              },
+              lobbyData.gamemode === 'custom' ? 0 : 4000
+            )
           })
           .catch((error) => {
             console.error('Erreur lors de la mise à jour du document de jeu: ', error)

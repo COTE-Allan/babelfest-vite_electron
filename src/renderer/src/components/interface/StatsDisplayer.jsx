@@ -3,6 +3,7 @@ import '../../styles/interface/statsDisplayer.scss'
 import { getPlayerRank } from '../others/toolBox'
 import ProfilePicture from '../esthetics/profilePicture'
 import achievements from '../../jsons/achievements.json'
+import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 
 export default function StatsDisplayer({ user, stats }) {
   const [playerRank, setPlayerRank] = useState(0)
@@ -18,21 +19,7 @@ export default function StatsDisplayer({ user, stats }) {
   }, [])
   return (
     <div className="statsDisplayer">
-      <div className="statsDisplayer-user">
-        <img src={user.banner} alt="bannière du joueur" className="statsDisplayer-banner" />
-        <ProfilePicture
-          size={75}
-          customUser={{
-            profilePic: user.profilePic,
-            profileBorder: user.profileBorder
-          }}
-          border={user.primaryColor}
-        />
-        <div className="statsDisplayer-user-content">
-          <h1>{user.username}</h1>
-          <h2>{user.title === 'level' ? `Niveau ${user.level}` : user.title}</h2>
-        </div>
-      </div>
+      <LeaderboardPlayerBanner user={user} />
 
       <div className="statsDisplayer-content">
         <div className="statsDisplayer-category">

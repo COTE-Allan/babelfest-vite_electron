@@ -8,6 +8,10 @@ import Slider from 'rc-slider'
 import { getCardBasedOnNameAndTitle, getEffectInfo } from '../effects/basics'
 import Button from '../items/Button'
 import { useLocation } from 'react-router'
+import { IoMdClose } from 'react-icons/io'
+import HudNavLink from '../items/hudNavLink'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { ImCross } from 'react-icons/im'
 
 export default function Library() {
   const [allCards, setAllCards] = useState(getAllCards())
@@ -405,11 +409,18 @@ export default function Library() {
               </div>
             </Tilt>
           </div>
-          <div className="navigation-buttons">
-            <Button onClick={handlePreviousCard}>Carte précédente</Button>
-            <Button onClick={handleCloseModal}>Retour au catalogue</Button>
-            <Button onClick={handleNextCard}>Carte suivante</Button>
-          </div>
+          <HudNavLink onClick={handleCloseModal} className="close">
+            <ImCross size={40} />
+            <span className="hidden-span">Fermer</span>
+          </HudNavLink>
+          <HudNavLink onClick={handlePreviousCard} className="previous">
+            <FaArrowLeft size={45} />
+            <span className="hidden-span">Précedente</span>
+          </HudNavLink>
+          <HudNavLink onClick={handleNextCard} className="next">
+            <span className="hidden-span">Suivante</span>
+            <FaArrowRight size={45} />
+          </HudNavLink>
         </Modal>
       )}
     </div>

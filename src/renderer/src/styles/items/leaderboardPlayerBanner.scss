@@ -1,0 +1,63 @@
+.leaderboardPlayerBanner {
+
+
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+
+
+
+
+    &-banner {
+        position: absolute;
+        z-index: -1;
+        left: 7px;
+        width: calc(100% - 7px);
+        max-width: 400px;
+        height: 75px;
+        object-fit: cover;
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+        opacity: 0.7;
+        transition: opacity 150ms ease-in-out;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+    }
+
+    &:hover &-banner {
+        opacity: 1;
+    }
+
+    & h1,
+    & h2,
+    h3 {
+        font-family: 'Kimberly Bl', sans-serif;
+        margin: 0;
+    }
+
+    & h1 {
+        font-size: 30px;
+    }
+
+    & h2 {
+        font-size: 15px;
+    }
+
+
+    & h1,
+    & h2 {
+        text-shadow:
+            2px 0 #000000d5,
+            -2px 0 #000000d5,
+            0 2px #000000d5,
+            0 -2px #000000d5,
+            1px 1px #000000d5,
+            -1px -1px #000000d5,
+            1px -1px #000000d5,
+            -1px 1px #000000d5;
+    }
+
+}

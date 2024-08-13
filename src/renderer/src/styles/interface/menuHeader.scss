@@ -88,24 +88,16 @@
   }
 
   &-musicBox {
-    padding: 5px 20px;
+    padding: 5px 0 15px 15px;
     position: absolute;
-    right: 0;
-    bottom: -16vh;
+    left: 50%;
+    top: 0px;
     z-index: 1;
-    border-radius: 15px 0 0 15px;
     transition: transform 200ms ease-in-out;
-    transform: translateX(100%);
-    background-color: rgba(0, 0, 0, 0.8);
-    @include greyBorders();
-    border-right: none;
-
-    &:hover {
-      border-right: none;
-    }
+    transform: translateX(-50%) translateY(-100px);
 
     &.active {
-      transform: translateX(0);
+      transform: translateX(-50%);
     }
   }
 }
