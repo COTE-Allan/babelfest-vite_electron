@@ -82,7 +82,7 @@ const Lobby = () => {
               () => {
                 navigate(`/game/${lobbyData.gameRef}`)
               },
-              lobbyData.gamemode === 'custom' ? 0 : 4000
+              lobbyData.gamemode === 'custom' ? 100 : 4000
             )
           })
           .catch((error) => {

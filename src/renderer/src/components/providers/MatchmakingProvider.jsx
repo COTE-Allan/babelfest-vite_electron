@@ -100,7 +100,8 @@ export const MatchmakingProvider = ({ children }) => {
           collection(db, 'matchmaking'),
           where('mmr', '>=', lowerMMRBound),
           where('mmr', '<=', upperMMRBound),
-          where('mode', '==', 'quick')
+          where('mode', '==', 'quick'),
+          where('verName', '==', player.verName) // Filter by verName
         )
       } else if (player.mode === 'ranked') {
         playersQuery = query(
@@ -109,7 +110,8 @@ export const MatchmakingProvider = ({ children }) => {
           where('mmr', '<=', upperMMRBound),
           where('rank', '>=', lowerRankBound),
           where('rank', '<=', upperRankBound),
-          where('mode', '==', 'ranked')
+          where('mode', '==', 'ranked'),
+          where('verName', '==', player.verName) // Filter by verName
         )
       }
 
@@ -128,7 +130,7 @@ export const MatchmakingProvider = ({ children }) => {
         if (player.mode === 'ranked') {
           rankRange += 2
         }
-        await new Promise((resolve) => setTimeout(resolve, 10000)) // Attendre 10 secondes
+        await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait for 10 seconds
       }
     }
   }
@@ -139,7 +141,8 @@ export const MatchmakingProvider = ({ children }) => {
       name: userInfo.username,
       mmr: userInfo.stats.mmr,
       rank: 1,
-      mode: mode
+      mode: mode,
+      verName: verName // Include verName in the player object
     }
     setCurrentUser(player)
     setMatchmakingSearch(mode)

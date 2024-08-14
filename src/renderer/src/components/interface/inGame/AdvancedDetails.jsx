@@ -29,7 +29,6 @@ export function AdvancedDetails({ card }) {
   }, [linkedCard])
 
   useEffect(() => {
-    console.log(advancedDetailCard)
     setDetailCard(advancedDetailCard)
   }, [advancedDetailCard])
 
@@ -80,8 +79,6 @@ export function AdvancedDetails({ card }) {
           </ul>
         </div>
       )}
-
-      <img className="card-visual" src={detailCard.url} alt={`Visuel de la carte sélectionnée.`} />
 
       {detailCard.effects && (
         <div className="details-card-effectsList">
@@ -187,6 +184,8 @@ export function AdvancedDetails({ card }) {
           )}
         </div>
       )}
+
+      <img className="card-visual" src={detailCard.url} alt={`Visuel de la carte sélectionnée.`} />
     </div>
   )
 }

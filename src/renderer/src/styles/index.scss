@@ -333,8 +333,23 @@ button.alert {
   box-shadow: rgb(226, 167, 5) 0 0 20px;
   background-color: rgba(175, 137, 32, 0.5);
 
+  animation: alert_animation 2s ease-in-out infinite both;
+
   &:hover {
     color: white;
+  }
+}
+
+@keyframes alert_animation {
+
+  0%,
+  100% {
+    box-shadow: rgba(226, 167, 5, 0.6) 0 0 20px;
+  }
+
+  50% {
+    box-shadow: rgb(226, 167, 5) 0 0 40px;
+
   }
 }
 

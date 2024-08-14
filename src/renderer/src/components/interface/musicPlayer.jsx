@@ -29,7 +29,6 @@ export default function MusicPlayer(props) {
   )
   const [isPlaying, setIsPlaying] = useState(userSettings.musicOnLaunch)
 
-
   useEffect(() => {
     setVolume(userSettings.musicVolume)
   }, [userSettings.musicVolume])
@@ -85,7 +84,7 @@ export default function MusicPlayer(props) {
 
   return (
     <div className={`musicPlayer`}>
-      <div id="particles"></div>
+      {props.noParticle ? <></> : <div id="particles"></div>}
       <div className={`musicPlayer-infos ${isPlaying && 'active'}`}>
         {isPlaying ? (
           <span>Vous écoutez : {playlist[currentIndex].name}</span>

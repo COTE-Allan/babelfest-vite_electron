@@ -32,41 +32,79 @@ export async function drawRandomCards(deck, amount) {
 }
 
 // Pioche des cartes aléatoires en fonction de leur rareté
-export async function drawCardsByRarity(deck, amount) {
-  const rarityProbabilities = [
-    { rarity: 1, probability: 50 },
-    { rarity: 2, probability: 30 },
-    { rarity: 3, probability: 15 },
-    { rarity: 4, probability: 5 }
-  ]
-
-  // Convert probabilities to cumulative probabilities
-  let cumulativeProbability = 0
-  const cumulativeProbabilities = rarityProbabilities.map(({ rarity, probability }) => {
-    cumulativeProbability += probability
-    return { rarity, cumulativeProbability }
-  })
-
-  const drawnCards = []
-  for (let i = 0; i < amount; i++) {
-    const random = Math.random() * 100
-    const selectedRarity = cumulativeProbabilities.find(
-      ({ cumulativeProbability }) => random <= cumulativeProbability
-    ).rarity
-
-    const cardsOfSelectedRarity = deck.filter((card) => card.rarity === selectedRarity)
-    if (cardsOfSelectedRarity.length === 0) continue // In case no card of the selected rarity is found
-
-    const randomIndex = Math.floor(Math.random() * cardsOfSelectedRarity.length)
-    const drawnCard = cardsOfSelectedRarity[randomIndex]
-    drawnCards.push(drawnCard)
-
-    // Remove the drawn card from the deck
-    const cardIndexInDeck = deck.indexOf(drawnCard)
-    deck.splice(cardIndexInDeck, 1)
+export async function drawHandWithRarityConstraint(deck, cardAmount) {
+  if (deck.length < cardAmount) {
+    console.error('Not enough cards in the deck to draw the required hand.')
+    return [] // Retourne un tableau vide ou tu peux lancer une erreur si nécessaire
   }
 
-  return drawnCards
+  let hand
+  let totalRarity
+  const deckCopy = [...deck] // Créer une copie du deck pour préserver l'original
+
+  do {
+    // Réinitialise la main et le total de la rareté
+    hand = []
+    totalRarity = 0
+
+    // On tire cardAmount cartes aléatoires
+    for (let i = 0; i < cardAmount; i++) {
+      const random = Math.floor(Math.random() * deckCopy.length)
+      const card = deckCopy[random]
+
+      hand.push(card)
+      totalRarity += card.rarity
+
+      // Retirer la carte du deck
+      deckCopy.splice(random, 1)
+    }
+
+    // Si la main ne satisfait pas la contrainte, on remet les cartes dans le deck
+    if (totalRarity < 13 || totalRarity > 15) {
+      deckCopy.push(...hand)
+    }
+  } while (totalRarity < 13 || totalRarity > 15)
+
+  // Retirer les cartes tirées du deck original
+  for (const card of hand) {
+    const index = deck.indexOf(card)
+    if (index > -1) {
+      deck.splice(index, 1)
+    }
+  }
+
+  return hand
+}
+
+export async function drawHandWithAdjustedRarity(deck, cardAmount) {
+  const hand = []
+  let totalRarity = 0
+
+  const rarityWeights = {
+    1: 4, // Plus de chance de tirer des cartes de rareté 1
+    2: 4, // Plus de chance de tirer des cartes de rareté 2
+    3: 1, // Moins de chance de tirer des cartes de rareté 3
+    4: 1 // Moins de chance de tirer des cartes de rareté 4
+  }
+
+  const weightedDeck = deck.flatMap((card) => Array(rarityWeights[card.rarity]).fill(card))
+
+  while (hand.length < cardAmount) {
+    const randomIndex = Math.floor(Math.random() * weightedDeck.length)
+    const card = weightedDeck[randomIndex]
+
+    hand.push(card)
+    totalRarity += card.rarity
+
+    // Retirer la carte du deck et de weightedDeck
+    const cardIndex = deck.indexOf(card)
+    if (cardIndex !== -1) {
+      deck.splice(cardIndex, 1)
+      weightedDeck.splice(randomIndex, 1)
+    }
+  }
+
+  return hand
 }
 
 // Piocher une carte et la retirer du deck

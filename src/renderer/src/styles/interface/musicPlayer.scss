@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 0;
+  margin: 10px;
 
   &-container {
     padding: 20px;
@@ -26,9 +26,9 @@
   &-infos {
     overflow: hidden;
     white-space: nowrap;
-    width: 300px;
+    width: 200px;
+    font-size: 13px;
     display: flex;
-    margin-bottom: 10px;
     justify-content: center;
     font-family: 'Kimberly Bl', sans-serif;
 
@@ -57,8 +57,8 @@
       border: none;
       margin: 2px;
       padding: 0;
-      height: 50px;
-      width: 50px;
+      height: 45px;
+      width: 45px;
 
       &:hover {
         background-color: $grey;

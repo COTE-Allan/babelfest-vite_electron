@@ -3,8 +3,12 @@ import { db } from '../../Firebase'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
 import { useContext } from 'react'
-import { getAllCards, getRandomFromArray } from '../others/toolBox'
-import { drawRandomCards } from '../effects/editCards'
+import { getAllCards } from '../others/toolBox'
+import {
+  drawHandWithAdjustedRarity,
+  drawHandWithRarityConstraint,
+  drawRandomCards
+} from '../effects/editCards'
 import { HeadOrTails } from '../effects/basics'
 
 // Créer un lobby et le rejoindre
@@ -256,6 +260,30 @@ async function DrawCards(room, cardAmount) {
   })
 }
 
+async function DrawCardsWithRarityMax(room, cardAmount) {
+  const deck = await getDeck(room)
+
+  if (!deck || deck.length === 0) {
+    throw new Error('Deck is undefined or empty')
+  }
+
+  // Draw 9 random cards for the shop
+  const shop = await drawRandomCards(deck, 9)
+
+  // Draw hands for both players with the rarity constraint
+  const hand1 = await drawHandWithRarityConstraint(deck, cardAmount)
+  const hand2 = await drawHandWithRarityConstraint(deck, cardAmount)
+  // const hand1 = await drawHandWithAdjustedRarity(deck, cardAmount)
+  // const hand2 = await drawHandWithAdjustedRarity(deck, cardAmount)
+
+  // Update the game document in the database
+  await updateDoc(doc(db, 'games', room), {
+    handJ1: hand1,
+    handJ2: hand2,
+    deck,
+    shop
+  })
+}
 export async function getDeck(room) {
   const docRef = doc(db, 'games', room)
   const docSnap = await getDoc(docRef)
@@ -270,7 +298,8 @@ export async function PopulateDeck(room, cardsPerHand) {
   await updateDoc(doc(db, 'games', room), {
     deck: cardsFiltered
   })
-  await DrawCards(room, cardsPerHand)
+  // await DrawCards(room, cardsPerHand)
+  await DrawCardsWithRarityMax(room, cardsPerHand)
 }
 
 async function DefineDefaultOrder(room) {

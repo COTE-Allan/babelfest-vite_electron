@@ -75,7 +75,7 @@ export default function Winner() {
 
   const handleExpAndStats = async () => {
     let xpObtained = 0
-    let gameWon = winner === playerID
+    let gameWon = winner === playerSelf.id
 
     if (turn === 1) {
       xpObtained = 10
@@ -89,41 +89,58 @@ export default function Winner() {
     let newPlayerExp = addExpToPlayer(userInfo.level, userInfo.xp, xpObtained)
 
     // Prepare to update stats
-    const gameMode = gameData.gamemode // Get the current game mode
-    let gamesPlayedUpdate = {} // Object to hold the updated games played counters
+    const gameMode = gameData.gamemode
+    let gamesPlayedUpdate = {}
     gamesPlayedUpdate[`stats.gamesPlayed.${gameMode}`] =
-      (userInfo.stats?.gamesPlayed?.[gameMode] || 0) + 1 // Increment the specific game mode counter
+      (userInfo.stats?.gamesPlayed?.[gameMode] || 0) + 1
 
     let newVictories = gameWon
       ? (userInfo.stats?.victories || 0) + 1
       : userInfo.stats?.victories || 0
 
     // Check MMR value
-    let currentMMR = 500 // Default MMR
-    if (userInfo.stats?.mmr !== 'NaN' && userInfo.stats?.mmr !== undefined) {
-      currentMMR = userInfo.stats.mmr
+    let currentMMR = 500
+    if (playerSelf.stats?.mmr !== 'NaN' && playerSelf.stats?.mmr !== undefined) {
+      currentMMR = playerSelf.stats.mmr
     }
+
+    // Get opponent's MMR
+    const opponentMMR = playerRival.stats.mmr
+
+    // Calculate MMR difference
+    const mmrDifference = opponentMMR - currentMMR
+    console.log(opponentMMR, currentMMR, mmrDifference)
 
     // Handle win streak and MMR only for non-custom game modes
     let currentStreak = userInfo.stats?.winStreak || 0
     let longestStreak = userInfo.stats?.longestWinStreak || 0
-    let mmrChangeValue = 0 // Base MMR change
+    let mmrChangeValue = 0
     let newMMR = currentMMR
 
     if (gameMode !== 'custom') {
-      mmrChangeValue = 15
+      const baseMMRChange = 15
+      const maxMMRChange = 100
+      const minMMRChange = 15
+
+      // Factor for scaling the MMR change based on the difference in MMR
+      const scalingFactor = Math.abs(mmrDifference) / 50
+
       if (gameWon) {
-        currentStreak += 1
-        mmrChangeValue += currentStreak * 2
-        if (mmrChangeValue > 30) {
-          mmrChangeValue = 30
-        }
-        if (currentStreak > longestStreak) {
-          longestStreak = currentStreak
+        if (mmrDifference > 0) {
+          // Won against a higher-rated player
+          mmrChangeValue = Math.min(baseMMRChange + scalingFactor * 10, maxMMRChange)
+        } else {
+          // Won against a lower-rated player
+          mmrChangeValue = baseMMRChange + scalingFactor * 10
         }
       } else {
-        currentStreak = 0 // Reset win streak on loss
-        mmrChangeValue = -15 // Decrease MMR
+        if (mmrDifference > 0) {
+          // Lost to a higher-rated player
+          mmrChangeValue = -Math.max(minMMRChange, baseMMRChange + scalingFactor * 5)
+        } else {
+          // Lost to a lower-rated player
+          mmrChangeValue = -Math.min(baseMMRChange + scalingFactor * 10, maxMMRChange)
+        }
       }
 
       newMMR = Math.max(0, currentMMR + mmrChangeValue) // Ensure MMR does not go below 0
@@ -141,6 +158,43 @@ export default function Winner() {
       ...gamesPlayedUpdate,
       'stats.victories': newVictories
     })
+
+    // Créer l'objet résumé du match
+    const matchSummary = {
+      player: {
+        id: playerSelf.id,
+        username: playerSelf.username,
+        primaryColor: playerSelf.primaryColor,
+        profilePic: playerSelf.profilePic,
+        profileBorder: playerSelf.profileBorder,
+        title: playerSelf.title,
+        level: playerSelf.level,
+        xpGained: xpObtained,
+        previousMMR: currentMMR,
+        newMMR: newMMR,
+        gameWon: gameWon
+      },
+      opponent: {
+        id: playerRival.id,
+        username: playerRival.username,
+        primaryColor: playerRival.primaryColor,
+        profilePic: playerRival.profilePic,
+        profileBorder: playerRival.profileBorder,
+        title: playerRival.title,
+        level: playerRival.level,
+        previousMMR: playerRival.stats.mmr,
+        mmrDifference: mmrDifference
+      },
+      gameDetails: {
+        mode: gameData.gamemode,
+        turnCount: turn,
+        timestamp: new Date().toISOString(),
+        result: gameWon ? 'victory' : 'defeat'
+      }
+    }
+
+    // Log l'objet résumé du match
+    console.log('Match Summary:', matchSummary)
 
     setTimeout(async () => {
       await updateUserState(user)

@@ -81,7 +81,7 @@ export default function InGameMenus() {
                 EndTurn(true)
               }
             }}
-            className={`${!isExchangeValid ? 'disabled' : ''}`}
+            className={`${!isExchangeValid ? 'disabled' : 'alert'}`}
           >
             {selectedShopCards.length !== 0 && selectedCards.length !== 0 && isExchangeValid ? (
               <>
@@ -108,7 +108,7 @@ export default function InGameMenus() {
                   setTradeButton(false)
                 }
               }}
-              className={`${!isTradeValid ? 'disabled' : ''}`}
+              className={`${!isTradeValid ? 'disabled' : 'alert'}`}
             >
               <span>{isTradeValid ? "Valider l'échange" : `Échanger ${phaseRules[0]} cartes`}</span>
               <GiConfirmed size={45} />

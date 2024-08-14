@@ -87,16 +87,13 @@ export default function MenuHeader() {
       </div>
       <div className="menuHeader-box">
         <nav className="menuHeader-nav">
+          <MusicPlayer role={'menu'} noParticle />
           {user && (
             <HudNavLink className={'disabled'}>
               <span className="hidden-span">Amis</span>
               <FaUserFriends size={40} />
             </HudNavLink>
           )}
-          <HudNavLink onClick={() => setMusicPlayer(!musicPlayer)}>
-            <span className="hidden-span">Musique</span>
-            <MdMusicNote size={40} />
-          </HudNavLink>
           <HudNavLink to={'/settings'}>
             <span className="hidden-span"> Paramètres</span>
             <IoMdSettings size={40} />
@@ -112,9 +109,6 @@ export default function MenuHeader() {
             </HudNavLink>
           )}
         </nav>
-      </div>
-      <div className={`menuHeader-musicBox ${musicPlayer ? 'active' : ''}`}>
-        <MusicPlayer role={'menu'} />
       </div>
       {askForLogout && (
         <Modal>
