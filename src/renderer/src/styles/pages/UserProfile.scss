@@ -51,6 +51,9 @@
             text-overflow: ellipsis;
             max-width: 200px;
             margin-top: 15px;
+            & svg {
+                margin-right: 5px;
+            }
         }
     }
 

@@ -21,9 +21,14 @@
       font-size: 20px;
     }
 
+    &-progress {
+      display: flex;
+      font-family: 'Kimberly Bl', sans-serif;
+      align-items: center;
+    }
     & .progress {
       width: 300px;
-      margin: 10px 0;
+      margin: 10px;
     }
   }
 
@@ -32,10 +37,9 @@
     display: flex;
     flex-wrap: wrap;
     &-item {
-      opacity: 0.3;
+      opacity: 0.5;
       filter: grayscale(100%);
       transition: opacity 200ms ease-in-out, filter 200ms ease-in-out;
-
       &.unlocked {
         filter: none;
         opacity: 1;
@@ -54,6 +58,8 @@
         object-fit: cover;
         @include greyBorders();
         border-radius: 15px;
+        background-color: rgba(0, 0, 0, 0.8);
+
       }
     }
   }

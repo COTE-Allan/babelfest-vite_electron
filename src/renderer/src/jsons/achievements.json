@@ -38,8 +38,8 @@
   {
     "id": "HF_5winStreak",
     "name": "Sérial Winner",
-    "desc": "Gagnez 5 parties d'affilée en rapide et/ou classé.",
-    "url": "./skins/icon_success_title.png",
+    "desc": "Gagnez 5 parties d'affilée en rapide et/ou classée.",
+    "url": "./skins/borders/cadre_cuir.png",
     "objective": {
       "stat": "longestWinStreak",
       "value": 5
@@ -48,8 +48,8 @@
   {
     "id": "HF_10winStreak",
     "name": "Dix sur dix",
-    "desc": "Gagnez 10 parties d'affilée en rapide et/ou classé.",
-    "url": "./skins/icon_success_title.png",
+    "desc": "Gagnez 10 parties d'affilée en rapide et/ou classée.",
+    "url": "./skins/borders/cadre_10to10.png",
     "objective": {
       "stat": "longestWinStreak",
       "value": 10
@@ -58,7 +58,7 @@
   {
     "id": "HF_15winStreak",
     "name": "Domination totale",
-    "desc": "Gagnez 15 parties d'affilée en rapide et/ou classé.",
+    "desc": "Gagnez 15 parties d'affilée en rapide et/ou classée.",
     "url": "./skins/icon_success_title.png",
     "objective": {
       "stat": "longestWinStreak",
@@ -79,7 +79,7 @@
     "id": "HF_50honors",
     "name": "Digne",
     "desc": "Obtenez 50 honneurs de la part d'autres joueurs.",
-    "url": "./skins/borders/cardre_or_honor.png",
+    "url": "./skins/borders/cadre_or_honor.png",
     "objective": {
       "profile": "honor",
       "value": 50
@@ -89,7 +89,7 @@
     "id": "HF_1honored",
     "name": "Fair play",
     "desc": "Honorez un autre joueur depuis son profil.",
-    "url": "./skins/icon_success_title.png",
+    "url": "./skins/borders/cadre_blushing.png",
     "objective": {
       "profile": "honored.quantity",
       "value": 1
@@ -99,10 +99,22 @@
     "id": "HF_50honored",
     "name": "Prend mon respect",
     "desc": "Honorez 50 fois.",
-    "url": "./skins/icon_success_title.png",
+    "url": "./skins/borders/cadre_rainbow.png",
     "objective": {
       "profile": "honored.quantity",
       "value": 50
+    }
+  },
+  {
+    "id": "HF_fastWin",
+    "name": "Expéditif",
+    "desc": "Gagnez une partie rapide ou classée en 5 tours ou moins.",
+    "url": "./skins/borders/cadre_speedlines.png",
+    "objective": {
+      "win": true,
+      "gamemode": ["quick", "ranked"],
+      "gameData": "turn",
+      "condition": "<5"
     }
   }
 ]

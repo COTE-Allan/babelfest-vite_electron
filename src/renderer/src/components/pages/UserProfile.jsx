@@ -7,7 +7,7 @@ import '../../styles/pages/UserProfile.scss'
 import ProfilePicture from '../esthetics/profilePicture'
 import StatsDisplayer from '../interface/StatsDisplayer'
 import HudNavLink from '../items/hudNavLink'
-import { FaBookOpen, FaThumbsUp, FaUserPlus } from 'react-icons/fa'
+import { FaBookOpen, FaCircle, FaThumbsUp, FaUserPlus } from 'react-icons/fa'
 import { AuthContext } from '../../AuthContext'
 import { toast } from 'react-toastify'
 import useSound from 'use-sound'
@@ -116,7 +116,10 @@ const UserProfile = () => {
       <div className="userProfile-profile">
         <div className="userProfile-profile-avatar">
           <ProfilePicture customUser={targetUser} size={200} border={targetUser.primaryColor} />
-          <h1>{targetUser.username}</h1>
+          <h1>                
+            <FaCircle color={targetUser.status.state === "online" ? "4ead35" : "888888"} size={20} />
+            {targetUser.username}
+          </h1>
         </div>
         <div className="userProfile-control">
           <HudNavLink permOpen onClick={handleHonor} className={!canHonor ? 'disabled' : ''}>

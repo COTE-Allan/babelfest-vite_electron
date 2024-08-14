@@ -88,6 +88,8 @@ export default function UserAchievements() {
       <div className="achievements-infos">
         <h3>{achievementInfos.name}</h3>
         <span>{achievementInfos.desc}</span>
+        <div className="achievements-infos-progress">
+{`${achievementValue}/${achievementInfos.objective?.value ? achievementInfos.objective.value : 1}`}
         <ProgressBar
           transitionDuration="0s"
           height="17px"
@@ -95,10 +97,11 @@ export default function UserAchievements() {
           completed={achievementValue}
           bgColor={userInfo.primaryColor}
           labelColor="#fff"
-          maxCompleted={achievementInfos.objective ? achievementInfos.objective.value : 1}
+          maxCompleted={achievementInfos.objective?.value ? achievementInfos.objective?.value : 1}
           className="progress"
-          customLabel={`${achievementValue}/${achievementInfos.objective ? achievementInfos.objective.value : 1}`}
-        />
+          customLabel={`${achievementValue}/${achievementInfos.objective?.value ? achievementInfos.objective?.value : 1}`}
+          />
+          </div>
       </div>
       <div className="achievements-list">
         {achievements.map((achievement) => (

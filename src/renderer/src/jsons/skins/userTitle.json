@@ -50,7 +50,7 @@
     "unlockTip": "Obtenu en atteignant le niveau 50."
   },
   {
-    "name": "Beaucoup trop impliqué",
+    "name": "Dieu",
     "level": 100,
     "unlockTip": "Obtenu en atteignant le niveau 100."
   },
@@ -58,16 +58,6 @@
     "name": "Sérial Winner",
     "unlockTip": "Obtenu en récompense du succès : 'Sérial Winner'",
     "achievement": "HF_5winStreak"
-  },
-  {
-    "name": "Dix sur Dix",
-    "unlockTip": "Obtenu en récompense du succès : 'Dix sur Dix'",
-    "achievement": "HF_10winStreak"
-  },
-  {
-    "name": "Domination Totale",
-    "unlockTip": "Obtenu en récompense du succès : 'Domination Totale'",
-    "achievement": "HF_15winStreak"
   },
   {
     "name": "Respecté",

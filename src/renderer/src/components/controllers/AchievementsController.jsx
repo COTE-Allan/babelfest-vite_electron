@@ -18,21 +18,47 @@ const getValue = (obj, path) => {
 }
 
 // Fonction pour vérifier un objectif
-const checkObjective = (objective, userInfo, playerStats) => {
+const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
+  console.log(gameData, winner, objective.gameData, objective.gamemode)
+  if (objective.win) {
+    // Si l'objectif requiert de gagner, vérifiez si le joueur a gagné
+    if (!winner) {
+      return false
+    }
+  }
+
   if (objective.stat && playerStats[objective.stat] !== undefined) {
     return playerStats[objective.stat] >= objective.value
   } else if (objective.profile) {
     const value = getValue(userInfo, objective.profile)
     return value !== undefined && value >= objective.value
+  } else if (objective.gameData) {
+    console.log(gameData, winner, objective.gameData, objective.gamemode)
+    // Vérifie si le mode de jeu courant est inclus dans la liste des modes de jeu spécifiés dans l'objectif
+    if (objective.gamemode.includes(gameData.gamemode)) {
+      const value = getValue(gameData, objective.gameData)
+      if (value !== undefined) {
+        if (objective.condition.startsWith("<")) {
+          return value < parseInt(objective.condition.substring(1), 10)
+        } else if (objective.condition.startsWith(">")) {
+          return value > parseInt(objective.condition.substring(1), 10)
+        } else if (objective.condition.startsWith("=")) {
+          return value === parseInt(objective.condition.substring(1), 10)
+        }
+      }
+    }
   }
+
   return false
 }
+
+
 
 // Hook pour vérifier et décerner les succès
 export const useCheckForAchievements = () => {
   const { userInfo, giveAchievement } = useContext(AuthContext)
 
-  const checkForAchievements = async () => {
+  const checkForAchievements = async (gameData = null, winner = false) => {
     const userAchievements = userInfo.achievements
     const playerStats = getPlayerStats(userInfo.stats)
     const achievementsToCheck = achievements.filter((achievement) => {
@@ -42,7 +68,7 @@ export const useCheckForAchievements = () => {
     })
 
     for (const ach of achievementsToCheck) {
-      if (checkObjective(ach.objective, userInfo, playerStats)) {
+      if (checkObjective(ach.objective, userInfo, playerStats, gameData, winner)) {
         await giveAchievement(ach)
       }
     }

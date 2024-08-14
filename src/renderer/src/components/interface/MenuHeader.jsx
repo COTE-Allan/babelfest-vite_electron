@@ -75,9 +75,8 @@ export default function MenuHeader() {
             <span className="hidden-span">Blog</span>
           </a>
           {matchmakingSearch && (
-            <HudNavLink to={'/home'} className="special">
+            <HudNavLink className="special">
               <FaSearch size={40} />
-              <span className="hidden-span">Recherche en cours...</span>
               <span className="hidden-span">
                 {matchmakingSearch === 'quick' ? 'Partie rapide ' : 'Partie classée '}- {searchTime}
               </span>

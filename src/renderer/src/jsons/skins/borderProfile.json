@@ -55,6 +55,12 @@
     "level": 21
   },
   {
+    "url": "./skins/borders/cadre_neon_synth.png",
+    "name": "Vaporwave",
+    "unlockTip": "Obtenu en atteignant le niveau 25.",
+    "level": 25
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711699336/babelfest/skins/borders/Garde_Imp%C3%A9riale.webp",
     "name": "Garde Impériale",
     "unlockTip": "Obtenu en atteignant le niveau 27.",
@@ -65,6 +71,18 @@
     "name": "Alliage Steampunk",
     "unlockTip": "Obtenu en atteignant le niveau 31.",
     "level": 31
+  },
+  {
+    "url": "./skins/borders/cadre_cyberfest.png",
+    "name": "Cyberfest Bleu",
+    "unlockTip": "Obtenu en atteignant le niveau 35.",
+    "level": 35
+  },
+  {
+    "url": "./skins/borders/cadre_cyberfest_2.png",
+    "name": "Cyberfest Jaune",
+    "unlockTip": "Obtenu en atteignant le niveau 40.",
+    "level": 40
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1722455063/babelfest/skins/borders/cadres_sang.webp",
@@ -91,10 +109,40 @@
     "achievement": "HF_50Games"
   },
   {
-    "url": "./skins/borders/cardre_or_honor.png",
+    "url": "./skins/borders/cadre_cuir.png",
+    "name": "Revêtement cuir",
+    "unlockTip": "Obtenu en récompense du succès : 'Sérial Winner'",
+    "achievement": "HF_5winStreak"
+  },
+  {
+    "url": "./skins/borders/cadre_10to10.png",
+    "name": "Note parfaite",
+    "unlockTip": "Obtenu en récompense du succès : 'Dix sur Dix'",
+    "achievement": "HF_10winStreak"
+  },
+  {
+    "url": "./skins/borders/cadre_or_honor.png",
     "name": "Plaqué Hon'OR",
     "unlockTip": "Obtenu en récompense du succès : 'Digne'",
     "achievement": "HF_50honors"
+  },
+  {
+    "url": "./skins/borders/cadre_blushing.png",
+    "name": "Tourbillon de couleurs",
+    "unlockTip": "Obtenu en récompense du succès : 'Fair play'",
+    "achievement": "HF_1honored"
+  },
+  {
+    "url": "./skins/borders/cadre_rainbow.png",
+    "name": "Amoureux",
+    "unlockTip": "Obtenu en récompense du succès : 'Prend mon respect'",
+    "achievement": "HF_50honored"
+  },
+  {
+    "url": "./skins/borders/cadre_speedlines.png",
+    "name": "Lignes de vitesse",
+    "unlockTip": "Obtenu en récompense du succès : 'Expéditif'",
+    "achievement": "HF_fastWin"
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181119/babelfest/skins/borders/cadre_neoBabelfest.webp",

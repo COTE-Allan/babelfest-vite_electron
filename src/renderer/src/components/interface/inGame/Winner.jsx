@@ -75,7 +75,7 @@ export default function Winner() {
 
   const handleExpAndStats = async () => {
     let xpObtained = 0
-    let gameWon = winner === playerSelf.id
+    let gameWon = winner === playerID
 
     if (turn === 1) {
       xpObtained = 10
@@ -118,34 +118,41 @@ export default function Winner() {
     let newMMR = currentMMR
 
     if (gameMode !== 'custom') {
-      const baseMMRChange = 15
-      const maxMMRChange = 100
-      const minMMRChange = 15
-
+      const baseMMRChange = 15;
+      const maxMMRChange = 100;
+      const minMMRChange = 5;
       // Factor for scaling the MMR change based on the difference in MMR
-      const scalingFactor = Math.abs(mmrDifference) / 50
-
+      const scalingFactor = Math.abs(mmrDifference) / 100; // Adjusted for more gradual scaling
+    
       if (gameWon) {
-        if (mmrDifference > 0) {
-          // Won against a higher-rated player
-          mmrChangeValue = Math.min(baseMMRChange + scalingFactor * 10, maxMMRChange)
-        } else {
+        if (mmrDifference < 0) {
           // Won against a lower-rated player
-          mmrChangeValue = baseMMRChange + scalingFactor * 10
+          mmrChangeValue = baseMMRChange - scalingFactor * 10;
+          mmrChangeValue = Math.max(minMMRChange, mmrChangeValue);  // Ensure it's at least the minimum
+        } else {
+          // Won against a higher-rated player
+          console.log(mmrChangeValue, mmrDifference, scalingFactor) 
+          mmrChangeValue = baseMMRChange + scalingFactor * 10;
+          mmrChangeValue = Math.min(mmrChangeValue, maxMMRChange); // Cap the gain
         }
       } else {
-        if (mmrDifference > 0) {
-          // Lost to a higher-rated player
-          mmrChangeValue = -Math.max(minMMRChange, baseMMRChange + scalingFactor * 5)
-        } else {
+        if (mmrDifference < 0) {
           // Lost to a lower-rated player
-          mmrChangeValue = -Math.min(baseMMRChange + scalingFactor * 10, maxMMRChange)
+          mmrChangeValue = -(baseMMRChange + scalingFactor * 20);
+          mmrChangeValue = Math.min(mmrChangeValue, -minMMRChange); // Ensure loss is at least the minimum
+        } else {
+          // Lost to a higher-rated player
+          mmrChangeValue = -(baseMMRChange - scalingFactor * 5);
+          mmrChangeValue = Math.max(mmrChangeValue, -maxMMRChange); // Cap the loss
         }
       }
-
-      newMMR = Math.max(0, currentMMR + mmrChangeValue) // Ensure MMR does not go below 0
+      mmrChangeValue = Math.min(maxMMRChange, Math.max(-maxMMRChange, mmrChangeValue));
+    
+      mmrChangeValue = Math.round(mmrChangeValue);
+      newMMR = Math.max(0, currentMMR + mmrChangeValue); // Ensure MMR does not go below 0
     }
-
+    
+    
     setMmrChange(mmrChangeValue)
 
     // Update the user in the database
@@ -206,7 +213,7 @@ export default function Winner() {
     if (winner !== null) {
       console.log('checking')
 
-      checkForAchievements()
+      checkForAchievements(gameData, winner === playerID)
     }
   }, [userInfo])
 
