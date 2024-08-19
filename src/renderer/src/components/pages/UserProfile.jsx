@@ -1,20 +1,19 @@
 import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { db } from '../../Firebase'
 import { getPlayerStats, useSendErrorMessage } from '../others/toolBox'
 import '../../styles/pages/UserProfile.scss'
 import ProfilePicture from '../esthetics/profilePicture'
 import StatsDisplayer from '../interface/StatsDisplayer'
 import HudNavLink from '../items/hudNavLink'
-import { FaBookOpen, FaCircle, FaThumbsUp, FaUserPlus } from 'react-icons/fa'
+import { FaArrowLeft, FaBookOpen, FaCircle, FaThumbsUp, FaUserPlus } from 'react-icons/fa'
 import { AuthContext } from '../../AuthContext'
 import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import successSfx from '../../assets/sfx/info_notification.mp3'
-import Button from '../items/Button'
-import { IoMdArrowRoundBack } from 'react-icons/io'
 import { ImCross } from 'react-icons/im'
+import MatchSummaries from '../interface/MatchSummaries'
 
 const UserProfile = () => {
   const { user, userInfo, updateUserState, userSettings } = useContext(AuthContext)
@@ -25,7 +24,6 @@ const UserProfile = () => {
   const [playSuccess] = useSound(successSfx, {
     volume: userSettings.sfxVolume
   })
-  const navigate = useNavigate()
 
   async function GetUser() {
     const userRef = doc(db, 'users', userId)
@@ -51,20 +49,23 @@ const UserProfile = () => {
         },
         status: userData.status,
         achievements: userData.achievements || [],
-        honored: userData.honored || { timestamp: 0, quantity: 0 }
+        honored: userData.honored || { timestamp: 0, quantity: 0 },
+        matchSummaries: userData.matchSummaries
       }
       let stats = getPlayerStats(userInfo.stats)
       userInfo.stats = stats
       userInfo.id = userId
       setTargetUser(userInfo)
-
     }
   }
 
   useEffect(() => {
     GetUser()
     const currentTime = Date.now()
-    if (!userInfo.honored.timestamp || currentTime - userInfo.honored.timestamp >= 24 * 60 * 60 * 1000) {
+    if (
+      !userInfo.honored.timestamp ||
+      currentTime - userInfo.honored.timestamp >= 24 * 60 * 60 * 1000
+    ) {
       setCanHonor(true)
     } else {
       setCanHonor(false)
@@ -73,7 +74,7 @@ const UserProfile = () => {
 
   const handleHonor = async () => {
     const currentTime = Date.now()
-  
+
     if (!canHonor) {
       const nextAvailableTime = new Date(userInfo.honored.timestamp + 24 * 60 * 60 * 1000)
       sendErrorMessage(
@@ -81,11 +82,11 @@ const UserProfile = () => {
       )
       return
     }
-  
+
     try {
       const userRef = doc(db, 'users', user.uid)
       const targetUserRef = doc(db, 'users', userId)
-  
+
       // Mettre à jour le timestamp et incrémenter la quantité dans honored
       await updateDoc(userRef, {
         honored: {
@@ -93,12 +94,14 @@ const UserProfile = () => {
           quantity: increment(1)
         }
       })
-  
+
       // Incrémenter le compteur honor de targetUser
       await updateDoc(targetUserRef, {
         honor: increment(1)
       })
-  
+
+      setTargetUser({ ...targetUser, honor: targetUser.honor + 1 })
+
       playSuccess()
       toast.success(`Vous avez honoré ${targetUser.username} !`)
       await updateUserState(user)
@@ -107,7 +110,6 @@ const UserProfile = () => {
       console.error("Erreur lors de l'honoration:", error)
     }
   }
-  
 
   if (targetUser === null) return null
 
@@ -116,10 +118,13 @@ const UserProfile = () => {
       <div className="userProfile-profile">
         <div className="userProfile-profile-avatar">
           <ProfilePicture customUser={targetUser} size={200} border={targetUser.primaryColor} />
-          <h1>                
-            <FaCircle color={targetUser.status.state === "online" ? "4ead35" : "888888"} size={20} />
-            {targetUser.username}
-          </h1>
+          <div className="userProfile-profile-avatar-name">
+            <FaCircle
+              color={targetUser.status.state === 'online' ? '4ead35' : '888888'}
+              size={20}
+            />
+            <h1>{targetUser.username}</h1>
+          </div>
         </div>
         <div className="userProfile-control">
           <HudNavLink permOpen onClick={handleHonor} className={!canHonor ? 'disabled' : ''}>
@@ -130,19 +135,21 @@ const UserProfile = () => {
             <FaUserPlus size={40} />
             <span className="hidden-span">Ajouter en ami</span>
           </HudNavLink>
-          <HudNavLink permOpen className={'disabled'}>
-            <FaBookOpen size={35} />
-            <span className="hidden-span">Historique</span>
+          <HudNavLink to={-1} permOpen>
+            <FaArrowLeft size={35} />
+            <span className="hidden-span">Quitter le profil</span>
           </HudNavLink>
         </div>
       </div>
 
       <div className="userProfile-content">
-        <HudNavLink to={-1} className="close">
-          <span className="hidden-span">Page précédente</span>
-          <ImCross size={40} color="#e62e31" />
-        </HudNavLink>
         <StatsDisplayer user={targetUser} stats={targetUser.stats} />
+        {targetUser.matchSummaries && (
+          <>
+            <h2 className="summary-title">Historique</h2>
+            <MatchSummaries summaries={targetUser.matchSummaries} />
+          </>
+        )}
       </div>
     </div>
   )

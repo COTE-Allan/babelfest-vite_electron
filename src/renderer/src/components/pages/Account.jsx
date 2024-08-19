@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { AuthContext } from '../../AuthContext'
 
@@ -16,10 +16,18 @@ import UserStatsController from '../accountEditor/UserStatsController'
 import UserAchievements from '../accountEditor/UserAchievements'
 import { FaBookOpen, FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
 import HudNavLink from '../items/hudNavLink'
+import MatchSummaries from '../interface/MatchSummaries'
+import { useParams } from 'react-router-dom'
 
 const Account = () => {
   const { userInfo } = useContext(AuthContext)
-  const [page, setPage] = useState(2)
+
+  const { defaultPage } = useParams()
+  const [page, setPage] = useState(0)
+
+  useEffect(() => {
+    setPage(Number(defaultPage) !== 0 ? Number(defaultPage) : 2)
+  }, [defaultPage])
 
   const [profile, setProfile] = useState(null)
   const [border, setBorder] = useState(null)
@@ -28,10 +36,6 @@ const Account = () => {
   const [selectedSecondary, setSelectedSecondary] = useState(null)
   const [title, setTitle] = useState(null)
   const [banner, setBanner] = useState(null)
-
-  const handleSwitchPage = (id) => {
-    setPage(id)
-  }
 
   const userData = {
     username: userInfo.username,
@@ -79,23 +83,23 @@ const Account = () => {
       </div>
       <div className="account-main">
         <nav className="account-main-nav">
-          <HudNavLink onClick={() => handleSwitchPage(1)} selected={page === 1} permOpen>
+          <HudNavLink to={'/account/1'} selected={page === 1} permOpen>
             <FaUserAlt size={45} />
             <span className="hidden-span">Statistiques</span>
           </HudNavLink>
-          <HudNavLink permOpen className={'disabled'}>
+          <HudNavLink to={'/account/5'} permOpen selected={page === 5}>
             <FaBookOpen size={45} />
             <span className="hidden-span">Historique</span>
           </HudNavLink>
-          <HudNavLink onClick={() => handleSwitchPage(2)} selected={page === 2} permOpen>
+          <HudNavLink to={'/account/2'} selected={page === 2} permOpen>
             <FaTshirt size={45} />
             <span className="hidden-span">Customisation</span>
           </HudNavLink>
-          <HudNavLink onClick={() => handleSwitchPage(4)} selected={page === 4} permOpen>
+          <HudNavLink to={'/account/4'} selected={page === 4} permOpen>
             <FaTrophy size={45} />
             <span className="hidden-span">Progression</span>
           </HudNavLink>
-          <HudNavLink onClick={() => handleSwitchPage(3)} selected={page === 3} permOpen>
+          <HudNavLink to={'/account/3'} selected={page === 3} permOpen>
             <FaCog size={45} />
             <span className="hidden-span">Modifier Profil</span>
           </HudNavLink>
@@ -105,6 +109,7 @@ const Account = () => {
           {page === 2 && <CosmecticsController {...props} />}
           {page === 3 && <UserSettingsController />}
           {page === 4 && <UserAchievements />}
+          {page === 5 && <MatchSummaries summaries={userInfo.matchSummaries} />}
         </div>
       </div>
     </div>

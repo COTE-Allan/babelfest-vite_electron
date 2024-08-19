@@ -1,6 +1,7 @@
 .userProfile {
     padding: 50px;
     display: flex;
+    height: calc(90% - 100px);
 
     & button {
         display: flex;
@@ -11,15 +12,6 @@
         margin-top: 15px;
     }
 
-    &-content {
-        position: relative;
-    }
-
-    & .close {
-        position: absolute;
-        right: 10px;
-        z-index: 1;
-    }
 
     &-avatar {
         margin-right: 10px;
@@ -39,22 +31,38 @@
         background-color: rgba(0, 0, 0, 0.5);
     }
 
+    & h2.summary-title {
+        font-family: 'Kimberly Bl', sans-serif;
+        font-size: 30px;
+        margin: 5px 10px;
+        margin-top: 10px;
+    }
+
     &-profile-avatar {
         display: flex;
         flex-direction: column;
         align-items: center;
         font-family: 'Kimberly Bl', sans-serif;
 
-        & h1 {
-            font-size: 25px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 200px;
-            margin-top: 15px;
+        &-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+
             & svg {
                 margin-right: 5px;
             }
+
+            & h1 {
+                font-size: 1.5em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 200px;
+
+            }
         }
+
     }
 
     &-control {
@@ -70,7 +78,11 @@
     }
 
     &-content {
+        position: relative;
+        overflow-y: auto;
         width: 100%;
+        height: 90%;
+
     }
 
 

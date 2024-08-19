@@ -6,7 +6,7 @@ export default function PlayerBanner({ user, cardsLeft, color, side }) {
     <div
       className={`playerBanner`}
       style={{
-        border: `${color} 5px solid`,
+        border: `${color} 4px solid`,
         opacity: user.disconnected ? 0.5 : 1
       }}
     >

@@ -118,55 +118,35 @@ export default function Winner() {
     let newMMR = currentMMR
 
     if (gameMode !== 'custom') {
-      const baseMMRChange = 15;
-      const maxMMRChange = 100;
-      const minMMRChange = 5;
-      // Factor for scaling the MMR change based on the difference in MMR
-      const scalingFactor = Math.abs(mmrDifference) / 100; // Adjusted for more gradual scaling
-    
+      const baseMMRChange = 15
+      const maxMMRChange = 100
+      const minMMRChange = 5
+      const scalingFactor = Math.abs(mmrDifference) / 100
+
       if (gameWon) {
         if (mmrDifference < 0) {
-          // Won against a lower-rated player
-          mmrChangeValue = baseMMRChange - scalingFactor * 10;
-          mmrChangeValue = Math.max(minMMRChange, mmrChangeValue);  // Ensure it's at least the minimum
+          mmrChangeValue = baseMMRChange - scalingFactor * 10
+          mmrChangeValue = Math.max(minMMRChange, mmrChangeValue)
         } else {
-          // Won against a higher-rated player
-          console.log(mmrChangeValue, mmrDifference, scalingFactor) 
-          mmrChangeValue = baseMMRChange + scalingFactor * 10;
-          mmrChangeValue = Math.min(mmrChangeValue, maxMMRChange); // Cap the gain
+          mmrChangeValue = baseMMRChange + scalingFactor * 10
+          mmrChangeValue = Math.min(mmrChangeValue, maxMMRChange)
         }
       } else {
         if (mmrDifference < 0) {
-          // Lost to a lower-rated player
-          mmrChangeValue = -(baseMMRChange + scalingFactor * 20);
-          mmrChangeValue = Math.min(mmrChangeValue, -minMMRChange); // Ensure loss is at least the minimum
+          mmrChangeValue = -(baseMMRChange + scalingFactor * 20)
+          mmrChangeValue = Math.min(mmrChangeValue, -minMMRChange)
         } else {
-          // Lost to a higher-rated player
-          mmrChangeValue = -(baseMMRChange - scalingFactor * 5);
-          mmrChangeValue = Math.max(mmrChangeValue, -maxMMRChange); // Cap the loss
+          mmrChangeValue = -(baseMMRChange - scalingFactor * 5)
+          mmrChangeValue = Math.max(mmrChangeValue, -maxMMRChange)
         }
       }
-      mmrChangeValue = Math.min(maxMMRChange, Math.max(-maxMMRChange, mmrChangeValue));
-    
-      mmrChangeValue = Math.round(mmrChangeValue);
-      newMMR = Math.max(0, currentMMR + mmrChangeValue); // Ensure MMR does not go below 0
+      mmrChangeValue = Math.min(maxMMRChange, Math.max(-maxMMRChange, mmrChangeValue))
+      mmrChangeValue = Math.round(mmrChangeValue)
+      newMMR = Math.max(0, currentMMR + mmrChangeValue)
     }
-    
-    
+
     setMmrChange(mmrChangeValue)
 
-    // Update the user in the database
-    await updateDoc(doc(db, 'users', user.uid), {
-      level: newPlayerExp.level,
-      xp: newPlayerExp.xp,
-      'stats.mmr': newMMR,
-      'stats.winStreak': currentStreak,
-      'stats.longestWinStreak': longestStreak,
-      ...gamesPlayedUpdate,
-      'stats.victories': newVictories
-    })
-
-    // Créer l'objet résumé du match
     const matchSummary = {
       player: {
         id: playerSelf.id,
@@ -177,8 +157,7 @@ export default function Winner() {
         title: playerSelf.title,
         level: playerSelf.level,
         xpGained: xpObtained,
-        previousMMR: currentMMR,
-        newMMR: newMMR,
+        mmrGained: mmrChangeValue,
         gameWon: gameWon
       },
       opponent: {
@@ -187,6 +166,7 @@ export default function Winner() {
         primaryColor: playerRival.primaryColor,
         profilePic: playerRival.profilePic,
         profileBorder: playerRival.profileBorder,
+        banner: playerRival.banner,
         title: playerRival.title,
         level: playerRival.level,
         previousMMR: playerRival.stats.mmr,
@@ -200,7 +180,23 @@ export default function Winner() {
       }
     }
 
-    // Log l'objet résumé du match
+    let updatedMatchSummaries = userInfo.matchSummaries ? [...userInfo.matchSummaries] : []
+    if (updatedMatchSummaries.length >= 10) {
+      updatedMatchSummaries.shift() // Remove the oldest match summary
+    }
+    updatedMatchSummaries.push(matchSummary)
+
+    await updateDoc(doc(db, 'users', user.uid), {
+      level: newPlayerExp.level,
+      xp: newPlayerExp.xp,
+      'stats.mmr': newMMR,
+      'stats.winStreak': currentStreak,
+      'stats.longestWinStreak': longestStreak,
+      ...gamesPlayedUpdate,
+      'stats.victories': newVictories,
+      matchSummaries: updatedMatchSummaries
+    })
+
     console.log('Match Summary:', matchSummary)
 
     setTimeout(async () => {

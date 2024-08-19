@@ -128,13 +128,13 @@
   },
   {
     "url": "./skins/borders/cadre_blushing.png",
-    "name": "Tourbillon de couleurs",
+    "name": "Amoureux",
     "unlockTip": "Obtenu en récompense du succès : 'Fair play'",
     "achievement": "HF_1honored"
   },
   {
     "url": "./skins/borders/cadre_rainbow.png",
-    "name": "Amoureux",
+    "name": "Tourbillon de couleurs",
     "unlockTip": "Obtenu en récompense du succès : 'Prend mon respect'",
     "achievement": "HF_50honored"
   },
@@ -146,7 +146,7 @@
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1713181119/babelfest/skins/borders/cadre_neoBabelfest.webp",
-    "name": "Neo-Babelfest",
+    "name": "Neofest",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
     "flag": "alphaTest"
   }

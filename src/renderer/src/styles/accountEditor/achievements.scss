@@ -1,16 +1,17 @@
 @import '../variables.scss';
 
 .achievements {
-  &-container {
+  & h2 {
+    font-family: 'Kimberly Bl', sans-serif;
+    margin: 0;
+    font-size: 30px;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    & h2 {
-      font-family: 'Kimberly Bl', sans-serif;
-      margin: 0;
-      font-size: 30px;
-    }
+
+  }
+
+  & button {
+    margin: 0;
+    margin-left: auto;
   }
 
   &-infos {
@@ -26,6 +27,7 @@
       font-family: 'Kimberly Bl', sans-serif;
       align-items: center;
     }
+
     & .progress {
       width: 300px;
       margin: 10px;
@@ -36,10 +38,12 @@
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
+
     &-item {
       opacity: 0.5;
       filter: grayscale(100%);
       transition: opacity 200ms ease-in-out, filter 200ms ease-in-out;
+
       &.unlocked {
         filter: none;
         opacity: 1;

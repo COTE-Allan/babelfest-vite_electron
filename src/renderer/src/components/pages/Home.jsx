@@ -42,7 +42,8 @@ const Home = () => {
   const [lastBlogPostDate, setLastBlogPostDate] = useState(null)
   const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
     useContext(MatchmakingContext)
-  const { userInfo, userSettings } = useContext(AuthContext)
+  const { userInfo, userSettings, user } = useContext(AuthContext)
+  const myID = user.uid
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
 
@@ -185,7 +186,7 @@ const Home = () => {
                   <NavLink
                     key={user.id}
                     className="grid-leaderboard-user"
-                    to={user.id !== userInfo.id ? `/userProfile/${user.id}` : '/home'}
+                    to={user.id && user.id !== myID ? `/userProfile/${user.id}` : '/account/1'}
                     onMouseEnter={hover}
                     onClick={select}
                   >

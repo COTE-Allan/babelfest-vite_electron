@@ -102,7 +102,7 @@ export default function MenuHeader() {
             <IoLogOut size={40} />
           </HudNavLink>
           {user && (
-            <HudNavLink to={'/account'}>
+            <HudNavLink to={'/account/0'}>
               <span className="hidden-span">Profil</span>
               <ProfilePicture size={60} />
             </HudNavLink>

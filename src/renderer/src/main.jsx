@@ -135,7 +135,7 @@ const App = () => {
             }
           />
           <Route
-            path="/account"
+            path="/account/:defaultPage"
             element={
               <Layout>
                 <Account />

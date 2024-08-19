@@ -6,9 +6,7 @@
   padding: 15px 10px;
 
   &-profile,
-  &-main-nav,
-  &-main-content .cosmetics-nav,
-  &-main-content .cosmetics-content {
+  &-main-nav {
     margin: 5px;
   }
 
@@ -74,7 +72,8 @@
       padding: 20px;
       border-radius: 15px;
 
-      & .cosmetics {
+      & .cosmetics,
+      & .achievements {
         display: flex;
         height: 100%;
 

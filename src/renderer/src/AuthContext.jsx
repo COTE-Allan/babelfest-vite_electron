@@ -87,7 +87,8 @@ export const AuthProvider = ({ children }) => {
         },
         status: userData.status,
         currentLobby: userData.currentLobby,
-        achievements: userData.achievements || []
+        achievements: userData.achievements || [],
+        matchSummaries: userData.matchSummaries || []
       }
       setUserInfo(userInfo)
     }

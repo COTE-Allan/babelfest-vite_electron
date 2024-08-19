@@ -10,14 +10,11 @@
         flex-grow: 1;
         margin: 5px 0;
         margin-right: 20px;
-        font-size: 16px;
-
-        &.smaller {
-            font-size: 13px;
-        }
+        font-size: 0.95em;
 
         &.smaller &-list-item-value {
-            font-size: 20px;
+            font-size: 1.3em;
+            min-width: 25px;
         }
 
         &-list {
@@ -35,6 +32,7 @@
                     display: block;
                     min-width: 25px;
                     font-size: 28px;
+                    font-size: 1.5em;
                     text-align: center;
                     margin-right: 5px;
                 }
