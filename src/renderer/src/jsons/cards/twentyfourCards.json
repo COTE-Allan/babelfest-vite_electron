@@ -2,7 +2,7 @@
   {
     "featured": true,
     "name": "Luna",
-    "title": " Guerrière de Fantasyland",
+    "title": "Guerrière de Fantasyland",
     "atk": 4,
     "dep": 3,
     "hp": 3,
@@ -189,10 +189,10 @@
     "title": "Ombre frêle de la destruction",
     "atk": 5,
     "dep": 0,
-    "hp": 1,
+    "hp": 3,
     "baseatk": 5,
     "basedep": 0,
-    "basehp": 1,
+    "basehp": 3,
     "url": "./cards/series/babelfest_2024series8.png",
     "rarity": 1,
     "collection": "Série Infinie",
@@ -266,6 +266,55 @@
         "value": 2,
         "target": "ally",
         "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "La patrouille",
+    "title": "Loubards de Babelfest",
+    "atk": 2,
+    "dep": 1,
+    "hp": 4,
+    "baseatk": 2,
+    "basedep": 1,
+    "basehp": 4,
+    "url": "./cards/series/babelfest_2024series11.png",
+    "rarity": 2,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Hampoule",
+    "fortress": true,
+    "effects": [
+      {
+        "when": [3],
+        "type": "defDebuff",
+        "target": "rival"
+      },
+      {
+        "type": "fortress"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Belphegor",
+    "title": "Démon de la paresse",
+    "atk": 3,
+    "dep": 4,
+    "hp": 2,
+    "baseatk": 3,
+    "basedep": 4,
+    "basehp": 2,
+    "url": "./cards/series/babelfest_2024series12.png",
+    "collection": "Série Infinie",
+    "rarity": 2,
+    "year": 2024,
+    "author": "Skyder",
+    "deathScythe": true,
+    "effects": [
+      {
+        "type": "deathScythe"
       }
     ]
   }
