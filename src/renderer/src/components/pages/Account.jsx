@@ -79,7 +79,6 @@ const Account = () => {
         />
         <ExperienceBar />
         <PlayerBanner user={userData} color={userData.primaryColor} />
-        <Button className="account-profile-logout">Déconnexion</Button>
       </div>
       <div className="account-main">
         <nav className="account-main-nav">
@@ -109,7 +108,11 @@ const Account = () => {
           {page === 2 && <CosmecticsController {...props} />}
           {page === 3 && <UserSettingsController />}
           {page === 4 && <UserAchievements />}
-          {page === 5 && <MatchSummaries summaries={userInfo.matchSummaries} />}
+          {page === 5 && (
+            <div className="matchSummaries-container">
+              <MatchSummaries summaries={userInfo.matchSummaries} />
+            </div>
+          )}
         </div>
       </div>
     </div>

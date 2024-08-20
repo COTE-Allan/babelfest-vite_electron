@@ -1,10 +1,14 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../AuthContext'
+import { signOut, deleteUser } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
+import { doc, deleteDoc } from 'firebase/firestore'
+import { ref, set, remove } from 'firebase/database'
+import { toast } from 'react-toastify'
+import { auth, db, realtimeDb } from '../../Firebase'
 
 import Button from '../items/Button'
-
-import { sendEmailVerification, updatePassword } from 'firebase/auth'
-import { toast } from 'react-toastify'
+import Modal from '../items/ClassicModal'
 
 export default function UserSettingsController() {
   const { user, updateUser, userInfo, changeEmail, verifMailSent, setVerifMailSent } =
@@ -14,6 +18,17 @@ export default function UserSettingsController() {
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [askForLogout, setAskForLogout] = useState(false)
+  const [askForDelete, setAskForDelete] = useState(false)
+  const [askForDeleteStep2, setAskForDeleteStep2] = useState(false)
+  const [askForDeleteStep3, setAskForDeleteStep3] = useState(false)
+  const navigate = useNavigate()
+
+  const updateOnlineStatus = async (userId) => {
+    const statusRef = ref(realtimeDb, '/status/' + userId)
+    await set(statusRef, { state: 'offline', last_changed: Date.now() })
+  }
 
   const handleUpdateUser = async () => {
     let updates = {}
@@ -34,7 +49,7 @@ export default function UserSettingsController() {
             toast.success('Mot de passe mis à jour avec succès.')
           })
           .catch((error) => {
-            toast.error(error)
+            toast.error(error.message)
           })
       } else {
         toast.error('Les mots de passe ne sont pas identiques.')
@@ -52,6 +67,38 @@ export default function UserSettingsController() {
       .catch((error) => {
         console.error("Erreur lors de l'envoi de l'email de vérification :", error)
       })
+  }
+
+  const handleLogout = async () => {
+    try {
+      await updateOnlineStatus(user.uid)
+      await signOut(auth)
+      navigate('/login')
+      toast.success('Vous êtes maintenant déconnecté.')
+    } catch (error) {
+      toast.error('Erreur lors de la déconnexion : ' + error.message)
+    }
+  }
+
+  const handleDeleteAccount = async () => {
+    setLoading(true)
+    try {
+      await updateOnlineStatus(user.uid)
+
+      const userDocRef = doc(db, 'users', user.uid)
+      await deleteDoc(userDocRef)
+
+      const statusRef = ref(realtimeDb, '/status/' + user.uid)
+      await remove(statusRef)
+
+      await deleteUser(user)
+      toast.success('Votre compte a été supprimé avec succès.')
+      navigate('/login')
+    } catch (error) {
+      toast.error('Erreur lors de la suppression du compte : ' + error.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const cancelUpdate = () => {
@@ -75,15 +122,15 @@ export default function UserSettingsController() {
           />
         </div>
         <div className="userSettings-input">
-          <label htmlFor="usernameInput">Définir un mot de passe</label>
+          <label htmlFor="passwordInput">Définir un mot de passe</label>
           <input
-            id="usernameInput"
+            id="passwordInput"
             type="password"
             placeholder="Nouveau mot de passe"
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
-            id="usernameInput"
+            id="confirmPasswordInput"
             type="password"
             placeholder="Confirmer le mot de passe"
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -93,6 +140,20 @@ export default function UserSettingsController() {
           <Button onClick={handleUpdateUser}>Sauvegarder</Button>
         )}
       </div>
+      <div className="userSettings-list">
+        <h1>Contrôle du compte</h1>
+        <Button className="account-profile-logout" onClick={() => setAskForLogout(true)}>
+          Déconnexion
+        </Button>
+        <Button
+          className="account-profile-delete warning"
+          onClick={() => setAskForDelete(true)}
+          disabled={loading}
+        >
+          Supprimer le compte
+        </Button>
+      </div>
+
       {!user.emailVerified && !verifMailSent && (
         <>
           <span className="alert">Vérifiez votre compte pour modifier ces données.</span>
@@ -105,6 +166,72 @@ export default function UserSettingsController() {
             Renvoyer un mail de confirmation
           </Button>
         </>
+      )}
+
+      {/* Modal de confirmation pour la déconnexion */}
+      {askForLogout && (
+        <Modal>
+          <div className="modal-container">
+            <span>Voulez-vous vraiment quitter Babelfest ?</span>
+            <Button onClick={handleLogout}>Confirmer</Button>
+            <Button onClick={() => setAskForLogout(false)}>Retour</Button>
+          </div>
+        </Modal>
+      )}
+
+      {/* Modal de confirmation pour la suppression de compte (Étape 1) */}
+      {askForDelete && (
+        <Modal>
+          <div className="modal-container">
+            <span>
+              Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.
+            </span>
+            <Button
+              onClick={() => {
+                setAskForDelete(false)
+                setAskForDeleteStep2(true)
+              }}
+              disabled={loading}
+              className="warning"
+            >
+              Oui, je suis sûr
+            </Button>
+            <Button onClick={() => setAskForDelete(false)}>Retour</Button>
+          </div>
+        </Modal>
+      )}
+
+      {/* Modal de confirmation pour la suppression de compte (Étape 2) */}
+      {askForDeleteStep2 && (
+        <Modal>
+          <div className="modal-container">
+            <span>C'est vraiment irréversible. Voulez-vous toujours continuer ?</span>
+            <Button
+              onClick={() => {
+                setAskForDeleteStep2(false)
+                setAskForDeleteStep3(true)
+              }}
+              disabled={loading}
+              className="warning"
+            >
+              Oui, je veux continuer
+            </Button>
+            <Button onClick={() => setAskForDeleteStep2(false)}>Retour</Button>
+          </div>
+        </Modal>
+      )}
+
+      {/* Modal de confirmation pour la suppression de compte (Étape 3) */}
+      {askForDeleteStep3 && (
+        <Modal>
+          <div className="modal-container">
+            <span>Dernière chance. Êtes-vous absolument sûr ?</span>
+            <Button onClick={handleDeleteAccount} disabled={loading} className="warning">
+              Oui, supprimer définitivement
+            </Button>
+            <Button onClick={() => setAskForDeleteStep3(false)}>Retour</Button>
+          </div>
+        </Modal>
       )}
     </div>
   )

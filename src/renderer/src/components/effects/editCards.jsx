@@ -152,6 +152,11 @@ export const useTradeCard = () => {
     const oppositeHand = host ? 'handJ2' : 'handJ1'
     let updatePayload = {}
 
+    // Attendre la mise à jour complète de la main
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+    console.log("Avant l'échange, main du joueur:", playerSelf.hand)
+
     const batch = writeBatch(db)
 
     switch (type) {
@@ -177,17 +182,20 @@ export const useTradeCard = () => {
         const handFilteredPP = playerSelf.hand.filter(
           (item) => !rivalNewCards.some((card) => containsObject(card, [item]))
         )
+
+        updatePayload[targetHand] = [...handFilteredPP, ...playerNewCards]
+
         const rivalFiltered = playerRival.hand.filter(
           (item) => !playerNewCards.some((card) => containsObject(card, [item]))
         )
-
-        updatePayload[targetHand] = [...handFilteredPP, ...playerNewCards]
         updatePayload[oppositeHand] = [...rivalFiltered, ...rivalNewCards]
         break
 
       default:
         return
     }
+
+    console.log("Après l'échange, nouvelle main du joueur:", updatePayload[targetHand])
 
     if (nextPhase) updatePayload.phase = phase + 1
     await pushLogsIntoBatch(

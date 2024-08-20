@@ -101,5 +101,11 @@
     "name": "Tuto Confiant",
     "unlockTip": "Obtenu en récompense du succès : 'Le meilleur joueur du monde'",
     "achievement": "HF_5win"
+  },
+  {
+    "url": "./skins/avatars/avatar_vehemon_1.png",
+    "name": "Vehemon",
+    "unlockTip": "Obtenu en récompense du succès : 'One Punch Man'",
+    "achievement": "HF_15dmg"
   }
 ]

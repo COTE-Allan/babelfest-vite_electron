@@ -47,8 +47,8 @@ export default function DeathController() {
         await updateDoc(doc(db, 'games', room), { processDeath: null })
 
         // Use the initial hasSpecialDeath value
-        if (phase !== 2 && !hasSpecialDeath) {
-          EndTurn(phase === 3 ? false : true)
+        if (phase === 3 && !hasSpecialDeath) {
+          EndTurn(false)
         }
       }
     }

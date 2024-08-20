@@ -526,8 +526,7 @@ export default function TutorialRoom() {
 
   useEffect(() => {
     if (tutorialWin) {
-      const achievement = getAchievementById('HF_tutorial')
-      giveAchievement(achievement)
+      giveAchievement('HF_tutorial')
 
       setTimeout(() => {
         navigate('/home')

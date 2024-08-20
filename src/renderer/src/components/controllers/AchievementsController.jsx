@@ -38,11 +38,11 @@ const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
     if (objective.gamemode.includes(gameData.gamemode)) {
       const value = getValue(gameData, objective.gameData)
       if (value !== undefined) {
-        if (objective.condition.startsWith("<")) {
+        if (objective.condition.startsWith('<')) {
           return value < parseInt(objective.condition.substring(1), 10)
-        } else if (objective.condition.startsWith(">")) {
+        } else if (objective.condition.startsWith('>')) {
           return value > parseInt(objective.condition.substring(1), 10)
-        } else if (objective.condition.startsWith("=")) {
+        } else if (objective.condition.startsWith('=')) {
           return value === parseInt(objective.condition.substring(1), 10)
         }
       }
@@ -51,8 +51,6 @@ const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
 
   return false
 }
-
-
 
 // Hook pour vérifier et décerner les succès
 export const useCheckForAchievements = () => {
@@ -69,7 +67,7 @@ export const useCheckForAchievements = () => {
 
     for (const ach of achievementsToCheck) {
       if (checkObjective(ach.objective, userInfo, playerStats, gameData, winner)) {
-        await giveAchievement(ach)
+        await giveAchievement(ach.id)
       }
     }
 

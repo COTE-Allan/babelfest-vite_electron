@@ -116,5 +116,11 @@
       "gameData": "turn",
       "condition": "<5"
     }
+  },
+  {
+    "id": "HF_15dmg",
+    "name": "One Punch Man",
+    "desc": "Infligez 15 points de dégâts en une seule attaque.",
+    "url": "./skins/avatars/avatar_vehemon_1.png"
   }
 ]

@@ -6,6 +6,7 @@ import { db, realtimeDb } from './Firebase'
 import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
+import { getAchievementById } from './components/controllers/AchievementsController'
 
 export const AuthContext = createContext()
 
@@ -181,22 +182,16 @@ export const AuthProvider = ({ children }) => {
     console.log('Utilisateur assigné au lobby avec succès')
   }
 
-  const giveAchievement = async (achievement) => {
-    if (!user) return
-
-    const userRef = doc(db, 'users', user.uid)
-
-    // Récupérer les données utilisateur actuelles
-    const userSnap = await getDoc(userRef)
-    if (!userSnap.exists()) return
-
-    const userData = userSnap.data()
+  const giveAchievement = async (achievementName) => {
+    if (!user && !userInfo) return
+    const achievement = getAchievementById(achievementName)
 
     // Vérifier si l'utilisateur a déjà l'achievement
-    if (userData.achievements && userData.achievements.includes(achievement.id)) {
+    if (userInfo.achievements && userInfo.achievements.includes(achievement.id)) {
       return
     }
 
+    const userRef = doc(db, 'users', user.uid)
     // Ajouter l'achievement à la liste des achievements de l'utilisateur
     await updateDoc(userRef, {
       achievements: arrayUnion(achievement.id)

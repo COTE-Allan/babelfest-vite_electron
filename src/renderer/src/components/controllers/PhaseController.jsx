@@ -123,7 +123,7 @@ export const useEndTurn = () => {
               shouldUpdate = true
             }
           })
-          ;['def', 'movedThisTurn', 'attackedThisTurn', 'affected'].forEach((prop) => {
+          ;['def', 'movedThisTurn', 'attackedThisTurn', 'affected', 'broken'].forEach((prop) => {
             if (cell.card[prop] != null) {
               delete cell.card[prop]
               shouldUpdate = true

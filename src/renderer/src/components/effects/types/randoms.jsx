@@ -5,7 +5,12 @@ import { getAllCardsOnArena } from '../targets'
 
 export function EffetRandom({ item, index }) {
   let target = item
-  let newEffect = getRandomFromArray(randomEffects, 1)[0]
+
+  // Effectuer une copie profonde de l'objet newEffect pour éviter toute mutation involontaire
+  let newEffect = JSON.parse(JSON.stringify(getRandomFromArray(randomEffects, 1)[0]))
+
+  console.log(`EffetRandom invoked on index ${index} for card ${target.card.name}.`)
+  console.log('Current effects:', target.card.effects)
 
   let effectInfos = getEffectInfo(newEffect.type)
   let randEffectInfos = getEffectInfo('random')
@@ -21,7 +26,12 @@ export function EffetRandom({ item, index }) {
     })
     delete newEffect.speParams
   }
+
+  // Remplacer l'effet à l'index spécifié
   target.card.effects[index] = newEffect
+
+  console.log('Updated effects:', target.card.effects)
+
   return {
     targets: [target],
     log: {

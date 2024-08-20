@@ -135,67 +135,74 @@ export const useTryEffect = () => {
     })
 
     for await (let item of authorizedCards) {
-      let effects = item.card.effects.filter((effect) => effect.when && effect.when.includes(when))
-      for (let [index, effect] of effects.entries()) {
-        console.log(`${item.card.name} active un effet, effect.type : ${effect.type}`)
+      // Parcourir les effets originaux de la carte
+      for (let index = 0; index < item.card.effects.length; index++) {
+        let effect = item.card.effects[index]
 
-        if ((effect.alreadyUsed ?? true) === false) {
-          effect.alreadyUsed = true
-        }
-        if ((effect.spawnUsed ?? true) === false) {
-          effect.spawnUsed = true
-        }
+        // Vérifier si l'effet est applicable
+        if (effect.when && effect.when.includes(when)) {
+          console.log(
+            `${item.card.name} active un effet, effect.type : ${effect.type}, index : ${index}`
+          )
 
-        if (effect.choice) {
-          let effectInfos = getEffectInfo(effect.type)
-          pattern = await getPattern(room)
-          switch (effect.choice) {
-            case 'target':
-              let possibleTargets = getAllCardsOnArena(item, effect.target, pattern)
-              if (possibleTargets.length !== 0) {
-                await goingStandby(room, playerID === 1 ? 2 : 1, false)
-                await demandToChoiceTarget(possibleTargets, effect, item).then(
-                  async (selection) => {
-                    setAskForTarget(false)
-                    const executedEffect = effectList[effect.type]({
-                      index,
-                      item,
-                      effect,
-                      targets: selection,
-                      pattern,
-                      effectInfos
-                    })
-                    await finishStandby(room)
-                    await concludeEffect(executedEffect)
-                  }
-                )
-              } else {
-                await concludeEffect({
-                  targets: [item],
-                  executor: item
-                })
-              }
-              break
-            default:
-              break
+          if ((effect.alreadyUsed ?? true) === false) {
+            effect.alreadyUsed = true
           }
-        } else {
-          let effectInfos = getEffectInfo(effect.type)
-          const executedEffect = await effectList[effect.type]({
-            index,
-            item,
-            effect,
-            pattern,
-            attacker: participants?.attacker,
-            defender: participants?.defender,
-            updatedDeadCell,
-            room,
-            killer: killer,
-            shop,
-            effectInfos
-          })
-          await concludeEffect(executedEffect)
-          stillDead = executedEffect?.stillDead ?? true
+          if ((effect.spawnUsed ?? true) === false) {
+            effect.spawnUsed = true
+          }
+
+          if (effect.choice) {
+            let effectInfos = getEffectInfo(effect.type)
+            pattern = await getPattern(room)
+            switch (effect.choice) {
+              case 'target':
+                let possibleTargets = getAllCardsOnArena(item, effect.target, pattern)
+                if (possibleTargets.length !== 0) {
+                  await goingStandby(room, playerID === 1 ? 2 : 1, false)
+                  await demandToChoiceTarget(possibleTargets, effect, item).then(
+                    async (selection) => {
+                      setAskForTarget(false)
+                      const executedEffect = effectList[effect.type]({
+                        index, // Utiliser l'index original ici
+                        item,
+                        effect,
+                        targets: selection,
+                        pattern,
+                        effectInfos
+                      })
+                      await finishStandby(room)
+                      await concludeEffect(executedEffect)
+                    }
+                  )
+                } else {
+                  await concludeEffect({
+                    targets: [item],
+                    executor: item
+                  })
+                }
+                break
+              default:
+                break
+            }
+          } else {
+            let effectInfos = getEffectInfo(effect.type)
+            const executedEffect = await effectList[effect.type]({
+              index, // Utiliser l'index original ici
+              item,
+              effect,
+              pattern,
+              attacker: participants?.attacker,
+              defender: participants?.defender,
+              updatedDeadCell,
+              room,
+              killer: killer,
+              shop,
+              effectInfos
+            })
+            await concludeEffect(executedEffect)
+            stillDead = executedEffect?.stillDead ?? true
+          }
         }
       }
     }

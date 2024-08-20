@@ -160,7 +160,6 @@
       {
         "when": [3],
         "type": "defDebuff",
-        "value": -2,
         "target": "rival"
       },
       {
@@ -257,7 +256,6 @@
       {
         "when": [3],
         "type": "defDebuff",
-        "value": -1,
         "target": "rival"
       },
       { "when": ["attacked"], "type": "trap" }

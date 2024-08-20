@@ -20,34 +20,37 @@ export default function MatchSummaries({ summaries = [] }) {
 
   return (
     <div className="matchSummaries">
-      {summaries.map((summary) => {
-        let gameDetails = summary.gameDetails
-        let player = summary.player
-        let rival = summary.opponent
-        return (
-          <div
-            className="matchSummaries-item"
-            onClick={() => {
-              navigate(`/userProfile/${rival.id}`)
-            }}
-          >
-            <div className="matchSummaries-item-date">
-              Le {format(new Date(gameDetails.timestamp), 'dd/MM/yy à HH:mm')} |{' '}
-              {gameDetails.turnCount} tours | XP +{player.xpGained}{' '}
-              {gameDetails.mode === 'quick' && `| MMR +${player.mmrGained}`}
-            </div>
-            <div className="matchSummaries-item-user">
-              <div className="matchSummaries-item-user-tags">
-                <span className={`mode tag ${gameDetails.mode}`}>{modes[gameDetails.mode]}</span>
-                <span className={`versus tag ${gameDetails.result}`}>
-                  {result[gameDetails.result]}
-                </span>
+      {summaries
+        .slice() // Copie l'array pour ne pas modifier l'original
+        .reverse() // Inverse l'ordre des éléments
+        .map((summary) => {
+          let gameDetails = summary.gameDetails
+          let player = summary.player
+          let rival = summary.opponent
+          return (
+            <div
+              className="matchSummaries-item"
+              onClick={() => {
+                navigate(`/userProfile/${rival.id}`)
+              }}
+            >
+              <div className="matchSummaries-item-date">
+                Le {format(new Date(gameDetails.timestamp), 'dd/MM/yy à HH:mm')} |{' '}
+                {gameDetails.turnCount} tours | XP +{player.xpGained}{' '}
+                {gameDetails.mode === 'quick' && `| MMR +${player.mmrGained}`}
               </div>
-              <PlayerBanner user={rival} color={rival.primaryColor} />
+              <div className="matchSummaries-item-user">
+                <div className="matchSummaries-item-user-tags">
+                  <span className={`mode tag ${gameDetails.mode}`}>{modes[gameDetails.mode]}</span>
+                  <span className={`versus tag ${gameDetails.result}`}>
+                    {result[gameDetails.result]}
+                  </span>
+                </div>
+                <PlayerBanner user={rival} color={rival.primaryColor} />
+              </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
     </div>
   )
 }

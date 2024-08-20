@@ -128,9 +128,16 @@
   {
     "slug": "defDebuff",
     "name": "Brise-Bouclier",
-    "desc": "Au début d'une phase d'attaque, cette carte baisse la défense des cartes ennemies adjacentes de la valeur indiqué.",
+    "desc": "Au début d'une phase d'attaque, appliquez l'effet 'Brisé' aux ennemis adjacents. (cette carte ne pourra pas avoir d'armure ce tour.)",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp",
     "type": "Débuffs"
+  },
+  {
+    "slug": "defBroken",
+    "name": "Brisé",
+    "desc": "Cette carte ne peut pas avoir d'armure pendant ce tour.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp",
+    "type": "Malus"
   },
   {
     "slug": "rageShield",

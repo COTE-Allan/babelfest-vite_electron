@@ -119,7 +119,7 @@ export default function Logs(props) {
                         <>
                           {Array.isArray(log.trigger) ? (
                             log.trigger.map((trigger, idx) => (
-                              <div key={idx}>
+                              <div key={idx} className="logs-item-header">
                                 <img
                                   className="icon-action-img"
                                   src={
@@ -137,7 +137,7 @@ export default function Logs(props) {
                               </div>
                             ))
                           ) : (
-                            <div>
+                            <div className="logs-item-header">
                               <img
                                 className="icon-action-img"
                                 src={

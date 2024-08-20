@@ -196,7 +196,7 @@ export default function Cell({ active, confirmModal, cell }) {
               )}
               {card.timerSummon && <div className="cell-card-counter">{card.timerSummon}</div>}
               {typeof card.def === 'number' && card.def !== 0 && (
-                <div className="cell-card-def">{card.def}</div>
+                <div className={`cell-card-def ${card.broken ? 'disabled' : ''}`}>{card.def}</div>
               )}
 
               <div className="img-container">

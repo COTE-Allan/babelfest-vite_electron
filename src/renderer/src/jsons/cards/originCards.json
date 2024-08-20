@@ -561,7 +561,6 @@
       {
         "when": [3],
         "type": "defDebuff",
-        "value": -1,
         "target": "rival"
       }
     ]

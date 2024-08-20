@@ -137,7 +137,7 @@ const UserProfile = () => {
           </HudNavLink>
           <HudNavLink to={-1} permOpen>
             <FaArrowLeft size={35} />
-            <span className="hidden-span">Quitter le profil</span>
+            <span className="hidden-span">Page précédente</span>
           </HudNavLink>
         </div>
       </div>

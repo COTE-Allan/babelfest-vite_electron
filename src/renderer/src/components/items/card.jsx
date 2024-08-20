@@ -28,7 +28,8 @@ export default function Card({ card }) {
     placementCostLeft,
     setRightWindow,
     rightWindow,
-    setHandCardsCredits
+    setHandCardsCredits,
+    setConfirmModal
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export default function Card({ card }) {
       if (isSelected) {
         // Si la carte est déjà sélectionnée, la désélectionner
         updatedCards = selectedCards.filter((item) => item.id !== cardId)
+        setConfirmModal(false)
       } else {
         // Si la carte n'est pas sélectionnée
         if (selectedCards.length < max) {

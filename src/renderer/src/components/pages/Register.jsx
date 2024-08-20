@@ -2,7 +2,6 @@ import { auth, db } from '../../Firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 
 import '../../styles/pages/home.scss'
-import MenuFooter from '../interface/MenuFooter'
 import { useState } from 'react'
 import { doc, setDoc } from 'firebase/firestore'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -13,16 +12,73 @@ import CardsBackground from '../esthetics/CardsBackground'
 const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [username, setUsername] = useState('')
+  const [errorEmail, setErrorEmail] = useState('')
+  const [errorPassword, setErrorPassword] = useState('')
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState('')
+  const [errorUsername, setErrorUsername] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const [error, setError] = useState('')
+  const validateForm = () => {
+    let valid = true
+    setErrorEmail('')
+    setErrorPassword('')
+    setErrorConfirmPassword('')
+    setErrorUsername('')
+
+    if (!username) {
+      setErrorUsername("Nom d'utilisateur requis.")
+      valid = false
+    }
+
+    if (!email) {
+      setErrorEmail('Adresse email requise.')
+      valid = false
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrorEmail('Adresse email invalide.')
+      valid = false
+    }
+
+    if (!password) {
+      setErrorPassword('Mot de passe requis.')
+      valid = false
+    } else if (password.length < 6) {
+      setErrorPassword('Le mot de passe doit comporter au moins 6 caractères.')
+      valid = false
+    }
+
+    if (password !== confirmPassword) {
+      setErrorConfirmPassword('Les mots de passe ne correspondent pas.')
+      valid = false
+    }
+
+    return valid
+  }
+
+  const handleFirebaseError = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        return "L'adresse email est déjà utilisée."
+      case 'auth/invalid-email':
+      case 'auth/invalid-credential':
+        return 'Adresse email invalide.'
+      case 'auth/weak-password':
+        return 'Le mot de passe est trop faible.'
+      default:
+        return "Erreur lors de l'inscription. Veuillez réessayer."
+    }
+  }
 
   const register = async () => {
+    if (!validateForm()) return
+
+    setLoading(true)
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       const user = userCredential.user
-      // Créer un document dans Firestore après l'inscription
+
       const userRef = doc(db, 'users', user.uid)
       await setDoc(userRef, {
         username: username,
@@ -47,16 +103,22 @@ const Register = () => {
           victories: 0
         }
       })
-      navigate('/login')
+
       sendEmailVerification(user)
         .then(() => {
           toast.success('Vous avez reçu un mail de confirmation.')
         })
         .catch((error) => {
-          console.error("Erreur lors de l'envoi de l'email de vérification :", error)
+          toast.error("Erreur lors de l'envoi de l'email de vérification.")
         })
+
+      navigate('/login')
     } catch (error) {
-      setError(error.message)
+      const errorMessage = handleFirebaseError(error.code)
+      setErrorEmail(errorMessage)
+      toast.error(errorMessage)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -72,6 +134,7 @@ const Register = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Nom d'utilisateur"
             />
+            {errorUsername && <div className="error-message">{errorUsername}</div>}
           </div>
           <div className="home-form-input">
             <input
@@ -80,6 +143,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Adresse email"
             />
+            {errorEmail && <div className="error-message">{errorEmail}</div>}
           </div>
           <div className="home-form-input">
             <input
@@ -88,11 +152,20 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Mot de passe"
             />
+            {errorPassword && <div className="error-message">{errorPassword}</div>}
           </div>
-          <Button className="home-button" onClick={register}>
-            Inscription
+          <div className="home-form-input">
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirmer le mot de passe"
+            />
+            {errorConfirmPassword && <div className="error-message">{errorConfirmPassword}</div>}
+          </div>
+          <Button className="home-button" onClick={register} disabled={loading}>
+            {loading ? 'Inscription...' : 'Inscription'}
           </Button>
-          {error && <div>Error: {error}</div>}
           <NavLink to={'/login'}>Retour à la connexion</NavLink>
         </div>
       </div>

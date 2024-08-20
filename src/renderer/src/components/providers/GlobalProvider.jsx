@@ -205,6 +205,7 @@ export const GlobalProvider = () => {
 
         setPlayerRival(isHost ? player2 : player1)
         setPlayerSelf(isHost ? player1 : player2)
+
         if (handJ1 && handJ2) {
           setPhaseRules(DefinePhaseRule(phase, isHost ? handJ1.length : handJ2.length))
         }
@@ -227,12 +228,8 @@ export const GlobalProvider = () => {
     const tradeCard = useTradeCard()
 
     function startWatchingTradePhase() {
-      const handFiltered = playerSelf.hand.filter((item) => !selectedCards.includes(item))
+      setPhaseRules([0, 0, 0])
       setSelectedCards([])
-      setPlayerSelf((prevState) => {
-        return { ...prevState, hand: handFiltered }
-      })
-
       if (host) {
         watchTradeRequests()
       }
@@ -272,6 +269,7 @@ export const GlobalProvider = () => {
     winner,
     selectedCards,
     setSelectedCards,
+    setPlayerSelf,
     deck,
     askForRectoVerso,
     setAskForRectoVerso,

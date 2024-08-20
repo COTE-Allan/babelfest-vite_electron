@@ -8,6 +8,7 @@ import { useTryEffect } from './EffectsController'
 import { generateUniqueID, getPattern } from '../others/toolBox'
 import { usePushLogsIntoBatch, usePushSceneIntoBatch } from './LogsController'
 import { getEffectInfo } from '../effects/basics'
+import { AuthContext } from '../../AuthContext'
 
 // ================================================================
 // TYPES DE PLACEMENTS ============================================
@@ -195,6 +196,7 @@ export const usePlaceCardOnArea = () => {
 // Attaquer
 export const useTryAttack = () => {
   const { pattern, room, playerID } = useContext(GlobalContext)
+  const { giveAchievement } = useContext(AuthContext)
   const EndTurn = useEndTurn()
   const pushLogsIntoBatch = usePushLogsIntoBatch()
   const pushSceneIntoBatch = usePushSceneIntoBatch()
@@ -288,22 +290,26 @@ export const useTryAttack = () => {
       } else {
         // Calculer les dégâts
         let damage
-        if (cardTarget.def && !cardAttacker.deathScythe) {
+        if (cardTarget.broken) {
+          damage = atkAttacker // Ignorer la défense et infliger des dégâts directement
+        } else if (cardTarget.def && !cardAttacker.deathScythe) {
           if (atkAttacker >= cardTarget.def) {
-            // Si l'attaque est égale ou supérieure à la défense,
-            // infliger les dégâts restants aux hp après avoir brisé la défense
             damage = atkAttacker - cardTarget.def
             delete cardTarget.def // Supprimer la défense car elle est brisée
           } else {
-            // Si l'attaque est inférieure à la défense,
-            // réduire la défense de la valeur de l'attaque sans infliger de dégâts aux hp
             cardTarget.def -= atkAttacker
             damage = 0
           }
         } else {
-          damage = atkAttacker // Infliger des dégâts directement si aucune défense n'est présente ou si la faux de la mort est active
+          damage = atkAttacker // Infliger des dégâts directement
         }
 
+        // Vérifier si les dégâts sont égaux ou supérieurs à 15
+        if (damage >= 15) {
+          giveAchievement('HF_15dmg')
+        }
+
+        // Appliquer les dégâts
         hpTarget = hpTarget - damage
 
         if (hpTarget <= 0) {
