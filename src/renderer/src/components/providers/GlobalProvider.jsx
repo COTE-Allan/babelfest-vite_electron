@@ -230,7 +230,7 @@ export const GlobalProvider = () => {
     function startWatchingTradePhase() {
       setPhaseRules([0, 0, 0])
       setSelectedCards([])
-      if (host) {
+      if (!host) {
         watchTradeRequests()
       }
     }

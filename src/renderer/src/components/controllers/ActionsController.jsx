@@ -305,8 +305,8 @@ export const useTryAttack = () => {
         }
 
         // Vérifier si les dégâts sont égaux ou supérieurs à 15
-        if (damage >= 15) {
-          giveAchievement('HF_15dmg')
+        if (damage >= 11) {
+          giveAchievement('HF_11dmg')
         }
 
         // Appliquer les dégâts
