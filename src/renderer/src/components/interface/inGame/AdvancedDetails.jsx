@@ -25,7 +25,7 @@ export function AdvancedDetails({ card }) {
   useEffect(() => {
     setDetailCard(advancedDetailCard)
   }, [advancedDetailCard])
-
+  console.log(detailCard)
   return (
     <div className="advancedDetails" ref={ref}>
       {detailCard.id !== advancedDetailCard.id && (
@@ -52,6 +52,16 @@ export function AdvancedDetails({ card }) {
       <span className="details-card-credits">
         Carte de la collection {detailCard.collection}, dessinée par {detailCard.author}
       </span>
+      {detailCard.affected && (
+        <div className="details-card-afflictions">
+          <h3>Buffs / Débuffs actifs :</h3>
+          <ul className="details-card-afflictions-list">
+            {detailCard.affected.map((affliction) => (
+              <li style={{ backgroundColor: affliction.colorCode }}>{affliction.text}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <CardEffects detailCard={detailCard} setLinkedCard={setLinkedCard} />
       <img className="card-visual" src={detailCard.url} alt={`Visuel de la carte sélectionnée.`} />
     </div>

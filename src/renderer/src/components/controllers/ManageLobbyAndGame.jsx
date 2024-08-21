@@ -271,8 +271,8 @@ async function DrawCardsWithRarityMax(room, cardAmount) {
   const shop = await drawRandomCards(deck, 9)
 
   // Draw hands for both players with the rarity constraint
-  const hand1 = await drawHandWithRarityConstraint(deck, cardAmount + 5)
-  const hand2 = await drawHandWithRarityConstraint(deck, cardAmount + 5)
+  const hand1 = await drawHandWithRarityConstraint(deck, cardAmount)
+  const hand2 = await drawHandWithRarityConstraint(deck, cardAmount)
   // const hand1 = await drawHandWithAdjustedRarity(deck, cardAmount)
   // const hand2 = await drawHandWithAdjustedRarity(deck, cardAmount)
 

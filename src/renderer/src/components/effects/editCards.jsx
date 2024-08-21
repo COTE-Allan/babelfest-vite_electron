@@ -42,6 +42,12 @@ export async function drawHandWithRarityConstraint(deck, cardAmount) {
   let totalRarity
   const deckCopy = [...deck] // Créer une copie du deck pour préserver l'original
 
+  // Calculer les bornes de rareté en fonction de cardAmount et arrondir à l'inférieur
+  const minBase = 13
+  const maxBase = 15
+  const minRarity = Math.floor(minBase * (cardAmount / 8))
+  const maxRarity = Math.floor(maxBase * (cardAmount / 8))
+
   do {
     // Réinitialise la main et le total de la rareté
     hand = []
@@ -60,12 +66,86 @@ export async function drawHandWithRarityConstraint(deck, cardAmount) {
     }
 
     // Si la main ne satisfait pas la contrainte, on remet les cartes dans le deck
-    if (totalRarity < 13 || totalRarity > 15) {
+    if (totalRarity < minRarity || totalRarity > maxRarity) {
       deckCopy.push(...hand)
     }
-  } while (totalRarity < 13 || totalRarity > 15)
+  } while (totalRarity < minRarity || totalRarity > maxRarity)
 
   // Retirer les cartes tirées du deck original
+  for (const card of hand) {
+    const index = deck.indexOf(card)
+    if (index > -1) {
+      deck.splice(index, 1)
+    }
+  }
+
+  return hand
+}
+
+export async function drawHandWithTargetDistribution(deck, cardAmount) {
+  if (deck.length < cardAmount) {
+    console.error('Not enough cards in the deck to draw the required hand.')
+    return []
+  }
+
+  let hand = []
+  const deckCopy = [...deck]
+
+  // Ensure at least one card of rarity 3 or 4
+  let rarity3or4Cards = deckCopy.filter((card) => card.rarity === 3 || card.rarity === 4)
+  if (rarity3or4Cards.length > 0) {
+    const card = rarity3or4Cards[Math.floor(Math.random() * rarity3or4Cards.length)]
+    hand.push(card)
+    deckCopy.splice(deckCopy.indexOf(card), 1)
+  }
+
+  // Handle Rarity 4: Only 0 or 1 additional card
+  let rarity4Cards = deckCopy.filter((card) => card.rarity === 4)
+  if (hand[0].rarity !== 4 && rarity4Cards.length > 0 && Math.random() < 0.25) {
+    // Assuming 25% chance for rarity 4
+    const card = rarity4Cards[Math.floor(Math.random() * rarity4Cards.length)]
+    hand.push(card)
+    deckCopy.splice(deckCopy.indexOf(card), 1)
+  }
+
+  // Handle Rarity 3: Only up to 1 more card if a rarity 4 is already included, otherwise up to 2 cards
+  let maxRarity3 = hand.some((card) => card.rarity === 4) ? 1 : 2
+  let rarity3Cards = deckCopy.filter((card) => card.rarity === 3)
+  for (let i = 0; i < maxRarity3 && rarity3Cards.length > 0; i++) {
+    const card = rarity3Cards[Math.floor(Math.random() * rarity3Cards.length)]
+    hand.push(card)
+    deckCopy.splice(deckCopy.indexOf(card), 1)
+    rarity3Cards = deckCopy.filter((card) => card.rarity === 3) // Refresh available cards
+  }
+
+  // Fill the rest with Rarity 1 and 2, with Rarity 2 being slightly more rare
+  let remainingCardsNeeded = cardAmount - hand.length
+  let lowerRarityCards = deckCopy.filter((card) => card.rarity === 1 || card.rarity === 2)
+
+  for (let i = 0; i < remainingCardsNeeded && lowerRarityCards.length > 0; i++) {
+    // Favor rarity 1 slightly over rarity 2
+    let card
+    const rarity1Cards = lowerRarityCards.filter((card) => card.rarity === 1)
+    const rarity2Cards = lowerRarityCards.filter((card) => card.rarity === 2)
+
+    if (rarity1Cards.length > 0 && (rarity2Cards.length === 0 || Math.random() < 0.6)) {
+      // 60% chance to choose rarity 1
+      card = rarity1Cards[Math.floor(Math.random() * rarity1Cards.length)]
+    } else if (rarity2Cards.length > 0) {
+      card = rarity2Cards[Math.floor(Math.random() * rarity2Cards.length)]
+    }
+
+    if (card) {
+      hand.push(card)
+      deckCopy.splice(deckCopy.indexOf(card), 1)
+      lowerRarityCards = deckCopy.filter((card) => card.rarity === 1 || card.rarity === 2) // Refresh available cards
+    }
+  }
+
+  // Shuffle the hand to mix the rarities
+  hand = hand.sort(() => Math.random() - 0.5)
+
+  // Remove drawn cards from the original deck
   for (const card of hand) {
     const index = deck.indexOf(card)
     if (index > -1) {

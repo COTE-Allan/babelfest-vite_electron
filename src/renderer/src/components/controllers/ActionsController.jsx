@@ -539,42 +539,77 @@ export const useTrySpawn = () => {
   const [isSpawning, setIsSpawning] = useState(false)
 
   const trySpawn = async () => {
-    // Ne faites rien si isSpawning est déjà true
     if (isSpawning) return
-
-    // Indiquez que trySpawn a commencé
     setIsSpawning(true)
 
-    let spawnedCells = pattern.filter((cell) =>
-      cell.card?.effects?.some((effect) => 'spawnUsed' in effect && effect.spawnUsed === false)
-    )
-
-    // Vérifie si une carte spawnUsed false possède un effet de type random
-    const hasRandomEffect = spawnedCells.some((cell) =>
-      cell.card.effects.some((effect) => effect.type === 'random')
-    )
-    console.log(hasRandomEffect)
-
-    // Effectue le tryEffect pour chaque cellule avec spawnUsed false
-    await Promise.all(
-      spawnedCells.map(async (cell) => {
-        console.log('spawn1')
-        await tryEffect('spawn', [], [cell.card.id, cell.id])
-      })
-    )
-
-    // Si une carte avait un effet de type random, refait un tryEffect spawn
-    if (hasRandomEffect) {
-      await Promise.all(
-        spawnedCells.map(async (cell) => {
-          console.log('spawn2')
-          await tryEffect('spawn', [], [cell.card.id, cell.id])
-        })
+    try {
+      let spawnedCells = pattern.filter((cell) =>
+        cell.card?.effects?.some((effect) => effect.when?.includes('spawn') && !effect.spawnUsed)
       )
+
+      for (const cell of spawnedCells) {
+        await processCellSpawn(cell)
+
+        // Re-fetch pattern to check for any newly spawned cells
+        let updatedPattern = await getPattern(room)
+        let newSpawnedCells = updatedPattern.filter((newCell) =>
+          newCell.card?.effects?.some(
+            (effect) => effect.when?.includes('spawn') && !effect.spawnUsed
+          )
+        )
+
+        // Process newly spawned cells recursively
+        for (const newCell of newSpawnedCells) {
+          await processCellSpawn(newCell)
+        }
+      }
+    } catch (error) {
+      console.error('Error during spawning process:', error)
+    } finally {
+      setIsSpawning(false)
+    }
+  }
+
+  const processCellSpawn = async (cell) => {
+    // Keep track of which spawn effects have been processed
+    let processedIndexes = new Set()
+
+    // First, process all initial spawn effects
+    await tryEffect('spawn', [], [cell.card.id, cell.id])
+
+    // Mark the initial spawn effects as processed
+    cell.card.effects.forEach((effect, index) => {
+      if (effect.when?.includes('spawn')) {
+        processedIndexes.add(index)
+        effect.spawnUsed = true
+      }
+    })
+
+    let effectTriggeredAgain = false
+
+    // Now, check if any new spawn effects were added by the random effect
+    for (let i = 0; i < cell.card.effects.length; i++) {
+      let effect = cell.card.effects[i]
+
+      // If a new spawn effect was added by a random effect, it won't be in processedIndexes
+      if (effect.when?.includes('spawn') && !processedIndexes.has(i)) {
+        effectTriggeredAgain = true
+        break
+      }
     }
 
-    // Indiquez que trySpawn est terminé
-    setIsSpawning(false)
+    if (effectTriggeredAgain) {
+      // Re-run tryEffect, but ensure it only processes unprocessed spawn effects
+      await tryEffect('spawn', [], [cell.card.id, cell.id])
+
+      // Mark the newly triggered effects as processed
+      cell.card.effects.forEach((effect, index) => {
+        if (effect.when?.includes('spawn')) {
+          processedIndexes.add(index)
+          effect.spawnUsed = true
+        }
+      })
+    }
   }
 
   return trySpawn

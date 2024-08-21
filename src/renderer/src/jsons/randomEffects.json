@@ -97,25 +97,29 @@
     "type": "randomATK",
     "when": ["spawn", 1],
     "range": [1, 1, 1, 1, 2, 3],
-    "name": "Attaque désordonnée"
+    "name": "Attaque désordonnée",
+    "spawnUsed": false
   },
   {
     "type": "randomDEP",
     "when": ["spawn", 1],
     "range": [1, 1, 1, 1, 2, 3],
-    "name": "Déplacement désordonné"
+    "name": "Déplacement désordonné",
+    "spawnUsed": false
   },
   {
     "type": "randomATK",
     "when": ["spawn", 1],
     "range": [1, 1, 1, 1, 1, 2, 2, 3, 4],
-    "name": "Attaque désordonnée"
+    "name": "Attaque désordonnée",
+    "spawnUsed": false
   },
   {
     "type": "randomDEP",
     "when": ["spawn", 1],
     "range": [1, 1, 1, 1, 1, 2, 2, 3, 4],
-    "name": "Déplacement désordonné"
+    "name": "Déplacement désordonné",
+    "spawnUsed": false
   },
   {
     "when": [3],
