@@ -115,7 +115,7 @@ export default function TutorialRoom() {
   const [tutorialStep, setTutorialStep] = useState(1)
   const [selectedCard, setSelectedCard] = useState(null)
   const [selectedCell, setSelectedCell] = useState(null)
-  const [selectedCellCard, setSelectedCellCard] = useState(null)
+  const [selectedCellCard, setSelectedCellCard] = useState([])
   const [selectedShopCards, setSelectedShopCards] = useState([])
   const [selectedHandCards, setSelectedHandCards] = useState([])
   const [selectedTradeCard, setSelectedTradeCard] = useState(null)
@@ -424,6 +424,7 @@ export default function TutorialRoom() {
         setSelectedCell(null)
         setPlacementCostLeft(3)
         setTutorialStep(7)
+        setSelectedCellCard([])
       } else {
         setSelectedCell(id)
       }
@@ -437,11 +438,12 @@ export default function TutorialRoom() {
         setTurn(1)
         setTutorialStep(9)
         setPlacementCostLeft(2)
+        setSelectedCellCard([])
       } else {
         setSelectedCell(id)
       }
     } else if (tutorialStep === 11 && id === 17) {
-      setSelectedCellCard(id)
+      setSelectedCellCard([id])
       setTutorialStep(12)
     } else if (tutorialStep === 12 && id === 9) {
       if (selectedCell === id) {
@@ -456,7 +458,7 @@ export default function TutorialRoom() {
           )
         )
         setSelectedCell(null)
-        setSelectedCellCard(null)
+        setSelectedCellCard([])
         setTurn(1)
         setTutorialStep(13)
         setMovesCostLeft(2)
@@ -466,14 +468,14 @@ export default function TutorialRoom() {
         setSelectedCell(id)
       }
     } else if (tutorialStep === 15 && id === 9) {
-      setSelectedCellCard(id)
+      setSelectedCellCard([id])
       setTutorialStep(16)
     } else if (tutorialStep === 16 && id === 10) {
       if (selectedCell === id) {
         setPattern(
           pattern.map((cell) => (cell.id === 10 ? { ...cell, card: null, owner: 0 } : cell))
         )
-        setSelectedCellCard(null)
+        setSelectedCellCard([])
         setSelectedCell(null)
         setTutorialStep(17)
       } else {
@@ -489,12 +491,13 @@ export default function TutorialRoom() {
         setTutorialStep(21)
         setSelectedCard(null)
         setSelectedCell(null)
+        setSelectedCellCard([])
         setPlacementCostLeft(4 - selectedCard.rarity)
       } else {
         setSelectedCell(id)
       }
     } else if (tutorialStep === 22 && id === 9) {
-      setSelectedCellCard(id)
+      setSelectedCellCard([id])
       setTutorialStep(23)
     } else if (tutorialStep === 23 && id === 2) {
       if (selectedCell) {
@@ -511,7 +514,7 @@ export default function TutorialRoom() {
         setTutorialStep(24)
         setMovesCostLeft(2)
         setSelectedCell(null)
-        setSelectedCellCard(null)
+        setSelectedCellCard([])
       } else {
         setSelectedCell(id)
       }
@@ -662,7 +665,7 @@ export default function TutorialRoom() {
                     <div
                       key={index}
                       className={`cell ${isImportantCell(cell.id) ? 'important' : ''} ${
-                        selectedCellCard === cell.id ? 'selected' : ''
+                        selectedCellCard.includes(cell.id) ? 'selected' : ''
                       } ${selectedCell === cell.id ? 'selected-noVibrate' : ''}`}
                       id={cell.id}
                       data-team={cell.side}
@@ -680,7 +683,11 @@ export default function TutorialRoom() {
                             : rival.primaryColor
                           : '#fff'
                       }}
-                      onClick={() => handleCellClick(cell.id)}
+                      onClick={() => {
+                        if (isImportantCell(cell.id))
+                          setSelectedCellCard([...selectedCellCard, cell.id])
+                        handleCellClick(cell.id)
+                      }}
                     >
                       {isImportantCell(cell.id) && (!cell.card || cell.owner !== 1) && (
                         <div className="cell-placementTrigger" />
