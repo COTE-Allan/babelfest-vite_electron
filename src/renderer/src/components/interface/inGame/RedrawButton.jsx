@@ -35,7 +35,7 @@ export default function RedrawButton() {
 
       console.log("Après mise à jour, nouvelle main dans l'état local:", newHand)
 
-      setRedrawUsed(true)
+      // setRedrawUsed(true)
     } catch (error) {
       console.error('Error in executeRedraw:', error)
     }

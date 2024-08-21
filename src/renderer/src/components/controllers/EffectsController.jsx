@@ -157,7 +157,12 @@ export const useTryEffect = () => {
             pattern = await getPattern(room)
             switch (effect.choice) {
               case 'target':
-                let possibleTargets = getAllCardsOnArena(item, effect.target, pattern)
+                let possibleTargets = getAllCardsOnArena(
+                  item,
+                  effect.target,
+                  pattern,
+                  effect.base ?? true
+                )
                 if (possibleTargets.length !== 0) {
                   await goingStandby(room, playerID === 1 ? 2 : 1, false)
                   await demandToChoiceTarget(possibleTargets, effect, item).then(

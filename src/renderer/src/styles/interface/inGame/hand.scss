@@ -27,7 +27,7 @@
       margin-left: 0; // Aucun chevauchement pour la première carte
     }
 
-    @for $i from 1 through 10 {
+    @for $i from 1 through 20 {
       &:nth-child(#{$i}) {
         // Ajuster l'angle de rotation si nécessaire
 

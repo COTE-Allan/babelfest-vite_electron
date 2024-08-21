@@ -269,7 +269,7 @@
     "slug": "grapple",
     "name": "Grappin",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707128021/babelfest/icons/grapple.webp",
-    "desc": "À l'invocation, ciblez une carte, téléportez là sur la case la plus proche de cette carte.",
+    "desc": "À l'invocation, ciblez une carte (sauf cartes sur bases), téléportez là sur la case la plus proche de cette carte.",
     "type": "Tactiques"
   },
   {

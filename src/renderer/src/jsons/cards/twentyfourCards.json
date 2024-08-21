@@ -105,7 +105,8 @@
         "type": "grapple",
         "target": "any",
         "spawnUsed": false,
-        "choice": "target"
+        "choice": "target",
+        "base": false
       }
     ]
   },
@@ -271,7 +272,7 @@
   },
   {
     "featured": true,
-    "name": "La patrouille",
+    "name": "La Patrouille",
     "title": "Loubards de Babelfest",
     "atk": 2,
     "dep": 1,

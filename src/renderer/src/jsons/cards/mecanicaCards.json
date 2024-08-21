@@ -195,7 +195,8 @@
         "type": "grapple",
         "target": "any",
         "spawnUsed": false,
-        "choice": "target"
+        "choice": "target",
+        "base": false
       }
     ]
   },
