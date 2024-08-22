@@ -20,6 +20,11 @@
     "unlockTip": "Débloqué par défaut."
   },
   {
+    "url": "./skins/avatars/avatar_tulip_1.png",
+    "name": "Tulip",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230255/babelfest/skins/profilePics/babelfest_origine_revamped36.webp",
     "name": "Améthyste",
     "unlockTip": "Débloqué par défaut."
@@ -89,6 +94,18 @@
     "name": "Le mec dans sa fusée",
     "unlockTip": "Obtenu en atteignant le niveau 23.",
     "level": 23
+  },
+  {
+    "url": "./skins/avatars/avatar_krone_1.png",
+    "name": "Krone",
+    "unlockTip": "Obtenu en atteignant le niveau 36.",
+    "level": 36
+  },
+  {
+    "url": "./skins/avatars/avatar_tulip_2.png",
+    "name": "Tulip sérieuse",
+    "unlockTip": "Obtenu en atteignant le niveau 64.",
+    "level": 64
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp",

@@ -125,6 +125,7 @@ export const usePlaceCardOnArea = () => {
   const [batchCommit, setBatchCommit] = useState(false)
   const pushLogsIntoBatch = usePushLogsIntoBatch()
   const pushSceneIntoBatch = usePushSceneIntoBatch()
+  const { giveAchievement } = useContext(AuthContext)
 
   async function placeCardOnArena(cellID, isRecto = true) {
     let cardToPlace = selectedCards[0]
@@ -161,6 +162,15 @@ export const usePlaceCardOnArea = () => {
       action: `Invocation en ${cell.coordinate}`
     })
     setPlacementCostLeft(placementCostLeft - cardToPlace.rarity)
+
+    if (cardToPlace.name === 'Krone' && cardToPlace.title === 'Intruse cosmique') {
+      // Compter le nombre de cellules qui contiennent une carte valide
+      const filledCellsCount = pattern.filter((cell) => cell.card).length
+
+      if (filledCellsCount >= 10) {
+        await giveAchievement('HF_kroneChaos')
+      }
+    }
 
     batch
       .commit()
@@ -306,7 +316,7 @@ export const useTryAttack = () => {
 
         // Vérifier si les dégâts sont égaux ou supérieurs à 15
         if (damage >= 11) {
-          giveAchievement('HF_11dmg')
+          await giveAchievement('HF_11dmg')
         }
 
         // Appliquer les dégâts

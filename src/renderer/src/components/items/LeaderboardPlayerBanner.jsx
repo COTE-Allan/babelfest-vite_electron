@@ -1,6 +1,7 @@
 import ProfilePicture from '../esthetics/profilePicture'
 import '../../styles/items/leaderboardPlayerBanner.scss'
 import { useNavigate } from 'react-router-dom'
+import { NameAndTitle } from './NameAndTitle'
 
 export default function LeaderboardPlayerBanner({ user, accessProfile }) {
   const navigate = useNavigate()
@@ -23,8 +24,7 @@ export default function LeaderboardPlayerBanner({ user, accessProfile }) {
         border={user.primaryColor}
       />
       <div className="leaderboardPlayerBanner-content">
-        <h1>{user.username}</h1>
-        <h2>{user.title === 'level' ? `Niveau ${user.level}` : user.title}</h2>
+        <NameAndTitle user={user} />
       </div>
     </div>
   )

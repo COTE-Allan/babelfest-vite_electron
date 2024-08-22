@@ -324,7 +324,7 @@ export default function Library() {
               <span>par {selected.author}</span>
 
               {selected.desc && (
-                <p className="rainbow_text_animated library-detail-infos-desc">{selected.desc}</p>
+                <p className="prestige-promo library-detail-infos-desc">{selected.desc}</p>
               )}
 
               {selected.rarity !== 5 ? (

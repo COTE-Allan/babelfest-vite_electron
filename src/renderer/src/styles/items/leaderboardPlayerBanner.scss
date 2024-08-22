@@ -31,33 +31,20 @@
         opacity: 1;
     }
 
-    & h1,
-    & h2,
-    h3 {
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         font-family: 'Kimberly Bl', sans-serif;
-        margin: 0;
+
+        & .name {
+            font-size: 30px;
+        }
+
+        & .title {
+            font-size: 17px;
+        }
     }
 
-    & h1 {
-        font-size: 30px;
-    }
-
-    & h2 {
-        font-size: 15px;
-    }
-
-
-    & h1,
-    & h2 {
-        text-shadow:
-            2px 0 #000000d5,
-            -2px 0 #000000d5,
-            0 2px #000000d5,
-            0 -2px #000000d5,
-            1px 1px #000000d5,
-            -1px -1px #000000d5,
-            1px -1px #000000d5,
-            -1px 1px #000000d5;
-    }
 
 }

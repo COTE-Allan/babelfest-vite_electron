@@ -17,6 +17,7 @@ import { MdOutlineTitle } from 'react-icons/md'
 import { PiFlagBannerFill } from 'react-icons/pi'
 import { IoIosColorPalette } from 'react-icons/io'
 import { AiFillGold } from 'react-icons/ai'
+import UserPrestige from './UserPrestige'
 
 export default function CosmecticsController({
   profile,
@@ -32,7 +33,9 @@ export default function CosmecticsController({
   selectedSecondary,
   setSelectedSecondary,
   setTitle,
-  setBanner
+  setBanner,
+  prestige,
+  setPrestige
 }) {
   const [page, setPage] = useState(1)
   const [needUpdate, setNeedUpdate] = useState(false)
@@ -51,6 +54,7 @@ export default function CosmecticsController({
     setArena([])
     setTitle(null)
     setBanner(null)
+    setPrestige(null)
   }
 
   const handleUpdateUser = () => {
@@ -76,6 +80,7 @@ export default function CosmecticsController({
       if (arena.length !== 0) updates.arenaReverse = arena[1]
       if (title) updates.title = title
       if (banner) updates.banner = banner
+      if (prestige) updates.prestige = prestige
 
       if (Object.keys(updates).length !== 0) updateUser(updates)
       cancelUpdate()
@@ -84,6 +89,7 @@ export default function CosmecticsController({
     }
   }
 
+  console.log(prestige, setPrestige)
   useEffect(() => {
     if (
       profile == null &&
@@ -92,13 +98,14 @@ export default function CosmecticsController({
       selectedSecondary == null &&
       arena.length == 0 &&
       title == null &&
-      banner == null
+      banner == null &&
+      prestige == null
     ) {
       setNeedUpdate(false)
     } else {
       setNeedUpdate(true)
     }
-  }, [profile, border, selectedPrimary, selectedSecondary, arena, title, banner])
+  }, [profile, border, selectedPrimary, selectedSecondary, arena, title, banner, prestige])
 
   return (
     <div className="cosmetics">
@@ -124,7 +131,7 @@ export default function CosmecticsController({
             <IoIosColorPalette size={45} />
             <span className="hidden-span">Couleurs</span>
           </HudNavLink>
-          <HudNavLink selected={page === 7} className={'disabled'} permOpen>
+          <HudNavLink selected={page === 7} onClick={() => handleSwitchPage(7)} permOpen>
             <AiFillGold size={45} />
             <span className="hidden-span">Prestige</span>
           </HudNavLink>
@@ -155,6 +162,7 @@ export default function CosmecticsController({
         {page === 4 && <BorderArena arena={arena} setArena={setArena} />}
         {page === 5 && <UserTitle title={title} setTitle={setTitle} />}
         {page === 6 && <UserBanner banner={banner} setBanner={setBanner} />}
+        {page === 7 && <UserPrestige prestige={prestige} setPrestige={setPrestige} />}
       </div>
     </div>
   )

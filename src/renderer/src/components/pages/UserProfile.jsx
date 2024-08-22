@@ -131,10 +131,10 @@ const UserProfile = () => {
             <FaThumbsUp size={35} />
             <span className="hidden-span">Honorer</span>
           </HudNavLink>
-          <HudNavLink permOpen className={'disabled'}>
+          {/* <HudNavLink permOpen className={'disabled'}>
             <FaUserPlus size={40} />
             <span className="hidden-span">Ajouter en ami</span>
-          </HudNavLink>
+          </HudNavLink> */}
           <HudNavLink to={-1} permOpen>
             <FaArrowLeft size={35} />
             <span className="hidden-span">Page précédente</span>

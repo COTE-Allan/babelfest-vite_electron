@@ -69,16 +69,34 @@
     "level": 32
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Regal_Sanctity.webp",
-    "name": "Regal Sanctity",
+    "url": "./skins/banners/banner_krone_1.png",
+    "name": "Krone",
     "unlockTip": "Obtenu en atteignant le niveau 36.",
     "level": 36
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Regal_Sanctity.webp",
+    "name": "Regal Sanctity",
+    "unlockTip": "Obtenu en atteignant le niveau 40.",
+    "level": 40
+  },
+  {
+    "url": "./skins/banners/banner_tulip_1.png",
+    "name": "Tulip en plein ménage",
+    "unlockTip": "Obtenu en atteignant le niveau 64.",
+    "level": 64
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270962/babelfest/skins/banner/Banniere_tuto.webp",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
     "achievement": "HF_tutorial"
+  },
+  {
+    "url": "./skins/banners/banner_krone_2.png",
+    "name": "Maîtrise de Krone",
+    "unlockTip": "Obtenu en récompense du succès : 'Chaos Cosmique'",
+    "achievement": "HF_kroneChaos"
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_315/v1711380216/babelfest/skins/banner/bannerFondateur.webp",

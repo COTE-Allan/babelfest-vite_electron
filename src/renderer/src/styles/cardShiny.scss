@@ -1,3 +1,4 @@
+// Card shines
 .foil .img-container {
   clip-path: url(#myClip);
   background: linear-gradient(48deg,
@@ -171,43 +172,7 @@
 
 
 
-
-.rainbow_text_animated {
-  background: linear-gradient(48deg,
-      #e3c1f4,
-      #d9d7ed,
-      #dff7f1,
-      #acf0ff,
-      #e3c1f4,
-      #d9d7ed,
-      #dff7f1,
-      #acf0ff,
-      #e3c1f4,
-      #d9d7ed,
-      #dff7f1,
-      #acf0ff,
-      #e3c1f4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite;
-  background-size: 400% 100%;
-}
-
-@keyframes rainbow_animation {
-
-  0%,
-  100% {
-    background-position: 0 0;
-  }
-
-  50% {
-    background-position: 100% 0;
-  }
-}
-
 // Couleurs animés
-
 .rainbow {
   animation: rainbow 20s linear;
   animation-iteration-count: infinite;
@@ -274,5 +239,190 @@
   91% {
     background-color: hsl(330, 100%, 70%);
     /* More pastel rose */
+  }
+}
+
+
+.name {
+  -webkit-text-stroke: 1.3px black;
+
+}
+
+.title {
+  -webkit-text-stroke: 1px black;
+  color: rgb(222, 222, 222);
+}
+
+.name,
+.title {
+  max-height: 35px;
+  display: inline-block;
+}
+
+// Textes animés
+.prestige {
+  position: relative;
+
+  & div {
+    background-size: 400% 50% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: prestige_animation 10s ease-in-out infinite !important;
+    color: transparent;
+    position: relative;
+
+    &.prestige {
+      &-promo {
+        background: linear-gradient(48deg,
+            #e3c1f4,
+            #d9d7ed,
+            #dff7f1,
+            #acf0ff,
+            #e3c1f4,
+            #d9d7ed,
+            #dff7f1,
+            #acf0ff,
+            #e3c1f4,
+            #d9d7ed,
+            #dff7f1,
+            #acf0ff,
+            #e3c1f4);
+      }
+
+      &-gold {
+        background: linear-gradient(48deg,
+            #f6e27a,
+            #f9c55d,
+            #e0a424,
+            #d4af37,
+            #f9c55d,
+            #f6e27a,
+            #f9c55d,
+            #d4af37,
+            #f9c55d,
+            #f6e27a);
+      }
+
+      &-ocean {
+        background: linear-gradient(48deg,
+            #00c6ff,
+            #0072ff,
+            #00c6ff,
+            #0072ff,
+            #00c6ff,
+            #0072ff,
+            #00c6ff,
+            #0072ff);
+      }
+
+      &-forest {
+        background: linear-gradient(48deg,
+            #a8e063,
+            #56ab2f,
+            #a8e063,
+            #56ab2f,
+            #a8e063,
+            #56ab2f,
+            #a8e063,
+            #56ab2f);
+      }
+
+      &-sunset {
+        background: linear-gradient(48deg,
+            #ff6a88,
+            #ffcc00,
+            #ff6a88,
+            #ffcc00,
+            #ff6a88,
+            #ffcc00,
+            #ff6a88,
+            #ffcc00);
+      }
+
+      &-neon {
+        background: linear-gradient(48deg,
+            #f953c6,
+            #59ebf3,
+            #f953c6,
+            #59ebf3,
+            #f953c6,
+            #59ebf3,
+            #f953c6,
+            #59ebf3);
+      }
+
+      &-ice {
+        background: linear-gradient(48deg,
+            #00f260,
+            #0575e6,
+            #00f260,
+            #0575e6,
+            #00f260,
+            #0575e6,
+            #00f260,
+            #0575e6);
+      }
+
+      &-metal {
+        background: linear-gradient(48deg,
+            #bdc3c7,
+            #89a1b9,
+            #bdc3c7,
+            #89a1b9,
+            #bdc3c7,
+            #89a1b9,
+            #bdc3c7,
+            #89a1b9);
+      }
+
+      &-redAlpha {
+        background: linear-gradient(48deg,
+            #ffa5a5,
+            /* Rouge clair */
+            #ff5b5e,
+            /* Rouge un peu plus foncé */
+            #ffa5a5,
+            #ff5b5e,
+            #ffa5a5,
+            #ff5b5e,
+            #ffa5a5,
+            #ff5b5e);
+      }
+
+      &-blueAlpha {
+        background: linear-gradient(48deg,
+            #7bc6ff,
+            /* Bleu clair */
+            #b5d2ff,
+            /* Bleu un peu plus foncé */
+            #7bc6ff,
+            #b5d2ff,
+            #7bc6ff,
+            #b5d2ff,
+            #7bc6ff,
+            #b5d2ff);
+      }
+
+
+    }
+  }
+}
+
+
+
+
+
+
+
+@keyframes prestige_animation {
+
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 0;
   }
 }

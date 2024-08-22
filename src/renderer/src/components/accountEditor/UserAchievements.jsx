@@ -11,9 +11,9 @@ import { FaArrowTrendUp } from 'react-icons/fa6'
 
 function SkinItem({ skin }) {
   const { userInfo } = useContext(AuthContext)
-  const { level, url, hex, name } = skin
+  const { level, url, hex, name, classe } = skin
   const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
-
+  console.log(skin)
   let content
   if (url) {
     content = <img src={url} alt={`Skin ${name}`} draggable="false" />
@@ -24,8 +24,15 @@ function SkinItem({ skin }) {
         style={{ backgroundColor: hex }}
       />
     )
+  } else if (classe) {
+    content = (
+      <span className={`title prestige skin-title`}>
+        {' '}
+        <div className={classe}> {userInfo.username}</div>
+      </span>
+    )
   } else {
-    content = <span className="title">{name}</span>
+    content = <span className="skin-title">{name}</span>
   }
 
   return (
@@ -36,7 +43,9 @@ function SkinItem({ skin }) {
       <span className="level">{level}</span>
       <hr />
       {content}
-      {skin.type !== 'Titre' && <span className="name">{name}</span>}
+      {skin.type !== 'Titre' && skin.type !== 'Prestige' && (
+        <span className="skin-name">{name}</span>
+      )}
       <span className="type">
         {skin.type} {lock}
       </span>
@@ -56,7 +65,17 @@ export default function UserAchievements() {
   const [showUnlocked, setShowUnlocked] = useState(false)
   const [page, setPage] = useState(1)
   const [filteredSkinsWithLevel, setFilteredSkinsWithLevel] = useState([])
+  const [achievementFilter, setAchievementFilter] = useState('all') // 'all', 'unlocked', 'locked'
   const checkAchievementValue = useCheckAchievementValue()
+
+  const toggleAchievementFilter = () => {
+    setAchievementFilter((prev) => {
+      if (prev === 'all') return 'unlocked'
+      if (prev === 'unlocked') return 'locked'
+      return 'all'
+    })
+  }
+
   useEffect(() => {
     if (showUnlocked) {
       setFilteredSkinsWithLevel(skinsWithLevel)
@@ -82,6 +101,12 @@ export default function UserAchievements() {
   const levelCompletion = calculateLevelCompletion()
   const achievementValue = achievementInfos.id ? checkAchievementValue(achievementInfos.id) : 0
 
+  const filteredAchievements = achievements.filter((achievement) => {
+    if (achievementFilter === 'all') return true
+    if (achievementFilter === 'unlocked') return userInfo.achievements.includes(achievement.id)
+    if (achievementFilter === 'locked') return !userInfo.achievements.includes(achievement.id)
+  })
+
   return (
     <div className="achievements">
       <nav className="achievements-nav">
@@ -99,7 +124,14 @@ export default function UserAchievements() {
       <div className="achievements-content">
         {page === 1 && (
           <>
-            <h2>Succès - {achievementCompletion.toFixed(0)}%</h2>
+            <h2>
+              Succès - {achievementCompletion.toFixed(0)}%
+              <button onClick={toggleAchievementFilter} className="filter-button">
+                {achievementFilter === 'all' && 'Tous les succès'}
+                {achievementFilter === 'unlocked' && 'Seulement débloqué'}
+                {achievementFilter === 'locked' && 'Seulement bloqué'}
+              </button>
+            </h2>
             <div className="achievements-infos">
               <h3>{achievementInfos.name}</h3>
               <span>{achievementInfos.desc}</span>
@@ -121,7 +153,7 @@ export default function UserAchievements() {
               </div>
             </div>
             <div className="achievements-list">
-              {achievements.map((achievement) => (
+              {filteredAchievements.map((achievement) => (
                 <div
                   onMouseEnter={() => {
                     setAchievementInfos({

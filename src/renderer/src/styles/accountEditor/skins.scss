@@ -88,4 +88,34 @@
       border-color: green;
     }
   }
+
+  &-prestige-item {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    // width: 180px;
+    background-color: $black;
+    padding: 20px;
+    font-family: 'Kimberly Bl', sans-serif;
+
+    &.disabled-prestige {
+      opacity: 80%;
+      border-color: rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+
+    &.selected {
+      border-color: green;
+    }
+  }
 }

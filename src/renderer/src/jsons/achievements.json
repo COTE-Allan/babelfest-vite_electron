@@ -106,6 +106,12 @@
     }
   },
   {
+    "id": "HF_kroneChaos",
+    "name": "Chaos Cosmique",
+    "desc": "Invoquez 'Krone : Intruse Cosmique' alors qu'il y a au moins 10 cartes sur le terrain.",
+    "url": "./skins/banners/banner_krone_2.png"
+  },
+  {
     "id": "HF_fastWin",
     "name": "Expéditif",
     "desc": "Gagnez une partie rapide ou classée en 5 tours ou moins.",

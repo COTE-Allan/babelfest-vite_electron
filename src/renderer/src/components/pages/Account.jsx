@@ -36,6 +36,7 @@ const Account = () => {
   const [selectedSecondary, setSelectedSecondary] = useState(null)
   const [title, setTitle] = useState(null)
   const [banner, setBanner] = useState(null)
+  const [prestige, setPrestige] = useState(null)
 
   const userData = {
     username: userInfo.username,
@@ -46,7 +47,8 @@ const Account = () => {
     arena: arena.length > 0 ? arena : userInfo.arena,
     title: title ? title : userInfo.title,
     banner: banner ? banner : userInfo.banner,
-    level: userInfo.level
+    level: userInfo.level,
+    prestige: prestige ? prestige : userInfo.prestige
   }
 
   let props = {
@@ -64,7 +66,9 @@ const Account = () => {
     setSelectedPrimary,
     setSelectedSecondary,
     setTitle,
-    setBanner
+    setBanner,
+    prestige,
+    setPrestige
   }
 
   return (

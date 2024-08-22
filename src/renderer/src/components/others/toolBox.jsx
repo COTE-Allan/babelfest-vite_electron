@@ -24,13 +24,15 @@ import colorsData from '../../jsons/skins/colorsSkins.json'
 import bannerData from '../../jsons/skins/userBanner.json'
 import avatarData from '../../jsons/skins/profilePics.json'
 import titleData from '../../jsons/skins/userTitle.json'
+import prestigeData from '../../jsons/skins/prestigeColor.json'
 
 const borders = bordersData.map((item) => ({ ...item, type: 'Bordure' }))
 const colors = colorsData.map((item) => ({ ...item, type: 'Couleur' }))
 const banner = bannerData.map((item) => ({ ...item, type: 'Bannière' }))
 const avatar = avatarData.map((item) => ({ ...item, type: 'Avatar' }))
 const title = titleData.map((item) => ({ ...item, type: 'Titre' }))
-const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title]
+const prestige = prestigeData.map((item) => ({ ...item, type: 'Prestige' }))
+const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title, ...prestige]
 
 import useSound from 'use-sound'
 import errorSfx from '../../assets/sfx/menu_unauthorized.mp3'

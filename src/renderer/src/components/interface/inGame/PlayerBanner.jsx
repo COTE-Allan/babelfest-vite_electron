@@ -1,5 +1,6 @@
 import { TbCardsFilled } from 'react-icons/tb'
 import ProfilePicture from '../../esthetics/profilePicture'
+import { NameAndTitle } from '../../items/NameAndTitle'
 
 export default function PlayerBanner({ user, cardsLeft, color, side }) {
   return (
@@ -14,14 +15,11 @@ export default function PlayerBanner({ user, cardsLeft, color, side }) {
         <div className="playerBanner-infos">
           <ProfilePicture customUser={user} size={85} />
           <div className="playerBanner-infos-content">
-            <span className="playerBanner-infos-name">
-              {user.disconnected ? 'Deconnecté' : user.username}
-            </span>
-            {!user.disconnected && (
-              <span className="playerBanner-infos-title">
-                {user.title === 'level' ? 'Niveau ' + user.level : user.title}
-              </span>
-            )}
+            <NameAndTitle
+              user={user}
+              nameClass="playerBanner-infos-name"
+              titleClass="playerBanner-infos-title"
+            />
           </div>
         </div>
       )}
@@ -35,14 +33,11 @@ export default function PlayerBanner({ user, cardsLeft, color, side }) {
       {side === 'rival' && (
         <div className="playerBanner-infos">
           <div className="playerBanner-infos-content">
-            <span className="playerBanner-infos-name">
-              {user.disconnected ? 'Deconnecté' : user.username}
-            </span>
-            {!user.disconnected && (
-              <span className="playerBanner-infos-title">
-                {user.title === 'level' ? 'Niveau ' + user.level : user.title}
-              </span>
-            )}
+            <NameAndTitle
+              user={user}
+              nameClass="playerBanner-infos-name"
+              titleClass="playerBanner-infos-title"
+            />
           </div>
           <ProfilePicture customUser={user} size={85} />
         </div>

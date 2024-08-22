@@ -77,7 +77,6 @@ button {
   @include greyBorders();
 
   &.selected {
-    background-color: rgb(81, 81, 81);
     border-color: white;
   }
 

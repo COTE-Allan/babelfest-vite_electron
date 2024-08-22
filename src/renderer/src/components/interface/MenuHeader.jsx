@@ -87,12 +87,10 @@ export default function MenuHeader() {
       <div className="menuHeader-box">
         <nav className="menuHeader-nav">
           <MusicPlayer role={'menu'} noParticle />
-          {user && (
-            <HudNavLink className={'disabled'}>
+          {/* <HudNavLink className={'disabled'}>
               <span className="hidden-span">Amis</span>
               <FaUserFriends size={40} />
-            </HudNavLink>
-          )}
+            </HudNavLink> */}
           <HudNavLink to={'/settings'}>
             <span className="hidden-span"> Paramètres</span>
             <IoMdSettings size={40} />

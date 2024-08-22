@@ -26,6 +26,7 @@ import axios from 'axios'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
 import { FaCircle } from 'react-icons/fa'
+import { NameAndTitle } from '../items/NameAndTitle'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -193,8 +194,7 @@ const Home = () => {
                     <span className={`rank ${getRankClass(index)}`}>{index + 1}</span>
                     <ProfilePicture customUser={user} size={60} />
                     <div className="grid-leaderboard-user-infos">
-                      <h2>{user.username}</h2>
-                      <span>{user.title === 'level' ? 'Niveau ' + user.level : user.title}</span>
+                      <NameAndTitle user={user} />
                     </div>
                     <img
                       className="grid-leaderboard-user-banner"

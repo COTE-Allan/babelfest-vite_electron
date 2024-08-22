@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Acier",
+    "unlockTip": "Obtenu en atteignant le niveau 50.",
+    "classe": "prestige-metal",
+    "level": 50
+  },
+  {
+    "name": "Arc-en-ciel",
+    "unlockTip": "Obtenu en atteignant le niveau 100.",
+    "classe": "prestige-promo",
+    "level": 100
+  },
+  {
+    "name": "Or",
+    "unlockTip": "Offert aux abonnés Patreons.",
+    "classe": "prestige-gold"
+  },
+  {
+    "name": "Rouge Alpha",
+    "unlockTip": "Offert aux joueurs inscrits pendant l'Alpha.",
+    "classe": "prestige-redAlpha",
+    "flag": "betaTest"
+  },
+  {
+    "name": "Bleu Fondateur",
+    "unlockTip": "Offert aux joueurs qui ont grandement aidé au développement du jeu.",
+    "classe": "prestige-blueAlpha",
+    "flag": "alphaTest"
+  }
+]
