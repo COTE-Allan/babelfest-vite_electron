@@ -32,6 +32,9 @@
       height: 100%;
       top: 0;
       left: 0;
+      width: 100%;
+
+
 
       &-wrapper {
         padding: 10px;
@@ -62,10 +65,33 @@
 
 
     &-banner {
+      flex: 0 0 23%;
+      /* 25% pour afficher 4 bannières par ligne */
+      aspect-ratio: 10 / 2.8;
+      /* Proportion calculée en fonction des dimensions 250px x 70px */
+      max-width: 250px;
+      max-height: 70px;
+      width: 100%;
+      height: auto;
+      box-sizing: border-box;
       background-position: center center;
       background-size: 100% 100% !important;
-      height: 70px;
-      width: 250px;
+      margin-bottom: 10px;
+      /* Espacement entre les lignes */
+    }
+
+    &.skins-button-square {
+      flex: 0 0 10%;
+      aspect-ratio: 1 / 1;
+      /* Assure que la hauteur et la largeur sont égales */
+      max-width: 100px;
+      max-height: 100px;
+      width: 100%;
+      height: auto;
+      /* Permet d'ajuster la hauteur en fonction de la largeur */
+      box-sizing: border-box;
+      /* Pour inclure padding et border dans la taille */
+
     }
   }
 

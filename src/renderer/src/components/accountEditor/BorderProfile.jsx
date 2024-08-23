@@ -24,6 +24,7 @@ export default function BorderProfile({ border, setBorder }) {
       <div className="skins-selector-list-wrapper">
         <div className="skins-selector-list">
           <SkinsButton
+            isSquare
             lockedCondition={true}
             selected={border === 'empty'}
             onClick={() => {
@@ -44,6 +45,7 @@ export default function BorderProfile({ border, setBorder }) {
 
             return (
               <SkinsButton
+                isSquare
                 onClick={() => {
                   if (lockedCondition && b.url !== border) {
                     if (border === b.url) {

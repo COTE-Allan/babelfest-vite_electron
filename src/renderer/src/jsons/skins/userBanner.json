@@ -99,6 +99,12 @@
     "achievement": "HF_kroneChaos"
   },
   {
+    "url": "./skins/banners/banner_shiro_1.png",
+    "name": "Maîtrise de Shiro",
+    "unlockTip": "Obtenu en récompense du succès : 'Zéro absolu'",
+    "achievement": "HF_shiroFreeze"
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_315/v1711380216/babelfest/skins/banner/bannerFondateur.webp",
     "name": "Akumu VS Odasun",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",

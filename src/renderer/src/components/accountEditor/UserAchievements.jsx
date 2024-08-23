@@ -1,19 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useMemo } from 'react'
 import { getSkinsWithLevel } from '../others/toolBox'
 import '../../styles/accountEditor/achievements.scss'
 import achievements from '../../jsons/achievements.json'
 import { AuthContext } from '../../AuthContext'
 import { FaEye, FaEyeSlash, FaLock, FaLockOpen, FaTrophy } from 'react-icons/fa'
-import ProgressBar from '@ramonak/react-progress-bar'
 import { useCheckAchievementValue } from '../controllers/AchievementsController'
 import HudNavLink from '../items/hudNavLink'
 import { FaArrowTrendUp } from 'react-icons/fa6'
+import useSound from 'use-sound'
+import hoverSfx from '../../assets/sfx/button_hover.wav'
+import selectSfx from '../../assets/sfx/menu_select.wav'
 
 function SkinItem({ skin }) {
   const { userInfo } = useContext(AuthContext)
   const { level, url, hex, name, classe } = skin
   const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
-  console.log(skin)
   let content
   if (url) {
     content = <img src={url} alt={`Skin ${name}`} draggable="false" />
@@ -54,8 +55,12 @@ function SkinItem({ skin }) {
 }
 
 export default function UserAchievements() {
-  const skinsWithLevel = getSkinsWithLevel()
-  const { userInfo } = useContext(AuthContext)
+  const { userInfo, userSettings } = useContext(AuthContext)
+
+  const skinsWithLevel = useMemo(() => getSkinsWithLevel(), [])
+
+  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
+  const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [achievementInfos, setAchievementInfos] = useState({
     id: null,
     name: 'Bienvenue sur Babelfest',
@@ -69,6 +74,7 @@ export default function UserAchievements() {
   const checkAchievementValue = useCheckAchievementValue()
 
   const toggleAchievementFilter = () => {
+    select()
     setAchievementFilter((prev) => {
       if (prev === 'all') return 'unlocked'
       if (prev === 'unlocked') return 'locked'
@@ -77,12 +83,12 @@ export default function UserAchievements() {
   }
 
   useEffect(() => {
-    if (showUnlocked) {
-      setFilteredSkinsWithLevel(skinsWithLevel)
-    } else {
-      setFilteredSkinsWithLevel(skinsWithLevel.filter((skin) => userInfo.level < skin.level))
-    }
-  }, [showUnlocked])
+    const filteredSkins = showUnlocked
+      ? skinsWithLevel
+      : skinsWithLevel.filter((skin) => userInfo.level < skin.level)
+
+    setFilteredSkinsWithLevel(filteredSkins)
+  }, [showUnlocked, skinsWithLevel, userInfo.level])
 
   const calculateAchievementCompletion = () => {
     if (!userInfo.achievements || userInfo.achievements.length === 0) return 0
@@ -126,13 +132,17 @@ export default function UserAchievements() {
           <>
             <h2>
               Succès - {achievementCompletion.toFixed(0)}%
-              <button onClick={toggleAchievementFilter} className="filter-button">
+              <button
+                onClick={toggleAchievementFilter}
+                className="filter-button"
+                onMouseEnter={hover}
+              >
                 {achievementFilter === 'all' && 'Tous les succès'}
                 {achievementFilter === 'unlocked' && 'Seulement débloqué'}
                 {achievementFilter === 'locked' && 'Seulement bloqué'}
               </button>
             </h2>
-            <div className="achievements-infos">
+            {/* <div className="achievements-infos">
               <h3>{achievementInfos.name}</h3>
               <span>{achievementInfos.desc}</span>
               <div className="achievements-infos-progress">
@@ -151,30 +161,31 @@ export default function UserAchievements() {
                   customLabel={`${achievementValue}/${achievementInfos.objective?.value ? achievementInfos.objective?.value : 1}`}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="achievements-list">
               {filteredAchievements.map((achievement) => (
                 <div
-                  onMouseEnter={() => {
-                    setAchievementInfos({
-                      id: achievement.id,
-                      name: userInfo.achievements?.includes(achievement.id)
-                        ? achievement.name
-                        : achievement.name + ' (Non atteint)',
-                      desc: achievement.desc,
-                      objective: achievement.objective
-                    })
-                  }}
+                  onMouseEnter={hover}
                   className={`achievements-list-item ${
                     userInfo.achievements?.includes(achievement.id) ? 'unlocked' : ''
                   }`}
                   key={achievement.id}
                 >
-                  <img
-                    src={achievement.url}
-                    alt={`image du succès : ${achievement.name}`}
-                    draggable="false"
-                  />
+                  <div className="achievements-list-item-infos">
+                    <h3>
+                      {achievement.name}{' '}
+                      {!userInfo.achievements?.includes(achievement.id) && <FaLock />}
+                    </h3>
+                    <span>{achievement.desc}</span>
+                  </div>
+                  <div className="achievements-list-item-reward">
+                    <img
+                      src={achievement.url}
+                      alt={`image du succès : ${achievement.name}`}
+                      draggable="false"
+                    />
+                    <span>{achievement.rewardType}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -184,7 +195,13 @@ export default function UserAchievements() {
           <>
             <h2>
               Récompenses de niveaux - {levelCompletion.toFixed(0)}%{' '}
-              <button onClick={() => setShowUnlocked((prev) => !prev)}>
+              <button
+                onMouseEnter={hover}
+                onClick={() => {
+                  select()
+                  setShowUnlocked(!showUnlocked)
+                }}
+              >
                 {showUnlocked ? (
                   <div className="filterUnlocked">
                     <FaEye size={25} /> Cacher débloqués

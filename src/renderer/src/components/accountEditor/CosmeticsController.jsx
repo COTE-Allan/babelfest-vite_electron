@@ -89,7 +89,6 @@ export default function CosmecticsController({
     }
   }
 
-  console.log(prestige, setPrestige)
   useEffect(() => {
     if (
       profile == null &&

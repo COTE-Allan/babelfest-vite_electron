@@ -1,6 +1,8 @@
 @import '../variables.scss';
 
 .achievements {
+
+
   & h2 {
     font-family: 'Kimberly Bl', sans-serif;
     margin: 0;
@@ -14,57 +16,88 @@
     margin-left: auto;
   }
 
-  &-infos {
+  // &-infos {
 
-    & h3 {
-      font-family: 'Kimberly Bl', sans-serif;
-      margin: 0;
-      font-size: 20px;
-    }
+  //   & h3 {
+  //     font-family: 'Kimberly Bl', sans-serif;
+  //     margin: 0;
+  //     font-size: 20px;
+  //   }
 
-    &-progress {
-      display: flex;
-      font-family: 'Kimberly Bl', sans-serif;
-      align-items: center;
-    }
+  //   &-progress {
+  //     display: flex;
+  //     align-items: center;
+  //   }
 
-    & .progress {
-      width: 300px;
-      margin: 10px;
-    }
-  }
+  //   & .progress {
+  //     width: 300px;
+  //     margin: 10px;
+  //   }
+  // }
 
   &-list {
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
+    overflow-y: auto;
+    max-height: calc(100% - 80px);
 
     &-item {
-      opacity: 0.5;
-      filter: grayscale(100%);
-      transition: opacity 200ms ease-in-out, filter 200ms ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      margin: 10px;
+      width: calc(50% - 20px - 20px - 6px);
+      font-family: 'Kimberly Bl', sans-serif;
+      border-radius: 15px;
+      @include greyBorders();
+      height: 100px;
 
-      &.unlocked {
-        filter: none;
-        opacity: 1;
+      &-infos {
+        max-width: 75%;
+
+        & h3 {
+          margin: 0;
+        }
+
+        & span {
+          font-size: 13px;
+        }
       }
 
-      margin-right: 15px;
+      &-reward {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 13px;
+        opacity: 0.2;
+        transition: opacity 200ms ease-in-out;
 
-      &:hover {
-        opacity: 1;
-        filter: none;
+        & span {
+          margin-top: 5px;
+        }
       }
 
       & img {
-        // width: 75px;
+        width: 75px;
         height: 75px;
+        object-position: right;
         object-fit: cover;
-        @include greyBorders();
         border-radius: 15px;
-        background-color: rgba(0, 0, 0, 0.8);
-
+        background-color: rgba(138, 138, 138, 0.2);
       }
+
+      &.unlocked,
+      &:hover {
+        & .achievements-list-item-reward {
+          opacity: 1;
+        }
+      }
+
+
+
 
     }
   }

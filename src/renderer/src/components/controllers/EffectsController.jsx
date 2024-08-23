@@ -16,6 +16,7 @@ import * as Offensives from '../effects/types/offensives'
 
 import { getAllEffects, getEffectInfo } from '../effects/basics'
 import { usePushLogsIntoBatch, usePushSceneIntoBatch } from './LogsController'
+import { AuthContext } from '../../AuthContext'
 
 export const useTryEffect = () => {
   const effectList = {
@@ -66,6 +67,8 @@ export const useTryEffect = () => {
     setConfirmModal,
     setGreenCells
   } = useContext(GlobalContext)
+  const { giveAchievement } = useContext(AuthContext)
+
   const pushLogsIntoBatch = usePushLogsIntoBatch()
   const pushSceneIntoBatch = usePushSceneIntoBatch()
 
@@ -255,6 +258,10 @@ export const useTryEffect = () => {
       }
 
       const batch = writeBatch(db)
+
+      if (result.ach) {
+        await giveAchievement(result.ach)
+      }
 
       for (const target of result.targets) {
         const ref = doc(db, `games/${room}/arena`, `cell-${target.id}`)

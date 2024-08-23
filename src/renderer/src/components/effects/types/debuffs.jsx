@@ -27,10 +27,14 @@ export function BriseBouclier({ item, effect, pattern, effectInfos }) {
 
 export function RegardGlace({ item, effect, targets, effectInfos }) {
   const targetsCards = targets.map((target) => target.card)
+  let ach = false
 
   targets.forEach((target) => {
     if (target.card.freeze && target.card.freeze > 0) {
       target.card.freeze = effect.value + target.card.freeze
+      if (item.card.name === 'Shiro' && item.card.title === 'Héraut du blizzard') {
+        ach = 'HF_shiroFreeze'
+      }
     } else {
       target.card.freeze = effect.value
     }
@@ -38,6 +42,7 @@ export function RegardGlace({ item, effect, targets, effectInfos }) {
   targets.push(item)
 
   return {
+    ach: ach,
     targets: targets,
     log: {
       trigger: item.card,

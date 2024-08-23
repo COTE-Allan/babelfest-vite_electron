@@ -26,12 +26,42 @@ import avatarData from '../../jsons/skins/profilePics.json'
 import titleData from '../../jsons/skins/userTitle.json'
 import prestigeData from '../../jsons/skins/prestigeColor.json'
 
-const borders = bordersData.map((item) => ({ ...item, type: 'Bordure' }))
-const colors = colorsData.map((item) => ({ ...item, type: 'Couleur' }))
-const banner = bannerData.map((item) => ({ ...item, type: 'Bannière' }))
-const avatar = avatarData.map((item) => ({ ...item, type: 'Avatar' }))
-const title = titleData.map((item) => ({ ...item, type: 'Titre' }))
-const prestige = prestigeData.map((item) => ({ ...item, type: 'Prestige' }))
+const borders = bordersData.map((item, index) => ({
+  ...item,
+  id: `border-${index}`,
+  type: 'Bordure'
+}))
+
+const colors = colorsData.map((item, index) => ({
+  ...item,
+  id: `color-${index}`,
+  type: 'Couleur'
+}))
+
+const banner = bannerData.map((item, index) => ({
+  ...item,
+  id: `banner-${index}`,
+  type: 'Bannière'
+}))
+
+const avatar = avatarData.map((item, index) => ({
+  ...item,
+  id: `avatar-${index}`,
+  type: 'Avatar'
+}))
+
+const title = titleData.map((item, index) => ({
+  ...item,
+  id: `title-${index}`,
+  type: 'Titre'
+}))
+
+const prestige = prestigeData.map((item, index) => ({
+  ...item,
+  id: `prestige-${index}`,
+  type: 'Prestige'
+}))
+
 const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title, ...prestige]
 
 import useSound from 'use-sound'
@@ -364,12 +394,12 @@ export async function getTotalPlayers() {
   const snapshot = await getDocs(usersRef)
   return snapshot.size
 }
-
 export function getSkinsWithLevel() {
   const skinsWithLevel = allSkins
     .filter((skin) => skin.hasOwnProperty('level') && typeof skin.level === 'number')
     .sort((a, b) => a.level - b.level)
 
+  console.log('Skins with Level:', skinsWithLevel) // Debugging pour vérifier les duplications
   return skinsWithLevel
 }
 

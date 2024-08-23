@@ -28,6 +28,7 @@ export default function ProfilePics({ profile, setProfile }) {
 
             return (
               <SkinsButton
+                isSquare
                 onClick={() => {
                   if (lockedCondition) {
                     if (profile === pp.url) {
