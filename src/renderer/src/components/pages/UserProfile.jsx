@@ -89,10 +89,8 @@ const UserProfile = () => {
 
       // Mettre à jour le timestamp et incrémenter la quantité dans honored
       await updateDoc(userRef, {
-        honored: {
-          timestamp: currentTime,
-          quantity: increment(1)
-        }
+        'honored.timestamp': currentTime,
+        'honored.quantity': increment(1)
       })
 
       // Incrémenter le compteur honor de targetUser

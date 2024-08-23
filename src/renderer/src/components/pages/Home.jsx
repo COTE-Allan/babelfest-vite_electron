@@ -187,7 +187,7 @@ const Home = () => {
                   <NavLink
                     key={user.id}
                     className="grid-leaderboard-user"
-                    to={user.id && user.id !== 'myID' ? `/userProfile/${user.id}` : '/account/1'}
+                    to={user.id && user.id !== myID ? `/userProfile/${user.id}` : '/account/1'}
                     onMouseEnter={hover}
                     onClick={select}
                   >
