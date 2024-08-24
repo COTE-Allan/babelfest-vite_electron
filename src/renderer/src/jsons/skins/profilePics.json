@@ -60,6 +60,11 @@
     "unlockTip": "Débloqué par défaut."
   },
   {
+    "url": "./skins/avatars/avatar_taka_1.png",
+    "name": "Taka",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704710169/babelfest/skins/profilePics/illu_vecto_carr%C3%A9.webp",
     "name": "Clémentine",
     "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."

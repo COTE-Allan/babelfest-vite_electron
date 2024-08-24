@@ -93,6 +93,12 @@
     "level": 40
   },
   {
+    "url": "./skins/banners/banner_oldSchoolKarnoie.png",
+    "name": "Old School Karnoie",
+    "unlockTip": "Obtenu en atteignant le niveau 43.",
+    "level": 46
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Rigor_of_Life.webp",
     "name": "Rigor of Life",
     "unlockTip": "Obtenu en atteignant le niveau 54.",
@@ -104,6 +110,7 @@
     "unlockTip": "Obtenu en atteignant le niveau 64.",
     "level": 64
   },
+
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270962/babelfest/skins/banner/Banniere_tuto.webp",
     "name": "Tuto",
