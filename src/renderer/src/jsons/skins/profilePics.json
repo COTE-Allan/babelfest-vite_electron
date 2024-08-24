@@ -25,6 +25,11 @@
     "unlockTip": "Débloqué par défaut."
   },
   {
+    "url": "./skins/avatars/avatar_oeilOmniscient.png",
+    "name": "Oeil Omniscient",
+    "unlockTip": "Débloqué par défaut."
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230255/babelfest/skins/profilePics/babelfest_origine_revamped36.webp",
     "name": "Améthyste",
     "unlockTip": "Débloqué par défaut."
@@ -78,6 +83,12 @@
     "level": 9
   },
   {
+    "url": "./skins/avatars/avatar_shape_1.png",
+    "name": "Shape",
+    "unlockTip": "Obtenu en atteignant le niveau 11.",
+    "level": 11
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1711543864/babelfest/skins/profilePics/LOWN_KENNEDY_1.webp",
     "name": "Lown Kennedy",
     "unlockTip": "Obtenu en atteignant le niveau 14.",
@@ -96,10 +107,22 @@
     "level": 23
   },
   {
+    "url": "./skins/avatars/avatar_clem_2.png",
+    "name": "Clém le démon",
+    "unlockTip": "Obtenu en atteignant le niveau 32.",
+    "level": 32
+  },
+  {
     "url": "./skins/avatars/avatar_krone_1.png",
     "name": "Krone",
     "unlockTip": "Obtenu en atteignant le niveau 36.",
     "level": 36
+  },
+  {
+    "url": "./skins/avatars/avatar_lukas_1.png",
+    "name": "Lukas surcadençé",
+    "unlockTip": "Obtenu en atteignant le niveau 46.",
+    "level": 46
   },
   {
     "url": "./skins/avatars/avatar_tulip_2.png",

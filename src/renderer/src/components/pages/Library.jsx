@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/pages/library.scss'
 import Modal from '../items/ClassicModal'
 import { MdZoomIn } from 'react-icons/md'
-import { getAllCards } from '../others/toolBox'
 import Tilt from 'react-parallax-tilt'
 import Slider from 'rc-slider'
-import { getCardBasedOnNameAndTitle, getEffectInfo } from '../effects/basics'
+import { getAllEffects, getCardBasedOnNameAndTitle, getEffectInfo } from '../effects/basics'
 import { useLocation } from 'react-router'
 import HudNavLink from '../items/hudNavLink'
 import { ImCross } from 'react-icons/im'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { getAllCards } from '../others/toolBox'
 
 export default function Library() {
   const [allCards, setAllCards] = useState(getAllCards())
@@ -18,7 +18,8 @@ export default function Library() {
   const [loading, setLoading] = useState(true)
   const [selectedCollections, setSelectedCollections] = useState([])
   const [selectedRarities, setSelectedRarities] = useState([])
-  const [selectedYears, setSelectedYears] = useState([]) // Nouvel état pour les années sélectionnées
+  const [selectedYears, setSelectedYears] = useState([])
+  const [selectedEffect, setSelectedEffect] = useState('') // Nouvel état pour l'effet sélectionné
   const [sortMethod, setSortMethod] = useState('rarity')
   const [cardScale, setCardScale] = useState(125)
   const [selected, setSelected] = useState(null)
@@ -26,11 +27,11 @@ export default function Library() {
 
   const location = useLocation()
 
-  // Déterminer les collections et les années
   const collections = [...new Set(allCards.map((card) => card.collection))]
   const years = [
     ...new Set(allCards.filter((card) => card.year).map((card) => card.year.toString()))
   ]
+  const effects = getAllEffects();
 
   const trait = {
     1: 'combatif',
@@ -55,7 +56,7 @@ export default function Library() {
 
   useEffect(() => {
     if (location.state && location.state.selected) {
-      const { selected } = location.state // Extrayez 'selected' de l'état de la route
+      const { selected } = location.state
       setSelected(selected)
     }
   }, [location])
@@ -68,11 +69,10 @@ export default function Library() {
     setSelectedIndex((prevIndex) => (prevIndex < cards.length - 1 ? prevIndex + 1 : 0))
   }
 
-  // Modifier cette fonction pour gérer la réouverture du modal
   const handleCardClick = (key) => {
     if (selectedIndex === key) {
       setSelectedIndex(null)
-      setTimeout(() => setSelectedIndex(key), 0) // Réinitialise puis définit selectedIndex
+      setTimeout(() => setSelectedIndex(key), 0)
     } else {
       setSelectedIndex(key)
     }
@@ -80,11 +80,11 @@ export default function Library() {
 
   const handleCloseModal = () => {
     setSelected(null)
-    setSelectedIndex(null) // Réinitialiser selectedIndex si nécessaire
+    setSelectedIndex(null)
   }
 
   useEffect(() => {
-    let allCards = getAllCards()
+    let allCards = getAllCards();
     let filteredCards = [...allCards]
 
     if (selectedCollections.length > 0) {
@@ -94,6 +94,13 @@ export default function Library() {
     if (selectedYears.length > 0) {
       filteredCards = filteredCards.filter((card) =>
         selectedYears.includes(card.year ? card.year.toString() : '')
+      )
+    }
+
+    console.log(selectedEffect)
+    if (selectedEffect !== '') {
+      filteredCards = filteredCards.filter((card) =>
+        card.effects && card.effects.some(effect => effect.type === selectedEffect)
       )
     }
 
@@ -116,7 +123,6 @@ export default function Library() {
       )
     }
 
-    // Trier
     switch (sortMethod) {
       case 'number':
         filteredCards.sort((a, b) => a.id - b.id)
@@ -132,7 +138,7 @@ export default function Library() {
     }
 
     setCards(filteredCards)
-  }, [search, selectedRarities, selectedCollections, selectedYears, allCards, sortMethod])
+  }, [search, selectedRarities, selectedCollections, selectedYears, selectedEffect, allCards, sortMethod])
 
   const handleCollectionChange = (event) => {
     const value = event.target.value
@@ -158,7 +164,6 @@ export default function Library() {
         ? [...currentRarities, value]
         : currentRarities.filter((rarity) => rarity !== value)
     )
-    // Ajouter ou supprimer une classe CSS pour le parent
     const parentDiv = event.target.parentNode
     if (event.target.checked) {
       parentDiv.classList.add('checked')
@@ -174,7 +179,6 @@ export default function Library() {
         ? [...currentYears, value]
         : currentYears.filter((year) => year !== value)
     )
-    // Ajouter ou supprimer une classe CSS pour le parent
     const parentDiv = event.target.parentNode
     if (event.target.checked) {
       parentDiv.classList.add('checked')
@@ -183,7 +187,10 @@ export default function Library() {
     }
   }
 
-  // Gestionnaire de chargement des images
+  const handleEffectChange = (event) => {
+    setSelectedEffect(event.target.value)
+  }
+
   const handleImageLoad = () => {
     const allImagesLoaded = cards.every((card, index) => {
       const imgElement = document.getElementById(`card-img-${index}`)
@@ -235,6 +242,21 @@ export default function Library() {
               <option value="rarity">Trier par rareté</option>
               <option value="number">Trier par numéro</option>
               <option value="name">Trier par nom</option>
+            </select>
+          </div>
+          <div className="library-controller-inputs-item">
+            <span className="library-controller-inputs-item-title">Effet :</span>
+            <select
+              className="library-controller-select"
+              onChange={handleEffectChange}
+              value={selectedEffect}
+            >
+              <option value="">Tous les effets</option>
+              {effects.map((effect, key) => (
+                <option key={key} value={effect.slug}>
+                  {effect.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="library-controller-inputs-item">

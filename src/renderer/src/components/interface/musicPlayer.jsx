@@ -33,23 +33,6 @@ export default function MusicPlayer(props) {
     setVolume(userSettings.musicVolume)
   }, [userSettings.musicVolume])
 
-  function createNote() {
-    const note = document.createElement('div')
-    note.className = 'note'
-    note.innerHTML = '&#9835;' // Symbole de note de musique
-    note.style.left = Math.random() * 100 + '%' // Position horizontale aléatoire dans le conteneur
-    note.style.animationDuration = Math.random() * 2 + 1 + 's' // Durée d'animation aléatoire entre 1 et 3 secondes
-
-    document.getElementById('particles').appendChild(note)
-
-    // Supprime la note après la fin de son animation pour éviter l'encombrement du DOM
-    setTimeout(
-      () => {
-        note.remove()
-      },
-      parseFloat(note.style.animationDuration) * 1000
-    )
-  }
 
   const playNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1 >= playlist.length ? 0 : prevIndex + 1))
@@ -71,9 +54,6 @@ export default function MusicPlayer(props) {
 
   useEffect(() => {
     let interval
-    if (isPlaying) {
-      interval = setInterval(createNote, 600)
-    }
 
     return () => {
       if (interval) {
@@ -84,7 +64,6 @@ export default function MusicPlayer(props) {
 
   return (
     <div className={`musicPlayer`}>
-      {props.noParticle ? <></> : <div id="particles"></div>}
       <div className={`musicPlayer-infos ${isPlaying && 'active'}`}>
         {isPlaying ? (
           <span>Vous écoutez : {playlist[currentIndex].name}</span>
