@@ -144,6 +144,13 @@
     }
   },
   {
+    "id": "HF_thirdEye",
+    "name": "Visionnaire",
+    "rewardType": "Avatar",
+    "desc": "Activez l'effet 'Troisième Oeil' sur une carte dissimulée.",
+    "url": "./skins/avatars/avatar_oeilOmniscient.png"
+  },
+  {
     "id": "HF_11dmg",
     "name": "One Punch Man",
     "rewardType": "Avatar",

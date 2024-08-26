@@ -25,11 +25,6 @@
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "url": "./skins/avatars/avatar_oeilOmniscient.png",
-    "name": "Oeil Omniscient",
-    "unlockTip": "Débloqué par défaut."
-  },
-  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707230255/babelfest/skins/profilePics/babelfest_origine_revamped36.webp",
     "name": "Améthyste",
     "unlockTip": "Débloqué par défaut."
@@ -146,6 +141,12 @@
     "name": "Tuto Confiant",
     "unlockTip": "Obtenu en récompense du succès : 'Le meilleur joueur du monde'",
     "achievement": "HF_5win"
+  },
+  {
+    "url": "./skins/avatars/avatar_oeilOmniscient.png",
+    "name": "Oeil Omniscient",
+    "unlockTip": "Obtenu en récompense du succès : 'Visionnaire'",
+    "achievement": "HF_thirdEye"
   },
   {
     "url": "./skins/avatars/avatar_vehemon_1.png",
