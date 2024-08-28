@@ -70,7 +70,6 @@ const Account = () => {
     prestige,
     setPrestige
   }
-
   return (
     <div className="account">
       <div className="account-profile">

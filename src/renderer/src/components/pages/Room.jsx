@@ -21,7 +21,8 @@ import RightWindow from '../interface/inGame/RightWindow'
 import LeftWindow from '../interface/inGame/LeftWindow'
 import ClassicModal from '../items/ClassicModal'
 import ScenesMaker from '../interface/inGame/ScenesMaker'
-import BabelfestBackground from "../../assets/img/fond_babelfest.png"
+import BabelfestBackground from '../../assets/img/fond_babelfest.png'
+import { getBackgroundStyle } from '../others/toolBox'
 
 export default function Room() {
   const {
@@ -45,7 +46,6 @@ export default function Room() {
   const placeCardOnArena = usePlaceCardOnArea()
 
   useEffect(() => {
-    // Si on est en phase 3 commencer à regarder si l'autre joueur termine sa phase
     if (phase === 3) {
       const gameDocRef = doc(db, 'games', room)
       const unsubscribe = onSnapshot(gameDocRef, (snapshot) => {
@@ -57,7 +57,6 @@ export default function Room() {
         }
       })
 
-      // Se désabonner de l'écoute lors du nettoyage.
       return () => unsubscribe()
     }
   }, [phase])
@@ -75,7 +74,6 @@ export default function Room() {
     window.addEventListener('online', handleOnline)
     window.addEventListener('offline', handleOffline)
 
-    // Cleanup the event listeners on component unmount
     return () => {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
@@ -86,7 +84,7 @@ export default function Room() {
     <>
       {(playerSelf.disconnected || !isOnline) && (
         <ClassicModal>
-          Vous avez été deconnecté, vérifiez votre connexion et rechargez votre navigateur dans les
+          Vous avez été déconnecté, vérifiez votre connexion et rechargez votre navigateur dans les
           30 secondes pour revenir dans la partie sous peine de défaite.
         </ClassicModal>
       )}
@@ -98,18 +96,14 @@ export default function Room() {
         {playerSelf.hand != null && (
           <>
             {detailCard && <Details detailCard={detailCard} />}
-            {/* Fenêtres */}
             <LeftWindow />
             <RightWindow />
             <TurnAlert />
             <div className={`musicPlayer-container ${musicPlayer ? 'active' : ''}`}>
               <MusicPlayer role="ingame" />
             </div>
-            {/* Arène */}
             <Arena />
-            {/* Menus */}
             <InGameMenus />
-            {/* Main du joueur */}
             <Hand>
               {playerSelf.hand
                 .sort((a, b) => a.rarity - b.rarity)
@@ -117,11 +111,8 @@ export default function Room() {
                   return <Card key={index} card={card} />
                 })}
             </Hand>
-            {/* Affichage des bannières de joueurs */}
             <Players />
-            {/* Affichage de l'état actuel de la partie */}
             <TurnTracker />
-            {/* Trucs de modal */}
             {askForTarget && <SelectTarget />}
             {standby[0] === playerID && (
               <Modal>
@@ -166,14 +157,10 @@ export default function Room() {
       <div
         className="gameContainer-filter"
         style={{
-          background: `${myTurn ? myColor : rivalColor}`
+          background: `${getBackgroundStyle(myTurn ? myColor : rivalColor)}`
         }}
       ></div>
-      <img
-        className={`gameContainer-bg`}
-        src={BabelfestBackground}
-        alt={'background du menu'}
-      />
+      <img className={`gameContainer-bg`} src={BabelfestBackground} alt={'background du menu'} />
     </>
   )
 }

@@ -12,18 +12,18 @@ import {
 } from 'firebase/firestore'
 import { db } from '../../Firebase'
 
-import originCards from '../../jsons/cards/originCards.json'
-import reinforcementCards from '../../jsons/cards/reinforcementCards.json'
+import originCards from '../../jsons/cards/origine.json'
+import reinforcementCards from '../../jsons/cards/renforts.json'
 import babelfish from '../../jsons/cards/babelfish.json'
-import mecanicaCards from '../../jsons/cards/mecanicaCards.json'
-import promoCards from '../../jsons/cards/promoCards.json'
-import twentyfourCards from '../../jsons/cards/twentyfourCards.json'
+import mecanicaCards from '../../jsons/cards/mecanica.json'
+import promoCards from '../../jsons/cards/promo.json'
+import twentyfourCards from '../../jsons/cards/infini_2024.json'
 
-import bordersData from '../../jsons/skins/borderProfile.json'
-import colorsData from '../../jsons/skins/colorsSkins.json'
-import bannerData from '../../jsons/skins/userBanner.json'
-import avatarData from '../../jsons/skins/profilePics.json'
-import titleData from '../../jsons/skins/userTitle.json'
+import bordersData from '../../jsons/skins/borders.json'
+import colorsData from '../../jsons/skins/colors.json'
+import bannerData from '../../jsons/skins/banners.json'
+import avatarData from '../../jsons/skins/avatars.json'
+import titleData from '../../jsons/skins/titles.json'
 import prestigeData from '../../jsons/skins/prestigeColor.json'
 
 const borders = bordersData.map((item, index) => ({
@@ -526,4 +526,16 @@ export const getRankClass = (index) => {
     default:
       return ''
   }
+}
+
+export const getBackgroundStyle = (colorObject) => {
+  if (typeof colorObject === 'string') {
+    // Si colorObject est une chaîne de caractères, renvoyer directement cette chaîne
+    return colorObject
+  } else if (colorObject.gradient) {
+    // Si colorObject est un objet avec un gradient, appliquer le dégradé
+    return `linear-gradient(to bottom, ${colorObject.hex}, ${colorObject.gradient})`
+  }
+  // Si colorObject est un objet sans gradient, renvoyer la couleur hex
+  return colorObject.hex
 }

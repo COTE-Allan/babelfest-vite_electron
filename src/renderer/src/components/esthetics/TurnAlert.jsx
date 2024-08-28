@@ -4,6 +4,7 @@ import '../../styles/esthetics/TurnAlert.scss'
 import useSound from 'use-sound'
 import notifSfx from '../../assets/sfx/notification_urturn.wav'
 import { AuthContext } from '../../AuthContext'
+import { getBackgroundStyle } from '../others/toolBox'
 
 export default function TurnAlert() {
   const { myTurn, phase, hand, host, myColor, rivalColor } = useContext(GlobalContext)
@@ -30,8 +31,8 @@ export default function TurnAlert() {
       setAnimation(false)
     }, 2000)
 
-    setTurnTxt(phase == 0 ? 'Début de la partie !' : turnText)
-    setPhaseTxt(phase == 0 ? 'Distribution et échange des cartes' : phaseText)
+    setTurnTxt(phase === 0 ? 'Début de la partie !' : turnText)
+    setPhaseTxt(phase === 0 ? 'Distribution et échange des cartes' : phaseText)
   }, [myTurn, phase])
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function TurnAlert() {
     <div
       className={`turnAlert ${animation ? 'animation' : ''}`}
       style={{
-        backgroundColor: `${host && myTurn ? myColor : !host && myTurn ? myColor : rivalColor}`
+        background: host && myTurn ? getBackgroundStyle(myColor) : getBackgroundStyle(rivalColor)
       }}
     >
       <h1>{turnTxt}</h1>

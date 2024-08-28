@@ -17,7 +17,7 @@ export default function ExperienceBar() {
       <ProgressBar
         padding={5}
         completed={userInfo.xp}
-        bgColor={userInfo.primaryColor}
+        bgColor={userInfo.primaryColor.hex}
         labelColor="#fff"
         maxCompleted={xpMax}
         customLabel={`${xpPercentage.toFixed(0)}%`}

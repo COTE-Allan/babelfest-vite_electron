@@ -64,7 +64,8 @@
     "level": 15
   },
   {
-    "hex": "#999999",
+    "hex": "#808080",
+    "gradient": "#c4c4c4",
     "name": "Argent",
     "unlockTip": "Obtenu en atteignant le niveau 20.",
     "level": 20
@@ -76,16 +77,43 @@
     "level": 26
   },
   {
-    "hex": "#D0870A",
+    "hex": "#d1a231",
+    "gradient": "#906500",
     "name": "Or",
     "unlockTip": "Obtenu en atteignant le niveau 30.",
     "level": 30
   },
   {
+    "hex": "#FFC0CB",
+    "name": "Rose Pastel",
+    "unlockTip": "Obtenu en atteignant le niveau 34.",
+    "level": 34
+  },
+  {
     "hex": "#94d3e1",
+    "gradient": "#29bbdd",
     "name": "Diamant",
     "unlockTip": "Obtenu en atteignant le niveau 40.",
     "level": 40
+  },
+  {
+    "hex": "#f8d763",
+    "name": "Jaune miel",
+    "unlockTip": "Obtenu en atteignant le niveau 44.",
+    "level": 44
+  },
+  {
+    "hex": "#ffa856",
+    "name": "Orange pêche",
+    "unlockTip": "Obtenu en atteignant le niveau 56.",
+    "level": 56
+  },
+  {
+    "hex": "#66cc99",
+    "gradient": "#994309",
+    "name": "Menthe Chocolat",
+    "unlockTip": "Obtenu en atteignant le niveau 62.",
+    "level": 62
   },
   {
     "hex": "#E9E9E9",
@@ -94,14 +122,44 @@
     "level": 70
   },
   {
-    "hex": "#c12527",
-    "name": "Rouge Babelfest Assombri",
-    "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
-    "flag": "alphaTest"
+    "hex": "#a9d6d0",
+    "gradient": "#ac7f2b",
+    "name": "Platine Royal",
+    "unlockTip": "Obtenu en atteignant le niveau 75.",
+    "level": 75
   },
   {
-    "hex": "#2c75aa",
-    "name": "Bleu Babelfest Assombri",
+    "hex": "#8B0000",
+    "gradient": "#FF4500",
+    "name": "Éclat de Rubis",
+    "unlockTip": "Obtenu en atteignant le niveau 80.",
+    "level": 80
+  },
+  {
+    "hex": "#8B0000",
+    "gradient": "#2F4F4F",
+    "name": "Cerise Noire",
+    "unlockTip": "Obtenu en atteignant le niveau 85.",
+    "level": 85
+  },
+  {
+    "hex": "#6A5ACD",
+    "gradient": "#FF1493",
+    "name": "Ombre Éthérée",
+    "unlockTip": "Obtenu en atteignant le niveau 95.",
+    "level": 95
+  },
+  {
+    "hex": "#e3c1f4",
+    "gradient": "#acf0ff",
+    "name": "Arc-en-Ciel Pastel",
+    "unlockTip": "Obtenu en atteignant le niveau 100.",
+    "level": 100
+  },
+  {
+    "hex": "#e62e32",
+    "gradient": "#40a8f6",
+    "name": "Dégradé Babelfest",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
     "flag": "alphaTest"
   }

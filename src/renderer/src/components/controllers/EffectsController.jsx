@@ -155,6 +155,12 @@ export const useTryEffect = () => {
             effect.spawnUsed = true
           }
 
+          // Si l'effet n'est pas réutilisable, on marque qu'il a été utilisé ce tour-ci
+          if (!effect.reusable) {
+            effect.usedThisTurn = true
+          }
+
+          // Logique pour gérer l'effet (choix, exécution, etc.)
           if (effect.choice) {
             let effectInfos = getEffectInfo(effect.type)
             pattern = await getPattern(room)
@@ -172,7 +178,7 @@ export const useTryEffect = () => {
                     async (selection) => {
                       setAskForTarget(false)
                       const executedEffect = effectList[effect.type]({
-                        index, // Utiliser l'index original ici
+                        index,
                         item,
                         effect,
                         targets: selection,
@@ -196,7 +202,7 @@ export const useTryEffect = () => {
           } else {
             let effectInfos = getEffectInfo(effect.type)
             const executedEffect = await effectList[effect.type]({
-              index, // Utiliser l'index original ici
+              index,
               item,
               effect,
               pattern,

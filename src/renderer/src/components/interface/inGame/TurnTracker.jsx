@@ -2,10 +2,12 @@ import ProfilePicture from '../../esthetics/profilePicture'
 import '../../../styles/interface/inGame/turnTracker.scss'
 import { GlobalContext } from '../../providers/GlobalProvider'
 import { useContext } from 'react'
+import { getBackgroundStyle } from '../../others/toolBox'
 
 export default function TurnTracker() {
   const { myTurn, phase, firstToPlay, playerID, myColor, rivalColor, turn } =
     useContext(GlobalContext)
+
   const phaseLabel = {
     0: "Échange avec l'autre joueur",
     1: 'Phase de préparation',
@@ -13,11 +15,12 @@ export default function TurnTracker() {
     3: "Phase d'attaque",
     4: 'Phase de troc'
   }
+
   return (
     <div
       className="turnTracker"
       style={{
-        borderColor: phase === 0 ? `transparent` : myTurn ? `${myColor}` : `${rivalColor}`
+        borderColor: phase === 0 ? `transparent` : myTurn ? myColor.hex : rivalColor.hex
       }}
     >
       <div className="turnTracker-content">
@@ -31,7 +34,7 @@ export default function TurnTracker() {
       </div>
       <div
         style={{
-          backgroundColor: phase === 0 ? `transparent` : myTurn ? `${myColor}` : `${rivalColor}`
+          background: phase === 0 ? `transparent` : myTurn ? myColor.hex : rivalColor.hex
         }}
         className="turnTracker-phases"
       >

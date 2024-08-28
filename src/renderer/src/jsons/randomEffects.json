@@ -167,8 +167,7 @@
     "when": ["cardDeath"],
     "byme": false,
     "type": "leader",
-    "name": "Leader",
-    "reusable": true
+    "name": "Leader"
   },
   {
     "when": [2],

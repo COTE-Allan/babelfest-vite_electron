@@ -3,7 +3,6 @@
     "id": "HF_tutorial",
     "name": "Le match du siècle",
     "desc": "Terminez le tutoriel.",
-    "rewardType": "Avatar + Bannière",
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp"
   },
   {
@@ -11,7 +10,6 @@
     "name": "Bienvenue sur Babelfest",
     "desc": "Terminez votre première partie dans n'importe quel mode.",
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323312/babelfest/skins/borders/04_-_Initiation_des_Plaines.webp",
-    "rewardType": "Cadre",
     "objective": {
       "stat": "totalGamesPlayed",
       "value": 1
@@ -20,7 +18,6 @@
   {
     "id": "HF_5win",
     "name": "Le meilleur joueur du monde",
-    "rewardType": "Avatar",
     "desc": "Gagnez 5 parties dans n'importe quel mode.",
     "url": "./skins/avatars/avatar_tuto_2.png",
     "objective": {
@@ -31,7 +28,6 @@
   {
     "id": "HF_50Games",
     "name": "Le début de l'addiction",
-    "rewardType": "Cadre",
     "desc": "Jouez 50 parties dans n'importe quel mode.",
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323313/babelfest/skins/borders/01_-_Archives_Akashiques.webp",
     "objective": {
@@ -44,7 +40,6 @@
     "name": "Sérial Winner",
     "desc": "Gagnez 5 parties d'affilée en rapide et/ou classée.",
     "url": "./skins/borders/cadre_cuir.png",
-    "rewardType": "Cadre",
     "objective": {
       "stat": "longestWinStreak",
       "value": 5
@@ -55,7 +50,6 @@
     "name": "Dix sur dix",
     "desc": "Gagnez 10 parties d'affilée en rapide et/ou classée.",
     "url": "./skins/borders/cadre_10to10.png",
-    "rewardType": "Cadre + Titre",
     "objective": {
       "stat": "longestWinStreak",
       "value": 10
@@ -66,7 +60,6 @@
     "name": "Domination totale",
     "desc": "Gagnez 15 parties d'affilée en rapide et/ou classée.",
     "url": "./skins/icon_success_title.png",
-    "rewardType": "Cadre + Titre",
     "objective": {
       "stat": "longestWinStreak",
       "value": 15
@@ -77,7 +70,6 @@
     "name": "Respecté",
     "desc": "Obtenez 10 honneurs de la part d'autres joueurs.",
     "url": "./skins/icon_success_title.png",
-    "rewardType": "Titre",
     "objective": {
       "profile": "honor",
       "value": 10
@@ -88,7 +80,6 @@
     "name": "Digne",
     "desc": "Obtenez 50 honneurs de la part d'autres joueurs.",
     "url": "./skins/borders/cadre_or_honor.png",
-    "rewardType": "Cadre",
     "objective": {
       "profile": "honor",
       "value": 50
@@ -99,7 +90,6 @@
     "name": "Fair play",
     "desc": "Honorez un autre joueur depuis son profil.",
     "url": "./skins/borders/cadre_blushing.png",
-    "rewardType": "Cadre",
     "objective": {
       "profile": "honored.quantity",
       "value": 1
@@ -110,7 +100,6 @@
     "name": "Prend mon respect",
     "desc": "Honorez 50 fois.",
     "url": "./skins/borders/cadre_rainbow.png",
-    "rewardType": "Cadre",
     "objective": {
       "profile": "honored.quantity",
       "value": 50
@@ -120,22 +109,19 @@
     "id": "HF_kroneChaos",
     "name": "Chaos Cosmique",
     "desc": "Invoquez 'Krone : Intruse Cosmique' alors qu'il y a au moins 10 cartes sur le terrain.",
-    "url": "./skins/banners/banner_krone_2.png",
-    "rewardType": "Bannière"
+    "url": "./skins/banners/banner_krone_2.png"
   },
   {
     "id": "HF_shiroFreeze",
     "name": "Zéro absolu",
     "desc": "Invoquez 'Shiro : Héraut du blizzard' et gelez une carte déjà gêlé.",
-    "url": "./skins/banners/banner_shiro_1.png",
-    "rewardType": "Bannière"
+    "url": "./skins/banners/banner_shiro_1.png"
   },
   {
     "id": "HF_fastWin",
     "name": "Expéditif",
     "desc": "Gagnez une partie rapide ou classée en 5 tours ou moins.",
     "url": "./skins/borders/cadre_speedlines.png",
-    "rewardType": "Cadre",
     "objective": {
       "win": true,
       "gamemode": ["quick", "ranked"],
@@ -146,21 +132,18 @@
   {
     "id": "HF_thirdEye",
     "name": "Visionnaire",
-    "rewardType": "Avatar",
     "desc": "Activez l'effet 'Troisième Oeil' sur une carte dissimulée.",
     "url": "./skins/avatars/avatar_oeilOmniscient.png"
   },
   {
     "id": "HF_11dmg",
     "name": "One Punch Man",
-    "rewardType": "Avatar",
     "desc": "Infligez 11 points de dégâts ou plus en une seule attaque.",
     "url": "./skins/avatars/avatar_vehemon_1.png"
   },
   {
     "id": "HF_6heal",
     "name": "Médecin de guerre",
-    "rewardType": "Bannière",
     "desc": "Soignez 6 points de vies ou plus en une seule fois.",
     "url": "./skins/banners/banner_heal.png"
   }

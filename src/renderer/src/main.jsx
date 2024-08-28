@@ -9,7 +9,6 @@ import MenuHeader from './components/interface/MenuHeader'
 import Login from './components/pages/Login'
 import { AuthContext, AuthProvider } from './AuthContext'
 import Account from './components/pages/Account'
-import Register from './components/pages/Register'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/toast.scss'
@@ -125,15 +124,7 @@ const App = () => {
               </>
             }
           />
-          <Route
-            path="/register"
-            element={
-              <>
-                <Register />
-                <UpdateNotifier />
-              </>
-            }
-          />
+
           <Route
             path="/account/:defaultPage"
             element={

@@ -1150,8 +1150,7 @@
       {
         "when": ["cardDeath"],
         "byme": false,
-        "type": "leader",
-        "reusable": true
+        "type": "leader"
       }
     ]
   },

@@ -1,33 +1,33 @@
 [
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1708684919/babelfest/skins/banner/defaultBanner.webp",
+    "url": "./skins/banners/banner_default.png",
     "name": "Babelfest",
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt2.webp",
+    "url": "./skins/banners/banner_default_3.png",
     "name": "Babelfest Bleu",
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711380764/babelfest/skins/banner/defaultBanner_alt1.webp",
+    "url": "./skins/banners/banner_default_2.png",
     "name": "Babelfest Rouge",
     "unlockTip": "Débloqué par défaut."
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711456964/babelfest/skins/banner/bannerEvilMat.webp",
+    "url": "./skins/banners/banner_evilmat_1.png",
     "name": "Le bout du monde",
     "unlockTip": "Obtenu en atteignant le niveau 2.",
     "level": 2
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1708695860/babelfest/skins/banner/bannerBabelfestHugoGeek.webp",
+    "url": "./skins/banners/banner_hugo_1.png",
     "name": "Gribouillages",
     "unlockTip": "Obtenu en atteignant le niveau 4.",
     "level": 4
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Go_With_The_Flow.webp",
+    "url": "./skins/banners/banner_rid_1.png",
     "name": "Go With The Flow",
     "unlockTip": "Obtenu en atteignant le niveau 6.",
     "level": 6
@@ -39,7 +39,7 @@
     "level": 11
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711476989/babelfest/skins/banner/banner_abuse_1.webp",
+    "url": "./skins/banners/banner_abuse_1.png",
     "name": "Forêt enneigée",
     "unlockTip": "Obtenu en atteignant le niveau 16.",
     "level": 16
@@ -51,25 +51,25 @@
     "level": 19
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024466/babelfest/skins/banner/In_The_Darkness.webp",
+    "url": "./skins/banners/banner_rid_3.png",
     "name": "In the Darkness",
     "unlockTip": "Obtenu en atteignant le niveau 22.",
     "level": 22
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270963/babelfest/skins/banner/eau_banniere.webp",
+    "url": "./skins/banners/banner_bubbles.jpg",
     "name": "Bulles",
     "unlockTip": "Obtenu en atteignant le niveau 24.",
     "level": 24
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270961/babelfest/skins/banner/Banniere_japon.webp",
+    "url": "./skins/banners/banner_nippon.jpg",
     "name": "Nippon",
     "unlockTip": "Obtenu en atteignant le niveau 29.",
     "level": 29
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1722455966/babelfest/skins/banner/clemojis.png",
+    "url": "./skins/banners/banner_clemojis.png",
     "name": "Clémojis",
     "unlockTip": "Obtenu en atteignant le niveau 32.",
     "level": 32
@@ -87,7 +87,7 @@
     "level": 37
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Regal_Sanctity.webp",
+    "url": "./skins/banners/banner_rid_2.png",
     "name": "Regal Sanctity",
     "unlockTip": "Obtenu en atteignant le niveau 40.",
     "level": 40
@@ -99,7 +99,7 @@
     "level": 46
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1711024467/babelfest/skins/banner/Rigor_of_Life.webp",
+    "url": "./skins/banners/banner_rid_4.png",
     "name": "Rigor of Life",
     "unlockTip": "Obtenu en atteignant le niveau 54.",
     "level": 54
@@ -112,7 +112,7 @@
   },
 
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1722270962/babelfest/skins/banner/Banniere_tuto.webp",
+    "url": "./skins/banners/banner_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
     "achievement": "HF_tutorial"
@@ -136,7 +136,7 @@
     "achievement": "HF_6heal"
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_315/v1711380216/babelfest/skins/banner/bannerFondateur.webp",
+    "url": "./skins/banners/banner_fondateur.png",
     "name": "Akumu VS Odasun",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
     "flag": "alphaTest"

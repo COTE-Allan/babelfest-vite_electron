@@ -13,23 +13,25 @@ import selectSfx from '../../assets/sfx/menu_select.wav'
 
 function SkinItem({ skin }) {
   const { userInfo } = useContext(AuthContext)
-  const { level, url, hex, name, classe } = skin
+  const { level, url, hex, gradient, name, classe } = skin
   const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
   let content
+
   if (url) {
     content = <img src={url} alt={`Skin ${name}`} draggable="false" />
   } else if (hex) {
     content = (
       <div
         className={`color ${skin.classes ? skin.classes : ''}`}
-        style={{ backgroundColor: hex }}
+        style={{
+          background: gradient ? `linear-gradient(to bottom, ${hex}, ${gradient})` : hex
+        }}
       />
     )
   } else if (classe) {
     content = (
       <span className={`title prestige skin-title`}>
-        {' '}
-        <div className={classe}> {userInfo.username}</div>
+        <div className={classe}>{userInfo.username}</div>
       </span>
     )
   } else {
@@ -176,7 +178,9 @@ export default function UserAchievements() {
                       {achievement.name}{' '}
                       {!userInfo.achievements?.includes(achievement.id) && <FaLock />}
                     </h3>
-                    <span>{achievement.desc}</span>
+                    <span>
+                      {achievement.desc} <br />
+                    </span>
                   </div>
                   <div className="achievements-list-item-reward">
                     <img
@@ -184,7 +188,6 @@ export default function UserAchievements() {
                       alt={`image du succès : ${achievement.name}`}
                       draggable="false"
                     />
-                    <span>{achievement.rewardType}</span>
                   </div>
                 </div>
               ))}

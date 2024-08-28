@@ -18,9 +18,6 @@ export default function Winner() {
     winner,
     gameData,
     room,
-    host,
-    myColor,
-    rivalColor,
     playerID,
     playerSelf,
     playerRival,
@@ -245,13 +242,7 @@ export default function Winner() {
 
   if (winner !== null) {
     return (
-      <div
-        className={`winner`}
-        style={{
-          backgroundColor:
-            winner == 1 && host ? myColor : winner == 2 && !host ? myColor : rivalColor
-        }}
-      >
+      <div className={`winner`}>
         <h1>{playerID === winner ? 'Vous avez gagné !' : 'Vous avez perdu...'}</h1>
         <div style={{ marginTop: 10 }}>
           <div className="xp-bar_container">

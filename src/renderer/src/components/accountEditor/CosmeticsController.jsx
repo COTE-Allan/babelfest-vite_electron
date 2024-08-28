@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react'
 import ColorSkins from '../accountEditor/ColorSkins'
 import ProfilePics from '../accountEditor/ProfilePics'
 import BorderProfile from '../accountEditor/BorderProfile'
-import BorderArena from '../accountEditor/BorderArena'
 import { GiCancel, GiConfirmed } from 'react-icons/gi'
 import { AuthContext } from '../../AuthContext'
 import Button from '../items/Button'
@@ -63,18 +62,23 @@ export default function CosmecticsController({
 
     // Check if both primary and secondary are selected and different
     if (selectedPrimary && selectedSecondary) {
-      isValidUpdate = selectedPrimary !== selectedSecondary
+      isValidUpdate = selectedPrimary.hex !== selectedSecondary.hex
     }
     // Check if only one is selected and it's different from the existing other color
     else if (selectedPrimary || selectedSecondary) {
       isValidUpdate =
-        selectedPrimary !== userInfo.secondaryColor && selectedSecondary !== userInfo.primaryColor
+        selectedPrimary?.hex !== userInfo.secondaryColor &&
+        selectedSecondary?.hex !== userInfo.primaryColor
     }
 
     if (isValidUpdate) {
       if (profile) updates.profilePic = profile
-      if (selectedPrimary) updates.primaryColor = selectedPrimary
-      if (selectedSecondary) updates.secondaryColor = selectedSecondary
+      if (selectedPrimary) {
+        updates.primaryColor = selectedPrimary
+      }
+      if (selectedSecondary) {
+        updates.secondaryColor = selectedSecondary
+      }
       if (border) updates.profileBorder = border
       if (arena.length !== 0) updates.arena = arena[0]
       if (arena.length !== 0) updates.arenaReverse = arena[1]
@@ -158,7 +162,6 @@ export default function CosmecticsController({
         )}
         {page === 1 && <ProfilePics profile={profile} setProfile={setProfile} />}
         {page === 2 && <BorderProfile border={border} setBorder={setBorder} />}
-        {page === 4 && <BorderArena arena={arena} setArena={setArena} />}
         {page === 5 && <UserTitle title={title} setTitle={setTitle} />}
         {page === 6 && <UserBanner banner={banner} setBanner={setBanner} />}
         {page === 7 && <UserPrestige prestige={prestige} setPrestige={setPrestige} />}

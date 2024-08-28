@@ -13,7 +13,7 @@ import {
   GiPerspectiveDiceSixFacesRandom,
   GiDeathSkull
 } from 'react-icons/gi'
-import { isCardMine } from '../../others/toolBox'
+import { getBackgroundStyle, isCardMine } from '../../others/toolBox'
 
 export default function Logs(props) {
   const { logs, myColor, rivalColor, playerID, pattern, phase, playerSelf, playerRival } =
@@ -74,6 +74,7 @@ export default function Logs(props) {
     4: 'Troc'
   }
 
+  // TODO: border color dégradé
   return (
     <div className="logs-messages">
       {logs != null &&
@@ -86,7 +87,7 @@ export default function Logs(props) {
 
           const isMine = log.owner === playerID
           const isVisible = log.trigger?.isRecto || isMine
-          const itemColor = isMine ? myColor : rivalColor
+          const itemColor = isMine ? getBackgroundStyle(myColor) : getBackgroundStyle(rivalColor)
 
           return (
             <div
@@ -112,7 +113,7 @@ export default function Logs(props) {
                     <div
                       className="logs-item-action"
                       style={{
-                        backgroundColor: itemColor
+                        background: itemColor
                       }}
                     >
                       {log.action === 'effect' ? (

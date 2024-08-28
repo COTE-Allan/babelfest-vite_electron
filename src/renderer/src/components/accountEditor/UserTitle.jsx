@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import userTitle from '../../jsons/skins/userTitle.json'
+import userTitle from '../../jsons/skins/titles.json'
 import { AuthContext } from '../../AuthContext'
 import { FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'

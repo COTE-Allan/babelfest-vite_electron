@@ -146,8 +146,8 @@ const Login = () => {
         profilePic:
           'https://res.cloudinary.com/dxdtcakuv/image/upload/v1705073934/babelfest/skins/profilePics/avatarLogoBabel.webp',
         flags: ['betaTest'],
-        primaryColor: '#40a8f5',
-        secondaryColor: '#e62e31',
+        primaryColor: { hex: '#40a8f5' },
+        secondaryColor: { hex: '#e62e31' },
         banner:
           'https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1708684919/babelfest/skins/banner/defaultBanner.webp',
         level: 1,

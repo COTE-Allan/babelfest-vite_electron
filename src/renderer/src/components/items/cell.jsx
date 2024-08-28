@@ -9,6 +9,7 @@ import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/card_select.wav'
 import hoverSfx from '../../assets/sfx/card_hover.wav'
+import { getBackgroundStyle } from '../others/toolBox'
 
 export default function Cell({ active, confirmModal, cell }) {
   const { userSettings } = useContext(AuthContext)
@@ -74,7 +75,6 @@ export default function Cell({ active, confirmModal, cell }) {
       select()
     }
 
-    // Sous quelles conditions peut t'on choisir la cellule ?
     if (
       (card?.attackedThisTurn && phase == 3) ||
       (card?.movedThisTurn && phase == 2) ||
@@ -115,19 +115,22 @@ export default function Cell({ active, confirmModal, cell }) {
 
   const bgColor = useMemo(() => {
     if (isBase) {
-      return (team === 1 && host) || (team === 2 && !host) ? myColor : rivalColor
+      return (team === 1 && host) || (team === 2 && !host) ? myColor.hex : rivalColor.hex
     } else {
       return '#000'
     }
   }, [isBase, team, host, myColor, rivalColor])
 
+  // TODO: bordure cell dégradé
   const borderColor = useMemo(() => {
     if (owner) {
-      return (owner === 1 && host) || (owner === 2 && !host) ? myColor : rivalColor
+      return (owner === 1 && host) || (owner === 2 && !host)
+        ? getBackgroundStyle(myColor)
+        : getBackgroundStyle(rivalColor)
     } else {
       return '#fff'
     }
-  }, [cell])
+  }, [cell, host, owner, myColor, rivalColor])
 
   if (!cell.exist) {
     return <div className="cell cell-inexistant" id={id} data-team={team} />
@@ -140,7 +143,7 @@ export default function Cell({ active, confirmModal, cell }) {
       data-team={team}
       onClick={selectCell}
       style={{
-        backgroundColor: bgColor,
+        background: bgColor,
         '--rotation': `${host ? '0deg' : '180deg'}`,
         borderColor: borderColor
       }}
@@ -151,7 +154,6 @@ export default function Cell({ active, confirmModal, cell }) {
         setRightWindow('details')
       }}
       onMouseEnter={() => {
-        console.log(cell)
         if (card) hover()
       }}
     >

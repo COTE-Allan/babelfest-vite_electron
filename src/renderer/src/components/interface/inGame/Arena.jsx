@@ -6,6 +6,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
 import { ArenaController } from '../../controllers/ArenaController'
 import DeathController from '../../controllers/DeathController'
+import { getBackgroundStyle } from '../../others/toolBox'
 
 export default function Arena() {
   const {
@@ -79,15 +80,19 @@ export default function Arena() {
               <div
                 className="arena-borders-item"
                 style={{
-                  backgroundColor: !myTurn || phase === 0 ? rivalColor : '#939393',
-                  boxShadow: !myTurn || phase === 0 ? `0 -10px 70px ${rivalColor}` : 'none'
+                  background: !myTurn || phase === 0 ? getBackgroundStyle(rivalColor) : '#939393',
+                  boxShadow:
+                    !myTurn || phase === 0
+                      ? `0 -10px 70px ${getBackgroundStyle(rivalColor)}`
+                      : 'none'
                 }}
               ></div>
               <div
                 className="arena-borders-item"
                 style={{
-                  backgroundColor: myTurn || phase === 0 ? myColor : '#939393',
-                  boxShadow: myTurn || phase === 0 ? `0 10px 70px ${myColor}` : 'none'
+                  background: myTurn || phase === 0 ? getBackgroundStyle(myColor) : '#939393',
+                  boxShadow:
+                    myTurn || phase === 0 ? `0 10px 70px ${getBackgroundStyle(myColor)}` : 'none'
                 }}
               ></div>
             </div>

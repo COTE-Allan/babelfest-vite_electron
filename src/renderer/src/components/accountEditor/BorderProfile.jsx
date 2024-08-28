@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import borderProfile from '../../jsons/skins/borderProfile.json'
+import borderProfile from '../../jsons/skins/borders.json'
 import { AuthContext } from '../../AuthContext'
 import { FaLock } from 'react-icons/fa'
 import SkinsButton from '../items/skinsButton'

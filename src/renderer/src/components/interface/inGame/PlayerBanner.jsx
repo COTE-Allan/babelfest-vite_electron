@@ -2,12 +2,15 @@ import { TbCardsFilled } from 'react-icons/tb'
 import ProfilePicture from '../../esthetics/profilePicture'
 import { NameAndTitle } from '../../items/NameAndTitle'
 
-export default function PlayerBanner({ user, cardsLeft, color, side }) {
+export default function PlayerBanner({ user, cardsLeft, color, side, gradient }) {
   return (
     <div
       className={`playerBanner`}
       style={{
-        border: `${color} 4px solid`,
+        border: 'double 5px transparent',
+        backgroundImage: `linear-gradient(white, white), linear-gradient(to bottom, ${color.hex}, ${color.gradient ? color.gradient : color.hex})`,
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'content-box, border-box',
         opacity: user.disconnected ? 0.5 : 1
       }}
     >

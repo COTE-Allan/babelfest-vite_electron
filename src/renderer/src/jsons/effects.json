@@ -205,7 +205,7 @@
   {
     "slug": "leader",
     "name": "Leader",
-    "desc": "Cette carte obtient un point permanent supplémentaire dans une stat aléatoire quand une carte alliée est détruite.",
+    "desc": "Une fois par tour, cette carte obtient un point permanent supplémentaire dans une stat aléatoire quand une carte alliée est détruite.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520370/babelfest/icons/leader_gyvy5j.webp",
     "type": "Buffs"
   },

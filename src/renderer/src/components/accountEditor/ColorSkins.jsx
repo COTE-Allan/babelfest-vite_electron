@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import colorsSkins from '../../jsons/skins/colorsSkins.json'
+import colorsSkins from '../../jsons/skins/colors.json'
 import { AuthContext } from '../../AuthContext'
 import { FaLock } from 'react-icons/fa'
 import { PiNumberCircleTwoFill, PiNumberCircleOneFill } from 'react-icons/pi'
@@ -33,74 +33,67 @@ export default function ColorSkins({
           {colorsSkins.map((color) => {
             let lockedCondition = isUnlocked(color, userInfo)
 
-            // TODO: couleur arc en ciel en jeu (faut stocker la classe avec le hex (ou juste la classe ?))
             return (
               <SkinsButton
                 isSquare
                 isColor
                 lockedCondition={lockedCondition}
                 className={`color ${color.classes ? color.classes : ''}`}
-                style={{ backgroundColor: color.hex }}
+                style={{
+                  background: color.gradient
+                    ? `linear-gradient(${color.hex}, ${color.gradient})`
+                    : color.hex
+                }}
                 onClick={() => {
-                  if (color.hex !== selectedSecondary) {
-                    if (color.hex === selectedPrimary) {
+                  if (color.hex !== selectedSecondary?.hex) {
+                    if (color.hex === selectedPrimary?.hex) {
                       setSelectedPrimary(null)
                     } else {
-                      setSelectedPrimary(color.hex)
+                      setSelectedPrimary({
+                        hex: color.hex,
+                        gradient: color.gradient || null
+                      })
                     }
                   } else {
                     sendErrorMessage('Cette couleur est déjà votre couleur secondaire.')
                   }
                 }}
                 onMouseEnter={() => setColorLabel([color.name, color.unlockTip, lockedCondition])}
-                onContextMenu={() => {
-                  if (color.hex !== selectedPrimary) {
-                    if (color.hex === selectedSecondary) {
+                onContextMenu={(e) => {
+                  e.preventDefault()
+                  if (color.hex !== selectedPrimary?.hex) {
+                    if (color.hex === selectedSecondary?.hex) {
                       setSelectedSecondary(null)
                     } else {
-                      setSelectedSecondary(color.hex)
+                      setSelectedSecondary({
+                        hex: color.hex,
+                        gradient: color.gradient || null
+                      })
                     }
                   } else {
                     sendErrorMessage('Cette couleur est déjà votre couleur primaire.')
                   }
                 }}
-                selected={selectedPrimary === color.hex || selectedSecondary === color.hex}
+                selected={
+                  selectedPrimary?.hex === color.hex || selectedSecondary?.hex === color.hex
+                }
               >
-                {selectedPrimary === color.hex && <PiNumberCircleOneFill className="btn-icon" />}
-                {selectedSecondary === color.hex && <PiNumberCircleTwoFill className="btn-icon" />}
+                {selectedPrimary?.hex === color.hex && (
+                  <PiNumberCircleOneFill className="btn-icon" />
+                )}
+                {selectedSecondary?.hex === color.hex && (
+                  <PiNumberCircleTwoFill className="btn-icon" />
+                )}
               </SkinsButton>
-              // <ColorButton
-              //   key={color.hex}
-              //   color={color}
-
-              //   unlocked={lockedCondition}
-              //   onMouseEnter={() =>
-              //     setColorLabel([color.name, color.unlockTip, lockedCondition])
-              //   }
-              //   onContextMenu={(e) => {
-              //     e.preventDefault();
-              //     if (lockedCondition && color.hex !== selectedPrimary) {
-              //       if (color.hex === selectedSecondary) {
-              //         setSelectedSecondary(null);
-              //       } else {
-              //         setSelectedSecondary(color.hex);
-              //       }
-              //     } else {
-              //       toast.error("Cette couleur est déjà votre couleur primaire.");
-              //     }
-              //   }}
-              //   selectedPrimary={color.hex === selectedPrimary}
-              //   selectedSecondary={color.hex === selectedSecondary}
-              // />
             )
           })}
         </div>
       </div>
 
-      <label className="tip">
+      {/* <label className="tip">
         Clique-droit pour choisir votre couleur secondaire. Elle sera utilisée quand votre
         adversaire utilise la même couleur que vous.
-      </label>
+      </label> */}
     </div>
   )
 }
