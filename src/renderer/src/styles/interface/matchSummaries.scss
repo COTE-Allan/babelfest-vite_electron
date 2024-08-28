@@ -83,5 +83,12 @@
     &-container {
         height: 90%;
         overflow-y: auto;
+
+        & h2 {
+            font-family: 'Kimberly Bl', sans-serif;
+            font-size: 30px;
+            margin: 5px 10px;
+            margin-top: 10px;
+        }
     }
 }

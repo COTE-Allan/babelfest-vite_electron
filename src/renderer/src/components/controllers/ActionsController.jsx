@@ -257,6 +257,10 @@ export const useTryAttack = () => {
 
       cardTarget.hp = hpTarget // Mise à jour des points de vie
 
+      if (atkAttacker >= 6) {
+        await giveAchievement('HF_6heal')
+      }
+
       await pushLogsIntoBatch(batch, {
         trigger: cardAttacker,
         action: 'heal',

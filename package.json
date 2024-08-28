@@ -88,7 +88,8 @@
     "win": {
       "target": [
         "nsis"
-      ]
+      ],
+      "icon": "babelfest_w.ico"
     },
     "nsis": {
       "oneClick": false,

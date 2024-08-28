@@ -154,7 +154,14 @@
     "id": "HF_11dmg",
     "name": "One Punch Man",
     "rewardType": "Avatar",
-    "desc": "Infligez 11 points de dégâts en une seule attaque.",
+    "desc": "Infligez 11 points de dégâts ou plus en une seule attaque.",
     "url": "./skins/avatars/avatar_vehemon_1.png"
+  },
+  {
+    "id": "HF_6heal",
+    "name": "Médecin de guerre",
+    "rewardType": "Bannière",
+    "desc": "Soignez 6 points de vies ou plus en une seule fois.",
+    "url": "./skins/banners/banner_heal.png"
   }
 ]

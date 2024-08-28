@@ -130,6 +130,12 @@
     "achievement": "HF_shiroFreeze"
   },
   {
+    "url": "./skins/banners/banner_heal.png",
+    "name": "Maîtrise du soin",
+    "unlockTip": "Obtenu en récompense du succès : 'Médecin de guerre'",
+    "achievement": "HF_6heal"
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_315/v1711380216/babelfest/skins/banner/bannerFondateur.webp",
     "name": "Akumu VS Odasun",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",

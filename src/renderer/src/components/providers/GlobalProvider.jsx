@@ -198,6 +198,10 @@ export const GlobalProvider = () => {
         }
         // =====================
 
+        if (phase === 1 && turn === 1) {
+          setSelectedCards([])
+        }
+
         if (disconnected) {
           player1.disconnected = disconnected.includes(player1.id)
           player2.disconnected = disconnected.includes(player2.id)
@@ -229,7 +233,6 @@ export const GlobalProvider = () => {
 
     function startWatchingTradePhase() {
       setPhaseRules([0, 0, 0])
-      setSelectedCards([])
       if (!host) {
         watchTradeRequests()
       }

@@ -90,10 +90,6 @@ const Account = () => {
             <FaUserAlt size={45} />
             <span className="hidden-span">Statistiques</span>
           </HudNavLink>
-          <HudNavLink to={'/account/5'} permOpen selected={page === 5}>
-            <FaBookOpen size={45} />
-            <span className="hidden-span">Historique</span>
-          </HudNavLink>
           <HudNavLink to={'/account/2'} selected={page === 2} permOpen>
             <FaTshirt size={45} />
             <span className="hidden-span">Customisation</span>
@@ -112,11 +108,6 @@ const Account = () => {
           {page === 2 && <CosmecticsController {...props} />}
           {page === 3 && <UserSettingsController />}
           {page === 4 && <UserAchievements />}
-          {page === 5 && (
-            <div className="matchSummaries-container">
-              <MatchSummaries summaries={userInfo.matchSummaries} />
-            </div>
-          )}
         </div>
       </div>
     </div>

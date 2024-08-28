@@ -98,7 +98,10 @@ const UserProfile = () => {
         honor: increment(1)
       })
 
-      setTargetUser({ ...targetUser, honor: targetUser.honor + 1 })
+      setTargetUser({
+        ...targetUser,
+        honor: (targetUser.honor || 0) + 1
+      })
 
       playSuccess()
       toast.success(`Vous avez honoré ${targetUser.username} !`)

@@ -147,8 +147,22 @@ export default function Winner() {
 
     setMmrChange(mmrChangeValue)
 
+    function cleanObject(obj) {
+      const cleanedObj = {} // Crée un nouvel objet vide
+
+      for (const key in obj) {
+        // Parcourt toutes les clés de l'objet
+        if (obj.hasOwnProperty(key)) {
+          // Vérifie si la clé existe dans l'objet
+          cleanedObj[key] = obj[key] !== undefined ? obj[key] : null // Si la valeur est undefined, remplace par null
+        }
+      }
+
+      return cleanedObj // Retourne l'objet nettoyé
+    }
+
     const matchSummary = {
-      player: {
+      player: cleanObject({
         id: playerSelf.id,
         username: playerSelf.username,
         primaryColor: playerSelf.primaryColor,
@@ -160,8 +174,8 @@ export default function Winner() {
         xpGained: xpObtained,
         mmrGained: mmrChangeValue,
         gameWon: gameWon
-      },
-      opponent: {
+      }),
+      opponent: cleanObject({
         id: playerRival.id,
         username: playerRival.username,
         primaryColor: playerRival.primaryColor,
@@ -173,7 +187,7 @@ export default function Winner() {
         level: playerRival.level,
         previousMMR: playerRival.stats.mmr,
         mmrDifference: mmrDifference
-      },
+      }),
       gameDetails: {
         mode: gameData.gamemode,
         turnCount: turn,

@@ -245,7 +245,8 @@ export default function Logs(props) {
                         ) : (
                           results[log.result.icon]
                         )}
-                        {log.result.value && (
+                        {/* Vérification pour cacher la valeur si la carte n'est pas Recto */}
+                        {log.result.value && (isVisible || isMine) && (
                           <span className="logs-item-result-value">{log.result.value}</span>
                         )}
                       </div>
