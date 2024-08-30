@@ -141,15 +141,19 @@ const Home = () => {
       <div className="home-col home-secondary">
         {featuredCards && (
           <div className="home-featured">
-            <Tilt
-              glareEnable={false}
-              gyroscope={true}
-              tiltMaxAngleX={7}
-              tiltMaxAngleY={7}
-              className={`tilt ${featuredCards[0].shiny && featuredCards[0].shiny}`}
-            >
-              <img src={featuredCards[0].url} alt="Featured card" />
-            </Tilt>
+            <span>
+
+            Notre sélection du moment
+            </span>
+            <div className="home-featured-list">
+
+  {featuredCards.slice(0, 4).map((card, index) => {
+    return (
+      <img onClick={() => goForward('/catalog', { state: { selected: card } })} key={index} src={card.url} alt="Featured card" />
+    );
+  })}
+  </div>
+
           </div>
         )}
 

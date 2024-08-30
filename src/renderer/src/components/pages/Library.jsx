@@ -110,6 +110,7 @@ export default function Library() {
   }, [selectedIndex])
 
   useEffect(() => {
+    console.log(location.state)
     if (location.state && location.state.selected) {
       const { selected } = location.state
       setSelected(selected)

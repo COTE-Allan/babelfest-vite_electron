@@ -29,6 +29,9 @@ import MusicPlayer from './components/interface/musicPlayer'
 import { MusicProvider } from './components/providers/MusicProvider'
 import BackButton from './components/items/BackButton'
 import MenuCard from './components/items/MenuCard'
+import MenuCardCatalog from './assets/img/catalogMenuCard.jpg'
+import MenuCardArena from './assets/img/arenasMenuCard.jpg'
+
 import './styles/items/menuCard.scss'
 
 // Composant Layout
@@ -93,6 +96,7 @@ const AppContent = () => {
                         name="Catalogue"
                         desc="Consultez les cartes présente dans le jeu."
                         where="/catalog"
+                        bg={MenuCardCatalog}
                       />
                       <MenuCard
                         name="Effets"
@@ -103,6 +107,7 @@ const AppContent = () => {
                         name="Arènes"
                         desc="Consultez la liste des arènes jouables."
                         where="/arenasList"
+                        bg={MenuCardArena}
                       />
                       <BackButton />
                     </div>
@@ -169,6 +174,7 @@ const AppContent = () => {
                 <Layout>
                   <TransitionWrapper>
                     <Leaderboards />
+
                   </TransitionWrapper>
                 </Layout>
               }

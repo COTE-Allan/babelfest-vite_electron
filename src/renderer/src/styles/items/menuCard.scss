@@ -10,10 +10,38 @@
     width: 350px;
     border-radius: 10px;
     @include greyBorders();
-    background-color: $black;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    position: relative;    
+    transition: background-color 250ms ease-in-out;
+
+    @include for-big-desktop-up {
+        height: 700px; // Ajustement de la hauteur pour les grands écrans
+        width: 490px; // Ajustement de la largeur pour les grands écrans
+        border-radius: 15px; // Augmentation du border-radius
+    }
 
     &:hover {
         cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    &:hover &-bg {
+        width: 110%;
+        @include for-big-desktop-up {
+            width: 130%; // Plus grand effet au survol sur les grands écrans
+        }
+    }
+
+    &-bg {
+        z-index: -1;
+        position: absolute;
+        width: 100%;
+        transition: width 250ms ease-in-out;
+
+        @include for-big-desktop-up {
+            width: 120%; // Plus grand effet au survol sur les grands écrans
+        }
     }
 
     &-container {
@@ -22,10 +50,22 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @include for-big-desktop-up {
+            padding: 20px; // Ajout d'un padding interne pour les grands écrans
+        }
     }
 
     &-name {
         font-family: 'Kimberly Bl', sans-serif;
-        font-size: 35px;
+        font-size: 45px;
+text-align: center;
+        @include for-big-desktop-up {
+            font-size: 60px; // Augmentation de la taille de la police pour les grands écrans
+        }
+    }
+    &-desc {
+        font-family: 'Kimberly Bl', sans-serif;
+
     }
 }

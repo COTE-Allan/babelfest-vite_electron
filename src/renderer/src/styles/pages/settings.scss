@@ -22,9 +22,11 @@
     &-item {
       display: flex;
       align-items: center;
-      margin: 25px 10px;
+      margin: 15px 10px;
       height: 45px;
-
+      padding: 5px 20px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
       // width: 100%;
       &-label {
         width: 30%;
@@ -34,6 +36,36 @@
 
       &-input {
         width: 70%;
+        &-switch {
+          display: flex;
+          @include greyBorders();
+          & .on, & .off {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 35px;
+            font-family: 'Kimberly Bl', sans-serif;
+            transition: background-color 250ms ease-in-out;
+       
+            
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          & .on {
+            width: 80%;
+          }
+          .active {
+            background-color: $blue !important;
+            color: rgb(255, 255, 255) !important;
+          }
+          .desactive {
+            background-color: $red !important;
+            color: rgb(255, 255, 255) !important;
+          }
+        }
       }
     }
   }
@@ -41,10 +73,14 @@
   &-confirm {
     display: flex;
     flex-direction: column;
-
+    transition: opacity 200ms ease-in-out;
     & span {
       color: red;
       font-family: 'Kimberly Bl', sans-serif;
+    }
+
+    &.disabled {
+      opacity: 0;
     }
   }
 }

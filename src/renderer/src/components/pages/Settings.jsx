@@ -55,16 +55,26 @@ const Settings = () => {
         <div className="settings-list-item">
           <label className="settings-list-item-label">Background animé</label>
           <div className="settings-list-item-input">
-            <Switch checked={userSettings.bgOn} onChange={() => handleToggleChange('bgOn')} />
-          </div>
+      <div className="settings-list-item-input-switch" onClick={() => handleToggleChange('bgOn')}>
+              <div className={`on ${userSettings.bgOn && "active"}`}>
+                Activé
+              </div>
+              <div className={`off ${!userSettings.bgOn && "desactive"}`}>
+                Désactivé
+              </div>
+            </div>          </div>
         </div>
         <div className="settings-list-item">
           <label className="settings-list-item-label">Fiche tutoriel en jeu</label>
           <div className="settings-list-item-input">
-            <Switch
-              checked={userSettings.tutorial}
-              onChange={() => handleToggleChange('tutorial')}
-            />
+            <div className="settings-list-item-input-switch" onClick={() => handleToggleChange('tutorial')}>
+              <div className={`on ${userSettings.tutorial && "active"}`}>
+                Activé
+              </div>
+              <div className={`off ${!userSettings.tutorial && "desactive"}`}>
+                Désactivé
+              </div>
+            </div>
           </div>
         </div>
         <div className="settings-list-item">
@@ -100,10 +110,14 @@ const Settings = () => {
         <div className="settings-list-item">
           <label className="settings-list-item-label">Musique au démarrage</label>
           <div className="settings-list-item-input">
-            <Switch
-              checked={userSettings.musicOnLaunch}
-              onChange={() => handleToggleChange('musicOnLaunch')}
-            />
+          <div className="settings-list-item-input-switch" onClick={() => handleToggleChange('musicOnLaunch')}>
+              <div className={`on ${userSettings.musicOnLaunch && "active"}`}>
+                Activé
+              </div>
+              <div className={`off ${!userSettings.musicOnLaunch && "desactive"}`}>
+                Désactivé
+              </div>
+            </div>  
           </div>
         </div>
         <div className="settings-list-item">
@@ -132,12 +146,10 @@ const Settings = () => {
           </div>
         </div>
       </div>
-      {smthChanged && (
-        <div className="settings-confirm">
+        <div className={`${!smthChanged && "disabled"} settings-confirm`}>
           <span>Vous avez des changements non sauvegardés !</span>
           <Button onClick={handleSave}>Sauvegarder</Button>
         </div>
-      )}
 
       <BackButton />
     </div>

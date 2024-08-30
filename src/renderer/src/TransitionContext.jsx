@@ -7,9 +7,14 @@ export const TransitionProvider = ({ children }) => {
   const [direction, setDirection] = useState('page-slide-left') // Default direction
   const navigate = useNavigate()
 
-  const goForward = (path) => {
+  const goForward = (path, state) => {
     setDirection('page-slide-left')
-    navigate(path)
+    if (state) {
+      navigate(path, state)
+
+    } else {
+      navigate(path)
+    }
   }
 
   const goBack = () => {
