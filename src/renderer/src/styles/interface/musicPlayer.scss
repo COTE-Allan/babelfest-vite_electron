@@ -6,22 +6,7 @@
   align-items: center;
   margin: 10px;
 
-  &-container {
-    padding: 20px;
-    border-radius: 0 15px 15px 0;
-    transform: translateX(-100%);
-    position: absolute;
-    top: 15vh;
-    background-color: $black;
-    transition: transform 0.2s ease-in-out;
-    border: 3px solid rgb(215, 215, 215);
-    border-left: none;
-    z-index: 1;
 
-    &.active {
-      transform: translateX(0);
-    }
-  }
 
   &-infos {
     overflow: hidden;
@@ -55,13 +40,15 @@
     & button {
       background-color: transparent;
       border: none;
-      margin: 2px;
+      margin: 5px;
       padding: 0;
-      height: 45px;
-      width: 45px;
+      height: 30px;
+      width: 30px;
+      transition: transform 200ms ease-in-out;
 
       &:hover {
-        background-color: $grey;
+        cursor: pointer;
+        transform: scale(1.2);
       }
     }
   }
@@ -76,42 +63,5 @@
   to {
     transform: translateX(-100%);
     /* Termine à l'extérieur du cadre à gauche */
-  }
-}
-
-#particles {
-  position: absolute;
-  width: 100%;
-  z-index: 0;
-  height: 100%;
-  overflow: hidden;
-}
-
-.note {
-  position: absolute;
-  font-size: 15px;
-  /* Taille de la note de musique */
-  animation: moveNote linear infinite;
-  opacity: 0.7;
-  /* Légère transparence pour un meilleur effet */
-  color: white;
-  /* Couleur de la note, choisissez selon votre préférence */
-}
-
-@keyframes moveNote {
-  0% {
-    transform: translateY(70px) scale(0.5);
-    /* Démarre juste en dessous du conteneur */
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-
-  100% {
-    transform: translateY(0px) scale(2);
-    /* Termine juste au-dessus du conteneur */
-    opacity: 0;
   }
 }

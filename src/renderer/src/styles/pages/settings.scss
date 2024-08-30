@@ -1,11 +1,12 @@
 @import '../variables.scss';
 
 .settings {
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: auto;
+  justify-content: center;
+
   & h1 {
     font-family: 'Kimberly Bl', sans-serif;
   }

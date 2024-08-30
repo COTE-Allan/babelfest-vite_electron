@@ -1,11 +1,10 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom/client'
-import { MemoryRouter, Routes, Route } from 'react-router-dom' // Utilisation de MemoryRouter
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import './styles/index.scss'
 import Home from './components/pages/Home'
 import Library from './components/pages/Library'
 import { GlobalProvider } from './components/providers/GlobalProvider'
-import MenuHeader from './components/interface/MenuHeader'
 import Login from './components/pages/Login'
 import { AuthContext, AuthProvider } from './AuthContext'
 import Account from './components/pages/Account'
@@ -24,16 +23,22 @@ import { TutorialProvider } from './components/providers/TutorialProvider'
 import UserProfile from './components/pages/UserProfile'
 import Leaderboards from './components/pages/Leaderboards'
 import ArenasList from './components/pages/ArenasList'
+import TransitionWrapper from './TransitionWrapper'
+import { TransitionProvider } from './TransitionContext'
+import MusicPlayer from './components/interface/musicPlayer'
+import { MusicProvider } from './components/providers/MusicProvider'
+import BackButton from './components/items/BackButton'
+import MenuCard from './components/items/MenuCard'
+import './styles/items/menuCard.scss'
 
 // Composant Layout
 const Layout = ({ children }) => {
-  const { userSettings } = React.useContext(AuthContext)
   return (
     <MatchmakingProvider>
-      <MenuHeader />
-      {children}
-      <UpdateNotifier />
-      <CardsBackground animate={userSettings.bgOn} />
+      <MusicProvider>
+        {children}
+        <UpdateNotifier />
+      </MusicProvider>
     </MatchmakingProvider>
   )
 }
@@ -41,6 +46,16 @@ const Layout = ({ children }) => {
 const App = () => {
   return (
     <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  )
+}
+
+const AppContent = () => {
+  const { userSettings } = React.useContext(AuthContext)
+
+  return (
+    <>
       <ToastContainer
         position="bottom-left"
         autoClose={5000}
@@ -54,96 +69,143 @@ const App = () => {
         theme="dark"
       />
       <MemoryRouter>
-        <Routes>
-          <Route path="/" element={<Loading />} />
-          <Route
-            path="/home"
-            element={
-              <Layout>
-                <Home />
-              </Layout>
-            }
-          />
-          <Route
-            path="/library"
-            element={
-              <Layout>
-                <Library />
-              </Layout>
-            }
-          />
-          <Route
-            path="/effects"
-            element={
-              <Layout>
-                <Effects />
-              </Layout>
-            }
-          />
-          <Route path="/game/:room" element={<GlobalProvider />} />
-          <Route path="/tutorial" element={<TutorialProvider />} />
-          <Route
-            path="/lobbyList"
-            element={
-              <Layout>
-                <LobbyList />
-              </Layout>
-            }
-          />
-          <Route path="/lobby/:lobbyId" element={<Lobby />} />
-          <Route
-            path="/userProfile/:userId"
-            element={
-              <Layout>
-                <UserProfile />
-              </Layout>
-            }
-          />
-          <Route
-            path="/arenasList"
-            element={
-              <Layout>
-                <ArenasList />
-              </Layout>
-            }
-          />
-          <Route
-            path="/leaderboards"
-            element={
-              <Layout>
-                <Leaderboards />
-              </Layout>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <>
-                <Login />
-                <UpdateNotifier />
-              </>
-            }
-          />
-
-          <Route
-            path="/account/:defaultPage"
-            element={
-              <Layout>
-                <Account />
-              </Layout>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <Layout>
-                <Settings />
-              </Layout>
-            }
-          />
-        </Routes>
+        <TransitionProvider>
+          <CardsBackground animate={userSettings?.bgOn} />
+          <Routes>
+            <Route path="/" element={<Loading />} />
+            <Route
+              path="/home"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Home />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/compendium"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <div className="MenuCard-container">
+                      <MenuCard
+                        name="Catalogue"
+                        desc="Consultez les cartes présente dans le jeu."
+                        where="/catalog"
+                      />
+                      <MenuCard
+                        name="Effets"
+                        desc="Consultez la liste des effets disponibles."
+                        where="/effects"
+                      />
+                      <MenuCard
+                        name="Arènes"
+                        desc="Consultez la liste des arènes jouables."
+                        where="/arenasList"
+                      />
+                      <BackButton />
+                    </div>
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/catalog"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Library />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/effects"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Effects />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route path="/game/:room" element={<GlobalProvider />} />
+            <Route path="/tutorial" element={<TutorialProvider />} />
+            <Route
+              path="/lobbyList"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <LobbyList />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route path="/lobby/:lobbyId" element={<Lobby />} />
+            <Route
+              path="/userProfile/:userId"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <UserProfile />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/arenasList"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <ArenasList />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/leaderboards"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Leaderboards />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <>
+                  <Login />
+                  <UpdateNotifier />
+                </>
+              }
+            />
+            <Route
+              path="/account/"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Account />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Settings />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+          </Routes>
+        </TransitionProvider>
       </MemoryRouter>
-    </AuthProvider>
+    </>
   )
 }
 

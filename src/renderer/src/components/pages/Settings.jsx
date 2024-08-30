@@ -7,11 +7,15 @@ import Slider from 'rc-slider'
 import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import Button from '../items/Button'
+import BackButton from '../items/BackButton'
+// Importer le contexte de transition
 
 const Settings = () => {
-  const { userSettings, setUserSettings, user, saveSettings } = useContext(AuthContext)
+  const { userSettings, setUserSettings, saveSettings } = useContext(AuthContext)
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [smthChanged, setSmthChanged] = useState(false)
+
+  // Obtenir la méthode goBack du contexte de transition
 
   const handleToggleChange = (settingKey) => {
     select()
@@ -134,6 +138,8 @@ const Settings = () => {
           <Button onClick={handleSave}>Sauvegarder</Button>
         </div>
       )}
+
+      <BackButton />
     </div>
   )
 }

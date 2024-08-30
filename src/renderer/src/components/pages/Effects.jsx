@@ -11,6 +11,7 @@ import Modal from '../items/ClassicModal'
 import HudNavLink from '../items/hudNavLink'
 import { ImCross } from 'react-icons/im'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import BackButton from '../items/BackButton'
 
 export default function Effects() {
   const effectsList = getAllEffects()
@@ -69,6 +70,7 @@ export default function Effects() {
 
   return (
     <div className="effects">
+      <BackButton />
       {selectedCategory && (
         <Modal>
           <HudNavLink onClick={() => setSelectedCategory(null)} className="close">

@@ -12,14 +12,11 @@ export default function HudNavLink(props) {
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
 
   return (
-    <NavLink
-      to={props.to || '#'}
+    <div
       onMouseEnter={hover}
-      className={({ isActive }) =>
-        `hudNavLink ${props.className} ${props.selected ? 'selected' : ''} ${props.permOpen ? 'open' : ''} ${
-          !props.to || props.to === -1 || !isActive ? '' : 'active'
-        }`
-      }
+      className={`hudNavLink ${props.className} ${props.selected ? 'selected' : ''} ${props.permOpen ? 'open' : ''} ${
+        !props.to || props.to === -1
+      }`}
       onClick={() => {
         select()
         if (props.onClick) {
@@ -28,6 +25,6 @@ export default function HudNavLink(props) {
       }}
     >
       {props.children}
-    </NavLink>
+    </div>
   )
 }

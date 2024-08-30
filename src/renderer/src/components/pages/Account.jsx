@@ -17,17 +17,11 @@ import UserAchievements from '../accountEditor/UserAchievements'
 import { FaBookOpen, FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
 import HudNavLink from '../items/hudNavLink'
 import MatchSummaries from '../interface/MatchSummaries'
-import { useParams } from 'react-router-dom'
 
 const Account = () => {
   const { userInfo } = useContext(AuthContext)
 
-  const { defaultPage } = useParams()
-  const [page, setPage] = useState(0)
-
-  useEffect(() => {
-    setPage(Number(defaultPage) !== 0 ? Number(defaultPage) : 2)
-  }, [defaultPage])
+  const [page, setPage] = useState(1)
 
   const [profile, setProfile] = useState(null)
   const [border, setBorder] = useState(null)

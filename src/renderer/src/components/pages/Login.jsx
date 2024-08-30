@@ -273,7 +273,7 @@ const Login = () => {
           </NavLink>
         </div>
       </div>
-      <CardsBackground animate={false} />
+      {/* <CardsBackground animate={false} /> */}
     </div>
   )
 }

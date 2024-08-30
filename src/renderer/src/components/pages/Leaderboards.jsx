@@ -12,6 +12,7 @@ import LoadingLogo from '../items/LoadingLogo'
 import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
+import BackButton from '../items/BackButton'
 
 const Leaderboards = () => {
   const { user, userInfo, userSettings } = useContext(AuthContext)
@@ -108,6 +109,8 @@ const Leaderboards = () => {
           <LoadingLogo />
         )}
       </div>
+
+      <BackButton />
     </div>
   )
 }

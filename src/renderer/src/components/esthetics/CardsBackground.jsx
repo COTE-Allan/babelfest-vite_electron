@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { getAllCards, shuffleArray } from '../others/toolBox'
 import '../../styles/esthetics/cardsBackground.scss'
-import BabelfestBackground from "../../assets/img/fond_babelfest.png"
+import BabelfestBackground from '../../assets/img/fond_babelfest.png'
 
 export default function CardsBackground(props) {
   const [allImagesLoaded, setAllImagesLoaded] = useState(false)
@@ -46,8 +46,7 @@ export default function CardsBackground(props) {
         ) : (
           <>
             <img
-              className={`carousel-picture ${regularLoaded && 'fade-in'}`}
-              style={{ display: !regularLoaded ? 'none' : 'block' }}
+              className={`carousel-picture`}
               src={BabelfestBackground}
               alt={'background du menu'}
               onLoad={() => setRegularLoaded(true)}

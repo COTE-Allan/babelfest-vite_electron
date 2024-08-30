@@ -4,12 +4,14 @@ import Modal from '../items/ClassicModal'
 import { MdZoomIn } from 'react-icons/md'
 import Tilt from 'react-parallax-tilt'
 import Slider from 'rc-slider'
+import Select from 'react-select'
 import { getAllEffects, getCardBasedOnNameAndTitle, getEffectInfo } from '../effects/basics'
 import { useLocation } from 'react-router'
 import HudNavLink from '../items/hudNavLink'
 import { ImCross } from 'react-icons/im'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { getAllCards } from '../others/toolBox'
+import BackButton from '../items/BackButton'
 
 export default function Library() {
   const [allCards, setAllCards] = useState(getAllCards())
@@ -19,34 +21,87 @@ export default function Library() {
   const [selectedCollections, setSelectedCollections] = useState([])
   const [selectedRarities, setSelectedRarities] = useState([])
   const [selectedYears, setSelectedYears] = useState([])
-  const [selectedEffect, setSelectedEffect] = useState('') // Nouvel état pour l'effet sélectionné
+  const [selectedEffects, setSelectedEffects] = useState([])
   const [sortMethod, setSortMethod] = useState('rarity')
   const [cardScale, setCardScale] = useState(125)
   const [selected, setSelected] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
 
   const location = useLocation()
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      height: '50px',
+      padding: '0px 10px',
+      fontSize: '15px',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Noir avec une opacité de 0.5
+      borderRadius: '5px',
+      border: 'solid 2px rgb(255, 255, 255)',
+      fontFamily: "'Kimberly Bl', sans-serif",
+      color: 'white'
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: 'rgba(226, 226, 226, 0.7)'
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: 'white'
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: 'rgba(0, 0, 0, 0.8)', // Noir avec une opacité de 0.5
+      borderRadius: '5px',
+      border: 'solid 2px rgb(255, 255, 255)'
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? 'gray' : 'rgba(0, 0, 0, 0.5)', // Noir avec une opacité de 0.5
+      color: 'white',
+      fontSize: '15px',
+      fontFamily: "'Kimberly Bl', sans-serif",
+      '&:hover': {
+        backgroundColor: 'gray',
+        color: 'white'
+      }
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: 'gray',
+      color: 'white'
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: 'white'
+    }),
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: 'white',
+      '&:hover': {
+        backgroundColor: 'red',
+        color: 'white'
+      }
+    })
+  }
 
-  const collections = [...new Set(allCards.map((card) => card.collection))]
+  const collections = [...new Set(allCards.map((card) => card.collection))].map((collection) => ({
+    value: collection,
+    label: collection
+  }))
   const years = [
     ...new Set(allCards.filter((card) => card.year).map((card) => card.year.toString()))
-  ]
-  const effects = getAllEffects();
-
-  const trait = {
-    1: 'combatif',
-    2: 'érudit',
-    3: 'charismatique',
-    4: 'résistant',
-    5: 'craintif'
-  }
-  const rarityNames = {
+  ].map((year) => ({ value: year, label: year }))
+  const effects = getAllEffects().map((effect) => ({
+    value: effect.slug,
+    label: effect.name
+  }))
+  const rarityOptions = Object.entries({
     1: 'Typique',
     2: 'Rare',
     3: 'Epique',
     4: 'Légendaire',
     5: 'Spéciale'
-  }
+  }).map(([value, label]) => ({ value, label }))
 
   useEffect(() => {
     if (selectedIndex !== null) {
@@ -84,23 +139,28 @@ export default function Library() {
   }
 
   useEffect(() => {
-    let allCards = getAllCards();
+    let allCards = getAllCards()
     let filteredCards = [...allCards]
 
     if (selectedCollections.length > 0) {
-      filteredCards = filteredCards.filter((card) => selectedCollections.includes(card.collection))
+      filteredCards = filteredCards.filter((card) =>
+        selectedCollections.some((collection) => collection.value === card.collection)
+      )
     }
 
     if (selectedYears.length > 0) {
       filteredCards = filteredCards.filter((card) =>
-        selectedYears.includes(card.year ? card.year.toString() : '')
+        selectedYears.some((year) => year.value === (card.year ? card.year.toString() : ''))
       )
     }
 
-    console.log(selectedEffect)
-    if (selectedEffect !== '') {
-      filteredCards = filteredCards.filter((card) =>
-        card.effects && card.effects.some(effect => effect.type === selectedEffect)
+    if (selectedEffects.length > 0) {
+      filteredCards = filteredCards.filter(
+        (card) =>
+          card.effects &&
+          selectedEffects.some((selectedEffect) =>
+            card.effects.some((effect) => effect.type === selectedEffect.value)
+          )
       )
     }
 
@@ -119,7 +179,7 @@ export default function Library() {
 
     if (selectedRarities.length > 0) {
       filteredCards = filteredCards.filter((card) =>
-        selectedRarities.includes(card.rarity.toString())
+        selectedRarities.some((rarity) => rarity.value === card.rarity.toString())
       )
     }
 
@@ -138,57 +198,30 @@ export default function Library() {
     }
 
     setCards(filteredCards)
-  }, [search, selectedRarities, selectedCollections, selectedYears, selectedEffect, allCards, sortMethod])
+  }, [
+    search,
+    selectedRarities,
+    selectedCollections,
+    selectedYears,
+    selectedEffects,
+    allCards,
+    sortMethod
+  ])
 
-  const handleCollectionChange = (event) => {
-    const value = event.target.value
-    setSelectedCollections((currentCollections) => {
-      if (event.target.checked) {
-        return [...currentCollections, value]
-      } else {
-        return currentCollections.filter((collection) => collection !== value)
-      }
-    })
-    const parentDiv = event.target.parentNode
-    if (event.target.checked) {
-      parentDiv.classList.add('checked')
-    } else {
-      parentDiv.classList.remove('checked')
-    }
+  const handleCollectionChange = (selectedOptions) => {
+    setSelectedCollections(selectedOptions)
   }
 
-  const handleRarityChange = (event) => {
-    const value = event.target.value
-    setSelectedRarities((currentRarities) =>
-      event.target.checked
-        ? [...currentRarities, value]
-        : currentRarities.filter((rarity) => rarity !== value)
-    )
-    const parentDiv = event.target.parentNode
-    if (event.target.checked) {
-      parentDiv.classList.add('checked')
-    } else {
-      parentDiv.classList.remove('checked')
-    }
+  const handleRarityChange = (selectedOptions) => {
+    setSelectedRarities(selectedOptions)
   }
 
-  const handleYearChange = (event) => {
-    const value = event.target.value
-    setSelectedYears((currentYears) =>
-      event.target.checked
-        ? [...currentYears, value]
-        : currentYears.filter((year) => year !== value)
-    )
-    const parentDiv = event.target.parentNode
-    if (event.target.checked) {
-      parentDiv.classList.add('checked')
-    } else {
-      parentDiv.classList.remove('checked')
-    }
+  const handleYearChange = (selectedOptions) => {
+    setSelectedYears(selectedOptions)
   }
 
-  const handleEffectChange = (event) => {
-    setSelectedEffect(event.target.value)
+  const handleEffectChange = (selectedOptions) => {
+    setSelectedEffects(selectedOptions || [])
   }
 
   const handleImageLoad = () => {
@@ -204,6 +237,7 @@ export default function Library() {
 
   return (
     <div className="library">
+      <BackButton />
       <div className="library-controller">
         <span>
           {cards.length} carte{cards.length > 1 && 's'} trouvée{cards.length > 1 && 's'}
@@ -246,69 +280,51 @@ export default function Library() {
           </div>
           <div className="library-controller-inputs-item">
             <span className="library-controller-inputs-item-title">Effet :</span>
-            <select
+            <Select
               className="library-controller-select"
+              options={effects}
+              styles={customStyles}
+              isMultif
               onChange={handleEffectChange}
-              value={selectedEffect}
-            >
-              <option value="">Tous les effets</option>
-              {effects.map((effect, key) => (
-                <option key={key} value={effect.slug}>
-                  {effect.name}
-                </option>
-              ))}
-            </select>
+              value={selectedEffects}
+              placeholder="Toutes les effets"
+            />
           </div>
           <div className="library-controller-inputs-item">
             <span className="library-controller-inputs-item-title">Collections :</span>
-            <div className="library-controller-checkboxes">
-              {collections.map((collection, key) => (
-                <label key={key} className="library-controller-checkboxes-item">
-                  <input
-                    type="checkbox"
-                    value={collection}
-                    checked={selectedCollections.includes(collection)}
-                    onChange={handleCollectionChange}
-                  />
-                  <span>{collection}</span>
-                </label>
-              ))}
-            </div>
+            <Select
+              className="library-controller-select"
+              options={collections}
+              styles={customStyles}
+              isMulti
+              onChange={handleCollectionChange}
+              value={selectedCollections}
+              placeholder="Toutes les collections"
+            />
           </div>
           <div className="library-controller-inputs-item">
             <span className="library-controller-inputs-item-title">Années :</span>
-            <div className="library-controller-checkboxes">
-              {years.map((year, key) => (
-                <label key={key} className="library-controller-checkboxes-item">
-                  <input
-                    type="checkbox"
-                    value={year}
-                    checked={selectedYears.includes(year)}
-                    onChange={handleYearChange}
-                  />
-                  <span>{year}</span>
-                </label>
-              ))}
-            </div>
+            <Select
+              className="library-controller-select"
+              options={years}
+              styles={customStyles}
+              isMulti
+              onChange={handleYearChange}
+              value={selectedYears}
+              placeholder="Toutes les années"
+            />
           </div>
           <div className="library-controller-inputs-item">
             <span className="library-controller-inputs-item-title">Raretés :</span>
-            <div className="library-controller-checkboxes">
-              {Object.entries(rarityNames).map(([value, name]) => (
-                <label
-                  key={value}
-                  className={`library-controller-checkboxes-item bg-rarity-${value}`}
-                >
-                  <input
-                    type="checkbox"
-                    value={value}
-                    checked={selectedRarities.includes(value)}
-                    onChange={handleRarityChange}
-                  />
-                  <span>{name}</span>
-                </label>
-              ))}
-            </div>
+            <Select
+              className="library-controller-select"
+              options={rarityOptions}
+              styles={customStyles}
+              isMulti
+              onChange={handleRarityChange}
+              value={selectedRarities}
+              placeholder="Toutes les raretés"
+            />
           </div>
         </div>
       </div>
@@ -336,7 +352,6 @@ export default function Library() {
         ))}
         {loading && <span>Chargement...</span>}
       </div>
-
       {selected !== null && (
         <Modal>
           <div className="library-detail">

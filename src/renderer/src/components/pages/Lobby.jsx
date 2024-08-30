@@ -272,7 +272,7 @@ const Lobby = () => {
         </ClassicModal>
       )}
 
-      <CardsBackground animate={userSettings.bgOn} />
+      {/* <CardsBackground animate={userSettings.bgOn} /> */}
     </div>
   )
 }

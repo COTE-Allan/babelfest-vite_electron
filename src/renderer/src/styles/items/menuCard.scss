@@ -1,0 +1,31 @@
+@import '../variables.scss';
+
+.MenuCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    height: 500px;
+    width: 350px;
+    border-radius: 10px;
+    @include greyBorders();
+    background-color: $black;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-name {
+        font-family: 'Kimberly Bl', sans-serif;
+        font-size: 35px;
+    }
+}
