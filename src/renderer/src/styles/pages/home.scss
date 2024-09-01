@@ -8,7 +8,7 @@
 
   .home-music {
     position: absolute;
-    top: 120px; 
+    top: 20px; 
     right: 50px;
     opacity: 0.8;
     transition: opacity 200ms ease-in-out;
@@ -20,19 +20,29 @@ padding: 10px;
     }
     display: flex;
     align-items: center;
-    height: 60px;
-
+    height: 50px;
     &:hover {opacity: 1;}
-    & .musicPlayer {
-      display: none;
+    &-wrapper {
+      display: inline-block;
+      max-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      transition: max-width 200ms ease-in-out, opacity 500ms ease-in-out;
+      opacity: 0;
     }
-    &:hover {
-      & .musicPlayer {
-        display: block;
+    &:hover
+      {
+        & .home-music-wrapper {
+
+          max-width: 400px;
+          opacity: 1;
+        }
       }
-    }
+    
     & .disc {
-      animation: disc 2s linear infinite both;
+      &.rotate {
+        animation: disc 2s linear infinite both;
+      }
       &:hover {
         cursor: pointer;
       }
@@ -65,6 +75,7 @@ padding: 10px;
 
     & .logo {
       width: 400px;
+      animation: float 6s ease-in-out infinite;
 
       @include for-big-desktop-up {
         width: 550px; // Example adjustment for larger screens

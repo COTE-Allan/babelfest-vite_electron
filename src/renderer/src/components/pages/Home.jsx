@@ -35,8 +35,12 @@ import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
+import { useMusic } from '../providers/MusicProvider'
 
 const Home = () => {
+  const {
+    isPlaying,
+  } = useMusic()
   const navigate = useNavigate()
   const [playerCount, setPlayerCount] = useState(0)
   const [topUsers, setTopUsers] = useState([])
@@ -110,14 +114,17 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home-music">
+        <div className="home-music-wrapper">
+
       <MusicPlayer role="menu" />
-      <FaCompactDisc className='disc' size={40} />
+        </div>
+      <FaCompactDisc className={`disc ${isPlaying && "rotate"}`} size={40} />
       </div>
 
-      <div onClick={() => goForward("/account")} className='home-playerBanner'>
+      {/* <div onClick={() => goForward("/account")} className='home-playerBanner'>
       <LeaderboardPlayerBanner user={userInfo} />
 
-      </div>
+      </div> */}
 
       <div className="home-col home-nav">
         <img src={Logo} className="logo" alt="Babelfest Logo" />
@@ -127,11 +134,11 @@ const Home = () => {
             Jouer
           </a>
           <a onClick={() => goForward('/compendium')} onMouseEnter={hover} onMouseDown={select}>
-            <IoLibrarySharp size={40} />
+            <IoLibrarySharp size={50} />
             Bibliothèque
           </a>
           <a onClick={() => goForward('/leaderboards')} onMouseEnter={hover} onMouseDown={select}>
-            <MdLeaderboard size={40} />
+            <MdLeaderboard size={50} />
             Classements
           </a>
           <a onClick={() => goForward('/account')} onMouseEnter={hover} onMouseDown={select}>

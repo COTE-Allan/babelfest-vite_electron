@@ -326,3 +326,15 @@ $grey: rgb(37, 37, 37);
     box-shadow: rgb(218, 152, 9) 0 0 0px;
   }
 }
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-10px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
