@@ -14,6 +14,7 @@ import { FaLock, FaPlusCircle } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import changelog from '../../jsons/changelog.json'
 import { useSendErrorMessage } from '../others/toolBox'
+import BackButton from '../items/BackButton'
 
 export default function LobbyList() {
   const verName = changelog.slice(-1)[0].title
@@ -91,6 +92,7 @@ export default function LobbyList() {
 
   return (
     <div className="lobbies">
+      <BackButton/>
       <Button
         className="lobbies-btn"
         onClick={() => {

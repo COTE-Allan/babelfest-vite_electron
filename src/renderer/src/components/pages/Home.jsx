@@ -27,13 +27,14 @@ import axios from 'axios'
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
-import { FaCircle, FaPlay } from 'react-icons/fa'
+import { FaCircle, FaCompactDisc, FaPlay } from 'react-icons/fa'
 import { NameAndTitle } from '../items/NameAndTitle'
 import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
 import { MdLeaderboard } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
+import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -108,11 +109,20 @@ const Home = () => {
   }, [lastBlogPost])
   return (
     <div className="home">
+      <div className="home-music">
       <MusicPlayer role="menu" />
+      <FaCompactDisc className='disc' size={40} />
+      </div>
+
+      <div onClick={() => goForward("/account")} className='home-playerBanner'>
+      <LeaderboardPlayerBanner user={userInfo} />
+
+      </div>
+
       <div className="home-col home-nav">
         <img src={Logo} className="logo" alt="Babelfest Logo" />
         <nav>
-          <a onClick={() => goForward('/play')} onMouseEnter={hover} onMouseDown={select}>
+          <a onClick={() => goForward('/gamemode')} onMouseEnter={hover} onMouseDown={select}>
             <FaPlay size={50} />
             Jouer
           </a>
@@ -120,13 +130,13 @@ const Home = () => {
             <IoLibrarySharp size={40} />
             Bibliothèque
           </a>
-          <a onClick={() => goForward('/account')} onMouseEnter={hover} onMouseDown={select}>
-            <ProfilePicture size={40} />
-            Profil
-          </a>
           <a onClick={() => goForward('/leaderboards')} onMouseEnter={hover} onMouseDown={select}>
             <MdLeaderboard size={40} />
             Classements
+          </a>
+          <a onClick={() => goForward('/account')} onMouseEnter={hover} onMouseDown={select}>
+            <ProfilePicture size={40} />
+            Profil
           </a>
           <a onClick={() => goForward('/settings')} onMouseEnter={hover} onMouseDown={select}>
             <IoMdSettings size={40} />
@@ -139,6 +149,7 @@ const Home = () => {
         </nav>
       </div>
       <div className="home-col home-secondary">
+
         {featuredCards && (
           <div className="home-featured">
             <span>

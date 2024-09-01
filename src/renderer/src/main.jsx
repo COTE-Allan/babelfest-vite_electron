@@ -25,13 +25,13 @@ import Leaderboards from './components/pages/Leaderboards'
 import ArenasList from './components/pages/ArenasList'
 import TransitionWrapper from './TransitionWrapper'
 import { TransitionProvider } from './TransitionContext'
-import MusicPlayer from './components/interface/musicPlayer'
 import { MusicProvider } from './components/providers/MusicProvider'
 import BackButton from './components/items/BackButton'
 import MenuCard from './components/items/MenuCard'
 import MenuCardCatalog from './assets/img/catalogMenuCard.jpg'
 import MenuCardArena from './assets/img/arenasMenuCard.jpg'
-
+import RankedCardArena from './assets/img/rankedMenuCard.png'
+import QuickplayCardArena from './assets/img/quickplayMenuCard.png'
 import './styles/items/menuCard.scss'
 
 // Composant Layout
@@ -108,6 +108,30 @@ const AppContent = () => {
                         desc="Consultez la liste des arènes jouables."
                         where="/arenasList"
                         bg={MenuCardArena}
+                      />
+                      <BackButton />
+                    </div>
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+                       <Route
+              path="/gamemode"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <div className="MenuCard-container">
+                      <MenuCard
+                        name="Partie rapide"
+                        desc="Affrontez un adversaire aléatoire de niveau similaire."
+                        where="/quick"
+                        bg={QuickplayCardArena}
+                      />
+                      <MenuCard
+                        name="Partie custom"
+                        desc="Jouez entre amis avec des règles modifiables."
+                        where="/lobbyList"
+                        bg={RankedCardArena}
                       />
                       <BackButton />
                     </div>

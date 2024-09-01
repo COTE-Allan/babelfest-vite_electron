@@ -57,15 +57,17 @@
     }
 
     &-name {
+        max-width: 90%;
         font-family: 'Kimberly Bl', sans-serif;
         font-size: 45px;
-text-align: center;
+        text-align: center;
         @include for-big-desktop-up {
             font-size: 60px; // Augmentation de la taille de la police pour les grands écrans
         }
     }
     &-desc {
         font-family: 'Kimberly Bl', sans-serif;
-
+        text-align: center;
+        max-width: 90%;
     }
 }

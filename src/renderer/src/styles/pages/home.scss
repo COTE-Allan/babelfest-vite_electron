@@ -6,18 +6,45 @@
   width: 100%;
   justify-content: space-between;
 
-  .musicPlayer {
+  .home-music {
     position: absolute;
-    top: 20px;
+    top: 120px; 
     right: 50px;
-    opacity: 0.5;
+    opacity: 0.8;
     transition: opacity 200ms ease-in-out;
-
+background-color: rgba(0, 0, 0, 0.5);
+border-radius: 10px;
+padding: 10px;
     @include for-big-desktop-up {
       right: 100px; // Example adjustment for larger screens
     }
+    display: flex;
+    align-items: center;
+    height: 60px;
 
     &:hover {opacity: 1;}
+    & .musicPlayer {
+      display: none;
+    }
+    &:hover {
+      & .musicPlayer {
+        display: block;
+      }
+    }
+    & .disc {
+      animation: disc 2s linear infinite both;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-playerBanner {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    width: 400px;
+    opacity: 1;
   }
 
   &-col {
@@ -54,7 +81,7 @@
         margin-top: 20px; // Example adjustment for larger screens
       }
 
-      & a:nth-child(1) {
+      & a:nth-child(1), a:nth-child(2), a:nth-child(3) {
         font-size: 3.5em;
 
         @include for-big-desktop-up {
@@ -67,7 +94,8 @@
         align-items: center;
         justify-content: flex-start;
         font-size: 1.8em;
-        padding: 10px;
+        padding: 0;
+        margin-bottom: 10px;
         transition: transform 200ms ease-in-out;
 
         @include for-big-desktop-up {
@@ -177,7 +205,7 @@
     & .loading {
       object-fit: contain;
       width: 100%;
-      height: 120px;
+      height: 90px;
       background-color: rgba(128, 128, 128, 0.2);
     }
 
@@ -210,4 +238,16 @@ font-size: 25px;      }
   margin: 5px 0;
   font-size: 14px;
   color: rgb(226, 14, 14);
+}
+
+
+@keyframes disc {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg );
+  }
+
 }
