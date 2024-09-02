@@ -38,9 +38,7 @@ import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 import { useMusic } from '../providers/MusicProvider'
 
 const Home = () => {
-  const {
-    isPlaying,
-  } = useMusic()
+  const { isPlaying } = useMusic()
   const navigate = useNavigate()
   const [playerCount, setPlayerCount] = useState(0)
   const [topUsers, setTopUsers] = useState([])
@@ -58,7 +56,6 @@ const Home = () => {
   const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
     useContext(MatchmakingContext)
   const { userInfo, userSettings, user } = useContext(AuthContext)
-  const myID = user.uid
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [featuredCards, setFeaturedCards] = useState(null)
@@ -115,10 +112,9 @@ const Home = () => {
     <div className="home">
       <div className="home-music">
         <div className="home-music-wrapper">
-
-      <MusicPlayer role="menu" />
+          <MusicPlayer role="menu" />
         </div>
-      <FaCompactDisc className={`disc ${isPlaying && "rotate"}`} size={40} />
+        <FaCompactDisc className={`disc ${isPlaying && 'rotate'}`} size={40} />
       </div>
 
       {/* <div onClick={() => goForward("/account")} className='home-playerBanner'>
@@ -141,7 +137,11 @@ const Home = () => {
             <MdLeaderboard size={50} />
             Classements
           </a>
-          <a onClick={() => goForward('/account')} onMouseEnter={hover} onMouseDown={select}>
+          <a
+            onClick={() => goForward(`/account/${user.uid}`)}
+            onMouseEnter={hover}
+            onMouseDown={select}
+          >
             <ProfilePicture size={40} />
             Profil
           </a>
@@ -156,22 +156,21 @@ const Home = () => {
         </nav>
       </div>
       <div className="home-col home-secondary">
-
         {featuredCards && (
           <div className="home-featured">
-            <span>
-
-            Notre sélection du moment
-            </span>
+            <span>Notre sélection du moment</span>
             <div className="home-featured-list">
-
-  {featuredCards.slice(0, 4).map((card, index) => {
-    return (
-      <img onClick={() => goForward('/catalog', { state: { selected: card } })} key={index} src={card.url} alt="Featured card" />
-    );
-  })}
-  </div>
-
+              {featuredCards.slice(0, 4).map((card, index) => {
+                return (
+                  <img
+                    onClick={() => goForward('/catalog', { state: { selected: card } })}
+                    key={index}
+                    src={card.url}
+                    alt="Featured card"
+                  />
+                )
+              })}
+            </div>
           </div>
         )}
 

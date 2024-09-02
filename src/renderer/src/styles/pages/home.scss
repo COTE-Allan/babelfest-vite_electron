@@ -1,5 +1,6 @@
 @import '../variables.scss';
 
+
 .home {
   display: flex;
   height: 100%;
@@ -8,20 +9,26 @@
 
   .home-music {
     position: absolute;
-    top: 20px; 
+    top: 20px;
     right: 50px;
     opacity: 0.8;
     transition: opacity 200ms ease-in-out;
-background-color: rgba(0, 0, 0, 0.5);
-border-radius: 10px;
-padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+
     @include for-big-desktop-up {
       right: 100px; // Example adjustment for larger screens
     }
+
     display: flex;
     align-items: center;
     height: 50px;
-    &:hover {opacity: 1;}
+
+    &:hover {
+      opacity: 1;
+    }
+
     &-wrapper {
       display: inline-block;
       max-width: 0;
@@ -30,19 +37,20 @@ padding: 10px;
       transition: max-width 200ms ease-in-out, opacity 500ms ease-in-out;
       opacity: 0;
     }
-    &:hover
-      {
-        & .home-music-wrapper {
 
-          max-width: 400px;
-          opacity: 1;
-        }
+    &:hover {
+      & .home-music-wrapper {
+
+        max-width: 400px;
+        opacity: 1;
       }
-    
+    }
+
     & .disc {
       &.rotate {
-        animation: disc 2s linear infinite both;
+        animation: rotation 2s linear infinite both;
       }
+
       &:hover {
         cursor: pointer;
       }
@@ -92,7 +100,9 @@ padding: 10px;
         margin-top: 20px; // Example adjustment for larger screens
       }
 
-      & a:nth-child(1), a:nth-child(2), a:nth-child(3) {
+      & a:nth-child(1),
+      a:nth-child(2),
+      a:nth-child(3) {
         font-size: 3.5em;
 
         @include for-big-desktop-up {
@@ -112,6 +122,7 @@ padding: 10px;
         @include for-big-desktop-up {
           // font-size: 2.5em; // Example adjustment for larger screens
         }
+
         & svg {
           margin-right: 10px;
         }
@@ -120,6 +131,7 @@ padding: 10px;
           margin: 0;
           margin-right: 10px;
         }
+
         &:hover {
           transform: translateX(10px);
           cursor: pointer;
@@ -152,11 +164,12 @@ padding: 10px;
     height: calc(100% - 100px);
     align-items: flex-end;
     justify-content: flex-end;
+
     @include for-big-desktop-up {
       padding-right: 100px;
     }
   }
-  
+
   &-featured {
     transform: translate();
     display: flex;
@@ -165,6 +178,7 @@ padding: 10px;
     margin-bottom: 10px;
     flex-direction: column;
     font-family: 'Kimberly Bl', sans-serif;
+
     &:hover {
       opacity: 1;
     }
@@ -185,6 +199,7 @@ padding: 10px;
       margin: 0 5px;
       opacity: 0.5;
       transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+
       &:hover {
         cursor: pointer;
         transform: scale(1.05);
@@ -229,7 +244,8 @@ padding: 10px;
       font-size: 20px;
 
       @include for-big-desktop-up {
-font-size: 25px;      }
+        font-size: 25px;
+      }
     }
 
     & img {
@@ -249,16 +265,4 @@ font-size: 25px;      }
   margin: 5px 0;
   font-size: 14px;
   color: rgb(226, 14, 14);
-}
-
-
-@keyframes disc {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(360deg );
-  }
-
 }

@@ -2,15 +2,17 @@ import ProfilePicture from '../esthetics/profilePicture'
 import '../../styles/items/leaderboardPlayerBanner.scss'
 import { useNavigate } from 'react-router-dom'
 import { NameAndTitle } from './NameAndTitle'
+import { useTransition } from '../../TransitionContext'
 
 export default function LeaderboardPlayerBanner({ user, accessProfile }) {
-  const navigate = useNavigate()
+  const { goForward } = useTransition()
+
   return (
     <div
       className="leaderboardPlayerBanner"
       onClick={() => {
         if (accessProfile) {
-          navigate(`/userProfile/${user.id}`)
+          goForward(`/account/${user.id}`)
         }
       }}
     >

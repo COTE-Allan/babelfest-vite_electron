@@ -5,22 +5,9 @@ import ProfilePicture from '../esthetics/profilePicture'
 import achievements from '../../jsons/achievements.json'
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 
-export default function StatsDisplayer({ user, stats }) {
-  const [playerRank, setPlayerRank] = useState(0)
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      const rank = await getPlayerRank(user.id)
-
-      setPlayerRank(rank)
-    }
-
-    fetchStats()
-  }, [])
+export default function StatsDisplayer({ user, stats, rank }) {
   return (
     <div className="statsDisplayer">
-      <LeaderboardPlayerBanner user={user} />
-
       <div className="statsDisplayer-content">
         <div className="statsDisplayer-category">
           <h3>Temps de jeu</h3>
@@ -78,14 +65,14 @@ export default function StatsDisplayer({ user, stats }) {
               <span className="statsDisplayer-category-list-item-value">{user.level}</span>
               niveaux
               <span className="statsDisplayer-category-list-item-rank">
-                (#{playerRank.levelXpRank ?? 0} du classement)
+                (#{user.rank.levelXpRank ?? 0} du classement)
               </span>
             </li>
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">{stats.mmr}</span>
               MMR{' '}
               <span className="statsDisplayer-category-list-item-rank">
-                (#{playerRank.mmrRank ?? 0} du classement)
+                (#{user.rank.mmrRank ?? 0} du classement)
               </span>
             </li>
             <li className="statsDisplayer-category-list-item">
@@ -132,7 +119,9 @@ export default function StatsDisplayer({ user, stats }) {
               Honneurs reçus
             </li>
             <li className="statsDisplayer-category-list-item">
-              <span className="statsDisplayer-category-list-item-value">{user.honored.quantity ?? 0}</span>
+              <span className="statsDisplayer-category-list-item-value">
+                {user.honored.quantity ?? 0}
+              </span>
               Honneurs envoyés
             </li>
           </ul>

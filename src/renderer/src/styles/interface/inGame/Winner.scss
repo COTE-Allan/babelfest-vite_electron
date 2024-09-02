@@ -1,5 +1,3 @@
-@import '../../variables.scss';
-
 .winner {
   position: fixed;
   top: 0;
@@ -14,7 +12,7 @@
   animation: fadein 1s ease-in-out;
   background-color: rgba(0, 0, 0, 0.95) !important;
 
-  & > div {
+  &>div {
     width: 50vw;
     display: flex;
     flex-direction: column;
@@ -30,15 +28,5 @@
     margin: 5px;
     text-align: center;
     font-family: 'Kimberly Bl', sans-serif;
-  }
-}
-
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

@@ -65,10 +65,11 @@
 
       @include for-big-desktop-up {
         height: 40px;
-        width: 40px; 
+        width: 40px;
+
         & svg {
           height: 30px;
-          width: 30px; 
+          width: 30px;
         }
       }
 
@@ -77,17 +78,5 @@
         transform: scale(1.2);
       }
     }
-  }
-}
-
-@keyframes textTranslate {
-  from {
-    transform: translateX(100%);
-    /* Démarre de l'extérieur du cadre à droite */
-  }
-
-  to {
-    transform: translateX(-100%);
-    /* Termine à l'extérieur du cadre à gauche */
   }
 }

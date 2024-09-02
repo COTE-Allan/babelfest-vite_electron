@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from 'react'
 import '../../styles/interface/matchSummaries.scss'
 import ProfilePicture from '../esthetics/profilePicture'
 import PlayerBanner from './inGame/PlayerBanner'
-import { useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import { AuthContext } from '../../AuthContext'
+import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
+import { useTransition } from '../../TransitionContext'
 
 export default function MatchSummaries({ summaries = [] }) {
   const { user } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { goForward } = useTransition()
   let modes = {
     custom: 'CUSTOM',
     quick: 'RAPIDE',
@@ -33,7 +34,7 @@ export default function MatchSummaries({ summaries = [] }) {
             <div
               className="matchSummaries-item"
               onClick={() => {
-                navigate(rival.id === user.uid ? `/account/1` : `/userProfile/${rival.id}`)
+                goForward(`/account/${rival.id}`)
               }}
             >
               <div className="matchSummaries-item-date">
@@ -48,7 +49,7 @@ export default function MatchSummaries({ summaries = [] }) {
                     {result[gameDetails.result]}
                   </span>
                 </div>
-                <PlayerBanner user={rival} color={rival.primaryColor} />
+                <LeaderboardPlayerBanner user={rival} />
               </div>
             </div>
           )

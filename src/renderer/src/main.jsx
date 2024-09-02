@@ -20,7 +20,6 @@ import Loading from './components/pages/Loading'
 import { MatchmakingProvider } from './components/providers/MatchmakingProvider'
 import UpdateNotifier from './UpdateNotifier'
 import { TutorialProvider } from './components/providers/TutorialProvider'
-import UserProfile from './components/pages/UserProfile'
 import Leaderboards from './components/pages/Leaderboards'
 import ArenasList from './components/pages/ArenasList'
 import TransitionWrapper from './TransitionWrapper'
@@ -115,7 +114,7 @@ const AppContent = () => {
                 </Layout>
               }
             />
-                       <Route
+            <Route
               path="/gamemode"
               element={
                 <Layout>
@@ -173,16 +172,6 @@ const AppContent = () => {
             />
             <Route path="/lobby/:lobbyId" element={<Lobby />} />
             <Route
-              path="/userProfile/:userId"
-              element={
-                <Layout>
-                  <TransitionWrapper>
-                    <UserProfile />
-                  </TransitionWrapper>
-                </Layout>
-              }
-            />
-            <Route
               path="/arenasList"
               element={
                 <Layout>
@@ -198,7 +187,6 @@ const AppContent = () => {
                 <Layout>
                   <TransitionWrapper>
                     <Leaderboards />
-
                   </TransitionWrapper>
                 </Layout>
               }
@@ -213,7 +201,7 @@ const AppContent = () => {
               }
             />
             <Route
-              path="/account/"
+              path="/account/:userId"
               element={
                 <Layout>
                   <TransitionWrapper>

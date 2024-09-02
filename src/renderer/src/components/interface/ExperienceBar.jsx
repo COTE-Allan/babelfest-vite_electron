@@ -3,21 +3,25 @@ import { getCurrentExpMax } from '../others/xpSystem'
 import { useContext } from 'react'
 import { AuthContext } from '../../AuthContext'
 
-export default function ExperienceBar() {
+export default function ExperienceBar({ customUserInfo = null }) {
   const { userInfo } = useContext(AuthContext)
 
-  const xpMax = getCurrentExpMax(userInfo.level)
-  const xpPercentage = (userInfo.xp / xpMax) * 100
+  const finalUserInfo = customUserInfo ?? userInfo
+
+  const xpMax = getCurrentExpMax(finalUserInfo.level)
+  const xpPercentage = (finalUserInfo.xp / xpMax) * 100
+
+  console.log(finalUserInfo)
 
   return (
     <div className="xp-bar">
       <span className="xp-bar-infos">
-        Niveau {userInfo.level} ({userInfo.xp}/{xpMax} XP)
+        Niveau {finalUserInfo.level} ({finalUserInfo.xp}/{xpMax} XP)
       </span>
       <ProgressBar
-        padding={5}
-        completed={userInfo.xp}
-        bgColor={userInfo.primaryColor.hex}
+        padding={2}
+        completed={finalUserInfo.xp}
+        bgColor={finalUserInfo.primaryColor.hex}
         labelColor="#fff"
         maxCompleted={xpMax}
         customLabel={`${xpPercentage.toFixed(0)}%`}

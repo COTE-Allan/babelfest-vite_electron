@@ -1,0 +1,101 @@
+@import '../variables.scss';
+
+.profileDisplayer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    &-wrapper {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        height: 90%;
+        width: 90%;
+        padding: 20px;
+    }
+
+    &-controller {
+        display: flex;
+        height: 7%;
+
+        & .hudNavLink {
+            flex: calc(25% - 16px) 0 0;
+            justify-content: center;
+
+        }
+    }
+
+    &-user {
+        display: flex;
+        justify-content: space-between;
+        height: 20%;
+
+        &-banner {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+        }
+
+        & .profilePic {
+            margin: 0;
+            margin-right: 7px;
+        }
+
+        & .xp-bar {
+            margin: 0;
+            margin-top: 10px;
+            align-items: flex-start;
+
+            &-infos {
+                text-align: start;
+            }
+        }
+
+        & .honor svg {
+            animation: jump-shaking 4.5s ease-in-out infinite;
+
+        }
+    }
+
+    &-content {
+        height: 70%;
+        position: relative;
+
+        & h3 {
+            font-family: 'Kimberly Bl', sans-serif;
+            margin: 0;
+            margin-top: 10px;
+        }
+    }
+
+    .fade-enter,
+    .fade-exit {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .fade-enter {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    .fade-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+
+    .fade-exit {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .fade-exit-active {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity 300ms, transform 300ms;
+    }
+
+}

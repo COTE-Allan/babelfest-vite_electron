@@ -12,6 +12,7 @@ import { ImCross } from 'react-icons/im'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { getAllCards } from '../others/toolBox'
 import BackButton from '../items/BackButton'
+import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 
 export default function Library() {
   const [allCards, setAllCards] = useState(getAllCards())
@@ -31,7 +32,7 @@ export default function Library() {
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      height: '50px',
+      minHeight: '50px',
       padding: '0px 10px',
       fontSize: '15px',
       backgroundColor: 'rgba(0, 0, 0, 0.5)', // Noir avec une opacité de 0.5
@@ -239,120 +240,123 @@ export default function Library() {
   return (
     <div className="library">
       <BackButton />
-      <div className="library-controller">
-        <span>
-          {cards.length} carte{cards.length > 1 && 's'} trouvée{cards.length > 1 && 's'}
-        </span>
-        <div className="library-controller-zoom">
-          <MdZoomIn color="white" size={40} />
-          <Slider
-            onChange={(newScale) => setCardScale(newScale)}
-            min={100}
-            max={250}
-            defaultValue={150}
-            step={1}
-            style={{ width: 200 }}
-            styles={{
-              handle: { backgroundColor: 'white', borderColor: 'white' },
-              track: { backgroundColor: 'white', borderColor: 'white' },
-              rail: { backgroundColor: 'rgba(255,255,255, 0.5' }
-            }}
-          />
-        </div>
-        <div className="library-controller-inputs">
-          <div className="library-controller-inputs-item">
-            <span className="library-controller-inputs-item-title">Recherche :</span>
-            <input
-              type="text"
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Recherchez une carte..."
+      <div className="library-wrapper">
+        <div className="library-controller">
+          <span>
+            {cards.length} carte{cards.length > 1 && 's'} trouvée{cards.length > 1 && 's'}
+          </span>
+          <div className="library-controller-zoom">
+            <MdZoomIn color="white" size={40} />
+            <Slider
+              onChange={(newScale) => setCardScale(newScale)}
+              min={100}
+              max={250}
+              defaultValue={150}
+              step={1}
+              style={{ width: 200 }}
+              styles={{
+                handle: { backgroundColor: 'white', borderColor: 'white' },
+                track: { backgroundColor: 'white', borderColor: 'white' },
+                rail: { backgroundColor: 'rgba(255,255,255, 0.5' }
+              }}
             />
           </div>
-          <div className="library-controller-inputs-item">
-            <span className="library-controller-inputs-item-title">Trier par :</span>
-            <select
-              className="library-controller-select"
-              onChange={(e) => setSortMethod(e.target.value)}
-            >
-              <option value="rarity">Trier par rareté</option>
-              <option value="number">Trier par numéro</option>
-              <option value="name">Trier par nom</option>
-            </select>
-          </div>
-          <div className="library-controller-inputs-item">
-            <span className="library-controller-inputs-item-title">Effet :</span>
-            <Select
-              className="library-controller-select"
-              options={effects}
-              styles={customStyles}
-              isMultif
-              onChange={handleEffectChange}
-              value={selectedEffects}
-              placeholder="Toutes les effets"
-            />
-          </div>
-          <div className="library-controller-inputs-item">
-            <span className="library-controller-inputs-item-title">Collections :</span>
-            <Select
-              className="library-controller-select"
-              options={collections}
-              styles={customStyles}
-              isMulti
-              onChange={handleCollectionChange}
-              value={selectedCollections}
-              placeholder="Toutes les collections"
-            />
-          </div>
-          <div className="library-controller-inputs-item">
-            <span className="library-controller-inputs-item-title">Années :</span>
-            <Select
-              className="library-controller-select"
-              options={years}
-              styles={customStyles}
-              isMulti
-              onChange={handleYearChange}
-              value={selectedYears}
-              placeholder="Toutes les années"
-            />
-          </div>
-          <div className="library-controller-inputs-item">
-            <span className="library-controller-inputs-item-title">Raretés :</span>
-            <Select
-              className="library-controller-select"
-              options={rarityOptions}
-              styles={customStyles}
-              isMulti
-              onChange={handleRarityChange}
-              value={selectedRarities}
-              placeholder="Toutes les raretés"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="library-list">
-        {cards.map((card, key) => (
-          <div
-            className={`${
-              card.shiny != null ? 'library-list-item ' + card.shiny : 'library-list-item'
-            } ${!loading && 'fade-in'}`}
-            key={key}
-            onClick={() => handleCardClick(key)}
-            style={{ display: loading ? 'none' : 'block' }}
-          >
-            <div className="img-container">
-              <img
-                id={`card-img-${key}`}
-                className="library-list-item-img"
-                src={card.url}
-                alt={`Carte ${card.name} de la collection ${card.collection}`}
-                style={{ width: `${cardScale}px` }}
-                onLoad={handleImageLoad}
+          <div className="library-controller-inputs">
+            <div className="library-controller-inputs-item">
+              <span className="library-controller-inputs-item-title">Recherche :</span>
+              <input
+                type="text"
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Recherchez une carte..."
+              />
+            </div>
+            <div className="library-controller-inputs-item">
+              <span className="library-controller-inputs-item-title">Trier par :</span>
+              <select
+                className="library-controller-select"
+                onChange={(e) => setSortMethod(e.target.value)}
+              >
+                <option value="rarity">Trier par rareté</option>
+                <option value="number">Trier par numéro</option>
+                <option value="name">Trier par nom</option>
+              </select>
+            </div>
+            <div className="library-controller-inputs-item">
+              <span className="library-controller-inputs-item-title">Effet :</span>
+              <Select
+                className="library-controller-select"
+                options={effects}
+                styles={customStyles}
+                isMulti
+                onChange={handleEffectChange}
+                value={selectedEffects}
+                placeholder="Toutes les effets"
+              />
+            </div>
+            <div className="library-controller-inputs-item">
+              <span className="library-controller-inputs-item-title">Collections :</span>
+              <Select
+                className="library-controller-select"
+                options={collections}
+                styles={customStyles}
+                isMulti
+                onChange={handleCollectionChange}
+                value={selectedCollections}
+                placeholder="Toutes les collections"
+              />
+            </div>
+            <div className="library-controller-inputs-item">
+              <span className="library-controller-inputs-item-title">Années :</span>
+              <Select
+                className="library-controller-select"
+                options={years}
+                styles={customStyles}
+                isMulti
+                onChange={handleYearChange}
+                value={selectedYears}
+                placeholder="Toutes les années"
+              />
+            </div>
+            <div className="library-controller-inputs-item">
+              <span className="library-controller-inputs-item-title">Raretés :</span>
+              <Select
+                className="library-controller-select"
+                options={rarityOptions}
+                styles={customStyles}
+                isMulti
+                onChange={handleRarityChange}
+                value={selectedRarities}
+                placeholder="Toutes les raretés"
               />
             </div>
           </div>
-        ))}
-        {loading && <span>Chargement...</span>}
+        </div>
+        <div className="library-list">
+          {cards.map((card, key) => (
+            <div
+              className={`${
+                card.shiny != null ? 'library-list-item ' + card.shiny : 'library-list-item'
+              } ${!loading && 'fade-in'}`}
+              key={key}
+              onClick={() => handleCardClick(key)}
+              style={{ display: loading ? 'none' : 'block' }}
+            >
+              <div className="img-container">
+                <img
+                  id={`card-img-${key}`}
+                  className="library-list-item-img"
+                  src={card.url}
+                  alt={`Carte ${card.name} de la collection ${card.collection}`}
+                  style={{ width: `${cardScale}px` }}
+                  onLoad={handleImageLoad}
+                />
+              </div>
+            </div>
+          ))}
+          {loading && <img src={LogoAnimate} className="loading" alt="Loading animation" />}
+        </div>
       </div>
+
       {selected !== null && (
         <Modal>
           <div className="library-detail">

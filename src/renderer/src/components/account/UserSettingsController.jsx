@@ -9,8 +9,9 @@ import { auth, db, realtimeDb } from '../../Firebase'
 
 import Button from '../items/Button'
 import Modal from '../items/ClassicModal'
+import '../../styles/accountEditor/userSettings.scss'
 
-export default function UserSettingsController() {
+export default function UserSettings() {
   const { user, updateUser, userInfo, changeEmail, verifMailSent, setVerifMailSent } =
     useContext(AuthContext)
 
@@ -112,6 +113,7 @@ export default function UserSettingsController() {
     <div className="userSettings">
       <div className="userSettings-list">
         <h1>Modifier mon compte</h1>
+        <hr />
         <div className="userSettings-input">
           <label htmlFor="usernameInput">Nom d'utilisateur</label>
           <input
@@ -142,6 +144,7 @@ export default function UserSettingsController() {
       </div>
       <div className="userSettings-list">
         <h1>Contrôle du compte</h1>
+        <hr />
         <Button className="account-profile-logout" onClick={() => setAskForLogout(true)}>
           Déconnexion
         </Button>

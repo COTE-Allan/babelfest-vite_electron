@@ -1,4 +1,7 @@
 @import 'variables.scss';
+@import 'cardShiny.scss';
+@import 'ranks.scss';
+@import 'animations.scss';
 
 :root {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -195,6 +198,12 @@ a {
   left: 20px;
   font-family: 'Kimberly Bl', sans-serif;
   font-size: 35px;
+  background-color: rgba(122, 122, 122, 0.2);
+  z-index: 10;
+
+  &-home {
+    bottom: 100px;
+  }
 }
 
 input,
@@ -281,15 +290,7 @@ select {
   animation: rotation 1s linear infinite;
 }
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
 
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 .mobile-block {
   display: flex;
@@ -347,18 +348,7 @@ button.alert {
   }
 }
 
-@keyframes alert_animation {
 
-  0%,
-  100% {
-    box-shadow: rgba(226, 167, 5, 0.6) 0 0 20px;
-  }
-
-  50% {
-    box-shadow: rgb(226, 167, 5) 0 0 40px;
-
-  }
-}
 
 .loadingScreen {
   position: absolute;
@@ -484,7 +474,7 @@ button.alert {
 }
 
 .xp-bar {
-  margin: 20px 0;
+  margin: 10px 0;
   width: 100%;
   font-family: 'Kimberly Bl', sans-serif;
 
@@ -493,7 +483,7 @@ button.alert {
     width: 100%;
     text-align: center;
     margin-bottom: 5px;
-    font-size: 17px;
+    font-size: 15px;
   }
 }
 
@@ -509,18 +499,7 @@ button.alert {
   animation: important 2s ease-in-out both infinite;
 }
 
-@keyframes important {
 
-  0%,
-  100% {
-    box-shadow: rgb(27, 96, 255) 0px 0px 0px 7px;
-  }
-
-  50% {
-    box-shadow: rgb(0, 208, 255) 0px 0px 0px 7px;
-
-  }
-}
 
 .rc-slider-handle {
   z-index: 0 !important;
