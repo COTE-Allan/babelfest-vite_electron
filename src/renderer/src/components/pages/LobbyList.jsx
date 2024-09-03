@@ -92,102 +92,104 @@ export default function LobbyList() {
 
   return (
     <div className="lobbies">
-      <BackButton/>
-      <Button
-        className="lobbies-btn"
-        onClick={() => {
-          setAskNewLobby(true)
-        }}
-      >
-        <FaPlusCircle size={25} />
-        Créer un salon
-      </Button>
+      <BackButton />
+      <div className="lobbies-wrapper">
+        <Button
+          className="lobbies-btn"
+          onClick={() => {
+            setAskNewLobby(true)
+          }}
+        >
+          <FaPlusCircle size={25} />
+          Créer un salon
+        </Button>
 
-      <div className="lobbies-content">
-        <h2>Lobbies disponibles</h2>
-        <ul className="lobbies-list">
-          {lobbies.length > 0 ? (
-            lobbies.map((lobby) => (
-              <li
-                key={lobby.id}
+        <div className="lobbies-content">
+          <h2>Lobbies disponibles</h2>
+          <ul className="lobbies-list">
+            {lobbies.length > 0 ? (
+              lobbies.map((lobby) => (
+                <li
+                  key={lobby.id}
+                  onClick={() => {
+                    if (lobby.password) {
+                      setAskPassword({ password: lobby.password, id: lobby.id })
+                    } else {
+                      handleJoinLobby(lobby.id)
+                    }
+                  }}
+                  className="lobbies-list-item"
+                >
+                  <span>
+                    {lobby.version} - {lobby.name}
+                  </span>
+                  <span>
+                    {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
+                    {lobby.password && <FaLock />}
+                  </span>
+                </li>
+              ))
+            ) : (
+              <p>Pas de lobbies disponibles...</p>
+            )}
+          </ul>
+        </div>
+
+        {askNewLobby && (
+          <Modal>
+            <div className="modal-container">
+              <input
+                onChange={(e) => setLobbyName(e.target.value)}
+                type="text"
+                placeholder="Nom du salon"
+              />
+              <input
+                onChange={(e) => setLobbyPassword(e.target.value)}
+                type="text"
+                placeholder="Mot de passe (optionnel)"
+              />
+              <Button onClick={handleCreateLobby}>Créer le salon</Button>
+              <Button
                 onClick={() => {
-                  if (lobby.password) {
-                    setAskPassword({ password: lobby.password, id: lobby.id })
+                  setAskNewLobby(false)
+                }}
+              >
+                Retour
+              </Button>
+            </div>
+          </Modal>
+        )}
+
+        {askPassword && (
+          <Modal>
+            <div className="modal-container">
+              <input
+                onChange={(e) => setJoinLobbyPassword(e.target.value)}
+                type="text"
+                placeholder="Mot de passe"
+              />
+              <Button
+                onClick={() => {
+                  if (askPassword.password === joinLobbyPassword) {
+                    handleJoinLobby(askPassword.id)
                   } else {
-                    handleJoinLobby(lobby.id)
+                    sendErrorMessage('Le mot de passe est incorrect.')
                   }
                 }}
-                className="lobbies-list-item"
               >
-                <span>
-                  {lobby.version} - {lobby.name}
-                </span>
-                <span>
-                  {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
-                  {lobby.password && <FaLock />}
-                </span>
-              </li>
-            ))
-          ) : (
-            <p>Pas de lobbies disponibles...</p>
-          )}
-        </ul>
+                Rejoindre la partie
+              </Button>
+              <Button
+                onClick={() => {
+                  setAskPassword(false)
+                }}
+              >
+                Retour
+              </Button>
+            </div>
+          </Modal>
+        )}
       </div>
-
-      {askNewLobby && (
-        <Modal>
-          <div className="modal-container">
-            <input
-              onChange={(e) => setLobbyName(e.target.value)}
-              type="text"
-              placeholder="Nom du salon"
-            />
-            <input
-              onChange={(e) => setLobbyPassword(e.target.value)}
-              type="text"
-              placeholder="Mot de passe (optionnel)"
-            />
-            <Button onClick={handleCreateLobby}>Créer le salon</Button>
-            <Button
-              onClick={() => {
-                setAskNewLobby(false)
-              }}
-            >
-              Retour
-            </Button>
-          </div>
-        </Modal>
-      )}
-
-      {askPassword && (
-        <Modal>
-          <div className="modal-container">
-            <input
-              onChange={(e) => setJoinLobbyPassword(e.target.value)}
-              type="text"
-              placeholder="Mot de passe"
-            />
-            <Button
-              onClick={() => {
-                if (askPassword.password === joinLobbyPassword) {
-                  handleJoinLobby(askPassword.id)
-                } else {
-                  sendErrorMessage('Le mot de passe est incorrect.')
-                }
-              }}
-            >
-              Rejoindre la partie
-            </Button>
-            <Button
-              onClick={() => {
-                setAskPassword(false)
-              }}
-            >
-              Retour
-            </Button>
-          </div>
-        </Modal>
-      )}
     </div>
   )
 }

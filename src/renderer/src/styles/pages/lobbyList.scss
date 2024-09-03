@@ -1,8 +1,12 @@
 @import '../variables.scss';
 
 .lobbies {
-  height: calc(85vh - 80px);
-  padding: 40px 50px;
+  height: 100%;
+
+  &-wrapper {
+    height: 100%;
+    padding: 50px;
+  }
 
   &-btn {
     display: inline-flex;

@@ -5,15 +5,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin: 0 5px;
     height: 500px;
     width: 350px;
     border-radius: 10px;
     @include greyBorders();
     background-color: rgba(0, 0, 0, 0.8);
     overflow: hidden;
-    position: relative;    
+    position: relative;
     transition: background-color 250ms ease-in-out;
+
+    &.small {
+        height: 120px;
+        width: calc(100% - 10px);
+        margin-top: 10px;
+    }
 
     @include for-big-desktop-up {
         height: 700px; // Ajustement de la hauteur pour les grands écrans
@@ -28,6 +34,7 @@
 
     &:hover &-bg {
         width: 110%;
+
         @include for-big-desktop-up {
             width: 130%; // Plus grand effet au survol sur les grands écrans
         }
@@ -48,8 +55,23 @@
         height: 100%;
         width: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        &-cards {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            &-list {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
 
         @include for-big-desktop-up {
             padding: 20px; // Ajout d'un padding interne pour les grands écrans
@@ -61,10 +83,12 @@
         font-family: 'Kimberly Bl', sans-serif;
         font-size: 45px;
         text-align: center;
+
         @include for-big-desktop-up {
             font-size: 60px; // Augmentation de la taille de la police pour les grands écrans
         }
     }
+
     &-desc {
         font-family: 'Kimberly Bl', sans-serif;
         text-align: center;

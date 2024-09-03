@@ -1,6 +1,6 @@
 import { useTransition } from '../../TransitionContext'
 
-const MenuCard = ({ name, desc, where, bg }) => {
+const MenuCard = ({ name, desc, where, bg, classNames }) => {
   const { goForward } = useTransition()
 
   const handleForward = () => {
@@ -8,10 +8,10 @@ const MenuCard = ({ name, desc, where, bg }) => {
   }
 
   return (
-    <div className="MenuCard" onClick={handleForward}>
+    <div className={`MenuCard ${classNames}`} onClick={handleForward}>
       <span className="MenuCard-name">{name}</span>
       <span className="MenuCard-desc">{desc}</span>
-      <img src={bg} className='MenuCard-bg' />
+      <img src={bg} className="MenuCard-bg" />
     </div>
   )
 }

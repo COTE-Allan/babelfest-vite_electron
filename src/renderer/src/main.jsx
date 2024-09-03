@@ -37,10 +37,8 @@ import './styles/items/menuCard.scss'
 const Layout = ({ children }) => {
   return (
     <MatchmakingProvider>
-      <MusicProvider>
-        {children}
-        <UpdateNotifier />
-      </MusicProvider>
+      {children}
+      <UpdateNotifier />
     </MatchmakingProvider>
   )
 }
@@ -48,7 +46,9 @@ const Layout = ({ children }) => {
 const App = () => {
   return (
     <AuthProvider>
-      <AppContent />
+      <MusicProvider>
+        <AppContent />
+      </MusicProvider>
     </AuthProvider>
   )
 }
@@ -91,23 +91,27 @@ const AppContent = () => {
                 <Layout>
                   <TransitionWrapper>
                     <div className="MenuCard-container">
-                      <MenuCard
-                        name="Catalogue"
-                        desc="Consultez les cartes présente dans le jeu."
-                        where="/catalog"
-                        bg={MenuCardCatalog}
-                      />
-                      <MenuCard
-                        name="Effets"
-                        desc="Consultez la liste des effets disponibles."
-                        where="/effects"
-                      />
-                      <MenuCard
-                        name="Arènes"
-                        desc="Consultez la liste des arènes jouables."
-                        where="/arenasList"
-                        bg={MenuCardArena}
-                      />
+                      <div className="MenuCard-container-cards">
+                        <div className="MenuCard-container-cards-list">
+                          <MenuCard
+                            name="Catalogue"
+                            desc="Cherchez, filtrez et consultez les cartes."
+                            where="/catalog"
+                            bg={MenuCardCatalog}
+                          />
+                          <MenuCard
+                            name="Effets"
+                            desc="Consultez la liste des effets disponibles."
+                            where="/effects"
+                          />
+                          <MenuCard
+                            name="Arènes"
+                            desc="Affichez une liste de toutes les arènes jouables."
+                            where="/arenasList"
+                            bg={MenuCardArena}
+                          />
+                        </div>
+                      </div>
                       <BackButton />
                     </div>
                   </TransitionWrapper>
@@ -120,18 +124,28 @@ const AppContent = () => {
                 <Layout>
                   <TransitionWrapper>
                     <div className="MenuCard-container">
-                      <MenuCard
-                        name="Partie rapide"
-                        desc="Affrontez un adversaire aléatoire de niveau similaire."
-                        where="/quick"
-                        bg={QuickplayCardArena}
-                      />
-                      <MenuCard
-                        name="Partie custom"
-                        desc="Jouez entre amis avec des règles modifiables."
-                        where="/lobbyList"
-                        bg={RankedCardArena}
-                      />
+                      <div className="MenuCard-container-cards">
+                        <div className="MenuCard-container-cards-list">
+                          <MenuCard
+                            name="Partie rapide"
+                            desc="Affrontez un adversaire aléatoire de niveau similaire."
+                            where="/quick"
+                            bg={QuickplayCardArena}
+                          />
+                          <MenuCard
+                            name="Partie custom"
+                            desc="Jouez entre amis avec des règles modifiables."
+                            where="/lobbyList"
+                            bg={RankedCardArena}
+                          />
+                        </div>
+                        <MenuCard
+                          classNames="small"
+                          name="Tutoriel"
+                          desc="Découvrez comment jouer avec un court tutoriel."
+                          where="/tutorial"
+                        />
+                      </div>
                       <BackButton />
                     </div>
                   </TransitionWrapper>

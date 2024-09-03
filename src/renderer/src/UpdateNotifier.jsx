@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ProgressBar from '@ramonak/react-progress-bar'
 import './styles/updateNotifier.scss'
 
 const UpdateNotifier = () => {
@@ -7,6 +8,8 @@ const UpdateNotifier = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    // setUpdateInfo({ version: 'test' })
+    // setProgress({ transferred: 500, total: 1000, bytesPerSecond: 0 })
     const handleUpdateAvailable = (info) => {
       setUpdateInfo(info)
     }
@@ -40,15 +43,27 @@ const UpdateNotifier = () => {
 
   if (updateInfo) {
     return (
-      <div className="updateBanner">
+      <div className="updateBanner fade-in">
         <div className="updateBanner-infos">Mise à jour disponible : {updateInfo.version}</div>
-        <span>Certaines fonctionnalités sont bloquées.</span>
+        <span>
+          Vous devez télécharger la mise à jour pour jouer, une fois téléchargée, le jeu se fermera
+          pour ouvrir l'installateur.
+        </span>
         <div className="updateBanner-download">
           {progress && (
             <>
-              Téléchargement en cours : {(progress.transferred / 1024 / 1024).toFixed(2)} MB /{' '}
-              {(progress.total / 1024 / 1024).toFixed(2)} MB -{' '}
-              {(progress.bytesPerSecond / 1024).toFixed(2)} KB/s
+              <div>
+                Téléchargement en cours : {(progress.transferred / 1024 / 1024).toFixed(2)} MB /{' '}
+                {(progress.total / 1024 / 1024).toFixed(2)} MB -{' '}
+                {(progress.bytesPerSecond / 1024).toFixed(2)} KB/s
+              </div>
+              <ProgressBar
+                completed={(progress.transferred / progress.total) * 100}
+                bgColor="#4caf50"
+                height="20px"
+                labelAlignment="center"
+                labelColor="#fff"
+              />
             </>
           )}
         </div>
