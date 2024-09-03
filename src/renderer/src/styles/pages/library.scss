@@ -8,7 +8,9 @@
   display: flex;
   justify-content: center;
 
-
+  .loading {
+    width: 100px;
+  }
 
   &-wrapper {
     display: flex;

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../AuthContext'
-import ProfileDisplayer from '../interface/ProfileDisplayer'
+import ProfileDisplayer from '../account/ProfileDisplayer'
 import { useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
@@ -71,7 +71,7 @@ const Account = () => {
     fetchUserData()
   }, [])
 
-  return <ProfileDisplayer userInfo={targetUser} isMine={isMine} />
+  return <ProfileDisplayer userInfo={targetUser} isMine={isMine} setUser={setTargetUser} />
 }
 
 export default Account

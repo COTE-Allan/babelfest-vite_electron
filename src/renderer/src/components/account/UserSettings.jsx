@@ -9,7 +9,7 @@ import { auth, db, realtimeDb } from '../../Firebase'
 
 import Button from '../items/Button'
 import Modal from '../items/ClassicModal'
-import '../../styles/accountEditor/userSettings.scss'
+import '../../styles/account/userSettings.scss'
 
 export default function UserSettings() {
   const { user, updateUser, userInfo, changeEmail, verifMailSent, setVerifMailSent } =

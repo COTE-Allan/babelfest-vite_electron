@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
+import { useSendErrorMessage } from './components/others/toolBox'
 
 export const AuthContext = createContext()
 
@@ -126,7 +127,6 @@ export const AuthProvider = ({ children }) => {
     if (!user) return
     const userRef = doc(db, 'users', user.uid)
     await updateDoc(userRef, updates)
-    toast.success('Les modifications ont correctement été appliquées.')
     setUserInfo((prev) => ({ ...prev, ...updates }))
   }
 

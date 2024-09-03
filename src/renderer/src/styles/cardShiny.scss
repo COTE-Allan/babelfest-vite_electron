@@ -273,6 +273,12 @@
     position: relative;
 
     &.prestige {
+
+      &-default {
+        background:
+          white;
+      }
+
       &-promo {
         background: linear-gradient(48deg,
             #e3c1f4,

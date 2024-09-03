@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react'
 import { getSkinsWithLevel } from '../others/toolBox'
-import '../../styles/accountEditor/achievements.scss'
+import '../../styles/account/userAchievements.scss'
 import achievements from '../../jsons/achievements.json'
 import { AuthContext } from '../../AuthContext'
 import { FaEye, FaEyeSlash, FaLock, FaLockOpen, FaTrophy } from 'react-icons/fa'
@@ -13,7 +13,47 @@ import selectSfx from '../../assets/sfx/menu_select.wav'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 function SkinItem({ skin, userInfo }) {
-  // Votre code de SkinItem reste inchangé
+  const { level, url, hex, gradient, name, classe } = skin
+  const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
+  let content
+
+  if (url) {
+    content = <img src={url} alt={`Skin ${name}`} draggable="false" />
+  } else if (hex) {
+    content = (
+      <div
+        className={`color ${skin.classes ? skin.classes : ''}`}
+        style={{
+          background: gradient ? `linear-gradient(to bottom, ${hex}, ${gradient})` : hex
+        }}
+      />
+    )
+  } else if (classe) {
+    content = (
+      <span className={`title prestige skin-title`}>
+        <div className={classe}>{userInfo.username}</div>
+      </span>
+    )
+  } else {
+    content = <span className="skin-title">{name}</span>
+  }
+
+  return (
+    <div
+      className={`achievements-levels-item ${userInfo.level >= level && 'unlocked'}`}
+      key={skin.id || skin.name}
+    >
+      <span className="level">{level}</span>
+      <hr />
+      {content}
+      {skin.type !== 'Titre' && skin.type !== 'Prestige' && (
+        <span className="skin-name">{name}</span>
+      )}
+      <span className="type">
+        {skin.type} {lock}
+      </span>
+    </div>
+  )
 }
 
 export default function UserAchievements({ userInfo }) {
@@ -67,7 +107,6 @@ export default function UserAchievements({ userInfo }) {
 
   const achievementCompletion = calculateAchievementCompletion()
   const levelCompletion = calculateLevelCompletion()
-  const achievementValue = achievementInfos.id ? checkAchievementValue(achievementInfos.id) : 0
 
   const filteredAchievements = achievements.filter((achievement) => {
     if (achievementFilter === 'all') return true
@@ -78,21 +117,19 @@ export default function UserAchievements({ userInfo }) {
   return (
     <div className="achievements">
       <nav className="achievements-nav">
-        <div className="cosmetics-nav-list">
-          <HudNavLink onClick={() => setPage(1)} selected={page === 1} permOpen>
-            <FaTrophy size={45} />
-            <span className="hidden-span">Succès</span>
-          </HudNavLink>
-          <HudNavLink onClick={() => setPage(2)} selected={page === 2} permOpen>
-            <FaArrowTrendUp size={45} />
-            <span className="hidden-span">Niveaux</span>
-          </HudNavLink>
-        </div>
+        <HudNavLink onClick={() => setPage(1)} selected={page === 1} permOpen>
+          <FaTrophy size={45} />
+          <span className="hidden-span">Succès</span>
+        </HudNavLink>
+        <HudNavLink onClick={() => setPage(2)} selected={page === 2} permOpen>
+          <FaArrowTrendUp size={45} />
+          <span className="hidden-span">Niveaux</span>
+        </HudNavLink>
       </nav>
       <TransitionGroup className="achievements-content">
-        <CSSTransition key={page} timeout={300} classNames="fade">
-          {page === 1 ? (
-            <>
+        {page === 1 && (
+          <CSSTransition key="ach-1" timeout={300} classNames="fade">
+            <div className="css-transition">
               <h2>
                 Succès - {achievementCompletion.toFixed(0)}%
                 <button
@@ -133,9 +170,12 @@ export default function UserAchievements({ userInfo }) {
                   </div>
                 ))}
               </div>
-            </>
-          ) : (
-            <>
+            </div>
+          </CSSTransition>
+        )}
+        {page === 2 && (
+          <CSSTransition key="ach-2" timeout={300} classNames="fade">
+            <div className="css-transition">
               <h2>
                 Récompenses de niveaux - {levelCompletion.toFixed(0)}%{' '}
                 <button
@@ -158,13 +198,14 @@ export default function UserAchievements({ userInfo }) {
                 </button>
               </h2>
               <div className="achievements-list">
-                {filteredSkinsWithLevel.map((skin) => (
-                  <SkinItem key={skin.id || skin.name} skin={skin} userInfo={userInfo} />
-                ))}
+                {filteredSkinsWithLevel.map((skin) => {
+                  console.log(skin)
+                  return <SkinItem key={skin.id || skin.name} skin={skin} userInfo={userInfo} />
+                })}
               </div>
-            </>
-          )}
-        </CSSTransition>
+            </div>
+          </CSSTransition>
+        )}
       </TransitionGroup>
     </div>
   )

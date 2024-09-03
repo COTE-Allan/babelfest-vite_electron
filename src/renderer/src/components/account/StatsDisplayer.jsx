@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react'
-import '../../styles/interface/statsDisplayer.scss'
-import { getPlayerRank } from '../others/toolBox'
-import ProfilePicture from '../esthetics/profilePicture'
+import '../../styles/account/statsDisplayer.scss'
 import achievements from '../../jsons/achievements.json'
-import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 
-export default function StatsDisplayer({ user, stats, rank }) {
+export default function StatsDisplayer({ user, stats }) {
   return (
     <div className="statsDisplayer">
       <div className="statsDisplayer-content">

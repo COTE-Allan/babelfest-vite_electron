@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import '../../styles/interface/matchSummaries.scss'
-import ProfilePicture from '../esthetics/profilePicture'
-import PlayerBanner from './inGame/PlayerBanner'
+import '../../styles/account/matchSummaries.scss'
 import { format } from 'date-fns'
 import { AuthContext } from '../../AuthContext'
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
@@ -26,12 +24,13 @@ export default function MatchSummaries({ summaries = [] }) {
       {summaries
         .slice() // Copie l'array pour ne pas modifier l'original
         .reverse() // Inverse l'ordre des éléments
-        .map((summary) => {
+        .map((summary, index) => {
           let gameDetails = summary.gameDetails
           let player = summary.player
           let rival = summary.opponent
           return (
             <div
+              key={index}
               className="matchSummaries-item"
               onClick={() => {
                 goForward(`/account/${rival.id}`)

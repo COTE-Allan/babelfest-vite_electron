@@ -11,8 +11,6 @@ export default function ExperienceBar({ customUserInfo = null }) {
   const xpMax = getCurrentExpMax(finalUserInfo.level)
   const xpPercentage = (finalUserInfo.xp / xpMax) * 100
 
-  console.log(finalUserInfo)
-
   return (
     <div className="xp-bar">
       <span className="xp-bar-infos">

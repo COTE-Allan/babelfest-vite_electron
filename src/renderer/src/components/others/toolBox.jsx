@@ -66,6 +66,7 @@ const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title, ...pres
 
 import useSound from 'use-sound'
 import errorSfx from '../../assets/sfx/menu_unauthorized.mp3'
+import successSfx from '../../assets/sfx/info_notification.mp3'
 import infoSfx from '../../assets/sfx/info_notification.mp3'
 import { toast } from 'react-toastify'
 import { useContext } from 'react'
@@ -212,6 +213,7 @@ export function useSendErrorMessage() {
   const { userSettings } = useContext(AuthContext)
   const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
   const [info] = useSound(infoSfx, { volume: userSettings.sfxVolume })
+  const [success] = useSound(successSfx, { volume: userSettings.sfxVolume })
 
   const sendErrorMessage = (msg, type = 'error') => {
     switch (type) {
@@ -222,6 +224,9 @@ export function useSendErrorMessage() {
       case 'info':
         info()
         toast.info(msg)
+      case 'success':
+        success()
+        toast.success(msg)
       default:
         break
     }
@@ -399,13 +404,17 @@ export function getSkinsWithLevel() {
     .filter((skin) => skin.hasOwnProperty('level') && typeof skin.level === 'number')
     .sort((a, b) => a.level - b.level)
 
-  console.log('Skins with Level:', skinsWithLevel) // Debugging pour vérifier les duplications
   return skinsWithLevel
 }
 
 export function getSkinsByLevel(level) {
   // Filtrer les objets qui ont un 'level' égal à l'entrée
   return allSkins.filter((skin) => skin.level === level)
+}
+
+export function getSkins() {
+  // Filtrer les objets qui ont un 'level' égal à l'entrée
+  return allSkins
 }
 
 export function getArenaPattern() {

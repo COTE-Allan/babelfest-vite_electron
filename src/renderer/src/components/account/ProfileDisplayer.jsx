@@ -1,20 +1,34 @@
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
-import ExperienceBar from './ExperienceBar'
-import '../../styles/interface/profileDisplayer.scss'
+import ExperienceBar from '../interface/ExperienceBar'
+import '../../styles/account/profileDisplayer.scss'
 import BackButton from '../items/BackButton'
 import StatsDisplayer from './StatsDisplayer'
 import MatchSummaries from './MatchSummaries'
 import HudNavLink from '../items/hudNavLink'
-import { FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
+import { FaCog, FaSave, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
 import HonorButton from '../items/HonorButton'
-import { useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import UserAchievements from '../account/UserAchievements'
-import UserSettings from '../account/UserSettingsController'
-import { getPlayerRank } from '../others/toolBox'
+import UserAchievements from './UserAchievements'
+import UserSettings from './UserSettings'
+import UserCustomisation from './UserCustomisation'
+import { ImCross } from 'react-icons/im'
+import { AuthContext } from '../../AuthContext'
+import { update } from 'lodash'
+import { useSendErrorMessage } from '../others/toolBox'
 
-export default function ProfileDisplayer({ userInfo, isMine }) {
+export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
   const [page, setPage] = useState(1)
+  const [customizedUserInfo, setCustomizedUserInfo] = useState(null)
+  const { updateUser } = useContext(AuthContext)
+  const sendErrorMessage = useSendErrorMessage()
+
+  const handleUpdateUser = async () => {
+    await updateUser(customizedUserInfo)
+    setUser(customizedUserInfo)
+    setCustomizedUserInfo(null)
+    sendErrorMessage('Les changements ont étés correctements appliqués.', 'success')
+  }
 
   return (
     <div className="profileDisplayer">
@@ -23,12 +37,28 @@ export default function ProfileDisplayer({ userInfo, isMine }) {
         <div className="profileDisplayer-wrapper">
           <div className="profileDisplayer-user">
             <div className="profileDisplayer-user-banner">
-              <LeaderboardPlayerBanner user={userInfo} />
+              <LeaderboardPlayerBanner user={customizedUserInfo ?? userInfo} />
               <ExperienceBar customUserInfo={userInfo} />
             </div>
             {!isMine && (
               <div className="profileDisplayer-user-controller">
                 <HonorButton targetUser={userInfo} targetUserId={userInfo.id} />
+              </div>
+            )}
+            {customizedUserInfo && (
+              <div className="profileDisplayer-user-controller">
+                <HudNavLink permOpen onClick={handleUpdateUser} className="fade-in save">
+                  <span className="hidden-span">Valider le skin</span>
+                  <FaSave size={30} />
+                </HudNavLink>
+                <HudNavLink
+                  permOpen
+                  onClick={() => setCustomizedUserInfo(null)}
+                  className="fade-in unsave"
+                >
+                  <span className="hidden-span">Annuler le skin</span>
+                  <ImCross size={30} />
+                </HudNavLink>
               </div>
             )}
           </div>
@@ -74,7 +104,10 @@ export default function ProfileDisplayer({ userInfo, isMine }) {
             )}
             {isMine && page === 3 && (
               <CSSTransition key="customisation" timeout={300} classNames="fade">
-                <></>
+                <UserCustomisation
+                  customizedUserInfo={customizedUserInfo}
+                  setCustomizedUserInfo={setCustomizedUserInfo}
+                />
               </CSSTransition>
             )}
             {isMine && page === 4 && (
