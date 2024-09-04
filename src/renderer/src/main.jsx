@@ -29,8 +29,8 @@ import BackButton from './components/items/BackButton'
 import MenuCard from './components/items/MenuCard'
 import MenuCardCatalog from './assets/img/catalogMenuCard.jpg'
 import MenuCardArena from './assets/img/arenasMenuCard.jpg'
-import RankedCardArena from './assets/img/rankedMenuCard.png'
-import QuickplayCardArena from './assets/img/quickplayMenuCard.png'
+import MenuCardEffects from './assets/img/effectsMenuCard.png'
+
 import './styles/items/menuCard.scss'
 import GamemodeSelect from './components/pages/GamemodeSelect'
 import MatchmakingQueue from './components/pages/MatchmakingQueue'
@@ -105,6 +105,7 @@ const AppContent = () => {
                             name="Effets"
                             desc="Consultez la liste des effets disponibles."
                             where="/effects"
+                            bg={MenuCardEffects}
                           />
                           <MenuCard
                             name="Arènes"

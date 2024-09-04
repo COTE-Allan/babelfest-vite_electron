@@ -15,7 +15,6 @@ import axios from 'axios'
 
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
-import { MatchmakingContext } from '../providers/MatchmakingProvider'
 import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
 import { MdLeaderboard } from 'react-icons/md'
