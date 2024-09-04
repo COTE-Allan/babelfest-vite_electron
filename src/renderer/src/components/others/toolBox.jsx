@@ -224,9 +224,11 @@ export function useSendErrorMessage() {
       case 'info':
         info()
         toast.info(msg)
+        break
       case 'success':
         success()
         toast.success(msg)
+        break
       default:
         break
     }

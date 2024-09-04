@@ -1,24 +1,13 @@
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import ProfilePicture from '../esthetics/profilePicture'
 
 import '../../styles/pages/home.scss'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
-import MenuFooter from '../interface/MenuFooter'
-import { useContext, useEffect, useRef, useState } from 'react'
-import {
-  getFeaturedCards,
-  getOnlineUsersCount,
-  getRankClass,
-  getTopUsersByMMR,
-  getTotalAndOnlinePlayers,
-  shuffleArray,
-  useSendErrorMessage
-} from '../others/toolBox'
-import { CSSTransition } from 'react-transition-group'
+import { useContext, useEffect, useState } from 'react'
+import { getFeaturedCards, getOnlineUsersCount, shuffleArray } from '../others/toolBox'
 import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
-import Tilt from 'react-parallax-tilt'
 import ClassicModal from '../items/ClassicModal'
 import Button from '../items/Button'
 import { useJoinLobby, useLeaveLobby } from '../controllers/ManageLobbyAndGame'
@@ -27,41 +16,28 @@ import axios from 'axios'
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
-import { FaCircle, FaCompactDisc, FaPlay } from 'react-icons/fa'
-import { NameAndTitle } from '../items/NameAndTitle'
+import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
 import { MdLeaderboard } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
-import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 import { useMusic } from '../providers/MusicProvider'
 
 const Home = () => {
   const { isPlaying } = useMusic()
-  const navigate = useNavigate()
   const [playerCount, setPlayerCount] = useState(0)
-  const [topUsers, setTopUsers] = useState([])
-  const sendErrorMessage = useSendErrorMessage()
-  const handleItemClick = (path) => {
-    navigate(path)
-  }
   const { goForward } = useTransition()
 
   const { state } = useLocation()
   const joinLobby = useJoinLobby()
   const leaveLobby = useLeaveLobby()
   const [lastBlogPost, setLastBlogPost] = useState(null)
-  const [lastBlogPostDate, setLastBlogPostDate] = useState(null)
-  const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
-    useContext(MatchmakingContext)
-  const { userInfo, userSettings, user } = useContext(AuthContext)
+  const { userSettings, user } = useContext(AuthContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [featuredCards, setFeaturedCards] = useState(null)
   const [askForLogout, setAskForLogout] = useState(false)
-
-  let isTutorialFinished = userInfo.achievements.includes('HF_tutorial')
 
   const handleLeaveGame = () => {
     if (askForLogout) {
@@ -96,18 +72,6 @@ const Home = () => {
     fetchPost()
   }, [])
 
-  useEffect(() => {
-    if (lastBlogPost) {
-      setLastBlogPostDate(
-        new Date(lastBlogPost.date).toLocaleDateString('fr-FR', {
-          year: 'numeric',
-          month: 'long',
-          day: '2-digit',
-          hour12: false
-        })
-      )
-    }
-  }, [lastBlogPost])
   return (
     <div className="home">
       <div className="home-music">
@@ -115,6 +79,10 @@ const Home = () => {
           <MusicPlayer role="menu" />
         </div>
         <FaCompactDisc className={`disc ${isPlaying && 'rotate'}`} size={40} />
+      </div>
+      <div className="home-playerCount">
+        <FaCircle color="green" />
+        {playerCount}
       </div>
 
       {/* <div onClick={() => goForward("/account")} className='home-playerBanner'>
@@ -173,6 +141,29 @@ const Home = () => {
             </div>
           </div>
         )}
+
+        <div className="home-socials">
+          <span>Rejoignez la communauté !</span>
+          <div className="home-socials-list">
+            <a className="home-socials-list-item" href="https://x.com/babelfest_" target="_blank">
+              <FaTwitter />
+            </a>
+            <a
+              className="home-socials-list-item"
+              href="https://discord.com/invite/WYCuMDTt45"
+              target="_blank"
+            >
+              <FaDiscord />
+            </a>
+            <a
+              className="home-socials-list-item"
+              href="https://www.youtube.com/channel/UCxZ85Kq0CvJXQu9jAzcNzEw"
+              target="_blank"
+            >
+              <FaYoutube />
+            </a>
+          </div>
+        </div>
 
         {lastBlogPost ? (
           <a

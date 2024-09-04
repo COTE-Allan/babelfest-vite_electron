@@ -15,6 +15,14 @@
         padding: 20px;
     }
 
+    &-loading {
+        height: 90%;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     &-controller {
         display: flex;
         height: 7%;

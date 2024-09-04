@@ -142,7 +142,7 @@ export const MatchmakingProvider = ({ children }) => {
       mmr: userInfo.stats.mmr,
       rank: 1,
       mode: mode,
-      verName: verName // Include verName in the player object
+      verName: verName
     }
     setCurrentUser(player)
     setMatchmakingSearch(mode)

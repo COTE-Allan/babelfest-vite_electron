@@ -1,16 +1,26 @@
+import { FaLock } from 'react-icons/fa'
 import { useTransition } from '../../TransitionContext'
+import { useSendErrorMessage } from '../others/toolBox'
 
-const MenuCard = ({ name, desc, where, bg, classNames }) => {
+const MenuCard = ({ name, desc, where, bg, classNames, disabled = false }) => {
   const { goForward } = useTransition()
+  const sendErrorMessage = useSendErrorMessage()
 
   const handleForward = () => {
-    goForward(where)
+    if (disabled) {
+      sendErrorMessage(disabled, 'info')
+    } else {
+      goForward(where)
+    }
   }
 
   return (
-    <div className={`MenuCard ${classNames}`} onClick={handleForward}>
-      <span className="MenuCard-name">{name}</span>
-      <span className="MenuCard-desc">{desc}</span>
+    <div className={`MenuCard ${classNames} `} onClick={handleForward}>
+      <span className="MenuCard-name">
+        {disabled && <FaLock size={40} />}
+        {disabled ? 'Bloqué' : name}
+      </span>
+      <span className="MenuCard-desc">{disabled ? disabled : desc}</span>
       <img src={bg} className="MenuCard-bg" />
     </div>
   )

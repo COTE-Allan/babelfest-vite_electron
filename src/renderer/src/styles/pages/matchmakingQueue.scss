@@ -1,0 +1,19 @@
+.matchmaking {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Kimberly Bl', sans-serif;
+
+    & h1 {
+        font-size: 70px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    & h2 {
+        font-size: 30px;
+        margin: 0;
+    }
+}

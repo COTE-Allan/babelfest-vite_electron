@@ -12,7 +12,7 @@ import { ImCross } from 'react-icons/im'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { getAllCards } from '../others/toolBox'
 import BackButton from '../items/BackButton'
-import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
+import LoadingLogo from '../items/LoadingLogo'
 
 export default function Library() {
   const [allCards, setAllCards] = useState(getAllCards())
@@ -111,7 +111,6 @@ export default function Library() {
   }, [selectedIndex])
 
   useEffect(() => {
-    console.log(location.state)
     if (location.state && location.state.selected) {
       const { selected } = location.state
       setSelected(selected)
@@ -353,7 +352,11 @@ export default function Library() {
               </div>
             </div>
           ))}
-          {loading && <img src={LogoAnimate} className="loading" alt="Loading animation" />}
+          {loading && (
+            <div className="library-loading">
+              <LoadingLogo />
+            </div>
+          )}
         </div>
       </div>
 

@@ -10,6 +10,22 @@
     margin: 20px; // Example adjustment for larger screens
   }
 
+  &-container {
+    top: 130px;
+    transform: translateX(-100%);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 250ms ease-in-out;
+    z-index: 10;
+
+    &.active {
+      transform: translateX(-5%);
+    }
+  }
+
   &-infos {
     overflow: hidden;
     white-space: nowrap;

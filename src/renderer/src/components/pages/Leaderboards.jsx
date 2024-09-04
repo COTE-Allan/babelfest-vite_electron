@@ -128,7 +128,9 @@ const Leaderboards = () => {
               </div>
             </>
           ) : (
-            <LoadingLogo />
+            <div className="leaderboard-loading">
+              <LoadingLogo />
+            </div>
           )}
         </div>
       </div>

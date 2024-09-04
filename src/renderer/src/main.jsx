@@ -32,6 +32,8 @@ import MenuCardArena from './assets/img/arenasMenuCard.jpg'
 import RankedCardArena from './assets/img/rankedMenuCard.png'
 import QuickplayCardArena from './assets/img/quickplayMenuCard.png'
 import './styles/items/menuCard.scss'
+import GamemodeSelect from './components/pages/GamemodeSelect'
+import MatchmakingQueue from './components/pages/MatchmakingQueue'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -123,31 +125,17 @@ const AppContent = () => {
               element={
                 <Layout>
                   <TransitionWrapper>
-                    <div className="MenuCard-container">
-                      <div className="MenuCard-container-cards">
-                        <div className="MenuCard-container-cards-list">
-                          <MenuCard
-                            name="Partie rapide"
-                            desc="Affrontez un adversaire aléatoire de niveau similaire."
-                            where="/quick"
-                            bg={QuickplayCardArena}
-                          />
-                          <MenuCard
-                            name="Partie custom"
-                            desc="Jouez entre amis avec des règles modifiables."
-                            where="/lobbyList"
-                            bg={RankedCardArena}
-                          />
-                        </div>
-                        <MenuCard
-                          classNames="small"
-                          name="Tutoriel"
-                          desc="Découvrez comment jouer avec un court tutoriel."
-                          where="/tutorial"
-                        />
-                      </div>
-                      <BackButton />
-                    </div>
+                    <GamemodeSelect />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/matchmakingQueue/:gamemode"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <MatchmakingQueue />
                   </TransitionWrapper>
                 </Layout>
               }

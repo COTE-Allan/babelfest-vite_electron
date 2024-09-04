@@ -3,6 +3,14 @@
     justify-content: center;
     height: 100%;
 
+    &-loading {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     &-wrapper {
         background-color: rgba(0, 0, 0, 0.368);
         display: flex;
