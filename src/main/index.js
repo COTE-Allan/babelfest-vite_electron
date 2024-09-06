@@ -74,6 +74,14 @@ function createWindow() {
     store.set('screenMode', 'windowed')
     mainWindow.webContents.send('fullscreen-changed', false)
   })
+  mainWindow.webContents.on('did-finish-load', () => {
+    // Ouvre DevTools avec F12
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+      if (input.key === 'F12' && input.type === 'keyDown') {
+        mainWindow.webContents.openDevTools()
+      }
+    })
+  })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
@@ -95,6 +103,7 @@ function checkForUpdates() {
   autoUpdater.on('update-available', (info) => {
     log.info('Update available.')
     if (mainWindow) {
+      log.info('wow!.', info)
       mainWindow.webContents.send('update_available', info)
     }
   })

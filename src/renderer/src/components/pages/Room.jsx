@@ -21,7 +21,6 @@ import RightWindow from '../interface/inGame/RightWindow'
 import LeftWindow from '../interface/inGame/LeftWindow'
 import ClassicModal from '../items/ClassicModal'
 import ScenesMaker from '../interface/inGame/ScenesMaker'
-import BabelfestBackground from '../../assets/img/fond_babelfest.png'
 import { getBackgroundStyle } from '../others/toolBox'
 
 export default function Room() {
@@ -160,7 +159,6 @@ export default function Room() {
           background: `${getBackgroundStyle(myTurn ? myColor : rivalColor)}`
         }}
       ></div>
-      <img className={`gameContainer-bg`} src={BabelfestBackground} alt={'background du menu'} />
     </>
   )
 }
