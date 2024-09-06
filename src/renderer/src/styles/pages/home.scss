@@ -63,14 +63,38 @@
     right: 50px;
     font-family: 'Kimberly Bl', sans-serif;
     font-size: 25px;
-    display: flex;
-    align-items: center;
+    // display: flex;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 10px;
 
     & svg {
       margin-right: 7px;
+    }
+
+    &-count {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    &:hover &-list {
+      // display: flex;
+      height: 200px;
+      width: 400px;
+    }
+
+    white-space: nowrap;
+
+    &-list {
+      height: 0;
+      width: 0;
+      overflow-y: auto;
+      margin-top: 5px;
+      font-size: 17px;
+      transition: height 200ms ease-in-out, width 200ms ease-in-out;
+      // display: none;
+      flex-wrap: wrap;
     }
   }
 

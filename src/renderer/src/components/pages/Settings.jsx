@@ -1,6 +1,4 @@
-import Switch from 'react-switch'
 import '../../styles/pages/settings.scss'
-import MenuFooter from '../interface/MenuFooter'
 import { AuthContext } from '../../AuthContext'
 import { useContext, useState } from 'react'
 import Slider from 'rc-slider'
@@ -55,25 +53,24 @@ const Settings = () => {
         <div className="settings-list-item">
           <label className="settings-list-item-label">Background animé</label>
           <div className="settings-list-item-input">
-      <div className="settings-list-item-input-switch" onClick={() => handleToggleChange('bgOn')}>
-              <div className={`on ${userSettings.bgOn && "active"}`}>
-                Activé
-              </div>
-              <div className={`off ${!userSettings.bgOn && "desactive"}`}>
-                Désactivé
-              </div>
-            </div>          </div>
+            <div
+              className="settings-list-item-input-switch"
+              onClick={() => handleToggleChange('bgOn')}
+            >
+              <div className={`on ${userSettings.bgOn && 'active'}`}>Activé</div>
+              <div className={`off ${!userSettings.bgOn && 'desactive'}`}>Désactivé</div>
+            </div>{' '}
+          </div>
         </div>
         <div className="settings-list-item">
           <label className="settings-list-item-label">Fiche tutoriel en jeu</label>
           <div className="settings-list-item-input">
-            <div className="settings-list-item-input-switch" onClick={() => handleToggleChange('tutorial')}>
-              <div className={`on ${userSettings.tutorial && "active"}`}>
-                Activé
-              </div>
-              <div className={`off ${!userSettings.tutorial && "desactive"}`}>
-                Désactivé
-              </div>
+            <div
+              className="settings-list-item-input-switch"
+              onClick={() => handleToggleChange('tutorial')}
+            >
+              <div className={`on ${userSettings.tutorial && 'active'}`}>Activé</div>
+              <div className={`off ${!userSettings.tutorial && 'desactive'}`}>Désactivé</div>
             </div>
           </div>
         </div>
@@ -110,14 +107,25 @@ const Settings = () => {
         <div className="settings-list-item">
           <label className="settings-list-item-label">Musique au démarrage</label>
           <div className="settings-list-item-input">
-          <div className="settings-list-item-input-switch" onClick={() => handleToggleChange('musicOnLaunch')}>
-              <div className={`on ${userSettings.musicOnLaunch && "active"}`}>
-                Activé
-              </div>
-              <div className={`off ${!userSettings.musicOnLaunch && "desactive"}`}>
-                Désactivé
-              </div>
-            </div>  
+            <div
+              className="settings-list-item-input-switch"
+              onClick={() => handleToggleChange('musicOnLaunch')}
+            >
+              <div className={`on ${userSettings.musicOnLaunch && 'active'}`}>Activé</div>
+              <div className={`off ${!userSettings.musicOnLaunch && 'desactive'}`}>Désactivé</div>
+            </div>
+          </div>
+        </div>
+        <div className="settings-list-item">
+          <label className="settings-list-item-label">Sonar de recherche</label>
+          <div className="settings-list-item-input">
+            <div
+              className="settings-list-item-input-switch"
+              onClick={() => handleToggleChange('searchPing')}
+            >
+              <div className={`on ${userSettings.searchPing && 'active'}`}>Activé</div>
+              <div className={`off ${!userSettings.searchPing && 'desactive'}`}>Désactivé</div>
+            </div>
           </div>
         </div>
         <div className="settings-list-item">
@@ -146,10 +154,10 @@ const Settings = () => {
           </div>
         </div>
       </div>
-        <div className={`${!smthChanged && "disabled"} settings-confirm`}>
-          <span>Vous avez des changements non sauvegardés !</span>
-          <Button onClick={handleSave}>Sauvegarder</Button>
-        </div>
+      <div className={`${!smthChanged && 'disabled'} settings-confirm`}>
+        <span>Vous avez des changements non sauvegardés !</span>
+        <Button onClick={handleSave}>Sauvegarder</Button>
+      </div>
 
       <BackButton />
     </div>

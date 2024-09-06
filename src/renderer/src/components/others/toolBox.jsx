@@ -300,6 +300,28 @@ export function getOnlineUsersCount(setCountCallback) {
   return unsubscribe
 }
 
+export function getOnlineUsers(setUsersCallback) {
+  const usersRef = collection(db, 'users')
+  const q = query(usersRef, where('status.state', '==', 'online'))
+
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    // Récupère les utilisateurs en ligne sous forme d'array
+    const onlineUsers = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+
+    // Trie par ordre alphabétique sur le champ 'username'
+    onlineUsers.sort((a, b) => a.username.localeCompare(b.username))
+
+    // Mise à jour avec la liste des utilisateurs triée
+    setUsersCallback(onlineUsers)
+  })
+
+  // Retourne la fonction de désinscription pour pouvoir l'arrêter plus tard
+  return unsubscribe
+}
+
 export function getFeaturedCards() {
   // Récupérer toutes les cartes en utilisant getAllCards
   const allCards = getAllCards()

@@ -34,6 +34,7 @@ import MenuCardEffects from './assets/img/effectsMenuCard.png'
 import './styles/items/menuCard.scss'
 import GamemodeSelect from './components/pages/GamemodeSelect'
 import MatchmakingQueue from './components/pages/MatchmakingQueue'
+import MatchmakingTracker from './components/interface/MatchmakingTracker'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -41,6 +42,7 @@ const Layout = ({ children }) => {
     <MatchmakingProvider>
       {children}
       <UpdateNotifier />
+      <MatchmakingTracker />
     </MatchmakingProvider>
   )
 }

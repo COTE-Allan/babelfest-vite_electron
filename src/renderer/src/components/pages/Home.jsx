@@ -5,7 +5,12 @@ import '../../styles/pages/home.scss'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import { useContext, useEffect, useState } from 'react'
-import { getFeaturedCards, getOnlineUsersCount, shuffleArray } from '../others/toolBox'
+import {
+  getFeaturedCards,
+  getOnlineUsers,
+  getOnlineUsersCount,
+  shuffleArray
+} from '../others/toolBox'
 import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import ClassicModal from '../items/ClassicModal'
@@ -50,7 +55,7 @@ const Home = () => {
 
   useEffect(() => {
     setFeaturedCards(shuffleArray(getFeaturedCards()))
-    const unsubscribe = getOnlineUsersCount(setPlayerCount)
+    const unsubscribe = getOnlineUsers(setPlayerCount)
     return () => unsubscribe()
   }, [])
 
@@ -80,8 +85,17 @@ const Home = () => {
         <FaCompactDisc className={`disc ${isPlaying && 'rotate'}`} size={40} />
       </div>
       <div className="home-playerCount">
-        <FaCircle color="green" />
-        {playerCount}
+        <div className="home-playerCount-count">
+          <FaCircle color="green" />
+          {playerCount.length}
+        </div>
+        {playerCount?.length > 0 && (
+          <div className="home-playerCount-list">
+            {playerCount.map((user) => (
+              <div className="home-playerCount-list-item">{user.username}</div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* <div onClick={() => goForward("/account")} className='home-playerBanner'>

@@ -153,12 +153,6 @@ const Login = () => {
         level: 1,
         xp: 0,
         title: 'level',
-        settings: {
-          bgOn: true,
-          sfxVolume: 0.5,
-          tutorial: true,
-          musicPlayer: false
-        },
         stats: {
           gamesPlayed: 0,
           victories: 0

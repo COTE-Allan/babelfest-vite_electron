@@ -2,12 +2,14 @@ import BackButton from '../items/BackButton'
 import { useContext, useEffect } from 'react'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
 import { useParams } from 'react-router-dom'
-import '../../styles/pages/matchmakingQueue.scss'
+import Button from '../items/Button'
+import { useTransition } from '../../TransitionContext'
 
 const MatchmakingQueue = () => {
   const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
     useContext(MatchmakingContext)
   const { gamemode } = useParams()
+  const { goHome } = useTransition()
 
   const randomTips = [
     "Placez une carte sur votre base pour la protéger d'une capture !",
@@ -18,8 +20,15 @@ const MatchmakingQueue = () => {
   ]
 
   useEffect(() => {
-    handleStartMatchmaking(gamemode)
+    if (!matchmakingSearch) {
+      handleStartMatchmaking(gamemode)
+    }
   }, [])
+
+  const handleStop = async () => {
+    await handleStopMatchmaking()
+    goHome()
+  }
 
   return (
     <div className="matchmaking">
@@ -29,9 +38,14 @@ const MatchmakingQueue = () => {
           <h2>
             {matchmakingSearch === 'quick' ? 'Partie rapide ' : 'Partie classée '} - {searchTime}
           </h2>
+          <small>(Vous pouvez quitter cette page, la recherche ne sera pas interrompue.)</small>
+          <div className="matchmaking-control">
+            <Button onClick={goHome}>Retour au menu</Button>
+            <Button onClick={handleStop}>Annuler la recherche</Button>
+          </div>
         </>
       )}
-      <BackButton clickEvent={handleStopMatchmaking} />
+      <BackButton />
     </div>
   )
 }

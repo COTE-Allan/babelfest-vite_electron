@@ -9,11 +9,59 @@
     & h1 {
         font-size: 70px;
         margin: 0;
-        margin-bottom: 10px;
     }
 
     & h2 {
         font-size: 30px;
-        margin: 0;
+        margin: 10px 0;
+    }
+
+    & small {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    & button {
+        margin: 0 5px;
+        padding: 10px 30px;
+        font-size: 18px;
+        width: 300px;
+    }
+
+    &-tracker {
+        font-family: 'Kimberly Bl', sans-serif;
+        display: flex;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0;
+        left: 50%;
+        border-radius: 0 0 10px 10px;
+        padding: 10px 20px;
+        transform: translateX(-50%);
+        z-index: 10;
+        opacity: 70%;
+        transition: opacity 200ms ease-in-out;
+
+        & svg {
+            animation: jump-shaking 4.5s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        &-wrapper {
+            width: 0;
+        }
+
+
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        &:hover .hidden-span {
+            max-width: 500px;
+        }
+
+
     }
 }
