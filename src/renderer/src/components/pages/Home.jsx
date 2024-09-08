@@ -92,16 +92,11 @@ const Home = () => {
         {playerCount?.length > 0 && (
           <div className="home-playerCount-list">
             {playerCount.map((user) => (
-              <div className="home-playerCount-list-item">{user.username}</div>
+              <div className="home-playerCount-list-item" onClick={() => goForward(`/account/${user.id}`)}>{user.username}</div>
             ))}
           </div>
         )}
       </div>
-
-      {/* <div onClick={() => goForward("/account")} className='home-playerBanner'>
-      <LeaderboardPlayerBanner user={userInfo} />
-
-      </div> */}
 
       <div className="home-col home-nav">
         <img src={Logo} className="logo" alt="Babelfest Logo" />

@@ -48,7 +48,7 @@ export default function TurnAlert() {
     <div
       className={`turnAlert ${animation ? 'animation' : ''}`}
       style={{
-        background: host && myTurn ? getBackgroundStyle(myColor) : getBackgroundStyle(rivalColor)
+        background: host && myTurn ? getBackgroundStyle(myColor, "to right") : getBackgroundStyle(rivalColor, "to right")
       }}
     >
       <h1>{turnTxt}</h1>

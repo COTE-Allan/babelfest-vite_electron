@@ -19,9 +19,6 @@ export default function TurnTracker() {
   return (
     <div
       className="turnTracker"
-      style={{
-        borderColor: phase === 0 ? `transparent` : myTurn ? myColor.hex : rivalColor.hex
-      }}
     >
       <div className="turnTracker-content">
         <span className="turnTracker-activePlayer">
@@ -34,7 +31,7 @@ export default function TurnTracker() {
       </div>
       <div
         style={{
-          background: phase === 0 ? `transparent` : myTurn ? myColor.hex : rivalColor.hex
+          background: phase === 0 ? `transparent` : myTurn ? getBackgroundStyle(myColor, "to right") : getBackgroundStyle(rivalColor, "to right") 
         }}
         className="turnTracker-phases"
       >

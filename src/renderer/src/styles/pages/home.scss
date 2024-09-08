@@ -80,21 +80,30 @@
 
     &:hover &-list {
       // display: flex;
-      height: 200px;
-      width: 400px;
+      max-height: 200px;
+      width: 100px;
     }
 
     white-space: nowrap;
 
     &-list {
-      height: 0;
+      max-height: 0;
       width: 0;
       overflow-y: auto;
+      overflow-x: hidden;
       margin-top: 5px;
       font-size: 17px;
-      transition: height 200ms ease-in-out, width 200ms ease-in-out;
-      // display: none;
-      flex-wrap: wrap;
+      transition: max-height 120ms ease-in-out, width 300ms ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &-item {
+        margin: 2.5px;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
     }
   }
 

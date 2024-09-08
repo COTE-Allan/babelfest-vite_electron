@@ -22,8 +22,8 @@ export default function MatchSummaries({ summaries = [] }) {
   return (
     <div className="matchSummaries">
       {summaries
-        .slice() // Copie l'array pour ne pas modifier l'original
-        .reverse() // Inverse l'ordre des éléments
+        .slice()
+        .reverse()
         .map((summary, index) => {
           let gameDetails = summary.gameDetails
           let player = summary.player

@@ -70,6 +70,7 @@ export default function Winner() {
     }
   }
 
+
   const handleExpAndStats = async () => {
     let xpObtained = 0
     let gameWon = winner === playerID

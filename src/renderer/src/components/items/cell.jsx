@@ -145,7 +145,10 @@ export default function Cell({ active, confirmModal, cell }) {
       style={{
         background: bgColor,
         '--rotation': `${host ? '0deg' : '180deg'}`,
-        borderColor: borderColor
+        border: 'double 5px transparent',
+        backgroundImage: `linear-gradient(white, white), ${borderColor}`,
+        backgroundOrigin: 'border-box',
+        backgroundClip:  'content-box, border-box',
       }}
       onContextMenu={(e) => {
         e.preventDefault()

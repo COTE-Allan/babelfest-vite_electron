@@ -16,14 +16,14 @@ const GamemodeSelect = () => {
           <MenuCard
             disabled={!isTutorialFinished ? lockedReason : false}
             name="Partie rapide"
-            desc="Affrontez un adversaire aléatoire de niveau similaire."
+            desc="Affrontez un adversaire aléatoire de niveau similaire"
             where="/matchmakingQueue/quick"
             bg={QuickplayCardArena}
           />
           <MenuCard
             disabled={!isTutorialFinished ? lockedReason : false}
             name="Partie custom"
-            desc="Jouez entre amis avec des règles modifiables."
+            desc="Jouez entre amis avec des règles modifiables"
             where="/lobbyList"
             bg={RankedCardArena}
           />
@@ -31,7 +31,7 @@ const GamemodeSelect = () => {
         <MenuCard
           classNames="small"
           name="Tutoriel"
-          desc="Découvrez comment jouer avec un court tutoriel."
+          desc="Découvrez comment jouer avec un court tutoriel"
           where="/tutorial"
         />
       </div>

@@ -31,9 +31,8 @@ const Leaderboards = () => {
   const [selectedLeaderboard, setSelectedLeaderboard] = useState('MMR')
 
   const fetchLeaderboardData = async (leaderboard) => {
-    setLeaderboardData(null) // Reset leaderboard data to null before fetching new data
-    setMyRank(null) // Reset my rank to null
-
+    setLeaderboardData(null)
+    setMyRank(null) 
     let data = null
     let rank = null
 
@@ -59,6 +58,9 @@ const Leaderboards = () => {
   useEffect(() => {
     fetchLeaderboardData(selectedLeaderboard)
   }, [selectedLeaderboard, user.uid])
+
+  console.log(leaderboardData)
+  // return;
 
   return (
     <div className="leaderboard">

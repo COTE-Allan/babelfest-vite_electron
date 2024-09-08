@@ -211,7 +211,8 @@ export function useCreateGame() {
           side: side,
           card: null,
           base: index === bases[0] || index === bases[1],
-          owner: null
+          owner: null,
+          burn: null,
         }
       }
     })

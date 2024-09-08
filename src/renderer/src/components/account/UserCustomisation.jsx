@@ -9,7 +9,7 @@ import { MdOutlineTitle } from 'react-icons/md'
 import { FaBorderTopLeft, FaLock } from 'react-icons/fa6'
 import { BiSolidUserRectangle } from 'react-icons/bi'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { getSkins, isUnlocked } from '../others/toolBox'
+import { getSkins, isUnlocked, useSendErrorMessage } from '../others/toolBox'
 import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
@@ -17,7 +17,7 @@ import selectSfx from '../../assets/sfx/menu_select.wav'
 // Créer un contexte pour customizedUserInfo
 const CustomizedUserInfoContext = createContext()
 
-export default function UserCustomisation({ customizedUserInfo, setCustomizedUserInfo }) {
+export default function UserCustomisation({ user, customizedUserInfo, setCustomizedUserInfo }) {
   const { userInfo } = useContext(AuthContext)
   const [page, setPage] = useState(1)
   const [hoveredSkin, setHoveredSkin] = useState(null)
@@ -58,7 +58,7 @@ export default function UserCustomisation({ customizedUserInfo, setCustomizedUse
   }, [])
 
   return (
-    <CustomizedUserInfoContext.Provider value={{ customizedUserInfo, setCustomizedUserInfo }}>
+    <CustomizedUserInfoContext.Provider value={{ customizedUserInfo, setCustomizedUserInfo, user }}>
       <div className="customize">
         <nav className="customize-nav">
           <HudNavLink onClick={() => setPage(1)} selected={page === 1} permOpen>
@@ -277,11 +277,12 @@ export default function UserCustomisation({ customizedUserInfo, setCustomizedUse
 }
 
 function SkinItem({ skin, type, children, setHoveredSkin }) {
-  const { userSettings, userInfo } = useContext(AuthContext)
-  const { customizedUserInfo, setCustomizedUserInfo } = useContext(CustomizedUserInfoContext)
+  const { userSettings } = useContext(AuthContext)
+  const { customizedUserInfo, setCustomizedUserInfo, user } = useContext(CustomizedUserInfoContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
-  skin.lock = isUnlocked(skin, userInfo)
+  skin.lock = isUnlocked(skin, user)
+  const sendErrorMessage = useSendErrorMessage()
 
   const relatedSkinsParams = {
     avatar: 'profilePic',
@@ -313,8 +314,13 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   const handleClick = () => {
     select()
 
+    if (!skin.lock) {
+      sendErrorMessage("Vous ne possédez pas ce cosmétique.", "error")
+      return;
+    }
+
     // Si customizedUserInfo est null, on le remplace par userInfo
-    let updatedUserInfo = customizedUserInfo ? { ...customizedUserInfo } : { ...userInfo }
+    let updatedUserInfo = customizedUserInfo ? { ...customizedUserInfo } : { ...user }
 
     // Appliquer la bonne valeur selon le type
     if (relatedSkinsParams[type]) {

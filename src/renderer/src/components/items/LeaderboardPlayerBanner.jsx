@@ -3,8 +3,9 @@ import '../../styles/items/leaderboardPlayerBanner.scss'
 import { useNavigate } from 'react-router-dom'
 import { NameAndTitle } from './NameAndTitle'
 import { useTransition } from '../../TransitionContext'
+import { TbCardsFilled } from 'react-icons/tb'
 
-export default function LeaderboardPlayerBanner({ user, accessProfile }) {
+export default function LeaderboardPlayerBanner({ user, accessProfile, cards }) {
   const { goForward } = useTransition()
 
   return (
@@ -28,6 +29,14 @@ export default function LeaderboardPlayerBanner({ user, accessProfile }) {
       <div className="leaderboardPlayerBanner-content">
         <NameAndTitle user={user} />
       </div>
+      
+      {cards && (
+        <div className="playerBanner-cardsLeft">
+          <TbCardsFilled />
+          <span>{cards}</span>
+        </div>
+      )}
+
     </div>
   )
 }

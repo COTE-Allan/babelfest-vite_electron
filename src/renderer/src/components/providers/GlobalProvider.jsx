@@ -7,11 +7,15 @@ import Room from '../pages/Room'
 import { DefinePhaseRule } from '../controllers/PhaseController'
 import { useTradeCard } from '../effects/editCards'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
+import { useLeaveLobby } from '../controllers/ManageLobbyAndGame'
+import { useSendErrorMessage } from '../others/toolBox'
 
 export const GlobalContext = createContext(null)
 export const GlobalProvider = () => {
   const { room } = useParams()
   const { user } = useContext(AuthContext)
+  const leaveLobby = useLeaveLobby()
+  const sendErrorMessage = useSendErrorMessage();
   const [host, setHost] = useState(false)
   // Données Globales
   const [gameData, setGameData] = useState(null)
@@ -156,7 +160,8 @@ export const GlobalProvider = () => {
           turn,
           player1,
           player2,
-          disconnected
+          disconnected,
+          revenge
         } = data
         // =====================
         let isHost = user.uid === player1.id
@@ -193,6 +198,12 @@ export const GlobalProvider = () => {
         // =====================
         if (finished !== false) {
           setWinner(finished)
+          if (revenge === "quit") {
+            sendErrorMessage("L'autre joueur à quitté, vous quitterez automatiquement dans 5 secondes.", "info")
+            setTimeout(() => {
+              leaveLobby(data.lobbyId, room, data.gamemode)
+            }, 5000);
+          }
         } else {
           setWinner(null)
         }

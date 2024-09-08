@@ -87,20 +87,20 @@ export default function Logs(props) {
 
           const isMine = log.owner === playerID
           const isVisible = log.trigger?.isRecto || isMine
-          const itemColor = isMine ? getBackgroundStyle(myColor) : getBackgroundStyle(rivalColor)
+          const itemColor = isMine ? getBackgroundStyle(myColor, "to right") : getBackgroundStyle(rivalColor, "to right")
+          const txtColor = isMine ? myColor.hex : rivalColor.hex;
 
           return (
             <div
               className="logs-item"
               key={index}
               style={{
-                borderColor: itemColor,
                 borderWidth: log.turn ? 0 : 2
               }}
             >
               {log.turn && previousLogHasNoTurn ? (
                 <div className="logs-item-turn">
-                  <p style={{ color: itemColor }}>
+                  <p style={{ color: txtColor }}>
                     {`TOUR ${log.turn} - ${phases[log.phase]} de ${
                       log.owner === playerID ? playerSelf.username : playerRival.username
                     }`}

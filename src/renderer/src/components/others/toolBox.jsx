@@ -335,6 +335,7 @@ export function getFeaturedCards() {
 export async function getTopUsersByMMR(amount = 10) {
   const usersRef = collection(db, 'users')
 
+  // Requête pour trier par MMR descendant
   const q = query(usersRef, orderBy('stats.mmr', 'desc'), limit(amount))
 
   try {
@@ -343,7 +344,15 @@ export async function getTopUsersByMMR(amount = 10) {
     let rank = 1
 
     querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, rank, ...doc.data() })
+      // Vérifie si le champ `rank` existe et s'il est un objet, le supprime
+      let userData = doc.data()
+      if (typeof userData.rank === 'object') {
+        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+        delete userData.rank  // Supprime l'ancien champ `rank`
+      }
+
+      // Ajoute l'utilisateur avec le rang mis à jour
+      topUsers.push({ id: doc.id, rank, ...userData })
       rank++
     })
 
@@ -354,10 +363,11 @@ export async function getTopUsersByMMR(amount = 10) {
   }
 }
 
+
 export async function getTopUsersByLevel(amount = 10) {
   const usersRef = collection(db, 'users')
 
-  // Utilisez d'abord orderBy pour le niveau, puis pour l'xp pour gérer les égalités
+  // Utiliser d'abord orderBy pour le niveau, puis pour l'xp pour gérer les égalités
   const q = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'), limit(amount))
 
   try {
@@ -366,7 +376,15 @@ export async function getTopUsersByLevel(amount = 10) {
     let rank = 1
 
     querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, rank, ...doc.data() })
+      // Si le champ `rank` existe déjà dans les données et que c'est un objet, remplace-le
+      let userData = doc.data()
+      if (typeof userData.rank === 'object') {
+        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+        delete userData.rank  // Supprimer l'ancien champ `rank`
+      }
+
+      // Ajouter l'utilisateur avec le rang mis à jour
+      topUsers.push({ id: doc.id, rank, ...userData })
       rank++
     })
 
@@ -376,6 +394,7 @@ export async function getTopUsersByLevel(amount = 10) {
     return []
   }
 }
+
 
 export async function getPlayerRank(userId) {
   const usersRef = collection(db, 'users')
@@ -561,14 +580,14 @@ export const getRankClass = (index) => {
   }
 }
 
-export const getBackgroundStyle = (colorObject) => {
+export const getBackgroundStyle = (colorObject, direction = "to bottom") => {
   if (typeof colorObject === 'string') {
     // Si colorObject est une chaîne de caractères, renvoyer directement cette chaîne
     return colorObject
   } else if (colorObject.gradient) {
     // Si colorObject est un objet avec un gradient, appliquer le dégradé
-    return `linear-gradient(to bottom, ${colorObject.hex}, ${colorObject.gradient})`
+    return `linear-gradient(${direction}, ${colorObject.hex}, ${colorObject.gradient})`
   }
   // Si colorObject est un objet sans gradient, renvoyer la couleur hex
-  return colorObject.hex
+  return `linear-gradient(${direction}, ${colorObject.hex}, ${colorObject.hex})`
 }

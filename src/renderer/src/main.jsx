@@ -63,12 +63,14 @@ const AppContent = () => {
   return (
     <>
       <ToastContainer
-        position="bottom-left"
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
+        limit={5}
         closeOnClick
         rtl={false}
+        style={{right: 50}}
         pauseOnFocusLoss
         draggable
         pauseOnHover
@@ -99,19 +101,19 @@ const AppContent = () => {
                         <div className="MenuCard-container-cards-list">
                           <MenuCard
                             name="Catalogue"
-                            desc="Cherchez, filtrez et consultez les cartes."
+                            desc="Cherchez, filtrez et consultez les cartes"
                             where="/catalog"
                             bg={MenuCardCatalog}
                           />
                           <MenuCard
                             name="Effets"
-                            desc="Consultez la liste des effets disponibles."
+                            desc="Consultez la liste des effets disponibles"
                             where="/effects"
                             bg={MenuCardEffects}
                           />
                           <MenuCard
                             name="Arènes"
-                            desc="Affichez une liste de toutes les arènes jouables."
+                            desc="Affichez une liste de toutes les arènes jouables"
                             where="/arenasList"
                             bg={MenuCardArena}
                           />
