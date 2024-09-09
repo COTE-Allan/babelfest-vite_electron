@@ -7,6 +7,14 @@
   width: 100%;
   justify-content: space-between;
 
+  &-verName {
+    font-family: 'Kimberly Bl', sans-serif;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+  }
+
   &-music {
     position: absolute;
     top: 20px;
@@ -97,8 +105,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       &-item {
         margin: 2.5px;
+
         &:hover {
           text-decoration: underline;
           cursor: pointer;

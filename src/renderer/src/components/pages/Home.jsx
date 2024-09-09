@@ -17,6 +17,7 @@ import ClassicModal from '../items/ClassicModal'
 import Button from '../items/Button'
 import { useJoinLobby, useLeaveLobby } from '../controllers/ManageLobbyAndGame'
 import axios from 'axios'
+import changelog from '../../jsons/changelog.json'
 
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
@@ -32,6 +33,7 @@ const Home = () => {
   const { isPlaying } = useMusic()
   const [playerCount, setPlayerCount] = useState(0)
   const { goForward } = useTransition()
+  const verName = changelog.slice(-1)[0].title
 
   const { state } = useLocation()
   const joinLobby = useJoinLobby()
@@ -78,6 +80,7 @@ const Home = () => {
 
   return (
     <div className="home">
+      <span className="home-verName">Babelfest v{verName} par Cielesis</span>
       <div className="home-music">
         <div className="home-music-wrapper">
           <MusicPlayer role="menu" />
@@ -92,7 +95,12 @@ const Home = () => {
         {playerCount?.length > 0 && (
           <div className="home-playerCount-list">
             {playerCount.map((user) => (
-              <div className="home-playerCount-list-item" onClick={() => goForward(`/account/${user.id}`)}>{user.username}</div>
+              <div
+                className="home-playerCount-list-item"
+                onClick={() => goForward(`/account/${user.id}`)}
+              >
+                {user.username}
+              </div>
             ))}
           </div>
         )}
