@@ -143,13 +143,11 @@ const Login = () => {
       const userRef = doc(db, 'users', user.uid)
       await setDoc(userRef, {
         username: username,
-        profilePic:
-          'https://res.cloudinary.com/dxdtcakuv/image/upload/v1705073934/babelfest/skins/profilePics/avatarLogoBabel.webp',
+        profilePic: './skins/avatars/avatar_babelfest.png',
         flags: ['betaTest'],
         primaryColor: { hex: '#40a8f5' },
         secondaryColor: { hex: '#e62e31' },
-        banner:
-          'https://res.cloudinary.com/dxdtcakuv/image/upload/w_315/v1708684919/babelfest/skins/banner/defaultBanner.webp',
+        banner: './skins/banners/banner_default.png',
         level: 1,
         xp: 0,
         title: 'level',
