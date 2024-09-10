@@ -5,12 +5,7 @@ import '../../styles/pages/home.scss'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import { useContext, useEffect, useState } from 'react'
-import {
-  getFeaturedCards,
-  getOnlineUsers,
-  getOnlineUsersCount,
-  shuffleArray
-} from '../others/toolBox'
+import { getFeaturedCards, getOnlineUsers, shuffleArray } from '../others/toolBox'
 import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import ClassicModal from '../items/ClassicModal'
@@ -21,8 +16,9 @@ import changelog from '../../jsons/changelog.json'
 
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
-import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaYoutube } from 'react-icons/fa'
 import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
+import { FaXTwitter } from 'react-icons/fa6'
 import { MdLeaderboard } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
@@ -162,7 +158,7 @@ const Home = () => {
           <span>Rejoignez la communauté !</span>
           <div className="home-socials-list">
             <a className="home-socials-list-item" href="https://x.com/babelfest_" target="_blank">
-              <FaTwitter />
+              <FaXTwitter />
             </a>
             <a
               className="home-socials-list-item"
