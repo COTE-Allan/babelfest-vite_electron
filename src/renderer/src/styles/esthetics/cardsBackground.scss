@@ -6,7 +6,7 @@
   overflow: hidden;
   height: 100vh;
   top: 0;
-  opacity: 20%;
+  opacity: 25%;
   background-color: black;
 
   &-picture {
@@ -15,24 +15,12 @@
 
   }
 
-}
+  &-confettis {
+    position: fixed !important;
+    z-index: -2 !important;
+    opacity: 70%;
+  }
 
-.carousel-filter {
-  position: fixed;
-  top: 0;
-  z-index: -2;
-  height: 100vh;
-  width: 100vw;
-  // background-color: rgba(0, 0, 0, 0.7);
-}
-
-.carouselLine {
-  display: flex;
-  flex-wrap: nowrap;
-  height: 50%;
-  will-change: transform;
-  filter: blur(5px);
-  animation: scroll 100s linear infinite;
 }
 
 

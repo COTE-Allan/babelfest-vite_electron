@@ -13,7 +13,7 @@
 
   &-container {
     position: absolute;
-    max-width: 400px;
+    max-width: 450px;
     width: 100%;
     $pos: 10px;
 
@@ -24,9 +24,14 @@
 
     &.rival {
       top: $pos;
-      right: $pos + 40px;
+      right: $pos;
+      align-items: flex-end;
 
- 
+      & .playerBanner-cardsLeft {
+        margin-left: 0;
+        margin-right: auto;
+      }
+
     }
   }
 

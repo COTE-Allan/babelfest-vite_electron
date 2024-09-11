@@ -37,7 +37,7 @@ export default function Players() {
         <LeaderboardPlayerBanner user={playerSelf} cards={selfCardsLeft} />
       </div>
       <div className="playerBanner-container rival">
-      <LeaderboardPlayerBanner user={playerRival} cards={rivalCardsLeft} />
+        <LeaderboardPlayerBanner user={playerRival} cards={rivalCardsLeft} reverse />
       </div>
     </>
   )

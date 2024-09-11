@@ -35,6 +35,7 @@ import './styles/items/menuCard.scss'
 import GamemodeSelect from './components/pages/GamemodeSelect'
 import MatchmakingQueue from './components/pages/MatchmakingQueue'
 import MatchmakingTracker from './components/interface/MatchmakingTracker'
+import Credits from './components/pages/Credits'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -70,7 +71,7 @@ const AppContent = () => {
         limit={5}
         closeOnClick
         rtl={false}
-        style={{right: 50}}
+        style={{ right: 50 }}
         pauseOnFocusLoss
         draggable
         pauseOnHover
@@ -161,6 +162,16 @@ const AppContent = () => {
                 <Layout>
                   <TransitionWrapper>
                     <Effects />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/credits"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Credits />
                   </TransitionWrapper>
                 </Layout>
               }

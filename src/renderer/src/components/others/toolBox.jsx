@@ -348,7 +348,7 @@ export async function getTopUsersByMMR(amount = 10) {
       let userData = doc.data()
       if (typeof userData.rank === 'object') {
         console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
-        delete userData.rank  // Supprime l'ancien champ `rank`
+        delete userData.rank // Supprime l'ancien champ `rank`
       }
 
       // Ajoute l'utilisateur avec le rang mis à jour
@@ -362,7 +362,6 @@ export async function getTopUsersByMMR(amount = 10) {
     return []
   }
 }
-
 
 export async function getTopUsersByLevel(amount = 10) {
   const usersRef = collection(db, 'users')
@@ -380,7 +379,7 @@ export async function getTopUsersByLevel(amount = 10) {
       let userData = doc.data()
       if (typeof userData.rank === 'object') {
         console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
-        delete userData.rank  // Supprimer l'ancien champ `rank`
+        delete userData.rank // Supprimer l'ancien champ `rank`
       }
 
       // Ajouter l'utilisateur avec le rang mis à jour
@@ -394,7 +393,6 @@ export async function getTopUsersByLevel(amount = 10) {
     return []
   }
 }
-
 
 export async function getPlayerRank(userId) {
   const usersRef = collection(db, 'users')
@@ -580,7 +578,7 @@ export const getRankClass = (index) => {
   }
 }
 
-export const getBackgroundStyle = (colorObject, direction = "to bottom") => {
+export const getBackgroundStyle = (colorObject, direction = 'to bottom') => {
   if (typeof colorObject === 'string') {
     // Si colorObject est une chaîne de caractères, renvoyer directement cette chaîne
     return colorObject
@@ -590,4 +588,23 @@ export const getBackgroundStyle = (colorObject, direction = "to bottom") => {
   }
   // Si colorObject est un objet sans gradient, renvoyer la couleur hex
   return `linear-gradient(${direction}, ${colorObject.hex}, ${colorObject.hex})`
+}
+
+export function getAllUniqueArtists() {
+  // Récupère toutes les cartes en utilisant la fonction getAllCards
+  const allCards = getAllCards()
+
+  // Utiliser un Set pour s'assurer qu'il n'y ait pas de doublons
+  const uniqueArtists = new Set()
+
+  // Parcourir chaque carte et ajouter l'artiste au Set (si l'artiste existe)
+  allCards.forEach((card) => {
+    if (card.author) {
+      uniqueArtists.add(card.author)
+    }
+  })
+
+  // Convertir le Set en tableau pour avoir une liste exploitable
+  console.log(uniqueArtists)
+  return Array.from(uniqueArtists)
 }

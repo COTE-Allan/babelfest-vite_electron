@@ -16,8 +16,8 @@
     transition: background-color 250ms ease-in-out;
 
     &.small {
-        height: 120px;
-        width: calc(100% - 10px);
+        height: 100px;
+        width: calc(525px + 10px);
         margin-top: 10px;
     }
 
@@ -92,6 +92,15 @@
 
         @include for-big-desktop-up {
             font-size: 60px; // Augmentation de la taille de la police pour les grands écrans
+        }
+    }
+
+    &.small &-name {
+        font-size: 35px;
+
+        & svg {
+            width: 35px;
+            height: 35px;
         }
     }
 

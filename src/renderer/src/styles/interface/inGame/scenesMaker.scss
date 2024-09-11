@@ -7,14 +7,14 @@
   justify-content: center;
 
   &.slideAnim {
-    animation: slide-in-out-left 2s linear both;
+    animation: slide-in-out-left 1.5s linear both;
   }
 
   &.effectAnim {
-    animation: scale-in-out-center 2s linear both;
+    animation: scale-in-out-center 1.5s linear both;
 
     & .scenesMaker-card {
-      animation: golden-aura 2s linear both;
+      animation: golden-aura 1.5s linear both;
     }
   }
 

@@ -114,15 +114,20 @@ export default function Cell({ active, confirmModal, cell }) {
   }, [card, owner, isSelected, isBase, team, player, phase, confirmModal])
 
   const bgColor = useMemo(() => {
+    if (!card || !owner) {
+      return '#000' // Fond noir si card ou owner est null
+    }
     if (isBase) {
       return (team === 1 && host) || (team === 2 && !host) ? myColor.hex : rivalColor.hex
     } else {
       return '#000'
     }
-  }, [isBase, team, host, myColor, rivalColor])
+  }, [isBase, team, host, myColor, rivalColor, card, owner])
 
-  // TODO: bordure cell dégradé
   const borderColor = useMemo(() => {
+    if (!card || !owner) {
+      return 'transparent' // Bordure transparente si card ou owner est null
+    }
     if (owner) {
       return (owner === 1 && host) || (owner === 2 && !host)
         ? getBackgroundStyle(myColor)
@@ -130,7 +135,7 @@ export default function Cell({ active, confirmModal, cell }) {
     } else {
       return '#fff'
     }
-  }, [cell, host, owner, myColor, rivalColor])
+  }, [cell, host, owner, myColor, rivalColor, card])
 
   if (!cell.exist) {
     return <div className="cell cell-inexistant" id={id} data-team={team} />
@@ -146,9 +151,9 @@ export default function Cell({ active, confirmModal, cell }) {
         background: bgColor,
         '--rotation': `${host ? '0deg' : '180deg'}`,
         border: 'double 5px transparent',
-        backgroundImage: `linear-gradient(white, white), ${borderColor}`,
+        backgroundImage: !card || !owner ? 'none' : `linear-gradient(white, white), ${borderColor}`,
         backgroundOrigin: 'border-box',
-        backgroundClip:  'content-box, border-box',
+        backgroundClip: 'content-box, border-box'
       }}
       onContextMenu={(e) => {
         e.preventDefault()

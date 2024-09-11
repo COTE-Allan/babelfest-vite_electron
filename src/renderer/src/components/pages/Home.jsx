@@ -16,7 +16,7 @@ import changelog from '../../jsons/changelog.json'
 
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
-import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaYoutube } from 'react-icons/fa'
+import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaScroll, FaYoutube } from 'react-icons/fa'
 import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
 import { FaXTwitter } from 'react-icons/fa6'
 import { MdLeaderboard } from 'react-icons/md'
@@ -90,8 +90,9 @@ const Home = () => {
         </div>
         {playerCount?.length > 0 && (
           <div className="home-playerCount-list">
-            {playerCount.map((user) => (
+            {playerCount.map((user, index) => (
               <div
+                key={index}
                 className="home-playerCount-list-item"
                 onClick={() => goForward(`/account/${user.id}`)}
               >
@@ -122,15 +123,19 @@ const Home = () => {
             onMouseEnter={hover}
             onMouseDown={select}
           >
-            <ProfilePicture size={40} />
+            <ProfilePicture size={35} />
             Profil
           </a>
           <a onClick={() => goForward('/settings')} onMouseEnter={hover} onMouseDown={select}>
-            <IoMdSettings size={40} />
+            <IoMdSettings size={35} />
             Paramètres
           </a>
+          <a onClick={() => goForward('/credits')} onMouseEnter={hover} onMouseDown={select}>
+            <FaScroll size={35} />
+            Crédits
+          </a>
           <a onClick={handleLeaveGame} onMouseEnter={hover} onMouseDown={select}>
-            <IoLogOut size={40} />
+            <IoLogOut size={35} />
             Quitter
           </a>
         </nav>

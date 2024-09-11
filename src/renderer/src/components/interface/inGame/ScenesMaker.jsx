@@ -91,7 +91,7 @@ export default function ScenesMaker() {
       } catch (e) {
         console.error('Transaction failed: ', e)
       }
-    }, 2200)
+    }, 1700)
 
     // Nettoyer le timer quand le composant est démonté
     return () => clearTimeout(timer)
