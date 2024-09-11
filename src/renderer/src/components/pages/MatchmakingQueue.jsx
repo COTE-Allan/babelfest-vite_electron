@@ -14,7 +14,8 @@ const MatchmakingQueue = () => {
   const randomTips = [
     "Placez une carte sur votre base pour la protéger d'une capture !",
     "Réfléchissez bien à l'ordre de vos attaques...",
-    "N'oubliez jamais quel joueur à la priorité sur le tour !",
+    "N'oubliez jamais quel joueur à la priorité sur le tour !", 
+    "Est ce que vous avez déjà essayer d'attaquer vos propres cartes ?",
     "Babelfest était à l'origine un concept de jeu de combat.",
     'Le terme Babel se réfère à la bibliothèque de Babel.'
   ]

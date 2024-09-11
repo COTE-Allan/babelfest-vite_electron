@@ -173,9 +173,7 @@ export default function Library() {
           card.collection.toLowerCase().includes(searchLower) ||
           card.name.toLowerCase().includes(searchLower) ||
           card.author.toLowerCase().includes(searchLower) ||
-          card.id == searchLower ||
-          (trait[card.trait] && trait[card.trait].toLowerCase().includes(searchLower))
-      )
+          card.id == searchLower       )
     }
 
     if (selectedRarities.length > 0) {

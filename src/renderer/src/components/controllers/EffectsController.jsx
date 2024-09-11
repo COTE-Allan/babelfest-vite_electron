@@ -294,6 +294,7 @@ export const useTryEffect = () => {
           batch.set(ref, target)
         }
       }
+      // TODO: Add icon here effectInfos.icon
       if (result.log) {
         await pushLogsIntoBatch(batch, result.log, result.executor.owner)
         await pushSceneIntoBatch(batch, {
