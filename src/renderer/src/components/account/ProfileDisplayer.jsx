@@ -25,7 +25,6 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
   const sendErrorMessage = useSendErrorMessage()
 
   const handleUpdateUser = async () => {
-    console.log(customizedUserInfo)
     await updateUser(customizedUserInfo)
     setUser(customizedUserInfo)
     setCustomizedUserInfo(null)
@@ -94,9 +93,13 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
                 <CSSTransition key="stats" timeout={300} classNames="fade">
                   <div className="statsDisplayer-wrapper">
                     <StatsDisplayer user={userInfo} stats={userInfo.stats} />
-                    <h3>Historique</h3>
-                    <hr />
-                    <MatchSummaries summaries={userInfo.matchSummaries} />
+                    {userInfo.matchSummaries?.length !== 0 && (
+                      <>
+                        <h3>Historique</h3>
+                        <hr />
+                        <MatchSummaries summaries={userInfo.matchSummaries} />
+                      </>
+                    )}
                   </div>
                 </CSSTransition>
               )}
@@ -108,7 +111,7 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
               {isMine && page === 3 && (
                 <CSSTransition key="customisation" timeout={300} classNames="fade">
                   <UserCustomisation
-                  user={userInfo}
+                    user={userInfo}
                     customizedUserInfo={customizedUserInfo}
                     setCustomizedUserInfo={setCustomizedUserInfo}
                   />

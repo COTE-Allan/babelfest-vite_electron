@@ -11,9 +11,10 @@
         border-radius: 15px;
         padding: 10px;
         margin: 5px;
-        width: calc(50% - 35px);
+        width: calc(33% - 35px);
         border: 2.5px transparent solid;
         transition: border-color 150ms ease-in-out;
+        overflow: hidden;
 
         &:hover {
             cursor: pointer;

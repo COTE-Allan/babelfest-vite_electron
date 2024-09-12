@@ -82,11 +82,11 @@ export function useLeaveLobby() {
             if (!gameData.finished) {
               await updateDoc(gameRef, {
                 finished: isJ1 ? 2 : isJ2 ? 1 : null,
-                revenge: 'quit'
+                revenge: { state: 'quit', id: isJ1 ? 1 : 2 }
               })
             } else {
               await updateDoc(gameRef, {
-                revenge: 'quit'
+                revenge: { state: 'quit', id: isJ1 ? 1 : 2 }
               })
             }
           } else {
@@ -212,7 +212,7 @@ export function useCreateGame() {
           card: null,
           base: index === bases[0] || index === bases[1],
           owner: null,
-          burn: null,
+          burn: null
         }
       }
     })

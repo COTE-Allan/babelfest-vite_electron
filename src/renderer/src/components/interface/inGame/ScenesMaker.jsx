@@ -91,7 +91,7 @@ export default function ScenesMaker() {
       } catch (e) {
         console.error('Transaction failed: ', e)
       }
-    }, 1700)
+    }, 1400)
 
     // Nettoyer le timer quand le composant est démonté
     return () => clearTimeout(timer)
@@ -135,7 +135,12 @@ export default function ScenesMaker() {
             </>
           )}
         </div>
-        <span className="scenesMaker-action">{scene.action}</span>
+        <span className="scenesMaker-action">
+          {scene.isEffect && (
+            <img className="scenesMaker-effectIcon" src={scene.icon} alt="Icon de l'effet" />
+          )}
+          {scene.action}
+        </span>
         <p className="scenesMaker-desc">{scene.desc}</p>
       </div>
     </Modal>

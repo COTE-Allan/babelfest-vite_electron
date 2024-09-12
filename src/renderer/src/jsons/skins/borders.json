@@ -73,6 +73,12 @@
     "level": 31
   },
   {
+    "url": "./skins/borders/cadre_glitched.png",
+    "name": "ErR3ur 4o4",
+    "unlockTip": "Obtenu en atteignant le niveau 33.",
+    "level": 33
+  },
+  {
     "url": "./skins/borders/cadre_cyberfest.png",
     "name": "Cyberfest Bleu",
     "unlockTip": "Obtenu en atteignant le niveau 35.",

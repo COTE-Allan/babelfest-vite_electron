@@ -15,7 +15,7 @@ export const GlobalProvider = () => {
   const { room } = useParams()
   const { user } = useContext(AuthContext)
   const leaveLobby = useLeaveLobby()
-  const sendErrorMessage = useSendErrorMessage();
+  const sendErrorMessage = useSendErrorMessage()
   const [host, setHost] = useState(false)
   // Données Globales
   const [gameData, setGameData] = useState(null)
@@ -198,11 +198,22 @@ export const GlobalProvider = () => {
         // =====================
         if (finished !== false) {
           setWinner(finished)
-          if (revenge === "quit") {
-            sendErrorMessage("L'autre joueur à quitté, vous quitterez automatiquement dans 5 secondes.", "info")
+          console.log(
+            revenge,
+            revenge?.state,
+            revenge?.id,
+            revenge?.state === 'quit',
+            revenge?.id !== (isHost ? 1 : 2),
+            isHost ? 1 : 2
+          )
+          if (revenge?.state === 'quit' && revenge?.id !== (isHost ? 1 : 2)) {
+            sendErrorMessage(
+              "L'autre joueur à quitté, vous quitterez automatiquement dans 5 secondes.",
+              'info'
+            )
             setTimeout(() => {
               leaveLobby(data.lobbyId, room, data.gamemode)
-            }, 5000);
+            }, 5000)
           }
         } else {
           setWinner(null)

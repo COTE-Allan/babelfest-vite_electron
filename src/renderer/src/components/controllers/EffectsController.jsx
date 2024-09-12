@@ -294,13 +294,13 @@ export const useTryEffect = () => {
           batch.set(ref, target)
         }
       }
-      // TODO: Add icon here effectInfos.icon
       if (result.log) {
         await pushLogsIntoBatch(batch, result.log, result.executor.owner)
         await pushSceneIntoBatch(batch, {
           cards: [result.executor.card],
           action: result.log.effectInfos.name,
           desc: result.log.effectInfos.desc,
+          icon: result.log.effectInfos.icon,
           isEffect: true,
           sound: 'effect'
         })

@@ -46,9 +46,7 @@ function SkinItem({ skin, userInfo }) {
       <span className="level">{level}</span>
       <hr />
       {content}
-      {skin.type !== 'Titre' && skin.type !== 'Prestige' && (
-        <span className="skin-name">{name}</span>
-      )}
+      {skin.type !== 'Titre' && <span className="skin-name">{name}</span>}
       <span className="type">
         {skin.type} {lock}
       </span>
@@ -199,7 +197,6 @@ export default function UserAchievements({ userInfo }) {
               </h2>
               <div className="achievements-list">
                 {filteredSkinsWithLevel.map((skin) => {
-                  console.log(skin)
                   return <SkinItem key={skin.id || skin.name} skin={skin} userInfo={userInfo} />
                 })}
               </div>

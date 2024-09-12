@@ -32,7 +32,7 @@ const Leaderboards = () => {
 
   const fetchLeaderboardData = async (leaderboard) => {
     setLeaderboardData(null)
-    setMyRank(null) 
+    setMyRank(null)
     let data = null
     let rank = null
 
@@ -59,7 +59,6 @@ const Leaderboards = () => {
     fetchLeaderboardData(selectedLeaderboard)
   }, [selectedLeaderboard, user.uid])
 
-  console.log(leaderboardData)
   // return;
 
   return (
@@ -110,7 +109,9 @@ const Leaderboards = () => {
                     <span className={`rank ${getRankClass(user.rank)} leaderboard-rank`}>
                       {user.rank}
                     </span>
-                    <LeaderboardPlayerBanner user={user} accessProfile />
+                    <div className="leaderboard-list-item-bannerWrapper">
+                      <LeaderboardPlayerBanner user={user} accessProfile />
+                    </div>
                     <span className="value">
                       {selectedLeaderboard === 'MMR'
                         ? `MMR ${user.stats.mmr}`

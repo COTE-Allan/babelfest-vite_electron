@@ -10,6 +10,7 @@ import { AuthContext } from '../../../AuthContext'
 import ExperienceBar from '../ExperienceBar'
 import useSound from 'use-sound'
 import levelupSfx from '../../../assets/sfx/level_up.mp3'
+import endingSfx from '../../../assets/sfx/match_end.mp3'
 import { deleteAllLogs } from '../../others/manageFirestore'
 import useCheckForAchievements from '../../controllers/AchievementsController'
 
@@ -31,11 +32,25 @@ export default function Winner() {
   const { userInfo, user, updateUserState, userSettings } = useContext(AuthContext)
   const [xpGained, setXpGained] = useState(0)
   const [mmrChange, setMmrChange] = useState(0)
+  const [xpDetails, setXpDetails] = useState([])
+  const [handleWin, setHandleWin] = useState(null)
   const [levelup] = useSound(levelupSfx, { volume: userSettings.sfxVolume })
+  const [ending] = useSound(endingSfx, { volume: userSettings.sfxVolume })
 
   const createGame = useCreateGame()
   const leaveLobby = useLeaveLobby()
   const checkForAchievements = useCheckForAchievements()
+
+  useEffect(() => {
+    if (winner !== null) {
+      ending()
+      setTimeout(() => {
+        setHandleWin(true)
+      }, 1000)
+    } else {
+      setHandleWin(null)
+    }
+  }, [winner])
 
   const winnerPlayer = playerID === winner ? playerSelf.username : playerRival.username
 
@@ -60,30 +75,55 @@ export default function Winner() {
       // Commit the batch
       await batch.commit()
 
+      setHandleWin(null)
       createGame(gameData.lobbyId, gameData.player1, gameData.player2, room, gameData.settings)
     } else {
       // Update revenge status
       const gameRef = doc(db, 'games', room)
       await updateDoc(gameRef, {
-        revenge: playerID
+        revenge: { state: 'want', id: playerID }
       })
     }
   }
 
-
   const handleExpAndStats = async () => {
-    let xpObtained = 0
     let gameWon = winner === playerID
+    let newXpDetails = []
 
-    if (turn === 1) {
-      xpObtained = 10
-    } else {
-      xpObtained = obtainExp(turn, gameWon, gameData.gamemode)
-    }
+    // Vérifie si c'est la première partie de la journée
+    const today = new Date().setHours(0, 0, 0, 0)
+    const matchSummaries = userInfo.matchSummaries || []
+
+    // Filtre les parties du jour
+    const gamesToday = matchSummaries.filter((match) => {
+      const matchDate = new Date(match.gameDetails.timestamp).setHours(0, 0, 0, 0)
+      return matchDate === today
+    })
+
+    // Vérifie si toutes les parties du jour sont des "lots de consolation" (tour 1 uniquement)
+    const allGamesConsolation = gamesToday.every((game) => game.gameDetails.turnCount === 1)
+    console.log(allGamesConsolation, gamesToday)
+
+    // Définit isFirstGameOfDay et isFirstWinOfDay selon les parties précédentes
+    const isFirstGameOfDay = allGamesConsolation || gamesToday.length === 0
+    const isFirstWinOfDay =
+      gameWon &&
+      (allGamesConsolation || gamesToday.every((game) => game.gameDetails.result !== 'victory'))
+
+    // Utilisation de la fonction obtainExp qui gère l'ajout aux détails d'XP
+    const xpObtained = obtainExp(
+      turn,
+      gameWon,
+      gameData.gamemode,
+      isFirstGameOfDay,
+      isFirstWinOfDay,
+      newXpDetails,
+      gameWon ? userInfo.stats?.winStreak + 1 : false
+    )
 
     setXpGained(xpObtained)
 
-    // Update player experience
+    // Mettre à jour l'expérience du joueur
     let newPlayerExp = addExpToPlayer(userInfo.level, userInfo.xp, xpObtained)
 
     // Prepare to update stats
@@ -107,13 +147,27 @@ export default function Winner() {
 
     // Calculate MMR difference
     const mmrDifference = opponentMMR - currentMMR
-    console.log(opponentMMR, currentMMR, mmrDifference)
 
     // Handle win streak and MMR only for non-custom game modes
     let currentStreak = userInfo.stats?.winStreak || 0
     let longestStreak = userInfo.stats?.longestWinStreak || 0
     let mmrChangeValue = 0
     let newMMR = currentMMR
+
+    if (gameWon) {
+      if (turn !== 1) {
+        currentStreak += 1
+        if (currentStreak > longestStreak) {
+          longestStreak = currentStreak
+        }
+      } else {
+        newXpDetails.push('Votre série de victoire reste inchangée.')
+      }
+    } else {
+      currentStreak = 0
+    }
+
+    setXpDetails(newXpDetails)
 
     if (gameMode !== 'custom') {
       const baseMMRChange = 15
@@ -195,10 +249,10 @@ export default function Winner() {
     }
 
     let updatedMatchSummaries = userInfo.matchSummaries ? [...userInfo.matchSummaries] : []
-    if (updatedMatchSummaries.length >= 10) {
-      updatedMatchSummaries.shift() // Remove the oldest match summary
-    }
     updatedMatchSummaries.push(matchSummary)
+    if (updatedMatchSummaries.length >= 9) {
+      updatedMatchSummaries = updatedMatchSummaries.slice(-9)
+    }
 
     await updateDoc(doc(db, 'users', user.uid), {
       level: newPlayerExp.level,
@@ -211,7 +265,7 @@ export default function Winner() {
       matchSummaries: updatedMatchSummaries
     })
 
-    console.log('Match Summary:', matchSummary)
+    // console.log('Match Summary:', matchSummary)
 
     setTimeout(async () => {
       await updateUserState(user)
@@ -220,15 +274,13 @@ export default function Winner() {
   }
 
   useEffect(() => {
-    if (winner !== null) {
-      console.log('checking')
-
+    if (handleWin !== null) {
       checkForAchievements(gameData, winner === playerID)
     }
   }, [userInfo])
 
   useEffect(() => {
-    if (winner !== null) {
+    if (handleWin !== null) {
       setSelectedCells([])
       setSelectedCards([])
       setMovesLeft(4)
@@ -239,15 +291,22 @@ export default function Winner() {
       setXpGained(0)
       setMmrChange(0)
     }
-  }, [winner])
+  }, [handleWin])
 
-  if (winner !== null) {
+  if (handleWin !== null) {
     return (
       <div className={`winner`}>
         <h1>{playerID === winner ? 'Vous avez gagné !' : 'Vous avez perdu...'}</h1>
         <div style={{ marginTop: 10 }}>
           <div className="xp-bar_container">
             <h2>XP gagnée : {xpGained}</h2>
+            {xpDetails.length > 0 && (
+              <ul className="winner-details">
+                {xpDetails.map((detail, index) => (
+                  <li key={index}>{detail}</li>
+                ))}
+              </ul>
+            )}
             {gameData.gamemode !== 'custom' && (
               <h2>
                 MMR {mmrChange > 0 ? 'gagné' : 'perdu'} : {mmrChange}
@@ -255,18 +314,18 @@ export default function Winner() {
             )}
             <ExperienceBar />
           </div>
-          {gameData.revenge !== 'quit' && (
+          {gameData.revenge?.state !== 'quit' && (
             <Button
               className={`ingame-button ${
-                gameData.revenge !== playerID && gameData.revenge !== null ? 'alert' : ''
+                gameData.revenge?.id !== playerID && gameData.revenge !== null ? 'alert' : ''
               }`}
               onClick={async () => {
-                if (gameData.revenge !== playerID) {
+                if (gameData.revenge?.id !== playerID) {
                   requestRevanche()
                 }
               }}
             >
-              {gameData.revenge === playerID
+              {gameData.revenge?.id === playerID
                 ? "En attente de l'autre joueur..."
                 : gameData.revenge !== null
                   ? 'Accepter la revanche !'

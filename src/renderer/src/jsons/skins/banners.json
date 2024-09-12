@@ -63,6 +63,12 @@
     "level": 24
   },
   {
+    "url": "./skins/banners/banner_synthwave.png",
+    "name": "Synthwave",
+    "unlockTip": "Obtenu en atteignant le niveau 28.",
+    "level": 28
+  },
+  {
     "url": "./skins/banners/banner_nippon.jpg",
     "name": "Nippon",
     "unlockTip": "Obtenu en atteignant le niveau 29.",

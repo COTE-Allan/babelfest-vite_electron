@@ -10,7 +10,7 @@ import Button from '../items/Button'
 import '../../styles/pages/lobbyList.scss'
 import Modal from '../items/ClassicModal'
 import { AuthContext } from '../../AuthContext'
-import { FaLock, FaPlusCircle } from 'react-icons/fa'
+import { FaLock, FaPlusCircle, FaUser } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import changelog from '../../jsons/changelog.json'
 import { useSendErrorMessage } from '../others/toolBox'
@@ -18,7 +18,7 @@ import BackButton from '../items/BackButton'
 
 export default function LobbyList() {
   const verName = changelog.slice(-1)[0].title
-  const { user } = useContext(AuthContext)
+  const { user, userInfo } = useContext(AuthContext)
   const [lobbies, setLobbies] = useState([])
 
   const [askNewLobby, setAskNewLobby] = useState(false)
@@ -57,7 +57,8 @@ export default function LobbyList() {
         name: lobbyName,
         password: lobbyPassword,
         version: verName,
-        gamemode: 'custom'
+        gamemode: 'custom',
+        creator: userInfo.username
       })
     } else {
       sendErrorMessage('Ce nom de salon est invalide ou déjà utilisé.')
@@ -121,11 +122,13 @@ export default function LobbyList() {
                   className="lobbies-list-item"
                 >
                   <span>
-                    {lobby.version} - {lobby.name}
+                    Lobby de {lobby.creator} - {lobby.name}
                   </span>
                   <span>
+                    <FaUser />
                     {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
                     {lobby.password && <FaLock />}
+                    <span>- v{lobby.version}</span>
                   </span>
                 </li>
               ))

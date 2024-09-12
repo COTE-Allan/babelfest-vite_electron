@@ -114,9 +114,6 @@ export default function Cell({ active, confirmModal, cell }) {
   }, [card, owner, isSelected, isBase, team, player, phase, confirmModal])
 
   const bgColor = useMemo(() => {
-    if (!card || !owner) {
-      return '#000' // Fond noir si card ou owner est null
-    }
     if (isBase) {
       return (team === 1 && host) || (team === 2 && !host) ? myColor.hex : rivalColor.hex
     } else {
@@ -151,7 +148,10 @@ export default function Cell({ active, confirmModal, cell }) {
         background: bgColor,
         '--rotation': `${host ? '0deg' : '180deg'}`,
         border: 'double 5px transparent',
-        backgroundImage: !card || !owner ? 'none' : `linear-gradient(white, white), ${borderColor}`,
+        backgroundImage:
+          !card || !owner
+            ? 'none'
+            : `linear-gradient(${card.isRecto ? 'white, white' : 'black, black'}), ${borderColor}`,
         backgroundOrigin: 'border-box',
         backgroundClip: 'content-box, border-box'
       }}
