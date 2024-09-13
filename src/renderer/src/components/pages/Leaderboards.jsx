@@ -122,7 +122,9 @@ const Leaderboards = () => {
               </div>
               <div className="leaderboard-self">
                 <span className={`rank ${getRankClass(myRank)} leaderboard-rank`}>{myRank}</span>
-                <LeaderboardPlayerBanner user={userInfo} />
+                <div className="leaderboard-list-item-bannerWrapper">
+                  <LeaderboardPlayerBanner user={userInfo} />
+                </div>
                 <span className="value">
                   {selectedLeaderboard === 'MMR'
                     ? `MMR ${userInfo.stats.mmr}`

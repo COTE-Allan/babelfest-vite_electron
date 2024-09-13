@@ -7,6 +7,10 @@
     height: 100%;
     width: 100%;
 
+    & .leaderboardPlayerBanner-banner {
+        left: 85px;
+    }
+
     &-wrapper {
         background-color: rgba(0, 0, 0, 0.5);
         border-radius: 15px;

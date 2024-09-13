@@ -27,9 +27,10 @@ export default function Winner() {
     setSelectedCards,
     setMovesLeft,
     setPlacementCostLeft,
-    setTradeButton
+    setTradeButton,
+    pattern
   } = useContext(GlobalContext)
-  const { userInfo, user, updateUserState, userSettings } = useContext(AuthContext)
+  const { userInfo, user, updateUserState, userSettings, giveAchievement } = useContext(AuthContext)
   const [xpGained, setXpGained] = useState(0)
   const [mmrChange, setMmrChange] = useState(0)
   const [xpDetails, setXpDetails] = useState([])
@@ -274,9 +275,26 @@ export default function Winner() {
   }
 
   useEffect(() => {
-    if (handleWin !== null) {
-      checkForAchievements(gameData, winner === playerID)
+    const checkAchievements = async () => {
+      if (handleWin !== null) {
+        checkForAchievements(gameData, winner === playerID)
+        // Check Chegel achievement
+        if (
+          winner === playerID &&
+          pattern.some(
+            (cell) =>
+              cell.card &&
+              cell.card.name === 'Chegel' &&
+              cell.card.title === "L'omniscient" &&
+              cell.owner === playerID
+          )
+        ) {
+          await giveAchievement('HF_chegel')
+        }
+      }
     }
+
+    checkAchievements()
   }, [userInfo])
 
   useEffect(() => {

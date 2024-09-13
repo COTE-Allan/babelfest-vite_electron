@@ -74,7 +74,7 @@ export function obtainExp(
 
   // Calcul série de victoires
   if (streak) {
-    const xpStreakBonus = streak * 15
+    let xpStreakBonus = streak * 15
     if (streak >= 11) {
       xpStreakBonus = 150
     }

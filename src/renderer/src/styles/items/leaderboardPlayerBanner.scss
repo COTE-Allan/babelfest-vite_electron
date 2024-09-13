@@ -5,7 +5,7 @@
     position: relative;
     align-items: center;
     width: 100%;
-
+    // overflow: hidden;
 
 
 
@@ -13,7 +13,7 @@
     &-banner {
         position: absolute;
         left: 90px;
-        max-width: 275px;
+        max-width: 300px;
         width: 100%;
         height: 75px;
         // object-fit: cover;
@@ -24,9 +24,9 @@
 
     &.reverse &-banner {
         transform: scaleX(-1);
-        left: 85px;
-        // right: 85px;
-        background-color: red !important;
+        left: 0;
+        right: 90px;
+        // background-color: red !important;
     }
 
     &.reverse &-content {

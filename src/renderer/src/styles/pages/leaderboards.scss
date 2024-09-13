@@ -88,4 +88,8 @@
         text-align: center;
         border-radius: 10px;
     }
+
+    & .leaderboardPlayerBanner-banner {
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+    }
 }

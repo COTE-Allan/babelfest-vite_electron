@@ -116,12 +116,17 @@
     "unlockTip": "Obtenu en atteignant le niveau 64.",
     "level": 64
   },
-
   {
     "url": "./skins/banners/banner_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
     "achievement": "HF_tutorial"
+  },
+  {
+    "url": "./skins/banners/banner_liminalis.png",
+    "name": "Liminalis",
+    "unlockTip": "Obtenu en récompense du succès : 'Gloire à l'omniscient'",
+    "achievement": "HF_chegel"
   },
   {
     "url": "./skins/banners/banner_krone_2.png",

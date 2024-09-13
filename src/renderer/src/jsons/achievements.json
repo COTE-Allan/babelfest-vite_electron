@@ -136,6 +136,12 @@
     "url": "./skins/avatars/avatar_oeilOmniscient.png"
   },
   {
+    "id": "HF_chegel",
+    "name": "Gloire à l'omniscient",
+    "desc": "Gagnez une partie avec Chegel sur le terrain.",
+    "url": "./skins/banners/banner_liminalis.png"
+  },
+  {
     "id": "HF_11dmg",
     "name": "One Punch Man",
     "desc": "Infligez 11 points de dégâts ou plus en une seule attaque.",

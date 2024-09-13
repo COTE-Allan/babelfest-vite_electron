@@ -103,10 +103,13 @@
       }
 
       &.banner {
-        height: 80px;
+        width: 280px;
+        // height: 80px;
+
 
         & img {
           height: 100%;
+          width: 100%;
         }
       }
 

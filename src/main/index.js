@@ -120,7 +120,7 @@ function checkForUpdates() {
     if (mainWindow) {
       mainWindow.webContents.send('update_downloaded', info)
       setTimeout(() => {
-        autoUpdater.quitAndInstall()
+        autoUpdater.quitAndInstall(true, true)
       }, 5000)
     }
   })
