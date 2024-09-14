@@ -150,6 +150,7 @@ const Login = () => {
         banner: './skins/banners/banner_default.png',
         level: 1,
         xp: 0,
+        mmr: 500,
         title: 'level',
         stats: {
           gamesPlayed: 0,

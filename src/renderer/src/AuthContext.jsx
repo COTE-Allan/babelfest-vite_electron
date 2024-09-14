@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
         primaryColor: userData.primaryColor,
         secondaryColor: userData.secondaryColor,
         profilePic: userData.profilePic,
-        profileBorder: userData.profileBorder,
+        profileBorder: userData.profileBorder || null,
         flags: userData.flags || [],
         title: userData.title,
         banner: userData.banner,
@@ -88,8 +88,8 @@ export const AuthProvider = ({ children }) => {
           winStreak: userData.stats?.winStreak || 0,
           longestWinStreak: userData.stats?.longestWinStreak || 0
         },
-        status: userData.status,
-        currentLobby: userData.currentLobby,
+        status: userData.status || null,
+        currentLobby: userData.currentLobby || null,
         achievements: userData.achievements || [],
         matchSummaries: userData.matchSummaries || []
       }
