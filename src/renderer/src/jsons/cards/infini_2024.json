@@ -318,5 +318,60 @@
         "type": "deathScythe"
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Yalin",
+    "title": "'Doc' insaisissable",
+    "atk": 3,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series13.png",
+    "rarity": 2,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "GM et NooB",
+    "healer": true,
+    "ghost": true,
+    "effects": [
+      {
+        "type": "healer"
+      },
+      {
+        "type": "ghost"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Elysabeth Leninton",
+    "title": "Éclair lavande",
+    "atk": 0,
+    "dep": 4,
+    "hp": 2,
+    "baseatk": 0,
+    "basedep": 4,
+    "basehp": 2,
+    "url": "./cards/series/babelfest_2024series14.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Karel Barreau",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "taser",
+        "alreadyUsed": false
+      },
+      {
+        "when": ["death"],
+        "type": "deathSummon",
+        "location": "self",
+        "cards": [{ "name": "Lown", "title": "Rage écarlate" }]
+      }
+    ]
   }
 ]
