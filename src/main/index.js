@@ -148,8 +148,9 @@ app.whenReady().then(() => {
       screenMode: store.get('screenMode', 'windowed'),
       resolution: store.get('resolution', '1536x864'),
       musicOnLaunch: store.get('musicOnLaunch', 'true'),
-      musicVolume: store.get('musicVolume', 0.25),
-      searchPing: store.get('searchPing', true)
+      musicVolume: store.get('musicVolume', 0.03),
+      searchPing: store.get('searchPing', true),
+      customColors: store.get('customColors', true)
     }
     return settings
   })
@@ -167,6 +168,7 @@ app.whenReady().then(() => {
     store.set('musicOnLaunch', settings.musicOnLaunch)
     store.set('musicVolume', settings.musicVolume)
     store.set('searchPing', settings.searchPing)
+    store.set('customColors', settings.customColors)
 
     mainWindow.setResizable(true)
 

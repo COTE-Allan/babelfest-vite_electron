@@ -1,0 +1,9 @@
+[
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Tiens, tiens... Un nouvel adversaire. Tu cherchais un adversaire à ta... ah tu n’as jamais joué ?§ Bon ok, on va y aller lentement dans ce cas, tu sais je suis un peu un expert à ce jeu.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "highlightedElements": []
+  }
+]

@@ -8,14 +8,14 @@ import { DefinePhaseRule } from '../controllers/PhaseController'
 import { useTradeCard } from '../effects/editCards'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { useLeaveLobby } from '../controllers/ManageLobbyAndGame'
-import { useSendErrorMessage } from '../others/toolBox'
+import { useSendMessage } from '../others/toolBox'
 
 export const GlobalContext = createContext(null)
 export const GlobalProvider = () => {
   const { room } = useParams()
-  const { user } = useContext(AuthContext)
+  const { user, userSettings } = useContext(AuthContext)
   const leaveLobby = useLeaveLobby()
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
   const [host, setHost] = useState(false)
   // Données Globales
   const [gameData, setGameData] = useState(null)
@@ -169,22 +169,16 @@ export const GlobalProvider = () => {
         player1.hand = handJ1
         player2.hand = handJ2
         setPlayerID(isHost ? 1 : 2)
-        setRivalColor(player1.primaryColor)
-        if (isHost) {
-          if (player2.primaryColor === player1.primaryColor) {
-            setRivalColor(player2.secondaryColor)
-          } else {
-            setRivalColor(player2.primaryColor)
-          }
-          setMyColor(player1.primaryColor)
+
+        // TODO : Que faire si même couleurs
+        if (userSettings.customColors) {
+          setMyColor(isHost ? player1.primaryColor : player2.primaryColor)
+          setRivalColor(isHost ? player2.primaryColor : player1.primaryColor)
         } else {
-          if (player2.primaryColor === player1.primaryColor) {
-            setMyColor(player2.secondaryColor)
-          } else {
-            setMyColor(player2.primaryColor)
-          }
-          setRivalColor(player1.primaryColor)
+          setMyColor({ hex: '#40a8f5' })
+          setRivalColor({ hex: '#e62e31' })
         }
+
         // =====================
         setStandby(standby)
         setDeck(deck)
@@ -207,7 +201,7 @@ export const GlobalProvider = () => {
             isHost ? 1 : 2
           )
           if (revenge?.state === 'quit' && revenge?.id !== (isHost ? 1 : 2)) {
-            sendErrorMessage(
+            sendMessage(
               "L'autre joueur à quitté, vous quitterez automatiquement dans 5 secondes.",
               'info'
             )

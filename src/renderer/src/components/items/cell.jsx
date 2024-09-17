@@ -9,7 +9,7 @@ import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/card_select.wav'
 import hoverSfx from '../../assets/sfx/card_hover.wav'
-import { getBackgroundStyle } from '../others/toolBox'
+import { getBackgroundStyle, useSendMessage } from '../others/toolBox'
 
 export default function Cell({ active, confirmModal, cell }) {
   const { userSettings } = useContext(AuthContext)
@@ -58,6 +58,7 @@ export default function Cell({ active, confirmModal, cell }) {
     [myTurn, cell.card, checkIfMyCard]
   )
   const handleClickOnArena = useHandleClickOnArena()
+  const sendMessage = useSendMessage()
 
   useEffect(() => {
     if (!showArenaInModal) {
@@ -73,6 +74,10 @@ export default function Cell({ active, confirmModal, cell }) {
   const selectCell = () => {
     if (card) {
       select()
+    }
+
+    if (card && phase === 3 && card.diving) {
+      sendMessage('Vous ne pouvez pas choisir cette carte.', 'warn')
     }
 
     if (

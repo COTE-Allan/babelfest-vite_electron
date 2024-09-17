@@ -209,14 +209,18 @@ export function defineWinner(room, player) {
   })
 }
 
-export function useSendErrorMessage() {
+export function useSendMessage() {
   const { userSettings } = useContext(AuthContext)
   const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
   const [info] = useSound(infoSfx, { volume: userSettings.sfxVolume })
   const [success] = useSound(successSfx, { volume: userSettings.sfxVolume })
 
-  const sendErrorMessage = (msg, type = 'error') => {
+  const sendMessage = (msg, type = 'error') => {
     switch (type) {
+      case 'warn':
+        info()
+        toast.warn(msg)
+        break
       case 'error':
         error()
         toast.error(msg)
@@ -234,7 +238,7 @@ export function useSendErrorMessage() {
     }
   }
 
-  return sendErrorMessage
+  return sendMessage
 }
 
 export function arraysEqual(a, b) {

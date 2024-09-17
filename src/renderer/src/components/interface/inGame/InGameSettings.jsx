@@ -40,12 +40,11 @@ export default function InGameSettings() {
     setSmthChanged(false)
   }
 
-
   return (
     <div className="ig-settings">
-            <h1>Partie en cours</h1>
+      <h1>Partie en cours</h1>
       <span>Code de la partie : {room}</span>
-      <Button onClick={giveUpForReal}>{giveUp ? "Vraiment ?" : "Concéder le match"}</Button>
+      <Button onClick={giveUpForReal}>{giveUp ? 'Vraiment ?' : 'Concéder le match'}</Button>
       <h1>Paramètres</h1>
       <div className="volume-settings">
         <div className="volume-settings-item">

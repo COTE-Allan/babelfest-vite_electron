@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
-import { useSendErrorMessage } from './components/others/toolBox'
+import { useSendMessage } from './components/others/toolBox'
 
 export const AuthContext = createContext()
 

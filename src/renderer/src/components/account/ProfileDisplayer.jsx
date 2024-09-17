@@ -15,20 +15,20 @@ import UserCustomisation from './UserCustomisation'
 import { ImCross } from 'react-icons/im'
 import { AuthContext } from '../../AuthContext'
 import { update } from 'lodash'
-import { useSendErrorMessage } from '../others/toolBox'
+import { useSendMessage } from '../others/toolBox'
 import LoadingLogo from '../items/LoadingLogo'
 
 export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
   const [page, setPage] = useState(1)
   const [customizedUserInfo, setCustomizedUserInfo] = useState(null)
   const { updateUser } = useContext(AuthContext)
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
 
   const handleUpdateUser = async () => {
     await updateUser(customizedUserInfo)
     setUser(customizedUserInfo)
     setCustomizedUserInfo(null)
-    sendErrorMessage('Les changements ont étés correctements appliqués.', 'success')
+    sendMessage('Les changements ont étés correctements appliqués.', 'success')
   }
 
   return (
