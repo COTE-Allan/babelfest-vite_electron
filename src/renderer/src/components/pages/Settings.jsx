@@ -55,11 +55,11 @@ const Settings = () => {
             <FaDesktop size={45} />
             <span className="hidden-span">Affichage</span>
           </HudNavLink>
-          <HudNavLink onClick={() => setPage(2)} selected={page === 3} permOpen>
+          <HudNavLink onClick={() => setPage(2)} selected={page === 2} permOpen>
             <FaVolumeUp size={45} />
             <span className="hidden-span">Son</span>
           </HudNavLink>
-          <HudNavLink onClick={() => setPage(3)} selected={page === 2} permOpen>
+          <HudNavLink onClick={() => setPage(3)} selected={page === 3} permOpen>
             <FaGamepad size={45} />
             <span className="hidden-span">En jeu</span>
           </HudNavLink>
