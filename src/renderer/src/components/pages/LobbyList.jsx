@@ -13,7 +13,7 @@ import { AuthContext } from '../../AuthContext'
 import { FaLock, FaPlusCircle, FaUser } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import changelog from '../../jsons/changelog.json'
-import { useSendErrorMessage } from '../others/toolBox'
+import { useSendMessage } from '../others/toolBox'
 import BackButton from '../items/BackButton'
 
 export default function LobbyList() {
@@ -31,7 +31,7 @@ export default function LobbyList() {
   const joinLobby = useJoinLobby()
   const joinGameAsSpectator = useJoinGameAsSpectator()
   const createLobby = useCreateLobby()
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
 
   const fetchLobbies = () => {
     const collectionRef = collection(db, 'lobbies')
@@ -61,7 +61,7 @@ export default function LobbyList() {
         creator: userInfo.username
       })
     } else {
-      sendErrorMessage('Ce nom de salon est invalide ou déjà utilisé.')
+      sendMessage('Ce nom de salon est invalide ou déjà utilisé.')
     }
   }
 
@@ -74,7 +74,7 @@ export default function LobbyList() {
     if (foundLobby.version !== verName) {
       // joinGameAsSpectator(foundLobby.gameRef);
       joinLobby(lobbyID)
-      sendErrorMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
+      sendMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
     } else {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {
         joinLobby(lobbyID)
@@ -83,7 +83,7 @@ export default function LobbyList() {
         // if (foundLobby.gameRef) {
         //   joinGameAsSpectator(foundLobby.gameRef)
         // } else {
-        //   sendErrorMessage(
+        //   sendMessage(
         //     'Attendez que cette partie commence pour la rejoindre en tant que spectateur.'
         //   )
         // }
@@ -176,7 +176,7 @@ export default function LobbyList() {
                   if (askPassword.password === joinLobbyPassword) {
                     handleJoinLobby(askPassword.id)
                   } else {
-                    sendErrorMessage('Le mot de passe est incorrect.')
+                    sendMessage('Le mot de passe est incorrect.')
                   }
                 }}
               >

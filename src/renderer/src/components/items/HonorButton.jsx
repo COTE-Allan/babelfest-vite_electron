@@ -5,14 +5,14 @@ import { FaThumbsUp } from 'react-icons/fa'
 import useSound from 'use-sound'
 import { db } from '../../Firebase'
 import { AuthContext } from '../../AuthContext'
-import { useSendErrorMessage } from '../others/toolBox'
+import { useSendMessage } from '../others/toolBox'
 import successSfx from '../../assets/sfx/info_notification.mp3'
 import HudNavLink from '../items/hudNavLink'
 
 const HonorButton = ({ targetUserId, targetUser, onHonorSuccess }) => {
   const { user, userInfo, updateUserState, userSettings } = useContext(AuthContext)
   const [canHonor, setCanHonor] = useState(false)
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
   const [playSuccess] = useSound(successSfx, {
     volume: userSettings.sfxVolume
   })
@@ -34,7 +34,7 @@ const HonorButton = ({ targetUserId, targetUser, onHonorSuccess }) => {
 
     if (!canHonor) {
       const nextAvailableTime = new Date(userInfo.honored.timestamp + 24 * 60 * 60 * 1000)
-      sendErrorMessage(
+      sendMessage(
         `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`
       )
       return

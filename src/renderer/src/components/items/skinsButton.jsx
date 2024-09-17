@@ -1,5 +1,5 @@
 import { FaLock } from 'react-icons/fa'
-import { useSendErrorMessage } from '../others/toolBox'
+import { useSendMessage } from '../others/toolBox'
 import Button from './Button'
 
 export default function SkinsButton({
@@ -16,7 +16,7 @@ export default function SkinsButton({
   isSquare,
   isColor
 }) {
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
 
   return (
     <Button
@@ -27,14 +27,14 @@ export default function SkinsButton({
         if (lockedCondition) {
           onClick()
         } else {
-          sendErrorMessage('Vous ne possédez pas ce cosmétique.')
+          sendMessage('Vous ne possédez pas ce cosmétique.')
         }
       }}
       contextMenu={() => {
         if (lockedCondition) {
           onContextMenu()
         } else {
-          sendErrorMessage('Vous ne possédez pas ce cosmétique.')
+          sendMessage('Vous ne possédez pas ce cosmétique.')
         }
       }}
       onMouseEnter={() => {

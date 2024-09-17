@@ -9,7 +9,7 @@ import { MdOutlineTitle } from 'react-icons/md'
 import { FaBorderTopLeft, FaLock } from 'react-icons/fa6'
 import { BiSolidUserRectangle } from 'react-icons/bi'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { getSkins, isUnlocked, useSendErrorMessage } from '../others/toolBox'
+import { getSkins, isUnlocked, useSendMessage } from '../others/toolBox'
 import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
@@ -282,7 +282,7 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   skin.lock = isUnlocked(skin, user)
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
 
   const relatedSkinsParams = {
     avatar: 'profilePic',
@@ -315,8 +315,8 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
     select()
 
     if (!skin.lock) {
-      sendErrorMessage("Vous ne possédez pas ce cosmétique.", "error")
-      return;
+      sendMessage('Vous ne possédez pas ce cosmétique.', 'error')
+      return
     }
 
     // Si customizedUserInfo est null, on le remplace par userInfo

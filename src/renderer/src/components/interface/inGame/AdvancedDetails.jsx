@@ -25,7 +25,6 @@ export function AdvancedDetails({ card }) {
   useEffect(() => {
     setDetailCard(advancedDetailCard)
   }, [advancedDetailCard])
-  console.log(detailCard)
   return (
     <div className="advancedDetails" ref={ref}>
       {detailCard.id !== advancedDetailCard.id && (
@@ -43,6 +42,11 @@ export function AdvancedDetails({ card }) {
       <h2 className={`details-card-subtitle txt-rarity-${detailCard.rarity}`}>
         {detailCard.title}
       </h2>
+      {detailCard.owner && (
+        <h3 className="details-card-owner" style={{ color: detailCard.owner.hex }}>
+          Carte invoquée par {detailCard?.owner?.name}
+        </h3>
+      )}
       <CardStats
         stats={[detailCard.atk, detailCard.dep, detailCard.hp]}
         basehp={detailCard.basehp}

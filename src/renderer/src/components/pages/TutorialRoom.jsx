@@ -902,15 +902,6 @@ export default function TutorialRoom() {
       {tutorialWin && <div className="tutorial-win fade-in"></div>}
 
       {stepsConfig[tutorialStep - 1].modal && <ClassicModal></ClassicModal>}
-
-      <ReactPlayer
-        volume={userSettings.musicVolume}
-        url={'https://www.youtube.com/watch?v=Tb4herBVRGY'}
-        playing={true}
-        width={0}
-        height={0}
-        loop={true}
-      />
     </>
   )
 }

@@ -28,7 +28,10 @@ export default function Winner() {
     setMovesLeft,
     setPlacementCostLeft,
     setTradeButton,
-    pattern
+    pattern,
+    setRightWindow,
+    setLeftWindow,
+    setAdvancedDetailCard
   } = useContext(GlobalContext)
   const { userInfo, user, updateUserState, userSettings, giveAchievement } = useContext(AuthContext)
   const [xpGained, setXpGained] = useState(0)
@@ -302,6 +305,8 @@ export default function Winner() {
       setSelectedCells([])
       setSelectedCards([])
       setMovesLeft(4)
+      setRightWindow(null)
+      setLeftWindow(null)
       setPlacementCostLeft(4)
       setTradeButton(true)
       handleExpAndStats()
