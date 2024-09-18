@@ -19,7 +19,6 @@ import LobbyList from './components/pages/LobbyList'
 import Loading from './components/pages/Loading'
 import { MatchmakingProvider } from './components/providers/MatchmakingProvider'
 import UpdateNotifier from './UpdateNotifier'
-import { TutorialProvider } from './components/providers/TutorialProvider'
 import Leaderboards from './components/pages/Leaderboards'
 import ArenasList from './components/pages/ArenasList'
 import TransitionWrapper from './TransitionWrapper'
@@ -30,12 +29,12 @@ import MenuCard from './components/items/MenuCard'
 import MenuCardCatalog from './assets/img/catalogMenuCard.jpg'
 import MenuCardArena from './assets/img/arenasMenuCard.jpg'
 import MenuCardEffects from './assets/img/effectsMenuCard.png'
-
 import './styles/items/menuCard.scss'
 import GamemodeSelect from './components/pages/GamemodeSelect'
 import MatchmakingQueue from './components/pages/MatchmakingQueue'
 import MatchmakingTracker from './components/interface/MatchmakingTracker'
 import Credits from './components/pages/Credits'
+import { Tutorial } from './components/pages/Tutorial'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -177,7 +176,7 @@ const AppContent = () => {
               }
             />
             <Route path="/game/:room" element={<GlobalProvider />} />
-            <Route path="/tutorial" element={<TutorialProvider />} />
+            <Route path="/tutorial" element={<Tutorial />} />
             <Route
               path="/lobbyList"
               element={

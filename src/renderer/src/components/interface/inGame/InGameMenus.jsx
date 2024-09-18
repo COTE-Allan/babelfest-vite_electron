@@ -110,7 +110,9 @@ export default function InGameMenus() {
               }}
               className={`${!isTradeValid ? 'disabled' : 'alert'}`}
             >
-              <span>{isTradeValid ? "Valider l'échange" : `Échanger ${phaseRules[0]} cartes`}</span>
+              <span>
+                {isTradeValid ? "Valider l'échange" : `Échanger [ ${phaseRules[0]} ] cartes`}
+              </span>
               <GiConfirmed size={45} />
             </IconButton>
           </>

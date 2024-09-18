@@ -390,6 +390,10 @@ button.alert {
   animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
+.fade-in-late {
+  animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation-delay: 1s;
+}
 
 
 .window {

@@ -80,19 +80,13 @@ export default function Arena() {
               <div
                 className="arena-borders-item"
                 style={{
-                  background: !myTurn || phase === 0 ? getBackgroundStyle(rivalColor) : '#939393',
-                  boxShadow:
-                    !myTurn || phase === 0
-                      ? `0 -10px 70px ${getBackgroundStyle(rivalColor)}`
-                      : 'none'
+                  background: !myTurn || phase === 0 ? getBackgroundStyle(rivalColor) : '#939393'
                 }}
               ></div>
               <div
                 className="arena-borders-item"
                 style={{
-                  background: myTurn || phase === 0 ? getBackgroundStyle(myColor) : '#939393',
-                  boxShadow:
-                    myTurn || phase === 0 ? `0 10px 70px ${getBackgroundStyle(myColor)}` : 'none'
+                  background: myTurn || phase === 0 ? getBackgroundStyle(myColor) : '#939393'
                 }}
               ></div>
             </div>

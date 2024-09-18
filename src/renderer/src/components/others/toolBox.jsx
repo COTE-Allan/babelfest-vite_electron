@@ -612,3 +612,38 @@ export function getAllUniqueArtists() {
   console.log(uniqueArtists)
   return Array.from(uniqueArtists)
 }
+
+export function generateLocalArena(cellsToRemove, bases) {
+  const amount = 32
+
+  const getCoordinates = (index) => {
+    const rowLetters = ['A', 'B', 'C', 'D']
+    const rows = rowLetters.length
+    const col = Math.floor(index / rows) + 1
+    const row = rowLetters[index % rows]
+    return `${row}${col}`
+  }
+
+  return Array.from({ length: amount }).map((_, index) => {
+    const side = index < amount / 2 ? 1 : 2
+    return {
+      id: index,
+      coordinate: getCoordinates(index),
+      exist: !cellsToRemove.includes(index),
+      side: side,
+      card: null,
+      base: index === bases[0] || index === bases[1],
+      owner: null
+    }
+  })
+}
+
+// Fonction pour récupérer des cartes basées sur un array d'ID
+export function getCardsByIds(ids) {
+  const allCards = getAllCards() // Récupère toutes les cartes
+  const filteredCards = allCards
+    .filter((card) => ids.includes(card.id)) // Filtre les cartes dont l'ID est dans le tableau d'IDs
+    .sort((a, b) => a.rarity - b.rarity) // Trie les cartes par la rareté (en supposant que 'rarity' soit un nombre)
+
+  return filteredCards
+}

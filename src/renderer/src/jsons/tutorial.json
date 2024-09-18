@@ -1,9 +1,224 @@
 [
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Tiens, tiens... Un nouvel adversaire. Tu cherchais un adversaire à ta... ah tu n’as jamais joué ?§ Bon ok, on va y aller lentement dans ce cas, tu sais je suis un peu un expert à ce jeu.",
+    "text": "Ah, te voilà enfin, je commençais à m'impatienter. Bon t'attend quoi allez rentre viens !",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "highlightedElements": []
+    "position": "center"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Bienvenue au festival de Babel, aussi appellé Babelfest, il s'agit d'un grand tournoi ou des gens venu de tous le multivers s'affrontent.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "center"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Les combattants s'affrontent dans l'arène, pour gagner, ils doivent capturer la base de l'équipe adverse ou mettre K-O tous leurs adversaires.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "top-left",
+    "highlightedElements": ["arena"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Voici les combattants de ton équipe, ils sont choisis aléatoirement. Tu pourra les placer dans l'arène au fur et à mesure du match, si tu perd tout tes combattants, tu perd la partie.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "above-hand",
+    "highlightedElements": ["hand"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant que ta les bases, on va faire un tour de jeu entier, j'ai moi aussi 4 combattants, mais je ne vais pas pouvoir tous les jouer.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Nous allons d'abord devoir nous échanger des combattants avant de jouer, il faut donner 30% de ses combattants à l'adversaire, donc ici, un seul.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Allons-y, choisis un combattant que je vais recevoir, tu recevra l'un des miens en échange.",
+    "clickOn": { "element": "card", "id": 63 },
+    "position": "top-left",
+    "highlightedElements": ["hand", "hand-63"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant, valide ta sélection et l'échange sera effectué.",
+    "clickOn": { "element": "validate" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["hand", "bottom-menu"],
+    "selected": ["hand-63"],
+    "removeCard": { "where": "hand", "id": 63 },
+    "addCard": { "where": "hand", "id": 83 },
+    "turn": 1,
+    "phase": 1
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant que l'échange à été effectué, la partie commence vraiment. Les combattants agissent selon des phases.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "La première phase c'est la phase de préparation. Elle consiste en l'invocation de nos combattants dans l'arène, je commence, regarde.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "addCard": { "where": "cell", "id": 4, "to": 14, "owner": 2 }
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Voilà, j'ai invoqué un combattant, tu ne peut invoquer que sur ta moitié de l'arène.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "addCard": { "where": "cell", "id": 3, "to": 2, "owner": 2, "hidden": true }
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "J'en invoque un deuxième, face caché, directement sur ma base pour empêcher une capture et je termine mon tour.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "turn": 2
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant c'est ton tour, tu va pouvoir invoquer un combattant dans l'arène.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "center"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Tu vois ça ? C'est ton énergie, invoquer une carte consomme l'énergie indiqué sur celle-ci, tu remonte à 4 énergies à chaque fin de tour.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "above-buttons",
+    "highlightedElements": ["bottom-menu"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Bien, sélectionne un combattant que tu va invoquer dans l'arène.",
+    "clickOn": { "element": "card", "id": 48 },
+    "position": "top-left",
+    "highlightedElements": ["hand", "hand-48"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Et maintenant l'endroit ou tu va l'invoquer.",
+    "clickOn": { "element": "cell", "id": 18 },
+    "position": "top-left",
+    "highlightedElements": ["cell-18"],
+    "selected": ["hand-48"],
+    "removeCard": { "where": "hand", "id": 48 },
+    "addCard": { "where": "cell", "id": 48, "to": 18, "owner": 1 },
+    "cost": 1
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Tu viens d'invoquer une carte coûtant 3, plus le coût est elevé plus la carte est puissante.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Comme tu peut le voir, ton énergie à été consommé, mais il t'en reste une, tu peut encore invoquer un combattant coûtant 1 ou tu peut passer ton tour.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "above-buttons",
+    "highlightedElements": ["bottom-menu"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Profite-en pour invoquer un deuxième combattant.",
+    "clickOn": { "element": "card", "id": 15 },
+    "position": "top-left",
+    "highlightedElements": ["hand", "hand-15"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Profite-en pour invoquer un deuxième combattant.",
+    "clickOn": { "element": "cell", "id": 17 },
+    "position": "top-left",
+    "highlightedElements": ["cell-17"],
+    "selected": ["hand-15"],
+    "removeCard": { "where": "hand", "id": 15 },
+    "addCard": { "where": "cell", "id": 15, "to": 17, "owner": 1 },
+    "cost": 4,
+    "phase": 2,
+    "turn": 1
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Ton tour s'est terminé automatiquement en consommant ta dernière énergie. La phase de déplacement va commencer.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Dans cette phase, nous allons déplacer nos combattants pour capturer la base ou préparer notre attaque.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "center"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Observe, je vais déplacer un combattant.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "moveCard": {
+      "from": 2,
+      "to": 10
+    },
+    "turn": 2
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "En déplacant mon combattant dissimulé, ce dernier se révèle, je l'ai déplacé derrière mon autre combattant.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Je ne l'ai pas déplacé ici pour rien, ce combattant renforce l'attaque de ses alliés adjacents, mais avant d'attaquer, tu va d'abord pouvoir te déplacer.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "De la même façon que pour invoquer, tu possède de l'énergie qui se consomme pour chaque case traversé.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "above-buttons",
+    "highlightedElements": ["bottom-menu"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Sélectionne un combattant dans l'arène.",
+    "clickOn": { "element": "cell", "id": 17 },
+    "position": "top-left",
+    "highlightedElements": ["arena", "cell-17"],
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant, l'endroit ou ton combattant va se déplacer.",
+    "clickOn": { "element": "cell", "id": 13 },
+    "position": "top-left",
+    "highlightedElements": ["arena", "cell-13"],
+    "selected": ["cell-17"],
+    "modal": true,
+    "moveCard": {
+      "from": 17,
+      "to": 13
+    },
+    "cost": 3
   }
 ]
