@@ -59,7 +59,8 @@
     "removeCard": { "where": "hand", "id": 63 },
     "addCard": { "where": "hand", "id": 83 },
     "turn": 1,
-    "phase": 1
+    "phase": 1,
+    "sound": "turn"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -69,24 +70,35 @@
   },
   {
     "url": "./images/tuto_hautain.png",
+    "text": "Tu pourra suivre la progression des phases ici.",
+    "clickOn": { "element": "dialog" },
+    "position": "under-tracker",
+    "modal": true,
+    "highlightedElements": ["tracker"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
     "text": "La première phase c'est la phase de préparation. Elle consiste en l'invocation de nos combattants dans l'arène, je commence, regarde.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
-    "addCard": { "where": "cell", "id": 4, "to": 14, "owner": 2 }
+    "addCard": { "where": "cell", "id": 60, "to": 14, "owner": 2 },
+    "sound": "summon"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Voilà, j'ai invoqué un combattant, tu ne peut invoquer que sur ta moitié de l'arène.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
-    "addCard": { "where": "cell", "id": 3, "to": 2, "owner": 2, "hidden": true }
+    "addCard": { "where": "cell", "id": 3, "to": 2, "owner": 2, "hidden": true },
+    "sound": "summon"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "J'en invoque un deuxième, face caché, directement sur ma base pour empêcher une capture et je termine mon tour.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
-    "turn": 2
+    "turn": 2,
+    "sound": "turn"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -116,16 +128,29 @@
     "clickOn": { "element": "cell", "id": 18 },
     "position": "top-left",
     "highlightedElements": ["cell-18"],
+    "green": ["cell-18"],
+    "selected": ["hand-48"]
+  },
+  {
+    "confirm": ["cell-18"],
+    "url": "./images/tuto_hautain.png",
+    "text": "Confirme ton choix pour invoquer la carte.",
+    "clickOn": { "element": "cell", "id": 18 },
+    "position": "top-left",
+    "highlightedElements": ["cell-18"],
     "selected": ["hand-48"],
+    "green": ["cell-18"],
     "removeCard": { "where": "hand", "id": 48 },
     "addCard": { "where": "cell", "id": 48, "to": 18, "owner": 1 },
-    "cost": 1
+    "cost": 1,
+    "sound": "summon"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Tu viens d'invoquer une carte coûtant 3, plus le coût est elevé plus la carte est puissante.",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "center",
+    "modal": true
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -148,18 +173,33 @@
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
     "highlightedElements": ["cell-17"],
-    "selected": ["hand-15"],
-    "removeCard": { "where": "hand", "id": 15 },
-    "addCard": { "where": "cell", "id": 15, "to": 17, "owner": 1 },
-    "cost": 4,
-    "phase": 2,
-    "turn": 1
+    "green": ["cell-17"],
+    "selected": ["hand-15"]
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Ton tour s'est terminé automatiquement en consommant ta dernière énergie. La phase de déplacement va commencer.",
+    "text": "Profite-en pour invoquer un deuxième combattant.",
+    "clickOn": { "element": "cell", "id": 17 },
+    "position": "top-left",
+    "highlightedElements": ["cell-17"],
+    "selected": ["hand-15"],
+    "removeCard": { "where": "hand", "id": 15 },
+    "addCard": { "where": "cell", "id": 15, "to": 17, "owner": 1 },
+    "sound": "summon",
+    "cost": 0,
+    "green": ["cell-17"],
+    "confirm": ["cell-17"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Ton tour va se terminer automatiquement car tu a consommé ta dernière énergie. La phase de déplacement va commencer.",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "center",
+    "modal": true,
+    "cost": 4,
+    "phase": 2,
+    "turn": 1,
+    "sound": "turn"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -176,20 +216,23 @@
     "moveCard": {
       "from": 2,
       "to": 10
-    },
-    "turn": 2
+    }
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "En déplacant mon combattant dissimulé, ce dernier se révèle, je l'ai déplacé derrière mon autre combattant.",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "tired": ["cell-10"]
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Je ne l'ai pas déplacé ici pour rien, ce combattant renforce l'attaque de ses alliés adjacents, mais avant d'attaquer, tu va d'abord pouvoir te déplacer.",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "tired": ["cell-10"],
+    "turn": 2,
+    "sound": "turn"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -197,28 +240,165 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
-    "highlightedElements": ["bottom-menu"]
+    "highlightedElements": ["bottom-menu"],
+    "tired": ["cell-10"]
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Sélectionne un combattant dans l'arène.",
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
-    "highlightedElements": ["arena", "cell-17"],
-    "modal": true
+    "highlightedElements": ["cell-17"],
+    "tired": ["cell-10"]
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Maintenant, l'endroit ou ton combattant va se déplacer.",
-    "clickOn": { "element": "cell", "id": 13 },
+    "clickOn": { "element": "cell", "id": 9 },
     "position": "top-left",
-    "highlightedElements": ["arena", "cell-13"],
+    "highlightedElements": ["cell-9"],
     "selected": ["cell-17"],
-    "modal": true,
+    "green": ["cell-9"],
+    "tired": ["cell-10"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant, l'endroit ou ton combattant va se déplacer.",
+    "clickOn": { "element": "cell", "id": 9 },
+    "position": "top-left",
+    "highlightedElements": ["cell-9"],
+    "selected": ["cell-17"],
+    "green": ["cell-9"],
+    "confirm": ["cell-9"],
     "moveCard": {
       "from": 17,
-      "to": 13
+      "to": 9
     },
-    "cost": 3
+    "cost": 3,
+    "tired": ["cell-10"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Ton combattant viens de se déplacer, retiens que peu importe la distance, tu ne pourra pas le redéplacer ce tour.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "tired": ["cell-10", "cell-9"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Toutefois, tu peut continuer à déplacer d'autres combattants, vu qu'il te reste de l'énergie.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "above-buttons",
+    "highlightedElements": ["bottom-menu"],
+    "tired": ["cell-10", "cell-9"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Ta phase de déplacement se termine quand tu épuise ton énergie ou quand tu passe ton tour. Passe ton tour pour cette fois.",
+    "clickOn": { "element": "validate" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu"],
+    "tired": ["cell-10", "cell-9"],
+    "turn": 1,
+    "phase": 3,
+    "cost": 4,
+    "sound": "turn",
+    "editCard": { "id": 14, "atk": 5 }
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Après avoir invoquer et déplacer les combattants, la phase suivante est l'attaque.",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Le plus important à retenir c'est que les combattants ne peuvent attaquer qu'une fois par tour et uniquement les cibles adjacentes. (haut, bas, gauche, droite)",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Observe la disposition de mes combattants, le combattant 'Tuto' offre un bonus d'attaque aux alliés adjacents, c'est l'un de ses effets.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "highlightedElements": ["arena"],
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Ma carte 'The Outsider' va maintenant attaquer ton 'Mandarine-man'.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "removeCard": { "where": "cell", "id": 18 },
+    "sound": "death",
+    "turn": 2
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "'The Outsider' inflige 5 dégâts à 'Mandarine-man' ce qui fait tomber ses points de vies à 0.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "tired": ["cell-14"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "J'ai attaqué une fois, c'est à ton tour, sélectionne l'attaquant.",
+    "clickOn": { "element": "cell", "id": 9 },
+    "position": "top-left",
+    "tired": ["cell-14"],
+    "highlightedElements": ["cell-9"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant la cible.",
+    "clickOn": { "element": "cell", "id": 10 },
+    "position": "top-left",
+    "tired": ["cell-14"],
+    "highlightedElements": ["cell-10"],
+    "selected": ["cell-9"],
+    "green": ["cell-10"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant la cible.",
+    "clickOn": { "element": "cell", "id": 10 },
+    "position": "top-left",
+    "tired": ["cell-14"],
+    "highlightedElements": ["cell-10"],
+    "selected": ["cell-9", "cell-10"],
+    "green": ["cell-10"],
+    "confirm": ["cell-10"],
+    "removeCard": { "where": "cell", "id": 10 },
+    "sound": "death",
+    "turn": 1
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "'Xyphias Tonitruo' inflige 2 dégâts à 'Tuto' ce qui fait tomber ses points de vies à 0.",
+    "tired": ["cell-14", "cell-9"],
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "En terminant la phase de troc, on passe au tour suivant et on recommence les phases ( Invocation, Déplacement, Attaque et Troc ) en inversant l'ordre de jeu.",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "modal": true,
+    "order": 2,
+    "turn": 2,
+    "phase": 1,
+    "sound": "turn"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "dialog" },
+    "text": "Ce tour-ci, tu commence, invoque en premier.",
+    "position": "top-left"
   }
 ]

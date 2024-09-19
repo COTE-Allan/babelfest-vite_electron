@@ -42,7 +42,7 @@
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045503/babelfest/musiques/ordinary_days.mp3",
     "name": "Klaus Veen - Ordinary Days V2",
-    "role": "any"
+    "role": "ingame"
   },
   {
     "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045511/babelfest/musiques/DL_yami_yugi.mp3",
@@ -88,5 +88,10 @@
     "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045494/babelfest/musiques/battle_colress.mp3",
     "name": "Battle! Colress - Pokemon Masters EX (With Countdown)",
     "role": "ingame"
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726750774/babelfest/musiques/Babelfest_OST_-_Tuto_avec_Tuto.mp3",
+    "name": "Babelfest OST - Tuto avec Tuto",
+    "role": "tutorial"
   }
 ]

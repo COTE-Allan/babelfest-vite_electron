@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { generateLocalArena, getCardsByIds } from '../others/toolBox'
 import Modal from '../items/ClassicModal'
@@ -12,17 +12,43 @@ import { GiConfirmed } from 'react-icons/gi'
 import { TiArrowBack } from 'react-icons/ti'
 import { useNavigate } from 'react-router-dom'
 import { BsQuestionLg } from 'react-icons/bs'
+import { PiFlagCheckeredFill } from 'react-icons/pi'
+import { AuthContext } from '../../AuthContext'
+
+import useSound from 'use-sound'
+import summonSfx from '../../assets/sfx/summon.mp3'
+import turnSfx from '../../assets/sfx/notification_urturn.wav'
+import hoverSfx from '../../assets/sfx/button_hover.wav'
+import selectSfx from '../../assets/sfx/menu_select.wav'
+import deathSfx from '../../assets/sfx/ingame_death.mp3'
+import MusicPlayer from '../interface/musicPlayer'
 
 export const Tutorial = () => {
+  const { userSettings } = useContext(AuthContext)
   const [user, setUser] = useState(null)
   const [rival, setRival] = useState(null)
   const [costLeft, setCostLeft] = useState(4)
   const [phase, setPhase] = useState(0)
   const [pattern, setPattern] = useState(null)
   const [turn, setTurn] = useState(0)
+  const [order, setOrder] = useState(1)
   const [tutorialStep, setTutorialStep] = useState(null)
   const [step, setStep] = useState(0)
   const navigate = useNavigate()
+
+  const [playSummon] = useSound(summonSfx, { volume: userSettings.sfxVolume })
+  const [playTurn] = useSound(turnSfx, { volume: userSettings.sfxVolume })
+  const [playDeath] = useSound(deathSfx, { volume: userSettings.sfxVolume })
+  const [playHover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
+  const [playSelect] = useSound(selectSfx, { volume: userSettings.sfxVolume })
+
+  const phaseLabel = {
+    0: "Échange avec l'autre joueur",
+    1: 'Phase de préparation',
+    2: 'Phase de déplacement',
+    3: "Phase d'attaque",
+    4: 'Phase de troc'
+  }
 
   // Création du tuto
   useEffect(() => {
@@ -50,6 +76,8 @@ export const Tutorial = () => {
 
   function handleClick(element, id) {
     if (tutorialStep.clickOn.element === element) {
+      playSelect()
+
       if (tutorialStep.removeCard) {
         handleRemoveCard()
       }
@@ -62,9 +90,30 @@ export const Tutorial = () => {
         handleMoveCard()
       }
 
+      if (tutorialStep.editCard) {
+        handleEditCard() // Nouvelle fonction pour éditer la carte
+      }
+
       if (tutorialStep.turn) setTurn(tutorialStep.turn)
       if (tutorialStep.phase) setPhase(tutorialStep.phase)
       if (tutorialStep.cost) setCostLeft(tutorialStep.cost)
+      if (tutorialStep.order) setOrder(tutorialStep.order)
+
+      if (tutorialStep.sound) {
+        switch (tutorialStep.sound) {
+          case 'summon':
+            playSummon()
+            break
+          case 'turn':
+            playTurn()
+            break
+          case 'death':
+            playDeath()
+            break
+          default:
+            break
+        }
+      }
 
       // Si l'élément cliqué est correct et l'ID correspond, on passe à l'étape suivante
       if ((id && tutorialStep.clickOn.id === id) || !id) {
@@ -87,7 +136,7 @@ export const Tutorial = () => {
       // Supprime une carte d'une cellule
       setPattern((prevPattern) =>
         prevPattern.map((cell) =>
-          cell.id === tutorialStep.removeCard.cellID ? { ...cell, card: null } : cell
+          cell.id === tutorialStep.removeCard.id ? { ...cell, card: null } : cell
         )
       )
     }
@@ -119,6 +168,26 @@ export const Tutorial = () => {
         )
       )
     }
+  }
+
+  // Fonction pour éditer la carte d'une cellule
+  function handleEditCard() {
+    setPattern((prevPattern) => {
+      return prevPattern.map((cell) => {
+        // Vérifie si l'ID de la cellule correspond à celui spécifié dans l'étape du tutoriel
+        if (cell.id === tutorialStep.editCard.id && cell.card) {
+          // Modifie les propriétés de la carte (attaque, etc.) en fonction de ce qui est spécifié
+          return {
+            ...cell,
+            card: {
+              ...cell.card,
+              ...tutorialStep.editCard // Remplace les propriétés de la carte par les nouvelles
+            }
+          }
+        }
+        return cell
+      })
+    })
   }
 
   // Fonction pour déplacer une carte d'une cellule à une autre
@@ -157,6 +226,7 @@ export const Tutorial = () => {
         onClick={() => {
           handleClick('dialog')
         }}
+        onMouseEnter={playHover}
       >
         <div className="tutorial-modal-avatar">
           <img src={tutorialStep.url} alt="avatar du tuto, pendant le tuto" />
@@ -169,8 +239,36 @@ export const Tutorial = () => {
           <MdNavigateNext className="next" size={150} />
         )}
       </div>
-      {tutorialStep.modal && <Modal></Modal>}
+      {tutorialStep.modal && <Modal className="fade-in"></Modal>}
       <div className="gameContainer">
+        {/* Musique */}
+        <div className={`musicPlayer-container`}>
+          <MusicPlayer role="tutorial" />
+        </div>
+        {/* Tracker */}
+        <div
+          className="turnTracker"
+          style={{ zIndex: tutorialStep.highlightedElements?.includes('tracker') ? 10 : 2 }}
+        >
+          <div className="turnTracker-content">
+            <span className="turnTracker-activePlayer">
+              {turn === 2 || phase === 0 ? 'À vous de jouer.' : 'Votre adversaire joue.'}
+            </span>
+
+            <span className="turnTracker-order">
+              {order === 2 ? 'Vous jouez en premier.' : 'Vous jouez en second.'}
+            </span>
+          </div>
+          <div
+            style={{
+              background: phase === 0 ? `transparent` : turn === 2 ? user.hex : rival.hex
+            }}
+            className="turnTracker-phases"
+          >
+            <span className="turnTracker-turns">TOUR {order} - </span>
+            <span className="turnTracker-phases-label">{phaseLabel[phase]}</span>
+          </div>
+        </div>
         {/* Main */}
         <Hand style={{ zIndex: tutorialStep.highlightedElements?.includes('hand') ? 10 : 1 }}>
           {user.hand.map((card, index) => (
@@ -180,6 +278,7 @@ export const Tutorial = () => {
               onClick={() => {
                 handleClick('card', card.id)
               }}
+              onMouseEnter={playHover}
             >
               <div className="img-container">
                 {tutorialStep.selected?.includes('hand-' + card.id) && (
@@ -223,7 +322,7 @@ export const Tutorial = () => {
                   return (
                     <div
                       key={index}
-                      className={`cell ${tutorialStep.highlightedElements?.includes('cell-' + cell.id) && 'important'} ${tutorialStep.selected?.includes('cell-' + cell.id) && 'selected'}`}
+                      className={`cell ${tutorialStep.highlightedElements?.includes('cell-' + cell.id) && 'important'} ${tutorialStep.selected?.includes('cell-' + cell.id) && 'selected'} ${tutorialStep.tired?.includes('cell-' + cell.id) && 'tired'}`}
                       id={cell.id}
                       data-team={cell.side}
                       style={{
@@ -239,8 +338,16 @@ export const Tutorial = () => {
                       onClick={() => {
                         handleClick('cell', cell.id)
                       }}
+                      onMouseEnter={() => {
+                        if (cell.card) playHover
+                      }}
                     >
-                      {tutorialStep.selected?.includes('cell-' + cell.id) && (
+                      {tutorialStep.confirm?.includes('cell-' + cell.id) && (
+                        <div className="cell-confirmModal">
+                          <GiConfirmed size={90} />
+                        </div>
+                      )}
+                      {tutorialStep.green?.includes('cell-' + cell.id) && (
                         <div className="cell-placementTrigger" />
                       )}
                       {cell.card && cell.card.recto !== false && (
@@ -323,16 +430,27 @@ export const Tutorial = () => {
               énergies
             </div>
           )}
-          {phase === 0 && (
+          {phase !== null && (
             <IconButton
               onClick={() => {
                 handleClick('validate')
               }}
             >
-              <span>Échanger [ 1 ] cartes</span>
-              <GiConfirmed size={45} />
+              {phase === 0 && (
+                <>
+                  <span>Échanger [ 1 ] cartes</span>
+                  <GiConfirmed size={45} />
+                </>
+              )}
+              {(phase === 1 || phase === 2 || phase === 3) && (
+                <>
+                  <span>Fin de phase</span>
+                  <PiFlagCheckeredFill size={45} />
+                </>
+              )}
             </IconButton>
           )}
+          {/* TODO ECHANGE PHASE 4 */}
         </div>
       </div>
       {/* Filtre */}

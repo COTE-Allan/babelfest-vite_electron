@@ -44,6 +44,17 @@ export const MusicProvider = ({ children }) => {
     })
   }
 
+  const handleEnded = () => {
+    if (repeat) {
+      player.current.seekTo(0)
+    } else if (currentIndex === playlist.length - 1) {
+      // Si c'est la dernière musique, revenir au début de la playlist
+      setCurrentIndex(0)
+    } else {
+      playNext()
+    }
+  }
+
   const playPrevious = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = prevIndex - 1 < 0 ? playlist.length - 1 : prevIndex - 1
@@ -53,14 +64,6 @@ export const MusicProvider = ({ children }) => {
 
   const togglePlay = () => {
     setIsPlaying((prev) => !prev)
-  }
-
-  const handleEnded = () => {
-    if (repeat) {
-      player.current.seekTo(0)
-    } else {
-      playNext()
-    }
   }
 
   useEffect(() => {
