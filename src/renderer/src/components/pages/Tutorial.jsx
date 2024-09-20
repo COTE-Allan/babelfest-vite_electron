@@ -8,7 +8,7 @@ import '../../styles/pages/tutorial.scss'
 import { MdNavigateNext } from 'react-icons/md'
 import { IoIosFlash } from 'react-icons/io'
 import IconButton from '../items/iconButton'
-import { GiConfirmed } from 'react-icons/gi'
+import { GiConfirmed, GiPriceTag } from 'react-icons/gi'
 import { TiArrowBack } from 'react-icons/ti'
 import { useNavigate } from 'react-router-dom'
 import { BsQuestionLg } from 'react-icons/bs'
@@ -27,11 +27,13 @@ export const Tutorial = () => {
   const { userSettings } = useContext(AuthContext)
   const [user, setUser] = useState(null)
   const [rival, setRival] = useState(null)
+  const [shop, setShop] = useState(null)
   const [costLeft, setCostLeft] = useState(4)
   const [phase, setPhase] = useState(0)
   const [pattern, setPattern] = useState(null)
   const [turn, setTurn] = useState(0)
   const [order, setOrder] = useState(1)
+  const [diff, setDiff] = useState(0)
   const [tutorialStep, setTutorialStep] = useState(null)
   const [step, setStep] = useState(0)
   const navigate = useNavigate()
@@ -53,14 +55,14 @@ export const Tutorial = () => {
   // Création du tuto
   useEffect(() => {
     // Création des users
-    const ids = [15, 25, 63, 48]
     setUser({
       hex: '#40a8f5',
-      hand: getCardsByIds(ids)
+      hand: getCardsByIds([15, 25, 63, 48])
     })
     setRival({
       hex: '#e62e31'
     })
+    setShop(getCardsByIds([42, 27, 38, 57, 89, 20, 13, 95, 57, 102]))
 
     // Création de l'arène
     const cellsToRemove = [31, 27, 28, 24, 0, 4, 3, 7]
@@ -98,6 +100,7 @@ export const Tutorial = () => {
       if (tutorialStep.phase) setPhase(tutorialStep.phase)
       if (tutorialStep.cost) setCostLeft(tutorialStep.cost)
       if (tutorialStep.order) setOrder(tutorialStep.order)
+      if (tutorialStep.diff) setDiff(tutorialStep.diff)
 
       if (tutorialStep.sound) {
         switch (tutorialStep.sound) {
@@ -122,13 +125,12 @@ export const Tutorial = () => {
     }
   }
 
-  // Fonction pour gérer la suppression d'une carte de la main ou d'une cellule
   function handleRemoveCard() {
     if (tutorialStep.removeCard.where === 'hand') {
       // Supprime une carte de la main
       setUser((prevUser) => ({
         ...prevUser,
-        hand: prevUser.hand.filter((card) => card.id !== tutorialStep.removeCard.id)
+        hand: prevUser.hand.filter((card) => !tutorialStep.removeCard.id.includes(card.id))
       }))
     }
 
@@ -218,7 +220,7 @@ export const Tutorial = () => {
     })
   }
 
-  if (!user || !rival || !pattern || !tutorialStep) return
+  if (!user || !rival || !pattern || !tutorialStep || !shop) return
   return (
     <div className="tutorial fade-in">
       <div
@@ -339,7 +341,7 @@ export const Tutorial = () => {
                         handleClick('cell', cell.id)
                       }}
                       onMouseEnter={() => {
-                        if (cell.card) playHover
+                        if (cell.card) playHover()
                       }}
                     >
                       {tutorialStep.confirm?.includes('cell-' + cell.id) && (
@@ -351,12 +353,7 @@ export const Tutorial = () => {
                         <div className="cell-placementTrigger" />
                       )}
                       {cell.card && cell.card.recto !== false && (
-                        <div
-                          className="cell-card"
-                          onMouseEnter={() => {
-                            hover()
-                          }}
-                        >
+                        <div className="cell-card">
                           <div className="cell-card-stats">
                             {[cell.card.atk, cell.card.dep, cell.card.hp].map((stat, key) => {
                               let className = 'cell-card-stats-item'
@@ -430,8 +427,23 @@ export const Tutorial = () => {
               énergies
             </div>
           )}
+          {phase === 4 && (
+            <div
+              className="costCounter"
+              style={{
+                color: diff >= 0 ? '#4ead35' : '#bb2424'
+              }}
+            >
+              <div className="costCounter-infos">
+                <GiPriceTag />
+                <span>{diff}</span>
+              </div>
+              Différentiel
+            </div>
+          )}
           {phase !== null && (
             <IconButton
+              className={`${tutorialStep.clickOn.element !== 'validate' && 'disabled'}`}
               onClick={() => {
                 handleClick('validate')
               }}
@@ -448,10 +460,42 @@ export const Tutorial = () => {
                   <PiFlagCheckeredFill size={45} />
                 </>
               )}
+              {phase === 4 && (
+                <>
+                  <span>Valider l'échange</span>
+                  <GiConfirmed size={45} />
+                </>
+              )}
             </IconButton>
           )}
+
           {/* TODO ECHANGE PHASE 4 */}
         </div>
+        {/* Shop */}
+        {phase === 4 && (
+          <div
+            className={`window left`}
+            style={{ zIndex: tutorialStep.highlightedElements?.includes('shop') ? 10 : 1 }}
+          >
+            <div className="shop-list">
+              {shop.map((card) => (
+                <div
+                  key={card.name}
+                  className={`shop-item ${tutorialStep.highlightedElements?.includes('shop-' + card.id) && 'important'} ${tutorialStep.selected?.includes('shop-' + card.id) && 'selected'}`}
+                  onClick={() => handleClick('shop', card.id)}
+                  onMouseEnter={playHover}
+                >
+                  <div className="img-container">
+                    <div className={`card-cost`}>
+                      <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
+                    </div>
+                    <img src={card.url} alt="shop card" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       {/* Filtre */}
       <div

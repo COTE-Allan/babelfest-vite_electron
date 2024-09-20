@@ -47,10 +47,16 @@ export const MusicProvider = ({ children }) => {
   const handleEnded = () => {
     if (repeat) {
       player.current.seekTo(0)
+    } else if (playlist.length === 1) {
+      // Si la playlist ne contient qu'une seule musique, recommencer la même musique
+      player.current.seekTo(0)
+      setIsPlaying(true)
     } else if (currentIndex === playlist.length - 1) {
-      // Si c'est la dernière musique, revenir au début de la playlist
+      // Si c'est la dernière musique et qu'il y en a plusieurs, revenir au début de la playlist
       setCurrentIndex(0)
+      setIsPlaying(true)
     } else {
+      // Sinon, jouer la prochaine musique
       playNext()
     }
   }

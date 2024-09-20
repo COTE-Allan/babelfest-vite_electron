@@ -56,7 +56,7 @@
     "modal": true,
     "highlightedElements": ["hand", "bottom-menu"],
     "selected": ["hand-63"],
-    "removeCard": { "where": "hand", "id": 63 },
+    "removeCard": { "where": "hand", "id": [63] },
     "addCard": { "where": "hand", "id": 83 },
     "turn": 1,
     "phase": 1,
@@ -140,7 +140,7 @@
     "highlightedElements": ["cell-18"],
     "selected": ["hand-48"],
     "green": ["cell-18"],
-    "removeCard": { "where": "hand", "id": 48 },
+    "removeCard": { "where": "hand", "id": [48] },
     "addCard": { "where": "cell", "id": 48, "to": 18, "owner": 1 },
     "cost": 1,
     "sound": "summon"
@@ -183,7 +183,7 @@
     "position": "top-left",
     "highlightedElements": ["cell-17"],
     "selected": ["hand-15"],
-    "removeCard": { "where": "hand", "id": 15 },
+    "removeCard": { "where": "hand", "id": [15] },
     "addCard": { "where": "cell", "id": 15, "to": 17, "owner": 1 },
     "sound": "summon",
     "cost": 0,
@@ -245,6 +245,14 @@
   },
   {
     "url": "./images/tuto_hautain.png",
+    "text": "Observe les chiffres sur les cartes, la valeur au centre représente la distance maximale qu'une carte peut traverser en un déplacement.",
+    "clickOn": { "element": "dialog" },
+    "position": "top-left",
+    "highlightedElements": ["arena"],
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
     "text": "Sélectionne un combattant dans l'arène.",
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
@@ -274,12 +282,12 @@
       "from": 17,
       "to": 9
     },
-    "cost": 3,
+    "cost": 2,
     "tired": ["cell-10"]
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Ton combattant viens de se déplacer, retiens que peu importe la distance, tu ne pourra pas le redéplacer ce tour.",
+    "text": "Ton combattant viens de se déplacer, retiens que peu importe l'énergie qu'il te reste, tu ne pourra pas le redéplacer ce tour.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "tired": ["cell-10", "cell-9"]
@@ -374,8 +382,7 @@
     "green": ["cell-10"],
     "confirm": ["cell-10"],
     "removeCard": { "where": "cell", "id": 10 },
-    "sound": "death",
-    "turn": 1
+    "sound": "death"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -386,19 +393,196 @@
   },
   {
     "url": "./images/tuto_hautain.png",
+    "text": "Maintenant que tu a attaqué une fois, je peut réattaquer à nouveau, mais je n'ai aucun combattant qui en a la possibilité, donc je met fin à mon tour.",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "tired": ["cell-14", "cell-9"],
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Tu peut donc attaquer à nouveau toi aussi, mais tu n'a aucun combattant valide, passe ton tour.",
+    "clickOn": { "element": "validate" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu"],
+    "tired": ["cell-14", "cell-9"],
+    "turn": 1,
+    "sound": "turn"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "La dernière phase d'un tour c'est le troc.",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "modal": true,
+    "phase": 4
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "L'objectif de cette phase est d'échanger des cartes avec la 'boutique', qui contient 9 combattants aléatoires. L'échange est optionnel et sert à renforcer ton équipe en remplacant des combattants que tu ne veut pas jouer.",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "modal": true,
+    "highlightedElements": ["shop"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "La valeur que tu vois ici c'est le coût de l'échange, le coût va baisser quand tu achète une carte et va augmenter quand tu va en vendre, il doit être supérieur à 0 pour conclure l'achat.",
+    "clickOn": { "element": "dialog" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu", "shop"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Commence par choisir les cartes que tu compte acheter.",
+    "clickOn": { "element": "shop", "id": 42 },
+    "position": "center",
+    "modal": true,
+    "highlightedElements": ["bottom-menu", "shop", "shop-42"],
+    "diff": -3
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Le différentiel baisse de 3, car la carte coûte 3 énergies pour être invoqué.",
+    "clickOn": { "element": "dialog" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu", "shop"],
+    "selected": ["shop-42"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Sélectionne une carte que tu va vendre.",
+    "clickOn": { "element": "card", "id": 83 },
+    "position": "center",
+    "modal": true,
+    "highlightedElements": ["bottom-menu", "hand", "shop", "hand-83"],
+    "diff": -1,
+    "selected": ["shop-42"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Le différentiel augmente de 2, car la carte coûte 2 énergies pour être invoqué. Ce n'est pas assez pour valider l'échange.",
+    "clickOn": { "element": "dialog" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu"],
+    "selected": ["shop-42", "hand-83"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Sélectionne une deuxième carte à vendre.",
+    "clickOn": { "element": "card", "id": 25 },
+    "position": "center",
+    "modal": true,
+    "highlightedElements": ["bottom-menu", "hand", "shop", "hand-25"],
+    "diff": "0",
+    "selected": ["shop-42", "hand-83"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "L'échange est valide, tu peut maintenant confirmer.",
+    "clickOn": { "element": "validate" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu"],
+    "removeCard": { "where": "hand", "id": [25, 83] },
+    "addCard": { "where": "hand", "id": 42 },
+    "selected": ["shop-42", "hand-83", "hand-25"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Tu a terminer ton premier échange, retiens que tu peut aussi prendre plusieurs cartes de la boutique d'un coup.",
+    "clickOn": { "element": "dialog" },
+    "position": "center",
+    "modal": true,
+    "highlightedElements": ["bottom-menu", "hand"],
+    "phase": 1
+  },
+  {
+    "url": "./images/tuto_hautain.png",
     "text": "En terminant la phase de troc, on passe au tour suivant et on recommence les phases ( Invocation, Déplacement, Attaque et Troc ) en inversant l'ordre de jeu.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
     "order": 2,
     "turn": 2,
-    "phase": 1,
     "sound": "turn"
   },
   {
     "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "card", "id": 42 },
+    "text": "Ce tour-ci, tu commence, invoque en premier, fait ta phase de préparation.",
+    "highlightedElements": ["hand-42"],
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "cell", "id": 29 },
+    "text": "Ce tour-ci, tu commence, invoque en premier, fait ta phase de préparation.",
+    "highlightedElements": ["cell-29"],
+    "green": ["cell-29"],
+    "selected": ["hand-42"],
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "cell", "id": 29 },
+    "text": "Ce tour-ci, tu commence, invoque en premier, fait ta phase de préparation.",
+    "highlightedElements": ["cell-29"],
+    "green": ["cell-29"],
+    "selected": ["hand-42", "cell-29"],
+    "position": "top-left",
+    "confirm": ["cell-29"],
+    "removeCard": { "where": "hand", "id": [42] },
+    "addCard": { "where": "cell", "id": 42, "to": 29, "owner": 2 },
+    "sound": "turn",
+    "phase": 2
+  },
+  {
+    "url": "./images/tuto_hautain.png",
     "clickOn": { "element": "dialog" },
-    "text": "Ce tour-ci, tu commence, invoque en premier.",
+    "text": "Cette fois-ci, je décide de ne pas invoquer, la phase de déplacement commence.",
+    "position": "center",
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "cell", "id": 9 },
+    "highlightedElements": ["arena", "cell-9"],
+    "text": "Ta carte 'Xyphias Tonitruo', possède 4 points de déplacements, tu peut donc te déplacer sur ma base pour la capturer.",
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "cell", "id": 2 },
+    "highlightedElements": ["arena", "cell-9"],
+    "selected": ["cell-9"],
+    "green": ["cell-2"],
+    "text": "Ta carte 'Xyphias Tonitruo', possède 4 points de déplacements, tu peut donc te déplacer sur ma base pour la capturer.",
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "cell", "id": 2 },
+    "highlightedElements": ["arena", "cell-9"],
+    "green": ["cell-2"],
+    "selected": ["cell-9", "cell-2"],
+    "confirm": ["cell-2"],
+    "text": "Ta carte 'Xyphias Tonitruo', possède 4 points de déplacements, tu peut donc te déplacer sur ma base pour la capturer.",
+    "position": "top-left",
+    "moveCard": {
+      "from": 9,
+      "to": 2
+    },
+    "sound": "win"
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "dialog" },
+    "text": "test",
     "position": "top-left"
   }
 ]

@@ -72,8 +72,10 @@
         }
 
         & .next {
-            max-width: 100px;
-            max-height: 100px;
+            margin-left: 10px;
+            width: 50px;
+            flex-shrink: 0;
+            height: 50px;
             animation: blink 2s ease-in-out infinite both;
         }
     }
