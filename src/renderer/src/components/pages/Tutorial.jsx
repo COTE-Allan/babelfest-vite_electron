@@ -18,13 +18,14 @@ import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import summonSfx from '../../assets/sfx/summon.mp3'
 import turnSfx from '../../assets/sfx/notification_urturn.wav'
+import endSfx from '../../assets/sfx/match_end.mp3'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import deathSfx from '../../assets/sfx/ingame_death.mp3'
 import MusicPlayer from '../interface/musicPlayer'
 
 export const Tutorial = () => {
-  const { userSettings } = useContext(AuthContext)
+  const { userSettings, giveAchievement } = useContext(AuthContext)
   const [user, setUser] = useState(null)
   const [rival, setRival] = useState(null)
   const [shop, setShop] = useState(null)
@@ -34,6 +35,7 @@ export const Tutorial = () => {
   const [turn, setTurn] = useState(0)
   const [order, setOrder] = useState(1)
   const [diff, setDiff] = useState(0)
+  const [win, setWin] = useState(false)
   const [tutorialStep, setTutorialStep] = useState(null)
   const [step, setStep] = useState(0)
   const navigate = useNavigate()
@@ -43,6 +45,7 @@ export const Tutorial = () => {
   const [playDeath] = useSound(deathSfx, { volume: userSettings.sfxVolume })
   const [playHover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [playSelect] = useSound(selectSfx, { volume: userSettings.sfxVolume })
+  const [playEnd] = useSound(endSfx, { volume: userSettings.sfxVolume })
 
   const phaseLabel = {
     0: "Échange avec l'autre joueur",
@@ -80,50 +83,62 @@ export const Tutorial = () => {
     if (tutorialStep.clickOn.element === element) {
       playSelect()
 
-      if (tutorialStep.removeCard) {
-        handleRemoveCard()
-      }
-
-      if (tutorialStep.addCard) {
-        handleAddCard()
-      }
-
-      if (tutorialStep.moveCard) {
-        handleMoveCard()
-      }
-
-      if (tutorialStep.editCard) {
-        handleEditCard() // Nouvelle fonction pour éditer la carte
-      }
-
-      if (tutorialStep.turn) setTurn(tutorialStep.turn)
-      if (tutorialStep.phase) setPhase(tutorialStep.phase)
-      if (tutorialStep.cost) setCostLeft(tutorialStep.cost)
-      if (tutorialStep.order) setOrder(tutorialStep.order)
-      if (tutorialStep.diff) setDiff(tutorialStep.diff)
-
-      if (tutorialStep.sound) {
-        switch (tutorialStep.sound) {
-          case 'summon':
-            playSummon()
-            break
-          case 'turn':
-            playTurn()
-            break
-          case 'death':
-            playDeath()
-            break
-          default:
-            break
-        }
-      }
-
       // Si l'élément cliqué est correct et l'ID correspond, on passe à l'étape suivante
       if ((id && tutorialStep.clickOn.id === id) || !id) {
+        if (tutorialStep.removeCard) {
+          handleRemoveCard()
+        }
+
+        if (tutorialStep.addCard) {
+          handleAddCard()
+        }
+
+        if (tutorialStep.moveCard) {
+          handleMoveCard()
+        }
+
+        if (tutorialStep.editCard) {
+          handleEditCard() // Nouvelle fonction pour éditer la carte
+        }
+
+        if (tutorialStep.turn) setTurn(tutorialStep.turn)
+        if (tutorialStep.phase) setPhase(tutorialStep.phase)
+        if (tutorialStep.cost) setCostLeft(tutorialStep.cost)
+        if (tutorialStep.order) setOrder(tutorialStep.order)
+        if (tutorialStep.diff) setDiff(tutorialStep.diff)
+        if (tutorialStep.win) setWin(true)
+
+        if (tutorialStep.sound) {
+          switch (tutorialStep.sound) {
+            case 'summon':
+              playSummon()
+              break
+            case 'turn':
+              playTurn()
+              break
+            case 'death':
+              playDeath()
+              break
+            case 'end':
+              playEnd()
+              break
+            default:
+              break
+          }
+        }
         setStep(step + 1)
       }
     }
   }
+
+  useEffect(() => {
+    if (win) {
+      giveAchievement('HF_tutorial')
+      setTimeout(() => {
+        navigate('/home')
+      }, 2000)
+    }
+  }, [win])
 
   function handleRemoveCard() {
     if (tutorialStep.removeCard.where === 'hand') {
@@ -138,7 +153,7 @@ export const Tutorial = () => {
       // Supprime une carte d'une cellule
       setPattern((prevPattern) =>
         prevPattern.map((cell) =>
-          cell.id === tutorialStep.removeCard.id ? { ...cell, card: null } : cell
+          cell.id === tutorialStep.removeCard.id ? { ...cell, card: null, owner: null } : cell
         )
       )
     }
@@ -223,6 +238,8 @@ export const Tutorial = () => {
   if (!user || !rival || !pattern || !tutorialStep || !shop) return
   return (
     <div className="tutorial fade-in">
+      {win && <div className="tutorial-win fade-in"></div>}
+
       <div
         className={`tutorial-modal ${tutorialStep.position} ${tutorialStep.clickOn.element === 'dialog' && 'clickable'}`}
         onClick={() => {
@@ -237,7 +254,7 @@ export const Tutorial = () => {
           <span className="speaker">Tuto</span>
           <p className="text">{tutorialStep.text}</p>
         </div>
-        {tutorialStep.clickOn.element === 'dialog' && (
+        {(tutorialStep.clickOn.element === 'dialog' || tutorialStep.clickOn.element === 'end') && (
           <MdNavigateNext className="next" size={150} />
         )}
       </div>

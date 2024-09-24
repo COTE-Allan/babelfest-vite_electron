@@ -537,7 +537,7 @@
     "position": "top-left",
     "confirm": ["cell-29"],
     "removeCard": { "where": "hand", "id": [42] },
-    "addCard": { "where": "cell", "id": 42, "to": 29, "owner": 2 },
+    "addCard": { "where": "cell", "id": 42, "to": 29, "owner": 1 },
     "sound": "turn",
     "phase": 2
   },
@@ -577,12 +577,28 @@
       "from": 9,
       "to": 2
     },
-    "sound": "win"
+    "sound": "end"
   },
   {
     "url": "./images/tuto_hautain.png",
     "clickOn": { "element": "dialog" },
-    "text": "test",
-    "position": "top-left"
+    "text": "Félicitation, tu viens de gagner via capture. N'oublie pas que tu peut aussi gagner en éliminant tout les combattants adverses.",
+    "position": "center",
+    "modal": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "dialog" },
+    "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, bonne chance.",
+    "position": "center",
+    "modal": true,
+    "win": true
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "clickOn": { "element": "end" },
+    "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, bonne chance.",
+    "position": "center",
+    "modal": true
   }
 ]

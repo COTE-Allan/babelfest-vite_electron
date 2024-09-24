@@ -34,5 +34,30 @@
         "spawnUsed": false
       }
     ]
+  },
+  {
+    "name": "Tulip",
+    "title": "Enfant nomade",
+    "desc": "Ajoutée au jeu pour commémorer la sortie de la campagne de Krone Tome 1 & 2.",
+    "atk": 2,
+    "dep": 2,
+    "hp": 0,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 0,
+    "url": "./cards/promo/babelfest_promo1.png",
+    "rarity": 1,
+    "collection": "Promo",
+    "year": 2024,
+    "author": "Antoine Bordon",
+    "shiny": "foil",
+    "effects": [
+      {
+        "type": "randomHP",
+        "when": ["spawn"],
+        "range": [2, 3, 4],
+        "spawnUsed": false
+      }
+    ]
   }
 ]

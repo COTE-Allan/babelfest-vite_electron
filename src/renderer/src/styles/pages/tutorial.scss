@@ -79,4 +79,14 @@
             animation: blink 2s ease-in-out infinite both;
         }
     }
+
+    &-win {
+        position: absolute;
+        z-index: 15;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+    }
 }

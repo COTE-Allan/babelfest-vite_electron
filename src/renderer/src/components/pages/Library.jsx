@@ -173,7 +173,8 @@ export default function Library() {
           card.collection.toLowerCase().includes(searchLower) ||
           card.name.toLowerCase().includes(searchLower) ||
           card.author.toLowerCase().includes(searchLower) ||
-          card.id == searchLower       )
+          card.id == searchLower
+      )
     }
 
     if (selectedRarities.length > 0) {
@@ -367,14 +368,21 @@ export default function Library() {
               <span>par {selected.author}</span>
 
               {selected.desc && (
-                <p className="prestige-promo library-detail-infos-desc">{selected.desc}</p>
+                <div className="prestige">
+                  <div className=" prestige prestige-promo library-detail-infos-desc">
+                    {selected.desc}
+                  </div>
+                </div>
               )}
 
-              {selected.rarity !== 5 ? (
-                <h2>Coût d'invocation : {selected.rarity}</h2>
-              ) : (
-                <h2>Non invocable normalement</h2>
-              )}
+              <h2 className={`txt-rarity-${selected.rarity}`}>
+                {selected.rarity === 5 ? (
+                  <>Non invocable normalement</>
+                ) : (
+                  <>Coût d'invocation : {selected.rarity}</>
+                )}
+              </h2>
+
               {selected.effects && (
                 <>
                   <h3>Effets :</h3>
