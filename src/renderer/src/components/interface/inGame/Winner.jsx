@@ -46,13 +46,20 @@ export default function Winner() {
   const checkForAchievements = useCheckForAchievements()
 
   useEffect(() => {
+    let timeoutId
     if (winner !== null) {
       ending()
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setHandleWin(true)
       }, 1000)
     } else {
       setHandleWin(null)
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
     }
   }, [winner])
 

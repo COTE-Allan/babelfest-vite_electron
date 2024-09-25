@@ -46,15 +46,6 @@ export function useJoinLobby() {
   return joinLobby
 }
 
-export function useJoinGameAsSpectator() {
-  const navigate = useNavigate()
-
-  const joinGameAsSpectator = async (gameRef) => {
-    navigate(`/gameSpectator/${gameRef}`)
-  }
-  return joinGameAsSpectator
-}
-
 export function useLeaveLobby() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)

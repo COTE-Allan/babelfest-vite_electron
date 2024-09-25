@@ -487,7 +487,7 @@
     "clickOn": { "element": "validate" },
     "position": "above-buttons",
     "modal": true,
-    "highlightedElements": ["bottom-menu"],
+    "highlightedElements": ["bottom-menu", "shop", "hand"],
     "removeCard": { "where": "hand", "id": [25, 83] },
     "addCard": { "where": "hand", "id": 42 },
     "selected": ["shop-42", "hand-83", "hand-25"]
@@ -509,7 +509,8 @@
     "modal": true,
     "order": 2,
     "turn": 2,
-    "sound": "turn"
+    "sound": "turn",
+    "editCard": { "id": 14, "atk": 4 }
   },
   {
     "url": "./images/tuto_hautain.png",

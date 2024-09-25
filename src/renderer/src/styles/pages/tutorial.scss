@@ -27,11 +27,11 @@
         &-content {
             & .speaker {
                 font-family: 'Kimberly Bl', sans-serif;
-                font-size: 20px;
+                font-size: 22px;
             }
 
             & .text {
-                font-size: 14px;
+                font-size: 16px;
                 margin: 0;
                 padding: 0;
                 line-height: 20px;
@@ -88,5 +88,9 @@
         width: 100vw;
         height: 100vh;
         background-color: black;
+    }
+
+    .musicPlayer-container {
+        left: -20px;
     }
 }

@@ -59,7 +59,7 @@
     "id": "HF_15winStreak",
     "name": "Domination totale",
     "desc": "Gagnez 15 parties d'affilée en rapide et/ou classée.",
-    "url": "./skins/icon_success_title.png",
+    "url": "./skins/borders/cadre_juge_impartial.png",
     "objective": {
       "stat": "longestWinStreak",
       "value": 15

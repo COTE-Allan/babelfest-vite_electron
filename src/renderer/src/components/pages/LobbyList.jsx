@@ -1,11 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { db } from '../../Firebase'
-import {
-  useCreateLobby,
-  useJoinGameAsSpectator,
-  useJoinLobby
-} from '../controllers/ManageLobbyAndGame'
+import { useCreateLobby, useJoinLobby } from '../controllers/ManageLobbyAndGame'
 import Button from '../items/Button'
 import '../../styles/pages/lobbyList.scss'
 import Modal from '../items/ClassicModal'
@@ -29,7 +25,6 @@ export default function LobbyList() {
   const [joinLobbyPassword, setJoinLobbyPassword] = useState(null)
 
   const joinLobby = useJoinLobby()
-  const joinGameAsSpectator = useJoinGameAsSpectator()
   const createLobby = useCreateLobby()
   const sendMessage = useSendMessage()
 
@@ -72,8 +67,6 @@ export default function LobbyList() {
   const handleJoinLobby = (lobbyID) => {
     const foundLobby = lobbies.find((lobby) => lobby.id === lobbyID)
     if (foundLobby.version !== verName) {
-      // joinGameAsSpectator(foundLobby.gameRef);
-      joinLobby(lobbyID)
       sendMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
     } else {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {

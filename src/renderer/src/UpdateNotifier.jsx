@@ -47,19 +47,21 @@ const UpdateNotifier = () => {
           Mise à jour disponible {updateInfo && updateInfo.version && `: ${updateInfo.version}`}
         </div>
         <span>
-          Vous devez télécharger la mise à jour pour jouer, une fois téléchargée, le jeu se fermera
-          pour ouvrir l'installateur.
+          Vous devez télécharger la mise à jour pour jouer, une fois téléchargée, le jeu va
+          redémarrer.
         </span>
         <div className="updateBanner-download">
           {progress && (
             <>
-              <div>
+              <div className="updateBanner-download-infos">
                 Téléchargement en cours : {(progress.transferred / 1024 / 1024).toFixed(1)} MB /{' '}
                 {(progress.total / 1024 / 1024).toFixed(2)} MB -{' '}
                 {(progress.bytesPerSecond / 1024 / 1024).toFixed(2)} MB/s
               </div>
               <ProgressBar
-                completed={`${((progress.transferred / progress.total) * 100).toFixed(1)}%`}
+                customLabel={`${((progress.transferred / progress.total) * 100).toFixed(1)}%`}
+                completed={progress.transferred}
+                maxCompleted={progress.total}
                 bgColor="#4caf50"
                 height="20px"
                 labelAlignment="center"

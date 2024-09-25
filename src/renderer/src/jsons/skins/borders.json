@@ -127,6 +127,12 @@
     "achievement": "HF_10winStreak"
   },
   {
+    "url": "./skins/borders/cadre_juge_impartial.png",
+    "name": "Juge impartial",
+    "unlockTip": "Obtenu en récompense du succès : 'Domination totale'",
+    "achievement": "HF_15winStreak"
+  },
+  {
     "url": "./skins/borders/cadre_or_honor.png",
     "name": "Plaqué Hon'OR",
     "unlockTip": "Obtenu en récompense du succès : 'Digne'",
