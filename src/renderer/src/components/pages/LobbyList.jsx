@@ -6,16 +6,19 @@ import Button from '../items/Button'
 import '../../styles/pages/lobbyList.scss'
 import Modal from '../items/ClassicModal'
 import { AuthContext } from '../../AuthContext'
-import { FaLock, FaPlusCircle, FaUser } from 'react-icons/fa'
-import { toast } from 'react-toastify'
+import { FaEye, FaLock, FaPlusCircle, FaUser } from 'react-icons/fa'
+import { CgEnter } from 'react-icons/cg'
 import changelog from '../../jsons/changelog.json'
 import { useSendMessage } from '../others/toolBox'
 import BackButton from '../items/BackButton'
+import { useNavigate } from 'react-router-dom'
+import HudNavLink from '../items/hudNavLink'
 
 export default function LobbyList() {
   const verName = changelog.slice(-1)[0].title
   const { user, userInfo } = useContext(AuthContext)
   const [lobbies, setLobbies] = useState([])
+  const navigate = useNavigate()
 
   const [askNewLobby, setAskNewLobby] = useState(false)
   const [askPassword, setAskPassword] = useState(false)
@@ -72,15 +75,18 @@ export default function LobbyList() {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {
         joinLobby(lobbyID)
       } else {
-        // rejoindre en spec LOCKED
-        // if (foundLobby.gameRef) {
-        //   joinGameAsSpectator(foundLobby.gameRef)
-        // } else {
-        //   sendMessage(
-        //     'Attendez que cette partie commence pour la rejoindre en tant que spectateur.'
-        //   )
-        // }
+        handleJoinAsSpectator(lobbyID)
       }
+    }
+  }
+
+  const handleJoinAsSpectator = (lobbyID) => {
+    const foundLobby = lobbies.find((lobby) => lobby.id === lobbyID)
+    navigate(`/lobby/${lobbyID}`, { state: { spectator: true } })
+    if (foundLobby.version === verName) {
+      navigate(`/lobby/${lobbyID}`, { state: { spectator: true } })
+    } else {
+      sendMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
     }
   }
 
@@ -103,26 +109,38 @@ export default function LobbyList() {
           <ul className="lobbies-list">
             {lobbies.length > 0 ? (
               lobbies.map((lobby) => (
-                <li
-                  key={lobby.id}
-                  onClick={() => {
-                    if (lobby.password) {
-                      setAskPassword({ password: lobby.password, id: lobby.id })
-                    } else {
-                      handleJoinLobby(lobby.id)
-                    }
-                  }}
-                  className="lobbies-list-item"
-                >
-                  <span>
+                <li key={lobby.id} className="lobbies-list-item">
+                  <span className="lobbies-list-item-span">
                     Lobby de {lobby.creator} - {lobby.name}
                   </span>
-                  <span>
-                    <FaUser />
-                    {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
-                    {lobby.password && <FaLock />}
-                    <span>- v{lobby.version}</span>
-                  </span>
+                  <div className="lobbies-list-item-div">
+                    <span className="lobbies-list-item-span">
+                      <FaUser />
+                      {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
+                      {lobby.password && <FaLock />}
+                      <span>- v{lobby.version}</span>
+                    </span>
+                    <HudNavLink
+                      onClick={() => {
+                        if (lobby.password) {
+                          setAskPassword({ password: lobby.password, id: lobby.id })
+                        } else {
+                          handleJoinLobby(lobby.id)
+                        }
+                      }}
+                    >
+                      <span className="hidden-span">Rejoindre</span>
+                      <CgEnter size={30} />
+                    </HudNavLink>
+                    <HudNavLink
+                      onClick={() => {
+                        handleJoinAsSpectator(lobby.id)
+                      }}
+                    >
+                      <span className="hidden-span">Regarder</span>
+                      <FaEye size={30} />
+                    </HudNavLink>
+                  </div>
                 </li>
               ))
             ) : (

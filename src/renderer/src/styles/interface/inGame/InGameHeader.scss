@@ -29,7 +29,7 @@
     &-state {
       margin-right: 5px;
 
-      & > div {
+      &>div {
         display: flex;
       }
 
@@ -109,7 +109,7 @@
 
       &:hover {
         transform: scale(1.1);
-        cursor: pointer;
+        cursor: url('../../../assets/svg/pointer.svg'), auto;
       }
     }
 
@@ -126,7 +126,8 @@
   }
 
   // height: 50px;
-  font-family: 'Kimberly Bl', sans-serif;
+  font-family: 'Kimberly Bl',
+  sans-serif;
 
   &-activePlayer {
     @include for-desktop-up {

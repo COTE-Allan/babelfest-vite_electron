@@ -43,7 +43,7 @@
 
       &:hover {
         transform: scale(1.1);
-        cursor: pointer;
+        cursor: url('../../../assets/svg/pointer.svg'), auto;
       }
     }
 
@@ -117,6 +117,7 @@
       align-items: center;
       flex-direction: column;
       z-index: -2;
+
       &.reversed {
         transform: rotate(180deg);
       }

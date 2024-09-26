@@ -28,7 +28,8 @@
     }
 
     &:hover {
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
         background-color: rgba(0, 0, 0, 0.6);
     }
 

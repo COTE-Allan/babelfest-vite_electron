@@ -95,6 +95,10 @@
       @include greyBorders();
       border-radius: 5px;
 
+      &:hover {
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+      }
+
       &.titre,
       &.prestige {
         padding: 10px 15px;

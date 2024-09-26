@@ -90,7 +90,8 @@
       }
 
       &:hover {
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
         transform: scale(1.2);
       }
     }

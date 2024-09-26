@@ -49,7 +49,7 @@ $grey: rgb(37, 37, 37);
   &:hover {
     background-color: white;
     color: black;
-    cursor: pointer;
+    cursor: url('../assets/svg/pointer.svg'), auto;
   }
 }
 

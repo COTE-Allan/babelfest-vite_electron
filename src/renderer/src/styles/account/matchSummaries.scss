@@ -22,7 +22,8 @@
         overflow: hidden;
 
         &:hover {
-            cursor: pointer;
+            cursor: url('../../assets/svg/pointer.svg'), auto;
+            ;
             border-color: rgba(255, 255, 255, 0.505);
         }
 

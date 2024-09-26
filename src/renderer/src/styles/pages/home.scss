@@ -60,7 +60,8 @@
       }
 
       &:hover {
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
       }
     }
   }
@@ -134,7 +135,8 @@
 
         &:hover {
           text-decoration: underline;
-          cursor: pointer;
+          cursor: url('../../assets/svg/pointer.svg'), auto;
+          ;
         }
       }
     }
@@ -217,7 +219,7 @@
 
         &:hover {
           transform: translateX(10px);
-          cursor: pointer;
+          cursor: url('../../assets/svg/pointer.svg'), auto;
         }
       }
     }
@@ -285,7 +287,8 @@
       transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
 
       &:hover {
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
         transform: scale(1.05);
         opacity: 1;
       }

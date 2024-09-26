@@ -60,7 +60,8 @@
     }
 
     &:hover {
-      cursor: pointer;
+      cursor: url('../../assets/svg/pointer.svg'), auto;
+      ;
       background-color: white;
       color: black;
 
@@ -98,7 +99,8 @@
     &:hover {
       color: black;
       background-color: white;
-      cursor: pointer;
+      cursor: url('../../assets/svg/pointer.svg'), auto;
+      ;
 
       & img {
         mix-blend-mode: difference;
@@ -149,7 +151,8 @@
         }
 
         &:hover {
-          cursor: pointer;
+          cursor: url('../../assets/svg/pointer.svg'), auto;
+          ;
           background-color: rgba(0, 0, 0, 0.8);
         }
       }

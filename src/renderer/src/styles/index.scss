@@ -52,6 +52,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: url('../assets/svg/curseur.svg'), auto;
 }
 
 h1 {
@@ -85,7 +86,7 @@ button {
 
   &:hover {
     border-color: white;
-    cursor: pointer;
+    cursor: url('../assets/svg/pointer.svg'), auto;
     background-color: rgb(255, 255, 255);
     color: black;
   }
@@ -258,7 +259,7 @@ select {
 
   &:hover {
     text-decoration: underline;
-    cursor: pointer;
+    cursor: url('../assets/svg/pointer.svg'), auto;
   }
 }
 
@@ -328,6 +329,11 @@ select {
   &:hover {
     cursor: not-allowed;
   }
+}
+
+a:hover {
+  cursor: url('../assets/svg/pointer.svg'), auto;
+
 }
 
 

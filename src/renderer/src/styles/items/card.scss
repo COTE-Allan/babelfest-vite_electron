@@ -54,7 +54,7 @@
   }
 
   &:hover {
-    cursor: pointer;
+    cursor: url('../../assets/svg/pointer.svg'), auto;
     transform: translateY(-30px);
   }
 

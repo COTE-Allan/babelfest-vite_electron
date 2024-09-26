@@ -50,23 +50,34 @@
 
     &-item {
       margin: 5px 0;
-      width: 100%;
+      width: calc(100% - 20px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px;
       list-style-type: none;
       background-color: $black;
+      border-radius: 15px;
       font-size: 18px;
       font-family: 'Kimberly Bl', sans-serif;
       @include greyBorders();
-      @include whiteHovering();
+      // @include whiteHovering();
 
-      & span {
+      &-span {
         margin: 0 10px;
         display: flex;
         align-items: center;
       }
+
+      &-div {
+        display: flex;
+        align-items: center;
+      }
+
+      & .hudNavLink {
+        @include greyBorders();
+      }
+
 
 
     }

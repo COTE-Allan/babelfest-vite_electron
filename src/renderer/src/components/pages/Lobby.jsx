@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { doc, onSnapshot, getDoc, arrayRemove, updateDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import '../../styles/pages/lobby.scss'
@@ -35,6 +35,8 @@ const Lobby = () => {
   const leaveLobby = useLeaveLobby()
   const createGame = useCreateGame()
   const navigate = useNavigate()
+  let location = useLocation()
+  let isSpectator = location.state.spectator ?? false
 
   useEffect(() => {
     if (!lobbyId) return
@@ -221,7 +223,11 @@ const Lobby = () => {
             )}
             <Button
               onClick={() => {
-                leaveLobby(lobbyId)
+                if (isSpectator) {
+                  navigate('/lobbyList')
+                } else {
+                  leaveLobby(lobbyId)
+                }
               }}
             >
               Quitter le lobby
