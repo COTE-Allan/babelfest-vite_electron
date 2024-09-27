@@ -105,7 +105,7 @@ export function useLeaveLobby() {
       const userRef = doc(db, 'users', user.uid)
       await updateDoc(userRef, { currentLobby: null })
 
-      navigate('/home')
+      navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
     } catch (error) {
       console.error('Error leaving lobby: ', error)
     }

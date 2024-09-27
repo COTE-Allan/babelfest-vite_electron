@@ -38,7 +38,7 @@ const GamemodeSelect = () => {
             where="/tutorial"
             bg={TutorialCardArena}
           />
-          <MenuCard classNames="small" disabled={"Ce mode de jeu n'est pas encore disponible."} />
+          {/* <MenuCard classNames="small" disabled={"Ce mode de jeu n'est pas encore disponible."} /> */}
         </div>
       </div>
       <BackButton />

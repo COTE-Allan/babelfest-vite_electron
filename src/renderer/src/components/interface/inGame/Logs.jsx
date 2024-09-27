@@ -16,8 +16,17 @@ import {
 import { getBackgroundStyle, isCardMine } from '../../others/toolBox'
 
 export default function Logs(props) {
-  const { logs, myColor, rivalColor, playerID, pattern, phase, playerSelf, playerRival } =
-    useContext(GlobalContext)
+  const {
+    logs,
+    myColor,
+    rivalColor,
+    playerID,
+    pattern,
+    phase,
+    playerSelf,
+    playerRival,
+    isSpectator
+  } = useContext(GlobalContext)
 
   const actions = {
     summon: (cardName) => (
@@ -86,9 +95,11 @@ export default function Logs(props) {
           }
 
           const isMine = log.owner === playerID
-          const isVisible = log.trigger?.isRecto || isMine
-          const itemColor = isMine ? getBackgroundStyle(myColor, "to right") : getBackgroundStyle(rivalColor, "to right")
-          const txtColor = isMine ? myColor.hex : rivalColor.hex;
+          const isVisible = log.trigger?.isRecto || (isMine && !isSpectator)
+          const itemColor = isMine
+            ? getBackgroundStyle(myColor, 'to right')
+            : getBackgroundStyle(rivalColor, 'to right')
+          const txtColor = isMine ? myColor.hex : rivalColor.hex
 
           return (
             <div

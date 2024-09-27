@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
 import { db } from '../../Firebase'
 import {
@@ -9,7 +9,9 @@ import {
   collection,
   orderBy,
   updateDoc,
-  increment
+  increment,
+  arrayUnion,
+  arrayRemove
 } from 'firebase/firestore'
 import Room from '../pages/Room'
 import { DefinePhaseRule } from '../controllers/PhaseController'
@@ -25,7 +27,8 @@ export const GlobalProvider = () => {
   const leaveLobby = useLeaveLobby()
   const sendMessage = useSendMessage()
   const [host, setHost] = useState(false)
-  const [isSpectator, setIsSpectator] = useState(false)
+  let location = useLocation()
+  let isSpectator = location.state?.spectator ?? false
   // Données Globales
   const [gameData, setGameData] = useState(null)
   const [playerSelf, setPlayerSelf] = useState(null)
@@ -78,6 +81,8 @@ export const GlobalProvider = () => {
   const [rightWindow, setRightWindow] = useState(null)
   const [leftWindow, setLeftWindow] = useState(null)
   const [musicPlayer, setMusicPlayer] = useState(false)
+  // Gestion des specs
+  const [spectatorCount, setSpectatorCount] = useState(0)
 
   const [timeJoined, setTimeJoined] = useState(Date.now())
   useEffect(() => {
@@ -114,7 +119,7 @@ export const GlobalProvider = () => {
 
   // Variable qui gère les scenes
   const useScenes = (room) => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext) // Make sure user is accessible here
     const [scenes, setScenes] = useState([])
 
     useEffect(() => {
@@ -137,16 +142,15 @@ export const GlobalProvider = () => {
 
   const scenes = useScenes(room)
 
-  const [spectatorCount, setSpectatorCount] = useState(0)
-
-  // Mettre à jour les états quand la base de données change
+  // Mettre a jour les states quand la db change
   useEffect(() => {
+    // Gérer l'utilisateur qui quitte
     console.log('useEffect activé !')
 
     const unsubscribe = onSnapshot(
       doc(db, 'games', room),
       async (doc) => {
-        console.log('Changement détecté')
+        console.log('changement detecté')
         const data = doc.data()
 
         setGameData(data)
@@ -167,86 +171,80 @@ export const GlobalProvider = () => {
           player2,
           disconnected,
           revenge,
-          spectatorCount
+          spectators
         } = data
-
-        // Déterminer le rôle de l'utilisateur
-        const isPlayer1 = user.uid === player1.id
-        const isPlayer2 = user.uid === player2.id
-        const isSpectator = !isPlayer1 && !isPlayer2
-        setIsSpectator(isSpectator)
-
-        setHost(isPlayer1)
-        setPlayerID(isPlayer1 ? 1 : isPlayer2 ? 2 : 0)
-
-        // Assigner les mains aux joueurs
+        // =====================
+        let isHost = user.uid === player1.id || isSpectator
+        setHost(isHost)
         player1.hand = handJ1
         player2.hand = handJ2
+        setPlayerID(isHost ? 1 : 2)
 
-        // Définir les couleurs des joueurs
         if (userSettings.customColors) {
-          if (isPlayer1) {
-            setMyColor(player1.primaryColor)
-            setRivalColor(player2.primaryColor)
-          } else if (isPlayer2) {
-            setMyColor(player2.primaryColor)
-            setRivalColor(player1.primaryColor)
-          } else {
-            // Couleurs pour les spectateurs
-            setMyColor({ hex: '#40a8f5' })
-            setRivalColor({ hex: '#e62e31' })
+          let myColor = isHost ? player1.primaryColor : player2.primaryColor
+          let rivalColor = isHost ? player2.primaryColor : player1.primaryColor
+
+          // Vérifier si les deux joueurs ont la même couleur
+          if (myColor.hex === rivalColor.hex) {
+            // Si la couleur identique est '#40a8f5', appliquer '#e62e31' au rival
+            if (myColor.hex === '#40a8f5') {
+              rivalColor = { hex: '#e62e31' }
+            }
+            // Si la couleur identique est '#e62e31', appliquer '#40a8f5' au rival
+            else if (myColor.hex === '#e62e31') {
+              rivalColor = { hex: '#40a8f5' }
+            }
+            // Si la couleur identique est différente, appliquer '#40a8f5' au rival
+            else {
+              rivalColor = { hex: '#40a8f5' }
+            }
           }
+
+          setMyColor(myColor)
+          setRivalColor(rivalColor)
         } else {
           setMyColor({ hex: '#40a8f5' })
           setRivalColor({ hex: '#e62e31' })
         }
 
-        // Définir les données des joueurs
-        if (isSpectator) {
-          // Les spectateurs peuvent voir les deux joueurs
-          setPlayerSelf(player1)
-          setPlayerRival(player2)
-        } else {
-          setPlayerSelf(isPlayer1 ? player1 : isPlayer2 ? player2 : null)
-          setPlayerRival(isPlayer1 ? player2 : isPlayer2 ? player1 : null)
-        }
-
-        // Mettre à jour les autres états
+        // =====================
         setStandby(standby)
         setDeck(deck)
         setShop(shop)
         setPhase(phase)
         setFirstToPlay(FirstToPlay)
         setProcessDeath(processDeath)
+        setTurnOrder((isHost && FirstToPlay === 1) || (!isHost && FirstToPlay === 2) ? 1 : 2)
+        setActivePlayer(activePlayer)
         setTurn(turn)
+        setSpectatorCount(spectators)
+        // =====================
         setRevenge(revenge)
         if (finished !== false) {
           setWinner(finished)
         } else {
           setWinner(null)
         }
+        // =====================
 
-        // Gérer les déconnexions
+        if (phase === 1 && turn === 1) {
+          setSelectedCards([])
+        }
+
         if (disconnected) {
           player1.disconnected = disconnected.includes(player1.id)
           player2.disconnected = disconnected.includes(player2.id)
         }
 
-        // Définir les règles de phase en fonction de la longueur de la main
+        setPlayerRival(isHost ? player2 : player1)
+        setPlayerSelf(isHost ? player1 : player2)
+
         if (handJ1 && handJ2) {
-          const handLength = isPlayer1 ? handJ1.length : isPlayer2 ? handJ2.length : 0
-          setPhaseRules(DefinePhaseRule(phase, handLength))
+          setPhaseRules(DefinePhaseRule(phase, isHost ? handJ1.length : handJ2.length))
         }
-
-        // Déterminer si c'est le tour de l'utilisateur
-        if (!isSpectator) {
-          setMyTurn(activePlayer === (isPlayer1 ? 1 : 2))
-        } else {
-          setMyTurn(false)
-        }
-
-        // Mettre à jour le nombre de spectateurs
-        setSpectatorCount(spectatorCount || 0)
+        // ====================
+        setMyTurn(activePlayer === (isHost ? 1 : 2))
+        // ====================
       },
       (error) => {
         console.error("Erreur lors de l'écoute des modifications de la base de données :", error)
@@ -258,44 +256,49 @@ export const GlobalProvider = () => {
     }
   }, [user])
 
-  // Gérer le compteur de spectateurs
   useEffect(() => {
-    if (isSpectator) {
-      const gameRef = doc(db, 'games', room)
-      // Incrémenter le compteur de spectateurs lors du montage du composant
-      updateDoc(gameRef, { spectatorCount: increment(1) }).catch((error) => {
-        console.error("Erreur lors de l'incrémentation du compteur de spectateurs :", error)
-      })
+    let timer
+    if (revenge?.state === 'quit' && revenge?.id !== (host ? 1 : 2)) {
+      sendMessage('Le lobby sera automatiquement supprimé dans 5 secondes.', 'info')
+      timer = setTimeout(() => {
+        leaveLobby(gameData.lobbyId, room, gameData.gamemode)
+      }, 5000)
+    }
+    return () => clearTimeout(timer)
+  }, [revenge])
 
-      // Décrémenter le compteur de spectateurs lors du démontage du composant
-      return () => {
-        updateDoc(gameRef, { spectatorCount: increment(-1) }).catch((error) => {
-          console.error('Erreur lors de la décrémentation du compteur de spectateurs :', error)
+  // Gestion du compteur de spec
+  useEffect(() => {
+    const gameDocRef = doc(db, 'games', room)
+
+    if (isSpectator) {
+      // Add spectator ID to the spectators array (avoids duplicates)
+      updateDoc(gameDocRef, {
+        spectators: arrayUnion(user.uid)
+      }).catch((error) => {
+        console.error('Error adding spectator to the list:', error)
+      })
+    }
+
+    return () => {
+      if (isSpectator) {
+        // Remove spectator ID from the spectators array when leaving the game
+        updateDoc(gameDocRef, {
+          spectators: arrayRemove(user.uid)
+        }).catch((error) => {
+          console.error('Error removing spectator from the list:', error)
         })
       }
     }
-  }, [room, isSpectator])
-
-  useEffect(() => {
-    if (!isSpectator) {
-      let timer
-      if (revenge?.state === 'quit' && revenge?.id !== (host ? 1 : 2)) {
-        sendMessage(
-          "L'autre joueur a quitté, vous quitterez automatiquement dans 5 secondes.",
-          'info'
-        )
-        timer = setTimeout(() => {
-          leaveLobby(gameData.lobbyId, room, gameData.gamemode)
-        }, 5000)
-      }
-      return () => clearTimeout(timer)
-    }
-  }, [revenge, isSpectator])
+  }, [isSpectator, room, user.uid])
 
   const useStartWatchingTradePhase = () => {
     const tradeCard = useTradeCard()
 
     function startWatchingTradePhase() {
+      if (isSpectator) {
+        return // Prevent spectators from initiating trade phase
+      }
       setPhaseRules([0, 0, 0])
       if (!host) {
         watchTradeRequests()
@@ -398,10 +401,9 @@ export const GlobalProvider = () => {
     isSpectator,
     spectatorCount
   }
-
   return (
     <GlobalContext.Provider value={propsList}>
-      {gameData && !isSpectator ? (
+      {playerRival && playerSelf ? (
         <Room />
       ) : (
         <div className="waiting">

@@ -92,7 +92,7 @@ export default function LobbyList() {
 
   return (
     <div className="lobbies">
-      <BackButton />
+      <BackButton onlyHome={true} />
       <div className="lobbies-wrapper">
         <Button
           className="lobbies-btn"

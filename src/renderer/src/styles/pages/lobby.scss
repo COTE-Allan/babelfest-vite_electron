@@ -43,13 +43,19 @@
     &-buttons {
       display: flex;
       flex-direction: column;
-      margin-bottom: auto;
 
       & button {
         margin: 5px 0;
       }
     }
+
+    .musicPlayer {
+      margin-top: auto;
+      margin-bottom: 30px;
+    }
+
   }
+
 
   &-settings {
     display: flex;

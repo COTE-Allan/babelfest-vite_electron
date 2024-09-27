@@ -10,7 +10,7 @@ import { AuthContext } from '../../../AuthContext'
 import { defineWinner } from '../../others/toolBox'
 
 export default function InGameSettings() {
-  const { gameData, room, playerID } = useContext(GlobalContext)
+  const { gameData, room, playerID, isSpectator } = useContext(GlobalContext)
   const { userSettings, setUserSettings, saveSettings } = useContext(AuthContext)
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [smthChanged, setSmthChanged] = useState(false)
@@ -44,7 +44,9 @@ export default function InGameSettings() {
     <div className="ig-settings">
       <h1>Partie en cours</h1>
       <span>Code de la partie : {room}</span>
-      <Button onClick={giveUpForReal}>{giveUp ? 'Vraiment ?' : 'Concéder le match'}</Button>
+      {!isSpectator && (
+        <Button onClick={giveUpForReal}>{giveUp ? 'Vraiment ?' : 'Concéder le match'}</Button>
+      )}
       <h1>Paramètres</h1>
       <div className="volume-settings">
         <div className="volume-settings-item">

@@ -40,12 +40,13 @@ export default function Room() {
     standby,
     myTurn,
     musicPlayer,
-    scenes
+    scenes,
+    isSpectator
   } = useContext(GlobalContext)
   const placeCardOnArena = usePlaceCardOnArea()
 
   useEffect(() => {
-    if (phase === 3) {
+    if (phase === 3 && !isSpectator) {
       const gameDocRef = doc(db, 'games', room)
       const unsubscribe = onSnapshot(gameDocRef, (snapshot) => {
         const data = snapshot.data()
@@ -81,7 +82,7 @@ export default function Room() {
 
   return (
     <>
-      {(playerSelf.disconnected || !isOnline) && (
+      {(playerSelf.disconnected || !isOnline) && !isSpectator && (
         <ClassicModal>
           Vous avez été déconnecté, vérifiez votre connexion et rechargez votre navigateur dans les
           30 secondes pour revenir dans la partie sous peine de défaite.
@@ -95,61 +96,64 @@ export default function Room() {
         {playerSelf.hand != null && (
           <>
             {detailCard && <Details detailCard={detailCard} />}
-            <LeftWindow />
-            <RightWindow />
             <TurnAlert />
+            <TurnTracker />
+            <Players />
             <div className={`musicPlayer-container ${musicPlayer ? 'active' : ''}`}>
               <MusicPlayer role="ingame" />
             </div>
             <Arena />
+            <RightWindow />
+            <LeftWindow />
             <InGameMenus />
-            <Hand>
-              {playerSelf.hand
-                .sort((a, b) => a.rarity - b.rarity)
-                .map((card, index) => {
-                  return <Card key={index} card={card} />
-                })}
-            </Hand>
-            <Players />
-            <TurnTracker />
-            {askForTarget && <SelectTarget />}
-            {standby[0] === playerID && (
-              <Modal>
-                <img src={LogoAnimate} alt="logo animé de chargement" className="spinner" />
-                En attente de l'autre joueur...
-              </Modal>
-            )}
             <Winner />
-            {askForRectoVerso !== false && (
-              <Modal showArena={true}>
-                <label>Choisissez comment invoquer votre carte</label>
-                <Button
-                  onClick={() => {
-                    placeCardOnArena(askForRectoVerso)
-                    setAskForRectoVerso(false)
-                  }}
-                >
-                  Invoquer face recto
-                </Button>
-                <Button
-                  onClick={() => {
-                    placeCardOnArena(askForRectoVerso, false)
-                    setAskForRectoVerso(false)
-                  }}
-                >
-                  Invoquer face verso
-                </Button>
-                <Button
-                  onClick={() => {
-                    setAskForRectoVerso(false)
-                  }}
-                >
-                  Annuler l'invocation
-                </Button>
-              </Modal>
-            )}
-
             {scenes !== null && scenes.length !== 0 && <ScenesMaker key={scenes[0].id} />}
+            {!isSpectator && (
+              <>
+                <Hand>
+                  {playerSelf.hand
+                    .sort((a, b) => a.rarity - b.rarity)
+                    .map((card, index) => {
+                      return <Card key={index} card={card} />
+                    })}
+                </Hand>
+                {askForTarget && <SelectTarget />}
+                {standby[0] === playerID && (
+                  <Modal>
+                    <img src={LogoAnimate} alt="logo animé de chargement" className="spinner" />
+                    En attente de l'autre joueur...
+                  </Modal>
+                )}
+                {askForRectoVerso !== false && (
+                  <Modal showArena={true}>
+                    <label>Choisissez comment invoquer votre carte</label>
+                    <Button
+                      onClick={() => {
+                        placeCardOnArena(askForRectoVerso)
+                        setAskForRectoVerso(false)
+                      }}
+                    >
+                      Invoquer face recto
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        placeCardOnArena(askForRectoVerso, false)
+                        setAskForRectoVerso(false)
+                      }}
+                    >
+                      Invoquer face verso
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setAskForRectoVerso(false)
+                      }}
+                    >
+                      Annuler l'invocation
+                    </Button>
+                  </Modal>
+                )}
+              </>
+            )}
           </>
         )}
       </div>

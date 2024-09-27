@@ -15,7 +15,7 @@ import blockSfx from '../../../assets/sfx/ingame_block.mp3'
 import deathSfx from '../../../assets/sfx/ingame_death.mp3'
 
 export default function ScenesMaker() {
-  const { scenes, user, room, pattern, playerID } = useContext(GlobalContext)
+  const { scenes, user, room, pattern, playerID, isSpectator } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
   let scene = scenes[0]
 
@@ -108,7 +108,9 @@ export default function ScenesMaker() {
             <img
               className="scenesMaker-card"
               src={
-                matchCard1 && !matchCard1.card.isRecto && matchCard1.owner !== playerID
+                matchCard1 &&
+                !matchCard1.card.isRecto &&
+                (matchCard1.owner !== playerID || isSpectator)
                   ? hiddenCard
                   : scene.cards[0].url
               }

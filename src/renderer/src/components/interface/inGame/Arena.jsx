@@ -34,9 +34,9 @@ export default function Arena() {
       onContextMenu={(e) => e.preventDefault()}
     >
       <TransformWrapper
-        minScale={0.5}
+        minScale={0.55}
         maxScale={2.5}
-        initialScale={0.65}
+        initialScale={0.55}
         centerOnInit={true}
         doubleClick={{ disabled: true }}
         velocityAnimation={{ disabled: false, sensitivity: 100 }}

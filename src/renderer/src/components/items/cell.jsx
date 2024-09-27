@@ -34,7 +34,8 @@ export default function Cell({ active, confirmModal, cell }) {
     rivalColor,
     rightWindow,
     setRightWindow,
-    playerID
+    playerID,
+    isSpectator
   } = useContext(GlobalContext)
   const id = cell.id
   const team = cell.side
@@ -72,6 +73,7 @@ export default function Cell({ active, confirmModal, cell }) {
     }
   }
   const selectCell = () => {
+    if (isSpectator) return
     if (card) {
       select()
     }
@@ -162,7 +164,7 @@ export default function Cell({ active, confirmModal, cell }) {
       }}
       onContextMenu={(e) => {
         e.preventDefault()
-        if (card && !card.isRecto && player !== owner) return
+        if (card && !card.isRecto && (player !== owner || isSpectator)) return
         setAdvancedDetailCard(card)
         setRightWindow('details')
       }}
@@ -194,7 +196,7 @@ export default function Cell({ active, confirmModal, cell }) {
         <div
           className={card.shiny ? 'cell-card ' + card.shiny : 'cell-card'}
           onMouseEnter={() => {
-            if (!card.isRecto && player !== owner) {
+            if (!card.isRecto && (player !== owner || isSpectator)) {
               setDetailCard('hidden')
             } else {
               setDetailCard(card)
@@ -244,7 +246,7 @@ export default function Cell({ active, confirmModal, cell }) {
             </>
           ) : (
             <>
-              {player === owner || card.revealed ? (
+              {(player === owner && !isSpectator) || card.revealed ? (
                 <>
                   <img src={card.url} className="cell-card-visual hidden" alt="Card" />
                   <AiFillEyeInvisible size={90} className="hidden-icon" />
