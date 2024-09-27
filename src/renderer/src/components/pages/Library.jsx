@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../../styles/pages/library.scss'
 import Modal from '../items/ClassicModal'
 import { MdZoomIn } from 'react-icons/md'
@@ -13,8 +13,15 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { getAllCards } from '../others/toolBox'
 import BackButton from '../items/BackButton'
 import LoadingLogo from '../items/LoadingLogo'
+import { AuthContext } from '../../AuthContext'
+import useSound from 'use-sound'
+import hoverSfx from '../../assets/sfx/button_hover.wav'
+import selectSfx from '../../assets/sfx/menu_select.wav'
 
 export default function Library() {
+  const { userSettings } = useContext(AuthContext)
+  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
+  const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [allCards, setAllCards] = useState(getAllCards())
   const [cards, setCards] = useState(getAllCards)
   const [search, setSearch] = useState('')
@@ -126,6 +133,7 @@ export default function Library() {
   }
 
   const handleCardClick = (key) => {
+    select()
     if (selectedIndex === key) {
       setSelectedIndex(null)
       setTimeout(() => setSelectedIndex(key), 0)
@@ -332,6 +340,7 @@ export default function Library() {
         <div className="library-list">
           {cards.map((card, key) => (
             <div
+              onMouseEnter={hover}
               className={`${
                 card.shiny != null ? 'library-list-item ' + card.shiny : 'library-list-item'
               } ${!loading && 'fade-in'}`}

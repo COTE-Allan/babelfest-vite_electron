@@ -51,6 +51,16 @@ export default function Loading(params) {
     }, 1000)
   }, [])
 
+  // Redirection après 15 secondes
+  useEffect(() => {
+    const redirectTimeout = setTimeout(() => {
+      navigate('/login')
+    }, 15000) // 15 secondes
+
+    // Nettoyage du timeout si l'utilisateur quitte la page avant la fin
+    return () => clearTimeout(redirectTimeout)
+  }, [navigate])
+
   return (
     <div className={`loadingScreen fade-in`}>
       <img src={LogoAnimate} alt="logo animé de chargement" className={`spinner`} />

@@ -148,7 +148,11 @@ const Home = () => {
               {featuredCards.slice(0, 4).map((card, index) => {
                 return (
                   <img
-                    onClick={() => goForward('/catalog', { state: { selected: card } })}
+                    onMouseEnter={hover}
+                    onClick={() => {
+                      select()
+                      goForward('/catalog', { state: { selected: card } })
+                    }}
                     key={index}
                     src={card.url}
                     alt="Featured card"
@@ -162,11 +166,19 @@ const Home = () => {
         <div className="home-socials">
           <span>Rejoignez la communauté !</span>
           <div className="home-socials-list">
-            <a className="home-socials-list-item" href="https://x.com/babelfest_" target="_blank">
+            <a
+              className="home-socials-list-item"
+              onMouseEnter={hover}
+              onClick={select}
+              href="https://x.com/babelfest_"
+              target="_blank"
+            >
               <FaXTwitter />
             </a>
             <a
               className="home-socials-list-item"
+              onMouseEnter={hover}
+              onClick={select}
               href="https://discord.com/invite/WYCuMDTt45"
               target="_blank"
             >
@@ -174,6 +186,8 @@ const Home = () => {
             </a>
             <a
               className="home-socials-list-item"
+              onMouseEnter={hover}
+              onClick={select}
               href="https://www.youtube.com/channel/UCxZ85Kq0CvJXQu9jAzcNzEw"
               target="_blank"
             >
@@ -188,6 +202,8 @@ const Home = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="home-news"
+            onMouseEnter={hover}
+            onClick={select}
           >
             <span>{lastBlogPost.title.rendered}</span>
             <img src={lastBlogPost.featured_media_src_url} alt="Last blog post" />
