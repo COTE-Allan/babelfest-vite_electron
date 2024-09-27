@@ -373,5 +373,29 @@
         "cards": [{ "name": "Lown", "title": "Rage écarlate" }]
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Kl'rgh",
+    "title": "Le petit conquérant",
+    "atk": 1,
+    "dep": 3,
+    "hp": 5,
+    "baseatk": 1,
+    "basedep": 3,
+    "basehp": 5,
+    "url": "./cards/series/babelfest_2024series15.png",
+    "rarity": 2,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Kula",
+    "diving": true,
+    "effects": [
+      {
+        "when": [1],
+        "type": "diving"
+      },
+      { "when": ["attacked"], "type": "trap" }
+    ]
   }
 ]
