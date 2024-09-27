@@ -38,6 +38,12 @@
         }
       }
 
+      &.unlocked,
+      &:hover {
+        & .achievements-list-item-reward {
+          opacity: 1;
+        }
+      }
       &-reward {
         display: flex;
         flex-direction: column;
@@ -45,12 +51,11 @@
         font-size: 13px;
         opacity: 0.2;
         transition: opacity 200ms ease-in-out;
-
         & span {
           margin-top: 5px;
         }
       }
-
+      
       & img {
         width: 75px;
         height: 75px;
@@ -60,14 +65,14 @@
         background-color: rgba(230, 230, 230, 0.341);
       }
 
-      &.unlocked,
-      &:hover {
-        & .achievements-list-item-reward {
-          opacity: 1;
-        }
+      .xp-progress-background {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        border-radius: 4px;
+        z-index: -1;
       }
-
-
 
 
     }
@@ -111,15 +116,6 @@
         width: 80%;
         margin: 10px 0;
         margin-top: 0;
-      }
-
-      &:hover,
-      &.unlocked {
-        opacity: 1;
-      }
-
-      &.unlocked {
-        background-color: rgba(169, 169, 169, 0.3);
       }
 
       & img {

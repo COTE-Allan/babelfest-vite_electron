@@ -95,8 +95,14 @@
   {
     "url": "./skins/banners/banner_rid_2.png",
     "name": "Regal Sanctity",
-    "unlockTip": "Obtenu en atteignant le niveau 40.",
-    "level": 40
+    "unlockTip": "Obtenu en atteignant le niveau 39.",
+    "level": 39
+  },
+  {
+    "url": "./skins/banners/banner_dieux_dormants.jpg",
+    "name": "Dieux Dormants",
+    "unlockTip": "Obtenu en atteignant le niveau 43.",
+    "level": 43
   },
   {
     "url": "./skins/banners/banner_oldSchoolKarnoie.png",

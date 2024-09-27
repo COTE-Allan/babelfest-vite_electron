@@ -11,85 +11,38 @@ import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-
-function SkinItem({ skin, userInfo }) {
-  const { level, url, hex, gradient, name, classe } = skin
-  const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
-  let content
-
-  if (url) {
-    content = <img src={url} alt={`Skin ${name}`} draggable="false" />
-  } else if (hex) {
-    content = (
-      <div
-        className={`color ${skin.classes ? skin.classes : ''}`}
-        style={{
-          background: gradient ? `linear-gradient(to bottom, ${hex}, ${gradient})` : hex
-        }}
-      />
-    )
-  } else if (classe) {
-    content = (
-      <span className={`title prestige skin-title`}>
-        <div className={classe}>{userInfo.username}</div>
-      </span>
-    )
-  } else {
-    content = <span className="skin-title">{name}</span>
-  }
-
-  return (
-    <div
-      className={`achievements-levels-item ${userInfo.level >= level && 'unlocked'}`}
-      key={skin.id || skin.name}
-    >
-      <span className="level">{level}</span>
-      <hr />
-      {content}
-      {skin.type !== 'Titre' && <span className="skin-name">{name}</span>}
-      <span className="type">
-        {skin.type} {lock}
-      </span>
-    </div>
-  )
-}
+import { getCurrentExpMax } from '../others/xpSystem'
 
 export default function UserAchievements({ userInfo }) {
   const { userSettings } = useContext(AuthContext)
 
   const skinsWithLevel = useMemo(() => getSkinsWithLevel(), [])
-
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
-  const [achievementInfos, setAchievementInfos] = useState({
-    id: null,
-    name: 'Bienvenue sur Babelfest',
-    desc: 'Terminez le tutoriel.',
-    objective: { value: 1 }
-  })
   const [showUnlocked, setShowUnlocked] = useState(false)
   const [page, setPage] = useState(1)
-  const [filteredSkinsWithLevel, setFilteredSkinsWithLevel] = useState([])
   const [achievementFilter, setAchievementFilter] = useState('all')
-  const checkAchievementValue = useCheckAchievementValue()
 
-  const toggleAchievementFilter = () => {
-    select()
-    setAchievementFilter((prev) => {
-      if (prev === 'all') return 'unlocked'
-      if (prev === 'unlocked') return 'locked'
-      return 'all'
-    })
-  }
+  // Calculate player's current XP percentage
+  const xpMax = getCurrentExpMax(userInfo.level)
+  const xpPercentage = (userInfo.xp / xpMax) * 100
 
-  useEffect(() => {
-    const filteredSkins = showUnlocked
-      ? skinsWithLevel
-      : skinsWithLevel.filter((skin) => userInfo.level < skin.level)
+  // Filter to find the first skin not unlocked yet (next reward to unlock)
+  const nextUnlockableSkin = skinsWithLevel.find((skin) => userInfo.level + 1 === skin.level)
 
-    setFilteredSkinsWithLevel(filteredSkins)
-  }, [showUnlocked, skinsWithLevel, userInfo.level])
+  // Filter skins based on whether or not to show unlocked skins
+  const filteredSkinsWithLevel = showUnlocked
+    ? skinsWithLevel
+    : skinsWithLevel.filter((skin) => userInfo.level < skin.level)
 
+  // Filter achievements based on user selection
+  const filteredAchievements = achievements.filter((achievement) => {
+    if (achievementFilter === 'all') return true
+    if (achievementFilter === 'unlocked') return userInfo.achievements.includes(achievement.id)
+    if (achievementFilter === 'locked') return !userInfo.achievements.includes(achievement.id)
+  })
+
+  // Calculate achievement and level completion percentage
   const calculateAchievementCompletion = () => {
     if (!userInfo.achievements || userInfo.achievements.length === 0) return 0
     const unlockedAchievements = achievements.filter((achievement) =>
@@ -106,27 +59,31 @@ export default function UserAchievements({ userInfo }) {
   const achievementCompletion = calculateAchievementCompletion()
   const levelCompletion = calculateLevelCompletion()
 
-  const filteredAchievements = achievements.filter((achievement) => {
-    if (achievementFilter === 'all') return true
-    if (achievementFilter === 'unlocked') return userInfo.achievements.includes(achievement.id)
-    if (achievementFilter === 'locked') return !userInfo.achievements.includes(achievement.id)
-  })
+  const toggleAchievementFilter = () => {
+    select()
+    setAchievementFilter((prev) => {
+      if (prev === 'all') return 'unlocked'
+      if (prev === 'unlocked') return 'locked'
+      return 'all'
+    })
+  }
 
   return (
     <div className="achievements">
       <nav className="achievements-nav">
         <HudNavLink onClick={() => setPage(1)} selected={page === 1} permOpen>
-          <FaTrophy size={45} />
-          <span className="hidden-span">Succès</span>
-        </HudNavLink>
-        <HudNavLink onClick={() => setPage(2)} selected={page === 2} permOpen>
           <FaArrowTrendUp size={45} />
           <span className="hidden-span">Niveaux</span>
         </HudNavLink>
+        <HudNavLink onClick={() => setPage(2)} selected={page === 2} permOpen>
+          <FaTrophy size={45} />
+          <span className="hidden-span">Succès</span>
+        </HudNavLink>
       </nav>
+
       <TransitionGroup className="achievements-content">
-        {page === 1 && (
-          <CSSTransition key="ach-1" timeout={300} classNames="fade">
+        {page === 2 && (
+          <CSSTransition key="achievements-page" timeout={300} classNames="fade">
             <div className="css-transition">
               <h2>
                 Succès - {achievementCompletion.toFixed(0)}%
@@ -154,9 +111,7 @@ export default function UserAchievements({ userInfo }) {
                         {achievement.name}{' '}
                         {!userInfo.achievements?.includes(achievement.id) && <FaLock />}
                       </h3>
-                      <span>
-                        {achievement.desc} <br />
-                      </span>
+                      <span>{achievement.desc}</span>
                     </div>
                     <div className="achievements-list-item-reward">
                       <img
@@ -171,11 +126,11 @@ export default function UserAchievements({ userInfo }) {
             </div>
           </CSSTransition>
         )}
-        {page === 2 && (
-          <CSSTransition key="ach-2" timeout={300} classNames="fade">
+        {page === 1 && (
+          <CSSTransition key="levels-page" timeout={300} classNames="fade">
             <div className="css-transition">
               <h2>
-                Récompenses de niveaux - {levelCompletion.toFixed(0)}%{' '}
+                Récompenses de niveaux - {levelCompletion.toFixed(0)}%
                 <button
                   onMouseEnter={hover}
                   onClick={() => {
@@ -196,14 +151,86 @@ export default function UserAchievements({ userInfo }) {
                 </button>
               </h2>
               <div className="achievements-list">
-                {filteredSkinsWithLevel.map((skin) => {
-                  return <SkinItem key={skin.id || skin.name} skin={skin} userInfo={userInfo} />
-                })}
+                {filteredSkinsWithLevel.map((skin) => (
+                  <SkinItem
+                    key={skin.id || skin.name}
+                    skin={skin}
+                    userInfo={userInfo}
+                    xpPercentage={nextUnlockableSkin && skin.level === nextUnlockableSkin.level ? xpPercentage : 0}  // Apply XP progress only to the next unlockable skin
+                  />
+                ))}
               </div>
             </div>
           </CSSTransition>
         )}
       </TransitionGroup>
+    </div>
+  )
+}
+
+function SkinItem({ skin, userInfo, xpPercentage }) {
+  const { level, url, hex, gradient, name, classe } = skin
+  const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
+  let content
+
+  if (url) {
+    content = <img src={url} alt={`Skin ${name}`} draggable="false" />
+  } else if (hex) {
+    content = (
+      <div
+        className={`color ${skin.classes ? skin.classes : ''}`}
+        style={{
+          background: gradient ? `linear-gradient(to bottom, ${hex}, ${gradient})` : hex
+        }}
+      />
+    )
+  } else if (classe) {
+    content = (
+      <span className={`title prestige skin-title`}>
+        <div className={classe}>{userInfo.username}</div>
+      </span>
+    )
+  } else {
+    content = <span className="skin-title">{name}</span>
+  }
+
+  // Determine if the progress bar should be full width (100%)
+  const isUnlocked = userInfo.level >= level
+  const progressWidth = isUnlocked ? 100 : xpPercentage
+
+  return (
+    <div
+      className={`achievements-levels-item ${isUnlocked && 'unlocked'}`}
+      key={skin.id || skin.name}
+      style={{
+        position: 'relative', // Required for positioning the background progress bar
+        backgroundColor: "rgba(43, 43, 43, 0.3)"
+      }}
+    >
+      <span className="level">{level}</span>
+      <hr />
+      {content}
+      {skin.type !== 'Titre' && <span className="skin-name">{name}</span>}
+      <span className="type">
+        {skin.type} {lock}
+      </span>
+
+      {/* Add a div to show XP progress */}
+      {progressWidth > 0 && (
+        <div
+          className="xp-progress-background"
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            height: '100%',
+            width: `${progressWidth}%`,  // Set width based on XP percentage or full width if unlocked
+            backgroundColor: userInfo.primaryColor.hex + "80",  // Semi-transparent color for visual effect
+            zIndex: -1,  // Ensure it’s behind the content
+            borderRadius: '4px',
+          }}
+        />
+      )}
     </div>
   )
 }
