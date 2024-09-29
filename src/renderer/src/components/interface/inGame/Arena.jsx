@@ -20,7 +20,8 @@ export default function Arena() {
     myColor,
     rivalColor,
     myTurn,
-    showArenaInModal
+    showArenaInModal,
+    isSpectator
   } = useContext(GlobalContext)
 
   ArenaController()
@@ -29,7 +30,7 @@ export default function Arena() {
   return (
     <div
       className={`arena-wrapper ${
-        (askForCell || askForTarget || showArenaInModal) && 'arena-wrapper-upperLayer'
+        ((askForCell || askForTarget || showArenaInModal) && !isSpectator) && 'arena-wrapper-upperLayer'
       }`}
       onContextMenu={(e) => e.preventDefault()}
     >

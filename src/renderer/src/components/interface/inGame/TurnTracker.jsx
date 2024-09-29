@@ -52,8 +52,8 @@ export default function TurnTracker() {
               ? 'Vous jouez en premier.'
               : 'Vous jouez en second.'
             : firstToPlay === playerID
-              ? `${currentPlayerName} joue en premier.`
-              : `${currentPlayerName} joue en second.`}
+              ? `${playerSelf?.username} joue en premier.`
+              : `${playerSelf?.username} joue en second.`}
         </span>
       </div>
       <div

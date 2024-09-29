@@ -205,11 +205,12 @@ export default function InGameMenus() {
           <IoMdMusicalNote size={45} />
           <span>Musique</span>
         </IconButton>
-        {spectatorCount !== null && spectatorCount.length !== 0 && (
+        {spectatorCount !== null && spectatorCount?.length !== 0 && (
           <div className="costCounter spectatorCount">
             <FaEye size={30} />
-            {spectatorCount.length}
+            {spectatorCount?.length}
           </div>
+          
         )}
       </div>
     </>
