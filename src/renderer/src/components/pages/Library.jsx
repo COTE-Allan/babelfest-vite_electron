@@ -9,7 +9,7 @@ import { getAllEffects, getCardBasedOnNameAndTitle, getEffectInfo } from '../eff
 import { useLocation } from 'react-router'
 import HudNavLink from '../items/hudNavLink'
 import { ImCross } from 'react-icons/im'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaSave } from 'react-icons/fa'
 import { getAllCards } from '../others/toolBox'
 import BackButton from '../items/BackButton'
 import LoadingLogo from '../items/LoadingLogo'
@@ -17,9 +17,11 @@ import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
+import Details from '../interface/inGame/Details'
 
-export default function Library() {
+export default function Library({ editorMode }) {
   const { userSettings } = useContext(AuthContext)
+  const [detailCard, setDetailCard] = useState(null)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [allCards, setAllCards] = useState(getAllCards())
@@ -31,18 +33,37 @@ export default function Library() {
   const [selectedYears, setSelectedYears] = useState([])
   const [selectedEffects, setSelectedEffects] = useState([])
   const [sortMethod, setSortMethod] = useState('rarity')
-  const [cardScale, setCardScale] = useState(125)
+  const [cardScale, setCardScale] = useState(editorMode ? 120 : 125)
   const [selected, setSelected] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
 
+  // Added deck state to keep track of selected cards
+  const [deck, setDeck] = useState([])
+
   const location = useLocation()
+
+  // Constants for rarity order and labels
+  const rarityOrder = [1, 2, 3, 4, 5]
+  const rarityLabels = {
+    1: 'Typique',
+    2: 'Rare',
+    3: 'Épique',
+    4: 'Légendaire',
+    5: 'Spéciale'
+  }
+  const rarityMaxAmount = {
+    2: 3,
+    3: 2,
+    4: 1,
+  }
+
   const customStyles = {
     control: (provided) => ({
       ...provided,
       minHeight: '50px',
       padding: '0px 10px',
       fontSize: '15px',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Noir avec une opacité de 0.5
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       border: 'solid 2px rgb(255, 255, 255)',
       fontFamily: "'Kimberly Bl', sans-serif",
@@ -58,13 +79,13 @@ export default function Library() {
     }),
     menu: (provided) => ({
       ...provided,
-      backgroundColor: 'rgba(0, 0, 0, 0.8)', // Noir avec une opacité de 0.5
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
       borderRadius: '5px',
       border: 'solid 2px rgb(255, 255, 255)'
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? 'gray' : 'rgba(0, 0, 0, 0.5)', // Noir avec une opacité de 0.5
+      backgroundColor: state.isSelected ? 'gray' : 'rgba(0, 0, 0, 0.5)',
       color: 'white',
       fontSize: '15px',
       fontFamily: "'Kimberly Bl', sans-serif",
@@ -112,10 +133,11 @@ export default function Library() {
   }).map(([value, label]) => ({ value, label }))
 
   useEffect(() => {
-    if (selectedIndex !== null) {
-      setSelected(cards[selectedIndex])
+    if (selected !== null) {
+      const index = flattenedCards.findIndex((c) => c.id === selected.id)
+      setSelectedIndex(index)
     }
-  }, [selectedIndex])
+  }, [selected])
 
   useEffect(() => {
     if (location.state && location.state.selected) {
@@ -125,20 +147,48 @@ export default function Library() {
   }, [location])
 
   const handlePreviousCard = () => {
-    setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : cards.length - 1))
+    if (selectedIndex !== null) {
+      const newIndex = selectedIndex > 0 ? selectedIndex - 1 : flattenedCards.length - 1
+      setSelected(flattenedCards[newIndex])
+    }
   }
 
   const handleNextCard = () => {
-    setSelectedIndex((prevIndex) => (prevIndex < cards.length - 1 ? prevIndex + 1 : 0))
+    if (selectedIndex !== null) {
+      const newIndex = selectedIndex < flattenedCards.length - 1 ? selectedIndex + 1 : 0
+      setSelected(flattenedCards[newIndex])
+    }
   }
 
-  const handleCardClick = (key) => {
+  const handleCardClick = (card) => {
     select()
-    if (selectedIndex === key) {
-      setSelectedIndex(null)
-      setTimeout(() => setSelectedIndex(key), 0)
+    const cardToAdd = card
+    if (editorMode) {
+      if (cardToAdd.rarity !== 5) {
+
+        // Vérifier si la carte est déjà dans le deck
+        const isCardInDeck = deck.some((deckCard) => deckCard.id === cardToAdd.id)
+        if (isCardInDeck) {
+          // Retirer la carte du deck
+          setDeck(deck.filter((deckCard) => deckCard.id !== cardToAdd.id))
+        } else {
+          // Ajouter la carte au deck si le deck n'est pas plein
+          if (deck.length < 8) {
+            setDeck([
+              ...deck,
+              {
+                id: cardToAdd.id,
+                name: cardToAdd.name,
+                title: cardToAdd.title,
+                image: cardToAdd.url,
+                rarity: cardToAdd.rarity
+              }
+            ])
+          }
+        }
+      }
     } else {
-      setSelectedIndex(key)
+      setSelected(card)
     }
   }
 
@@ -233,8 +283,8 @@ export default function Library() {
   }
 
   const handleImageLoad = () => {
-    const allImagesLoaded = cards.every((card, index) => {
-      const imgElement = document.getElementById(`card-img-${index}`)
+    const allImagesLoaded = cards.every((card) => {
+      const imgElement = document.getElementById(`card-img-${card.id}`)
       return imgElement && imgElement.complete
     })
 
@@ -243,9 +293,34 @@ export default function Library() {
     }
   }
 
+  // Function to handle deck saving
+  const handleSaveDeck = () => {
+    // Save the deck (you can implement saving to local storage or sending to a server)
+    console.log('Deck saved:', deck)
+    alert('Deck sauvegardé !')
+  }
+
+  // Group cards in the deck by rarity
+  const deckByRarity = deck.reduce((acc, card) => {
+    if (!acc[card.rarity]) acc[card.rarity] = []
+    acc[card.rarity].push(card)
+    return acc
+  }, {})
+
+  // Group cards in the main list by rarity
+  const cardsByRarity = cards.reduce((acc, card) => {
+    if (!acc[card.rarity]) acc[card.rarity] = []
+    acc[card.rarity].push(card)
+    return acc
+  }, {})
+
+  // Flattened array of cards for navigation
+  const flattenedCards = [].concat(...rarityOrder.map((rarity) => cardsByRarity[rarity] || []))
+
   return (
     <div className="library">
-      <BackButton />
+      {detailCard && <Details detailCard={detailCard} noRightClick />}
+      {!editorMode && <BackButton />}
       <div className="library-wrapper">
         <div className="library-controller">
           <span>
@@ -268,6 +343,7 @@ export default function Library() {
             />
           </div>
           <div className="library-controller-inputs">
+            {/* Vos champs de recherche et filtres */}
             <div className="library-controller-inputs-item">
               <span className="library-controller-inputs-item-title">Recherche :</span>
               <input
@@ -337,35 +413,116 @@ export default function Library() {
             </div>
           </div>
         </div>
-        <div className="library-list">
-          {cards.map((card, key) => (
-            <div
-              onMouseEnter={hover}
-              className={`${
-                card.shiny != null ? 'library-list-item ' + card.shiny : 'library-list-item'
-              } ${!loading && 'fade-in'}`}
-              key={key}
-              onClick={() => handleCardClick(key)}
-              style={{ display: loading ? 'none' : 'block' }}
-            >
-              <div className="img-container">
-                <img
-                  id={`card-img-${key}`}
-                  className="library-list-item-img"
-                  src={card.url}
-                  alt={`Carte ${card.name} de la collection ${card.collection}`}
-                  style={{ width: `${cardScale}px` }}
-                  onLoad={handleImageLoad}
-                />
-              </div>
-            </div>
-          ))}
+        <div className="library-list fade-in">
+          {rarityOrder.map(
+            (rarity) =>
+              cardsByRarity[rarity] &&
+              cardsByRarity[rarity].length > 0 && (
+                <div key={rarity} className="library-list-rarity-container">
+                  <div className="library-list-rarity-container-text">
+                    <h3 className={`txt-rarity-${rarity}`}>{rarityLabels[rarity]}</h3>
+                    <hr className={`bg-rarity-${rarity}`} />
+                  </div>
+                  <div className="library-list-cards">
+                    {cardsByRarity[rarity].map((card) => (
+                      <div
+                        onMouseEnter={() => {
+                          hover()
+                          if (editorMode) setDetailCard(card)
+                        }}
+                        onMouseLeave={() => {
+                          if (editorMode) setDetailCard(null)
+                        }}
+                        className={`${
+                          card.shiny != null
+                            ? 'library-list-item ' + card.shiny
+                            : 'library-list-item'
+                        } ${!loading && 'fade-in'} ${
+                          editorMode
+                            ? deck.some((deckCard) => deckCard.id === card.id)
+                              ? 'selected'
+                              : 'not-selected'
+                            : ''
+                        } ${
+                          !editorMode && selected && selected.id === card.id ? 'active-card' : ''
+                        }`}
+                        key={card.id}
+                        onClick={() => handleCardClick(card)}
+                        style={{ display: loading ? 'none' : 'block' }}
+                      >
+                        <div className="img-container">
+                          <div className={`card-cost`}>
+                            <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
+                          </div>
+                          <img
+                            id={`card-img-${card.id}`}
+                            className="library-list-item-img"
+                            src={card.url}
+                            alt={`Carte ${card.name} de la collection ${card.collection}`}
+                            style={{ width: `${cardScale}px` }}
+                            onLoad={handleImageLoad}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
           {loading && (
             <div className="library-loading">
               <LoadingLogo />
             </div>
           )}
         </div>
+
+        {editorMode && (
+          <div className="library-deck">
+            <h2>Deck ({deck.length}/8)</h2>
+            {rarityOrder.map(
+              (rarity) =>
+                deckByRarity[rarity] &&
+                deckByRarity[rarity].length > 0 && (
+                  <div key={rarity} className="library-deck-rarity-container">
+                    <h3 className={`txt-rarity-${rarity}`}>{rarityLabels[rarity]} {rarity !== 1 && "(max " + rarityMaxAmount[rarity] + ")"}</h3>
+                    <hr className={`bg-rarity-${rarity}`} />
+                    <div className="library-deck-cards">
+                      {deckByRarity[rarity].map((card) => (
+                        <div
+                          key={card.id}
+                          onMouseEnter={hover}
+                          className="library-deck-card"
+                          onClick={() =>
+                          {
+
+                            select()
+                            setDeck(deck.filter((deckCard) => deckCard.id !== card.id))
+                          }
+                          }
+                        >
+                          <img src={card.image} alt={`${card.name} - ${card.title}`} />
+                          <div className="library-deck-card-infos">
+                            <h3 className={`txt-rarity-${card.rarity}`}>{card.name}</h3>
+                            <h4 className={`txt-rarity-${card.rarity}`}>{card.title}</h4>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+            )}
+            <div className="library-deck-control">
+              <HudNavLink permOpen onClick={handleSaveDeck}>
+                <FaSave size={30} />
+                <span className="hidden-span">Sauvegarder</span>
+              </HudNavLink>
+              <HudNavLink permOpen onClick={() => editorMode(false)}>
+                <FaArrowLeft size={30} />
+                <span className="hidden-span">Retour</span>
+              </HudNavLink>
+            </div>
+          </div>
+        )}
       </div>
 
       {selected !== null && (
@@ -398,8 +555,8 @@ export default function Library() {
                   {selected.effects.map((effect, index) => {
                     let effectInfos = getEffectInfo(effect.type, effect.value)
                     return (
-                      <>
-                        <div className="details-card-effect" key={index}>
+                      <div key={index}>
+                        <div className="details-card-effect">
                           <div className="details-card-effect-img">
                             <img src={effectInfos.icon} alt="" />
                             {effect.value != null && (
@@ -425,12 +582,14 @@ export default function Library() {
                           <>
                             <p>L'effet {effectInfos.name} est lié à :</p>
                             <ul>
-                              {effect.cards.map((infos) => {
+                              {effect.cards.map((infos, idx) => {
                                 let card = getCardBasedOnNameAndTitle(infos)
                                 return (
                                   <li
+                                    key={idx}
                                     className={`txt-rarity-${card.rarity}`}
                                     onClick={() => {
+                                      if (editorMode) return
                                       setSelected(card)
                                     }}
                                   >
@@ -441,7 +600,7 @@ export default function Library() {
                             </ul>
                           </>
                         )}
-                      </>
+                      </div>
                     )
                   })}
                 </>

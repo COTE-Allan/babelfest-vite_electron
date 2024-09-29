@@ -3,7 +3,7 @@ import { CardStats } from './Details/CardStats'
 import { CardEffects } from './Details/CardEffects'
 import '../../../styles/interface/inGame/details.scss'
 
-export default function Details({ detailCard }) {
+export default function Details({ detailCard, noRightClick }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isPositioned, setIsPositioned] = useState(false)
   const detailsRef = useRef(null)
@@ -80,7 +80,9 @@ export default function Details({ detailCard }) {
               Carte de la collection {detailCard.collection}, dessinée par {detailCard.author}
             </span>
             <CardEffects detailCard={detailCard} />
+            {!noRightClick &&
             <span className="details-card-more">Clic droit pour plus d'infos...</span>
+            }
           </div>
         </div>
       )}

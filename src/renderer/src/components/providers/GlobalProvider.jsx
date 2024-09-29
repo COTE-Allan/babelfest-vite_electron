@@ -297,7 +297,7 @@ export const GlobalProvider = () => {
 
     function startWatchingTradePhase() {
       if (isSpectator) {
-        return // Prevent spectators from initiating trade phase
+        return
       }
       setPhaseRules([0, 0, 0])
       if (!host) {

@@ -17,6 +17,9 @@ import { AuthContext } from '../../AuthContext'
 import { update } from 'lodash'
 import { useSendMessage } from '../others/toolBox'
 import LoadingLogo from '../items/LoadingLogo'
+import { PiCards } from 'react-icons/pi'
+import { TbCardsFilled } from 'react-icons/tb'
+import DeckBuilder from './DeckBuilder'
 
 export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
   const [page, setPage] = useState(1)
@@ -76,6 +79,10 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
               </HudNavLink>
               {isMine && (
                 <>
+                  <HudNavLink selected={page === 6} permOpen onClick={() => setPage(6)}>
+                    <TbCardsFilled size={45} />
+                    <span className="hidden-span">Mes decks</span>
+                  </HudNavLink>
                   <HudNavLink selected={page === 3} permOpen onClick={() => setPage(3)}>
                     <FaTshirt size={45} />
                     <span className="hidden-span">Customisation</span>
@@ -120,6 +127,11 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
               {isMine && page === 4 && (
                 <CSSTransition key="edit-profile" timeout={300} classNames="fade">
                   <UserSettings />
+                </CSSTransition>
+              )}
+                           {isMine && page === 6 && (
+                <CSSTransition key="edit-profile" timeout={300} classNames="fade">
+                  <DeckBuilder/>
                 </CSSTransition>
               )}
             </TransitionGroup>

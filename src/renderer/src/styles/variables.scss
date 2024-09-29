@@ -112,3 +112,25 @@ $grey: rgb(37, 37, 37);
     background: linear-gradient(to bottom, #ff0000 0%, #820d0b 100%);
   }
 }
+
+@mixin border-rarities {
+  .border-rarity-1 {
+    border-color: #1ddb69;
+  }
+
+  .border-rarity-2 {
+    border-color: #184d94;
+  }
+
+  .border-rarity-3 {
+    border-color: #73367d;
+  }
+
+  .border-rarity-4 {
+    border-color: #d1a215;
+  }
+
+  .border-rarity-5 {
+    border-color: #ff0000;
+  }
+}

@@ -37,7 +37,7 @@
   {
     "slug": "defBuff",
     "name": "Bouclier Protecteur",
-    "desc": "Au début d'une phase d'attaque, cette carte ajoute un point de défense à ses alliés adjacents jusqu'à la fin du tour.",
+    "desc": "Au début d'une phase d'attaque, cette carte renforce la valeur de défense de ses alliés adjacents de la valeur indiqué jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/shield_hueeo5.webp",
     "type": "Buffs"
   },

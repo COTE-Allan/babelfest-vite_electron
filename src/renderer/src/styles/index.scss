@@ -346,6 +346,7 @@ a:hover {
 
 
 @include txt-rarities();
+@include border-rarities();
 
 span.alert {
   color: red;
