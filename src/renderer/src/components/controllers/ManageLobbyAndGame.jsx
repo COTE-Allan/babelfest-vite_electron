@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, updateDoc, writeBatch } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc, writeBatch } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
@@ -60,10 +60,52 @@ export function useLeaveLobby() {
       if (lobbyDoc.exists()) {
         const lobbyData = lobbyDoc.data()
 
-        // Déterminer si l'utilisateur est j1 ou j2
+        // Determine if the user is j1 or j2
         const isJ1 = lobbyData.j1 && lobbyData.j1.id === user.uid
         const isJ2 = lobbyData.j2 && lobbyData.j2.id === user.uid
 
+        // Prepare update payload for lobby
+        const updatePayload = {}
+
+        // Handle ready statuses
+        if (isJ1) {
+          updatePayload.readyj1 = null
+        } else if (isJ2) {
+          updatePayload.readyj2 = null
+        }
+
+        // Handle player leaving
+        if (isJ1) {
+          if (lobbyData.j2) {
+            // Promote j2 to j1
+            updatePayload.j1 = lobbyData.j2
+            updatePayload.j2 = null
+            // Move readyj2 to readyj1
+            updatePayload.readyj1 = lobbyData.readyj2 || null
+            updatePayload.readyj2 = null
+          } else {
+            // No j2, set j1 to null
+            updatePayload.j1 = null
+          }
+        } else if (isJ2) {
+          // Remove j2
+          updatePayload.j2 = null
+        }
+
+        // Update the lobby document
+        await updateDoc(lobbyRef, updatePayload)
+
+        // After updating, check if lobby is empty
+        const updatedLobbyDoc = await getDoc(lobbyRef)
+        if (updatedLobbyDoc.exists()) {
+          const updatedLobbyData = updatedLobbyDoc.data()
+          if (!updatedLobbyData.j1 && !updatedLobbyData.j2) {
+            // Delete the lobby document
+            await deleteDoc(lobbyRef)
+          }
+        }
+
+        // Handle game document if necessary
         if (lobbyData.gameRef) {
           const gameRef = doc(db, 'games', lobbyData.gameRef)
           const gameDoc = await getDoc(gameRef)
@@ -84,24 +126,11 @@ export function useLeaveLobby() {
             console.error('Game document does not exist!')
           }
         }
-
-        // Mise à jour du lobby en fonction de la position de l'utilisateur
-        if (isJ1) {
-          // Si j1 quitte et qu'il y a un j2, promouvoir j2 à j1
-          await updateDoc(lobbyRef, {
-            j1: lobbyData.j2 ? lobbyData.j2 : null, // Promouvoir j2 à j1 s'il existe
-            j2: null // Réinitialiser j2
-          })
-        } else if (isJ2) {
-          // Si j2 quitte, simplement le retirer
-          await updateDoc(lobbyRef, {
-            j2: null
-          })
-        }
       } else {
         console.error('Lobby document does not exist!')
       }
 
+      // Update user's currentLobby to null
       const userRef = doc(db, 'users', user.uid)
       await updateDoc(userRef, { currentLobby: null })
 

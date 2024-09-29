@@ -2,25 +2,48 @@ import { useContext, useState } from 'react'
 import '../../styles/account/deckBuilder.scss'
 import { AuthContext } from '../../AuthContext'
 import { FaPlus } from 'react-icons/fa'
-import Modal from "../items/ClassicModal" 
+import Modal from '../items/ClassicModal'
 import Library from '../pages/Library'
 import BabelfestBackground from '../../assets/img/fond_babelfest.png'
 
 export default function DeckBuilder() {
   const [deckBuilderOn, setDeckBuilderOn] = useState(false)
-  const { user } = useContext(AuthContext)
+  const { userInfo } = useContext(AuthContext)
   return (
     <div className="deckBuilder">
-     <div className="deckBuilder-list">
-      <div className="deckBuilder-list-item createNew" onClick={() => {setDeckBuilderOn(true)}}>
-<FaPlus size={50}/>
-Créer nouveau        
+      <div className="deckBuilder-list">
+        {userInfo.decks.length <= 8 &&
+        <div
+        className="deckBuilder-list-item createNew"
+        onClick={() => {
+          setDeckBuilderOn("open")
+        }}
+        >
+          <FaPlus size={50} />
+          Créer nouveau
+        </div>
+        }
+        {userInfo.decks.map((deck) => (
+          <div
+            className="deckBuilder-list-item"
+            onClick={() => {
+              setDeckBuilderOn(deck)
+            }}
+          >
+            <h2>
+
+            {deck.name}
+            </h2>
+            <img src={deck.cards[7].image} />
+          </div>
+        ))}
       </div>
-     </div>
-     {deckBuilderOn && <Modal className="deckBuilder-editor">
-     <Library editorMode={setDeckBuilderOn}/> 
-     <img className='deckBuilder-editor-bg' src={BabelfestBackground} />
-     </Modal> }
+      {deckBuilderOn && (
+        <Modal className="deckBuilder-editor">
+          <Library editorMode={setDeckBuilderOn} deck={deckBuilderOn !== "open" && deckBuilderOn} />
+          <img className="deckBuilder-editor-bg" src={BabelfestBackground} />
+        </Modal>
+      )}
     </div>
   )
 }

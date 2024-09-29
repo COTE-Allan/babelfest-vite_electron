@@ -14,7 +14,7 @@ export default function Button(props) {
       className={props.className}
       onClick={() => {
         select()
-        if (props.onClick) {
+        if (props.onClick && !props.disabled) {
           props.onClick()
         }
       }}

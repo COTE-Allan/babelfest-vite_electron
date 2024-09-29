@@ -9,7 +9,7 @@ import { getAllEffects, getCardBasedOnNameAndTitle, getEffectInfo } from '../eff
 import { useLocation } from 'react-router'
 import HudNavLink from '../items/hudNavLink'
 import { ImCross } from 'react-icons/im'
-import { FaArrowLeft, FaArrowRight, FaSave } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaPen, FaSave, FaTrash } from 'react-icons/fa'
 import { getAllCards } from '../others/toolBox'
 import BackButton from '../items/BackButton'
 import LoadingLogo from '../items/LoadingLogo'
@@ -19,8 +19,9 @@ import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import Details from '../interface/inGame/Details'
 
-export default function Library({ editorMode }) {
-  const { userSettings } = useContext(AuthContext)
+// TODO : vérifier que les cartes sont bien selected avec la classe, cliquer dessus doit la retirer
+export default function Library({ editorMode, deck }) {
+  const { userSettings, saveDeck, modifyDeck, deleteDeck } = useContext(AuthContext)
   const [detailCard, setDetailCard] = useState(null)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
@@ -33,16 +34,22 @@ export default function Library({ editorMode }) {
   const [selectedYears, setSelectedYears] = useState([])
   const [selectedEffects, setSelectedEffects] = useState([])
   const [sortMethod, setSortMethod] = useState('rarity')
-  const [cardScale, setCardScale] = useState(editorMode ? 120 : 125)
+  const [cardScale, setCardScale] = useState(editorMode ? 105 : 125)
   const [selected, setSelected] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
 
-  // Added deck state to keep track of selected cards
-  const [deck, setDeck] = useState([])
+  // States for the deck
+  const [deckName, setDeckName] = useState('')
+  const [deckCards, setDeckCards] = useState([])
 
-  const location = useLocation()
+  // Initialize deck data if in editorMode and a valid deck is provided
+  useEffect(() => {
+    if (editorMode && deck) {
+      setDeckName(deck.name || '')
+      setDeckCards(deck.cards || [])
+    }
+  }, [editorMode, deck])
 
-  // Constants for rarity order and labels
   const rarityOrder = [1, 2, 3, 4, 5]
   const rarityLabels = {
     1: 'Typique',
@@ -54,7 +61,7 @@ export default function Library({ editorMode }) {
   const rarityMaxAmount = {
     2: 3,
     3: 2,
-    4: 1,
+    4: 1
   }
 
   const customStyles = {
@@ -139,49 +146,46 @@ export default function Library({ editorMode }) {
     }
   }, [selected])
 
-  useEffect(() => {
-    if (location.state && location.state.selected) {
-      const { selected } = location.state
-      setSelected(selected)
-    }
-  }, [location])
-
-  const handlePreviousCard = () => {
-    if (selectedIndex !== null) {
-      const newIndex = selectedIndex > 0 ? selectedIndex - 1 : flattenedCards.length - 1
-      setSelected(flattenedCards[newIndex])
-    }
-  }
-
-  const handleNextCard = () => {
-    if (selectedIndex !== null) {
-      const newIndex = selectedIndex < flattenedCards.length - 1 ? selectedIndex + 1 : 0
-      setSelected(flattenedCards[newIndex])
-    }
-  }
-
   const handleCardClick = (card) => {
     select()
-    const cardToAdd = card
+  
     if (editorMode) {
-      if (cardToAdd.rarity !== 5) {
-
-        // Vérifier si la carte est déjà dans le deck
-        const isCardInDeck = deck.some((deckCard) => deckCard.id === cardToAdd.id)
+      if (card.rarity !== 5) {
+        const isCardInDeck = deckCards.some(
+          (deckCard) => deckCard.name === card.name && deckCard.title === card.title
+        )
+  
+        // Count the number of cards by rarity
+        const rarityCount = deckCards.reduce((acc, deckCard) => {
+          acc[deckCard.rarity] = (acc[deckCard.rarity] || 0) + 1
+          return acc
+        }, {})
+  
+        // Enforce rarity limits
         if (isCardInDeck) {
-          // Retirer la carte du deck
-          setDeck(deck.filter((deckCard) => deckCard.id !== cardToAdd.id))
+          // Remove the card if it's already in the deck
+          setDeckCards(deckCards.filter((deckCard) => deckCard.id !== card.id))
         } else {
-          // Ajouter la carte au deck si le deck n'est pas plein
-          if (deck.length < 8) {
-            setDeck([
-              ...deck,
+          // Check if the rarity limits are respected
+          if (
+            (card.rarity === 4 && (rarityCount[4] || 0) >= 1) ||
+            (card.rarity === 3 && (rarityCount[3] || 0) >= 2) ||
+            (card.rarity === 2 && (rarityCount[2] || 0) >= 3)
+          ) {
+            // If the limit for the rarity has been reached, show an alert or prevent adding
+            alert(`Vous avez atteint la limite pour les cartes de rareté ${rarityLabels[card.rarity]}.`)
+            return
+          }
+  
+          // Add the card to the deck if the limit has not been reached
+          if (deckCards.length < 8) {
+            setDeckCards([
+              ...deckCards,
               {
-                id: cardToAdd.id,
-                name: cardToAdd.name,
-                title: cardToAdd.title,
-                image: cardToAdd.url,
-                rarity: cardToAdd.rarity
+                name: card.name,
+                title: card.title,
+                image: card.url,
+                rarity: card.rarity
               }
             ])
           }
@@ -191,7 +195,7 @@ export default function Library({ editorMode }) {
       setSelected(card)
     }
   }
-
+  
   const handleCloseModal = () => {
     setSelected(null)
     setSelectedIndex(null)
@@ -293,32 +297,47 @@ export default function Library({ editorMode }) {
     }
   }
 
-  // Function to handle deck saving
+  // Function to handle deck saving or modification
   const handleSaveDeck = () => {
-    // Save the deck (you can implement saving to local storage or sending to a server)
-    console.log('Deck saved:', deck)
-    alert('Deck sauvegardé !')
+    if (!deckName) {
+      alert('Veuillez entrer un nom pour le deck')
+      return
+    }
+
+    if (deckCards.length !== 8) {
+      alert('Le deck ne fait pas 8 cartes.')
+      return
+    }
+    
+
+    if (deck) {
+      // Modify the existing deck
+      modifyDeck(deck.id, {
+        name: deckName,
+        cards: deckCards
+      })
+    } else {
+      // Save the new deck
+      saveDeck(deckName, deckCards)
+    }
   }
 
-  // Group cards in the deck by rarity
-  const deckByRarity = deck.reduce((acc, card) => {
+  const deckByRarity = deckCards.reduce((acc, card) => {
     if (!acc[card.rarity]) acc[card.rarity] = []
     acc[card.rarity].push(card)
     return acc
   }, {})
 
-  // Group cards in the main list by rarity
   const cardsByRarity = cards.reduce((acc, card) => {
     if (!acc[card.rarity]) acc[card.rarity] = []
     acc[card.rarity].push(card)
     return acc
   }, {})
 
-  // Flattened array of cards for navigation
   const flattenedCards = [].concat(...rarityOrder.map((rarity) => cardsByRarity[rarity] || []))
 
   return (
-    <div className="library">
+    <div className="library fade-in">
       {detailCard && <Details detailCard={detailCard} noRightClick />}
       {!editorMode && <BackButton />}
       <div className="library-wrapper">
@@ -413,7 +432,7 @@ export default function Library({ editorMode }) {
             </div>
           </div>
         </div>
-        <div className="library-list fade-in">
+        <div className="library-list">
           {rarityOrder.map(
             (rarity) =>
               cardsByRarity[rarity] &&
@@ -439,7 +458,7 @@ export default function Library({ editorMode }) {
                             : 'library-list-item'
                         } ${!loading && 'fade-in'} ${
                           editorMode
-                            ? deck.some((deckCard) => deckCard.id === card.id)
+                            ? deckCards.some((deckCard) => deckCard.id === card.id)
                               ? 'selected'
                               : 'not-selected'
                             : ''
@@ -478,13 +497,27 @@ export default function Library({ editorMode }) {
 
         {editorMode && (
           <div className="library-deck">
-            <h2>Deck ({deck.length}/8)</h2>
+            <div className="deck-name-input">
+              <input
+                type="text"
+                id="deck-name"
+                value={deckName}
+                onChange={(e) => setDeckName(e.target.value)}
+                placeholder="Deck sans titre"
+              />
+              <FaPen size={25} />
+            </div>
+            <hr className="deck-name-input-hr" />
+            <h2>Cartes ({deckCards.length}/8)</h2>
             {rarityOrder.map(
               (rarity) =>
                 deckByRarity[rarity] &&
                 deckByRarity[rarity].length > 0 && (
                   <div key={rarity} className="library-deck-rarity-container">
-                    <h3 className={`txt-rarity-${rarity}`}>{rarityLabels[rarity]} {rarity !== 1 && "(max " + rarityMaxAmount[rarity] + ")"}</h3>
+                    <h3 className={`txt-rarity-${rarity}`}>
+                      {rarityLabels[rarity]}{' '}
+                      {rarity !== 1 && '(max ' + rarityMaxAmount[rarity] + ')'}
+                    </h3>
                     <hr className={`bg-rarity-${rarity}`} />
                     <div className="library-deck-cards">
                       {deckByRarity[rarity].map((card) => (
@@ -492,13 +525,15 @@ export default function Library({ editorMode }) {
                           key={card.id}
                           onMouseEnter={hover}
                           className="library-deck-card"
-                          onClick={() =>
-                          {
-
+                          onClick={() => {
                             select()
-                            setDeck(deck.filter((deckCard) => deckCard.id !== card.id))
-                          }
-                          }
+                            setDeckCards(
+                              deckCards.filter(
+                                (deckCard) =>
+                                  deckCard.name !== card.name && deckCard.title !== card.title
+                              )
+                            )
+                          }}
                         >
                           <img src={card.image} alt={`${card.name} - ${card.title}`} />
                           <div className="library-deck-card-infos">
@@ -513,11 +548,25 @@ export default function Library({ editorMode }) {
             )}
             <div className="library-deck-control">
               <HudNavLink permOpen onClick={handleSaveDeck}>
-                <FaSave size={30} />
+                <FaSave size={25} />
                 <span className="hidden-span">Sauvegarder</span>
               </HudNavLink>
+              {deck && (
+                <HudNavLink
+                  permOpen
+                  onClick={() => {
+                    if (deck) {
+                      deleteDeck(deck.id) // Call deleteDeck to remove the deck
+                      editorMode(false) // Exit editor mode after deleting
+                    }
+                  }}
+                >
+                  <FaTrash size={25} />
+                  <span className="hidden-span">Supprimer</span>
+                </HudNavLink>
+              )}
               <HudNavLink permOpen onClick={() => editorMode(false)}>
-                <FaArrowLeft size={30} />
+                <FaArrowLeft size={25} />
                 <span className="hidden-span">Retour</span>
               </HudNavLink>
             </div>
@@ -535,7 +584,7 @@ export default function Library({ editorMode }) {
 
               {selected.desc && (
                 <div className="prestige">
-                  <div className=" prestige prestige-promo library-detail-infos-desc">
+                  <div className="prestige prestige-promo library-detail-infos-desc">
                     {selected.desc}
                   </div>
                 </div>
