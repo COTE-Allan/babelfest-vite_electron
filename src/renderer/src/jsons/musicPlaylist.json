@@ -1,97 +1,97 @@
 [
   {
-    "url": "./songs/babelfest_welcome.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045515/babelfest/musiques/babelfest_welcome.mp3",
     "name": "Babelfest OST - Bienvenue !",
     "role": "menu"
   },
   {
-    "url": "./songs/Fade_to_white.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045493/babelfest/musiques/Fade_to_white.mp3",
     "name": "Neon White OST - Fade To White",
     "role": "menu"
   },
   {
-    "url": "./songs/alice_in_the_alice.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045500/babelfest/musiques/alice_in_the_alice.mp3",
     "name": "Crash Fever - Alice in the ALICE",
     "role": "menu"
   },
   {
-    "url": "./songs/beat_em_up.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045504/babelfest/musiques/beat_em_up.mp3",
     "name": "floopy, Cynax - Beat 'Em Up",
     "role": "menu"
   },
   {
-    "url": "./songs/spacecube.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045493/babelfest/musiques/spacecube.mp3",
     "name": "THE FINALS - SpaceCube",
     "role": "menu"
   },
   {
-    "url": "./songs/floatingbits.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045504/babelfest/musiques/floatingbits.mp3",
     "name": "THE FINALS - FloatingBits",
     "role": "menu"
   },
   {
-    "url": "./songs/Fortress_of_lies.mp3",
-    "name": "Keiichi Okabe - Fortress of Lies",
-    "role": "menu"
-  },
-  {
-    "url": "./songs/finalver2b.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045500/babelfest/musiques/finalver2b.mp3",
     "name": "THE FINALS - FinalVer2b",
     "role": "menu"
   },
   {
-    "url": "./songs/dreamer.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045501/babelfest/musiques/dreamer.mp3",
     "name": "Throttle - Dreamer",
     "role": "menu"
   },
   {
-    "url": "./songs/ordinary_days.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045503/babelfest/musiques/ordinary_days.mp3",
     "name": "Klaus Veen - Ordinary Days V2",
-    "role": "any"
+    "role": "ingame"
   },
   {
-    "url": "./songs/DL_yami_yugi.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045511/babelfest/musiques/DL_yami_yugi.mp3",
     "name": "Yu-Gi-Oh! Duel Links - Yami Yugi Theme",
     "role": "ingame"
   },
   {
-    "url": "./songs/preliminary_duel.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045509/babelfest/musiques/preliminary_duel.mp3",
     "name": "Yu-Gi-Oh! 5D's Decade Duels Soundtrack - Preliminary Duel B",
     "role": "ingame"
   },
   {
-    "url": "./songs/nearing_victory.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045495/babelfest/musiques/nearing_victory.mp3",
     "name": "Yu-Gi-Oh! 5D's Decade Duels Soundtrack - Nearing Victory A",
     "role": "ingame"
   },
   {
-    "url": "./songs/follow_the_white_rabbit.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045495/babelfest/musiques/follow_the_white_rabbit.mp3",
     "name": "Crash Fever - Follow the White Rabbit",
     "role": "ingame"
   },
   {
-    "url": "./songs/cyber_grind.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045517/babelfest/musiques/cyber_grind.mp3",
     "name": "meganeko - The Cyber Grind (Ultrakill Soundtrack)",
     "role": "ingame"
   },
   {
-    "url": "./songs/elimination_duel.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045508/babelfest/musiques/elimination_duel.mp3",
     "name": "Yu-Gi-Oh! 5D's Decade Duels Soundtrack - Elimination Duel A",
     "role": "ingame"
   },
   {
-    "url": "./songs/virtual_paradise.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045513/babelfest/musiques/virtual_paradise.mp3",
     "name": "Neon White OST: Virtual Paradise",
     "role": "ingame"
   },
   {
-    "url": "./songs/funky_beat.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045491/babelfest/musiques/funky_beat.mp3",
     "name": "Hideki Naganuma - AIN'T NOTHIN' LIKE A FUNKY BEAT",
     "role": "ingame"
   },
   {
-    "url": "./songs/battle_colress.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045494/babelfest/musiques/battle_colress.mp3",
     "name": "Battle! Colress - Pokemon Masters EX (With Countdown)",
     "role": "ingame"
+  },
+  {
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726750774/babelfest/musiques/Babelfest_OST_-_Tuto_avec_Tuto.mp3",
+    "name": "Babelfest OST - Tuto avec Tuto",
+    "role": "tutorial"
   }
 ]

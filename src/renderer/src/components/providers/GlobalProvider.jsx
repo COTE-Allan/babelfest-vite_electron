@@ -1,24 +1,41 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
 import { db } from '../../Firebase'
-import { doc, onSnapshot, query, collection, orderBy } from 'firebase/firestore'
+import {
+  doc,
+  onSnapshot,
+  query,
+  collection,
+  orderBy,
+  updateDoc,
+  increment,
+  arrayUnion,
+  arrayRemove
+} from 'firebase/firestore'
 import Room from '../pages/Room'
 import { DefinePhaseRule } from '../controllers/PhaseController'
 import { useTradeCard } from '../effects/editCards'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
+import { useLeaveLobby } from '../controllers/ManageLobbyAndGame'
+import { useSendMessage } from '../others/toolBox'
 
 export const GlobalContext = createContext(null)
 export const GlobalProvider = () => {
   const { room } = useParams()
-  const { user } = useContext(AuthContext)
+  const { user, userSettings } = useContext(AuthContext)
+  const leaveLobby = useLeaveLobby()
+  const sendMessage = useSendMessage()
   const [host, setHost] = useState(false)
+  let location = useLocation()
+  let isSpectator = location.state?.spectator ?? false
   // Données Globales
   const [gameData, setGameData] = useState(null)
   const [playerSelf, setPlayerSelf] = useState(null)
   const [playerRival, setPlayerRival] = useState(null)
   const [playerID, setPlayerID] = useState(0)
   const [winner, setWinner] = useState(null)
+  const [revenge, setRevenge] = useState(null)
   const [turn, setTurn] = useState(null)
   // Gestion des cartes
   const [selectedCards, setSelectedCards] = useState([])
@@ -64,6 +81,8 @@ export const GlobalProvider = () => {
   const [rightWindow, setRightWindow] = useState(null)
   const [leftWindow, setLeftWindow] = useState(null)
   const [musicPlayer, setMusicPlayer] = useState(false)
+  // Gestion des specs
+  const [spectatorCount, setSpectatorCount] = useState(0)
 
   const [timeJoined, setTimeJoined] = useState(Date.now())
   useEffect(() => {
@@ -126,12 +145,6 @@ export const GlobalProvider = () => {
   // Mettre a jour les states quand la db change
   useEffect(() => {
     // Gérer l'utilisateur qui quitte
-    const handleBeforeUnload = (event) => {
-      event.preventDefault()
-      event.returnValue = 'Vous êtes sûr de vouloir quitter ?'
-    }
-    window.addEventListener('beforeunload', handleBeforeUnload)
-
     console.log('useEffect activé !')
 
     const unsubscribe = onSnapshot(
@@ -156,30 +169,44 @@ export const GlobalProvider = () => {
           turn,
           player1,
           player2,
-          disconnected
+          disconnected,
+          revenge,
+          spectators
         } = data
         // =====================
-        let isHost = user.uid === player1.id
+        let isHost = user.uid === player1.id || isSpectator
         setHost(isHost)
         player1.hand = handJ1
         player2.hand = handJ2
         setPlayerID(isHost ? 1 : 2)
-        setRivalColor(player1.primaryColor)
-        if (isHost) {
-          if (player2.primaryColor === player1.primaryColor) {
-            setRivalColor(player2.secondaryColor)
-          } else {
-            setRivalColor(player2.primaryColor)
+
+        if (userSettings.customColors) {
+          let myColor = isHost ? player1.primaryColor : player2.primaryColor
+          let rivalColor = isHost ? player2.primaryColor : player1.primaryColor
+
+          // Vérifier si les deux joueurs ont la même couleur
+          if (myColor.hex === rivalColor.hex) {
+            // Si la couleur identique est '#40a8f5', appliquer '#e62e31' au rival
+            if (myColor.hex === '#40a8f5') {
+              rivalColor = { hex: '#e62e31' }
+            }
+            // Si la couleur identique est '#e62e31', appliquer '#40a8f5' au rival
+            else if (myColor.hex === '#e62e31') {
+              rivalColor = { hex: '#40a8f5' }
+            }
+            // Si la couleur identique est différente, appliquer '#40a8f5' au rival
+            else {
+              rivalColor = { hex: '#40a8f5' }
+            }
           }
-          setMyColor(player1.primaryColor)
+
+          setMyColor(myColor)
+          setRivalColor(rivalColor)
         } else {
-          if (player2.primaryColor === player1.primaryColor) {
-            setMyColor(player2.secondaryColor)
-          } else {
-            setMyColor(player2.primaryColor)
-          }
-          setRivalColor(player1.primaryColor)
+          setMyColor({ hex: '#40a8f5' })
+          setRivalColor({ hex: '#e62e31' })
         }
+
         // =====================
         setStandby(standby)
         setDeck(deck)
@@ -190,7 +217,9 @@ export const GlobalProvider = () => {
         setTurnOrder((isHost && FirstToPlay === 1) || (!isHost && FirstToPlay === 2) ? 1 : 2)
         setActivePlayer(activePlayer)
         setTurn(turn)
+        setSpectatorCount(spectators)
         // =====================
+        setRevenge(revenge)
         if (finished !== false) {
           setWinner(finished)
         } else {
@@ -223,15 +252,53 @@ export const GlobalProvider = () => {
     )
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
       unsubscribe()
     }
   }, [user])
+
+  useEffect(() => {
+    let timer
+    if (revenge?.state === 'quit' && revenge?.id !== (host ? 1 : 2)) {
+      sendMessage('Le lobby sera automatiquement supprimé dans 5 secondes.', 'info')
+      timer = setTimeout(() => {
+        leaveLobby(gameData.lobbyId, room, gameData.gamemode)
+      }, 5000)
+    }
+    return () => clearTimeout(timer)
+  }, [revenge])
+
+  // Gestion du compteur de spec
+  useEffect(() => {
+    const gameDocRef = doc(db, 'games', room)
+
+    if (isSpectator) {
+      // Add spectator ID to the spectators array (avoids duplicates)
+      updateDoc(gameDocRef, {
+        spectators: arrayUnion(user.uid)
+      }).catch((error) => {
+        console.error('Error adding spectator to the list:', error)
+      })
+    }
+
+    return () => {
+      if (isSpectator) {
+        // Remove spectator ID from the spectators array when leaving the game
+        updateDoc(gameDocRef, {
+          spectators: arrayRemove(user.uid)
+        }).catch((error) => {
+          console.error('Error removing spectator from the list:', error)
+        })
+      }
+    }
+  }, [isSpectator, room, user.uid])
 
   const useStartWatchingTradePhase = () => {
     const tradeCard = useTradeCard()
 
     function startWatchingTradePhase() {
+      if (isSpectator) {
+        return // Prevent spectators from initiating trade phase
+      }
       setPhaseRules([0, 0, 0])
       if (!host) {
         watchTradeRequests()
@@ -330,7 +397,9 @@ export const GlobalProvider = () => {
     handCardsCredits,
     setHandCardsCredits,
     shopCardsCredits,
-    setShopCardsCredits
+    setShopCardsCredits,
+    isSpectator,
+    spectatorCount
   }
   return (
     <GlobalContext.Provider value={propsList}>

@@ -66,6 +66,7 @@ const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title, ...pres
 
 import useSound from 'use-sound'
 import errorSfx from '../../assets/sfx/menu_unauthorized.mp3'
+import successSfx from '../../assets/sfx/info_notification.mp3'
 import infoSfx from '../../assets/sfx/info_notification.mp3'
 import { toast } from 'react-toastify'
 import { useContext } from 'react'
@@ -208,13 +209,18 @@ export function defineWinner(room, player) {
   })
 }
 
-export function useSendErrorMessage() {
+export function useSendMessage() {
   const { userSettings } = useContext(AuthContext)
   const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
   const [info] = useSound(infoSfx, { volume: userSettings.sfxVolume })
+  const [success] = useSound(successSfx, { volume: userSettings.sfxVolume })
 
-  const sendErrorMessage = (msg, type = 'error') => {
+  const sendMessage = (msg, type = 'error') => {
     switch (type) {
+      case 'warn':
+        info()
+        toast.warn(msg)
+        break
       case 'error':
         error()
         toast.error(msg)
@@ -222,12 +228,17 @@ export function useSendErrorMessage() {
       case 'info':
         info()
         toast.info(msg)
+        break
+      case 'success':
+        success()
+        toast.success(msg)
+        break
       default:
         break
     }
   }
 
-  return sendErrorMessage
+  return sendMessage
 }
 
 export function arraysEqual(a, b) {
@@ -293,6 +304,28 @@ export function getOnlineUsersCount(setCountCallback) {
   return unsubscribe
 }
 
+export function getOnlineUsers(setUsersCallback) {
+  const usersRef = collection(db, 'users')
+  const q = query(usersRef, where('status.state', '==', 'online'))
+
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    // Récupère les utilisateurs en ligne sous forme d'array
+    const onlineUsers = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+
+    // Trie par ordre alphabétique sur le champ 'username'
+    onlineUsers.sort((a, b) => a.username.localeCompare(b.username))
+
+    // Mise à jour avec la liste des utilisateurs triée
+    setUsersCallback(onlineUsers)
+  })
+
+  // Retourne la fonction de désinscription pour pouvoir l'arrêter plus tard
+  return unsubscribe
+}
+
 export function getFeaturedCards() {
   // Récupérer toutes les cartes en utilisant getAllCards
   const allCards = getAllCards()
@@ -306,6 +339,7 @@ export function getFeaturedCards() {
 export async function getTopUsersByMMR(amount = 10) {
   const usersRef = collection(db, 'users')
 
+  // Requête pour trier par MMR descendant
   const q = query(usersRef, orderBy('stats.mmr', 'desc'), limit(amount))
 
   try {
@@ -314,7 +348,15 @@ export async function getTopUsersByMMR(amount = 10) {
     let rank = 1
 
     querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, rank, ...doc.data() })
+      // Vérifie si le champ `rank` existe et s'il est un objet, le supprime
+      let userData = doc.data()
+      if (typeof userData.rank === 'object') {
+        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+        delete userData.rank // Supprime l'ancien champ `rank`
+      }
+
+      // Ajoute l'utilisateur avec le rang mis à jour
+      topUsers.push({ id: doc.id, rank, ...userData })
       rank++
     })
 
@@ -328,7 +370,7 @@ export async function getTopUsersByMMR(amount = 10) {
 export async function getTopUsersByLevel(amount = 10) {
   const usersRef = collection(db, 'users')
 
-  // Utilisez d'abord orderBy pour le niveau, puis pour l'xp pour gérer les égalités
+  // Utiliser d'abord orderBy pour le niveau, puis pour l'xp pour gérer les égalités
   const q = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'), limit(amount))
 
   try {
@@ -337,7 +379,15 @@ export async function getTopUsersByLevel(amount = 10) {
     let rank = 1
 
     querySnapshot.forEach((doc) => {
-      topUsers.push({ id: doc.id, rank, ...doc.data() })
+      // Si le champ `rank` existe déjà dans les données et que c'est un objet, remplace-le
+      let userData = doc.data()
+      if (typeof userData.rank === 'object') {
+        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+        delete userData.rank // Supprimer l'ancien champ `rank`
+      }
+
+      // Ajouter l'utilisateur avec le rang mis à jour
+      topUsers.push({ id: doc.id, rank, ...userData })
       rank++
     })
 
@@ -399,13 +449,17 @@ export function getSkinsWithLevel() {
     .filter((skin) => skin.hasOwnProperty('level') && typeof skin.level === 'number')
     .sort((a, b) => a.level - b.level)
 
-  console.log('Skins with Level:', skinsWithLevel) // Debugging pour vérifier les duplications
   return skinsWithLevel
 }
 
 export function getSkinsByLevel(level) {
   // Filtrer les objets qui ont un 'level' égal à l'entrée
   return allSkins.filter((skin) => skin.level === level)
+}
+
+export function getSkins() {
+  // Filtrer les objets qui ont un 'level' égal à l'entrée
+  return allSkins
 }
 
 export function getArenaPattern() {
@@ -528,14 +582,68 @@ export const getRankClass = (index) => {
   }
 }
 
-export const getBackgroundStyle = (colorObject) => {
+export const getBackgroundStyle = (colorObject, direction = 'to bottom') => {
   if (typeof colorObject === 'string') {
     // Si colorObject est une chaîne de caractères, renvoyer directement cette chaîne
     return colorObject
   } else if (colorObject.gradient) {
     // Si colorObject est un objet avec un gradient, appliquer le dégradé
-    return `linear-gradient(to bottom, ${colorObject.hex}, ${colorObject.gradient})`
+    return `linear-gradient(${direction}, ${colorObject.hex}, ${colorObject.gradient})`
   }
   // Si colorObject est un objet sans gradient, renvoyer la couleur hex
-  return colorObject.hex
+  return `linear-gradient(${direction}, ${colorObject.hex}, ${colorObject.hex})`
+}
+
+export function getAllUniqueArtists() {
+  // Récupère toutes les cartes en utilisant la fonction getAllCards
+  const allCards = getAllCards()
+
+  // Utiliser un Set pour s'assurer qu'il n'y ait pas de doublons
+  const uniqueArtists = new Set()
+
+  // Parcourir chaque carte et ajouter l'artiste au Set (si l'artiste existe)
+  allCards.forEach((card) => {
+    if (card.author) {
+      uniqueArtists.add(card.author)
+    }
+  })
+
+  // Convertir le Set en tableau pour avoir une liste exploitable
+  console.log(uniqueArtists)
+  return Array.from(uniqueArtists)
+}
+
+export function generateLocalArena(cellsToRemove, bases) {
+  const amount = 32
+
+  const getCoordinates = (index) => {
+    const rowLetters = ['A', 'B', 'C', 'D']
+    const rows = rowLetters.length
+    const col = Math.floor(index / rows) + 1
+    const row = rowLetters[index % rows]
+    return `${row}${col}`
+  }
+
+  return Array.from({ length: amount }).map((_, index) => {
+    const side = index < amount / 2 ? 1 : 2
+    return {
+      id: index,
+      coordinate: getCoordinates(index),
+      exist: !cellsToRemove.includes(index),
+      side: side,
+      card: null,
+      base: index === bases[0] || index === bases[1],
+      owner: null
+    }
+  })
+}
+
+// Fonction pour récupérer des cartes basées sur un array d'ID
+export function getCardsByIds(ids) {
+  const allCards = getAllCards() // Récupère toutes les cartes
+  const filteredCards = allCards
+    .filter((card) => ids.includes(card.id)) // Filtre les cartes dont l'ID est dans le tableau d'IDs
+    .sort((a, b) => a.rarity - b.rarity) // Trie les cartes par la rareté (en supposant que 'rarity' soit un nombre)
+
+  return filteredCards
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { doc, onSnapshot, getDoc, arrayRemove, updateDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import '../../styles/pages/lobby.scss'
@@ -35,6 +35,8 @@ const Lobby = () => {
   const leaveLobby = useLeaveLobby()
   const createGame = useCreateGame()
   const navigate = useNavigate()
+  let location = useLocation()
+  let isSpectator = location.state?.spectator ?? false
 
   useEffect(() => {
     if (!lobbyId) return
@@ -73,23 +75,27 @@ const Lobby = () => {
       fetchPlayerInfo(lobbyData.j2).then(setPlayer2)
 
       if (lobbyData.gameRef) {
-        const gameRef = doc(db, 'games', lobbyData.gameRef)
-        updateDoc(gameRef, {
-          disconnected: arrayRemove(user.uid)
-        })
-          .then(() => {
-            setTimeout(
-              () => {
-                navigate(`/game/${lobbyData.gameRef}`)
-              },
-              lobbyData.gamemode === 'custom' ? 100 : 2500
-            )
+        if (isSpectator) {
+          navigate(`/game/${lobbyData.gameRef}`, { state: { spectator: true } })
+        } else {
+          const gameRef = doc(db, 'games', lobbyData.gameRef)
+          updateDoc(gameRef, {
+            disconnected: arrayRemove(user.uid)
           })
-          .catch((error) => {
-            console.error('Erreur lors de la mise à jour du document de jeu: ', error)
-          })
+            .then(() => {
+              setTimeout(
+                () => {
+                  navigate(`/game/${lobbyData.gameRef}`)
+                },
+                lobbyData.gamemode === 'custom' ? 100 : 2500
+              )
+            })
+            .catch((error) => {
+              console.error('Erreur lors de la mise à jour du document de jeu: ', error)
+            })
+        }
       }
-      setIsUserHost(user && user.uid === lobbyData.j1?.id ? true : false)
+      setIsUserHost(user && user.uid === lobbyData.j1?.id && !isSpectator ? true : false)
     }
   }, [lobbyData])
 
@@ -221,7 +227,11 @@ const Lobby = () => {
             )}
             <Button
               onClick={() => {
-                leaveLobby(lobbyId)
+                if (isSpectator) {
+                  navigate('/lobbyList')
+                } else {
+                  leaveLobby(lobbyId, false, 'custom')
+                }
               }}
             >
               Quitter le lobby
@@ -272,7 +282,7 @@ const Lobby = () => {
         </ClassicModal>
       )}
 
-      <CardsBackground animate={userSettings.bgOn} />
+      {/* <CardsBackground animate={userSettings.bgOn} /> */}
     </div>
   )
 }

@@ -300,6 +300,7 @@ export const useTryEffect = () => {
           cards: [result.executor.card],
           action: result.log.effectInfos.name,
           desc: result.log.effectInfos.desc,
+          icon: result.log.effectInfos.icon,
           isEffect: true,
           sound: 'effect'
         })

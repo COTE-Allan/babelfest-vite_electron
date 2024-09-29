@@ -63,6 +63,12 @@
     "level": 24
   },
   {
+    "url": "./skins/banners/banner_synthwave.png",
+    "name": "Synthwave",
+    "unlockTip": "Obtenu en atteignant le niveau 28.",
+    "level": 28
+  },
+  {
     "url": "./skins/banners/banner_nippon.jpg",
     "name": "Nippon",
     "unlockTip": "Obtenu en atteignant le niveau 29.",
@@ -89,8 +95,14 @@
   {
     "url": "./skins/banners/banner_rid_2.png",
     "name": "Regal Sanctity",
-    "unlockTip": "Obtenu en atteignant le niveau 40.",
-    "level": 40
+    "unlockTip": "Obtenu en atteignant le niveau 39.",
+    "level": 39
+  },
+  {
+    "url": "./skins/banners/banner_dieux_dormants.jpg",
+    "name": "Dieux Dormants",
+    "unlockTip": "Obtenu en atteignant le niveau 43.",
+    "level": 43
   },
   {
     "url": "./skins/banners/banner_oldSchoolKarnoie.png",
@@ -110,12 +122,17 @@
     "unlockTip": "Obtenu en atteignant le niveau 64.",
     "level": 64
   },
-
   {
     "url": "./skins/banners/banner_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
     "achievement": "HF_tutorial"
+  },
+  {
+    "url": "./skins/banners/banner_liminalis.png",
+    "name": "Liminalis",
+    "unlockTip": "Obtenu en récompense du succès : 'Gloire à l'omniscient'",
+    "achievement": "HF_chegel"
   },
   {
     "url": "./skins/banners/banner_krone_2.png",

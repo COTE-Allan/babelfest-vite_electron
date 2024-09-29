@@ -12,102 +12,134 @@ import LoadingLogo from '../items/LoadingLogo'
 import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
+import BackButton from '../items/BackButton'
+import HudNavLink from '../items/hudNavLink'
+import Logo from '../../assets/svg/babelfest.svg'
+import { MdOutlineSportsScore } from 'react-icons/md'
+import { FaStairs } from 'react-icons/fa6'
+import { FaStar } from 'react-icons/fa'
 
 const Leaderboards = () => {
   const { user, userInfo, userSettings } = useContext(AuthContext)
-  const [MMRUsers, setMMRUsers] = useState(null)
-  const [LevelUsers, setLevelUsers] = useState(null)
-  const [myRank, setMyRank] = useState(0)
+  const [leaderboardData, setLeaderboardData] = useState(null)
+  const [myRank, setMyRank] = useState(null)
   const myId = user.uid
 
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
 
-  useEffect(() => {
-    const fetchTopUsers = async () => {
-      const MMRUsers = await getTopUsersByMMR(30)
-      const LevelUsers = await getTopUsersByLevel(30)
-      const myRank = await getPlayerRank(user.uid)
-      setMMRUsers(MMRUsers)
-      setLevelUsers(LevelUsers)
-      setMyRank(myRank)
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState('MMR')
+
+  const fetchLeaderboardData = async (leaderboard) => {
+    setLeaderboardData(null)
+    setMyRank(null)
+    let data = null
+    let rank = null
+
+    try {
+      if (leaderboard === 'MMR') {
+        data = await getTopUsersByMMR(30)
+        rank = (await getPlayerRank(user.uid)).mmrRank
+      } else if (leaderboard === 'Level') {
+        data = await getTopUsersByLevel(30)
+        rank = (await getPlayerRank(user.uid)).levelXpRank
+      }
+
+      // After fetching, update state
+      setLeaderboardData(data)
+      setMyRank(rank)
+    } catch (error) {
+      console.error('Error fetching leaderboard data:', error)
+      // Handle any errors in fetching data (e.g., set an error state if needed)
     }
-    fetchTopUsers()
-  }, [user.uid])
+  }
+
+  // Fetch the selected leaderboard data whenever it changes
+  useEffect(() => {
+    fetchLeaderboardData(selectedLeaderboard)
+  }, [selectedLeaderboard, user.uid])
+
+  // return;
 
   return (
     <div className="leaderboard">
-      <div className="leaderboard-control"></div>
-      <div className="leaderboard-content">
-        {MMRUsers ? (
-          <>
-            <h1>Matchmaking Rank (MMR)</h1>
-            <div className="leaderboard-list">
-              {MMRUsers.map((user) => (
-                <div
-                  key={user.id}
-                  className="leaderboard-list-item"
-                  onMouseEnter={hover}
-                  onClick={() => {
-                    select()
-                    // Add any other click handling logic here
-                  }}
-                >
-                  <span className={`rank ${getRankClass(user.rank)} leaderboard-rank`}>
-                    {user.rank}
-                  </span>
-                  <LeaderboardPlayerBanner user={user} accessProfile={user.id !== myId} />
-                  <span className="value">{user.stats.mmr}</span>
+      <div className="leaderboard-wrapper">
+        <div className="leaderboard-control">
+          <img src={Logo} className="logo" alt="Babelfest Logo" />
+          <HudNavLink
+            permOpen
+            onClick={() => {
+              setLeaderboardData(null)
+              setSelectedLeaderboard('MMR')
+              select()
+            }}
+            className={selectedLeaderboard === 'MMR' ? 'selected' : ''}
+          >
+            <MdOutlineSportsScore size={45} />
+            <span className="hidden-span">Par MMR</span>
+          </HudNavLink>
+          <HudNavLink
+            permOpen
+            onClick={() => {
+              setLeaderboardData(null)
+              setSelectedLeaderboard('Level')
+              select()
+            }}
+            className={selectedLeaderboard === 'Level' ? 'selected' : ''}
+          >
+            <FaStar size={45} />
+            <span className="hidden-span">Par niveau</span>
+          </HudNavLink>
+        </div>
+
+        {/* Display LoadingLogo while data is being fetched */}
+        <div className="leaderboard-content">
+          {leaderboardData && myRank !== null ? (
+            <>
+              <div className="leaderboard-list">
+                {leaderboardData.map((user) => (
+                  <div
+                    key={user.id}
+                    className="leaderboard-list-item"
+                    onMouseEnter={hover}
+                    onClick={() => {
+                      select()
+                    }}
+                  >
+                    <span className={`rank ${getRankClass(user.rank)} leaderboard-rank`}>
+                      {user.rank}
+                    </span>
+                    <div className="leaderboard-list-item-bannerWrapper">
+                      <LeaderboardPlayerBanner user={user} accessProfile />
+                    </div>
+                    <span className="value">
+                      {selectedLeaderboard === 'MMR'
+                        ? `MMR ${user.stats.mmr}`
+                        : `Niveau ${user.level}`}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="leaderboard-self">
+                <span className={`rank ${getRankClass(myRank)} leaderboard-rank`}>{myRank}</span>
+                <div className="leaderboard-list-item-bannerWrapper">
+                  <LeaderboardPlayerBanner user={userInfo} />
                 </div>
-              ))}
+                <span className="value">
+                  {selectedLeaderboard === 'MMR'
+                    ? `MMR ${userInfo.stats.mmr}`
+                    : `Niveau ${userInfo.level}`}
+                </span>
+              </div>
+            </>
+          ) : (
+            <div className="leaderboard-loading">
+              <LoadingLogo />
             </div>
-            <div className="leaderboard-self">
-              <span className={`rank ${getRankClass(myRank.mmrRank)} leaderboard-rank`}>
-                {myRank.mmrRank}
-              </span>
-              <LeaderboardPlayerBanner user={userInfo} />
-              <span className="value">{userInfo.stats.mmr}</span>
-            </div>
-          </>
-        ) : (
-          <LoadingLogo />
-        )}
+          )}
+        </div>
       </div>
-      <div className="leaderboard-content">
-        {LevelUsers ? (
-          <>
-            <h1>Niveau de joueur</h1>
-            <div className="leaderboard-list">
-              {LevelUsers.map((user) => (
-                <div
-                  key={user.id}
-                  className="leaderboard-list-item"
-                  onMouseEnter={hover}
-                  onClick={() => {
-                    select()
-                    // Add any other click handling logic here
-                  }}
-                >
-                  <span className={`rank ${getRankClass(user.rank)} leaderboard-rank`}>
-                    {user.rank}
-                  </span>
-                  <LeaderboardPlayerBanner user={user} accessProfile={user.id !== myId} />
-                  <span className="value">{user.level}</span>
-                </div>
-              ))}
-            </div>
-            <div className="leaderboard-self">
-              <span className={`rank ${getRankClass(myRank.levelXpRank)} leaderboard-rank`}>
-                {myRank.levelXpRank}
-              </span>
-              <LeaderboardPlayerBanner user={userInfo} />
-              <span className="value">{userInfo.level}</span>
-            </div>
-          </>
-        ) : (
-          <LoadingLogo />
-        )}
-      </div>
+      <BackButton />
     </div>
   )
 }

@@ -20,7 +20,8 @@ export default function Arena() {
     myColor,
     rivalColor,
     myTurn,
-    showArenaInModal
+    showArenaInModal,
+    isSpectator
   } = useContext(GlobalContext)
 
   ArenaController()
@@ -29,14 +30,14 @@ export default function Arena() {
   return (
     <div
       className={`arena-wrapper ${
-        (askForCell || askForTarget || showArenaInModal) && 'arena-wrapper-upperLayer'
+        ((askForCell || askForTarget || showArenaInModal) && !isSpectator) && 'arena-wrapper-upperLayer'
       }`}
       onContextMenu={(e) => e.preventDefault()}
     >
       <TransformWrapper
-        minScale={0.5}
+        minScale={0.55}
         maxScale={2.5}
-        initialScale={0.65}
+        initialScale={0.55}
         centerOnInit={true}
         doubleClick={{ disabled: true }}
         velocityAnimation={{ disabled: false, sensitivity: 100 }}
@@ -80,19 +81,13 @@ export default function Arena() {
               <div
                 className="arena-borders-item"
                 style={{
-                  background: !myTurn || phase === 0 ? getBackgroundStyle(rivalColor) : '#939393',
-                  boxShadow:
-                    !myTurn || phase === 0
-                      ? `0 -10px 70px ${getBackgroundStyle(rivalColor)}`
-                      : 'none'
+                  background: !myTurn || phase === 0 ? getBackgroundStyle(rivalColor) : '#939393'
                 }}
               ></div>
               <div
                 className="arena-borders-item"
                 style={{
-                  background: myTurn || phase === 0 ? getBackgroundStyle(myColor) : '#939393',
-                  boxShadow:
-                    myTurn || phase === 0 ? `0 10px 70px ${getBackgroundStyle(myColor)}` : 'none'
+                  background: myTurn || phase === 0 ? getBackgroundStyle(myColor) : '#939393'
                 }}
               ></div>
             </div>

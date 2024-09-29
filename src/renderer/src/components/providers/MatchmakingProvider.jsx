@@ -14,6 +14,7 @@ import { AuthContext } from '../../AuthContext'
 import { useCreateLobby, useJoinLobby } from '../controllers/ManageLobbyAndGame'
 import changelog from '../../jsons/changelog.json'
 import queueSound from '../../assets/sfx/queue_tick.mp3'
+import cancelSfx from '../../assets/sfx/menu_cancel.flac'
 import successSound from '../../assets/sfx/success_bell.mp3'
 import useSound from 'use-sound'
 
@@ -29,12 +30,13 @@ export const MatchmakingProvider = ({ children }) => {
   const [successQueue] = useSound(successSound, {
     volume: userSettings.sfxVolume
   })
+  const [cancel] = useSound(cancelSfx, { volume: userSettings.sfxVolume })
 
   const createLobby = useCreateLobby()
   const joinLobby = useJoinLobby()
   const verName = changelog.slice(-1)[0].title
 
-  const intervalTime = 4000
+  const intervalTime = 10000
 
   useEffect(() => {
     let timer
@@ -47,7 +49,9 @@ export const MatchmakingProvider = ({ children }) => {
       }, 1000)
 
       playQueueTimer = setInterval(() => {
-        playQueue()
+        if (userSettings.searchPing) {
+          playQueue()
+        }
       }, intervalTime)
     } else {
       setSearchTime(0)
@@ -142,7 +146,7 @@ export const MatchmakingProvider = ({ children }) => {
       mmr: userInfo.stats.mmr,
       rank: 1,
       mode: mode,
-      verName: verName // Include verName in the player object
+      verName: verName
     }
     setCurrentUser(player)
     setMatchmakingSearch(mode)
@@ -150,6 +154,7 @@ export const MatchmakingProvider = ({ children }) => {
 
   const handleStopMatchmaking = async () => {
     if (currentUser) {
+      cancel()
       await deleteDoc(doc(db, 'matchmaking', currentUser.id))
       setCurrentUser(null)
       setMatch(null)

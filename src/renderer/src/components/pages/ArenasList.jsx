@@ -1,8 +1,10 @@
+import BackButton from '../items/BackButton'
 import ArenaPicker from '../others/ArenaPicker'
 
 export default function ArenasList() {
   return (
-    <>
+    <div className="arenasList">
+      <BackButton />
       <h1
         style={{
           textAlign: 'center',
@@ -14,6 +16,6 @@ export default function ArenasList() {
         Arènes
       </h1>
       <ArenaPicker disableInteractivity />
-    </>
+    </div>
   )
 }

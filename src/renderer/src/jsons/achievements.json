@@ -3,13 +3,13 @@
     "id": "HF_tutorial",
     "name": "Le match du siècle",
     "desc": "Terminez le tutoriel.",
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1704791711/babelfest/skins/profilePics/Tuto_psycho.webp"
+    "url": "./skins/avatars/avatar_tuto_1.jpg"
   },
   {
     "id": "HF_firstGame",
     "name": "Bienvenue sur Babelfest",
     "desc": "Terminez votre première partie dans n'importe quel mode.",
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323312/babelfest/skins/borders/04_-_Initiation_des_Plaines.webp",
+    "url": "./skins/borders/cadre_plaines.png",
     "objective": {
       "stat": "totalGamesPlayed",
       "value": 1
@@ -29,7 +29,7 @@
     "id": "HF_50Games",
     "name": "Le début de l'addiction",
     "desc": "Jouez 50 parties dans n'importe quel mode.",
-    "url": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1712323313/babelfest/skins/borders/01_-_Archives_Akashiques.webp",
+    "url": "./skins/borders/cadre_akashique.png",
     "objective": {
       "stat": "totalGamesPlayed",
       "value": 50
@@ -59,7 +59,7 @@
     "id": "HF_15winStreak",
     "name": "Domination totale",
     "desc": "Gagnez 15 parties d'affilée en rapide et/ou classée.",
-    "url": "./skins/icon_success_title.png",
+    "url": "./skins/borders/cadre_juge_impartial.png",
     "objective": {
       "stat": "longestWinStreak",
       "value": 15
@@ -134,6 +134,12 @@
     "name": "Visionnaire",
     "desc": "Activez l'effet 'Troisième Oeil' sur une carte dissimulée.",
     "url": "./skins/avatars/avatar_oeilOmniscient.png"
+  },
+  {
+    "id": "HF_chegel",
+    "name": "Gloire à l'omniscient",
+    "desc": "Gagnez une partie avec Chegel sur le terrain.",
+    "url": "./skins/banners/banner_liminalis.png"
   },
   {
     "id": "HF_11dmg",

@@ -46,6 +46,16 @@
       margin-bottom: 5px;
     }
 
+    &-owner {
+      margin: 2px auto;
+      padding: 0;
+      text-align: center;
+      border-radius: 15px;
+      font-size: 15px;
+      width: 70%;
+      font-family: 'Kimberly Bl', sans-serif;
+    }
+
     &-list-item-item {
       display: flex;
       flex-direction: column;
@@ -122,8 +132,7 @@
       width: 100%;
       margin: 15px 0;
 
-      & ul {
-      }
+      & ul {}
     }
 
     &-stats {

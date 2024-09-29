@@ -7,20 +7,19 @@
   align-items: center;
   left: 50%;
   top: 0;
-
+  z-index: 5;
   transform: translateX(-50%) translateY(-90px);
   font-family: 'Kimberly Bl', sans-serif;
   box-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
   border-radius: 0 0 10px 10px;
   transition: transform 200ms ease-in-out;
-  border: white 4px solid;
+  border: rgb(255, 255, 255) 4px solid;
   border-top: none;
   background-color: $black;
   width: 300px;
 
   &:hover {
     transform: translateX(-50%) translateY(0px);
-    cursor: default;
   }
 
   &-content {
@@ -39,6 +38,7 @@
     width: 100%;
     text-align: center;
     padding: 7px 0;
+    border-radius: 0 0 5px 5px;
   }
 
   &-order {

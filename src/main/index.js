@@ -74,6 +74,14 @@ function createWindow() {
     store.set('screenMode', 'windowed')
     mainWindow.webContents.send('fullscreen-changed', false)
   })
+  mainWindow.webContents.on('did-finish-load', () => {
+    // Ouvre DevTools avec F12
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+      if (input.key === 'F12' && input.type === 'keyDown') {
+        mainWindow.webContents.openDevTools()
+      }
+    })
+  })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
@@ -95,6 +103,7 @@ function checkForUpdates() {
   autoUpdater.on('update-available', (info) => {
     log.info('Update available.')
     if (mainWindow) {
+      log.info('wow!.', info)
       mainWindow.webContents.send('update_available', info)
     }
   })
@@ -111,7 +120,7 @@ function checkForUpdates() {
     if (mainWindow) {
       mainWindow.webContents.send('update_downloaded', info)
       setTimeout(() => {
-        autoUpdater.quitAndInstall()
+        autoUpdater.quitAndInstall(true, true)
       }, 5000)
     }
   })
@@ -139,7 +148,9 @@ app.whenReady().then(() => {
       screenMode: store.get('screenMode', 'windowed'),
       resolution: store.get('resolution', '1536x864'),
       musicOnLaunch: store.get('musicOnLaunch', 'true'),
-      musicVolume: store.get('musicVolume', 0.25)
+      musicVolume: store.get('musicVolume', 0.03),
+      searchPing: store.get('searchPing', true),
+      customColors: store.get('customColors', true)
     }
     return settings
   })
@@ -156,6 +167,8 @@ app.whenReady().then(() => {
     store.set('bgOn', settings.bgOn)
     store.set('musicOnLaunch', settings.musicOnLaunch)
     store.set('musicVolume', settings.musicVolume)
+    store.set('searchPing', settings.searchPing)
+    store.set('customColors', settings.customColors)
 
     mainWindow.setResizable(true)
 

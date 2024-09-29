@@ -25,7 +25,8 @@ export default function ShopCard({ card }) {
     placementCostLeft,
     setRightWindow,
     rightWindow,
-    setShopCardsCredits
+    setShopCardsCredits,
+    isSpectator
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -33,8 +34,7 @@ export default function ShopCard({ card }) {
   }, [phaseRules])
 
   function selectShopCard() {
-    console.log(max)
-    if (max === 0) return
+    if (max === 0 || isSpectator) return
     if (myTurn || phase === 0) {
       select()
       const cardId = card.id

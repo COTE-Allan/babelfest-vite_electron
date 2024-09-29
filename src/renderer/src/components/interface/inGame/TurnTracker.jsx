@@ -5,8 +5,18 @@ import { useContext } from 'react'
 import { getBackgroundStyle } from '../../others/toolBox'
 
 export default function TurnTracker() {
-  const { myTurn, phase, firstToPlay, playerID, myColor, rivalColor, turn } =
-    useContext(GlobalContext)
+  const {
+    myTurn,
+    phase,
+    firstToPlay,
+    playerID,
+    myColor,
+    rivalColor,
+    turn,
+    isSpectator,
+    playerSelf,
+    playerRival
+  } = useContext(GlobalContext)
 
   const phaseLabel = {
     0: "Échange avec l'autre joueur",
@@ -16,25 +26,44 @@ export default function TurnTracker() {
     4: 'Phase de troc'
   }
 
+  // Définir le nom du joueur dont c'est le tour
+  const currentPlayerName = myTurn
+    ? playerSelf?.username || 'Joueur 1'
+    : playerRival?.username || 'Joueur 2'
+
   return (
-    <div
-      className="turnTracker"
-      style={{
-        borderColor: phase === 0 ? `transparent` : myTurn ? myColor.hex : rivalColor.hex
-      }}
-    >
+    <div className="turnTracker">
       <div className="turnTracker-content">
         <span className="turnTracker-activePlayer">
-          {myTurn || phase === 0 ? 'À vous de jouer.' : 'Votre adversaire joue.'}
+          {phase === 0
+            ? isSpectator
+              ? 'Début de la partie !'
+              : 'À vous de jouer.'
+            : isSpectator
+              ? `Au tour de ${currentPlayerName}.`
+              : myTurn
+                ? 'À vous de jouer.'
+                : 'Votre adversaire joue.'}
         </span>
 
         <span className="turnTracker-order">
-          {firstToPlay === playerID ? 'Vous jouez en premier.' : 'Vous jouez en second.'}
+          {!isSpectator
+            ? firstToPlay === playerID
+              ? 'Vous jouez en premier.'
+              : 'Vous jouez en second.'
+            : firstToPlay === playerID
+              ? `${playerSelf?.username} joue en premier.`
+              : `${playerSelf?.username} joue en second.`}
         </span>
       </div>
       <div
         style={{
-          background: phase === 0 ? `transparent` : myTurn ? myColor.hex : rivalColor.hex
+          background:
+            phase === 0
+              ? `transparent`
+              : myTurn
+                ? getBackgroundStyle(myColor, 'to right')
+                : getBackgroundStyle(rivalColor, 'to right')
         }}
         className="turnTracker-phases"
       >

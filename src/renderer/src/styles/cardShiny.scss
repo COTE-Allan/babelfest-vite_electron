@@ -2,19 +2,19 @@
 .foil .img-container {
   clip-path: url(#myClip);
   background: linear-gradient(48deg,
-      #e3c1f46d,
-      #d9d7ed6d,
-      #dff7f16d,
-      #acf0ff6d,
-      #e3c1f46d,
-      #d9d7ed6d,
-      #dff7f16d,
-      #acf0ff6d,
-      #e3c1f46d,
-      #d9d7ed6d,
-      #dff7f16d,
-      #acf0ff6d,
-      #e3c1f46d);
+      #e3c1f45d,
+      #d9d7ed5d,
+      #dff7f15d,
+      #acf0ff5d,
+      #e3c1f45d,
+      #d9d7ed5d,
+      #dff7f15d,
+      #acf0ff5d,
+      #e3c1f45d,
+      #d9d7ed5d,
+      #dff7f15d,
+      #acf0ff5d,
+      #e3c1f45d);
   /* Répéter les couleurs pour doubler la longueur */
   animation: foil 2s linear infinite;
   background-size: 400% 400%;
@@ -273,6 +273,12 @@
     position: relative;
 
     &.prestige {
+
+      &-default {
+        background:
+          white;
+      }
+
       &-promo {
         background: linear-gradient(48deg,
             #e3c1f4,

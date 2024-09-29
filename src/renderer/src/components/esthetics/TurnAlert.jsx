@@ -7,7 +7,9 @@ import { AuthContext } from '../../AuthContext'
 import { getBackgroundStyle } from '../others/toolBox'
 
 export default function TurnAlert() {
-  const { myTurn, phase, hand, host, myColor, rivalColor } = useContext(GlobalContext)
+  const { myTurn, phase, hand, playerSelf, playerRival, myColor, rivalColor, isSpectator } =
+    useContext(GlobalContext)
+
   const phases = [
     'Phase de préparation',
     'Phase de déplacement',
@@ -20,35 +22,45 @@ export default function TurnAlert() {
   const [notif] = useSound(notifSfx, { volume: userSettings.sfxVolume })
 
   const [animation, setAnimation] = useState(true)
+  const [turnTxt, setTurnTxt] = useState('')
+  const [phaseTxt, setPhaseTxt] = useState('')
 
   useEffect(() => {
-    const turnText = myTurn ? 'À vous de jouer' : "Tour de l'adversaire"
-    const phaseText = phases[phase - 1] // Assuming phase is always between 1 and 4
+    let turnText = ''
+    let phaseText = phases[phase - 1] // En supposant que phase est entre 1 et 4
 
     setAnimation(true)
-
     setTimeout(() => {
       setAnimation(false)
     }, 2000)
 
-    setTurnTxt(phase === 0 ? 'Début de la partie !' : turnText)
-    setPhaseTxt(phase === 0 ? 'Distribution et échange des cartes' : phaseText)
+    if (phase === 0) {
+      turnText = 'Début de la partie !'
+      phaseText = 'Distribution et échange des cartes'
+    } else if (isSpectator) {
+      const currentPlayerName = myTurn ? playerSelf.username : playerRival.username
+      turnText = `Au tour de ${currentPlayerName}`
+    } else {
+      turnText = myTurn ? 'À vous de jouer' : "Tour de l'adversaire"
+    }
+
+    setTurnTxt(turnText)
+    setPhaseTxt(phaseText)
   }, [myTurn, phase])
 
   useEffect(() => {
-    if (myTurn) {
+    if (myTurn && !isSpectator) {
       notif()
     }
-  }, [myTurn])
-
-  const [turnTxt, setTurnTxt] = useState('')
-  const [phaseTxt, setPhaseTxt] = useState('')
+  }, [myTurn, isSpectator])
 
   return (
     <div
       className={`turnAlert ${animation ? 'animation' : ''}`}
       style={{
-        background: host && myTurn ? getBackgroundStyle(myColor) : getBackgroundStyle(rivalColor)
+        background: myTurn
+          ? getBackgroundStyle(myColor, 'to right')
+          : getBackgroundStyle(rivalColor, 'to right')
       }}
     >
       <h1>{turnTxt}</h1>

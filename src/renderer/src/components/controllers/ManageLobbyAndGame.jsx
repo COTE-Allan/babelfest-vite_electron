@@ -46,15 +46,6 @@ export function useJoinLobby() {
   return joinLobby
 }
 
-export function useJoinGameAsSpectator() {
-  const navigate = useNavigate()
-
-  const joinGameAsSpectator = async (gameRef) => {
-    navigate(`/gameSpectator/${gameRef}`)
-  }
-  return joinGameAsSpectator
-}
-
 export function useLeaveLobby() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
@@ -82,11 +73,11 @@ export function useLeaveLobby() {
             if (!gameData.finished) {
               await updateDoc(gameRef, {
                 finished: isJ1 ? 2 : isJ2 ? 1 : null,
-                revenge: 'quit'
+                revenge: { state: 'quit', id: isJ1 ? 1 : 2 }
               })
             } else {
               await updateDoc(gameRef, {
-                revenge: 'quit'
+                revenge: { state: 'quit', id: isJ1 ? 1 : 2 }
               })
             }
           } else {
@@ -211,7 +202,8 @@ export function useCreateGame() {
           side: side,
           card: null,
           base: index === bases[0] || index === bases[1],
-          owner: null
+          owner: null,
+          burn: null
         }
       }
     })

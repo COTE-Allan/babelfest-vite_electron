@@ -9,7 +9,7 @@ import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import selectSfx from '../../assets/sfx/card_select.wav'
 import hoverSfx from '../../assets/sfx/card_hover.wav'
-import { getBackgroundStyle } from '../others/toolBox'
+import { getBackgroundStyle, useSendMessage } from '../others/toolBox'
 
 export default function Cell({ active, confirmModal, cell }) {
   const { userSettings } = useContext(AuthContext)
@@ -34,7 +34,8 @@ export default function Cell({ active, confirmModal, cell }) {
     rivalColor,
     rightWindow,
     setRightWindow,
-    playerID
+    playerID,
+    isSpectator
   } = useContext(GlobalContext)
   const id = cell.id
   const team = cell.side
@@ -58,6 +59,7 @@ export default function Cell({ active, confirmModal, cell }) {
     [myTurn, cell.card, checkIfMyCard]
   )
   const handleClickOnArena = useHandleClickOnArena()
+  const sendMessage = useSendMessage()
 
   useEffect(() => {
     if (!showArenaInModal) {
@@ -71,8 +73,13 @@ export default function Cell({ active, confirmModal, cell }) {
     }
   }
   const selectCell = () => {
+    if (isSpectator) return
     if (card) {
       select()
+    }
+
+    if (card && phase === 3 && card.diving) {
+      sendMessage('Vous ne pouvez pas choisir cette carte.', 'warn')
     }
 
     if (
@@ -119,10 +126,12 @@ export default function Cell({ active, confirmModal, cell }) {
     } else {
       return '#000'
     }
-  }, [isBase, team, host, myColor, rivalColor])
+  }, [isBase, team, host, myColor, rivalColor, card, owner])
 
-  // TODO: bordure cell dégradé
   const borderColor = useMemo(() => {
+    if (!card || !owner) {
+      return 'transparent' // Bordure transparente si card ou owner est null
+    }
     if (owner) {
       return (owner === 1 && host) || (owner === 2 && !host)
         ? getBackgroundStyle(myColor)
@@ -130,7 +139,7 @@ export default function Cell({ active, confirmModal, cell }) {
     } else {
       return '#fff'
     }
-  }, [cell, host, owner, myColor, rivalColor])
+  }, [cell, host, owner, myColor, rivalColor, card])
 
   if (!cell.exist) {
     return <div className="cell cell-inexistant" id={id} data-team={team} />
@@ -145,11 +154,17 @@ export default function Cell({ active, confirmModal, cell }) {
       style={{
         background: bgColor,
         '--rotation': `${host ? '0deg' : '180deg'}`,
-        borderColor: borderColor
+        border: 'double 5px transparent',
+        backgroundImage:
+          !card || !owner
+            ? 'none'
+            : `linear-gradient(${card.isRecto ? 'white, white' : 'black, black'}), ${borderColor}`,
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'content-box, border-box'
       }}
       onContextMenu={(e) => {
         e.preventDefault()
-        if (card && !card.isRecto && player !== owner) return
+        if (card && !card.isRecto && (player !== owner || isSpectator)) return
         setAdvancedDetailCard(card)
         setRightWindow('details')
       }}
@@ -181,7 +196,7 @@ export default function Cell({ active, confirmModal, cell }) {
         <div
           className={card.shiny ? 'cell-card ' + card.shiny : 'cell-card'}
           onMouseEnter={() => {
-            if (!card.isRecto && player !== owner) {
+            if (!card.isRecto && (player !== owner || isSpectator)) {
               setDetailCard('hidden')
             } else {
               setDetailCard(card)
@@ -231,7 +246,7 @@ export default function Cell({ active, confirmModal, cell }) {
             </>
           ) : (
             <>
-              {player === owner || card.revealed ? (
+              {(player === owner && !isSpectator) || card.revealed ? (
                 <>
                   <img src={card.url} className="cell-card-visual hidden" alt="Card" />
                   <AiFillEyeInvisible size={90} className="hidden-icon" />

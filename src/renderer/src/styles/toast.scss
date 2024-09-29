@@ -5,6 +5,11 @@
   background: rgba(0, 0, 0, 0.9) !important;
   @include greyBorders();
   min-width: 350px;
+
+  // transform: translateX(-30px);
+  &:hover {
+    cursor: url('../assets/svg/pointer.svg'), auto;
+  }
 }
 
 .Toastify__close-button {

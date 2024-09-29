@@ -1,24 +1,24 @@
 import { useContext, useEffect, useState } from 'react'
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { db } from '../../Firebase'
-import {
-  useCreateLobby,
-  useJoinGameAsSpectator,
-  useJoinLobby
-} from '../controllers/ManageLobbyAndGame'
+import { useCreateLobby, useJoinLobby } from '../controllers/ManageLobbyAndGame'
 import Button from '../items/Button'
 import '../../styles/pages/lobbyList.scss'
 import Modal from '../items/ClassicModal'
 import { AuthContext } from '../../AuthContext'
-import { FaLock, FaPlusCircle } from 'react-icons/fa'
-import { toast } from 'react-toastify'
+import { FaEye, FaLock, FaPlusCircle, FaUser } from 'react-icons/fa'
+import { CgEnter } from 'react-icons/cg'
 import changelog from '../../jsons/changelog.json'
-import { useSendErrorMessage } from '../others/toolBox'
+import { useSendMessage } from '../others/toolBox'
+import BackButton from '../items/BackButton'
+import { useNavigate } from 'react-router-dom'
+import HudNavLink from '../items/hudNavLink'
 
 export default function LobbyList() {
   const verName = changelog.slice(-1)[0].title
-  const { user } = useContext(AuthContext)
+  const { user, userInfo } = useContext(AuthContext)
   const [lobbies, setLobbies] = useState([])
+  const navigate = useNavigate()
 
   const [askNewLobby, setAskNewLobby] = useState(false)
   const [askPassword, setAskPassword] = useState(false)
@@ -28,9 +28,8 @@ export default function LobbyList() {
   const [joinLobbyPassword, setJoinLobbyPassword] = useState(null)
 
   const joinLobby = useJoinLobby()
-  const joinGameAsSpectator = useJoinGameAsSpectator()
   const createLobby = useCreateLobby()
-  const sendErrorMessage = useSendErrorMessage()
+  const sendMessage = useSendMessage()
 
   const fetchLobbies = () => {
     const collectionRef = collection(db, 'lobbies')
@@ -56,10 +55,11 @@ export default function LobbyList() {
         name: lobbyName,
         password: lobbyPassword,
         version: verName,
-        gamemode: 'custom'
+        gamemode: 'custom',
+        creator: userInfo.username
       })
     } else {
-      sendErrorMessage('Ce nom de salon est invalide ou déjà utilisé.')
+      sendMessage('Ce nom de salon est invalide ou déjà utilisé.')
     }
   }
 
@@ -70,122 +70,140 @@ export default function LobbyList() {
   const handleJoinLobby = (lobbyID) => {
     const foundLobby = lobbies.find((lobby) => lobby.id === lobbyID)
     if (foundLobby.version !== verName) {
-      // joinGameAsSpectator(foundLobby.gameRef);
-      joinLobby(lobbyID)
-      sendErrorMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
+      sendMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
     } else {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {
         joinLobby(lobbyID)
       } else {
-        // rejoindre en spec LOCKED
-        // if (foundLobby.gameRef) {
-        //   joinGameAsSpectator(foundLobby.gameRef)
-        // } else {
-        //   sendErrorMessage(
-        //     'Attendez que cette partie commence pour la rejoindre en tant que spectateur.'
-        //   )
-        // }
+        handleJoinAsSpectator(lobbyID)
       }
+    }
+  }
+
+  const handleJoinAsSpectator = (lobbyID) => {
+    const foundLobby = lobbies.find((lobby) => lobby.id === lobbyID)
+    navigate(`/lobby/${lobbyID}`, { state: { spectator: true } })
+    if (foundLobby.version === verName) {
+      navigate(`/lobby/${lobbyID}`, { state: { spectator: true } })
+    } else {
+      sendMessage('Tu ne peux pas accéder à ce lobby car la version du jeu est différente.')
     }
   }
 
   return (
     <div className="lobbies">
-      <Button
-        className="lobbies-btn"
-        onClick={() => {
-          setAskNewLobby(true)
-        }}
-      >
-        <FaPlusCircle size={25} />
-        Créer un salon
-      </Button>
+      <BackButton onlyHome={true} />
+      <div className="lobbies-wrapper">
+        <Button
+          className="lobbies-btn"
+          onClick={() => {
+            setAskNewLobby(true)
+          }}
+        >
+          <FaPlusCircle size={25} />
+          Créer un salon
+        </Button>
 
-      <div className="lobbies-content">
-        <h2>Lobbies disponibles</h2>
-        <ul className="lobbies-list">
-          {lobbies.length > 0 ? (
-            lobbies.map((lobby) => (
-              <li
-                key={lobby.id}
+        <div className="lobbies-content">
+          <h2>Lobbies disponibles</h2>
+          <ul className="lobbies-list">
+            {lobbies.length > 0 ? (
+              lobbies.map((lobby) => (
+                <li key={lobby.id} className="lobbies-list-item">
+                  <span className="lobbies-list-item-span">
+                    Lobby de {lobby.creator} - {lobby.name}
+                  </span>
+                  <div className="lobbies-list-item-div">
+                    <span className="lobbies-list-item-span">
+                      <FaUser />
+                      {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
+                      {lobby.password && <FaLock />}
+                      <span>- v{lobby.version}</span>
+                    </span>
+                    <HudNavLink
+                      onClick={() => {
+                        if (lobby.password) {
+                          setAskPassword({ password: lobby.password, id: lobby.id })
+                        } else {
+                          handleJoinLobby(lobby.id)
+                        }
+                      }}
+                    >
+                      <span className="hidden-span">Rejoindre</span>
+                      <CgEnter size={30} />
+                    </HudNavLink>
+                    <HudNavLink
+                      onClick={() => {
+                        handleJoinAsSpectator(lobby.id)
+                      }}
+                    >
+                      <span className="hidden-span">Regarder</span>
+                      <FaEye size={30} />
+                    </HudNavLink>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p>Pas de lobbies disponibles...</p>
+            )}
+          </ul>
+        </div>
+
+        {askNewLobby && (
+          <Modal>
+            <div className="modal-container">
+              <input
+                onChange={(e) => setLobbyName(e.target.value)}
+                type="text"
+                placeholder="Nom du salon"
+              />
+              <input
+                onChange={(e) => setLobbyPassword(e.target.value)}
+                type="text"
+                placeholder="Mot de passe (optionnel)"
+              />
+              <Button onClick={handleCreateLobby}>Créer le salon</Button>
+              <Button
                 onClick={() => {
-                  if (lobby.password) {
-                    setAskPassword({ password: lobby.password, id: lobby.id })
+                  setAskNewLobby(false)
+                }}
+              >
+                Retour
+              </Button>
+            </div>
+          </Modal>
+        )}
+
+        {askPassword && (
+          <Modal>
+            <div className="modal-container">
+              <input
+                onChange={(e) => setJoinLobbyPassword(e.target.value)}
+                type="text"
+                placeholder="Mot de passe"
+              />
+              <Button
+                onClick={() => {
+                  if (askPassword.password === joinLobbyPassword) {
+                    handleJoinLobby(askPassword.id)
                   } else {
-                    handleJoinLobby(lobby.id)
+                    sendMessage('Le mot de passe est incorrect.')
                   }
                 }}
-                className="lobbies-list-item"
               >
-                <span>
-                  {lobby.version} - {lobby.name}
-                </span>
-                <span>
-                  {lobby.freeSpace ? '1/2' : '2/2'} {lobby.gameRef && ' - En jeu'}
-                  {lobby.password && <FaLock />}
-                </span>
-              </li>
-            ))
-          ) : (
-            <p>Pas de lobbies disponibles...</p>
-          )}
-        </ul>
+                Rejoindre la partie
+              </Button>
+              <Button
+                onClick={() => {
+                  setAskPassword(false)
+                }}
+              >
+                Retour
+              </Button>
+            </div>
+          </Modal>
+        )}
       </div>
-
-      {askNewLobby && (
-        <Modal>
-          <div className="modal-container">
-            <input
-              onChange={(e) => setLobbyName(e.target.value)}
-              type="text"
-              placeholder="Nom du salon"
-            />
-            <input
-              onChange={(e) => setLobbyPassword(e.target.value)}
-              type="text"
-              placeholder="Mot de passe (optionnel)"
-            />
-            <Button onClick={handleCreateLobby}>Créer le salon</Button>
-            <Button
-              onClick={() => {
-                setAskNewLobby(false)
-              }}
-            >
-              Retour
-            </Button>
-          </div>
-        </Modal>
-      )}
-
-      {askPassword && (
-        <Modal>
-          <div className="modal-container">
-            <input
-              onChange={(e) => setJoinLobbyPassword(e.target.value)}
-              type="text"
-              placeholder="Mot de passe"
-            />
-            <Button
-              onClick={() => {
-                if (askPassword.password === joinLobbyPassword) {
-                  handleJoinLobby(askPassword.id)
-                } else {
-                  sendErrorMessage('Le mot de passe est incorrect.')
-                }
-              }}
-            >
-              Rejoindre la partie
-            </Button>
-            <Button
-              onClick={() => {
-                setAskPassword(false)
-              }}
-            >
-              Retour
-            </Button>
-          </div>
-        </Modal>
-      )}
     </div>
   )
 }

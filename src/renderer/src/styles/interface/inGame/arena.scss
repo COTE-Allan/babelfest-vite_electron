@@ -43,7 +43,7 @@
 
       &:hover {
         transform: scale(1.1);
-        cursor: pointer;
+        cursor: url('../../../assets/svg/pointer.svg'), auto;
       }
     }
 
@@ -137,6 +137,7 @@
     }
 
     &-item {
+      border: white 3px solid;
       width: 100%;
       height: 50%;
       background-size: 100%;

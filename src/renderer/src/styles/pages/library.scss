@@ -2,10 +2,28 @@
 
 .library {
   width: 100%;
-  display: flex;
-  height: calc(90% - 20px);
+  height: calc(100% - 20px);
   padding: 0 20px;
   padding-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  &-loading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-wrapper {
+    display: flex;
+
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 95%;
+    width: 95%;
+  }
 
   &-nav {
     display: flex;
@@ -30,7 +48,8 @@
       &:hover {
         background-color: rgba(255, 255, 255, 0.9);
         color: black;
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
       }
     }
   }
@@ -39,6 +58,8 @@
     padding: 0 10px;
     width: 20vw;
     padding-top: 25px;
+    overflow-y: auto;
+    max-height: 90%;
 
     &-zoom {
       display: flex;
@@ -57,7 +78,8 @@
         font-family: 'Kimberly Bl', sans-serif;
         text-align: center;
         justify-content: center;
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
         padding: 7px;
         font-size: 14px;
         margin: 3px;
@@ -74,7 +96,8 @@
         }
 
         &:hover {
-          cursor: pointer;
+          cursor: url('../../assets/svg/pointer.svg'), auto;
+          ;
           background: white !important;
           color: black;
         }
@@ -82,7 +105,8 @@
         & input[type='checkbox'] {
           position: absolute;
           opacity: 0;
-          cursor: pointer;
+          cursor: url('../../assets/svg/pointer.svg'), auto;
+          ;
         }
       }
     }
@@ -183,7 +207,8 @@
       &:hover {
         font-weight: 800;
 
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
       }
     }
   }
@@ -194,8 +219,10 @@
     align-content: flex-start;
     align-items: center;
     overflow-y: scroll;
-    padding: 0 10px;
+    padding: 0;
     padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
     width: 80vw;
 
     &-item {
@@ -211,7 +238,8 @@
       &:hover {
         transform: scale(1.05);
         border: 3px solid white;
-        cursor: pointer;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
       }
     }
   }

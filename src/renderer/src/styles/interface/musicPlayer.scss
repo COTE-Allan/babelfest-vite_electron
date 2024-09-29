@@ -6,20 +6,23 @@
   align-items: center;
   margin: 10px;
 
+  @include for-big-desktop-up {
+    margin: 20px; // Example adjustment for larger screens
+  }
+
   &-container {
-    padding: 20px;
-    border-radius: 0 15px 15px 0;
+    top: 130px;
     transform: translateX(-100%);
     position: absolute;
-    top: 15vh;
-    background-color: $black;
-    transition: transform 0.2s ease-in-out;
-    border: 3px solid rgb(215, 215, 215);
-    border-left: none;
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 250ms ease-in-out;
+    z-index: 10;
 
     &.active {
-      transform: translateX(0);
+      transform: translateX(-5%);
     }
   }
 
@@ -32,6 +35,11 @@
     justify-content: center;
     font-family: 'Kimberly Bl', sans-serif;
 
+    @include for-big-desktop-up {
+      width: 300px; // Example adjustment for larger screens
+      font-size: 15px; // Example adjustment for larger screens
+    }
+
     &.active span {
       animation: textTranslate 15s linear infinite;
     }
@@ -39,6 +47,10 @@
 
   & span {
     display: inline-block;
+
+    @include for-big-desktop-up {
+      font-size: 1.2em; // Example adjustment for larger screens
+    }
   }
 
   &-controller {
@@ -47,71 +59,41 @@
     flex-direction: column;
     align-items: center;
 
+
     &-slider {
       margin-top: 5px;
       width: 50%;
+
+      @include for-big-desktop-up {
+        width: 60%; // Example adjustment for larger screens
+        margin-top: 10px; // Example adjustment for larger screens
+      }
     }
 
     & button {
       background-color: transparent;
       border: none;
-      margin: 2px;
+      margin: 5px;
       padding: 0;
-      height: 45px;
-      width: 45px;
+      height: 30px;
+      width: 30px;
+      transition: transform 200ms ease-in-out;
+
+      @include for-big-desktop-up {
+        height: 40px;
+        width: 40px;
+
+        & svg {
+          height: 30px;
+          width: 30px;
+        }
+      }
 
       &:hover {
-        background-color: $grey;
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+        ;
+        transform: scale(1.2);
       }
     }
-  }
-}
-
-@keyframes textTranslate {
-  from {
-    transform: translateX(100%);
-    /* Démarre de l'extérieur du cadre à droite */
-  }
-
-  to {
-    transform: translateX(-100%);
-    /* Termine à l'extérieur du cadre à gauche */
-  }
-}
-
-#particles {
-  position: absolute;
-  width: 100%;
-  z-index: 0;
-  height: 100%;
-  overflow: hidden;
-}
-
-.note {
-  position: absolute;
-  font-size: 15px;
-  /* Taille de la note de musique */
-  animation: moveNote linear infinite;
-  opacity: 0.7;
-  /* Légère transparence pour un meilleur effet */
-  color: white;
-  /* Couleur de la note, choisissez selon votre préférence */
-}
-
-@keyframes moveNote {
-  0% {
-    transform: translateY(70px) scale(0.5);
-    /* Démarre juste en dessous du conteneur */
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-
-  100% {
-    transform: translateY(0px) scale(2);
-    /* Termine juste au-dessus du conteneur */
-    opacity: 0;
   }
 }

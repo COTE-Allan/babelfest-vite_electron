@@ -118,7 +118,8 @@ export const usePlaceCardOnArea = () => {
     activePlayer,
     setConfirmModal,
     pattern,
-    room
+    room,
+    playerID
   } = useContext(GlobalContext)
 
   const EndTurn = useEndTurn()
@@ -136,6 +137,7 @@ export const usePlaceCardOnArea = () => {
 
     cardToPlace.isRecto = isRecto
     cardToPlace.uniqueID = generateUniqueID()
+    cardToPlace.owner = { name: playerSelf.username, hex: playerSelf.primaryColor.hex }
 
     const batch = writeBatch(db)
 

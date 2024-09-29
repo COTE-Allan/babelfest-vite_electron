@@ -13,6 +13,9 @@ import { useTradeCard } from '../../effects/editCards'
 import { SendCardsToPlayer, useEndTurn } from '../../controllers/PhaseController'
 import RedrawButton from './RedrawButton'
 import { AuthContext } from '../../../AuthContext'
+import { TiArrowBack } from 'react-icons/ti'
+import { useNavigate } from 'react-router-dom'
+import { FaEye } from 'react-icons/fa'
 
 export default function InGameMenus() {
   const {
@@ -36,10 +39,12 @@ export default function InGameMenus() {
     tradeButton,
     setTradeButton,
     handCardsCredits,
-    shopCardsCredits
+    shopCardsCredits,
+    isSpectator,
+    spectatorCount
   } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
-
+  const navigate = useNavigate()
   const tradeCard = useTradeCard()
   const startWatchingTradePhase = useStartWatchingTradePhase()
   const EndTurn = useEndTurn()
@@ -71,7 +76,7 @@ export default function InGameMenus() {
           <GoLog size={45} />
         </IconButton>
 
-        {phase === 4 && myTurn && (
+        {phase === 4 && myTurn && !isSpectator && (
           <IconButton
             onClick={() => {
               if (isExchangeValid && selectedShopCards.length !== 0 && selectedCards.length !== 0) {
@@ -96,7 +101,7 @@ export default function InGameMenus() {
             )}
           </IconButton>
         )}
-        {phase === 0 && tradeButton && (
+        {phase === 0 && tradeButton && !isSpectator && (
           <>
             <RedrawButton />
             <IconButton
@@ -110,12 +115,14 @@ export default function InGameMenus() {
               }}
               className={`${!isTradeValid ? 'disabled' : 'alert'}`}
             >
-              <span>{isTradeValid ? "Valider l'échange" : `Échanger ${phaseRules[0]} cartes`}</span>
+              <span>
+                {isTradeValid ? "Valider l'échange" : `Échanger [ ${phaseRules[0]} ] cartes`}
+              </span>
               <GiConfirmed size={45} />
             </IconButton>
           </>
         )}
-        {phase !== 0 && phase !== 4 && myTurn && (
+        {phase !== 0 && phase !== 4 && myTurn && !isSpectator && (
           <IconButton
             onClick={() => {
               if (myTurn) EndTurn(true)
@@ -126,7 +133,7 @@ export default function InGameMenus() {
             <PiFlagCheckeredFill size={45} />
           </IconButton>
         )}
-        {(phase === 1 || phase === 2) && myTurn && (
+        {(phase === 1 || phase === 2) && myTurn && !isSpectator && (
           <div className="costCounter">
             <div className="costCounter-infos">
               <IoIosFlash />
@@ -135,7 +142,7 @@ export default function InGameMenus() {
             énergies
           </div>
         )}
-        {phase === 4 && myTurn && (
+        {phase === 4 && myTurn && !isSpectator && (
           <div className="costCounter">
             <div className="costCounter-infos" style={{ color: differentialColor }}>
               <GiPriceTag />
@@ -146,6 +153,16 @@ export default function InGameMenus() {
         )}
       </div>
       <div className="ig-menu top">
+        {isSpectator && (
+          <IconButton
+            onClick={() => {
+              navigate('/lobbyList')
+            }}
+          >
+            <TiArrowBack size={45} />
+            <span>Quitter</span>
+          </IconButton>
+        )}
         <IconButton
           onClick={() => {
             setLeftWindow(leftWindow === 'settings' ? null : 'settings')
@@ -166,7 +183,7 @@ export default function InGameMenus() {
           <GiPriceTag size={45} />
           <span>Boutique</span>
         </IconButton>
-        {userSettings && userSettings.tutorial && (
+        {userSettings && userSettings.tutorial && !isSpectator && (
           <IconButton
             onClick={() => {
               setLeftWindow(leftWindow === 'help' ? null : 'help')
@@ -188,6 +205,13 @@ export default function InGameMenus() {
           <IoMdMusicalNote size={45} />
           <span>Musique</span>
         </IconButton>
+        {spectatorCount !== null && spectatorCount?.length !== 0 && (
+          <div className="costCounter spectatorCount">
+            <FaEye size={30} />
+            {spectatorCount?.length}
+          </div>
+          
+        )}
       </div>
     </>
   )

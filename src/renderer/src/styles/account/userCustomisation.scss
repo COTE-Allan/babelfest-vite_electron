@@ -1,0 +1,154 @@
+@import '../variables.scss';
+
+.customize {
+
+  & .details-modale {
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    pointer-events: none;
+    max-width: 450px;
+    border: 2px rgba(255, 255, 255, 0.3) solid;
+    animation: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    z-index: 10;
+
+    &.banner {
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 300px;
+
+      & img {
+        margin: 0;
+        margin-bottom: 5px;
+      }
+    }
+
+    .color-div {
+      height: 80px;
+      width: 80px;
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+
+    & img {
+      height: 80px;
+      margin-right: 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &-content {
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+
+      h2,
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+
+      .skin-name {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+
+        & svg {
+          margin-left: 5px;
+        }
+      }
+
+      p {
+        font-size: 13px;
+      }
+
+      .skin-equip {
+        animation: blink 2s ease-in-out infinite both;
+      }
+
+      .skin-unlock-method {
+        margin: 2px 0;
+      }
+
+      .skin-locked {
+        color: red;
+      }
+
+      .skin-equip,
+      .skin-locked {
+        font-family: 'Kimberly Bl', sans-serif;
+        margin-top: 5px;
+      }
+    }
+
+
+
+  }
+
+  &-list {
+    &-item {
+      margin: 5px;
+      @include greyBorders();
+      border-radius: 5px;
+
+      &:hover {
+        cursor: url('../../assets/svg/pointer.svg'), auto;
+      }
+
+      &.titre,
+      &.prestige {
+        padding: 10px 15px;
+        font-family: 'Kimberly Bl', sans-serif;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      &.banner {
+        width: 280px;
+        // height: 80px;
+
+
+        & img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      &.avatar,
+      &.cadre,
+      &.color {
+        width: 80px;
+        height: 80px;
+        position: relative;
+
+
+
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+
+        & .skin {
+          z-index: 1;
+          position: absolute;
+        }
+
+        & .user-avatar {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+      }
+
+    }
+  }
+
+  .color-div {
+    height: 100%;
+    width: 100%;
+  }
+}

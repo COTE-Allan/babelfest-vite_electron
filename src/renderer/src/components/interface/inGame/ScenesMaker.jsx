@@ -15,7 +15,7 @@ import blockSfx from '../../../assets/sfx/ingame_block.mp3'
 import deathSfx from '../../../assets/sfx/ingame_death.mp3'
 
 export default function ScenesMaker() {
-  const { scenes, user, room, pattern, playerID } = useContext(GlobalContext)
+  const { scenes, user, room, pattern, playerID, isSpectator } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
   let scene = scenes[0]
 
@@ -91,7 +91,7 @@ export default function ScenesMaker() {
       } catch (e) {
         console.error('Transaction failed: ', e)
       }
-    }, 2200)
+    }, 1400)
 
     // Nettoyer le timer quand le composant est démonté
     return () => clearTimeout(timer)
@@ -108,7 +108,9 @@ export default function ScenesMaker() {
             <img
               className="scenesMaker-card"
               src={
-                matchCard1 && !matchCard1.card.isRecto && matchCard1.owner !== playerID
+                matchCard1 &&
+                !matchCard1.card.isRecto &&
+                (matchCard1.owner !== playerID || isSpectator)
                   ? hiddenCard
                   : scene.cards[0].url
               }
@@ -135,7 +137,12 @@ export default function ScenesMaker() {
             </>
           )}
         </div>
-        <span className="scenesMaker-action">{scene.action}</span>
+        <span className="scenesMaker-action">
+          {scene.isEffect && (
+            <img className="scenesMaker-effectIcon" src={scene.icon} alt="Icon de l'effet" />
+          )}
+          {scene.action}
+        </span>
         <p className="scenesMaker-desc">{scene.desc}</p>
       </div>
     </Modal>

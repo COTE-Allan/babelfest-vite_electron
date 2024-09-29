@@ -1,8 +1,18 @@
 @import '../variables.scss';
 
 .lobbies {
-  height: calc(85vh - 80px);
-  padding: 40px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &-wrapper {
+    height: calc(90% - 60px);
+    width: calc(80% - 120px);
+    padding: 30px 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+  }
 
   &-btn {
     display: inline-flex;
@@ -18,9 +28,13 @@
     font-family: 'Kimberly Bl', sans-serif;
   }
 
+  & svg {
+    margin: 0 5px;
+  }
+
   &-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     padding: 0;
     margin: 0;
 
@@ -36,26 +50,36 @@
 
     &-item {
       margin: 5px 0;
+      width: calc(100% - 20px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px;
       list-style-type: none;
       background-color: $black;
+      border-radius: 15px;
       font-size: 18px;
       font-family: 'Kimberly Bl', sans-serif;
       @include greyBorders();
-      @include whiteHovering();
+      // @include whiteHovering();
 
-      & span {
+      &-span {
         margin: 0 10px;
         display: flex;
         align-items: center;
       }
 
-      & svg {
-        margin-left: 10px;
+      &-div {
+        display: flex;
+        align-items: center;
       }
+
+      & .hudNavLink {
+        @include greyBorders();
+      }
+
+
+
     }
   }
 }

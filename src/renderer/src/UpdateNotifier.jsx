@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ProgressBar from '@ramonak/react-progress-bar'
 import './styles/updateNotifier.scss'
 
 const UpdateNotifier = () => {
@@ -21,6 +22,7 @@ const UpdateNotifier = () => {
     }
 
     const handleError = (err) => {
+      console.error('Erreur lors de la mise à jour :', err)
       setError(err)
       setProgress(null) // Reset progress in case of error
     }
@@ -38,17 +40,33 @@ const UpdateNotifier = () => {
     }
   }, [])
 
-  if (updateInfo) {
+  if (updateInfo || progress) {
     return (
-      <div className="updateBanner">
-        <div className="updateBanner-infos">Mise à jour disponible : {updateInfo.version}</div>
-        <span>Certaines fonctionnalités sont bloquées.</span>
+      <div className="updateBanner fade-in">
+        <div className="updateBanner-infos">
+          Mise à jour disponible {updateInfo && updateInfo.version && `: ${updateInfo.version}`}
+        </div>
+        <span>
+          Vous devez télécharger la mise à jour pour jouer, une fois téléchargée, le jeu va
+          redémarrer.
+        </span>
         <div className="updateBanner-download">
           {progress && (
             <>
-              Téléchargement en cours : {(progress.transferred / 1024 / 1024).toFixed(2)} MB /{' '}
-              {(progress.total / 1024 / 1024).toFixed(2)} MB -{' '}
-              {(progress.bytesPerSecond / 1024).toFixed(2)} KB/s
+              <div className="updateBanner-download-infos">
+                Téléchargement en cours : {(progress.transferred / 1024 / 1024).toFixed(1)} MB /{' '}
+                {(progress.total / 1024 / 1024).toFixed(2)} MB -{' '}
+                {(progress.bytesPerSecond / 1024 / 1024).toFixed(2)} MB/s
+              </div>
+              <ProgressBar
+                customLabel={`${((progress.transferred / progress.total) * 100).toFixed(1)}%`}
+                completed={progress.transferred}
+                maxCompleted={progress.total}
+                bgColor="#4caf50"
+                height="20px"
+                labelAlignment="center"
+                labelColor="#fff"
+              />
             </>
           )}
         </div>

@@ -11,6 +11,9 @@ import {
 import { useTryEffect } from './EffectsController'
 import { defineWinner } from '../others/toolBox'
 import { useEndTurn } from './PhaseController'
+import useSound from 'use-sound'
+
+import { AuthContext } from '../../AuthContext'
 
 export function ArenaController() {
   const {
@@ -34,6 +37,7 @@ export function ArenaController() {
     setMusicPlayer,
     processDeath
   } = useContext(GlobalContext)
+  const { userSettings } = useContext(AuthContext)
 
   const placementHalfMap = usePlacementHalfMap()
   const getAdjacentCells = useGetAdjacentsCells()
@@ -51,28 +55,35 @@ export function ArenaController() {
 
   useEffect(() => {
     if (!host || phase === 0) return
-    //  vérifier si un joueur peut gagner
-    // Victory by capturing bases
+
+    // Fonction pour gérer la victoire avec délai et autres actions avant de définir le gagnant
+    const handleVictory = (winner) => {
+      defineWinner(room, winner) // Appeler defineWinner après 1 seconde
+    }
+
+    // Vérifier si un joueur peut gagner par capture de base
     let bases = pattern.filter((cell) => cell.base)
-    bases.forEach((base) => {
+    for (let base of bases) {
       if (base.card !== null && base.owner !== base.side) {
-        defineWinner(room, base.owner)
+        handleVictory(base.owner) // Gagnant par capture de base
         return
       }
-    })
-
-    // Victory by depleting cards
-    const J1cardsOnTheArena = pattern.filter((cell) => cell.card !== null && cell.owner == 1).length
-    const J2cardsOnTheArena = pattern.filter((cell) => cell.card !== null && cell.owner == 2).length
-
-    if (playerSelf.hand.length == 0 || playerRival.hand.length == 0) {
-      if (J1cardsOnTheArena == 0) {
-        defineWinner(room, 2)
-      } else if (J2cardsOnTheArena == 0) {
-        defineWinner(room, 1)
-      }
     }
-  }, [pattern, playerSelf.hand])
+
+    // Vérifier si un joueur peut gagner par épuisement de cartes
+    const J1cardsOnTheArena = pattern.filter(
+      (cell) => cell.card !== null && cell.owner === 1
+    ).length
+    const J2cardsOnTheArena = pattern.filter(
+      (cell) => cell.card !== null && cell.owner === 2
+    ).length
+
+    if (playerSelf.hand.length === 0 && J1cardsOnTheArena === 0) {
+      handleVictory(2) // J1 a perdu
+    } else if (playerRival.hand.length === 0 && J2cardsOnTheArena === 0) {
+      handleVictory(1) // J2 a perdu
+    }
+  }, [pattern, playerSelf.hand, playerRival.hand, room, host, phase])
 
   useEffect(() => {
     if (phase === 4) {
@@ -151,7 +162,6 @@ export const useHandleClickOnArena = () => {
 
   return (cellID, type, specialAction = null, switchAlly = false) => {
     if (specialAction) {
-      console.log(specialAction)
       specialAction()
     } else {
       const action = phaseActions[type]

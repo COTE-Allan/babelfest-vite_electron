@@ -1,0 +1,41 @@
+@import '../variables.scss';
+
+.userSettings {
+  display: flex;
+  padding: 20px 0;
+  height: calc(100% - 40px);
+  width: 100%;
+  font-family: 'Kimberly Bl', sans-serif;
+
+  & h1 {
+    margin: 0;
+    font-size: 25px;
+  }
+
+  &-list {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    & hr {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  & button {
+    margin: 5px 0;
+  }
+
+  &-input {
+    margin: 0;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+
+    & input {
+      margin: 5px 0;
+    }
+  }
+}

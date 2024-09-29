@@ -1,8 +1,7 @@
 import { useContext, useMemo } from 'react'
-import ProfilePicture from '../../esthetics/profilePicture'
-import PlayerBanner from './PlayerBanner'
 import { GlobalContext } from '../../providers/GlobalProvider'
 import '../../../styles/interface/inGame/players.scss'
+import LeaderboardPlayerBanner from '../../items/LeaderboardPlayerBanner'
 
 function calculateCardsOnArena(pattern, playerId, isSelf) {
   return pattern.filter(
@@ -35,15 +34,10 @@ export default function Players() {
   return (
     <>
       <div className="playerBanner-container self">
-        <PlayerBanner user={playerSelf} color={myColor} cardsLeft={selfCardsLeft} />
+        <LeaderboardPlayerBanner user={playerSelf} cards={selfCardsLeft} />
       </div>
       <div className="playerBanner-container rival">
-        <PlayerBanner
-          side={'rival'}
-          user={playerRival}
-          color={rivalColor}
-          cardsLeft={rivalCardsLeft}
-        />
+        <LeaderboardPlayerBanner user={playerRival} cards={rivalCardsLeft} reverse />
       </div>
     </>
   )

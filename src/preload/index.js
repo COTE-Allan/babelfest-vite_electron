@@ -48,7 +48,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const options = {
     backgroundColor: TitlebarColor.fromHex('#000'),
     icon: winIcon,
-    minimizable: false,
     maximizable: false
   }
 

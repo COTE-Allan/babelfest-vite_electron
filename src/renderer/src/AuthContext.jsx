@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
+import { useSendMessage } from './components/others/toolBox'
 
 export const AuthContext = createContext()
 
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }) => {
         primaryColor: userData.primaryColor,
         secondaryColor: userData.secondaryColor,
         profilePic: userData.profilePic,
-        profileBorder: userData.profileBorder,
+        profileBorder: userData.profileBorder || null,
         flags: userData.flags || [],
         title: userData.title,
         banner: userData.banner,
@@ -87,8 +88,8 @@ export const AuthProvider = ({ children }) => {
           winStreak: userData.stats?.winStreak || 0,
           longestWinStreak: userData.stats?.longestWinStreak || 0
         },
-        status: userData.status,
-        currentLobby: userData.currentLobby,
+        status: userData.status || null,
+        currentLobby: userData.currentLobby || null,
         achievements: userData.achievements || [],
         matchSummaries: userData.matchSummaries || []
       }
@@ -126,7 +127,6 @@ export const AuthProvider = ({ children }) => {
     if (!user) return
     const userRef = doc(db, 'users', user.uid)
     await updateDoc(userRef, updates)
-    toast.success('Les modifications ont correctement été appliquées.')
     setUserInfo((prev) => ({ ...prev, ...updates }))
   }
 

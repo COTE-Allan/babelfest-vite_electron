@@ -1,116 +1,77 @@
 import React, { useContext, useEffect, useState } from 'react'
-
 import { AuthContext } from '../../AuthContext'
-
-import '../../styles/pages/home.scss'
-import '../../styles/pages/account.scss'
-import '../../styles/accountEditor/skins.scss'
-
-import ProfilePicture from '../esthetics/profilePicture'
-import CosmecticsController from '../accountEditor/CosmeticsController'
-import Button from '../items/Button'
-import UserSettingsController from '../accountEditor/UserSettingsController'
-import PlayerBanner from '../interface/inGame/PlayerBanner'
-import ExperienceBar from '../interface/ExperienceBar'
-import UserStatsController from '../accountEditor/UserStatsController'
-import UserAchievements from '../accountEditor/UserAchievements'
-import { FaBookOpen, FaCog, FaTrophy, FaTshirt, FaUserAlt } from 'react-icons/fa'
-import HudNavLink from '../items/hudNavLink'
-import MatchSummaries from '../interface/MatchSummaries'
+import ProfileDisplayer from '../account/ProfileDisplayer'
 import { useParams } from 'react-router-dom'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../../Firebase'
+import { getPlayerRank, getPlayerStats } from '../others/toolBox'
 
 const Account = () => {
-  const { userInfo } = useContext(AuthContext)
+  const { userInfo, user } = useContext(AuthContext)
+  const [targetUser, setTargetUser] = useState(null)
+  const { userId } = useParams()
+  const isMine = userId === user.uid
 
-  const { defaultPage } = useParams()
-  const [page, setPage] = useState(0)
+  async function GetUser(userId) {
+    const userRef = doc(db, 'users', userId)
+    const docSnap = await getDoc(userRef)
 
+    if (docSnap.exists()) {
+      const userData = docSnap.data()
+      const userInfo = {
+        username: userData.username,
+        primaryColor: userData.primaryColor,
+        profilePic: userData.profilePic,
+        profileBorder: userData.profileBorder,
+        title: userData.title,
+        banner: userData.banner,
+        level: userData.level,
+        honor: userData.honor,
+        xp: userData.xp ?? 0,
+        stats: {
+          gamesPlayed: userData.stats?.gamesPlayed || 0,
+          victories: userData.stats?.victories || 0,
+          mmr: userData.stats?.mmr || 500,
+          winStreak: userData.stats?.winStreak || 0,
+          longestWinStreak: userData.stats?.longestWinStreak || 0
+        },
+        status: userData.status,
+        achievements: userData.achievements || [],
+        honored: userData.honored || { timestamp: 0, quantity: 0 },
+        matchSummaries: userData.matchSummaries,
+        prestige: userData.prestige ?? null
+      }
+      let stats = getPlayerStats(userInfo.stats)
+      userInfo.stats = stats
+      userInfo.id = userId
+      const rank = await getPlayerRank(userId)
+      userInfo.rank = rank
+      setTargetUser(userInfo)
+    }
+  }
+
+  // TODO: Customisaiton, loading, transition customisation et achivements correctes
   useEffect(() => {
-    setPage(Number(defaultPage) !== 0 ? Number(defaultPage) : 2)
-  }, [defaultPage])
+    const fetchUserData = async () => {
+      if (isMine) {
+        const rank = await getPlayerRank(user.uid)
 
-  const [profile, setProfile] = useState(null)
-  const [border, setBorder] = useState(null)
-  const [arena, setArena] = useState([])
-  const [selectedPrimary, setSelectedPrimary] = useState(null)
-  const [selectedSecondary, setSelectedSecondary] = useState(null)
-  const [title, setTitle] = useState(null)
-  const [banner, setBanner] = useState(null)
-  const [prestige, setPrestige] = useState(null)
+        const extendedUserInfo = {
+          ...userInfo, // Conserver les propriétés existantes de userInfo
+          id: user.uid, // Ajouter la propriété id depuis user
+          stats: getPlayerStats(userInfo.stats),
+          rank: rank
+        }
+        setTargetUser(extendedUserInfo)
+      } else {
+        await GetUser(userId) // Appeler GetUser avec await
+      }
+    }
 
-  const userData = {
-    username: userInfo.username,
-    primaryColor: selectedPrimary ? selectedPrimary : userInfo.primaryColor,
-    secondaryColor: selectedSecondary ? selectedSecondary : userInfo.secondaryColor,
-    profilePic: profile ? profile : userInfo.profilePic,
-    profileBorder: border ? border : userInfo.profileBorder,
-    arena: arena.length > 0 ? arena : userInfo.arena,
-    title: title ? title : userInfo.title,
-    banner: banner ? banner : userInfo.banner,
-    level: userInfo.level,
-    prestige: prestige ? prestige : userInfo.prestige
-  }
+    fetchUserData()
+  }, [])
 
-  let props = {
-    userData,
-    profile,
-    border,
-    arena,
-    title,
-    banner,
-    selectedPrimary,
-    selectedSecondary,
-    setProfile,
-    setBorder,
-    setArena,
-    setSelectedPrimary,
-    setSelectedSecondary,
-    setTitle,
-    setBanner,
-    prestige,
-    setPrestige
-  }
-  return (
-    <div className="account">
-      <div className="account-profile">
-        <ProfilePicture
-          size={300}
-          customUser={{
-            profilePic: userData.profilePic,
-            profileBorder: userData.profileBorder
-          }}
-        />
-        <ExperienceBar />
-        <PlayerBanner user={userData} color={userData.primaryColor} />
-      </div>
-      <div className="account-main">
-        <nav className="account-main-nav">
-          <HudNavLink to={'/account/1'} selected={page === 1} permOpen>
-            <FaUserAlt size={45} />
-            <span className="hidden-span">Statistiques</span>
-          </HudNavLink>
-          <HudNavLink to={'/account/2'} selected={page === 2} permOpen>
-            <FaTshirt size={45} />
-            <span className="hidden-span">Customisation</span>
-          </HudNavLink>
-          <HudNavLink to={'/account/4'} selected={page === 4} permOpen>
-            <FaTrophy size={45} />
-            <span className="hidden-span">Progression</span>
-          </HudNavLink>
-          <HudNavLink to={'/account/3'} selected={page === 3} permOpen>
-            <FaCog size={45} />
-            <span className="hidden-span">Modifier Profil</span>
-          </HudNavLink>
-        </nav>
-        <div className="account-main-content">
-          {page === 1 && <UserStatsController />}
-          {page === 2 && <CosmecticsController {...props} />}
-          {page === 3 && <UserSettingsController />}
-          {page === 4 && <UserAchievements />}
-        </div>
-      </div>
-    </div>
-  )
+  return <ProfileDisplayer userInfo={targetUser} isMine={isMine} setUser={setTargetUser} />
 }
 
 export default Account

@@ -19,7 +19,6 @@ const getValue = (obj, path) => {
 
 // Fonction pour vérifier un objectif
 const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
-  console.log(gameData, winner, objective.gameData, objective.gamemode)
   if (objective.win) {
     // Si l'objectif requiert de gagner, vérifiez si le joueur a gagné
     if (!winner) {
@@ -33,7 +32,6 @@ const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
     const value = getValue(userInfo, objective.profile)
     return value !== undefined && value >= objective.value
   } else if (objective.gameData) {
-    console.log(gameData, winner, objective.gameData, objective.gamemode)
     // Vérifie si le mode de jeu courant est inclus dans la liste des modes de jeu spécifiés dans l'objectif
     if (objective.gamemode.includes(gameData.gamemode)) {
       const value = getValue(gameData, objective.gameData)
