@@ -17,14 +17,14 @@ const GamemodeSelect = () => {
           <MenuCard
             disabled={!isTutorialFinished ? lockedReason : false}
             name="Partie rapide"
-            desc="Affrontez un adversaire aléatoire de niveau similaire"
+            desc="Avec un deck généré aléatoirement, affrontez un adversaire de niveau similaire"
             where="/matchmakingQueue/quick"
             bg={QuickplayCardArena}
           />
           <MenuCard
             disabled={!isTutorialFinished ? lockedReason : false}
             name="Partie custom"
-            desc="Jouez entre amis avec des règles modifiables"
+            desc="Jouez entre amis avec des règles modifiables et des decks construits"
             where="/lobbyList"
             bg={RankedCardArena}
           />

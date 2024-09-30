@@ -196,8 +196,7 @@ a {
 
 .back-button {
 
-  font-family: 'Kimberly Bl',
-    sans-serif;
+  font-family: 'Kimberly Bl', sans-serif;
   font-size: 35px;
   background-color: rgba(122, 122, 122, 0.2);
   z-index: 10;
@@ -205,6 +204,7 @@ a {
   &-container {
     display: flex;
     flex-direction: column-reverse;
+    align-items: flex-start; // Ajouté pour empêcher l'étirement en largeur
     position: absolute;
     bottom: 30px;
     left: 20px;
@@ -215,6 +215,7 @@ a {
     position: relative !important;
   }
 }
+
 
 input,
 select {

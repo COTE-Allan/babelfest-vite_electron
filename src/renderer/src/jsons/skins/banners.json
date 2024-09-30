@@ -18,144 +18,168 @@
     "url": "./skins/banners/banner_evilmat_1.png",
     "name": "Le bout du monde",
     "unlockTip": "Obtenu en atteignant le niveau 2.",
-    "level": 2
+    "level": 2,
+    "author": "Matthieu Otsen"
   },
   {
     "url": "./skins/banners/banner_hugo_1.png",
     "name": "Gribouillages",
     "unlockTip": "Obtenu en atteignant le niveau 4.",
-    "level": 4
+    "level": 4,
+    "author": "TheHug0Geek"
   },
   {
     "url": "./skins/banners/banner_rid_1.png",
     "name": "Go With The Flow",
     "unlockTip": "Obtenu en atteignant le niveau 6.",
-    "level": 6
+    "level": 6,
+    "author": "RID"
   },
   {
     "url": "./skins/banners/banner_shape_1.png",
     "name": "Shape prêt au combat",
     "unlockTip": "Obtenu en atteignant le niveau 11.",
-    "level": 11
+    "level": 11,
+    "author": "Kiba"
   },
   {
     "url": "./skins/banners/banner_abuse_1.png",
     "name": "Forêt enneigée",
     "unlockTip": "Obtenu en atteignant le niveau 16.",
-    "level": 16
+    "level": 16,
+    "author": "Abuse"
   },
   {
     "url": "./skins/banners/banner_cameRat.png",
     "name": "Camélérat",
     "unlockTip": "Obtenu en atteignant le niveau 19.",
-    "level": 19
+    "level": 19,
+    "author": "Kiba"
   },
   {
     "url": "./skins/banners/banner_rid_3.png",
     "name": "In the Darkness",
     "unlockTip": "Obtenu en atteignant le niveau 22.",
-    "level": 22
+    "level": 22,
+    "author": "RID"
   },
   {
     "url": "./skins/banners/banner_bubbles.jpg",
     "name": "Bulles",
     "unlockTip": "Obtenu en atteignant le niveau 24.",
-    "level": 24
+    "level": 24,
+    "author": "Kiba"
   },
   {
     "url": "./skins/banners/banner_synthwave.png",
     "name": "Synthwave",
     "unlockTip": "Obtenu en atteignant le niveau 28.",
-    "level": 28
+    "level": 28,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/banners/banner_nippon.jpg",
     "name": "Nippon",
     "unlockTip": "Obtenu en atteignant le niveau 29.",
-    "level": 29
+    "level": 29,
+    "author": "Kiba"
   },
   {
     "url": "./skins/banners/banner_clemojis.png",
     "name": "Clémojis",
     "unlockTip": "Obtenu en atteignant le niveau 32.",
-    "level": 32
+    "level": 32,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/banners/banner_krone_1.png",
     "name": "Krone",
     "unlockTip": "Obtenu en atteignant le niveau 36.",
-    "level": 36
+    "level": 36,
+    "author": "Antoine Bordon"
   },
   {
     "url": "./skins/banners/banner_requinTigre.png",
     "name": "Requin-tigre",
     "unlockTip": "Obtenu en atteignant le niveau 37.",
-    "level": 37
+    "level": 37,
+    "author": "Kiba"
   },
   {
     "url": "./skins/banners/banner_rid_2.png",
     "name": "Regal Sanctity",
     "unlockTip": "Obtenu en atteignant le niveau 39.",
-    "level": 39
+    "level": 39,
+    "author": "RID"
   },
   {
     "url": "./skins/banners/banner_dieux_dormants.jpg",
     "name": "Dieux Dormants",
     "unlockTip": "Obtenu en atteignant le niveau 43.",
-    "level": 43
+    "level": 43,
+    "author": "Kula"
   },
   {
     "url": "./skins/banners/banner_oldSchoolKarnoie.png",
     "name": "Old School Karnoie",
     "unlockTip": "Obtenu en atteignant le niveau 43.",
-    "level": 46
+    "level": 46,
+    "author": "LeRatonVoyer & Sanga"
   },
   {
     "url": "./skins/banners/banner_rid_4.png",
     "name": "Rigor of Life",
     "unlockTip": "Obtenu en atteignant le niveau 54.",
-    "level": 54
+    "level": 54,
+    "author": "RID"
   },
   {
     "url": "./skins/banners/banner_tulip_1.png",
     "name": "Tulip en plein ménage",
     "unlockTip": "Obtenu en atteignant le niveau 64.",
-    "level": 64
+    "level": 64,
+    "author": "Antoine Bordon"
   },
   {
     "url": "./skins/banners/banner_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
-    "achievement": "HF_tutorial"
+    "achievement": "HF_tutorial",
+    "author": "Kiba"
   },
   {
     "url": "./skins/banners/banner_liminalis.png",
     "name": "Liminalis",
     "unlockTip": "Obtenu en récompense du succès : 'Gloire à l'omniscient'",
-    "achievement": "HF_chegel"
+    "achievement": "HF_chegel",
+    "author": "Neald"
   },
   {
     "url": "./skins/banners/banner_krone_2.png",
     "name": "Maîtrise de Krone",
     "unlockTip": "Obtenu en récompense du succès : 'Chaos Cosmique'",
-    "achievement": "HF_kroneChaos"
+    "achievement": "HF_kroneChaos",
+    "author": "Antoine Bordon"
   },
   {
     "url": "./skins/banners/banner_shiro_1.png",
     "name": "Maîtrise de Shiro",
     "unlockTip": "Obtenu en récompense du succès : 'Zéro absolu'",
-    "achievement": "HF_shiroFreeze"
+    "achievement": "HF_shiroFreeze",
+    "author": "RID"
   },
   {
     "url": "./skins/banners/banner_heal.png",
     "name": "Maîtrise du soin",
     "unlockTip": "Obtenu en récompense du succès : 'Médecin de guerre'",
-    "achievement": "HF_6heal"
+    "achievement": "HF_6heal",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/banners/banner_fondateur.png",
     "name": "Akumu VS Odasun",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
-    "flag": "alphaTest"
+    "flag": "alphaTest",
+    "author": "ChouetteBlancheRoliste & Seilongk"
   }
 ]

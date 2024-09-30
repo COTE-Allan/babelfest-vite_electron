@@ -410,6 +410,57 @@
             #b5d2ff);
       }
 
+      &-galaxy {
+        background: linear-gradient(48deg,
+            #f8c1a1,
+            /* Rose doré clair */
+            #f9a37d,
+            /* Rose cuivré doux */
+            #e78b5e,
+            /* Or rose plus intense */
+            #d08c64,
+            /* Cuivre doré */
+            #f9a37d,
+            /* Retour au rose cuivré doux */
+            #f8c1a1,
+            /* Retour au rose doré clair */
+            #f9a37d,
+            #e78b5e,
+            #f9a37d,
+            #f8c1a1);
+      }
+
+
+      &-cosmicPulse {
+        background: linear-gradient(48deg,
+            #ff33cc,
+            /* Rose néon plus vif */
+            #6666ff,
+            /* Bleu électrique plus clair */
+            #33ffcc,
+            /* Turquoise éclatant et lumineux */
+            #ffcc33,
+            /* Orange doré plus lumineux */
+            #ff33cc,
+            /* Retour au rose néon plus vif */
+            #6666ff,
+            #33ffcc,
+            #ffcc33);
+      }
+
+      &-championFlame {
+        background: linear-gradient(48deg,
+            #f83600,
+            /* Orange vif */
+            #f9d423,
+            /* Jaune doré */
+            #f83600,
+            #f9d423,
+            #f83600,
+            #f9d423,
+            #f83600,
+            #f9d423);
+      }
 
     }
   }

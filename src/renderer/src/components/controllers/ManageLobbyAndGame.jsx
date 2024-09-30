@@ -1,4 +1,12 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc, writeBatch } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  writeBatch
+} from 'firebase/firestore'
 import { db } from '../../Firebase'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
@@ -7,7 +15,8 @@ import { getAllCards } from '../others/toolBox'
 import {
   drawHandWithAdjustedRarity,
   drawHandWithRarityConstraint,
-  drawRandomCards
+  drawRandomCards,
+  getCardsFromArray
 } from '../effects/editCards'
 import { HeadOrTails } from '../effects/basics'
 
@@ -50,7 +59,7 @@ export function useLeaveLobby() {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
 
-  const leaveLobby = async (lobbyId, leaveByDisconnect = false, gamemode) => {
+  const leaveLobby = async (lobbyId, leaveByDisconnect = false, gamemode, inGame = true) => {
     if (!user) return
 
     try {
@@ -134,7 +143,9 @@ export function useLeaveLobby() {
       const userRef = doc(db, 'users', user.uid)
       await updateDoc(userRef, { currentLobby: null })
 
-      navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
+      if (inGame) {
+        navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
+      }
     } catch (error) {
       console.error('Error leaving lobby: ', error)
     }
@@ -150,10 +161,11 @@ export function useCreateGame() {
     j2Ref,
     room = null,
     gameSettings = null,
-    gameMode = 'custom'
+    gameMode = 'custom',
+    deckJ1,
+    deckJ2
   ) {
     let gameDocRef
-
     // Création ou mise à jour du document de jeu avec les objets utilisateur complets
     if (room === null) {
       // Récupération des données des utilisateurs
@@ -243,7 +255,7 @@ export function useCreateGame() {
     // Application de la transaction
     await batch.commit()
 
-    await PopulateDeck(gameDocRef.id, gameSettings.cards)
+    await PopulateDeck(gameDocRef.id, gameSettings.cards, deckJ1, deckJ2)
     await DefineDefaultOrder(gameDocRef.id)
 
     // Mise à jour du document de lobby avec une référence au jeu créé
@@ -281,7 +293,7 @@ async function DrawCards(room, cardAmount) {
   })
 }
 
-async function DrawCardsWithRarityMax(room, cardAmount) {
+async function DrawCardsWithRarityMax(room, cardAmount, deckJ1, deckJ2) {
   const deck = await getDeck(room)
 
   if (!deck || deck.length === 0) {
@@ -292,10 +304,15 @@ async function DrawCardsWithRarityMax(room, cardAmount) {
   const shop = await drawRandomCards(deck, 9)
 
   // Draw hands for both players with the rarity constraint
-  const hand1 = await drawHandWithRarityConstraint(deck, cardAmount)
-  const hand2 = await drawHandWithRarityConstraint(deck, cardAmount)
-  // const hand1 = await drawHandWithAdjustedRarity(deck, cardAmount)
-  // const hand2 = await drawHandWithAdjustedRarity(deck, cardAmount)
+
+  let hand1, hand2
+  if (deckJ1 && deckJ2) {
+    hand1 = await getCardsFromArray(deckJ1.cards)
+    hand2 = await getCardsFromArray(deckJ2.cards)
+  } else {
+    hand1 = await drawHandWithRarityConstraint(deck, cardAmount)
+    hand2 = await drawHandWithRarityConstraint(deck, cardAmount)
+  }
 
   // Update the game document in the database
   await updateDoc(doc(db, 'games', room), {
@@ -314,13 +331,13 @@ export async function getDeck(room) {
   }
 }
 
-export async function PopulateDeck(room, cardsPerHand) {
+export async function PopulateDeck(room, cardsPerHand, deckJ1, deckJ2) {
   let cardsFiltered = getAllCards().filter((card) => card.rarity != 5)
   await updateDoc(doc(db, 'games', room), {
     deck: cardsFiltered
   })
   // await DrawCards(room, cardsPerHand)
-  await DrawCardsWithRarityMax(room, cardsPerHand)
+  await DrawCardsWithRarityMax(room, cardsPerHand, deckJ1, deckJ2)
 }
 
 async function DefineDefaultOrder(room) {

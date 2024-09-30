@@ -261,7 +261,7 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                   {hoveredSkin.name} {!hoveredSkin.lock && <FaLock />}
                 </h2>
               )}
-
+              {hoveredSkin.author && <span className="skin-artist">Par {hoveredSkin.author}</span>}
               <p className="skin-unlock-method">{hoveredSkin.unlockTip}</p>
               {hoveredSkin.lock ? (
                 <p className="skin-equip">Cliquez pour équiper !</p>

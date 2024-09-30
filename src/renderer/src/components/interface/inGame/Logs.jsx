@@ -83,7 +83,6 @@ export default function Logs(props) {
     4: 'Troc'
   }
 
-  // TODO: border color dégradé
   return (
     <div className="logs-messages">
       {logs != null &&

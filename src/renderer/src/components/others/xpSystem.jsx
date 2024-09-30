@@ -3,7 +3,7 @@ export function getCurrentExpMax(currentLevel) {
 
   // Calcul de l'XP requis pour le niveau actuel
   for (let level = 2; level <= currentLevel; level++) {
-    expMax += 50 * 1.05
+    expMax += 40
     expMax = Math.ceil(expMax) // Arrondi à l'unité supérieure
   }
 

@@ -10,12 +10,10 @@ import { FaLock } from 'react-icons/fa'
 import { useCreateGame, useLeaveLobby } from '../controllers/ManageLobbyAndGame'
 import Slider from 'rc-slider'
 import ClassicModal from '../items/ClassicModal'
-import { getRandomPattern } from '../others/toolBox'
+import { getRandomPattern, useSendMessage } from '../others/toolBox'
 import { IoMdSettings } from 'react-icons/io'
-import { toast } from 'react-toastify'
 import ArenaPicker from '../others/ArenaPicker'
 
-// TODO : Démarrer la game avec des decks construits
 const Lobby = () => {
   const { lobbyId } = useParams()
   const [lobbyData, setLobbyData] = useState(null)
@@ -23,6 +21,7 @@ const Lobby = () => {
   const [player2, setPlayer2] = useState(null)
   const [selectedDeck, setSelectedDeck] = useState(null)
   const [mapChoice, setMapChoice] = useState(false)
+  const [selectedMap, setSelectedMap] = useState(false)
 
   const { user, userInfo } = useContext(AuthContext)
   const leaveLobby = useLeaveLobby()
@@ -30,6 +29,7 @@ const Lobby = () => {
   const navigate = useNavigate()
   let location = useLocation()
   let isSpectator = location.state?.spectator ?? false
+  const sendMessage = useSendMessage()
 
   // Fetch lobby and listen for changes
   useEffect(() => {
@@ -50,41 +50,42 @@ const Lobby = () => {
 
   // Set player info
   useEffect(() => {
-    let unsubscribeJ1, unsubscribeJ2;
+    let unsubscribeJ1, unsubscribeJ2
 
     const fetchPlayerInfo = (playerRef, setPlayer) => {
       if (!playerRef) {
-        setPlayer(null);
-        return;
+        setPlayer(null)
+        return
       }
       return onSnapshot(playerRef, (doc) => {
         if (doc.exists()) {
-          setPlayer(doc.data());
+          setPlayer(doc.data())
         } else {
-          setPlayer(null);
+          setPlayer(null)
         }
-      });
-    };
+      })
+    }
 
     if (lobbyData) {
-      unsubscribeJ1 = fetchPlayerInfo(lobbyData.j1, setPlayer1);
-      unsubscribeJ2 = fetchPlayerInfo(lobbyData.j2, setPlayer2);
+      unsubscribeJ1 = fetchPlayerInfo(lobbyData.j1, setPlayer1)
+      unsubscribeJ2 = fetchPlayerInfo(lobbyData.j2, setPlayer2)
     }
 
     return () => {
-      if (unsubscribeJ1) unsubscribeJ1();
-      if (unsubscribeJ2) unsubscribeJ2();
-    };
+      if (unsubscribeJ1) unsubscribeJ1()
+      if (unsubscribeJ2) unsubscribeJ2()
+    }
   }, [lobbyData])
 
   const isUserHost = user && user.uid === lobbyData?.j1?.id // Only player 1 is the host
 
   // Update local state from lobbyData
   const deckType = lobbyData?.deckType || 'random'
-  const selectedMap = lobbyData?.selectedMap || null
   const cardsPerHand = lobbyData?.cardsPerHand || 8
   const anyPlayerReady = lobbyData?.readyj1 || lobbyData?.readyj2
-  const userIsReady = (user.uid === player1?.id && lobbyData?.readyj1) || (user.uid === player2?.id && lobbyData?.readyj2)
+  const userIsReady =
+    (user.uid === player1?.id && lobbyData?.readyj1) ||
+    (user.uid === player2?.id && lobbyData?.readyj2)
 
   // Handle deckType change
   const handleDeckTypeChange = async (newDeckType) => {
@@ -102,19 +103,10 @@ const Lobby = () => {
     await updateDoc(lobbyRef, { cardsPerHand: value })
   }
 
-  // Handle map selection
-  const handleMapSelect = async (map) => {
-    if (!isUserHost || anyPlayerReady) return
-
-    const lobbyRef = doc(db, 'lobbies', lobbyId)
-    await updateDoc(lobbyRef, { selectedMap: map })
-    setMapChoice(false)
-  }
-
   // Toggle "ready" status based on deckType
   const toggleReady = async () => {
     if (deckType === 'constructed' && !selectedDeck) {
-      toast.error('Veuillez choisir un deck avant de vous déclarer prêt.')
+      sendMessage('Veuillez choisir un deck avant de vous déclarer prêt.', 'warn')
       return
     }
 
@@ -122,13 +114,27 @@ const Lobby = () => {
     const updatePayload = {}
 
     if (user.uid === player1?.id) {
-      updatePayload.readyj1 = lobbyData.readyj1 ? null : deckType === 'constructed' ? selectedDeck : true
+      updatePayload.readyj1 = lobbyData.readyj1
+        ? null
+        : deckType === 'constructed'
+          ? selectedDeck
+          : true
     } else if (user.uid === player2?.id) {
-      updatePayload.readyj2 = lobbyData.readyj2 ? null : deckType === 'constructed' ? selectedDeck : true
+      updatePayload.readyj2 = lobbyData.readyj2
+        ? null
+        : deckType === 'constructed'
+          ? selectedDeck
+          : true
     }
 
     await updateDoc(lobbyRef, updatePayload)
-    toast.success(lobbyData.readyj1 || lobbyData.readyj2 ? 'Vous n\'êtes plus prêt.' : 'Vous êtes prêt!')
+    toast.success(
+      lobbyData.readyj1 || lobbyData.readyj2 ? "Vous n'êtes plus prêt." : 'Vous êtes prêt!'
+    )
+    sendMessage(
+      lobbyData.readyj1 || lobbyData.readyj2 ? "Vous n'êtes plus prêt." : 'Vous êtes prêt!',
+      'success'
+    )
   }
 
   // Automatically set player as ready if gamemode is not 'custom'
@@ -169,14 +175,15 @@ const Lobby = () => {
               bases: mapPattern[1]
             }
           },
-          lobbyData.gamemode
+          lobbyData.gamemode,
+          lobbyData.readyj1 && lobbyData.deckType === 'constructed' ? lobbyData.readyj1 : null,
+          lobbyData.readyj2 && lobbyData.deckType === 'constructed' ? lobbyData.readyj2 : null
         )
         // Update the lobby with the gameRef
         const lobbyRef = doc(db, 'lobbies', lobbyId)
         await updateDoc(lobbyRef, { gameRef: gameRef.id })
       }
     }
-
     startGame()
   }, [lobbyData, isUserHost])
 
@@ -213,21 +220,21 @@ const Lobby = () => {
             {isUserHost && !isSpectator && (
               <>
                 {/* Deck Type Selection */}
-                <div className="lobby-settings-item">
+                <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                   <span>Type de deck :</span>
                   <select
                     onChange={(e) => handleDeckTypeChange(e.target.value)}
                     value={deckType}
                     disabled={anyPlayerReady}
                   >
-                    <option value="random">Deck aléatoire</option>
+                    <option value="random">Tirage aléatoire</option>
                     <option value="constructed">Deck construit</option>
                   </select>
                 </div>
 
                 {/* Number of Cards Per Hand if in "random" mode */}
                 {deckType === 'random' && (
-                  <div className="lobby-settings-item">
+                  <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                     <span>Nombre de cartes en main : {cardsPerHand}</span>
                     <Slider
                       onChange={handleCardsPerHandChange}
@@ -238,7 +245,7 @@ const Lobby = () => {
                       styles={{
                         handle: { backgroundColor: 'white', borderColor: 'white' },
                         track: { backgroundColor: 'white', borderColor: 'white' },
-                        rail: { backgroundColor: 'rgba(255,255,255, 0.5)' },
+                        rail: { backgroundColor: 'rgba(255,255,255, 0.5)' }
                       }}
                       disabled={anyPlayerReady}
                     />
@@ -246,7 +253,7 @@ const Lobby = () => {
                 )}
 
                 {/* Map Selection */}
-                <div className="lobby-settings-item">
+                <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                   <Button onClick={() => setMapChoice(true)} disabled={anyPlayerReady}>
                     Arène actuelle : {!selectedMap ? 'Aléatoire' : selectedMap.pattern[2]}
                   </Button>
@@ -256,7 +263,7 @@ const Lobby = () => {
 
             {/* Deck Selection for all players if in "constructed" mode */}
             {deckType === 'constructed' && !isSpectator && (
-              <div className="lobby-settings-item">
+              <div className={`lobby-settings-item ${userIsReady && 'disabled'}`}>
                 <span>Choisir un deck :</span>
                 <select
                   onChange={(e) =>
@@ -265,13 +272,16 @@ const Lobby = () => {
                   value={selectedDeck ? selectedDeck.id : ''}
                   disabled={userIsReady}
                 >
-                  <option value="">Sélectionner un deck</option>
+                  <option value="">Aucun deck sélectionné</option>
                   {userInfo.decks.map((deck) => (
                     <option key={deck.id} value={deck.id}>
                       {deck.name}
                     </option>
                   ))}
                 </select>
+                {(!userInfo.decks || userInfo.decks.length === 0) && (
+                  <span className="alert">Créez un deck depuis votre profil !</span>
+                )}
               </div>
             )}
 
@@ -280,14 +290,20 @@ const Lobby = () => {
                 {lobbyData.readyj1 && lobbyData.readyj2
                   ? 'Les deux joueurs sont prêts'
                   : userIsReady
-                  ? 'Annuler Prêt'
-                  : 'Se déclarer prêt'}
+                    ? 'Annuler Prêt'
+                    : 'Se déclarer prêt'}
               </Button>
             )}
           </div>
 
           <div className="lobby-controls-buttons">
-            <Button onClick={() => leaveLobby(lobbyId, false, lobbyData.gamemode)}>
+            <Button
+              onClick={() =>
+                isSpectator
+                  ? navigate('/lobbyList')
+                  : leaveLobby(lobbyId, false, lobbyData.gamemode, false)
+              }
+            >
               {isSpectator ? 'Quitter le lobby' : 'Quitter'}
             </Button>
           </div>
@@ -300,7 +316,7 @@ const Lobby = () => {
             <div className="lobby-players-item-content">
               <ProfilePicture customUser={player1} size={300} />
               <span className="lobby-players-name">{player1.username}</span>
-              <span className="lobby-players-status">
+              <span className={`lobby-players-status ${lobbyData.readyj1 && 'ready'}`}>
                 {lobbyData.readyj1 ? 'Prêt' : 'Non prêt'}
               </span>
             </div>
@@ -318,7 +334,7 @@ const Lobby = () => {
             <div className="lobby-players-item-content">
               <ProfilePicture customUser={player2} size={300} />
               <span className="lobby-players-name">{player2.username}</span>
-              <span className="lobby-players-status">
+              <span className={`lobby-players-status ${lobbyData.readyj2 && 'ready'}`}>
                 {lobbyData.readyj2 ? 'Prêt' : 'Non prêt'}
               </span>
             </div>
@@ -332,7 +348,7 @@ const Lobby = () => {
 
       {mapChoice && (
         <ClassicModal>
-          <ArenaPicker selectedMap={selectedMap} setSelectedMap={handleMapSelect} />
+          <ArenaPicker selectedMap={selectedMap} setSelectedMap={setSelectedMap} />
           <Button onClick={() => setMapChoice(false)}>Retour</Button>
         </ClassicModal>
       )}

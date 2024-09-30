@@ -50,7 +50,6 @@ const Account = () => {
     }
   }
 
-  // TODO: Customisaiton, loading, transition customisation et achivements correctes
   useEffect(() => {
     const fetchUserData = async () => {
       if (isMine) {

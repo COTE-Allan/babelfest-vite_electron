@@ -14,6 +14,13 @@
     "type": "Débuffs"
   },
   {
+    "slug": "freeze",
+    "name": "Congelé",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702647583/babelfest/icons/freeze.webp",
+    "desc": "Cette carte ne peut pas bouger pendant encore X tours.",
+    "type": "Débuffs"
+  },
+  {
     "slug": "swapStats",
     "name": "Inversion",
     "desc": "Quand cette carte attaque, elle inverse son ATK et ses HP.",
@@ -53,7 +60,7 @@
     "name": "Compte à rebours",
     "desc": "Après invocation, cette carte sera détruite dans le nombre de tour indiqué.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/countdown_dphplq.webp",
-    "type": "Malus"
+    "type": "Débuffs"
   },
   {
     "slug": "healer",
@@ -137,7 +144,7 @@
     "name": "Brisé",
     "desc": "Cette carte ne peut pas avoir d'armure pendant ce tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp",
-    "type": "Malus"
+    "type": "Débuffs"
   },
   {
     "slug": "rageShield",
@@ -249,21 +256,14 @@
     "name": "Dévoilé",
     "desc": "Cette carte ne possède plus d'effets car elle a été révélée par le Troisième œil.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705564482/babelfest/icons/muted.webp",
-    "type": "Malus"
-  },
-  {
-    "slug": "freeze",
-    "name": "Congelé",
-    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702647583/babelfest/icons/freeze.webp",
-    "desc": "Cette carte ne peut pas bouger pendant encore X tours.",
-    "type": "Malus"
+    "type": "Débuffs"
   },
   {
     "slug": "dieTogether",
     "name": "Mourir ensemble",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707128021/babelfest/icons/deathReaper.webp",
     "desc": "Quand cette carte attaque, elle meurt.",
-    "type": "Malus"
+    "type": "Débuffs"
   },
   {
     "slug": "grapple",

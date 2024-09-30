@@ -441,3 +441,10 @@ export function randomEffect(target, index) {
   target.card.effects[index] = effect
   return target
 }
+
+export function getCardsFromArray(cardsArray) {
+  return cardsArray.map((cardInfo) => {
+    const { name, title } = cardInfo
+    return getCardBasedOnNameAndTitle({ name, title })
+  })
+}

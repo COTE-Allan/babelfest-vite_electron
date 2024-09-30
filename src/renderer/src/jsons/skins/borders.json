@@ -7,17 +7,20 @@
   {
     "url": "./skins/borders/cadre_sfm.png",
     "name": "Super Fighting Mermaid",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Hugo Mollet"
   },
   {
     "url": "./skins/borders/cadre_oddcards_1.png",
     "name": "Tech Odd Cards",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Kiba"
   },
   {
     "url": "./skins/borders/cadre_babelrock.png",
     "name": "Babelfest Tigré",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Spait"
   },
   {
     "url": "./skins/borders/cadre_alpha.png",
@@ -28,138 +31,161 @@
   {
     "url": "./skins/borders/cadre_clem_1.png",
     "name": "Perruque Clémentine",
-    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
+    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative.",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_hugo.png",
     "name": "Hurdes.psd",
     "unlockTip": "Obtenu en atteignant le niveau 8.",
-    "level": 8
+    "level": 8,
+    "author": "TheHug0Geek"
   },
   {
     "url": "./skins/borders/cadre_lukas.png",
     "name": "Acier trempé",
     "unlockTip": "Obtenu en atteignant le niveau 12.",
-    "level": 12
+    "level": 12,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_chtonien.png",
     "name": "Honneur Chtonien",
     "unlockTip": "Obtenu en atteignant le niveau 18.",
-    "level": 18
+    "level": 18,
+    "author": "RID"
   },
   {
     "url": "./skins/borders/cadre_volt.png",
     "name": "Énergie Voltaïque",
     "unlockTip": "Obtenu en atteignant le niveau 21.",
-    "level": 21
+    "level": 21,
+    "author": "Spait"
   },
   {
     "url": "./skins/borders/cadre_neon_synth.png",
     "name": "Vaporwave",
     "unlockTip": "Obtenu en atteignant le niveau 25.",
-    "level": 25
+    "level": 25,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_imperial.png",
     "name": "Garde Impériale",
     "unlockTip": "Obtenu en atteignant le niveau 27.",
-    "level": 27
+    "level": 27,
+    "author": "RID"
   },
   {
     "url": "./skins/borders/cadre_steampunk.png",
     "name": "Alliage Steampunk",
     "unlockTip": "Obtenu en atteignant le niveau 31.",
-    "level": 31
+    "level": 31,
+    "author": "Onigami"
   },
   {
     "url": "./skins/borders/cadre_glitched.png",
     "name": "ErR3ur 4o4",
     "unlockTip": "Obtenu en atteignant le niveau 33.",
-    "level": 33
+    "level": 33,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_cyberfest.png",
     "name": "Cyberfest Bleu",
     "unlockTip": "Obtenu en atteignant le niveau 35.",
-    "level": 35
+    "level": 35,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_cyberfest_2.png",
     "name": "Cyberfest Jaune",
     "unlockTip": "Obtenu en atteignant le niveau 40.",
-    "level": 38
+    "level": 38,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_sang.png",
     "name": "Blessures",
     "unlockTip": "Obtenu en atteignant le niveau 45.",
-    "level": 45
+    "level": 45,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_clem_2.png",
     "name": "Énergie du Voyageur",
     "unlockTip": "Obtenu en atteignant le niveau 55.",
-    "level": 55
+    "level": 55,
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_plaines.png",
     "name": "Initiation des Plaines",
     "unlockTip": "Obtenu en récompense du succès : 'Bienvenue sur Babelfest'",
-    "achievement": "HF_firstGame"
+    "achievement": "HF_firstGame",
+    "author": "RID"
   },
   {
     "url": "./skins/borders/cadre_akashique.png",
     "name": "Archives Akashiques",
     "unlockTip": "Obtenu en récompense du succès : 'Le début de l'addiction'",
-    "achievement": "HF_50Games"
+    "achievement": "HF_50Games",
+    "author": "RID"
   },
   {
     "url": "./skins/borders/cadre_cuir.png",
     "name": "Revêtement cuir",
     "unlockTip": "Obtenu en récompense du succès : 'Sérial Winner'",
-    "achievement": "HF_5winStreak"
+    "achievement": "HF_5winStreak",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_10to10.png",
     "name": "Note parfaite",
     "unlockTip": "Obtenu en récompense du succès : 'Dix sur Dix'",
-    "achievement": "HF_10winStreak"
+    "achievement": "HF_10winStreak",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_juge_impartial.png",
     "name": "Juge impartial",
     "unlockTip": "Obtenu en récompense du succès : 'Domination totale'",
-    "achievement": "HF_15winStreak"
+    "achievement": "HF_15winStreak",
+    "author": "RID"
   },
   {
     "url": "./skins/borders/cadre_or_honor.png",
     "name": "Plaqué Hon'OR",
     "unlockTip": "Obtenu en récompense du succès : 'Digne'",
-    "achievement": "HF_50honors"
+    "achievement": "HF_50honors",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_blushing.png",
     "name": "Amoureux",
     "unlockTip": "Obtenu en récompense du succès : 'Fair play'",
-    "achievement": "HF_1honored"
+    "achievement": "HF_1honored",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_rainbow.png",
     "name": "Tourbillon de couleurs",
     "unlockTip": "Obtenu en récompense du succès : 'Prend mon respect'",
-    "achievement": "HF_50honored"
+    "achievement": "HF_50honored",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_speedlines.png",
     "name": "Lignes de vitesse",
     "unlockTip": "Obtenu en récompense du succès : 'Expéditif'",
-    "achievement": "HF_fastWin"
+    "achievement": "HF_fastWin",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/borders/cadre_neofest.png",
     "name": "Neofest",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
-    "flag": "alphaTest"
+    "flag": "alphaTest",
+    "author": "Spait"
   }
 ]

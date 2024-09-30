@@ -12,9 +12,27 @@
     "level": 100
   },
   {
+    "name": "Matrice Néons",
+    "unlockTip": "Obtenu en atteignant le niveau 200.",
+    "classe": "prestige-neon",
+    "level": 200
+  },
+  {
+    "name": "Pulsions Cosmiques",
+    "unlockTip": "Obtenu en atteignant le niveau 300.",
+    "classe": "prestige-cosmicPulse",
+    "level": 300
+  },
+  {
     "name": "Plaqué Or",
     "unlockTip": "Offert aux abonnés Patreons.",
     "classe": "prestige-gold"
+  },
+  {
+    "name": "Flammes du conquérant",
+    "unlockTip": "Obtenu en gagnant un tournoi communautaire.",
+    "classe": "prestige-championFlame",
+    "flag": "tournamentWinner"
   },
   {
     "name": "Rouge Alpha",

@@ -20,6 +20,11 @@
     "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
   },
   {
+    "name": "Poltergeist",
+    "level": 7,
+    "unlockTip": "Obtenu en atteignant le niveau 9."
+  },
+  {
     "name": "Démon des jeux-vidéo",
     "level": 9,
     "unlockTip": "Obtenu en atteignant le niveau 9."
@@ -38,6 +43,11 @@
     "name": "Pro",
     "level": 30,
     "unlockTip": "Obtenu en atteignant le niveau 30."
+  },
+  {
+    "name": "Volontée de Krone",
+    "level": 36,
+    "unlockTip": "Obtenu en atteignant le niveau 36."
   },
   {
     "name": "Champion",
@@ -63,6 +73,11 @@
     "name": "Respecté",
     "unlockTip": "Obtenu en récompense du succès : 'Respecté'",
     "achievement": "HF_10honors"
+  },
+  {
+    "name": "Conquérant de l'arène",
+    "unlockTip": "Obtenu en gagnant un tournoi communautaire.",
+    "flag": "tournamentWinner"
   },
   {
     "name": "Alpha-testeur",

@@ -12,146 +12,179 @@
   {
     "url": "./skins/avatars/avatar_akumu_1.png",
     "name": "Akumu",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "ChouetteBlancheRoliste"
   },
   {
     "url": "./skins/avatars/avatar_mandarine.jpg",
     "name": "Mandarine et les chats",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Adsanman"
   },
   {
     "url": "./skins/avatars/avatar_tulip_1.png",
     "name": "Tulip",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Antoine Bordon"
   },
   {
     "url": "./skins/avatars/avatar_amethyste.png",
     "name": "Améthyste",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Naelle Owska"
   },
   {
     "url": "./skins/avatars/avatar_odasun.png",
     "name": "Odasun",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Seilongk"
   },
   {
     "url": "./skins/avatars/avatar_soleil.png",
     "name": "Soleil",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Elie Vigneron"
   },
   {
     "url": "./skins/avatars/avatar_banshee.png",
     "name": "Banshee",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "RID"
   },
   {
     "url": "./skins/avatars/avatar_joel.png",
     "name": "Joël",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Mimo"
   },
   {
     "url": "./skins/avatars/avatar_hugo.png",
     "name": "Yūjō",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "TheHug0Geek"
   },
   {
     "url": "./skins/avatars/avatar_taka_1.png",
     "name": "Taka",
-    "unlockTip": "Débloqué par défaut."
+    "unlockTip": "Débloqué par défaut.",
+    "author": "LeRatonVoyer & Sanga"
   },
   {
     "url": "./skins/avatars/avatar_clem_1.png",
     "name": "Clémentine",
-    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative."
+    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative.",
+    "author": "Cielesis"
   },
   {
     "url": "./skins/avatars/avatar_shiro.png",
     "name": "Shiro",
     "unlockTip": "Obtenu en atteignant le niveau 3.",
-    "level": 3
+    "level": 3,
+    "author": "RID"
   },
   {
     "url": "./skins/avatars/avatar_blaire.png",
     "name": "Blaire Witcher",
     "unlockTip": "Obtenu en atteignant le niveau 7.",
-    "level": 7
+    "level": 7,
+    "author": "Okaah"
   },
   {
     "url": "./skins/avatars/avatar_johod.jpg",
     "name": "Johod Jay",
     "unlockTip": "Obtenu en atteignant le niveau 9.",
-    "level": 9
+    "level": 9,
+    "author": "Child"
   },
   {
     "url": "./skins/avatars/avatar_shape_1.png",
     "name": "Shape",
     "unlockTip": "Obtenu en atteignant le niveau 11.",
-    "level": 11
+    "level": 11,
+    "author": "Kiba"
   },
   {
     "url": "./skins/avatars/avatar_lown.png",
     "name": "Lown Kennedy",
     "unlockTip": "Obtenu en atteignant le niveau 14.",
-    "level": 14
+    "level": 14,
+    "author": "Karel Barreau"
   },
   {
     "url": "./skins/avatars/avatar_prince.jpg",
     "name": "Le Prince Déchu",
     "unlockTip": "Obtenu en atteignant le niveau 17.",
-    "level": 17
+    "level": 17,
+    "author": "Micami"
   },
   {
     "url": "./skins/avatars/avatar_fusette.png",
     "name": "Le mec dans sa fusée",
     "unlockTip": "Obtenu en atteignant le niveau 23.",
-    "level": 23
+    "level": 23,
+    "author": "Fusette"
   },
   {
     "url": "./skins/avatars/avatar_clem_2.png",
     "name": "Clém le démon",
     "unlockTip": "Obtenu en atteignant le niveau 32.",
-    "level": 32
+    "level": 32,
+    "author": "Kiba"
   },
   {
     "url": "./skins/avatars/avatar_krone_1.png",
     "name": "Krone",
     "unlockTip": "Obtenu en atteignant le niveau 36.",
-    "level": 36
+    "level": 36,
+    "author": "Antoine Bordon"
+  },
+  {
+    "url": "./skins/avatars/avatar_wendy.jpg",
+    "name": "Mendy Asimov",
+    "unlockTip": "Obtenu en atteignant le niveau 41.",
+    "level": 41,
+    "author": "Trickster"
   },
   {
     "url": "./skins/avatars/avatar_lukas_1.png",
     "name": "Lukas surcadençé",
     "unlockTip": "Obtenu en atteignant le niveau 46.",
-    "level": 46
+    "level": 46,
+    "author": "Kiba"
   },
   {
     "url": "./skins/avatars/avatar_tulip_2.png",
     "name": "Tulip sérieuse",
     "unlockTip": "Obtenu en atteignant le niveau 64.",
-    "level": 64
+    "level": 64,
+    "author": "Antoine Bordon"
   },
   {
     "url": "./skins/avatars/avatar_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
-    "achievement": "HF_tutorial"
+    "achievement": "HF_tutorial",
+    "author": "Kiba"
   },
   {
     "url": "./skins/avatars/avatar_tuto_2.png",
     "name": "Tuto Confiant",
     "unlockTip": "Obtenu en récompense du succès : 'Le meilleur joueur du monde'",
-    "achievement": "HF_5win"
+    "achievement": "HF_5win",
+    "author": "Kiba"
   },
   {
     "url": "./skins/avatars/avatar_oeilOmniscient.png",
     "name": "Oeil Omniscient",
     "unlockTip": "Obtenu en récompense du succès : 'Visionnaire'",
-    "achievement": "HF_thirdEye"
+    "achievement": "HF_thirdEye",
+    "author": "Kiba"
   },
   {
     "url": "./skins/avatars/avatar_vehemon_1.png",
     "name": "Vehemon",
     "unlockTip": "Obtenu en récompense du succès : 'One Punch Man'",
-    "achievement": "HF_11dmg"
+    "achievement": "HF_11dmg",
+    "author": "Abuse"
   }
 ]

@@ -10,15 +10,15 @@
     width: 350px;
     border-radius: 10px;
     @include greyBorders();
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
     position: relative;
     transition: background-color 250ms ease-in-out;
 
     &.small {
         height: 100px;
-        width: calc(525px + 10px);
         margin-top: 10px;
+        width: 100%;
     }
 
     @include for-big-desktop-up {
@@ -30,7 +30,7 @@
     &:hover {
         cursor: url('../../assets/svg/pointer.svg'), auto;
         ;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.4);
     }
 
     &:hover &-bg {
@@ -67,6 +67,7 @@
             flex-direction: column;
 
             &-list {
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;

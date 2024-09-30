@@ -485,8 +485,6 @@ export const Tutorial = () => {
               )}
             </IconButton>
           )}
-
-          {/* TODO ECHANGE PHASE 4 */}
         </div>
         {/* Shop */}
         {phase === 4 && (
