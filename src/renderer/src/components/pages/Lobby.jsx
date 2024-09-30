@@ -177,7 +177,8 @@ const Lobby = () => {
           },
           lobbyData.gamemode,
           lobbyData.readyj1 && lobbyData.deckType === 'constructed' ? lobbyData.readyj1 : null,
-          lobbyData.readyj2 && lobbyData.deckType === 'constructed' ? lobbyData.readyj2 : null
+          lobbyData.readyj2 && lobbyData.deckType === 'constructed' ? lobbyData.readyj2 : null,
+          lobbyData.deckType
         )
         // Update the lobby with the gameRef
         const lobbyRef = doc(db, 'lobbies', lobbyId)

@@ -163,7 +163,8 @@ export function useCreateGame() {
     gameSettings = null,
     gameMode = 'custom',
     deckJ1,
-    deckJ2
+    deckJ2,
+    deckType
   ) {
     let gameDocRef
     // Création ou mise à jour du document de jeu avec les objets utilisateur complets
@@ -184,7 +185,7 @@ export function useCreateGame() {
       gameDocRef = await addDoc(collection(db, 'games'), {
         created: Date.now(),
         finished: false,
-        phase: 0,
+        phase: deckType === "constructed" ? 1 : 0,
         activePlayer: 0,
         player1: j1,
         player2: j2,
@@ -193,7 +194,8 @@ export function useCreateGame() {
         lobbyId: lobbyId,
         turn: 1,
         gamemode: gameMode,
-        settings: gameSettings
+        settings: gameSettings,
+        deckType: deckType
       })
     } else {
       const roomRef = doc(db, 'games', room)

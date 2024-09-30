@@ -397,5 +397,29 @@
       },
       { "when": ["attacked"], "type": "trap" }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Zero Swordfire",
+    "title": "Héros de la symphonie",
+    "atk": 3,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series16.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Thibault Deboom",
+    "effects": [
+      {
+        "when": ["cardDeath"],
+        "byme": true,
+        "type": "flame",
+        "alreadyUsed": false
+      }
+    ]
   }
 ]

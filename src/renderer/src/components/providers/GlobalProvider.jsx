@@ -41,6 +41,7 @@ export const GlobalProvider = () => {
   const [selectedCards, setSelectedCards] = useState([])
   const [deck, setDeck] = useState([])
   const [tradeButton, setTradeButton] = useState(true)
+  const [deckType, setDeckType] = useState(null)
   // Gestion du placement
   const [askForRectoVerso, setAskForRectoVerso] = useState(false)
   const [placementCostLeft, setPlacementCostLeft] = useState(4)
@@ -171,7 +172,8 @@ export const GlobalProvider = () => {
           player2,
           disconnected,
           revenge,
-          spectators
+          spectators,
+          deckType
         } = data
         // =====================
         let isHost = user.uid === player1.id || isSpectator
@@ -208,6 +210,7 @@ export const GlobalProvider = () => {
         }
 
         // =====================
+        setDeckType(deckType)
         setStandby(standby)
         setDeck(deck)
         setShop(shop)
@@ -296,7 +299,7 @@ export const GlobalProvider = () => {
     const tradeCard = useTradeCard()
 
     function startWatchingTradePhase() {
-      if (isSpectator) {
+      if (isSpectator || deckType === "constructed") {
         return
       }
       setPhaseRules([0, 0, 0])
@@ -399,7 +402,8 @@ export const GlobalProvider = () => {
     shopCardsCredits,
     setShopCardsCredits,
     isSpectator,
-    spectatorCount
+    spectatorCount,
+    deckType
   }
   return (
     <GlobalContext.Provider value={propsList}>

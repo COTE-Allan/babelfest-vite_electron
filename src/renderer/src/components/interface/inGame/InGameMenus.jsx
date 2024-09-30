@@ -41,7 +41,8 @@ export default function InGameMenus() {
     handCardsCredits,
     shopCardsCredits,
     isSpectator,
-    spectatorCount
+    spectatorCount,
+    deckType
   } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
   const navigate = useNavigate()
@@ -103,7 +104,9 @@ export default function InGameMenus() {
         )}
         {phase === 0 && tradeButton && !isSpectator && (
           <>
+          {deckType !== "constructed" &&
             <RedrawButton />
+          }
             <IconButton
               onClick={() => {
                 if (isTradeValid && tradeButton) {
