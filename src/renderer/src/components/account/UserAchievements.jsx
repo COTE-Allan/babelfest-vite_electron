@@ -156,7 +156,11 @@ export default function UserAchievements({ userInfo }) {
                     key={skin.id || skin.name}
                     skin={skin}
                     userInfo={userInfo}
-                    xpPercentage={nextUnlockableSkin && skin.level === nextUnlockableSkin.level ? xpPercentage : 0}  // Apply XP progress only to the next unlockable skin
+                    xpPercentage={
+                      nextUnlockableSkin && skin.level === nextUnlockableSkin.level
+                        ? xpPercentage
+                        : 0
+                    } // Apply XP progress only to the next unlockable skin
                   />
                 ))}
               </div>
@@ -204,17 +208,18 @@ function SkinItem({ skin, userInfo, xpPercentage }) {
       key={skin.id || skin.name}
       style={{
         position: 'relative', // Required for positioning the background progress bar
-        backgroundColor: "rgba(43, 43, 43, 0.3)"
+        backgroundColor: 'rgba(43, 43, 43, 0.3)'
       }}
     >
-      <span className="level">{level}</span>
-      <hr />
-      {content}
-      {skin.type !== 'Titre' && <span className="skin-name">{name}</span>}
-      <span className="type">
-        {skin.type} {lock}
-      </span>
-
+      <div className="achievements-levels-item-wrapper">
+        <span className="level">{level}</span>
+        <hr />
+        {content}
+        {skin.type !== 'Titre' && <span className="skin-name">{name}</span>}
+        <span className="type">
+          {skin.type} {lock}
+        </span>
+      </div>
       {/* Add a div to show XP progress */}
       {progressWidth > 0 && (
         <div
@@ -223,11 +228,12 @@ function SkinItem({ skin, userInfo, xpPercentage }) {
             position: 'absolute',
             bottom: 0,
             left: 0,
+            opacity: 0.5,
             height: '100%',
-            width: `${progressWidth}%`,  // Set width based on XP percentage or full width if unlocked
-            backgroundColor: userInfo.primaryColor.hex + "80",  // Semi-transparent color for visual effect
-            zIndex: -1,  // Ensure it’s behind the content
-            borderRadius: '4px',
+            width: `${progressWidth}%`, // Set width based on XP percentage or full width if unlocked
+            backgroundColor: userInfo.primaryColor.hex + '80', // Semi-transparent color for visual effect
+            zIndex: 0, // Ensure it’s behind the content
+            borderRadius: '4px'
           }}
         />
       )}

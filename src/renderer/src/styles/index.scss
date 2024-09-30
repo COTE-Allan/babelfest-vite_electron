@@ -325,7 +325,7 @@ select {
 }
 
 .warning {
-  color: rgb(255, 36, 36);
+  color: $red;
   font-family: 'Kimberly Bl', sans-serif;
   font-size: 15px;
   margin-bottom: 5px;
@@ -350,7 +350,7 @@ a:hover {
 @include border-rarities();
 
 span.alert {
-  color: red;
+  color: $red;
   font-family: 'Kimberly Bl', sans-serif;
 }
 

@@ -152,5 +152,11 @@
     "name": "Médecin de guerre",
     "desc": "Soignez 6 points de vies ou plus en une seule fois.",
     "url": "./skins/banners/banner_heal.png"
+  },
+  {
+    "id": "HF_deckCreator",
+    "name": "Créateur de decks",
+    "desc": "Créez un deck personnalisé.",
+    "url": "./skins/icon_success_title.png"
   }
 ]

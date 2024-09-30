@@ -40,6 +40,11 @@
     "unlockTip": "Obtenu en atteignant le niveau 20."
   },
   {
+    "name": "Le mec à l'Emporio",
+    "level": 24,
+    "unlockTip": "Obtenu en atteignant le niveau 24."
+  },
+  {
     "name": "Pro",
     "level": 30,
     "unlockTip": "Obtenu en atteignant le niveau 30."
@@ -48,6 +53,21 @@
     "name": "Volontée de Krone",
     "level": 36,
     "unlockTip": "Obtenu en atteignant le niveau 36."
+  },
+  {
+    "name": "Cyborg",
+    "level": 41,
+    "unlockTip": "Obtenu en atteignant le niveau 41."
+  },
+  {
+    "name": "Golem",
+    "level": 47,
+    "unlockTip": "Obtenu en atteignant le niveau 47."
+  },
+  {
+    "name": "De l'Outre Monde",
+    "level": 49,
+    "unlockTip": "Obtenu en atteignant le niveau 49."
   },
   {
     "name": "Champion",
@@ -63,6 +83,11 @@
     "name": "Dieu",
     "level": 100,
     "unlockTip": "Obtenu en atteignant le niveau 100."
+  },
+  {
+    "name": "Créateur de decks",
+    "unlockTip": "Obtenu en récompense du succès : 'Créateur de decks'",
+    "achievement": "HF_deckCreator"
   },
   {
     "name": "Sérial Winner",

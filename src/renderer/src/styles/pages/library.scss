@@ -49,7 +49,7 @@
         background-color: rgba(255, 255, 255, 0.9);
         color: black;
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        ;
+
       }
     }
   }
@@ -302,7 +302,7 @@
 
     &-card {
       position: relative;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.5);
       width: 100%;
       margin: 10px 0;
       border-radius: 10px;
@@ -311,7 +311,7 @@
 
       &:hover {
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.3);
       }
 
       &-infos {
@@ -334,11 +334,11 @@
         white-space: nowrap;
         width: 100%;
         margin: 0 !important;
-        font-size: 15px;
+        font-size: 1em;
       }
 
       & h4 {
-        font-size: 11px;
+        font-size: 0.8em;
         margin: 0;
       }
 
@@ -356,7 +356,36 @@
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 10px;
-    width: 80%;
+    height: 100%;
+
+    &.smaller {
+      height: 90%;
+      border-bottom: 2px rgba(255, 255, 255, 0.3) solid;
+    }
+
+    &-creditsCounter {
+      padding-top: 7px;
+      display: flex;
+      align-items: center;
+      // justify-content: center;
+      flex-direction: column;
+      height: calc(10% - 7px);
+
+      & .progressBar {
+        min-width: 400px;
+        margin: 5px 0;
+      }
+
+      & .alert {
+        font-size: 15px;
+      }
+    }
+
+    &-wrapper {
+      width: 80%;
+      height: 100%;
+      flex-direction: column;
+    }
 
     & hr {
       border: none;

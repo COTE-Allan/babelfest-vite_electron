@@ -18,6 +18,8 @@ import useSound from 'use-sound'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import Details from '../interface/inGame/Details'
+import ProgressBar from '@ramonak/react-progress-bar'
+import Button from '../items/Button'
 
 export default function Library({ editorMode, deck }) {
   const { userSettings, saveDeck, modifyDeck, deleteDeck } = useContext(AuthContext)
@@ -33,9 +35,10 @@ export default function Library({ editorMode, deck }) {
   const [selectedYears, setSelectedYears] = useState([])
   const [selectedEffects, setSelectedEffects] = useState([])
   const [sortMethod, setSortMethod] = useState('rarity')
-  const [cardScale, setCardScale] = useState(editorMode ? 105 : 125)
+  const [cardScale, setCardScale] = useState(editorMode ? 105 : 120)
   const [selected, setSelected] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const location = useLocation()
   const sendMessage = useSendMessage()
   // States for the deck
@@ -177,7 +180,7 @@ export default function Library({ editorMode, deck }) {
           (deckCard) => deckCard.name === card.name && deckCard.title === card.title
         )
 
-        // Count the number of cards by rarity
+        // Compter le nombre de cartes par rareté
         const rarityCount = deckCards.reduce((acc, deckCard) => {
           acc[deckCard.rarity] = (acc[deckCard.rarity] || 0) + 1
           return acc
@@ -185,28 +188,56 @@ export default function Library({ editorMode, deck }) {
 
         // Enforce rarity limits
         if (isCardInDeck) {
-          // Remove the card if it's already in the deck
+          // Retirer la carte si elle est déjà dans le deck
           setDeckCards(
             deckCards.filter(
-              (deckCard) => deckCard.name !== card.name && deckCard.title !== card.title
+              (deckCard) => deckCard.name !== card.name || deckCard.title !== card.title
             )
           )
         } else {
-          // Check if the rarity limits are respected
+          // Vérifier la nouvelle contrainte pour les raretés 3 et 4
+          const numberOfRarity3 = rarityCount[3] || 0
+          const hasRarity4 = (rarityCount[4] || 0) > 0
+
+          // Si on essaie d'ajouter une carte de rareté 4
+          if (card.rarity === 4) {
+            if (numberOfRarity3 >= 2) {
+              sendMessage(
+                'Vous ne pouvez pas ajouter une carte légendaire si vous avez déjà deux cartes épiques.',
+                'warn'
+              )
+              return
+            }
+          }
+
+          // Si on essaie d'ajouter une carte de rareté 3
+          if (card.rarity === 3) {
+            if (numberOfRarity3 >= 2) {
+              sendMessage('Vous avez atteint la limite pour les cartes épiques.', 'warn')
+              return
+            }
+            if (numberOfRarity3 >= 1 && hasRarity4) {
+              sendMessage(
+                'Vous ne pouvez pas avoir à la fois deux cartes épiques et une carte légendaire.',
+                'warn'
+              )
+              return
+            }
+          }
+
+          // Vérifier les limites de chaque rareté
           if (
             (card.rarity === 4 && (rarityCount[4] || 0) >= 1) ||
-            (card.rarity === 3 && (rarityCount[3] || 0) >= 2) ||
             (card.rarity === 2 && (rarityCount[2] || 0) >= 3)
           ) {
-            // If the limit for the rarity has been reached, show an alert or prevent adding
             sendMessage(
-              `Vous avez atteint la limite pour les cartes ${rarityLabels[card.rarity]}`,
+              `Vous avez atteint la limite pour les cartes ${rarityLabels[card.rarity]}.`,
               'warn'
             )
             return
           }
 
-          // Add the card to the deck if the limit has not been reached
+          // Ajouter la carte au deck si la limite n'a pas été atteinte
           if (deckCards.length < 8) {
             setDeckCards([
               ...deckCards,
@@ -219,6 +250,8 @@ export default function Library({ editorMode, deck }) {
             ])
           }
         }
+      } else {
+        sendMessage('Les cartes spéciales doivent être invoquées via un effet.', 'warn')
       }
     } else {
       setSelected(card)
@@ -464,63 +497,83 @@ export default function Library({ editorMode, deck }) {
             </div>
           </div>
         </div>
-        <div className="library-list">
-          {rarityOrder.map(
-            (rarity) =>
-              cardsByRarity[rarity] &&
-              cardsByRarity[rarity].length > 0 && (
-                <div key={rarity} className="library-list-rarity-container">
-                  <div className="library-list-rarity-container-text">
-                    <h3 className={`txt-rarity-${rarity}`}>{rarityLabels[rarity]}</h3>
-                    <hr className={`bg-rarity-${rarity}`} />
-                  </div>
-                  <div className="library-list-cards">
-                    {cardsByRarity[rarity].map((card) => (
-                      <div
-                        onMouseEnter={() => {
-                          hover()
-                          if (editorMode) setDetailCard(card)
-                        }}
-                        onMouseLeave={() => {
-                          if (editorMode) setDetailCard(null)
-                        }}
-                        className={`library-list-item ${
-                          card.shiny != null ? card.shiny : ''
-                        } ${!loading && 'fade-in'} ${
-                          editorMode &&
-                          deckCards.some(
-                            (deckCard) =>
-                              deckCard.title === card.title && deckCard.name === card.name
-                          )
-                            ? 'selected'
-                            : 'not-selected'
-                        }`} // Ajout de la classe "selected" si la carte est déjà dans le deck
-                        key={card.id}
-                        onClick={() => handleCardClick(card)}
-                        style={{ display: loading ? 'none' : 'block' }}
-                      >
-                        <div className="img-container">
-                          <div className="card-cost">
-                            <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
-                          </div>
-                          <img
-                            id={`card-img-${card.id}`}
-                            className="library-list-item-img"
-                            src={card.url}
-                            alt={`Carte ${card.name} de la collection ${card.collection}`}
-                            style={{ width: `${cardScale}px` }}
-                            onLoad={handleImageLoad}
-                          />
-                        </div>
+        <div className="library-list-wrapper">
+          <div className={`library-list ${editorMode && 'smaller'}`}>
+            {rarityOrder.map(
+              (rarity) =>
+                cardsByRarity[rarity] &&
+                cardsByRarity[rarity].length > 0 && (
+                  <div key={rarity} className="library-list-rarity-container">
+                    {!loading && (
+                      <div className="library-list-rarity-container-text">
+                        <h3 className={`txt-rarity-${rarity}`}>{rarityLabels[rarity]}</h3>
+                        <hr className={`bg-rarity-${rarity}`} />
                       </div>
-                    ))}
+                    )}
+                    <div className="library-list-cards">
+                      {cardsByRarity[rarity].map((card) => (
+                        <div
+                          onMouseEnter={() => {
+                            hover()
+                            if (editorMode) setDetailCard(card)
+                          }}
+                          onMouseLeave={() => {
+                            if (editorMode) setDetailCard(null)
+                          }}
+                          className={`library-list-item ${
+                            card.shiny != null ? card.shiny : ''
+                          } ${!loading && 'fade-in'} ${
+                            editorMode &&
+                            deckCards.some(
+                              (deckCard) =>
+                                deckCard.title === card.title && deckCard.name === card.name
+                            )
+                              ? 'selected'
+                              : 'not-selected'
+                          }`} // Ajout de la classe "selected" si la carte est déjà dans le deck
+                          key={card.id}
+                          onClick={() => handleCardClick(card)}
+                          style={{ display: loading ? 'none' : 'block' }}
+                        >
+                          <div className="img-container">
+                            <div className="card-cost">
+                              <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
+                            </div>
+                            <img
+                              id={`card-img-${card.id}`}
+                              className="library-list-item-img"
+                              src={card.url}
+                              alt={`Carte ${card.name} de la collection ${card.collection}`}
+                              style={{ width: `${cardScale}px` }}
+                              onLoad={handleImageLoad}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )
-          )}
-          {loading && (
-            <div className="library-loading">
-              <LoadingLogo />
+                )
+            )}
+            {loading && (
+              <div className="library-loading">
+                <LoadingLogo />
+              </div>
+            )}
+          </div>
+          {editorMode && (
+            <div className="library-list-creditsCounter">
+              <span>Crédits utilisés :</span>
+              <ProgressBar
+                customLabel={`25/50`}
+                completed={25}
+                maxCompleted={50}
+                bgColor="#40a8f5"
+                height="20px"
+                labelAlignment="center"
+                labelColor="#fff"
+                className="progressBar"
+              />
+              <span className="alert">Votre deck dépasse la valeur maximale de crédits !</span>
             </div>
           )}
         </div>
@@ -586,8 +639,9 @@ export default function Library({ editorMode, deck }) {
                   permOpen
                   onClick={() => {
                     if (deck) {
-                      deleteDeck(deck.id)
-                      editorMode(false)
+                      // deleteDeck(deck.id)
+                      setConfirmDelete(true)
+                      // editorMode(false)
                     }
                   }}
                 >
@@ -717,6 +771,25 @@ export default function Library({ editorMode, deck }) {
             <span className="hidden-span">Suivante</span>
             <FaArrowRight size={45} />
           </HudNavLink>
+        </Modal>
+      )}
+
+      {editorMode && confirmDelete && (
+        <Modal>
+          <div className="modal-container">
+            <span>Êtes-vous sûr de vouloir supprimer ce deck ? Cette action est irréversible.</span>
+            <Button
+              onClick={() => {
+                deleteDeck(deck.id)
+                editorMode(false)
+              }}
+              disabled={loading}
+              className="warning"
+            >
+              Oui, je suis sûr
+            </Button>
+            <Button onClick={() => setConfirmDelete(false)}>Annuler</Button>
+          </div>
         </Modal>
       )}
     </div>

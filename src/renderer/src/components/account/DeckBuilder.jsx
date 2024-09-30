@@ -27,7 +27,7 @@ export default function DeckBuilder() {
             }}
           >
             <FaPlus size={50} />
-            Créer nouveau
+            Créer nouveau ({userInfo.decks.length}/8)
           </div>
         )}
         {userInfo.decks.map((deck) => (
@@ -42,7 +42,9 @@ export default function DeckBuilder() {
             <div className="deckBuilder-list-item-info">
               <h2>{deck.name}</h2>
             </div>
-            <img src={deck.cards[7].image} />
+            <div className="deckBuilder-list-item-bg">
+              <img src={deck.cards[7].image} />
+            </div>
           </div>
         ))}
       </div>

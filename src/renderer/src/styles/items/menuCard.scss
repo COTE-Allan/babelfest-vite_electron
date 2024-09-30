@@ -10,7 +10,7 @@
     width: 350px;
     border-radius: 10px;
     @include greyBorders();
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     overflow: hidden;
     position: relative;
     transition: background-color 250ms ease-in-out;
@@ -29,8 +29,7 @@
 
     &:hover {
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        ;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.5);
     }
 
     &:hover &-bg {

@@ -1,12 +1,22 @@
 import { createContext, useState, useEffect, useContext } from 'react'
 import { getAuth, onAuthStateChanged, updateEmail } from 'firebase/auth'
-import { doc, getDoc, updateDoc, arrayUnion, collection, setDoc, getDocs, deleteDoc } from 'firebase/firestore'
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  collection,
+  setDoc,
+  getDocs,
+  deleteDoc
+} from 'firebase/firestore'
 import { ref, onValue, set, onDisconnect } from 'firebase/database'
 import { db, realtimeDb } from './Firebase'
 import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
+import { useSendMessage } from './components/others/toolBox'
 
 export const AuthContext = createContext()
 
@@ -15,6 +25,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [userInfo, setUserInfo] = useState({})
   const [userSettings, setUserSettings] = useState({})
+  const sendMessage = useSendMessage()
   const [playAchievementSound] = useSound(achievementSfx, {
     volume: userSettings.sfxVolume
   })
@@ -120,7 +131,8 @@ export const AuthProvider = ({ children }) => {
       ...prev,
       decks: [...prev.decks, { id: deckRef.id, name: deckName, cards: deckCards }]
     }))
-    toast.success(`Deck "${deckName}" sauvegardé avec succès!`)
+    await giveAchievement('HF_deckCreator')
+    sendMessage(`Deck "${deckName}" sauvegardé avec succès!`, 'success')
   }
 
   // Function to modify an existing deck
@@ -134,30 +146,29 @@ export const AuthProvider = ({ children }) => {
       ...prev,
       decks: prev.decks.map((deck) => (deck.id === deckId ? { ...deck, ...updatedDeck } : deck))
     }))
-    toast.success(`Deck "${updatedDeck.name}" modifié avec succès!`)
+    sendMessage(`Deck "${updatedDeck.name}" modifié avec succès!`, 'success')
   }
 
   const deleteDeck = async (deckId) => {
     if (!user) return
     const deckRef = doc(db, `users/${user.uid}/decks`, deckId)
-  
+
     try {
       // Delete the deck from Firestore
       await deleteDoc(deckRef)
-  
+
       // Update userInfo to remove the deleted deck from the decks list
       setUserInfo((prev) => ({
         ...prev,
         decks: prev.decks.filter((deck) => deck.id !== deckId)
       }))
-      
-      toast.success(`Deck supprimé avec succès!`)
+
+      sendMessage(`Deck supprimé avec succès!`, 'success')
     } catch (error) {
-      console.error("Erreur lors de la suppression du deck :", error)
-      toast.error(`Échec de la suppression du deck!`)
+      console.error('Erreur lors de la suppression du deck :', error)
+      sendMessage(`Échec de la suppression du deck!`, 'error')
     }
   }
-  
 
   const updateOnlineStatus = async (userId, isDisconnecting) => {
     const statusRef = ref(realtimeDb, '/status/' + userId)
@@ -182,7 +193,8 @@ export const AuthProvider = ({ children }) => {
     if (!user) return
     const userRef = doc(db, 'users', user.uid)
     await updateDoc(userRef, updates)
-    setUserInfo((prev) => ({ ...prev, ...updates }))
+    updateUserState(user)
+    sendMessage('Les modifications ont correctement été appliquées.', 'success')
   }
 
   const changeEmail = async (newEmail) => {
@@ -200,7 +212,7 @@ export const AuthProvider = ({ children }) => {
 
   const saveSettings = () => {
     window.api.send('settings', userSettings)
-    toast.success('Les modifications ont correctement été appliquées.')
+    sendMessage('Les modifications ont correctement été appliquées.', 'success')
   }
 
   const assignUserToLobby = async (lobbyId) => {

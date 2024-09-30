@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { doc, updateDoc, increment } from 'firebase/firestore'
-import { toast } from 'react-toastify'
 import { FaThumbsUp } from 'react-icons/fa'
-import useSound from 'use-sound'
 import { db } from '../../Firebase'
 import { AuthContext } from '../../AuthContext'
 import { useSendMessage } from '../others/toolBox'
-import successSfx from '../../assets/sfx/info_notification.mp3'
 import HudNavLink from '../items/hudNavLink'
+import useCheckForAchievements from '../controllers/AchievementsController'
 
-const HonorButton = ({ targetUserId, targetUser, onHonorSuccess }) => {
-  const { user, userInfo, updateUserState, userSettings } = useContext(AuthContext)
+const HonorButton = ({ targetUserId, targetUser }) => {
+  const { user, userInfo, updateUserState, userSettings, giveAchievement } = useContext(AuthContext)
   const [canHonor, setCanHonor] = useState(false)
   const sendMessage = useSendMessage()
-  const [playSuccess] = useSound(successSfx, {
-    volume: userSettings.sfxVolume
-  })
+  const checkForAchievements = useCheckForAchievements()
 
   useEffect(() => {
     const currentTime = Date.now()
@@ -31,11 +27,11 @@ const HonorButton = ({ targetUserId, targetUser, onHonorSuccess }) => {
 
   const handleHonor = async () => {
     const currentTime = Date.now()
-
     if (!canHonor) {
       const nextAvailableTime = new Date(userInfo.honored.timestamp + 24 * 60 * 60 * 1000)
       sendMessage(
-        `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`
+        `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`,
+        'error'
       )
       return
     }
@@ -43,6 +39,14 @@ const HonorButton = ({ targetUserId, targetUser, onHonorSuccess }) => {
     try {
       const userRef = doc(db, 'users', user.uid)
       const targetUserRef = doc(db, 'users', targetUserId)
+
+      if (userInfo.honored.quantity + 1 === 1) {
+        await giveAchievement('HF_1honored')
+      }
+
+      if (userInfo.honored.quantity + 1 === 50) {
+        await giveAchievement('HF_50honored')
+      }
 
       // Mettre à jour le timestamp et incrémenter la quantité dans honored
       await updateDoc(userRef, {
@@ -55,9 +59,7 @@ const HonorButton = ({ targetUserId, targetUser, onHonorSuccess }) => {
         honor: increment(1)
       })
 
-      playSuccess()
-      toast.success(`Vous avez honoré ${targetUser.username} !`)
-
+      sendMessage(`Vous avez honoré ${targetUser.username} !`, 'success')
       await updateUserState(user)
       setCanHonor(false)
     } catch (error) {

@@ -4,9 +4,14 @@ import { format } from 'date-fns'
 import { AuthContext } from '../../AuthContext'
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 import { useTransition } from '../../TransitionContext'
+import useSound from 'use-sound'
+import hoverSfx from '../../assets/sfx/button_hover.wav'
+import selectSfx from '../../assets/sfx/menu_select.wav'
 
 export default function MatchSummaries({ summaries = [] }) {
-  const { user } = useContext(AuthContext)
+  const { userSettings } = useContext(AuthContext)
+  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
+  const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const { goForward } = useTransition()
   let modes = {
     custom: 'CUSTOM',
@@ -30,9 +35,11 @@ export default function MatchSummaries({ summaries = [] }) {
           let rival = summary.opponent
           return (
             <div
+              onMouseEnter={hover}
               key={index}
               className="matchSummaries-item"
               onClick={() => {
+                select()
                 goForward(`/account/${rival.id}`)
               }}
             >

@@ -1,9 +1,12 @@
 @import '../variables.scss';
 
 .deckBuilder {
+    width: 100%;
+
     &-list {
         padding: 10px;
         display: flex;
+        width: calc(100% - 20px);
 
         &-item {
             position: relative;
@@ -11,10 +14,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.449);
+            border: rgba(255, 255, 255, 0.5) 2px solid;
             padding: 20px;
-            width: 150px;
-            height: 150px;
+            width: calc(25% - 40px);
+            height: 100px;
             border-radius: 10px;
             font-family: 'Kimberly Bl', sans-serif;
             overflow: hidden;
@@ -24,7 +28,7 @@
                 cursor: url('../../assets/svg/pointer.svg'), auto;
 
                 & img {
-                    opacity: 0.7;
+                    opacity: 1;
                 }
             }
 
@@ -43,13 +47,20 @@
                 -webkit-text-stroke: 1px black;
             }
 
-            & img {
+            &-bg {
                 position: absolute;
-                z-index: 0;
                 top: -20px;
-                opacity: 0.3;
-                width: 150%;
-                transition: opacity 150ms ease-in-out;
+                left: -60px;
+                background-color: black;
+                mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+                height: 100%;
+
+                & img {
+                    transition: opacity 150ms ease-in-out;
+
+                    opacity: 0.5;
+                    width: 110%;
+                }
             }
 
             &-info {
@@ -62,11 +73,10 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-end;
             }
         }
 
-        & .createNew {}
     }
 
     &-editor {
@@ -89,8 +99,11 @@
         &-bg {
             position: absolute;
             top: 0;
+            left: 0;
             z-index: -1;
             opacity: 0.2;
+            min-height: 100%;
+            width: 100%;
         }
     }
 }

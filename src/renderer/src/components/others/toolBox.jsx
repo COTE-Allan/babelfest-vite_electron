@@ -210,10 +210,11 @@ export function defineWinner(room, player) {
 }
 
 export function useSendMessage() {
-  const { userSettings } = useContext(AuthContext)
-  const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
+  const context = useContext(AuthContext)
+  const userSettings = context ? context.userSettings : { sfxVolume: 0.5 }
   const [info] = useSound(infoSfx, { volume: userSettings.sfxVolume })
   const [success] = useSound(successSfx, { volume: userSettings.sfxVolume })
+  const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
 
   const sendMessage = (msg, type = 'error') => {
     switch (type) {
