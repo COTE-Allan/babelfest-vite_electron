@@ -437,5 +437,38 @@
         "alreadyUsed": false
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Nodoka",
+    "title": "Fille de démon",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series17.png",
+    "rarity": 1,
+    "cost": 3,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Gotho",
+    "effects": [
+      {
+        "when": [2],
+        "type": "seeingEye",
+        "name": "Éclaireur",
+        "target": "rival"
+      },
+      {
+        "when": ["spawn"],
+        "type": "grapple",
+        "target": "any",
+        "spawnUsed": false,
+        "choice": "target",
+        "base": false
+      }
+    ]
   }
 ]

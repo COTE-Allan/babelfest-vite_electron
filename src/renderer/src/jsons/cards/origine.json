@@ -27,7 +27,7 @@
     "basehp": 1,
     "url": "./cards/origine/babelfest_origine2.png",
     "rarity": 1,
-    "cost": 3,
+    "cost": 1,
     "collection": "Origine",
     "year": 2023,
     "author": "Sailorblue"
@@ -44,7 +44,7 @@
     "ghost": true,
     "url": "./cards/origine/babelfest_origine3.png",
     "rarity": 1,
-    "cost": 1,
+    "cost": 2,
     "collection": "Origine",
     "year": 2023,
     "author": "Kiba",
