@@ -58,7 +58,7 @@ const App = () => {
 }
 
 const AppContent = () => {
-  const { userSettings } = React.useContext(AuthContext)
+  const { userSettings, user } = React.useContext(AuthContext)
 
   return (
     <>
@@ -116,6 +116,16 @@ const AppContent = () => {
                             desc="Affichez une liste de toutes les arènes jouables"
                             where="/arenasList"
                             bg={MenuCardArena}
+                          />
+                        </div>
+                        <div className="MenuCard-container-cards-list">
+                          <MenuCard
+                            classNames="small"
+                            name="Mes decks"
+                            desc="Créez vos propres decks"
+                            where={`/account/${user?.uid}`}
+                            state={{ state: { openMenu: 6 } }}
+                            bg={MenuCardCatalog}
                           />
                         </div>
                       </div>

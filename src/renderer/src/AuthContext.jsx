@@ -48,7 +48,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     window.api.invoke('get-settings').then((settings) => {
-      console.log(settings)
       setUserSettings(settings)
     })
 
@@ -112,18 +111,18 @@ export const AuthProvider = ({ children }) => {
   }
 
   const resetUserState = () => {
-    console.log('reset')
     setUser(false)
     setUserInfo(false)
   }
 
   // Function to save a new deck
-  const saveDeck = async (deckName, deckCards) => {
+  const saveDeck = async (deckName, deckCards, deckCost) => {
     if (!user) return
     const deckRef = doc(collection(db, `users/${user.uid}/decks`)) // Reference to the new deck document
     await setDoc(deckRef, {
       name: deckName,
       cards: deckCards,
+      cost: deckCost,
       createdAt: Date.now()
     })
     // Update userInfo with the new deck

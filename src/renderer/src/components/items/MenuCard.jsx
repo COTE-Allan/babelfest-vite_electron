@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 
-const MenuCard = ({ name, desc, where, bg, classNames, disabled = false }) => {
+const MenuCard = ({ name, desc, where, bg, classNames, disabled = false, state }) => {
   const { userSettings } = useContext(AuthContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
@@ -19,7 +19,7 @@ const MenuCard = ({ name, desc, where, bg, classNames, disabled = false }) => {
       sendMessage(disabled, 'info')
     } else {
       select()
-      goForward(where)
+      goForward(where, state)
     }
   }
 

@@ -20,6 +20,7 @@ import selectSfx from '../../assets/sfx/menu_select.wav'
 import Details from '../interface/inGame/Details'
 import ProgressBar from '@ramonak/react-progress-bar'
 import Button from '../items/Button'
+import { GiCreditsCurrency } from 'react-icons/gi'
 
 export default function Library({ editorMode, deck }) {
   const { userSettings, saveDeck, modifyDeck, deleteDeck } = useContext(AuthContext)
@@ -44,12 +45,14 @@ export default function Library({ editorMode, deck }) {
   // States for the deck
   const [deckName, setDeckName] = useState('')
   const [deckCards, setDeckCards] = useState([])
+  const [deckCost, setDeckCost] = useState(0)
 
   // Initialize deck data if in editorMode and a valid deck is provided
   useEffect(() => {
     if (editorMode && deck) {
       setDeckName(deck.name || '')
       setDeckCards(deck.cards || [])
+      setDeckCost(deck.cost || 0)
     }
   }, [editorMode, deck])
 
@@ -156,7 +159,6 @@ export default function Library({ editorMode, deck }) {
   }, [selectedIndex])
 
   useEffect(() => {
-    console.log(location)
     if (location.state && location.state.selected) {
       const { selected } = location.state
       setSelected(selected)
@@ -194,6 +196,7 @@ export default function Library({ editorMode, deck }) {
               (deckCard) => deckCard.name !== card.name || deckCard.title !== card.title
             )
           )
+          setDeckCost(deckCost - card.cost)
         } else {
           // Vérifier la nouvelle contrainte pour les raretés 3 et 4
           const numberOfRarity3 = rarityCount[3] || 0
@@ -245,9 +248,11 @@ export default function Library({ editorMode, deck }) {
                 name: card.name,
                 title: card.title,
                 image: card.url,
-                rarity: card.rarity
+                rarity: card.rarity,
+                cost: card.cost
               }
             ])
+            setDeckCost(deckCost + card.cost)
           }
         }
       } else {
@@ -371,6 +376,11 @@ export default function Library({ editorMode, deck }) {
       return
     }
 
+    if (deckCost > 50) {
+      sendMessage(`Le deck dépasse le coût maximum autorisé.`, 'warn')
+      return
+    }
+
     // Trier les cartes par rareté avant de sauvegarder
     const sortedDeckCards = [...deckCards].sort((a, b) => a.rarity - b.rarity)
 
@@ -378,11 +388,12 @@ export default function Library({ editorMode, deck }) {
       // Modifier le deck existant
       modifyDeck(deck.id, {
         name: deckName,
-        cards: sortedDeckCards
+        cards: sortedDeckCards,
+        cost: deckCost
       })
     } else {
       // Sauvegarder un nouveau deck
-      saveDeck(deckName, sortedDeckCards)
+      saveDeck(deckName, sortedDeckCards, deckCost)
     }
     editorMode(false)
   }
@@ -400,7 +411,6 @@ export default function Library({ editorMode, deck }) {
   }, {})
 
   const flattenedCards = [].concat(...rarityOrder.map((rarity) => cardsByRarity[rarity] || []))
-
   return (
     <div className="library fade-in">
       {detailCard && <Details detailCard={detailCard} noRightClick />}
@@ -539,6 +549,12 @@ export default function Library({ editorMode, deck }) {
                             <div className="card-cost">
                               <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
                             </div>
+                            {editorMode && card.cost && (
+                              <div className="card-credits">
+                                <GiCreditsCurrency size={20} />
+                                {card.cost}
+                              </div>
+                            )}
                             <img
                               id={`card-img-${card.id}`}
                               className="library-list-item-img"
@@ -562,18 +578,24 @@ export default function Library({ editorMode, deck }) {
           </div>
           {editorMode && (
             <div className="library-list-creditsCounter">
-              <span>Crédits utilisés :</span>
-              <ProgressBar
-                customLabel={`25/50`}
-                completed={25}
-                maxCompleted={50}
-                bgColor="#40a8f5"
-                height="20px"
-                labelAlignment="center"
-                labelColor="#fff"
-                className="progressBar"
-              />
-              <span className="alert">Votre deck dépasse la valeur maximale de crédits !</span>
+              <GiCreditsCurrency size={50} />
+
+              <div className="library-list-creditsCounter-wrapper">
+                <span>Crédits utilisés :</span>
+                <ProgressBar
+                  customLabel={`${deckCost}/50`}
+                  completed={deckCost}
+                  maxCompleted={50}
+                  bgColor="#40a8f5"
+                  height="15px"
+                  labelAlignment="center"
+                  labelColor="#fff"
+                  className="progressBar"
+                />
+                {deckCost > 50 && (
+                  <span className="alert">Votre deck dépasse la valeur maximale de crédits !</span>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -616,12 +638,19 @@ export default function Library({ editorMode, deck }) {
                                   deckCard.name !== card.name && deckCard.title !== card.title
                               )
                             )
+                            setDeckCost(deckCost - card.cost)
                           }}
                         >
                           <img src={card.image} alt={`${card.name} - ${card.title}`} />
                           <div className="library-deck-card-infos">
-                            <h3 className={`txt-rarity-${card.rarity}`}>{card.name}</h3>
-                            <h4 className={`txt-rarity-${card.rarity}`}>{card.title}</h4>
+                            <div className="library-deck-card-infos-name">
+                              <h3 className={`txt-rarity-${card.rarity}`}>{card.name}</h3>
+                              <h4 className={`txt-rarity-${card.rarity}`}>{card.title}</h4>
+                            </div>
+                            <div className="card-credits">
+                              <GiCreditsCurrency size={20} />
+                              {card.cost}
+                            </div>
                           </div>
                         </div>
                       ))}

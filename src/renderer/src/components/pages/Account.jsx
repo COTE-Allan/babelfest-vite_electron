@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../AuthContext'
 import ProfileDisplayer from '../account/ProfileDisplayer'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import { getPlayerRank, getPlayerStats } from '../others/toolBox'
@@ -11,7 +11,7 @@ const Account = () => {
   const [targetUser, setTargetUser] = useState(null)
   const { userId } = useParams()
   const isMine = userId === user.uid
-
+  const location = useLocation()
   async function GetUser(userId) {
     const userRef = doc(db, 'users', userId)
     const docSnap = await getDoc(userRef)
@@ -70,7 +70,14 @@ const Account = () => {
     fetchUserData()
   }, [])
 
-  return <ProfileDisplayer userInfo={targetUser} isMine={isMine} setUser={setTargetUser} />
+  return (
+    <ProfileDisplayer
+      userInfo={targetUser}
+      isMine={isMine}
+      setUser={setTargetUser}
+      defaultPage={location.state?.openMenu ? location.state?.openMenu : 1}
+    />
+  )
 }
 
 export default Account

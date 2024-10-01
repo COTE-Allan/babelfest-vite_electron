@@ -10,6 +10,7 @@
     "basehp": 3,
     "url": "./cards/babelfish/babelfest_babelfish1.png",
     "rarity": 4,
+    "cost": 25,
     "shiny": "gold",
     "collection": "Babelfish",
     "year": 2024,

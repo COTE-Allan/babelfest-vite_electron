@@ -21,8 +21,8 @@ import { PiCards } from 'react-icons/pi'
 import { TbCardsFilled } from 'react-icons/tb'
 import DeckBuilder from './DeckBuilder'
 
-export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
-  const [page, setPage] = useState(1)
+export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPage }) {
+  const [page, setPage] = useState(defaultPage)
   const [customizedUserInfo, setCustomizedUserInfo] = useState(null)
   const { updateUser } = useContext(AuthContext)
   const sendMessage = useSendMessage()
@@ -129,9 +129,9 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser }) {
                   <UserSettings />
                 </CSSTransition>
               )}
-                           {isMine && page === 6 && (
+              {isMine && page === 6 && (
                 <CSSTransition key="edit-profile" timeout={300} classNames="fade">
-                  <DeckBuilder/>
+                  <DeckBuilder />
                 </CSSTransition>
               )}
             </TransitionGroup>
