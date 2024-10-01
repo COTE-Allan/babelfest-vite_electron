@@ -164,7 +164,7 @@ export function useCreateGame() {
     gameMode = 'custom',
     deckJ1,
     deckJ2,
-    deckType
+    deckType = "random"
   ) {
     let gameDocRef
     // Création ou mise à jour du document de jeu avec les objets utilisateur complets
@@ -297,7 +297,7 @@ async function DrawCards(room, cardAmount) {
 
 async function DrawCardsWithRarityMax(room, cardAmount, deckJ1, deckJ2) {
   const deck = await getDeck(room)
-
+  console.log()
   if (!deck || deck.length === 0) {
     throw new Error('Deck is undefined or empty')
   }

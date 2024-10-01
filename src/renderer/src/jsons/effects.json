@@ -2,14 +2,14 @@
   {
     "slug": "atkBuff",
     "name": "Renforcement",
-    "desc": "Au début d'une phase d'attaque, cette carte renforce l'attaque de ses alliés adjacents de la valeur indiqué jusqu'à la fin du tour.",
+    "desc": "Au début d'une phase d'attaque, cette carte renforce l'attaque de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520356/babelfest/icons/forge_yoef1f.webp",
     "type": "Buffs"
   },
   {
     "slug": "freeze",
     "name": "Regard de glace",
-    "desc": "À l'invocation, ciblez une carte ennemie, bloquez tout ses mouvements pendant le nombre de tour indiqué.",
+    "desc": "À l'invocation, ciblez une carte ennemie, bloquez tout ses mouvements pendant le nombre de tour indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520364/babelfest/icons/froid_hs932w.webp",
     "type": "Débuffs"
   },
@@ -37,14 +37,14 @@
   {
     "slug": "depBuff",
     "name": "Turbo",
-    "desc": "Au début d'une phase de déplacement, cette carte renforce le déplacement de ses alliés adjacents de la valeur indiqué jusqu'à la fin du tour.",
+    "desc": "Au début d'une phase de déplacement, cette carte renforce le déplacement de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950667/babelfest/icons/turbo.webp",
     "type": "Buffs"
   },
   {
     "slug": "defBuff",
     "name": "Bouclier Protecteur",
-    "desc": "Au début d'une phase d'attaque, cette carte renforce la valeur de défense de ses alliés adjacents de la valeur indiqué jusqu'à la fin du tour.",
+    "desc": "Au début d'une phase d'attaque', cette carte renforce la défense de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/shield_hueeo5.webp",
     "type": "Buffs"
   },
@@ -58,7 +58,7 @@
   {
     "slug": "deathCounter",
     "name": "Compte à rebours",
-    "desc": "Après invocation, cette carte sera détruite dans le nombre de tour indiqué.",
+    "desc": "Après invocation, cette carte sera détruite dans le nombre de tour indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/countdown_dphplq.webp",
     "type": "Débuffs"
   },
@@ -100,7 +100,7 @@
   {
     "slug": "deathSummonDeck",
     "name": "Pioche Post-Mortem",
-    "desc": "Quand cette carte est détruite, elle invoque une carte aléatoire parmis les cartes de la pioche.",
+    "desc": "Quand cette carte est détruite, elle invoque une carte aléatoire parmi les cartes de la pioche.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520369/babelfest/icons/pioche_juypzo.webp",
     "type": "Invocations"
   },
@@ -163,7 +163,7 @@
   {
     "slug": "spawnSummon",
     "name": "Incantation de minions",
-    "desc": "À l'invocation, cette carte invoque le nombre indiqué de cartes dans l'arène.",
+    "desc": "À l'invocation, cette carte invoque le nombre indiquée de cartes dans l'arène.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520365/babelfest/icons/minions_mr31r0.webp",
     "type": "Invocations"
   },
@@ -198,7 +198,7 @@
   {
     "slug": "timerSummon",
     "name": "Chronomètre de puissance",
-    "desc": "Cette carte évoluera en une forme plus puissante après le nombre de tours indiqué.",
+    "desc": "Cette carte évoluera en une forme plus puissante après le nombre de tours indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520369/babelfest/icons/chrono_ocydlb.webp",
     "type": "Invocations"
   },
@@ -303,28 +303,28 @@
   {
     "slug": "permAtk",
     "name": "Griffes d'acier",
-    "desc": "A l'invocation, augmentez l'attaque max des aliés adjacents de la valeur indiqué.",
+    "desc": "A l'invocation, augmentez l'attaque max des alliés adjacents de la valeur indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/monster-grasp.webp",
     "type": "Buffs"
   },
   {
     "slug": "permHP",
     "name": "Cœur d'acier",
-    "desc": "A l'invocation, augmentez les points de vies max des aliés adjacents de la valeur indiqué.",
+    "desc": "A l'invocation, augmentez les points de vies max des alliés adjacents de la valeur indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1718009120/babelfest/icons/heart-shield.webp",
     "type": "Buffs"
   },
   {
     "slug": "processorAlly",
     "name": "Processeur de bataille",
-    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiqué pour chaque carte Typique alliée.",
+    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiquée pour chaque carte Typique alliée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1718009120/babelfest/icons/processor.webp",
     "type": "Buffs"
   },
   {
     "slug": "processorRival",
     "name": "Processeur de pression",
-    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiqué pour chaque carte Épique ou Légendaire adverse.",
+    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiquée pour chaque carte Épique ou Légendaire adverse.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/cpu-shot.webp",
     "type": "Buffs"
   }

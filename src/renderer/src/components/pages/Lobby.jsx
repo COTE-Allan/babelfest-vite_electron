@@ -128,9 +128,6 @@ const Lobby = () => {
     }
 
     await updateDoc(lobbyRef, updatePayload)
-    toast.success(
-      lobbyData.readyj1 || lobbyData.readyj2 ? "Vous n'êtes plus prêt." : 'Vous êtes prêt!'
-    )
     sendMessage(
       lobbyData.readyj1 || lobbyData.readyj2 ? "Vous n'êtes plus prêt." : 'Vous êtes prêt!',
       'success'
@@ -178,7 +175,7 @@ const Lobby = () => {
           lobbyData.gamemode,
           lobbyData.readyj1 && lobbyData.deckType === 'constructed' ? lobbyData.readyj1 : null,
           lobbyData.readyj2 && lobbyData.deckType === 'constructed' ? lobbyData.readyj2 : null,
-          lobbyData.deckType
+          lobbyData.deckType ?? "random"
         )
         // Update the lobby with the gameRef
         const lobbyRef = doc(db, 'lobbies', lobbyId)

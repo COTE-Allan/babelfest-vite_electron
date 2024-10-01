@@ -1,7 +1,7 @@
 {
   "name": "babelfest-electron",
   "type": "module",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "Babelfest est un jeu de carte qui fusionne les univers des auteurs indépendants.",
   "main": "./out/main/index.js",
   "author": "Cielesis",
