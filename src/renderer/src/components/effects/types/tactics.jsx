@@ -31,9 +31,9 @@ export function Inversion({ item, effectInfos }) {
   }
 }
 
-export function PluieFleche({ item, effect, pattern, effectInfos }) {
+export function PluieFleche({ item, effect, pattern, effectInfos, attacker }) {
   let targets = getAdjacentCells(item, effect.target, pattern)
-  targets = hpEdit(-1, targets, item)
+  targets = hpEdit(-1, targets, true, attacker)
 
   return {
     targets: targets,

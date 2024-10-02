@@ -65,7 +65,9 @@ export const useTryEffect = () => {
     firstToPlay,
     setPhaseEffects,
     setConfirmModal,
-    setGreenCells
+    setGreenCells,
+    playerSelf,
+    playerRival
   } = useContext(GlobalContext)
   const { giveAchievement } = useContext(AuthContext)
 
@@ -212,7 +214,9 @@ export const useTryEffect = () => {
               room,
               killer: killer,
               shop,
-              effectInfos
+              effectInfos,
+              player: item.owner === playerID ? playerSelf : playerRival,
+              rival: item.owner !== playerID ? playerRival : playerSelf
             })
             await concludeEffect(executedEffect)
             stillDead = executedEffect?.stillDead ?? true

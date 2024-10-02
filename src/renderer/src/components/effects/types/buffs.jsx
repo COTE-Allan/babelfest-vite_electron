@@ -215,7 +215,6 @@ export function permAtk({ item, effect, pattern, effectInfos }) {
 
 // Function to increase hp and basehp of adjacent cells
 export function permHP({ item, effect, pattern, effectInfos }) {
-  console.log(item)
   let targets = getAdjacentCells(item, effect.target, pattern)
   targets = hpEdit(effect.value, targets)
   const targetsCards = targets.map((target) => target.card)

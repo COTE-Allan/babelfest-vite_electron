@@ -128,9 +128,6 @@ const Lobby = () => {
     }
 
     await updateDoc(lobbyRef, updatePayload)
-    toast.success(
-      lobbyData.readyj1 || lobbyData.readyj2 ? "Vous n'êtes plus prêt." : 'Vous êtes prêt!'
-    )
     sendMessage(
       lobbyData.readyj1 || lobbyData.readyj2 ? "Vous n'êtes plus prêt." : 'Vous êtes prêt!',
       'success'

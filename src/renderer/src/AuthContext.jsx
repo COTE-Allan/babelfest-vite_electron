@@ -93,6 +93,7 @@ export const AuthProvider = ({ children }) => {
         level: userData.level,
         xp: userData.xp,
         prestige: userData.prestige || null,
+        id: currentUser.uid,
         stats: {
           gamesPlayed: userData.stats?.gamesPlayed || 0,
           victories: userData.stats?.victories || 0,

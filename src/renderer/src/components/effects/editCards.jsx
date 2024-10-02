@@ -357,14 +357,14 @@ export function depEdit(user, value, targets) {
 }
 
 // Ajouter aux hp existants
-export function hpEdit(value, targets, room, specialDeath = false) {
+export function hpEdit(value, targets, specialDeath = false, attacker = null) {
   targets.forEach(async (target) => {
     target.card.hp = target.card.hp + value
     if (target.card.hp <= 0) {
       target.card.dead = {
-        cell: target.id,
-        id: target.card.id,
-        uniqueID: target.card.uniqueID,
+        cell: attacker ? attacker.id : target.id,
+        id: attacker ? attacker.card.id : target.card.id,
+        uniqueID: attacker ? attacker.card.uniqueID : target.card.uniqueID,
         specialDeath: specialDeath
       }
     }
@@ -410,11 +410,17 @@ export function removeEffects(target) {
 }
 
 // Invoquer des cartes
-export function summonCardsFromCardsArray(cells, infos, owner = null) {
+export function summonCardsFromCardsArray(
+  cells,
+  infos,
+  owner = null,
+  player = { username: 'NAN', hex: '#FFFFFF' }
+) {
   let log = []
   cells.forEach((cell, index) => {
     let newCard = getCardBasedOnNameAndTitle(infos[index])
     cell.card = newCard
+    cell.card.owner = { name: player.username, hex: player.primaryColor.hex }
     cell.card.isRecto = true
     cell.card.uniqueID = generateUniqueID()
     cell.owner = owner ? owner : cell.owner

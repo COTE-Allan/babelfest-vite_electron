@@ -3,7 +3,7 @@ import { getAdjacentCells } from '../targets'
 
 export function PiegeOurs({ item, attacker, effectInfos }) {
   let targets = [attacker]
-  targets = hpEdit(-1, targets, item)
+  targets = hpEdit(-1, targets)
 
   return {
     targets: targets,
@@ -59,7 +59,7 @@ export async function TaserPostMortem({ item, killer, effectInfos }) {
 
 export function Pietinement({ item, pattern, effect, effectInfos }) {
   let targets = getAdjacentCells(item, effect.target, pattern)
-  targets = hpEdit(-1, targets, item, true)
+  targets = hpEdit(-1, targets, true, item)
   return {
     targets: targets,
     log: {
