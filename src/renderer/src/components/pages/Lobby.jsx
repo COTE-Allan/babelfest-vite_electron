@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { doc, onSnapshot, updateDoc, deleteDoc, getDoc } from 'firebase/firestore'
+import { doc, onSnapshot, updateDoc, deleteDoc, getDoc, arrayRemove } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import '../../styles/pages/lobby.scss'
 import ProfilePicture from '../esthetics/profilePicture'
