@@ -33,12 +33,7 @@ export default function CardsBackground() {
         />
       )}
       <div className="carousel">
-        <img
-          className={`carousel-picture`}
-          src={BabelfestBackground}
-          alt={'background du menu'}
-          onLoad={() => setRegularLoaded(true)}
-        />
+        <img className={`carousel-picture`} src={BabelfestBackground} alt={'background du menu'} />
       </div>
     </>
   )

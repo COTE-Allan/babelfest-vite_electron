@@ -188,7 +188,16 @@ const Lobby = () => {
   // Navigate to game when gameRef is set
   useEffect(() => {
     if (lobbyData && lobbyData.gameRef) {
-      navigate(`/game/${lobbyData.gameRef}`)
+      const gameRef = doc(db, 'games', lobbyData.gameRef)
+      updateDoc(gameRef, {
+        disconnected: arrayRemove(user.uid)
+      })
+        .then(() => {
+          navigate(`/game/${lobbyData.gameRef}`)
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la mise à jour du document de jeu: ', error)
+        })
     }
   }, [lobbyData])
 
