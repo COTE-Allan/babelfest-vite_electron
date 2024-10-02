@@ -3,9 +3,9 @@ import { getCardBasedOnID, getCardBasedOnNameAndTitle, getEffectInfo } from '../
 import { drawSingleCardAndUpdateDeck, summonCardsFromCardsArray } from '../editCards'
 import { getClosestEmptyCells } from '../targets'
 
-export function AngeRessurect({ item, effect, effectInfos }) {
+export function AngeRessurect({ item, effect, effectInfos, player }) {
   let target = { ...item }
-  let summon = summonCardsFromCardsArray([target], effect.cards, item.owner)
+  let summon = summonCardsFromCardsArray([target], effect.cards, item.owner, player)
 
   const targetsCards = summon.cells.map((target) => target.card)
 
@@ -23,11 +23,12 @@ export function AngeRessurect({ item, effect, effectInfos }) {
   }
 }
 
-export async function PiochePostMortem({ item, room, effectInfos }) {
+export async function PiochePostMortem({ item, room, effectInfos, player }) {
   let target = { ...item }
   let card = await drawSingleCardAndUpdateDeck(room)
 
   target.card = card
+  target.card.owner = { name: player.username, hex: player.primaryColor.hex }
   target.card.isRecto = true
   target.card.uniqueID = generateUniqueID()
 
@@ -45,7 +46,7 @@ export async function PiochePostMortem({ item, room, effectInfos }) {
   }
 }
 
-export function InvocationMiroir({ item, killer, effectInfos }) {
+export function InvocationMiroir({ item, killer, effectInfos, player }) {
   if (!killer.card) {
     // Return null effect if killer is null
     return {
@@ -60,6 +61,7 @@ export function InvocationMiroir({ item, killer, effectInfos }) {
   let attacker = killer
   let target = { ...item }
   target.card = getCardBasedOnID(attacker.card.id)
+  target.card.owner = { name: player.username, hex: player.primaryColor.hex }
   target.card.uniqueID = generateUniqueID()
   target.card.isRecto = true
 
@@ -77,7 +79,7 @@ export function InvocationMiroir({ item, killer, effectInfos }) {
   }
 }
 
-export function CompteurPuissance({ item, effect, effectInfos }) {
+export function CompteurPuissance({ item, effect, effectInfos, player }) {
   let target = { ...item }
   let summoned = false
   target.card.timerSummon = target.card.timerSummon - 1
@@ -85,6 +87,7 @@ export function CompteurPuissance({ item, effect, effectInfos }) {
   if (target.card.timerSummon <= 0) {
     target.card = getCardBasedOnNameAndTitle(effect.cards[0])
     target.card.isRecto = true
+    target.card.owner = { name: player.username, hex: player.primaryColor.hex }
     target.card.uniqueID = generateUniqueID()
     summoned = true
   }
@@ -113,7 +116,7 @@ export function CompteurPuissance({ item, effect, effectInfos }) {
   }
 }
 
-export function Soldes({ item, shop, pattern, effectInfos }) {
+export function Soldes({ item, shop, pattern, effectInfos, player }) {
   let targets = getClosestEmptyCells(item.id, 1, pattern)
   let log = []
 
@@ -121,6 +124,7 @@ export function Soldes({ item, shop, pattern, effectInfos }) {
     let newCard = getRandomFromArray(shop, 1)[0]
     cell.card = newCard
     cell.card.isRecto = true
+    cell.card.owner = { name: player.username, hex: player.primaryColor.hex }
     cell.card.uniqueID = generateUniqueID()
     cell.owner = item.owner
   })
@@ -142,9 +146,9 @@ export function Soldes({ item, shop, pattern, effectInfos }) {
   }
 }
 
-export function InvocationMinions({ item, effect, pattern, effectInfos }) {
+export function InvocationMinions({ item, effect, pattern, effectInfos, player }) {
   let targets = getClosestEmptyCells(item.id, effect.cards.length, pattern)
-  let summon = summonCardsFromCardsArray(targets, effect.cards, item.owner)
+  let summon = summonCardsFromCardsArray(targets, effect.cards, item.owner, player)
   let result = summon.cells
 
   const targetsCards = summon.cells.map((target) => target.card)
@@ -164,10 +168,10 @@ export function InvocationMinions({ item, effect, pattern, effectInfos }) {
   }
 }
 
-export function Metamorphose({ item, effect, targets, effectInfos }) {
+export function Metamorphose({ item, effect, targets, effectInfos, rival }) {
   let targetsBefore = targets.map((target) => ({ ...target.card }))
 
-  let summon = summonCardsFromCardsArray(targets, effect.cards)
+  let summon = summonCardsFromCardsArray(targets, effect.cards, null, rival)
   let result = summon.cells
 
   let targetsAfter = result.map((cell) => ({ ...cell.card }))
