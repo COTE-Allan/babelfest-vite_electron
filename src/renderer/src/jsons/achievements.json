@@ -142,6 +142,12 @@
     "url": "./skins/banners/banner_liminalis.png"
   },
   {
+    "id": "HF_blaireKill",
+    "name": "La démone à frappé",
+    "desc": "Détruisez une carte ennemie avec Blaire : Démone sanglante.",
+    "url": "./skins/banners/banner_blaire_1.png"
+  },
+  {
     "id": "HF_11dmg",
     "name": "One Punch Man",
     "desc": "Infligez 11 points de dégâts ou plus en une seule attaque.",

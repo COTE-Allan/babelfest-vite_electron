@@ -31,7 +31,6 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
     await updateUser(customizedUserInfo)
     setUser(customizedUserInfo)
     setCustomizedUserInfo(null)
-    sendMessage('Les changements ont étés correctements appliqués.', 'success')
   }
 
   return (

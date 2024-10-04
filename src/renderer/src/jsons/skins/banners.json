@@ -169,6 +169,13 @@
     "author": "RID"
   },
   {
+    "url": "./skins/banners/banner_blaire_1.png",
+    "name": "Maîtrise de Blaire",
+    "unlockTip": "Obtenu en récompense du succès : 'La démone à frappé'",
+    "achievement": "HF_blaireKill",
+    "author": "Okaah"
+  },
+  {
     "url": "./skins/banners/banner_heal.png",
     "name": "Maîtrise du soin",
     "unlockTip": "Obtenu en récompense du succès : 'Médecin de guerre'",

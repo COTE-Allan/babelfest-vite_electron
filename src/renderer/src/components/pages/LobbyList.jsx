@@ -109,7 +109,11 @@ export default function LobbyList() {
           <ul className="lobbies-list">
             {lobbies.length > 0 ? (
               lobbies.map((lobby) => (
-                <li key={lobby.id} className="lobbies-list-item">
+                <li
+                  key={lobby.id}
+                  className="lobbies-list-item"
+                  onDoubleClick={() => handleJoinLobby(lobby.id)}
+                >
                   <span className="lobbies-list-item-span">
                     Lobby de {lobby.creator} - {lobby.name}
                   </span>

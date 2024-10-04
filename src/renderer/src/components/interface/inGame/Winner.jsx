@@ -94,7 +94,17 @@ export default function Winner() {
       await batch.commit()
 
       setHandleWin(null)
-      createGame(gameData.lobbyId, gameData.player1, gameData.player2, room, gameData.settings)
+      createGame(
+        gameData.lobbyId,
+        gameData.player1,
+        gameData.player2,
+        room,
+        gameData.settings,
+        gameData.gameMode,
+        gameData.deckJ1,
+        gameData.deckJ2,
+        gameData.deckType
+      )
     } else {
       // Mettre à jour le statut de revanche
       const gameRef = doc(db, 'games', room)
@@ -361,7 +371,7 @@ export default function Winner() {
               <ExperienceBar />
             </div>
           )}
-          {!isSpectator && gameData.revenge?.state !== 'quit' && (
+          {!isSpectator && gameData.revenge?.state !== 'quit' && gameData.revenge !== 'quit' && (
             <Button
               className={`ingame-button ${
                 gameData.revenge?.id !== playerID && gameData.revenge !== null ? 'alert' : ''

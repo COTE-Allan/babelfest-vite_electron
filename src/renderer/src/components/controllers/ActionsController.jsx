@@ -334,6 +334,13 @@ export const useTryAttack = () => {
             id: cardAttacker.id,
             uniqueID: cardAttacker.uniqueID
           }
+          if (
+            cardAttacker.name === 'Blaire Witcher' &&
+            cardAttacker.title === 'Démone sanglante' &&
+            cellTarget.owner !== playerID
+          ) {
+            await giveAchievement('HF_blaireKill')
+          }
           await pushLogsIntoBatch(batch, {
             trigger: cardAttacker,
             action: 'attack',

@@ -143,9 +143,7 @@ export function useLeaveLobby() {
       const userRef = doc(db, 'users', user.uid)
       await updateDoc(userRef, { currentLobby: null })
 
-      if (inGame) {
-        navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
-      }
+      navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
     } catch (error) {
       console.error('Error leaving lobby: ', error)
     }
@@ -185,10 +183,12 @@ export function useCreateGame() {
       gameDocRef = await addDoc(collection(db, 'games'), {
         created: Date.now(),
         finished: false,
-        phase: deckType === "constructed" ? 1 : 0,
+        phase: deckType === 'constructed' ? 1 : 0,
         activePlayer: 0,
         player1: j1,
         player2: j2,
+        deckJ1: deckJ1,
+        deckJ2: deckJ2,
         standby: false,
         revenge: null,
         lobbyId: lobbyId,
