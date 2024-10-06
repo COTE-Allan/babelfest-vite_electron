@@ -35,8 +35,6 @@
 
     &:hover {
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        ;
-
     }
 
     &:hover &-banner {
@@ -49,9 +47,13 @@
         justify-content: center;
         font-family: 'Kimberly Bl', sans-serif;
         z-index: 1;
-
+        max-width: 200px;
         & .name {
             font-size: 30px;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         & .title {

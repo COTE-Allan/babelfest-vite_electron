@@ -149,6 +149,7 @@ const Login = () => {
         secondaryColor: { hex: '#e62e31' },
         banner: './skins/banners/banner_default.png',
         level: 1,
+        id: user.uid,
         xp: 0,
         mmr: 500,
         title: 'level',

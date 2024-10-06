@@ -1,6 +1,5 @@
 [
   {
-    "featured": true,
     "name": "Luna",
     "title": "Guerrière de Fantasyland",
     "atk": 4,
@@ -29,7 +28,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Papillon",
     "title": "Une nuit de folie",
     "atk": 3,
@@ -52,7 +50,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Taika",
     "title": "Le titan des jeux-vidéo",
     "atk": 2,
@@ -83,7 +80,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Hector Ranger",
     "title": "Harponnage Capilaire",
     "atk": 2,
@@ -115,7 +111,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Aaydin",
     "title": "Aal de lumière",
     "atk": 2,
@@ -138,7 +133,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Azuki",
     "title": "Anemoi Gryphus",
     "atk": 3,
@@ -163,7 +157,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Vehemon",
     "title": "Réminiscence des puissances déchues",
     "atk": 3,
@@ -192,7 +185,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Mhor",
     "title": "Ombre frêle de la destruction",
     "atk": 5,
@@ -209,7 +201,6 @@
     "author": "Haeri3rd"
   },
   {
-    "featured": true,
     "name": "Gann",
     "title": "Ombre douce de la raison",
     "atk": 1,
@@ -242,7 +233,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Haeri",
     "title": "Génie du bonheur",
     "atk": 1,
@@ -281,7 +271,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "La Patrouille",
     "title": "Loubards de Babelfest",
     "atk": 2,
@@ -309,7 +298,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Belphegor",
     "title": "Démon de la paresse",
     "atk": 3,
@@ -332,7 +320,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Yalin",
     "title": "'Doc' insaisissable",
     "atk": 3,
@@ -359,7 +346,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Elysabeth Leninton",
     "title": "Éclair lavande",
     "atk": 0,
@@ -389,7 +375,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Kl'rgh",
     "title": "Le petit conquérant",
     "atk": 1,
@@ -468,6 +453,56 @@
         "spawnUsed": false,
         "choice": "target",
         "base": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Lukas",
+    "title": "Fusion du coeur",
+    "atk": 6,
+    "dep": 6,
+    "hp": 6,
+    "baseatk": 6,
+    "basedep": 6,
+    "basehp": 6,
+    "url": "./cards/series/babelfest_2024series20.png",
+    "rarity": 5,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "shiny": "gold",
+    "author": "Cielesis",
+    "deathCounter": 4,
+    "effects": [
+      {
+        "when": [1],
+        "type": "deathCounter"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Pink",
+    "title": "Fan de disco",
+    "atk": 7,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 7,
+    "basedep": 2,
+    "basehp": 2,
+    "cost": 25,
+    "url": "./cards/series/babelfest_2024series21.png",
+    "rarity": 4,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "shiny": "gold",
+    "author": "Kiba",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "absoluteSeeingEye",
+        "target": "any",
+        "spawnUsed": false
       }
     ]
   }

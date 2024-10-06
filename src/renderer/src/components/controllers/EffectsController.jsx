@@ -37,6 +37,7 @@ export const useTryEffect = () => {
     taser: Traps.TaserPostMortem,
     stomp: Traps.Pietinement,
     seeingEye: Traps.TroisiemeOeil,
+    absoluteSeeingEye: Traps.AbsoluteTroisiemeOeil,
     deathSummon: Summons.AngeRessurect,
     deathSummonDeck: Summons.PiochePostMortem,
     deathSummonGhost: Summons.InvocationMiroir,
@@ -258,7 +259,7 @@ export const useTryEffect = () => {
 
   const concludeEffect = useCallback(
     async (result) => {
-      if (!result) return
+      if (!result || result.cancel) return
       console.log("conclusion de l'effet.", result, result.targets)
 
       // Cancel the effect if result.targets exists but is empty

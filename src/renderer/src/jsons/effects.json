@@ -224,6 +224,13 @@
     "type": "Pièges"
   },
   {
+    "slug": "absoluteSeeingEye",
+    "name": "Troisième œil absolu",
+    "desc": "A l'invocation, supprimez les effets de TOUTES les cartes adjacentes.",
+    "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950666/babelfest/icons/seeingEye.webp",
+    "type": "Pièges"
+  },
+  {
     "slug": "shopSummon",
     "name": "Soldes",
     "desc": "A l'invocation, cette carte invoque une copie d'une carte aléatoire de la boutique sur la case la plus proche.",

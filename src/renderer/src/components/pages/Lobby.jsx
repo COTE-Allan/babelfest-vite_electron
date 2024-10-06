@@ -193,7 +193,7 @@ const Lobby = () => {
         disconnected: arrayRemove(user.uid)
       })
         .then(() => {
-          navigate(`/game/${lobbyData.gameRef}`)
+          navigate(`/game/${lobbyData.gameRef}`, {state: {spectator: isSpectator}})
         })
         .catch((error) => {
           console.error('Erreur lors de la mise à jour du document de jeu: ', error)

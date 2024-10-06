@@ -39,15 +39,223 @@ export function SendCardsToPlayer(selectedCards, room, host) {
   })
 }
 
+// const PLAYER_ONE = 1
+// const PLAYER_TWO = 2
+// const ATTACK_PHASE = 3
+// const FINAL_PHASE = 4
+
+// export const useEndTurn = () => {
+//   const {
+//     gameData,
+//     myTurn,
+//     setRivalEndedAttack,
+//     setGreenCells,
+//     setSelectedCards,
+//     setSelectedCells,
+//     setSelectedShopCards,
+//     setConfirmModal,
+//     firstToPlay,
+//     setPlacementCostLeft,
+//     setMovesLeft,
+//     pattern,
+//     playerID,
+//     phase,
+//     room,
+//     turn,
+//     playerRival
+//   } = useContext(GlobalContext)
+//   const pushLogsIntoBatch = usePushLogsIntoBatch()
+
+//   const playerRivalID = playerID === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
+
+//   const isFirstToPlay = playerID === firstToPlay
+
+//   function switchActivePlayer() {
+//     return playerID === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
+//   }
+
+//   async function EndTurn(nextPhase = true) {
+//     const updates = {}
+//     const batch = writeBatch(db)
+
+//     console.log('EndTurn called, nextPhase:', nextPhase)
+
+//     if (phase === 1) {
+//       if (isFirstToPlay) {
+//         // PlayerID == firstToPlay
+//         if (playerRival.hand.length === 0) {
+//           // Opponent's hand is empty
+//           console.log('Opponent hand is empty, moving to phase 2 without changing activePlayer')
+//           updates.phase = 2
+//           // Do not change activePlayer
+//         } else {
+//           // Opponent's hand is not empty
+//           console.log('Switching activePlayer in phase 1')
+//           updates.activePlayer = switchActivePlayer()
+//         }
+//       } else {
+//         // PlayerID != firstToPlay
+//         console.log('Moving to phase 2 and switching activePlayer')
+//         updates.phase = 2
+//         updates.activePlayer = switchActivePlayer()
+//       }
+//     } else if (phase === 2) {
+//       if (isFirstToPlay) {
+//         // PlayerID == firstToPlay
+//         console.log('Switching activePlayer in phase 2')
+//         updates.activePlayer = switchActivePlayer()
+//       } else {
+//         // PlayerID != firstToPlay
+//         console.log('Switching activePlayer and moving to phase 3')
+//         updates.activePlayer = switchActivePlayer()
+//         updates.phase = ATTACK_PHASE // Phase 3
+//       }
+//     } else if (phase === ATTACK_PHASE) {
+//       // Phase 3: Integrate all functionalities as before
+//       console.log('Handling attack phase logic')
+//       if (nextPhase) {
+//         updates.phase = gameData.playerAttackEnded ? FINAL_PHASE : phase
+
+//         if (gameData.playerAttackEnded) {
+//           console.log(
+//             'The other player has already ended their attack phase, moving to final phase'
+//           )
+//           updates.playerAttackEnded = null
+//           updates.activePlayer = firstToPlay
+//           updates.standby = [playerRivalID, true]
+//         } else {
+//           console.log("The other player hasn't ended attack phase yet")
+//           endingAttackTurnFirst(room, playerID)
+//           updates.activePlayer = switchActivePlayer()
+//         }
+//       } else if (gameData.playerAttackEnded) {
+//         console.log('The other player has already ended, keeping activePlayer as current player')
+//         updates.activePlayer = playerID
+//       } else updates.activePlayer = switchActivePlayer()
+//     } else if (phase === FINAL_PHASE) {
+//       if (isFirstToPlay) {
+//         // PlayerID == firstToPlay
+//         if (playerRival.hand.length === 0) {
+//           // Opponent's hand is empty
+//           console.log(
+//             'Opponent hand is empty, incrementing turn, moving to phase 1, switching firstToPlay and activePlayer'
+//           )
+//           updates.turn = turn + 1
+//           updates.phase = 1
+//           updates.FirstToPlay = playerRivalID
+//           updates.activePlayer = switchActivePlayer()
+
+//           // Reset cards in the arena
+//           resetArenaCards(batch, pattern, room)
+//         } else {
+//           // Opponent's hand is not empty
+//           console.log('Switching activePlayer in final phase')
+//           updates.activePlayer = switchActivePlayer()
+//         }
+//       } else {
+//         // PlayerID != firstToPlay
+//         console.log(
+//           'Incrementing turn, moving to phase 1, switching firstToPlay, keeping activePlayer as is'
+//         )
+//         updates.turn = turn + 1
+//         updates.phase = 1
+//         updates.FirstToPlay = playerID
+
+//         // Reset cards in the arena
+//         resetArenaCards(batch, pattern, room)
+//       }
+//     }
+//       setPlacementCostLeft(4)
+//       setMovesLeft(4)
+  
+
+//     if (setRivalEndedAttack) {
+//       setRivalEndedAttack(false)
+//     }
+
+//     // Log the changes
+//     await pushLogsIntoBatch(
+//       batch,
+//       {
+//         turn: updates.turn ? updates.turn : turn,
+//         phase: updates.phase ? updates.phase : phase
+//       },
+//       updates.activePlayer !== undefined ? updates.activePlayer : gameData.activePlayer
+//     )
+
+//     // Update the game data
+//     batch.update(doc(db, 'games', room), updates)
+//     await batch.commit()
+
+//     setGreenCells([])
+//     setSelectedCards([])
+//     setSelectedShopCards([])
+//     setSelectedCells([])
+//     setConfirmModal(null)
+//   }
+
+//   return EndTurn
+// }
+
+// function endingAttackTurnFirst(room, playerID) {
+//   updateDoc(doc(db, 'games', room), {
+//     playerAttackEnded: playerID
+//   })
+// }
+
+// function resetArenaCards(batch, pattern, room) {
+//   pattern.forEach((cell) => {
+//     if (!cell.card) return
+
+//     const arenaColRef = doc(batch._firestore, `games/${room}/arena`, `cell-${cell.id}`)
+//     let shouldUpdate = false
+
+//     ;['atk', 'dep', 'attackCount'].forEach((attr) => {
+//       if (cell.card[attr] !== cell.card[`base${attr}`]) {
+//         cell.card[attr] = cell.card[`base${attr}`]
+//         shouldUpdate = true
+//       }
+//     })
+//     ;['def', 'movedThisTurn', 'attackedThisTurn', 'affected', 'broken'].forEach((prop) => {
+//       if (cell.card[prop] != null) {
+//         delete cell.card[prop]
+//         shouldUpdate = true
+//       }
+//     })
+//     if (cell.card.effects) {
+//       cell.card.effects.forEach((effect) => {
+//         if (effect.usedThisTurn) {
+//           delete effect.usedThisTurn
+//         }
+//       })
+//       shouldUpdate = true
+//     }
+
+//     if (cell.card.freeze) {
+//       cell.card.freeze -= 1
+//       if (cell.card.freeze <= 0) {
+//         delete cell.card.freeze
+//       }
+//       shouldUpdate = true
+//     }
+
+//     if (shouldUpdate) {
+//       batch.update(arenaColRef, { card: cell.card })
+//     }
+//   })
+// }
+
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const ATTACK_PHASE = 3
 const FINAL_PHASE = 4
-
 export const useEndTurn = () => {
   const {
     gameData,
     myTurn,
+    host,
+    turnOrder,
+    rivalEndedAttack,
     setRivalEndedAttack,
     setGreenCells,
     setSelectedCards,
@@ -61,137 +269,115 @@ export const useEndTurn = () => {
     playerID,
     phase,
     room,
-    turn,
-    playerRival
+    turn
   } = useContext(GlobalContext)
   const pushLogsIntoBatch = usePushLogsIntoBatch()
 
-  const playerRivalID = playerID === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
-
-  const isFirstToPlay = playerID === firstToPlay
-
   function switchActivePlayer() {
-    return playerID === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
+    return host ? PLAYER_TWO : PLAYER_ONE
   }
 
   async function EndTurn(nextPhase = true) {
     const updates = {}
     const batch = writeBatch(db)
+    console.log('endturn,', nextPhase)
+    if (myTurn) {
+      updates.activePlayer = switchActivePlayer()
+    }
 
-    console.log('EndTurn called, nextPhase:', nextPhase)
-
-    if (phase === 1) {
-      if (isFirstToPlay) {
-        // PlayerID == firstToPlay
-        if (playerRival.hand.length === 0) {
-          // Opponent's hand is empty
-          console.log('Opponent hand is empty, moving to phase 2 without changing activePlayer')
-          updates.phase = 2
-          // Do not change activePlayer
-        } else {
-          // Opponent's hand is not empty
-          console.log('Switching activePlayer in phase 1')
-          updates.activePlayer = switchActivePlayer()
-        }
-      } else {
-        // PlayerID != firstToPlay
-        console.log('Moving to phase 2 and switching activePlayer')
-        updates.phase = 2
-        updates.activePlayer = switchActivePlayer()
-      }
-    } else if (phase === 2) {
-      if (isFirstToPlay) {
-        // PlayerID == firstToPlay
-        console.log('Switching activePlayer in phase 2')
-        updates.activePlayer = switchActivePlayer()
-      } else {
-        // PlayerID != firstToPlay
-        console.log('Switching activePlayer and moving to phase 3')
-        updates.activePlayer = switchActivePlayer()
-        updates.phase = ATTACK_PHASE // Phase 3
-      }
-    } else if (phase === ATTACK_PHASE) {
-      // Phase 3: Integrate all functionalities as before
-      console.log('Handling attack phase logic')
+    if (phase === ATTACK_PHASE) {
       if (nextPhase) {
-        updates.phase = gameData.playerAttackEnded ? FINAL_PHASE : phase
+        updates.phase =
+          gameData.playerAttackEnded && gameData.playerAttackEnded !== null ? FINAL_PHASE : phase
 
-        if (gameData.playerAttackEnded) {
-          console.log(
-            'The other player has already ended their attack phase, moving to final phase'
-          )
+        if (gameData.playerAttackEnded && gameData.playerAttackEnded !== null) {
+          console.log("l'autre joueur à déjà terminé sa phase, on passe en phase 4")
           updates.playerAttackEnded = null
           updates.activePlayer = firstToPlay
-          updates.standby = [playerRivalID, true]
+          updates.standby = [firstToPlay === 1 ? 2 : 1, true]
         } else {
-          console.log("The other player hasn't ended attack phase yet")
-          endingAttackTurnFirst(room, playerID)
-          updates.activePlayer = switchActivePlayer()
+          console.log("l'autre joueur n'a pas terminé, il joue encore")
+          endingAttackTurnFirst(room, turnOrder)
         }
-      } else if (gameData.playerAttackEnded) {
-        console.log('The other player has already ended, keeping activePlayer as current player')
-        updates.activePlayer = playerID
-      } else updates.activePlayer = switchActivePlayer()
-    } else if (phase === FINAL_PHASE) {
-      if (isFirstToPlay) {
-        // PlayerID == firstToPlay
-        if (playerRival.hand.length === 0) {
-          // Opponent's hand is empty
-          console.log(
-            'Opponent hand is empty, incrementing turn, moving to phase 1, switching firstToPlay and activePlayer'
-          )
-          updates.turn = turn + 1
-          updates.phase = 1
-          updates.FirstToPlay = playerRivalID
-          updates.activePlayer = switchActivePlayer()
+      } else if (gameData.playerAttackEnded && gameData.playerAttackEnded !== null) {
+        console.log("l'autre joueur à déjà terminé, je garde la main")
+        updates.activePlayer = host ? PLAYER_ONE : PLAYER_TWO
+      }
+    } else if (turnOrder === PLAYER_TWO && nextPhase) {
+      updates.phase = phase + 1
+      updates.standby = [playerID, true]
+    }
 
-          // Reset cards in the arena
-          resetArenaCards(batch, pattern, room)
-        } else {
-          // Opponent's hand is not empty
-          console.log('Switching activePlayer in final phase')
-          updates.activePlayer = switchActivePlayer()
-        }
-      } else {
-        // PlayerID != firstToPlay
-        console.log(
-          'Incrementing turn, moving to phase 1, switching firstToPlay, keeping activePlayer as is'
-        )
-        updates.turn = turn + 1
+    if (phase === FINAL_PHASE && nextPhase) {
+      if (turnOrder === PLAYER_TWO) {
+        updates.FirstToPlay = firstToPlay === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE
+        updates.activePlayer = updates.FirstToPlay
+        updates.standby = [firstToPlay === PLAYER_ONE ? PLAYER_ONE : PLAYER_TWO, true]
+
         updates.phase = 1
-        updates.FirstToPlay = playerID
 
-        // Reset cards in the arena
-        resetArenaCards(batch, pattern, room)
+        pattern.forEach((cell) => {
+          if (!cell.card) return
+
+          const arenaColRef = doc(db, `games/${room}/arena`, `cell-${cell.id}`)
+          let shouldUpdate = false
+
+          ;['atk', 'dep', 'attackCount'].forEach((attr) => {
+            if (cell.card[attr] !== cell.card[`base${attr}`]) {
+              cell.card[attr] = cell.card[`base${attr}`]
+              shouldUpdate = true
+            }
+          })
+          ;['def', 'movedThisTurn', 'attackedThisTurn', 'affected', 'broken'].forEach((prop) => {
+            if (cell.card[prop] != null) {
+              delete cell.card[prop]
+              shouldUpdate = true
+            }
+          })
+          if (cell.card.effects) {
+            cell.card.effects.forEach((effect) => {
+              if (effect.usedThisTurn) {
+                delete effect.usedThisTurn
+              }
+            })
+            shouldUpdate = true
+          }
+
+          if (cell.card.freeze) {
+            cell.card.freeze = cell.card.freeze - 1
+            if (cell.card.freeze <= 0) {
+              delete cell.card.freeze
+            }
+            shouldUpdate = true
+          }
+
+          if (shouldUpdate) {
+            batch.update(arenaColRef, { card: cell.card })
+          }
+        })
+
+        updates.turn = turn + 1
       }
     }
 
-    // Set default per-phase variables
-    if (updates.phase === 1) {
-      setPlacementCostLeft(4)
-    }
-    if (updates.phase === 2) {
-      setMovesLeft(4)
-    }
+    if (phase == 1) setPlacementCostLeft(4)
+    if (phase == 2) setMovesLeft(4)
 
-    if (setRivalEndedAttack) {
+    if (rivalEndedAttack) {
       setRivalEndedAttack(false)
     }
 
-    // Log the changes
     await pushLogsIntoBatch(
       batch,
       {
         turn: updates.turn ? updates.turn : turn,
         phase: updates.phase ? updates.phase : phase
       },
-      updates.activePlayer !== undefined ? updates.activePlayer : gameData.activePlayer
+      updates.activePlayer
     )
 
-    // Update the game data
     batch.update(doc(db, 'games', room), updates)
-    await batch.commit()
-
+    batch.commit()
     setGreenCells([])
     setSelectedCards([])
     setSelectedShopCards([])
@@ -202,50 +388,8 @@ export const useEndTurn = () => {
   return EndTurn
 }
 
-function endingAttackTurnFirst(room, playerID) {
+function endingAttackTurnFirst(room, turnOrder) {
   updateDoc(doc(db, 'games', room), {
-    playerAttackEnded: playerID
-  })
-}
-
-function resetArenaCards(batch, pattern, room) {
-  pattern.forEach((cell) => {
-    if (!cell.card) return
-
-    const arenaColRef = doc(batch._firestore, `games/${room}/arena`, `cell-${cell.id}`)
-    let shouldUpdate = false
-
-    ;['atk', 'dep', 'attackCount'].forEach((attr) => {
-      if (cell.card[attr] !== cell.card[`base${attr}`]) {
-        cell.card[attr] = cell.card[`base${attr}`]
-        shouldUpdate = true
-      }
-    })
-    ;['def', 'movedThisTurn', 'attackedThisTurn', 'affected', 'broken'].forEach((prop) => {
-      if (cell.card[prop] != null) {
-        delete cell.card[prop]
-        shouldUpdate = true
-      }
-    })
-    if (cell.card.effects) {
-      cell.card.effects.forEach((effect) => {
-        if (effect.usedThisTurn) {
-          delete effect.usedThisTurn
-        }
-      })
-      shouldUpdate = true
-    }
-
-    if (cell.card.freeze) {
-      cell.card.freeze -= 1
-      if (cell.card.freeze <= 0) {
-        delete cell.card.freeze
-      }
-      shouldUpdate = true
-    }
-
-    if (shouldUpdate) {
-      batch.update(arenaColRef, { card: cell.card })
-    }
+    playerAttackEnded: turnOrder
   })
 }

@@ -88,7 +88,37 @@ export function TroisiemeOeil({ item, pattern, effect, effectInfos }) {
   const targetsCards = targets.map((target) => target.card)
 
   return {
+    cancel: targets.length === 0,
     ach: ach,
+    targets: targets,
+    log: {
+      trigger: item.card,
+      action: 'effect',
+      effectInfos: effectInfos,
+      targets: targetsCards,
+      result: {
+        custom: true,
+        icon: effectInfos.icon
+      }
+    },
+    executor: item
+  }
+}
+
+
+
+export function AbsoluteTroisiemeOeil({ item, pattern, effect, effectInfos }) {
+  let targets = getAdjacentCells(item, effect.target, pattern)
+  targets.forEach((target) => {
+      target = removeEffects(target)
+      target.card.isRecto = true
+      target.card.effects = [{ type: 'revealed' }]
+  })
+
+  const targetsCards = targets.map((target) => target.card)
+
+  return {
+    cancel: targets.length === 0,
     targets: targets,
     log: {
       trigger: item.card,
