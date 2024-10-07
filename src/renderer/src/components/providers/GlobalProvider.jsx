@@ -182,6 +182,14 @@ export const GlobalProvider = () => {
         player2.hand = handJ2
         setPlayerID(isHost ? 1 : 2)
 
+        // Calcul de la somme des coûts pour chaque joueur
+        const totalCostPlayer1 = player1.hand.reduce((sum, card) => sum + card.cost, 0)
+        const totalCostPlayer2 = player2.hand.reduce((sum, card) => sum + card.cost, 0)
+
+        // Affichage des résultats dans la console
+        console.log(`Total cost for Player 1's hand: ${totalCostPlayer1}`)
+        console.log(`Total cost for Player 2's hand: ${totalCostPlayer2}`)
+
         if (userSettings.customColors) {
           let myColor = isHost ? player1.primaryColor : player2.primaryColor
           let rivalColor = isHost ? player2.primaryColor : player1.primaryColor
@@ -299,7 +307,7 @@ export const GlobalProvider = () => {
     const tradeCard = useTradeCard()
 
     function startWatchingTradePhase() {
-      if (isSpectator || deckType === "constructed") {
+      if (isSpectator || deckType === 'constructed') {
         return
       }
       setPhaseRules([0, 0, 0])

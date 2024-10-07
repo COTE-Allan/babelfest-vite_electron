@@ -1,39 +1,48 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../providers/GlobalProvider'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../../Firebase'
 import IconButton from '../../items/iconButton'
 import { VscDebugRestart } from 'react-icons/vsc'
-import { drawHandWithRarityConstraint } from '../../effects/editCards'
+import { generateDeck } from '../../effects/editCards'
 
 export default function RedrawButton() {
-  const { room, playerID, gameData, deck, setSelectedCards, setPlayerSelf, playerSelf } =
+  const { room, playerID, gameData, setSelectedCards, setPlayerSelf, playerSelf, winner } =
     useContext(GlobalContext)
   const [redrawUsed, setRedrawUsed] = useState(false)
 
+  useEffect(() => {
+    if (winner !== null) {
+      setRedrawUsed(false)
+    }
+  }, [winner])
+
   const executeRedraw = async () => {
     try {
-      const clonedDeck = [...deck]
-      const newHand = await drawHandWithRarityConstraint(clonedDeck, gameData.settings.cards)
+      // Generate a new deck via drawDeck
+      const newDeck = generateDeck(gameData.settings.cards)
+
       setSelectedCards([])
 
       console.log('Avant redraw, main du joueur:', playerSelf.hand)
-      console.log('Nouvelle main après redraw:', newHand)
+      console.log('Nouveau deck après redraw:', newDeck)
 
       const handKey = playerID === 1 ? 'handJ1' : 'handJ2'
 
       await updateDoc(doc(db, 'games', room), {
-        [handKey]: newHand,
-        deck: clonedDeck
+        [handKey]: newDeck
+        // No need to update the deck in the database
       })
 
-      // Mettre à jour l'état local
+      // Update the local state
       setPlayerSelf((prevState) => ({
         ...prevState,
-        hand: newHand
+        hand: newDeck
+        // If you maintain deck in state, update it here
+        // deck: newDeck
       }))
 
-      console.log("Après mise à jour, nouvelle main dans l'état local:", newHand)
+      console.log("Après mise à jour, nouvelle main dans l'état local:", newDeck)
 
       setRedrawUsed(true)
     } catch (error) {

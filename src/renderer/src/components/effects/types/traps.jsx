@@ -76,19 +76,21 @@ export function Pietinement({ item, pattern, effect, effectInfos }) {
 export function TroisiemeOeil({ item, pattern, effect, effectInfos }) {
   let targets = getAdjacentCells(item, effect.target, pattern)
   let ach = false
+  let cancel = true
   targets.forEach((target) => {
     if (!target.card.isRecto) {
       target = removeEffects(target)
       target.card.isRecto = true
       target.card.effects = [{ type: 'revealed' }]
       ach = 'HF_thirdEye'
+      cancel = false
     }
   })
 
   const targetsCards = targets.map((target) => target.card)
 
   return {
-    cancel: targets.length === 0,
+    cancel: cancel,
     ach: ach,
     targets: targets,
     log: {
@@ -105,17 +107,16 @@ export function TroisiemeOeil({ item, pattern, effect, effectInfos }) {
   }
 }
 
-
-
 export function AbsoluteTroisiemeOeil({ item, pattern, effect, effectInfos }) {
   let targets = getAdjacentCells(item, effect.target, pattern)
   targets.forEach((target) => {
-      target = removeEffects(target)
-      target.card.isRecto = true
-      target.card.effects = [{ type: 'revealed' }]
+    target = removeEffects(target)
+    target.card.isRecto = true
+    target.card.effects = [{ type: 'revealed' }]
   })
 
   const targetsCards = targets.map((target) => target.card)
+  targets.push(item)
 
   return {
     cancel: targets.length === 0,

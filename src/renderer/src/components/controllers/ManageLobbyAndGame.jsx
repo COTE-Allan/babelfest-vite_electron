@@ -12,12 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
 import { useContext } from 'react'
 import { getAllCards } from '../others/toolBox'
-import {
-  drawHandWithAdjustedRarity,
-  drawHandWithRarityConstraint,
-  drawRandomCards,
-  getCardsFromArray
-} from '../effects/editCards'
+import { drawRandomCards, generateDeck, getCardsFromArray } from '../effects/editCards'
 import { HeadOrTails } from '../effects/basics'
 
 // Créer un lobby et le rejoindre
@@ -162,7 +157,7 @@ export function useCreateGame() {
     gameMode = 'custom',
     deckJ1,
     deckJ2,
-    deckType = "random"
+    deckType = 'random'
   ) {
     let gameDocRef
     // Création ou mise à jour du document de jeu avec les objets utilisateur complets
@@ -202,7 +197,7 @@ export function useCreateGame() {
       await updateDoc(roomRef, {
         created: Date.now(),
         finished: false,
-        phase: 0,
+        phase: deckType === 'constructed' ? 1 : 0,
         activePlayer: 0,
         standby: false,
         revenge: null,
@@ -312,8 +307,8 @@ async function DrawCardsWithRarityMax(room, cardAmount, deckJ1, deckJ2) {
     hand1 = await getCardsFromArray(deckJ1.cards)
     hand2 = await getCardsFromArray(deckJ2.cards)
   } else {
-    hand1 = await drawHandWithRarityConstraint(deck, cardAmount)
-    hand2 = await drawHandWithRarityConstraint(deck, cardAmount)
+    hand1 = generateDeck(cardAmount)
+    hand2 = generateDeck(cardAmount)
   }
 
   // Update the game document in the database

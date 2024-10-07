@@ -140,6 +140,8 @@ export const useTryEffect = () => {
       })
     })
 
+    const batch = writeBatch(db)
+
     for await (let item of authorizedCards) {
       // Parcourir les effets originaux de la carte
       for (let index = 0; index < item.card.effects.length; index++) {
@@ -154,7 +156,9 @@ export const useTryEffect = () => {
           if ((effect.alreadyUsed ?? true) === false) {
             effect.alreadyUsed = true
           }
+          console.log(effect)
           if ((effect.spawnUsed ?? true) === false) {
+            console.log('test')
             effect.spawnUsed = true
           }
 
@@ -189,11 +193,11 @@ export const useTryEffect = () => {
                         effectInfos
                       })
                       await finishStandby(room)
-                      await concludeEffect(executedEffect)
+                      await concludeEffect(batch, executedEffect)
                     }
                   )
                 } else {
-                  await concludeEffect({
+                  await concludeEffect(batch, {
                     targets: [item],
                     executor: item
                   })
@@ -219,18 +223,20 @@ export const useTryEffect = () => {
               player: item.owner === playerID ? playerSelf : playerRival,
               rival: item.owner !== playerID ? playerRival : playerSelf
             })
-            await concludeEffect(executedEffect)
+            await concludeEffect(batch, executedEffect)
             stillDead = executedEffect?.stillDead ?? true
           }
         }
       }
     }
+    // Push en BDD
+    await batch.commit()
 
     if (phaseWhen) {
       if (firstToPlay === playerID) {
-        goingStandby(room, playerID)
+        await goingStandby(room, playerID)
       } else {
-        finishStandby(room)
+        await finishStandby(room)
       }
       setPhaseEffects(false)
     }
@@ -258,7 +264,8 @@ export const useTryEffect = () => {
   )
 
   const concludeEffect = useCallback(
-    async (result) => {
+    async (batch, result) => {
+      console.log(result)
       if (!result || result.cancel) return
       console.log("conclusion de l'effet.", result, result.targets)
 
@@ -267,8 +274,6 @@ export const useTryEffect = () => {
         console.log("Aucun cible trouvée. Annulation de l'effet.")
         return
       }
-
-      const batch = writeBatch(db)
 
       if (result.ach) {
         await giveAchievement(result.ach)
@@ -311,8 +316,6 @@ export const useTryEffect = () => {
         })
       }
 
-      // Push en BDD
-      await batch.commit()
       console.log(result.executor.card.name + ' : effet terminé.')
 
       const unsubscribe = onSnapshot(collection(db, `games/${room}/arena`), (snapshot) => {

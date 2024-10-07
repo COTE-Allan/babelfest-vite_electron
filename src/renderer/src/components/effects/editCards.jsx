@@ -2,7 +2,7 @@ import { doc, updateDoc, writeBatch } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import { useContext } from 'react'
 import { GlobalContext } from '../providers/GlobalProvider'
-import { generateUniqueID } from '../others/toolBox'
+import { generateUniqueID, getAllCards } from '../others/toolBox'
 import { getDeck } from '../controllers/ManageLobbyAndGame'
 import { getCardBasedOnNameAndTitle } from './basics'
 import randomEffects from '../../jsons/randomEffects.json'
@@ -202,6 +202,61 @@ export async function drawSingleCardAndUpdateDeck(room) {
     deck
   })
   return drawnCard
+}
+
+export function generateDeck(cardAmount = 8) {
+  const allCards = getAllCards(false)
+  const maxCost = 50
+  const minCost = 40
+  let deck = []
+  let rarityCounts = { 1: 0, 2: 0, 3: 0, 4: 0 }
+  let deckCost = 0
+
+  // Fonction auxiliaire pour vérifier les contraintes de rareté
+  const canAddCard = (card) => {
+    const { rarity } = card
+    if (rarity === 4 && rarityCounts[4] >= 1) return false
+    if (rarity === 3 && rarityCounts[3] >= 2 && rarityCounts[4] < 1) return false
+    if (rarity === 2 && rarityCounts[2] >= 3) return false
+    return true
+  }
+
+  // Fonction auxiliaire pour vérifier le coût total
+  const isCostValid = (cost) => {
+    if (cardAmount === 8) {
+      return cost >= minCost && cost <= maxCost
+    }
+    const exponentFactor = Math.pow(cardAmount / 8, 1.5)
+    return cost >= minCost * exponentFactor && cost <= maxCost * exponentFactor
+  }
+
+  while (deck.length < cardAmount) {
+    // Filtrer les cartes qui peuvent être ajoutées
+    const validCards = allCards.filter((card) => canAddCard(card) && !deck.includes(card))
+
+    // Si aucune carte valide n'est trouvée, on recommence
+    if (validCards.length === 0) {
+      deck = []
+      rarityCounts = { 1: 0, 2: 0, 3: 0, 4: 0 }
+      deckCost = 0
+      continue
+    }
+
+    // Ajouter une carte aléatoire parmi les cartes valides
+    const card = validCards[Math.floor(Math.random() * validCards.length)]
+    deck.push(card)
+    rarityCounts[card.rarity]++
+    deckCost += card.cost // Utiliser le paramètre cost de la carte
+
+    // Si le deck est complet et que le coût ne correspond pas aux exigences, recommencer
+    if (deck.length === cardAmount && !isCostValid(deckCost)) {
+      deck = []
+      rarityCounts = { 1: 0, 2: 0, 3: 0, 4: 0 }
+      deckCost = 0
+    }
+  }
+
+  return deck
 }
 
 // Echanger deux cartes depuis la boutique ou avec un autre joueur

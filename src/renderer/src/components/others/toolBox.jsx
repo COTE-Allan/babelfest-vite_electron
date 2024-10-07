@@ -73,7 +73,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../AuthContext'
 
 // obtenir toute les cartes du jeu
-export function getAllCards() {
+export function getAllCards(getSpecials = true) {
   let cards = []
   let idCounter = 1 // Start the counter at 1
 
@@ -94,6 +94,8 @@ export function getAllCards() {
     ...promoCards.map(addUniqueId),
     ...twentyfourCards.map(addUniqueId)
   )
+
+  if (!getSpecials) cards = cards.filter((card) => card.rarity !== 5)
 
   return cards
 }

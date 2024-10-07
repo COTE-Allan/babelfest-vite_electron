@@ -73,6 +73,7 @@ export default function Cell({ active, confirmModal, cell }) {
     }
   }
   const selectCell = () => {
+    console.log(cell)
     if (isSpectator) return
     if (card) {
       select()
