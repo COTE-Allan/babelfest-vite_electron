@@ -105,6 +105,13 @@
     "author": "Cielesis"
   },
   {
+    "url": "./skins/borders/cadre_sees.png",
+    "name": "Le SEES",
+    "unlockTip": "Obtenu en atteignant le niveau 42.",
+    "level": 42,
+    "author": "Enjin"
+  },
+  {
     "url": "./skins/borders/cadre_sang.png",
     "name": "Blessures",
     "unlockTip": "Obtenu en atteignant le niveau 45.",

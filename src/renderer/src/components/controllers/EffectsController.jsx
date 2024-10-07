@@ -140,7 +140,7 @@ export const useTryEffect = () => {
       })
     })
 
-    const batch = writeBatch(db)
+    let batch = writeBatch(db)
 
     for await (let item of authorizedCards) {
       // Parcourir les effets originaux de la carte
@@ -181,21 +181,22 @@ export const useTryEffect = () => {
                 )
                 if (possibleTargets.length !== 0) {
                   await goingStandby(room, playerID === 1 ? 2 : 1, false)
-                  await demandToChoiceTarget(possibleTargets, effect, item).then(
-                    async (selection) => {
-                      setAskForTarget(false)
-                      const executedEffect = effectList[effect.type]({
-                        index,
-                        item,
-                        effect,
-                        targets: selection,
-                        pattern,
-                        effectInfos
-                      })
-                      await finishStandby(room)
-                      await concludeEffect(batch, executedEffect)
-                    }
-                  )
+                  const selection = await demandToChoiceTarget(possibleTargets, effect, item)
+                  setAskForTarget(false)
+                  const executedEffect = await effectList[effect.type]({
+                    index,
+                    item,
+                    effect,
+                    targets: selection,
+                    pattern,
+                    effectInfos
+                  })
+                  await finishStandby(room)
+                  await concludeEffect(batch, executedEffect)
+          
+                  // Commit the batch immediately for effects requiring target choice
+                  await batch.commit()
+                  batch = writeBatch(db) // Re-initialize the batch for subsequent operations
                 } else {
                   await concludeEffect(batch, {
                     targets: [item],
@@ -338,3 +339,4 @@ export const useTryEffect = () => {
 
   return tryEffect
 }
+ 
