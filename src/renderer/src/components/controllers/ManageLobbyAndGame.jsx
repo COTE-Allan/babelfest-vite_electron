@@ -178,7 +178,7 @@ export function useCreateGame() {
       gameDocRef = await addDoc(collection(db, 'games'), {
         created: Date.now(),
         finished: false,
-        phase: deckType === 'constructed' ? 1 : 0,
+        phase: 1,
         activePlayer: 0,
         player1: j1,
         player2: j2,
@@ -197,7 +197,7 @@ export function useCreateGame() {
       await updateDoc(roomRef, {
         created: Date.now(),
         finished: false,
-        phase: deckType === 'constructed' ? 1 : 0,
+        phase: 1,
         activePlayer: 0,
         standby: false,
         revenge: null,

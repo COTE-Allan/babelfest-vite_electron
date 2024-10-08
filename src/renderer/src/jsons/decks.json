@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Polyvalence",
+    "creator": "Cielesis",
+    "content": [
+      { "name": "Tuto", "title": "Soutien psychologique" },
+      { "name": "Nodoka", "title": "Fille de démon" },
+      { "name": "Seven Cat", "title": "Reposé" },
+      { "name": "Xyphias Tonitruo", "title": "Impossible à surprendre" },
+      { "name": "Mun-eo", "title": "Tueur de krakens" },
+      { "name": "Joël", "title": "Impénétrable" },
+      { "name": "Soleil", "title": "Guerrier gravitationnel" },
+      { "name": "Boadicée", "title": "Cheffe de guerre" }
+    ]
+  },
+  {
+    "name": "Chaos de Krone",
+    "creator": "Cielesis",
+    "content": [
+      { "name": "Tulip", "title": "Enfant sauvage" },
+      { "name": "Le conseil des Primats", "title": "Béni par l'intrus" },
+      { "name": "Lorenzoni Tiflaurs", "title": "Sous les projecteurs" },
+      { "name": "Tulip", "title": "Volonté de Krone" },
+      { "name": "Chegel", "title": "L'omniscient" },
+      { "name": "Le cirque de Barjo", "title": "Prêt au spectacle" },
+      { "name": "Ragnarock", "title": "Voleuse de pouvoirs" },
+      { "name": "Krone", "title": "Intruse cosmique" }
+    ]
+  }
+]

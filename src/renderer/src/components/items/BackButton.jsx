@@ -22,13 +22,13 @@ const BackButton = ({ clickEvent = false, onlyHome = false }) => {
     <div className="back-button-container">
       {!onlyHome && (
         <HudNavLink className="back-button" onClick={handleGoBack}>
-          <FaArrowLeft size={45} />
+          <FaArrowLeft size={35} />
           <span className="hidden-span">Retour</span>
         </HudNavLink>
       )}
       {(depth >= 2 || onlyHome) && (
         <HudNavLink className="back-button back-button-home" onClick={() => handleGoBack(true)}>
-          <FaHome size={45} />
+          <FaHome size={35} />
           <span className="hidden-span">Menu principal</span>
         </HudNavLink>
       )}

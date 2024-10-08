@@ -35,7 +35,7 @@ export default function ShopCard({ card }) {
 
   function selectShopCard() {
     if (max === 0 || isSpectator) return
-    if (myTurn || phase === 0) {
+    if (myTurn) {
       select()
       const cardId = card.id
       const isSelected = selectedShopCards.some((e) => e.id === cardId)

@@ -24,6 +24,31 @@ export function getCardBasedOnNameAndTitle(infos) {
   return result
 }
 
+export function getCardsBasedOnMultipleInfos(infosArray) {
+  let cards = []
+  let allCards = getAllCards()
+  infosArray.forEach((info) => {
+    let cardTarget = allCards.find((card) => card.name === info.name && card.title === info.title)
+    let result = {
+      cost: cardTarget.cost,
+      image: cardTarget.url,
+      name: cardTarget.name,
+      title: cardTarget.title,
+      rarity: cardTarget.rarity
+    }
+    cards.push(result)
+  })
+  return cards
+}
+
+export function getTotalCost(deck) {
+  let cost = 0
+  deck.forEach((card) => {
+    cost = cost + card.cost
+  })
+  return cost
+}
+
 export function getEffectInfo(effectName) {
   return effectsInfos.find((effect) => effect.slug === effectName)
 }

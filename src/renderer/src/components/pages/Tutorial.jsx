@@ -23,6 +23,7 @@ import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import deathSfx from '../../assets/sfx/ingame_death.mp3'
 import MusicPlayer from '../interface/musicPlayer'
+import Details from '../interface/inGame/Details'
 
 export const Tutorial = () => {
   const { userSettings, giveAchievement } = useContext(AuthContext)
@@ -30,7 +31,7 @@ export const Tutorial = () => {
   const [rival, setRival] = useState(null)
   const [shop, setShop] = useState(null)
   const [costLeft, setCostLeft] = useState(4)
-  const [phase, setPhase] = useState(0)
+  const [phase, setPhase] = useState(1)
   const [pattern, setPattern] = useState(null)
   const [turn, setTurn] = useState(0)
   const [order, setOrder] = useState(1)
@@ -38,6 +39,7 @@ export const Tutorial = () => {
   const [win, setWin] = useState(false)
   const [tutorialStep, setTutorialStep] = useState(null)
   const [step, setStep] = useState(0)
+  const [detailCard, setDetailCard] = useState(null)
   const navigate = useNavigate()
 
   const [playSummon] = useSound(summonSfx, { volume: userSettings.sfxVolume })
@@ -48,7 +50,6 @@ export const Tutorial = () => {
   const [playEnd] = useSound(endSfx, { volume: userSettings.sfxVolume })
 
   const phaseLabel = {
-    0: "Échange avec l'autre joueur",
     1: 'Phase de préparation',
     2: 'Phase de déplacement',
     3: "Phase d'attaque",
@@ -60,7 +61,7 @@ export const Tutorial = () => {
     // Création des users
     setUser({
       hex: '#40a8f5',
-      hand: getCardsByIds([15, 25, 63, 48])
+      hand: getCardsByIds([15, 36, 25, 48])
     })
     setRival({
       hex: '#e62e31'
@@ -237,286 +238,328 @@ export const Tutorial = () => {
 
   if (!user || !rival || !pattern || !tutorialStep || !shop) return
   return (
-    <div className="tutorial fade-in">
-      {win && <div className="tutorial-win fade-in"></div>}
+    <>
+      {/* Details */}
+      {detailCard && <Details detailCard={detailCard} noRightClick />}
+      <div className="tutorial fade-in">
+        {win && <div className="tutorial-win fade-in"></div>}
 
-      <div
-        className={`tutorial-modal ${tutorialStep.position} ${tutorialStep.clickOn.element === 'dialog' && 'clickable'}`}
-        onClick={() => {
-          handleClick('dialog')
-        }}
-        onMouseEnter={playHover}
-      >
-        <div className="tutorial-modal-avatar">
-          <img src={tutorialStep.url} alt="avatar du tuto, pendant le tuto" />
-        </div>
-        <div className="tutorial-modal-content">
-          <span className="speaker">Tuto</span>
-          <p className="text">{tutorialStep.text}</p>
-        </div>
-        {(tutorialStep.clickOn.element === 'dialog' || tutorialStep.clickOn.element === 'end') && (
-          <MdNavigateNext className="next" size={150} />
-        )}
-      </div>
-      {tutorialStep.modal && <Modal className="fade-in"></Modal>}
-      <div className="gameContainer">
-        {/* Musique */}
-        <div className={`musicPlayer-container`}>
-          <MusicPlayer role="tutorial" />
-        </div>
-        {/* Tracker */}
         <div
-          className="turnTracker"
-          style={{ zIndex: tutorialStep.highlightedElements?.includes('tracker') ? 10 : 2 }}
+          className={`tutorial-modal ${tutorialStep.position} ${tutorialStep.clickOn.element === 'dialog' && 'clickable'}`}
+          onClick={() => {
+            handleClick('dialog')
+          }}
+          onMouseEnter={playHover}
         >
-          <div className="turnTracker-content">
-            <span className="turnTracker-activePlayer">
-              {turn === 2 || phase === 0 ? 'À vous de jouer.' : 'Votre adversaire joue.'}
-            </span>
-
-            <span className="turnTracker-order">
-              {order === 2 ? 'Vous jouez en premier.' : 'Vous jouez en second.'}
-            </span>
+          <div className="tutorial-modal-avatar">
+            <img src={tutorialStep.url} alt="avatar du tuto, pendant le tuto" />
           </div>
+          <div className="tutorial-modal-content">
+            <span className="speaker">Tuto</span>
+            <p className="text">{tutorialStep.text}</p>
+            {(tutorialStep.clickOn.element === 'dialog' ||
+              tutorialStep.clickOn.element === 'end') && (
+              <span className="next">Cliquez pour continuer...</span>
+            )}
+          </div>
+          {/* {(tutorialStep.clickOn.element === 'dialog' ||
+            tutorialStep.clickOn.element === 'end') && (
+            <MdNavigateNext className="next" size={150} />
+          )} */}
+        </div>
+        {tutorialStep.modal && <Modal className="fade-in"></Modal>}
+
+        <div className="gameContainer">
+          {/* Musique */}
+          <div className={`musicPlayer-container`}>
+            <MusicPlayer role="tutorial" />
+          </div>
+          {/* Tracker */}
           <div
-            style={{
-              background: phase === 0 ? `transparent` : turn === 2 ? user.hex : rival.hex
-            }}
-            className="turnTracker-phases"
+            className="turnTracker"
+            style={{ zIndex: tutorialStep.highlightedElements?.includes('tracker') ? 10 : 2 }}
           >
-            <span className="turnTracker-turns">TOUR {order} - </span>
-            <span className="turnTracker-phases-label">{phaseLabel[phase]}</span>
-          </div>
-        </div>
-        {/* Main */}
-        <Hand style={{ zIndex: tutorialStep.highlightedElements?.includes('hand') ? 10 : 1 }}>
-          {user.hand.map((card, index) => (
-            <div
-              key={index}
-              className={`card ${tutorialStep.highlightedElements?.includes('hand-' + card.id) && 'important'} ${tutorialStep.selected?.includes('hand-' + card.id) && 'card-selected'}`}
-              onClick={() => {
-                handleClick('card', card.id)
-              }}
-              onMouseEnter={playHover}
-            >
-              <div className="img-container">
-                {tutorialStep.selected?.includes('hand-' + card.id) && (
-                  <div className="card-filter"></div>
-                )}
-                <div className={`card-cost`}>
-                  <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
-                </div>
-                <img className="card-visual" src={card.url} alt={`card-${index}`} />
-              </div>
+            <div className="turnTracker-content">
+              <span className="turnTracker-activePlayer">
+                {turn === 2 ? 'À vous de jouer.' : 'Votre adversaire joue.'}
+              </span>
+
+              <span className="turnTracker-order">
+                {order === 2 ? 'Vous jouez en premier.' : 'Vous jouez en second.'}
+              </span>
             </div>
-          ))}
-        </Hand>
-        {/* Arène */}
-        <div
-          className="arena-wrapper"
-          style={{ zIndex: tutorialStep.highlightedElements?.includes('arena') ? 10 : 0 }}
-        >
-          <TransformWrapper
-            minScale={0.5}
-            maxScale={2.5}
-            initialScale={0.6}
-            centerOnInit={true}
-            doubleClick={{ disabled: true }}
-            velocityAnimation={{ disabled: false, sensitivity: 100 }}
+            <div
+              style={{
+                background: turn === 2 ? user.hex : rival.hex
+              }}
+              className="turnTracker-phases"
+            >
+              <span className="turnTracker-turns">TOUR {order} - </span>
+              <span className="turnTracker-phases-label">{phaseLabel[phase]}</span>
+            </div>
+          </div>
+          {/* Main */}
+          <Hand style={{ zIndex: tutorialStep.highlightedElements?.includes('hand') ? 10 : 1 }}>
+            {user.hand.map((card, index) => (
+              <div
+                key={index}
+                className={`card ${tutorialStep.highlightedElements?.includes('hand-' + card.id) && 'important'} ${tutorialStep.selected?.includes('hand-' + card.id) && 'card-selected'}`}
+                onClick={() => {
+                  handleClick('card', card.id)
+                }}
+                onMouseLeave={() => setDetailCard(null)}
+                onMouseEnter={() => {
+                  playHover()
+                  setDetailCard(card)
+                }}
+              >
+                <div className="img-container">
+                  {tutorialStep.selected?.includes('hand-' + card.id) && (
+                    <div className="card-filter"></div>
+                  )}
+                  <div className={`card-cost`}>
+                    <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
+                  </div>
+                  <img className="card-visual" src={card.url} alt={`card-${index}`} />
+                </div>
+              </div>
+            ))}
+          </Hand>
+          {/* Visuel */}
+          {tutorialStep.image && (
+            <img
+              className="schema-visual fade-in"
+              src={tutorialStep.image}
+              alt="Visuel de schema explicatif des cartes"
+            />
+          )}
+          {/* Arène */}
+          <div
+            className="arena-wrapper"
+            style={{ zIndex: tutorialStep.highlightedElements?.includes('arena') ? 10 : 0 }}
           >
-            <TransformComponent>
-              <div className="arena">
-                {pattern.map((cell, index) => {
-                  if (!cell.exist) {
+            <TransformWrapper
+              minScale={0.5}
+              maxScale={2.5}
+              initialScale={0.6}
+              centerOnInit={true}
+              doubleClick={{ disabled: true }}
+              velocityAnimation={{ disabled: false, sensitivity: 100 }}
+            >
+              <TransformComponent>
+                <div className={`arena-coords`}>
+                  <div className="arena-coords-col">
+                    <span>A</span>
+                    <span>B</span>
+                    <span>C</span>
+                    <span>D</span>
+                  </div>
+                  <div className="arena-coords-row">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                  </div>
+                </div>
+                <div className="arena">
+                  {pattern.map((cell, index) => {
+                    if (!cell.exist) {
+                      return (
+                        <div
+                          key={index}
+                          className="cell cell-inexistant"
+                          id={cell.id}
+                          data-team={cell.side}
+                        />
+                      )
+                    }
+
                     return (
                       <div
                         key={index}
-                        className="cell cell-inexistant"
+                        className={`cell ${tutorialStep.highlightedElements?.includes('cell-' + cell.id) && 'important'} ${tutorialStep.selected?.includes('cell-' + cell.id) && 'selected'} ${tutorialStep.tired?.includes('cell-' + cell.id) && 'tired'}`}
                         id={cell.id}
                         data-team={cell.side}
-                      />
-                    )
-                  }
-
-                  return (
-                    <div
-                      key={index}
-                      className={`cell ${tutorialStep.highlightedElements?.includes('cell-' + cell.id) && 'important'} ${tutorialStep.selected?.includes('cell-' + cell.id) && 'selected'} ${tutorialStep.tired?.includes('cell-' + cell.id) && 'tired'}`}
-                      id={cell.id}
-                      data-team={cell.side}
-                      style={{
-                        backgroundColor:
-                          cell.side && cell.base
-                            ? cell.side === 2
+                        style={{
+                          backgroundColor:
+                            cell.side && cell.base
+                              ? cell.side === 2
+                                ? user.hex
+                                : rival.hex
+                              : '#000',
+                          '--rotation': `0deg`,
+                          borderColor: cell.owner
+                            ? cell.owner === 1
                               ? user.hex
                               : rival.hex
-                            : '#000',
-                        '--rotation': `0deg`,
-                        borderColor: cell.owner ? (cell.owner === 1 ? user.hex : rival.hex) : '#fff'
-                      }}
-                      onClick={() => {
-                        handleClick('cell', cell.id)
-                      }}
-                      onMouseEnter={() => {
-                        if (cell.card) playHover()
-                      }}
-                    >
-                      {tutorialStep.confirm?.includes('cell-' + cell.id) && (
-                        <div className="cell-confirmModal">
-                          <GiConfirmed size={90} />
-                        </div>
-                      )}
-                      {tutorialStep.green?.includes('cell-' + cell.id) && (
-                        <div className="cell-placementTrigger" />
-                      )}
-                      {cell.card && cell.card.recto !== false && (
-                        <div className="cell-card">
-                          <div className="cell-card-stats">
-                            {[cell.card.atk, cell.card.dep, cell.card.hp].map((stat, key) => {
-                              let className = 'cell-card-stats-item'
-                              if (key === 0 && stat > cell.card.baseatk) {
-                                className += ' buff'
-                              }
-
-                              return (
-                                <div key={key} className={className}>
-                                  {stat}
-                                </div>
-                              )
-                            })}
+                            : '#fff'
+                        }}
+                        onClick={() => {
+                          handleClick('cell', cell.id)
+                        }}
+                        onMouseLeave={() => setDetailCard(null)}
+                        onMouseEnter={() => {
+                          if (cell.card) {
+                            playHover()
+                            setDetailCard(cell.card.recto !== false ? cell.card : 'hidden')
+                          }
+                        }}
+                      >
+                        {tutorialStep.confirm?.includes('cell-' + cell.id) && (
+                          <div className="cell-confirmModal">
+                            <GiConfirmed size={90} />
                           </div>
+                        )}
+                        {tutorialStep.green?.includes('cell-' + cell.id) && (
+                          <div className="cell-placementTrigger" />
+                        )}
+                        {cell.card && cell.card.recto !== false && (
+                          <div className="cell-card">
+                            <div className="cell-card-stats">
+                              {[cell.card.atk, cell.card.dep, cell.card.hp].map((stat, key) => {
+                                let className = 'cell-card-stats-item'
+                                if (key === 0 && stat > cell.card.baseatk) {
+                                  className += ' buff'
+                                }
 
-                          <img
-                            className="cell-card-visual"
-                            src={cell.card.url}
-                            alt={`card-${cell.id}`}
-                          />
-                        </div>
-                      )}
-                      {cell.card && cell.card.recto === false && (
-                        <BsQuestionLg size={90} className="hidden-icon" />
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-              <div className="arena-borders">
-                <div className={`arena-borders-container`}>
-                  <div
-                    className="arena-borders-item"
-                    style={{
-                      backgroundColor: turn === 1 || turn === 0 ? rival.hex : '#939393'
-                    }}
-                  ></div>
-                  <div
-                    className="arena-borders-item"
-                    style={{
-                      backgroundColor: turn === 2 || turn === 0 ? user.hex : '#939393'
-                    }}
-                  ></div>
+                                return (
+                                  <div key={key} className={className}>
+                                    {stat}
+                                  </div>
+                                )
+                              })}
+                            </div>
+
+                            <img
+                              className="cell-card-visual"
+                              src={cell.card.url}
+                              alt={`card-${cell.id}`}
+                            />
+                          </div>
+                        )}
+                        {cell.card && cell.card.recto === false && (
+                          <BsQuestionLg size={90} className="hidden-icon" />
+                        )}
+                      </div>
+                    )
+                  })}
                 </div>
-              </div>
-            </TransformComponent>
-          </TransformWrapper>
-        </div>
-        {/* Menu haut */}
-        <div className="ig-menu top" style={{ zIndex: 11 }}>
-          <IconButton
-            onClick={() => {
-              navigate('/home')
-            }}
-          >
-            <TiArrowBack size={45} />
-            <span>Quitter</span>
-          </IconButton>
-        </div>
-        {/* Menu bas */}
-        <div
-          className="ig-menu bottom"
-          style={{ zIndex: tutorialStep.highlightedElements?.includes('bottom-menu') ? 10 : 0 }}
-        >
-          {(phase === 1 || phase === 2) && (
-            <div className="costCounter">
-              <div className="costCounter-infos">
-                <IoIosFlash />
-                <span>{costLeft}</span>
-              </div>
-              énergies
-            </div>
-          )}
-          {phase === 4 && (
-            <div
-              className="costCounter"
-              style={{
-                color: diff >= 0 ? '#4ead35' : '#bb2424'
-              }}
-            >
-              <div className="costCounter-infos">
-                <GiPriceTag />
-                <span>{diff}</span>
-              </div>
-              Différentiel
-            </div>
-          )}
-          {phase !== null && (
-            <IconButton
-              className={`${tutorialStep.clickOn.element !== 'validate' && 'disabled'}`}
-              onClick={() => {
-                handleClick('validate')
-              }}
-            >
-              {phase === 0 && (
-                <>
-                  <span>Échanger [ 1 ] cartes</span>
-                  <GiConfirmed size={45} />
-                </>
-              )}
-              {(phase === 1 || phase === 2 || phase === 3) && (
-                <>
-                  <span>Fin de phase</span>
-                  <PiFlagCheckeredFill size={45} />
-                </>
-              )}
-              {phase === 4 && (
-                <>
-                  <span>Valider l'échange</span>
-                  <GiConfirmed size={45} />
-                </>
-              )}
-            </IconButton>
-          )}
-        </div>
-        {/* Shop */}
-        {phase === 4 && (
-          <div
-            className={`window left`}
-            style={{ zIndex: tutorialStep.highlightedElements?.includes('shop') ? 10 : 1 }}
-          >
-            <div className="shop-list">
-              {shop.map((card) => (
-                <div
-                  key={card.name}
-                  className={`shop-item ${tutorialStep.highlightedElements?.includes('shop-' + card.id) && 'important'} ${tutorialStep.selected?.includes('shop-' + card.id) && 'selected'}`}
-                  onClick={() => handleClick('shop', card.id)}
-                  onMouseEnter={playHover}
-                >
-                  <div className="img-container">
-                    <div className={`card-cost`}>
-                      <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
-                    </div>
-                    <img src={card.url} alt="shop card" />
+                <div className="arena-borders">
+                  <div className={`arena-borders-container`}>
+                    <div
+                      className="arena-borders-item"
+                      style={{
+                        backgroundColor: turn === 1 || turn === 0 ? rival.hex : '#939393'
+                      }}
+                    ></div>
+                    <div
+                      className="arena-borders-item"
+                      style={{
+                        backgroundColor: turn === 2 || turn === 0 ? user.hex : '#939393'
+                      }}
+                    ></div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </TransformComponent>
+            </TransformWrapper>
           </div>
-        )}
+          {/* Menu haut */}
+          <div className="ig-menu top" style={{ zIndex: 11 }}>
+            <IconButton
+              onClick={() => {
+                navigate('/home')
+              }}
+            >
+              <TiArrowBack size={45} />
+              <span>Quitter</span>
+            </IconButton>
+          </div>
+          {/* Menu bas */}
+          <div
+            className="ig-menu bottom"
+            style={{ zIndex: tutorialStep.highlightedElements?.includes('bottom-menu') ? 10 : 0 }}
+          >
+            {(phase === 1 || phase === 2) && (
+              <div className="costCounter">
+                <div className="costCounter-infos">
+                  <IoIosFlash />
+                  <span>{costLeft}</span>
+                </div>
+                énergies
+              </div>
+            )}
+            {phase === 4 && (
+              <div
+                className="costCounter"
+                style={{
+                  color: diff >= 0 ? '#4ead35' : '#bb2424'
+                }}
+              >
+                <div className="costCounter-infos">
+                  <GiPriceTag />
+                  <span>{diff}</span>
+                </div>
+                Différentiel
+              </div>
+            )}
+            {phase !== null && (
+              <IconButton
+                className={`${tutorialStep.clickOn.element !== 'validate' ? 'disabled' : 'alert'}`}
+                onClick={() => {
+                  handleClick('validate')
+                }}
+              >
+                {(phase === 1 || phase === 2 || phase === 3) && (
+                  <>
+                    <span>Fin de phase</span>
+                    <PiFlagCheckeredFill size={45} />
+                  </>
+                )}
+                {phase === 4 && (
+                  <>
+                    <span>Valider l'échange</span>
+                    <GiConfirmed size={45} />
+                  </>
+                )}
+              </IconButton>
+            )}
+          </div>
+          {/* Shop */}
+          {phase === 4 && (
+            <div
+              className={`window left`}
+              style={{ zIndex: tutorialStep.highlightedElements?.includes('shop') ? 10 : 1 }}
+            >
+              <div className="shop-list">
+                {shop.map((card) => (
+                  <div
+                    key={card.name}
+                    className={`shop-item ${tutorialStep.highlightedElements?.includes('shop-' + card.id) && 'important'} ${tutorialStep.selected?.includes('shop-' + card.id) && 'selected'}`}
+                    onClick={() => handleClick('shop', card.id)}
+                    onMouseEnter={playHover}
+                  >
+                    <div className="img-container">
+                      <div className={`card-cost`}>
+                        <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
+                      </div>
+                      <img src={card.url} alt="shop card" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Filtre */}
+        <div
+          className="gameContainer-filter"
+          style={{ background: `${turn === 2 || turn === 0 ? user.hex : rival.hex}` }}
+        ></div>
       </div>
-      {/* Filtre */}
-      <div
-        className="gameContainer-filter"
-        style={{ background: `${turn === 2 || turn === 0 ? user.hex : rival.hex}` }}
-      ></div>
-    </div>
+    </>
   )
 }

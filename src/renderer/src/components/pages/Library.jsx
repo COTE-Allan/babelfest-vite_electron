@@ -9,7 +9,7 @@ import { getAllEffects, getCardBasedOnNameAndTitle, getEffectInfo } from '../eff
 import { useLocation } from 'react-router'
 import HudNavLink from '../items/hudNavLink'
 import { ImCross } from 'react-icons/im'
-import { FaArrowLeft, FaArrowRight, FaPen, FaSave, FaTrash } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaCopy, FaPen, FaSave, FaTrash } from 'react-icons/fa'
 import { getAllCards, useSendMessage } from '../others/toolBox'
 import BackButton from '../items/BackButton'
 import LoadingLogo from '../items/LoadingLogo'
@@ -365,7 +365,7 @@ export default function Library({ editorMode, deck }) {
   }
 
   // Function to handle deck saving or modification
-  const handleSaveDeck = () => {
+  const handleSaveDeck = (isCopy = false) => {
     if (!deckName) {
       sendMessage(`Veuillez entrer un nom pour le deck.`, 'warn')
       return
@@ -384,7 +384,7 @@ export default function Library({ editorMode, deck }) {
     // Trier les cartes par rareté avant de sauvegarder
     const sortedDeckCards = [...deckCards].sort((a, b) => a.rarity - b.rarity)
 
-    if (deck) {
+    if (deck && !deck.content && !isCopy) {
       // Modifier le deck existant
       modifyDeck(deck.id, {
         name: deckName,
@@ -543,6 +543,9 @@ export default function Library({ editorMode, deck }) {
                           }`} // Ajout de la classe "selected" si la carte est déjà dans le deck
                           key={card.id}
                           onClick={() => handleCardClick(card)}
+                          onContextMenu={() => {
+                            setSelected(card)
+                          }}
                           style={{ display: loading ? 'none' : 'block' }}
                         >
                           <div className="img-container">
@@ -614,71 +617,84 @@ export default function Library({ editorMode, deck }) {
             </div>
             <hr className="deck-name-input-hr" />
             <h2>Cartes ({deckCards.length}/8)</h2>
-            {rarityOrder.map(
-              (rarity) =>
-                deckByRarity[rarity] &&
-                deckByRarity[rarity].length > 0 && (
-                  <div key={rarity} className="library-deck-rarity-container">
-                    <h3 className={`txt-rarity-${rarity}`}>
-                      {rarityLabels[rarity]}{' '}
-                      {rarity !== 1 && '(max ' + rarityMaxAmount[rarity] + ')'}
-                    </h3>
-                    <hr className={`bg-rarity-${rarity}`} />
-                    <div className="library-deck-cards">
-                      {deckByRarity[rarity].map((card) => (
-                        <div
-                          key={card.id}
-                          onMouseEnter={hover}
-                          className="library-deck-card"
-                          onClick={() => {
-                            select()
-                            setDeckCards(
-                              deckCards.filter(
-                                (deckCard) =>
-                                  deckCard.name !== card.name && deckCard.title !== card.title
+            <div className="library-deck-container">
+              {rarityOrder.map(
+                (rarity) =>
+                  deckByRarity[rarity] &&
+                  deckByRarity[rarity].length > 0 && (
+                    <div key={rarity} className="library-deck-rarity-container">
+                      <h3 className={`txt-rarity-${rarity}`}>
+                        {rarityLabels[rarity]}{' '}
+                        {rarity !== 1 && '(max ' + rarityMaxAmount[rarity] + ')'}
+                      </h3>
+                      <hr className={`bg-rarity-${rarity}`} />
+                      <div className="library-deck-cards">
+                        {deckByRarity[rarity].map((card) => (
+                          <div
+                            key={card.id}
+                            onMouseEnter={hover}
+                            className="library-deck-card"
+                            onClick={() => {
+                              select()
+                              setDeckCards(
+                                deckCards.filter(
+                                  (deckCard) =>
+                                    deckCard.name !== card.name && deckCard.title !== card.title
+                                )
                               )
-                            )
-                            setDeckCost(deckCost - card.cost)
-                          }}
-                        >
-                          <img src={card.image} alt={`${card.name} - ${card.title}`} />
-                          <div className="library-deck-card-infos">
-                            <div className="library-deck-card-infos-name">
-                              <h3 className={`txt-rarity-${card.rarity}`}>{card.name}</h3>
-                              <h4 className={`txt-rarity-${card.rarity}`}>{card.title}</h4>
-                            </div>
-                            <div className="card-credits">
-                              <GiCreditsCurrency size={20} />
-                              {card.cost}
+                              setDeckCost(deckCost - card.cost)
+                            }}
+                          >
+                            <img src={card.image} alt={`${card.name} - ${card.title}`} />
+                            <div className="library-deck-card-infos">
+                              <div className="library-deck-card-infos-name">
+                                <h3 className={`txt-rarity-${card.rarity}`}>{card.name}</h3>
+                                <h4 className={`txt-rarity-${card.rarity}`}>{card.title}</h4>
+                              </div>
+                              <div className="card-credits">
+                                <GiCreditsCurrency size={20} />
+                                {card.cost}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )
-            )}
+                  )
+              )}
+            </div>
             <div className="library-deck-control">
               <HudNavLink permOpen onClick={handleSaveDeck}>
                 <FaSave size={25} />
                 <span className="hidden-span">Sauvegarder</span>
               </HudNavLink>
-              {deck && (
-                <HudNavLink
-                  permOpen
-                  onClick={() => {
-                    if (deck) {
-                      // deleteDeck(deck.id)
-                      setConfirmDelete(true)
-                      // editorMode(false)
-                    }
-                  }}
-                >
-                  <FaTrash size={25} />
-                  <span className="hidden-span">Supprimer</span>
-                </HudNavLink>
+              {deck && !deck.content && (
+                <>
+                  <HudNavLink
+                    permOpen
+                    onClick={() => {
+                      handleSaveDeck(true)
+                    }}
+                  >
+                    <FaCopy size={25} />
+                    <span className="hidden-span">Dupliquer</span>
+                  </HudNavLink>
+                  <HudNavLink
+                    permOpen
+                    onClick={() => {
+                      if (deck) {
+                        // deleteDeck(deck.id)
+                        setConfirmDelete(true)
+                        // editorMode(false)
+                      }
+                    }}
+                  >
+                    <FaTrash size={25} />
+                    <span className="hidden-span">Supprimer</span>
+                  </HudNavLink>{' '}
+                </>
               )}
-              <HudNavLink permOpen onClick={() => editorMode(false)}>
+              <HudNavLink className="back" permOpen onClick={() => editorMode(false)}>
                 <FaArrowLeft size={25} />
                 <span className="hidden-span">Retour</span>
               </HudNavLink>
@@ -792,14 +808,18 @@ export default function Library({ editorMode, deck }) {
             <span className="hidden-span">Fermer</span>
             <ImCross size={40} color="#e62e31" />
           </HudNavLink>
-          <HudNavLink onClick={handlePreviousCard} className="previous">
-            <FaArrowLeft size={45} />
-            <span className="hidden-span">Précedente</span>
-          </HudNavLink>
-          <HudNavLink onClick={handleNextCard} className="next">
-            <span className="hidden-span">Suivante</span>
-            <FaArrowRight size={45} />
-          </HudNavLink>
+          {!editorMode && (
+            <>
+              <HudNavLink onClick={handlePreviousCard} className="previous">
+                <FaArrowLeft size={45} />
+                <span className="hidden-span">Précedente</span>
+              </HudNavLink>
+              <HudNavLink onClick={handleNextCard} className="next">
+                <span className="hidden-span">Suivante</span>
+                <FaArrowRight size={45} />
+              </HudNavLink>
+            </>
+          )}
         </Modal>
       )}
 

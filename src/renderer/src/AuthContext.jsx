@@ -124,12 +124,22 @@ export const AuthProvider = ({ children }) => {
       name: deckName,
       cards: deckCards,
       cost: deckCost,
+      creator: userInfo.username,
       createdAt: Date.now()
     })
     // Update userInfo with the new deck
     setUserInfo((prev) => ({
       ...prev,
-      decks: [...prev.decks, { id: deckRef.id, name: deckName, cards: deckCards }]
+      decks: [
+        ...prev.decks,
+        {
+          id: deckRef.id,
+          name: deckName,
+          cards: deckCards,
+          cost: deckCost,
+          creator: userInfo.username
+        }
+      ]
     }))
     await giveAchievement('HF_deckCreator')
     sendMessage(`Deck "${deckName}" sauvegardé avec succès!`, 'success')

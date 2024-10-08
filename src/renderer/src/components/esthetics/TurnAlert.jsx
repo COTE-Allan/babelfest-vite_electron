@@ -34,10 +34,7 @@ export default function TurnAlert() {
       setAnimation(false)
     }, 2000)
 
-    if (phase === 0) {
-      turnText = 'Début de la partie !'
-      phaseText = 'Distribution et échange des cartes'
-    } else if (isSpectator) {
+    if (isSpectator) {
       const currentPlayerName = myTurn ? playerSelf.username : playerRival.username
       turnText = `Au tour de ${currentPlayerName}`
     } else {

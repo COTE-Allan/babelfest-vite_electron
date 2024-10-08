@@ -54,7 +54,7 @@ export function ArenaController() {
   }, [selectedCards, selectedCells, phase])
 
   useEffect(() => {
-    if (!host || phase === 0) return
+    if (!host) return
 
     // Fonction pour gérer la victoire avec délai et autres actions avant de définir le gagnant
     const handleVictory = (winner) => {

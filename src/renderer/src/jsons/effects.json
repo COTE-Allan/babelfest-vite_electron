@@ -2,7 +2,7 @@
   {
     "slug": "atkBuff",
     "name": "Renforcement",
-    "desc": "Au début d'une phase d'attaque, cette carte renforce l'attaque de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
+    "desc": "Au début d'une phase d'attaque, cette carte augmente la valeur d'ATK de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520356/babelfest/icons/forge_yoef1f.webp",
     "type": "Buffs"
   },
@@ -37,7 +37,7 @@
   {
     "slug": "depBuff",
     "name": "Turbo",
-    "desc": "Au début d'une phase de déplacement, cette carte renforce le déplacement de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
+    "desc": "Au début d'une phase de déplacement, cette carte renforce la valeur de DEP de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950667/babelfest/icons/turbo.webp",
     "type": "Buffs"
   },
@@ -121,7 +121,7 @@
   {
     "slug": "randomDEP",
     "name": "Déplacement désordonné",
-    "desc": "À l'invocation et au début d'une phase de préparation, cette carte obtient une valeur de déplacement aléatoire.",
+    "desc": "À l'invocation et au début d'une phase de préparation, cette carte obtient une valeur de DEP aléatoire.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/random_nb5zhf.webp",
     "type": "Aléatoires"
   },
@@ -310,14 +310,14 @@
   {
     "slug": "permAtk",
     "name": "Griffes d'acier",
-    "desc": "A l'invocation, augmentez l'attaque max des alliés adjacents de la valeur indiquée.",
+    "desc": "A l'invocation, augmentez l'ATK max des alliés adjacents de la valeur indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/monster-grasp.webp",
     "type": "Buffs"
   },
   {
     "slug": "permHP",
     "name": "Cœur d'acier",
-    "desc": "A l'invocation, augmentez les points de vies max des alliés adjacents de la valeur indiquée.",
+    "desc": "A l'invocation, augmentez les HP max des alliés adjacents de la valeur indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1718009120/babelfest/icons/heart-shield.webp",
     "type": "Buffs"
   },

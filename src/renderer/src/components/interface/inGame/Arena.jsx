@@ -30,7 +30,9 @@ export default function Arena() {
   return (
     <div
       className={`arena-wrapper ${
-        ((askForCell || askForTarget || showArenaInModal) && !isSpectator) && 'arena-wrapper-upperLayer'
+        (askForCell || askForTarget || showArenaInModal) &&
+        !isSpectator &&
+        'arena-wrapper-upperLayer'
       }`}
       onContextMenu={(e) => e.preventDefault()}
     >
@@ -81,13 +83,13 @@ export default function Arena() {
               <div
                 className="arena-borders-item"
                 style={{
-                  background: !myTurn || phase === 0 ? getBackgroundStyle(rivalColor) : '#939393'
+                  background: !myTurn ? getBackgroundStyle(rivalColor) : '#939393'
                 }}
               ></div>
               <div
                 className="arena-borders-item"
                 style={{
-                  background: myTurn || phase === 0 ? getBackgroundStyle(myColor) : '#939393'
+                  background: myTurn ? getBackgroundStyle(myColor) : '#939393'
                 }}
               ></div>
             </div>

@@ -35,15 +35,11 @@ export default function TurnTracker() {
     <div className="turnTracker">
       <div className="turnTracker-content">
         <span className="turnTracker-activePlayer">
-          {phase === 0
-            ? isSpectator
-              ? 'Début de la partie !'
-              : 'À vous de jouer.'
-            : isSpectator
-              ? `Au tour de ${currentPlayerName}.`
-              : myTurn
-                ? 'À vous de jouer.'
-                : 'Votre adversaire joue.'}
+          {isSpectator
+            ? `Au tour de ${currentPlayerName}.`
+            : myTurn
+              ? 'À vous de jouer.'
+              : 'Votre adversaire joue.'}
         </span>
 
         <span className="turnTracker-order">
@@ -58,12 +54,9 @@ export default function TurnTracker() {
       </div>
       <div
         style={{
-          background:
-            phase === 0
-              ? `transparent`
-              : myTurn
-                ? getBackgroundStyle(myColor, 'to right')
-                : getBackgroundStyle(rivalColor, 'to right')
+          background: myTurn
+            ? getBackgroundStyle(myColor, 'to right')
+            : getBackgroundStyle(rivalColor, 'to right')
         }}
         className="turnTracker-phases"
       >

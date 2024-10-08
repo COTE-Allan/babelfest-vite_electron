@@ -144,12 +144,16 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ffffff;
+  background-color: #ffffff74;
   border-radius: 5px;
+
+  &:hover {
+    background-color: #ffffffa5;
+  }
 }
 
 ::-webkit-scrollbar-track {

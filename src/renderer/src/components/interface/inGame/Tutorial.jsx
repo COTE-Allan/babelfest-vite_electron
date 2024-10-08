@@ -12,27 +12,6 @@ export default function Tutorial(props) {
 
   return (
     <div className="tutorial">
-      {phase === 0 && (
-        <>
-          <p>
-            Au début d'une partie, commencez d'abord par vérifier vos cartes (en bas de l'écran),
-            sélectionnez ensuite {phaseRules[0]} cartes et donnez-les à l'adversaire.
-          </p>
-          <h2>Contrôles</h2>
-          <ul>
-            <li>
-              <BsMouse2 size={30} />
-              Clic gauche (sur une carte) : Choisir/Annuler
-            </li>
-            <li>
-              <VscDebugRestart size={30} />: Demander/Accepter de repiocher les cartes
-            </li>
-            <li>
-              <GiConfirmed size={30} /> : Donner vos cartes sélectionnées
-            </li>
-          </ul>
-        </>
-      )}
       {phase === 1 && (
         <>
           <p>

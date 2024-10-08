@@ -284,6 +284,12 @@
       margin-bottom: 5px;
     }
 
+    &-container {
+      // height: 80%;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
     &-control {
       margin-top: auto;
       display: flex;
@@ -294,13 +300,20 @@
         justify-content: center;
         margin: 5px 0;
 
+        // &.back {
+        //   position: absolute;
+        //   bottom: 15px;
+        //   left: 20px;
+        // }
+
         & span {
-          font-size: 20px;
+          font-size: 18px;
         }
       }
     }
 
     &-card {
+
       position: relative;
       background-color: rgba(0, 0, 0, 0.5);
       width: 100%;
@@ -356,6 +369,7 @@
 
   &-list {
     display: flex;
+
     flex-direction: column;
     align-content: flex-start;
     align-items: center;
