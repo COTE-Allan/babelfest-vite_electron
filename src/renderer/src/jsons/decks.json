@@ -1,7 +1,7 @@
 [
   {
     "name": "Polyvalence",
-    "creator": "Cielesis",
+    "creator": "Babel",
     "content": [
       { "name": "Tuto", "title": "Soutien psychologique" },
       { "name": "Nodoka", "title": "Fille de démon" },
@@ -15,7 +15,7 @@
   },
   {
     "name": "Chaos de Krone",
-    "creator": "Cielesis",
+    "creator": "Babel",
     "content": [
       { "name": "Tulip", "title": "Enfant sauvage" },
       { "name": "Le conseil des Primats", "title": "Béni par l'intrus" },
@@ -25,6 +25,20 @@
       { "name": "Le cirque de Barjo", "title": "Prêt au spectacle" },
       { "name": "Ragnarock", "title": "Voleuse de pouvoirs" },
       { "name": "Krone", "title": "Intruse cosmique" }
+    ]
+  },
+  {
+    "name": "Armure d'acier",
+    "creator": "Babel",
+    "content": [
+      { "name": "Yūjō", "title": "Yujal des Yūjōs" },
+      { "name": "La reine meurtrie", "title": "Volonté de fer" },
+      { "name": "Gann", "title": "Ombre douce de la raison" },
+      { "name": "Igor", "title": "Immortel" },
+      { "name": "Will", "title": "De l'Outremonde" },
+      { "name": "Yalin", "title": "'Doc' insaisissable" },
+      { "name": "Kl'rgh", "title": "Le petit conquérant" },
+      { "name": "Shiro", "title": "Héraut du blizzard" }
     ]
   }
 ]

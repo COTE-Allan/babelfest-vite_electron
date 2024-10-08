@@ -84,7 +84,7 @@ export default function DeckBuilder() {
                 <div className="deckBuilder-list-deck-infos">
                   <h2>{deck.name}</h2>
                   <h3>
-                    Par {deck.creator} | Coût : {deck.cost}
+                    Coût : {deck.cost}
                   </h3>
                 </div>
               </div>
