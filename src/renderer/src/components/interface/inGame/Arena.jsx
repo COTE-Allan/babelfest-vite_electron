@@ -24,8 +24,10 @@ export default function Arena() {
     isSpectator
   } = useContext(GlobalContext)
 
-  ArenaController()
-  DeathController()
+  {!isSpectator &&
+    ArenaController()
+    DeathController()
+  }
 
   return (
     <div

@@ -22,6 +22,7 @@ import LeftWindow from '../interface/inGame/LeftWindow'
 import ClassicModal from '../items/ClassicModal'
 import ScenesMaker from '../interface/inGame/ScenesMaker'
 import { getBackgroundStyle } from '../others/toolBox'
+import MatchIntro from '../esthetics/MatchIntro'
 
 export default function Room() {
   const {
@@ -107,6 +108,7 @@ export default function Room() {
             <LeftWindow />
             <InGameMenus />
             <Winner />
+            <MatchIntro/>
             {scenes !== null && scenes.length !== 0 && <ScenesMaker key={scenes[0].id} />}
             {!isSpectator && (
               <>

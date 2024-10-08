@@ -35,7 +35,8 @@ export default function InGameMenus() {
     shopCardsCredits,
     isSpectator,
     spectatorCount,
-    deckType
+    deckType,
+    turn
   } = useContext(GlobalContext)
   const { userSettings } = useContext(AuthContext)
   const navigate = useNavigate()
