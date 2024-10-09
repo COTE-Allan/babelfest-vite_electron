@@ -469,13 +469,15 @@ export function summonCardsFromCardsArray(
   cells,
   infos,
   owner = null,
-  player = { username: 'NAN', hex: '#FFFFFF' }
+  player = { username: 'NAN', primaryColor: { hex: '#FFFFFF' } },
+  keepOwner = false
 ) {
   let log = []
   cells.forEach((cell, index) => {
     let newCard = getCardBasedOnNameAndTitle(infos[index])
+    let oldOwner = cell.card?.owner
     cell.card = newCard
-    cell.card.owner = { name: player.username, hex: player.primaryColor.hex }
+    cell.card.owner = keepOwner ? oldOwner : { name: player.username, hex: player.primaryColor.hex }
     cell.card.isRecto = true
     cell.card.uniqueID = generateUniqueID()
     cell.owner = owner ? owner : cell.owner

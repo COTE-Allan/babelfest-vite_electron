@@ -151,16 +151,14 @@
     align-items: center;
     justify-content: center;
     width: 135px; // Réduction de la width
-    opacity: 0.5;
+    opacity: 0.45;
     transition:
-      transform 150ms ease-in-out,
-      opacity 50ms ease-in-out;
+      opacity 100ms ease-in-out;
     padding: 2px; // Réduction de la padding
 
     &:hover {
       cursor: url('../../assets/svg/pointer.svg'), auto;
-      ;
-      transform: scale(1.05);
+      opacity: 0.65;
     }
 
     &.selected {

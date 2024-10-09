@@ -46,6 +46,7 @@ export default function Library({ editorMode, deck }) {
   const [deckName, setDeckName] = useState('')
   const [deckCards, setDeckCards] = useState([])
   const [deckCost, setDeckCost] = useState(0)
+  const [showDeckOnly, setShowDeckOnly] = useState(false)
 
   // Initialize deck data if in editorMode and a valid deck is provided
   useEffect(() => {
@@ -269,72 +270,46 @@ export default function Library({ editorMode, deck }) {
   }
 
   useEffect(() => {
-    let allCards = getAllCards()
-    let filteredCards = [...allCards]
+    // Clone les cartes pour éviter les effets de bord
+    let sortedCards = [...allCards]
 
-    if (selectedCollections.length > 0) {
-      filteredCards = filteredCards.filter((card) =>
-        selectedCollections.some((collection) => collection.value === card.collection)
+    if (showDeckOnly) {
+      sortedCards = sortedCards.filter((card) =>
+        deckCards.some((deckCard) => deckCard.name === card.name && deckCard.title === card.title)
       )
     }
 
-    if (selectedYears.length > 0) {
-      filteredCards = filteredCards.filter((card) =>
-        selectedYears.some((year) => year.value === (card.year ? card.year.toString() : ''))
-      )
-    }
+    // Applique le tri sur chaque groupe de rareté défini par rarityOrder
+    const cardsSortedByRarity = rarityOrder.flatMap((rarity) => {
+      // Filtrer les cartes par rareté
+      const rarityGroup = sortedCards.filter((card) => card.rarity === rarity)
 
-    if (selectedEffects.length > 0) {
-      filteredCards = filteredCards.filter(
-        (card) =>
-          card.effects &&
-          selectedEffects.some((selectedEffect) =>
-            card.effects.some((effect) => effect.type === selectedEffect.value)
-          )
-      )
-    }
+      // Applique le tri sélectionné dans le groupe de même rareté
+      rarityGroup.sort((a, b) => {
+        switch (sortMethod) {
+          case 'number':
+            return a.id - b.id
+          case 'name':
+            return a.name.localeCompare(b.name)
+          case 'cost':
+            return a.cost - b.cost
+          default:
+            return 0
+        }
+      })
+      return rarityGroup
+    })
 
-    if (search !== '') {
-      const searchLower = search.toLowerCase()
-      filteredCards = filteredCards.filter(
-        (card) =>
-          (card.year && card.year.toString().includes(searchLower)) ||
-          card.collection.toLowerCase().includes(searchLower) ||
-          card.name.toLowerCase().includes(searchLower) ||
-          card.author.toLowerCase().includes(searchLower) ||
-          card.id == searchLower
-      )
-    }
-
-    if (selectedRarities.length > 0) {
-      filteredCards = filteredCards.filter((card) =>
-        selectedRarities.some((rarity) => rarity.value === card.rarity.toString())
-      )
-    }
-
-    switch (sortMethod) {
-      case 'number':
-        filteredCards.sort((a, b) => a.id - b.id)
-        break
-      case 'name':
-        filteredCards.sort((a, b) => a.name.localeCompare(b.name))
-        break
-      case 'rarity':
-        filteredCards.sort((a, b) => a.rarity - b.rarity)
-        break
-      default:
-        break
-    }
-
-    setCards(filteredCards)
+    setCards(cardsSortedByRarity)
   }, [
+    showDeckOnly,
+    sortMethod,
     search,
     selectedRarities,
     selectedCollections,
     selectedYears,
     selectedEffects,
-    allCards,
-    sortMethod
+    allCards
   ])
 
   const handleCollectionChange = (selectedOptions) => {
@@ -446,15 +421,17 @@ export default function Library({ editorMode, deck }) {
                 placeholder="Recherchez une carte..."
               />
             </div>
+
             <div className="library-controller-inputs-item">
               <span className="library-controller-inputs-item-title">Trier par :</span>
               <select
                 className="library-controller-select"
                 onChange={(e) => setSortMethod(e.target.value)}
+                value={sortMethod}
               >
-                <option value="rarity">Trier par rareté</option>
                 <option value="number">Trier par numéro</option>
                 <option value="name">Trier par nom</option>
+                <option value="cost">Trier par coût</option>
               </select>
             </div>
             <div className="library-controller-inputs-item">
@@ -505,6 +482,18 @@ export default function Library({ editorMode, deck }) {
                 placeholder="Toutes les raretés"
               />
             </div>
+            {editorMode && (
+              <div className="library-controller-inputs-item checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={showDeckOnly}
+                    onChange={() => setShowDeckOnly(!showDeckOnly)}
+                  />
+                  Dans le deck
+                </label>
+              </div>
+            )}
           </div>
         </div>
         <div className="library-list-wrapper">

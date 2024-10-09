@@ -147,16 +147,20 @@ const Home = () => {
             <div className="home-featured-list">
               {featuredCards.slice(0, 4).map((card, index) => {
                 return (
-                  <img
-                    onMouseEnter={hover}
-                    onClick={() => {
-                      select()
-                      goForward('/catalog', { state: { selected: card } })
-                    }}
-                    key={index}
-                    src={card.url}
-                    alt="Featured card"
-                  />
+                  <div className={`home-featured-list-item ${card.shiny && card.shiny}`}>
+                    <div className="img-container">
+                      <img
+                        onMouseEnter={hover}
+                        onClick={() => {
+                          select()
+                          goForward('/catalog', { state: { selected: card } })
+                        }}
+                        key={index}
+                        src={card.url}
+                        alt="Featured card"
+                      />
+                    </div>
+                  </div>
                 )
               })}
             </div>

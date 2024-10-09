@@ -168,10 +168,9 @@ export function InvocationMinions({ item, effect, pattern, effectInfos, player }
   }
 }
 
-export function Metamorphose({ item, effect, targets, effectInfos, rival }) {
+export function Metamorphose({ item, effect, targets, effectInfos }) {
   let targetsBefore = targets.map((target) => ({ ...target.card }))
-
-  let summon = summonCardsFromCardsArray(targets, effect.cards, null, rival)
+  let summon = summonCardsFromCardsArray(targets, effect.cards, null, null, true)
   let result = summon.cells
 
   let targetsAfter = result.map((cell) => ({ ...cell.card }))

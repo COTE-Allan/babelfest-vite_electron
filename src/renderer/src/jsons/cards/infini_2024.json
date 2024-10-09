@@ -91,7 +91,7 @@
     "url": "./cards/series/babelfest_2024series4.png",
     "collection": "Série Infinie",
     "rarity": 2,
-    "cost": 6,
+    "cost": 7,
     "year": 2024,
     "author": "Okaah",
     "effects": [
@@ -435,7 +435,7 @@
     "basehp": 1,
     "url": "./cards/series/babelfest_2024series17.png",
     "rarity": 1,
-    "cost": 3,
+    "cost": 6,
     "collection": "Série Infinie",
     "year": 2024,
     "author": "Gotho",

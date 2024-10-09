@@ -42,6 +42,7 @@ export const GlobalProvider = () => {
   const [deck, setDeck] = useState([])
   const [tradeButton, setTradeButton] = useState(true)
   const [deckType, setDeckType] = useState(null)
+  const [redrawUsed, setRedrawUsed] = useState(false)
   // Gestion du placement
   const [askForRectoVerso, setAskForRectoVerso] = useState(false)
   const [placementCostLeft, setPlacementCostLeft] = useState(4)
@@ -181,7 +182,6 @@ export const GlobalProvider = () => {
         player1.hand = handJ1
         player2.hand = handJ2
         setPlayerID(isHost ? 1 : 2)
-
 
         if (userSettings.customColors) {
           let myColor = isHost ? player1.primaryColor : player2.primaryColor
@@ -404,7 +404,9 @@ export const GlobalProvider = () => {
     setShopCardsCredits,
     isSpectator,
     spectatorCount,
-    deckType
+    deckType,
+    redrawUsed,
+    setRedrawUsed
   }
   return (
     <GlobalContext.Provider value={propsList}>

@@ -10,7 +10,7 @@ import { FaLock } from 'react-icons/fa'
 import { useCreateGame, useLeaveLobby } from '../controllers/ManageLobbyAndGame'
 import Slider from 'rc-slider'
 import ClassicModal from '../items/ClassicModal'
-import { getRandomPattern, useSendMessage } from '../others/toolBox'
+import { getArenaPattern, getRandomPattern, useSendMessage } from '../others/toolBox'
 import { IoMdSettings } from 'react-icons/io'
 import ArenaPicker from '../others/ArenaPicker'
 
@@ -21,7 +21,7 @@ const Lobby = () => {
   const [player2, setPlayer2] = useState(null)
   const [selectedDeck, setSelectedDeck] = useState(null)
   const [mapChoice, setMapChoice] = useState(false)
-  const [selectedMap, setSelectedMap] = useState(false)
+  const [selectedMaps, setSelectedMaps] = useState([]) // État pour gérer plusieurs arènes sélectionnées
 
   const { user, userInfo } = useContext(AuthContext)
   const leaveLobby = useLeaveLobby()
@@ -158,8 +158,21 @@ const Lobby = () => {
   // Start the game when both players are ready
   useEffect(() => {
     const startGame = async () => {
+      const arenas = getArenaPattern()
       if (lobbyData && lobbyData.readyj1 && lobbyData.readyj2 && isUserHost && !lobbyData.gameRef) {
-        let mapPattern = !selectedMap ? getRandomPattern() : selectedMap.pattern
+        let mapPattern
+        if (selectedMaps.length === 0 || selectedMaps.length === arenas.length) {
+          // Aucune arène sélectionnée ou toutes sont sélectionnées, choisir aléatoirement parmi toutes
+          mapPattern = getRandomPattern()
+        } else if (selectedMaps.length === 1) {
+          // Une seule arène sélectionnée, l'utiliser
+          mapPattern = selectedMaps[0].pattern
+        } else {
+          // Plusieurs arènes sélectionnées, en choisir une aléatoirement parmi celles-ci
+          const randomIndex = Math.floor(Math.random() * selectedMaps.length)
+          mapPattern = selectedMaps[randomIndex].pattern
+        }
+
         const gameRef = await createGame(
           lobbyId,
           lobbyData.j1,
@@ -183,7 +196,7 @@ const Lobby = () => {
       }
     }
     startGame()
-  }, [lobbyData, isUserHost])
+  }, [lobbyData, isUserHost, selectedMaps])
 
   // Navigate to game when gameRef is set
   useEffect(() => {
@@ -193,7 +206,7 @@ const Lobby = () => {
         disconnected: arrayRemove(user.uid)
       })
         .then(() => {
-          navigate(`/game/${lobbyData.gameRef}`, {state: {spectator: isSpectator}})
+          navigate(`/game/${lobbyData.gameRef}`, { state: { spectator: isSpectator } })
         })
         .catch((error) => {
           console.error('Erreur lors de la mise à jour du document de jeu: ', error)
@@ -262,7 +275,10 @@ const Lobby = () => {
                 {/* Map Selection */}
                 <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                   <Button onClick={() => setMapChoice(true)} disabled={anyPlayerReady}>
-                    Arène actuelle : {!selectedMap ? 'Aléatoire' : selectedMap.pattern[2]}
+                    Arène actuelle :{' '}
+                    {selectedMaps.length === 0
+                      ? 'Aléatoire'
+                      : selectedMaps.length + ' arènes sélectionnées'}
                   </Button>
                 </div>
               </>
@@ -355,7 +371,7 @@ const Lobby = () => {
 
       {mapChoice && (
         <ClassicModal>
-          <ArenaPicker selectedMap={selectedMap} setSelectedMap={setSelectedMap} />
+          <ArenaPicker selectedMap={selectedMaps} setSelectedMap={setSelectedMaps} />
           <Button onClick={() => setMapChoice(false)}>Retour</Button>
         </ClassicModal>
       )}

@@ -101,7 +101,7 @@ export default function ScenesMaker() {
     'https://res.cloudinary.com/dxdtcakuv/image/upload/v1718782860/babelfest/card_unknown.webp'
 
   return (
-    <Modal className={`fade-in-out`}>
+    <Modal className={`fade-in-out zindex11`}>
       <div className={`scenesMaker ${scene.isEffect ? 'effectAnim' : 'slideAnim'}`}>
         <div className="scenesMaker-cards">
           {scene.cards[0] && (

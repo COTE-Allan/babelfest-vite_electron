@@ -12,17 +12,19 @@
   z-index: 10;
   font-family: 'Kimberly Bl', sans-serif;
 
+  &.zindex11 {
+    z-index: 11;
+  }
+
   &-window {
     font-family: 'Kimberly Bl', sans-serif;
     position: absolute;
-    padding: 20px;
-    border-radius: 15px;
-    width: 600px;
+    padding: 20px 40px;
+    width: 100%;
     font-size: 15px;
-    bottom: 50px;
-    left: 15px;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 6;
+    bottom: 0;
+    left: 0;
+    z-index: 7;
 
     &-wrapper {
       display: flex;
@@ -32,21 +34,22 @@
     &-icons {
       margin-right: 20px;
 
+
       & img {
-        width: 75px;
-        max-height: 75px;
+        width: 50px;
+        max-height: 50px;
       }
     }
 
     & h1 {
       font-size: 28px;
-      margin: 10px 0;
-      text-align: center;
+      margin: 0;
+      margin-bottom: 10px;
     }
 
     & h2 {
       font-size: 22px;
-      margin: 10px 0;
+      margin: 0;
     }
 
     & p {

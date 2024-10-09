@@ -42,7 +42,8 @@ export default function Room() {
     myTurn,
     musicPlayer,
     scenes,
-    isSpectator
+    isSpectator,
+    winner
   } = useContext(GlobalContext)
   const placeCardOnArena = usePlaceCardOnArea()
 
@@ -108,7 +109,7 @@ export default function Room() {
             <LeftWindow />
             <InGameMenus />
             <Winner />
-            <MatchIntro/>
+            {!winner && <MatchIntro />}
             {scenes !== null && scenes.length !== 0 && <ScenesMaker key={scenes[0].id} />}
             {!isSpectator && (
               <>

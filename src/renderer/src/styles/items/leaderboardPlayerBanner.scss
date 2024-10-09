@@ -31,6 +31,12 @@
 
     &.reverse &-content {
         align-items: flex-end;
+
+        & .name {
+            & div {
+                text-align: end;
+            }
+        }
     }
 
     &:hover {
@@ -48,6 +54,7 @@
         font-family: 'Kimberly Bl', sans-serif;
         z-index: 1;
         max-width: 200px;
+
         & .name {
             font-size: 30px;
             width: 100%;

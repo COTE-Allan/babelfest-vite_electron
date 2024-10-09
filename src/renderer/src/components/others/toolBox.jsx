@@ -478,7 +478,9 @@ export function getArenaPattern() {
     [[30, 2, 14, 18], [6, 26], 'Immeuble'],
     [[3, 28, 16, 15], [7, 24], 'Désaxé'],
     [[30, 31, 16, 0, 1, 15], [7, 24], 'Slalom'],
-    [[31, 24, 23, 11, 3, 4], [1, 29], 'Face à Face']
+    [[31, 24, 23, 11, 3, 4], [1, 29], 'Face à Face'],
+    [[22, 28, 9, 3], [5, 26], 'Domino'],
+    [[0, 31], [28, 3], 'Simplicité']
   ]
 
   return arenaPatterns.map((pattern, index) => ({

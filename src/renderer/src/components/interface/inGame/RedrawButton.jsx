@@ -7,9 +7,17 @@ import { VscDebugRestart } from 'react-icons/vsc'
 import { generateDeck } from '../../effects/editCards'
 
 export default function RedrawButton() {
-  const { room, playerID, gameData, setSelectedCards, setPlayerSelf, playerSelf, winner } =
-    useContext(GlobalContext)
-  const [redrawUsed, setRedrawUsed] = useState(false)
+  const {
+    room,
+    playerID,
+    gameData,
+    setSelectedCards,
+    setPlayerSelf,
+    playerSelf,
+    winner,
+    redrawUsed,
+    setRedrawUsed
+  } = useContext(GlobalContext)
 
   useEffect(() => {
     if (winner !== null) {

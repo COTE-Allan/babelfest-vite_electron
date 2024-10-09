@@ -10,6 +10,7 @@
   animation: fadeOut 0.5s both ease-in-out;
   animation-delay: 5.5s;
   background-color: black;
+
   &-player1,
   &-player2 {
     display: flex;
@@ -18,17 +19,28 @@
     justify-content: center;
     transition: width 1s ease-in-out;
     overflow: hidden;
-    & h2 {
+
+    & .name {
       margin: 0;
+      margin-bottom: 30px;
       font-size: 50px;
+      white-space: nowrap;
+    }
+
+    & span {
+      font-size: 25px;
+      white-space: nowrap;
     }
   }
+
   &-player1 {
     animation: translateFromLeft 1s both ease-in-out;
   }
+
   &-player2 {
     animation: translateFromRight 1s both ease-in-out;
   }
+
   &-VS {
     position: absolute;
     top: 50%;
@@ -39,6 +51,7 @@
     animation: translateFromTop 1.5s both ease-in-out;
     transition: opacity 200ms ease-in-out;
   }
+
   &-starting {
     position: absolute;
     top: 20%;
@@ -51,20 +64,22 @@
 }
 
 @keyframes fadeSlideFromTop {
-    0% {
-      transform: translateY(-50px) translateX(-50%);
-      opacity: 0;
-    }
-    100% {
-    opacity: 1;
-      transform: translateY(0) translateX(-50%);
-    }
+  0% {
+    transform: translateY(-50px) translateX(-50%);
+    opacity: 0;
   }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}
 
 @keyframes translateFromRight {
   0% {
     transform: translateX(100%) rotate(2deg);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -74,6 +89,7 @@
   0% {
     transform: translateX(-100%) rotate(-2deg);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -83,16 +99,18 @@
   0% {
     top: -100%;
   }
+
   100% {
     top: 50%;
   }
 }
 
 @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  0% {
+    opacity: 1;
   }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -4,16 +4,19 @@ function ArenaPicker({ selectedMap, setSelectedMap, disableInteractivity }) {
   const arenas = getArenaPattern()
 
   const handleClick = (selectedArena) => {
-    if (disableInteractivity) return // Disable interactivity if the prop is true
+    if (disableInteractivity) return // Désactiver l'interactivité si le prop est true
 
-    if (selectedMap && selectedArena.id === selectedMap.id) {
-      setSelectedMap(null)
+    if (selectedMap.some((arena) => arena.id === selectedArena.id)) {
+      // Retire l'arène si elle est déjà sélectionnée
+      setSelectedMap(selectedMap.filter((arena) => arena.id !== selectedArena.id))
     } else {
-      setSelectedMap(selectedArena)
+      // Ajoute l'arène si elle n'est pas déjà sélectionnée
+      setSelectedMap([...selectedMap, selectedArena])
     }
   }
 
-  const isSelected = (arena) => disableInteractivity || (selectedMap && arena.id === selectedMap.id)
+  const isSelected = (arena) =>
+    disableInteractivity || selectedMap.some((selected) => selected.id === arena.id)
 
   return (
     <div className="arenaPicker">

@@ -345,7 +345,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "'The Outsider' inflige 5 dégâts à 'Mandarine-man' ce qui fait tomber ses HP à 0, détruisant ta carte.",
+    "text": "'The Outsider' inflige 5 dégâts à 'Mandarine-man' ce qui fait tomber ses PV à 0, détruisant ta carte.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "tired": ["cell-14"]
@@ -383,7 +383,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "'Xyphias Tonitruo' inflige 2 dégâts à 'Tuto' ce qui fait tomber ses points de vies à 0.",
+    "text": "'Xyphias Tonitruo' inflige 2 dégâts à 'Tuto' ce qui fait tomber ses PV à 0.",
     "tired": ["cell-14", "cell-9"],
     "clickOn": { "element": "dialog" },
     "position": "top-left"

@@ -119,7 +119,9 @@ export const usePlaceCardOnArea = () => {
     setConfirmModal,
     pattern,
     room,
-    playerID
+    playerID,
+    redrawUsed,
+    setRedrawUsed
   } = useContext(GlobalContext)
 
   const EndTurn = useEndTurn()
@@ -132,7 +134,7 @@ export const usePlaceCardOnArea = () => {
     let cardToPlace = selectedCards[0]
 
     if (placementCostLeft - cardToPlace.rarity < 0) return
-
+    if (!redrawUsed) setRedrawUsed(true)
     const targetHand = host ? 'handJ1' : 'handJ2'
 
     cardToPlace.isRecto = isRecto

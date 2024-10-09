@@ -189,11 +189,12 @@ export const useTryEffect = () => {
                     effect,
                     targets: selection,
                     pattern,
-                    effectInfos
+                    effectInfos,
+                    player: item.owner === playerID ? playerSelf : playerRival
                   })
                   await finishStandby(room)
                   await concludeEffect(batch, executedEffect)
-          
+
                   // Commit the batch immediately for effects requiring target choice
                   await batch.commit()
                   batch = writeBatch(db) // Re-initialize the batch for subsequent operations
@@ -339,4 +340,3 @@ export const useTryEffect = () => {
 
   return tryEffect
 }
- 
