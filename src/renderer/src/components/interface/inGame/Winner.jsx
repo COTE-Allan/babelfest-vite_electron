@@ -20,19 +20,17 @@ export default function Winner() {
     winner,
     gameData,
     room,
+    host,
     playerID,
     playerSelf,
     playerRival,
     turn,
     setSelectedCells,
     setSelectedCards,
-    setMovesLeft,
-    setPlacementCostLeft,
     setTradeButton,
     pattern,
     setRightWindow,
     setLeftWindow,
-    setAdvancedDetailCard,
     isSpectator
   } = useContext(GlobalContext)
   const { userInfo, user, updateUserState, userSettings, giveAchievement } = useContext(AuthContext)
@@ -115,7 +113,8 @@ export default function Winner() {
   }
 
   const handleExpAndStats = async () => {
-    if (!isSpectator) {
+    if (!isSpectator && !playerSelf.receiveRewards) {
+      console.log(!isSpectator && !playerSelf.receiveRewards)
       let gameWon = winner === playerID
       let newXpDetails = []
 
@@ -281,7 +280,12 @@ export default function Winner() {
         updatedMatchSummaries = updatedMatchSummaries.slice(-9)
       }
 
-      await updateDoc(doc(db, 'users', user.uid), {
+      // Création du batch
+      const batch = writeBatch(db)
+
+      // Mise à jour de l'utilisateur
+      const userRef = doc(db, 'users', user.uid)
+      batch.update(userRef, {
         level: newPlayerExp.level,
         xp: newPlayerExp.xp,
         'stats.mmr': newMMR,
@@ -291,6 +295,14 @@ export default function Winner() {
         'stats.victories': newVictories,
         matchSummaries: updatedMatchSummaries
       })
+
+      // Mise à jour du jeu pour définir `receiveRewards` à `true`
+      const gameRef = doc(db, 'games', room)
+      batch.update(gameRef, {
+        [host ? 'player1.receiveRewards' : 'player2.receiveRewards']: true
+      })
+
+      await batch.commit()
 
       setTimeout(async () => {
         await updateUserState(user)
@@ -328,10 +340,8 @@ export default function Winner() {
     if (handleWin !== null) {
       setSelectedCells([])
       setSelectedCards([])
-      setMovesLeft(4)
       setRightWindow(null)
       setLeftWindow(null)
-      setPlacementCostLeft(4)
       setTradeButton(true)
       if (!isSpectator) {
         handleExpAndStats()

@@ -183,6 +183,9 @@ export const GlobalProvider = () => {
         player2.hand = handJ2
         setPlayerID(isHost ? 1 : 2)
 
+        setPlacementCostLeft(isHost ? player1.placementLeft : player2.placementLeft)
+        setMovesLeft(isHost ? player1.movesLeft : player2.movesLeft)
+
         if (userSettings.customColors) {
           let myColor = isHost ? player1.primaryColor : player2.primaryColor
           let rivalColor = isHost ? player2.primaryColor : player1.primaryColor

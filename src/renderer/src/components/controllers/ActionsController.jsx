@@ -114,7 +114,6 @@ export const usePlaceCardOnArea = () => {
     setSelectedCards,
     playerSelf,
     placementCostLeft,
-    setPlacementCostLeft,
     activePlayer,
     setConfirmModal,
     pattern,
@@ -136,6 +135,7 @@ export const usePlaceCardOnArea = () => {
     if (placementCostLeft - cardToPlace.rarity < 0) return
     if (!redrawUsed) setRedrawUsed(true)
     const targetHand = host ? 'handJ1' : 'handJ2'
+    const targetPlayer = host ? 'player1.placementLeft' : 'player2.placementLeft'
 
     cardToPlace.isRecto = isRecto
     cardToPlace.uniqueID = generateUniqueID()
@@ -152,7 +152,8 @@ export const usePlaceCardOnArea = () => {
     const newHand = playerSelf.hand.filter((card) => card !== cardToPlace)
     const gameDocRef = doc(db, 'games', room)
     batch.update(gameDocRef, {
-      [targetHand]: newHand
+      [targetHand]: newHand,
+      [targetPlayer]: placementCostLeft - cardToPlace.rarity
     })
 
     const cell = pattern.find((cell) => cell.id === cellID)
@@ -165,7 +166,6 @@ export const usePlaceCardOnArea = () => {
       cards: [cardToPlace],
       action: `Invocation en ${cell.coordinate}`
     })
-    setPlacementCostLeft(placementCostLeft - cardToPlace.rarity)
 
     if (cardToPlace.name === 'Krone' && cardToPlace.title === 'Intruse cosmique') {
       // Compter le nombre de cellules qui contiennent une carte valide
@@ -194,9 +194,7 @@ export const usePlaceCardOnArea = () => {
         setConfirmModal(null)
         setBatchCommit(false)
         await trySpawn()
-        // await TryEffect("spawn", [], batchCommit);
         if (placementCostLeft == 0) {
-          setPlacementCostLeft(4)
           EndTurn()
         }
       }
@@ -429,7 +427,7 @@ export const useTryAttack = () => {
 
 // Déplacer
 export const useMoveCardOnArena = () => {
-  const { room, activePlayer, movesLeft, setMovesLeft, selectedCells, setSelectedCells, pattern } =
+  const { room, activePlayer, movesLeft, selectedCells, setSelectedCells, pattern, host } =
     useContext(GlobalContext)
   const EndTurn = useEndTurn()
   const pushLogsIntoBatch = usePushLogsIntoBatch()
@@ -517,20 +515,24 @@ export const useMoveCardOnArena = () => {
       owner: activePlayer
     })
 
+    const gameDocRef = doc(db, 'games', room)
+    let newMovesLeft
+    if (switchAlly) {
+      newMovesLeft = movesLeft - 2
+    } else {
+      newMovesLeft = movesLeft - distance
+    }
+    const targetPlayer = host ? 'player1.movesLeft' : 'player2.movesLeft'
+    batch.update(gameDocRef, {
+      [targetPlayer]: newMovesLeft
+    })
+
     try {
       // Exécutez le batch
       await batch.commit()
-
       // Réinitialisez les cellules sélectionnées
       setSelectedCells([])
-      if (switchAlly) {
-        setMovesLeft(movesLeft - 2)
-      } else {
-        setMovesLeft(movesLeft - distance)
-      }
       if (movesLeft - distance <= 0 || (switchAlly && movesLeft - 2 <= 0)) {
-        // Terminez le tour
-        setMovesLeft(4)
         EndTurn()
       }
     } catch (error) {

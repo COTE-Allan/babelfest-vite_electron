@@ -271,20 +271,51 @@ export default function Library({ editorMode, deck }) {
 
   useEffect(() => {
     // Clone les cartes pour éviter les effets de bord
-    let sortedCards = [...allCards]
+    let filteredCards = [...allCards]
 
+    // Filtrage par collections sélectionnées
+    if (selectedCollections.length > 0) {
+      const collectionValues = selectedCollections.map((col) => col.value)
+      filteredCards = filteredCards.filter((card) => collectionValues.includes(card.collection))
+    }
+
+    // Filtrage par raretés sélectionnées
+    if (selectedRarities.length > 0) {
+      const rarityValues = selectedRarities.map((rarity) => parseInt(rarity.value, 10))
+      filteredCards = filteredCards.filter((card) => rarityValues.includes(card.rarity))
+    }
+
+    // Filtrage par années sélectionnées
+    if (selectedYears.length > 0) {
+      const yearValues = selectedYears.map((year) => parseInt(year.value, 10))
+      filteredCards = filteredCards.filter((card) => yearValues.includes(card.year))
+    }
+
+    // Filtrage par effets sélectionnés
+    if (selectedEffects.length > 0) {
+      const effectValues = selectedEffects.map((effect) => effect.value)
+      filteredCards = filteredCards.filter((card) =>
+        card.effects?.some((effect) => effectValues.includes(effect.type))
+      )
+    }
+
+    // Filtrage par recherche de texte
+    if (search.trim() !== '') {
+      filteredCards = filteredCards.filter((card) =>
+        card.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+
+    // Filtrage pour afficher uniquement les cartes du deck
     if (showDeckOnly) {
-      sortedCards = sortedCards.filter((card) =>
+      filteredCards = filteredCards.filter((card) =>
         deckCards.some((deckCard) => deckCard.name === card.name && deckCard.title === card.title)
       )
     }
 
     // Applique le tri sur chaque groupe de rareté défini par rarityOrder
     const cardsSortedByRarity = rarityOrder.flatMap((rarity) => {
-      // Filtrer les cartes par rareté
-      const rarityGroup = sortedCards.filter((card) => card.rarity === rarity)
-
-      // Applique le tri sélectionné dans le groupe de même rareté
+      const rarityGroup = filteredCards.filter((card) => card.rarity === rarity)
       rarityGroup.sort((a, b) => {
         switch (sortMethod) {
           case 'number':
@@ -309,7 +340,8 @@ export default function Library({ editorMode, deck }) {
     selectedCollections,
     selectedYears,
     selectedEffects,
-    allCards
+    allCards,
+    deckCards // Ajouté pour réagir aux changements dans le deck
   ])
 
   const handleCollectionChange = (selectedOptions) => {

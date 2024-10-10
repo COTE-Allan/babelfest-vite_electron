@@ -175,6 +175,10 @@ export function useCreateGame() {
       // Extraire les données de l'utilisateur et ajouter l'ID
       const j1 = { id: j1Ref.id, ...j1Doc.data() }
       const j2 = { id: j2Ref.id, ...j2Doc.data() }
+      j1.placementLeft = 4
+      j1.movesLeft = 4
+      j2.placementLeft = 4
+      j2.movesLeft = 4
       gameDocRef = await addDoc(collection(db, 'games'), {
         created: Date.now(),
         finished: false,
@@ -199,6 +203,12 @@ export function useCreateGame() {
         finished: false,
         phase: 1,
         activePlayer: 0,
+        ['player1.receiveRewards']: false,
+        ['player1.placementLeft']: 4,
+        ['player1.movesLeft']: 4,
+        ['player2.placementLeft']: 4,
+        ['player2.movesLeft']: 4,
+        ['player2.receiveRewards']: false,
         standby: false,
         revenge: null,
         turn: 1,
