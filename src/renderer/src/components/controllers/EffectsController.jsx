@@ -83,167 +83,149 @@ export const useTryEffect = () => {
     phaseWhen = false,
     killer = undefined
   ) {
-    let stillDead = true
-    let pattern = await getPattern(room)
-    let updatedDeadCell = deadCell
+    return new Promise(async (resolve) => {
+      let stillDead = true
+      let pattern = await getPattern(room)
+      let updatedDeadCell = deadCell
 
-    if (deadCell) {
-      updatedDeadCell = pattern.find((cell) => cell.id === deadCell.id)
-      if (!updatedDeadCell) {
-        console.error(`Dead cell with id ${deadCell.id} not found in pattern`)
-        return
-      }
-    }
-
-    console.log('tryeffect', participants, when, spawnID, updatedDeadCell)
-
-    const authorizedCards = pattern.filter((cell) => {
-      // Vérification initiale de la présence de la carte et de ses effets
-      if (!cell?.card?.effects) return false
-
-      // Condition générale pour vérifier l'appartenance de la carte
-      const isOwner = cell.owner === playerID
-      const isDeadCell = when === 'death' && cell.id === updatedDeadCell?.id
-
-      // Vérification de l'appartenance selon le contexte 'when'
-      if (!isOwner && when !== 'attacked' && when !== 'cardDeath' && !isDeadCell) return false
-
-      // Filtrage basé sur les effets de la carte
-      return cell.card.effects.some((effect) => {
-        const effectApplicable = effect.when?.includes(when)
-        const effectNotUsed =
-          !effect.usedThisTurn && !effect.alreadyUsed && !(effect.spawnUsed && when === 'spawn')
-
-        // Vérification initiale de l'applicabilité de l'effet
-        if (!effectApplicable || !effectNotUsed) return false
-
-        // Conditions spécifiques selon 'when'
-        switch (when) {
-          case 'death':
-            return (
-              effect.when.includes('death') &&
-              cell.card.uniqueID === updatedDeadCell?.card?.uniqueID
-            )
-          case 'cardDeath':
-            const bymeCheck = effect.byme ? killer?.card?.uniqueID === cell.card.uniqueID : true
-            console.log(cell.card.name, effect.byme, bymeCheck, killer)
-            return bymeCheck && cell.card.uniqueID !== updatedDeadCell?.card?.uniqueID
-          case 'attacked':
-            return cell.id === participants?.target?.id
-          case 'attack':
-            return cell.id === participants?.attacker?.id
-          case 'spawn':
-            return cell.card.id === spawnID[0] && cell.id === spawnID[1]
-          default:
-            return true
+      if (deadCell) {
+        updatedDeadCell = pattern.find((cell) => cell.id === deadCell.id)
+        if (!updatedDeadCell) {
+          console.error(`Dead cell with id ${deadCell.id} not found in pattern`)
+          resolve(false) // Resolve immediately if deadCell isn't found
+          return
         }
+      }
+
+      console.log('tryeffect', participants, when, spawnID, updatedDeadCell)
+
+      const authorizedCards = pattern.filter((cell) => {
+        if (!cell?.card?.effects) return false
+        const isOwner = cell.owner === playerID
+        const isDeadCell = when === 'death' && cell.id === updatedDeadCell?.id
+        if (!isOwner && when !== 'attacked' && when !== 'cardDeath' && !isDeadCell) return false
+
+        return cell.card.effects.some((effect) => {
+          const effectApplicable = effect.when?.includes(when)
+          const effectNotUsed =
+            !effect.usedThisTurn && !effect.alreadyUsed && !(effect.spawnUsed && when === 'spawn')
+          if (!effectApplicable || !effectNotUsed) return false
+
+          switch (when) {
+            case 'death':
+              return effect.when.includes('death') && cell.card.uniqueID === updatedDeadCell?.card?.uniqueID
+            case 'cardDeath':
+              const bymeCheck = effect.byme ? killer?.card?.uniqueID === cell.card.uniqueID : true
+              console.log(cell.card.name, effect.byme, bymeCheck, killer)
+              return bymeCheck && cell.card.uniqueID !== updatedDeadCell?.card?.uniqueID
+            case 'attacked':
+              return cell.id === participants?.target?.id
+            case 'attack':
+              return cell.id === participants?.attacker?.id
+            case 'spawn':
+              return cell.card.id === spawnID[0] && cell.id === spawnID[1]
+            default:
+              return true
+          }
+        })
       })
-    })
 
-    let batch = writeBatch(db)
+      let batch = writeBatch(db)
 
-    for await (let item of authorizedCards) {
-      // Parcourir les effets originaux de la carte
-      for (let index = 0; index < item.card.effects.length; index++) {
-        let effect = item.card.effects[index]
+      for await (let item of authorizedCards) {
+        for (let index = 0; index < item.card.effects.length; index++) {
+          let effect = item.card.effects[index]
+          if (effect.when && effect.when.includes(when)) {
+            console.log(
+              `${item.card.name} active un effet, effect.type : ${effect.type}, index : ${index}`
+            )
 
-        // Vérifier si l'effet est applicable
-        if (effect.when && effect.when.includes(when)) {
-          console.log(
-            `${item.card.name} active un effet, effect.type : ${effect.type}, index : ${index}`
-          )
-
-          if ((effect.alreadyUsed ?? true) === false) {
-            effect.alreadyUsed = true
-          }
-          console.log(effect)
-          if ((effect.spawnUsed ?? true) === false) {
-            console.log('test')
-            effect.spawnUsed = true
-          }
-
-          // Si l'effet n'est pas réutilisable, on marque qu'il a été utilisé ce tour-ci
-          if (!effect.reusable) {
-            effect.usedThisTurn = true
-          }
-
-          // Logique pour gérer l'effet (choix, exécution, etc.)
-          if (effect.choice) {
-            let effectInfos = getEffectInfo(effect.type)
-            pattern = await getPattern(room)
-            switch (effect.choice) {
-              case 'target':
-                let possibleTargets = getAllCardsOnArena(
-                  item,
-                  effect.target,
-                  pattern,
-                  effect.base ?? true
-                )
-                if (possibleTargets.length !== 0) {
-                  await goingStandby(room, playerID === 1 ? 2 : 1, false)
-                  const selection = await demandToChoiceTarget(possibleTargets, effect, item)
-                  setAskForTarget(false)
-                  const executedEffect = await effectList[effect.type]({
-                    index,
-                    item,
-                    effect,
-                    targets: selection,
-                    pattern,
-                    effectInfos,
-                    player: item.owner === playerID ? playerSelf : playerRival
-                  })
-                  await finishStandby(room)
-                  await concludeEffect(batch, executedEffect)
-
-                  // Commit the batch immediately for effects requiring target choice
-                  await batch.commit()
-                  batch = writeBatch(db) // Re-initialize the batch for subsequent operations
-                } else {
-                  await concludeEffect(batch, {
-                    targets: [item],
-                    executor: item
-                  })
-                }
-                break
-              default:
-                break
+            if ((effect.alreadyUsed ?? true) === false) {
+              effect.alreadyUsed = true
             }
-          } else {
-            let effectInfos = getEffectInfo(effect.type)
-            const executedEffect = await effectList[effect.type]({
-              index,
-              item,
-              effect,
-              pattern,
-              attacker: participants?.attacker,
-              defender: participants?.defender,
-              updatedDeadCell,
-              room,
-              killer: killer,
-              shop,
-              effectInfos,
-              player: item.owner === playerID ? playerSelf : playerRival,
-              rival: item.owner !== playerID ? playerRival : playerSelf
-            })
-            await concludeEffect(batch, executedEffect)
-            stillDead = executedEffect?.stillDead ?? true
+            if ((effect.spawnUsed ?? true) === false) {
+              effect.spawnUsed = true
+            }
+
+            if (!effect.reusable) {
+              effect.usedThisTurn = true
+            }
+
+            if (effect.choice) {
+              let effectInfos = getEffectInfo(effect.type)
+              pattern = await getPattern(room)
+              switch (effect.choice) {
+                case 'target':
+                  let possibleTargets = getAllCardsOnArena(
+                    item,
+                    effect.target,
+                    pattern,
+                    effect.base ?? true
+                  )
+                  if (possibleTargets.length !== 0) {
+                    await goingStandby(room, playerID === 1 ? 2 : 1, false)
+                    const selection = await demandToChoiceTarget(possibleTargets, effect, item)
+                    setAskForTarget(false)
+                    const executedEffect = await effectList[effect.type]({
+                      index,
+                      item,
+                      effect,
+                      targets: selection,
+                      pattern,
+                      effectInfos,
+                      player: item.owner === playerID ? playerSelf : playerRival
+                    })
+                    await finishStandby(room)
+                    await concludeEffect(batch, executedEffect)
+                    await batch.commit()
+                    batch = writeBatch(db) // Re-initialize batch for subsequent operations
+                  } else {
+                    await concludeEffect(batch, {
+                      targets: [item],
+                      executor: item
+                    })
+                  }
+                  break
+                default:
+                  break
+              }
+            } else {
+              let effectInfos = getEffectInfo(effect.type)
+              const executedEffect = await effectList[effect.type]({
+                index,
+                item,
+                effect,
+                pattern,
+                attacker: participants?.attacker,
+                defender: participants?.defender,
+                updatedDeadCell,
+                room,
+                killer: killer,
+                shop,
+                effectInfos,
+                player: item.owner === playerID ? playerSelf : playerRival,
+                rival: item.owner !== playerID ? playerRival : playerSelf
+              })
+              await concludeEffect(batch, executedEffect)
+              stillDead = executedEffect?.stillDead ?? true
+            }
           }
         }
       }
-    }
-    // Push en BDD
-    await batch.commit()
 
-    if (phaseWhen) {
-      if (firstToPlay === playerID) {
-        await goingStandby(room, playerID)
-      } else {
-        await finishStandby(room)
+      await batch.commit() // Push all remaining changes to the database
+
+      if (phaseWhen) {
+        if (firstToPlay === playerID) {
+          await goingStandby(room, playerID)
+        } else {
+          await finishStandby(room)
+        }
+        setPhaseEffects(false)
       }
-      setPhaseEffects(false)
-    }
 
-    return stillDead
+      resolve(stillDead) // Resolve the promise after all async operations are complete
+    })
   }
 
   const demandToChoiceTarget = useCallback(
@@ -267,7 +249,6 @@ export const useTryEffect = () => {
 
   const concludeEffect = useCallback(
     async (batch, result) => {
-      console.log(result)
       if (!result || result.cancel) return
       console.log("conclusion de l'effet.", result, result.targets)
 

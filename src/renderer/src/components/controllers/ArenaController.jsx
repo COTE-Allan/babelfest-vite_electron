@@ -110,9 +110,13 @@ export function ArenaController() {
 
   useEffect(() => {
     if (processDeath === null) {
-      trySpawn()
+      console.log("trySpawn special");
+      (async () => {
+        await trySpawn();
+      })();
     }
-  }, [pattern, processDeath])
+  }, [pattern, processDeath]);
+  
 
   // Propose action or movement based on the current game phase
   function proposeMove(phase) {

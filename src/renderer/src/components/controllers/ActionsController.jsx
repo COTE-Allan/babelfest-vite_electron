@@ -193,7 +193,8 @@ export const usePlaceCardOnArea = () => {
         setSelectedCards([])
         setConfirmModal(null)
         setBatchCommit(false)
-        await trySpawn()
+        // console.log("tryspawn placecard")
+        // await trySpawn()
         if (placementCostLeft == 0) {
           EndTurn()
         }
@@ -564,32 +565,47 @@ export const useTrySpawn = () => {
   const tryEffect = useTryEffect()
   const { pattern, room } = useContext(GlobalContext)
   const [isSpawning, setIsSpawning] = useState(false)
+  const [processedCells, setProcessedCells] = useState(new Set())
 
   const trySpawn = async () => {
     if (isSpawning) return
     setIsSpawning(true)
 
     try {
-      let spawnedCells = pattern.filter((cell) =>
+      let toProcess = pattern.filter((cell) =>
         cell.card?.effects?.some((effect) => effect.when?.includes('spawn') && !effect.spawnUsed)
       )
 
-      for (const cell of spawnedCells) {
-        await processCellSpawn(cell)
+      const currentProcessedCells = new Set(processedCells)
 
-        // Re-fetch pattern to check for any newly spawned cells
+      while (toProcess.length > 0) {
+        const cell = toProcess.shift() // Take the first cell to process
+
+        // Skip processing if the cell is already processed in this run
+        if (currentProcessedCells.has(cell.id)) {
+          continue
+        }
+        currentProcessedCells.add(cell.id)
+
+        console.log(`Processing spawn effects for cell ${cell.id}`)
+
+        // Process the cell's spawn effects
+        await processCellSpawn(cell)
+        console.log("Finished processing spawn for cell", cell.id)
+
+        // Fetch updated pattern to check for newly spawned cells
         let updatedPattern = await getPattern(room)
-        let newSpawnedCells = updatedPattern.filter((newCell) =>
+        const newSpawns = updatedPattern.filter((newCell) =>
           newCell.card?.effects?.some(
             (effect) => effect.when?.includes('spawn') && !effect.spawnUsed
-          )
+          ) && !currentProcessedCells.has(newCell.id)
         )
 
-        // Process newly spawned cells recursively
-        for (const newCell of newSpawnedCells) {
-          await processCellSpawn(newCell)
-        }
+        // Append any new spawns to the end of the list to be processed
+        toProcess.push(...newSpawns)
       }
+
+      setProcessedCells(new Set()) // Reset processed cells after each run
     } catch (error) {
       console.error('Error during spawning process:', error)
     } finally {
@@ -598,41 +614,31 @@ export const useTrySpawn = () => {
   }
 
   const processCellSpawn = async (cell) => {
-    // Keep track of which spawn effects have been processed
-    let processedIndexes = new Set()
+    console.log(`Processing spawn effects for cell ${cell.id}`)
 
-    // First, process all initial spawn effects
+    // Initial spawn effects processing
     await tryEffect('spawn', [], [cell.card.id, cell.id])
+    console.log("Finished initial tryEffect for spawn for cell", cell.id)
 
-    // Mark the initial spawn effects as processed
-    cell.card.effects.forEach((effect, index) => {
+    // Mark initial spawn effects as processed
+    cell.card.effects.forEach((effect) => {
       if (effect.when?.includes('spawn')) {
-        processedIndexes.add(index)
-        effect.spawnUsed = true
+        effect.spawnUsed = true // Mark effect as used
       }
     })
 
-    let effectTriggeredAgain = false
+    // Check if any new spawn effects were added dynamically
+    const newSpawnEffect = cell.card.effects.some(
+      (effect) => effect.when?.includes('spawn') && !effect.spawnUsed
+    )
 
-    // Now, check if any new spawn effects were added by the random effect
-    for (let i = 0; i < cell.card.effects.length; i++) {
-      let effect = cell.card.effects[i]
-
-      // If a new spawn effect was added by a random effect, it won't be in processedIndexes
-      if (effect.when?.includes('spawn') && !processedIndexes.has(i)) {
-        effectTriggeredAgain = true
-        break
-      }
-    }
-
-    if (effectTriggeredAgain) {
-      // Re-run tryEffect, but ensure it only processes unprocessed spawn effects
+    if (newSpawnEffect) {
+      console.log("Detected new spawn effects after initial processing for cell", cell.id)
       await tryEffect('spawn', [], [cell.card.id, cell.id])
 
-      // Mark the newly triggered effects as processed
-      cell.card.effects.forEach((effect, index) => {
+      // Mark newly triggered effects as processed
+      cell.card.effects.forEach((effect) => {
         if (effect.when?.includes('spawn')) {
-          processedIndexes.add(index)
           effect.spawnUsed = true
         }
       })
