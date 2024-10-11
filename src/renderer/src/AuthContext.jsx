@@ -99,7 +99,8 @@ export const AuthProvider = ({ children }) => {
           victories: userData.stats?.victories || 0,
           mmr: userData.stats?.mmr || 500,
           winStreak: userData.stats?.winStreak || 0,
-          longestWinStreak: userData.stats?.longestWinStreak || 0
+          longestWinStreak: userData.stats?.longestWinStreak || 0,
+          pr: userData.stats.pr || 0
         },
         status: userData.status || null,
         currentLobby: userData.currentLobby || null,

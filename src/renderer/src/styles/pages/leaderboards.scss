@@ -77,16 +77,20 @@
         }
     }
 
+    & .stats {
+        margin-left: auto;
+        background-color: rgba(122, 122, 122, 0.2);
+        font-family: 'Kimberly Bl', sans-serif;
+        padding: 5px 40px;
+        border-radius: 10px;
+        font-size: 20px;
+
+    }
+
     & .value {
         transform: translateX(-20px);
-        font-size: 20px;
-        margin-left: auto;
-        font-family: 'Kimberly Bl', sans-serif;
-        background-color: rgba(122, 122, 122, 0.2);
-        padding: 5px 40px;
         width: 150px;
         text-align: center;
-        border-radius: 10px;
     }
 
     & .leaderboardPlayerBanner-banner {

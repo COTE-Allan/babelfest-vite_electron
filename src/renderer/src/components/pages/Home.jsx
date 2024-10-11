@@ -222,9 +222,14 @@ const Home = () => {
       {state?.askToRejoin && (
         <ClassicModal>
           <p>Il semblerait que vous étiez déjà dans un lobby, voulez-vous le rejoindre ?</p>
+          <span className="alert">
+            Si vous n'étiez pas en custom, vous subirez une pénalité de MMR/PR.
+          </span>
           <div>
             <Button onClick={() => joinLobby(state?.askToRejoin, true)}>Rejoindre</Button>
-            <Button onClick={() => leaveLobby(state?.askToRejoin)}>Quitter</Button>
+            <Button onClick={() => leaveLobby(state?.askToRejoin, null, null, false, true)}>
+              Quitter
+            </Button>
           </div>
         </ClassicModal>
       )}

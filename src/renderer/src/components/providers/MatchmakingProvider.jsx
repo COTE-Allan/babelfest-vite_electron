@@ -70,7 +70,7 @@ export const MatchmakingProvider = ({ children }) => {
         await deleteDoc(doc(db, 'matchmaking', user.uid))
         successQueue()
         setTimeout(() => {
-          joinLobby(data.lobbyFound)
+          joinLobby(data.lobbyFound, false, currentUser.deck) // Passer le deck ici
         }, 1000)
       }
     }
@@ -87,35 +87,36 @@ export const MatchmakingProvider = ({ children }) => {
   }, [currentUser])
 
   const findMatch = async (player) => {
-    let match = null
+    let matchFound = false
+    let prRange = 100
     let mmrRange = 50
-    let rankRange = 3
 
-    while (!match) {
-      const lowerMMRBound = player.mmr - mmrRange
-      const upperMMRBound = player.mmr + mmrRange
-      const lowerRankBound = player.rank - rankRange
-      const upperRankBound = player.rank + rankRange
-
+    while (!matchFound) {
       let playersQuery
 
       if (player.mode === 'quick') {
+        // Pour le mode rapide, on recherche sur le MMR
+        const lowerMMRBound = player.mmr - mmrRange
+        const upperMMRBound = player.mmr + mmrRange
+
         playersQuery = query(
           collection(db, 'matchmaking'),
           where('mmr', '>=', lowerMMRBound),
           where('mmr', '<=', upperMMRBound),
           where('mode', '==', 'quick'),
-          where('verName', '==', player.verName) // Filter by verName
+          where('verName', '==', player.verName)
         )
       } else if (player.mode === 'ranked') {
+        // Pour le mode classé, on recherche sur le PR
+        const lowerPRBound = player.pr - prRange
+        const upperPRBound = player.pr + prRange
+
         playersQuery = query(
           collection(db, 'matchmaking'),
-          where('mmr', '>=', lowerMMRBound),
-          where('mmr', '<=', upperMMRBound),
-          where('rank', '>=', lowerRankBound),
-          where('rank', '<=', upperRankBound),
+          where('pr', '>=', lowerPRBound),
+          where('pr', '<=', upperPRBound),
           where('mode', '==', 'ranked'),
-          where('verName', '==', player.verName) // Filter by verName
+          where('verName', '==', player.verName)
         )
       }
 
@@ -124,29 +125,45 @@ export const MatchmakingProvider = ({ children }) => {
       for (const docSnapshot of snapshot.docs) {
         const potentialMatch = docSnapshot.data()
         if (potentialMatch && potentialMatch.id !== player.id) {
-          setMatch(potentialMatch)
-          return
+          if (player.mode === 'quick') {
+            // On accepte le match directement en mode rapide
+            setMatch(potentialMatch)
+            matchFound = true
+            break
+          } else if (player.mode === 'ranked') {
+            // En mode classé, on filtre sur le MMR côté code
+            const mmrDifference = Math.abs(player.mmr - potentialMatch.mmr)
+            if (mmrDifference <= mmrRange) {
+              setMatch(potentialMatch)
+              matchFound = true
+              break
+            }
+          }
         }
       }
 
-      if (!match) {
-        mmrRange *= 2
-        if (player.mode === 'ranked') {
-          rankRange += 2
+      if (!matchFound) {
+        // Augmenter les plages si aucun match n'est trouvé
+        if (player.mode === 'quick') {
+          mmrRange += 50
+        } else if (player.mode === 'ranked') {
+          prRange += 100
+          mmrRange += 50
         }
-        await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait for 10 seconds
+        await new Promise((resolve) => setTimeout(resolve, 10000)) // Attendre 10 secondes
       }
     }
   }
 
-  const handleStartMatchmaking = (mode) => {
+  const handleStartMatchmaking = (mode, selectedDeck) => {
     const player = {
       id: user.uid,
       name: userInfo.username,
-      mmr: userInfo.stats.mmr,
-      rank: 1,
+      mmr: userInfo.stats.mmr || 500,
+      pr: userInfo.stats.pr || 0,
       mode: mode,
-      verName: verName
+      verName: verName,
+      deck: selectedDeck || null
     }
     setCurrentUser(player)
     setMatchmakingSearch(mode)
@@ -173,7 +190,8 @@ export const MatchmakingProvider = ({ children }) => {
               version: verName,
               gamemode: match.mode
             },
-            match.id
+            match.id,
+            currentUser.deck
           )
         }, 1000)
       }

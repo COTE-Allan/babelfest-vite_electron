@@ -68,7 +68,7 @@ export function CardEffects({ detailCard, setLinkedCard }) {
           </div>
           <div className="details-card-effect-txt">
             <span>Congelé</span>
-            <p>Cette carte ne peut pas bouger pendant encore {detailCard.freeze} tours.</p>
+            <p>Cette carte ne peut plus se déplacer pendant encore {detailCard.freeze} tour(s).</p>
           </div>
         </div>
       )}
@@ -82,7 +82,7 @@ export function CardEffects({ detailCard, setLinkedCard }) {
           </div>
           <div className="details-card-effect-txt">
             <span>Brisé</span>
-            <p>Cette carte ne peut pas avoir d'armure pendant ce tour.</p>
+            <p> Cette carte ne peut pas recevoir de Point de Défense ce tour.</p>
           </div>
         </div>
       )}
@@ -97,8 +97,8 @@ export function CardEffects({ detailCard, setLinkedCard }) {
           <div className="details-card-effect-txt">
             <span>Sous l'eau</span>
             <p>
-              Cette carte peut traverser les cases occupées mais elle ne peut ni attaquer ni être
-              attaqué jusqu'à la prochaine phase de préparation.
+              Cette carte peut traverser les cases occupées, mais ne peut ni attaquer ni être
+              attaquée jusqu'à la prochaine phase de préparation.
             </p>
           </div>
         </div>

@@ -14,13 +14,14 @@ import { useContext } from 'react'
 import { getAllCards } from '../others/toolBox'
 import { drawRandomCards, generateDeck, getCardsFromArray } from '../effects/editCards'
 import { HeadOrTails } from '../effects/basics'
+import { calculateMMRChange } from '../others/xpSystem'
 
 // Créer un lobby et le rejoindre
 export function useCreateLobby() {
   const { assignUserToLobby } = useContext(AuthContext)
   const navigate = useNavigate()
 
-  const createLobby = async (lobbyData, rivalId) => {
+  const createLobby = async (lobbyData, rivalId, deck) => {
     const docRef = await addDoc(collection(db, 'lobbies'), {
       ...lobbyData
     })
@@ -33,7 +34,7 @@ export function useCreateLobby() {
       })
     }
 
-    navigate(`/lobby/${docRef.id}`)
+    navigate(`/lobby/${docRef.id}`, { state: { deck } })
   }
 
   return createLobby
@@ -43,73 +44,54 @@ export function useJoinLobby() {
   const { assignUserToLobby } = useContext(AuthContext)
   const navigate = useNavigate()
 
-  const joinLobby = async (lobbyId, rejoin = false) => {
+  const joinLobby = async (lobbyId, rejoin = false, deck) => {
     if (!rejoin) await assignUserToLobby(lobbyId)
-    navigate(`/lobby/${lobbyId}`)
+    navigate(`/lobby/${lobbyId}`, { state: { deck } })
   }
   return joinLobby
 }
 
 export function useLeaveLobby() {
   const navigate = useNavigate()
-  const { user } = useContext(AuthContext)
+  const { user, userInfo, updateUserState } = useContext(AuthContext)
 
-  const leaveLobby = async (lobbyId, leaveByDisconnect = false, gamemode, inGame = true) => {
+  const leaveLobby = async (
+    lobbyId,
+    leaveByDisconnect = false,
+    gamemode,
+    inGame = true,
+    deservePenalty = false
+  ) => {
     if (!user) return
 
     try {
+      const batch = writeBatch(db)
       const lobbyRef = doc(db, 'lobbies', lobbyId)
       const lobbyDoc = await getDoc(lobbyRef)
 
       if (lobbyDoc.exists()) {
         const lobbyData = lobbyDoc.data()
 
-        // Determine if the user is j1 or j2
         const isJ1 = lobbyData.j1 && lobbyData.j1.id === user.uid
         const isJ2 = lobbyData.j2 && lobbyData.j2.id === user.uid
 
-        // Prepare update payload for lobby
         const updatePayload = {}
 
-        // Handle ready statuses
         if (isJ1) {
           updatePayload.readyj1 = null
+          updatePayload.j1 = null
         } else if (isJ2) {
+          updatePayload.j2 = null
           updatePayload.readyj2 = null
         }
 
-        // Handle player leaving
-        if (isJ1) {
-          if (lobbyData.j2) {
-            // Promote j2 to j1
-            updatePayload.j1 = lobbyData.j2
-            updatePayload.j2 = null
-            // Move readyj2 to readyj1
-            updatePayload.readyj1 = lobbyData.readyj2 || null
-            updatePayload.readyj2 = null
-          } else {
-            // No j2, set j1 to null
-            updatePayload.j1 = null
-          }
-        } else if (isJ2) {
-          // Remove j2
-          updatePayload.j2 = null
+        batch.update(lobbyRef, updatePayload)
+
+        if (!lobbyData.j1 && !lobbyData.j2) {
+          // Le lobby est vide après la mise à jour, supprimer le lobby
+          batch.delete(lobbyRef)
         }
 
-        // Update the lobby document
-        await updateDoc(lobbyRef, updatePayload)
-
-        // After updating, check if lobby is empty
-        const updatedLobbyDoc = await getDoc(lobbyRef)
-        if (updatedLobbyDoc.exists()) {
-          const updatedLobbyData = updatedLobbyDoc.data()
-          if (!updatedLobbyData.j1 && !updatedLobbyData.j2) {
-            // Delete the lobby document
-            await deleteDoc(lobbyRef)
-          }
-        }
-
-        // Handle game document if necessary
         if (lobbyData.gameRef) {
           const gameRef = doc(db, 'games', lobbyData.gameRef)
           const gameDoc = await getDoc(gameRef)
@@ -117,14 +99,73 @@ export function useLeaveLobby() {
           if (gameDoc.exists()) {
             const gameData = gameDoc.data()
             if (!gameData.finished) {
-              await updateDoc(gameRef, {
+              batch.update(gameRef, {
                 finished: isJ1 ? 2 : isJ2 ? 1 : null,
                 revenge: { state: 'quit', id: isJ1 ? 1 : 2 }
               })
             } else {
-              await updateDoc(gameRef, {
+              batch.update(gameRef, {
                 revenge: { state: 'quit', id: isJ1 ? 1 : 2 }
               })
+            }
+
+            if (deservePenalty) {
+              const playerMMR = userInfo.stats?.mmr || 500
+              const opponentMMR =
+                gameData.player1.id === user.uid
+                  ? gameData.player2.stats.mmr
+                  : gameData.player1.stats.mmr
+              const mmrPenalty = calculateMMRChange(
+                playerMMR,
+                opponentMMR,
+                false,
+                gameData.gamemode
+              )
+
+              // Calcul du changement de PR
+              const playerPR = userInfo.stats?.pr || 0
+              const prPenalty = calculatePRChange(false, userInfo.stats?.winStreak || 0)
+
+              const userRef = doc(db, 'users', user.uid)
+              const gamesPlayedKey = `stats.gamesPlayed.${gameData.gamemode}`
+
+              // Ajouter la défaite au résumé des matchs
+              const matchSummary = {
+                opponent: {
+                  id: gameData.player1.id === user.uid ? gameData.player2.id : gameData.player1.id
+                },
+                player: {
+                  id: user.uid,
+                  xpGained: 0,
+                  mmrGained: mmrPenalty,
+                  prGained: prPenalty
+                },
+                gameDetails: {
+                  mode: gameData.gamemode,
+                  turnCount: gameData.turn,
+                  timestamp: new Date().toISOString(),
+                  result: 'defeat'
+                }
+              }
+
+              const updatedMatchSummaries = userInfo.matchSummaries
+                ? [...userInfo.matchSummaries]
+                : []
+              updatedMatchSummaries.push(matchSummary)
+              if (updatedMatchSummaries.length > 9) {
+                updatedMatchSummaries.shift() // Conserver uniquement les 9 dernières entrées
+              }
+
+              batch.update(userRef, {
+                'stats.mmr': Math.max(0, playerMMR + mmrPenalty),
+                'stats.pr': Math.max(0, playerPR + prPenalty), // Mettre à jour le PR
+                currentLobby: null,
+                [gamesPlayedKey]: (userInfo.stats?.gamesPlayed?.[gameData.gamemode] || 0) + 1,
+                matchSummaries: updatedMatchSummaries
+              })
+            } else {
+              const userRef = doc(db, 'users', user.uid)
+              batch.update(userRef, { currentLobby: null })
             }
           } else {
             console.error('Game document does not exist!')
@@ -132,12 +173,13 @@ export function useLeaveLobby() {
         }
       } else {
         console.error('Lobby document does not exist!')
+        return
       }
 
-      // Update user's currentLobby to null
-      const userRef = doc(db, 'users', user.uid)
-      await updateDoc(userRef, { currentLobby: null })
-
+      await batch.commit()
+      if (deservePenalty) {
+        await updateUserState(user)
+      }
       navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
     } catch (error) {
       console.error('Error leaving lobby: ', error)

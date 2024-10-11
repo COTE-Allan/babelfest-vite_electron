@@ -1,7 +1,7 @@
 import BackButton from '../items/BackButton'
 import { useContext, useEffect } from 'react'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import Button from '../items/Button'
 import { useTransition } from '../../TransitionContext'
 
@@ -9,22 +9,21 @@ const MatchmakingQueue = () => {
   const { matchmakingSearch, searchTime, handleStartMatchmaking, handleStopMatchmaking } =
     useContext(MatchmakingContext)
   const { gamemode } = useParams()
+  const location = useLocation()
   const { goHome } = useTransition()
-
-  const randomTips = [
-    "Placez une carte sur votre base pour la protéger d'une capture !",
-    "Réfléchissez bien à l'ordre de vos attaques...",
-    "N'oubliez jamais quel joueur à la priorité sur le tour !", 
-    "Est ce que vous avez déjà essayer d'attaquer vos propres cartes ?",
-    "Babelfest était à l'origine un concept de jeu de combat.",
-    'Le terme Babel se réfère à la bibliothèque de Babel.'
-  ]
+  const selectedDeck = location.state?.deck ?? null
 
   useEffect(() => {
     if (!matchmakingSearch) {
-      handleStartMatchmaking(gamemode)
+      handleStartMatchmaking(gamemode, selectedDeck)
     }
   }, [])
+
+  useEffect(() => {
+    if (!matchmakingSearch) {
+      // goHome()
+    }
+  }, [matchmakingSearch])
 
   const handleStop = async () => {
     await handleStopMatchmaking()

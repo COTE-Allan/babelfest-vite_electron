@@ -21,6 +21,12 @@
         width: 100%;
     }
 
+    & select {
+        margin-top: 15px;
+        width: 90%;
+        text-align: center;
+    }
+
     @include for-big-desktop-up {
         height: 700px; // Ajustement de la hauteur pour les grands écrans
         width: 490px; // Ajustement de la largeur pour les grands écrans
@@ -108,6 +114,7 @@
     &-desc {
         font-family: 'Kimberly Bl', sans-serif;
         text-align: center;
-        max-width: 80%;
+        max-width: 90%;
+        font-size: 15px;
     }
 }

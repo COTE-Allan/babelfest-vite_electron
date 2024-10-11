@@ -27,8 +27,9 @@ const Lobby = () => {
   const leaveLobby = useLeaveLobby()
   const createGame = useCreateGame()
   const navigate = useNavigate()
-  let location = useLocation()
+  const location = useLocation()
   let isSpectator = location.state?.spectator ?? false
+  const deckFromState = location.state?.deck ?? null // Récupérer le deck depuis le state
   const sendMessage = useSendMessage()
 
   // Fetch lobby and listen for changes
@@ -142,9 +143,9 @@ const Lobby = () => {
         const updatePayload = {}
 
         if (user.uid === player1?.id && !lobbyData.readyj1) {
-          updatePayload.readyj1 = true
+          updatePayload.readyj1 = deckFromState || true // Définir readyj1 avec le deck
         } else if (user.uid === player2?.id && !lobbyData.readyj2) {
-          updatePayload.readyj2 = true
+          updatePayload.readyj2 = deckFromState || true // Définir readyj2 avec le deck
         }
 
         if (Object.keys(updatePayload).length > 0) {
@@ -186,9 +187,9 @@ const Lobby = () => {
             }
           },
           lobbyData.gamemode,
-          lobbyData.readyj1 && lobbyData.deckType === 'constructed' ? lobbyData.readyj1 : null,
-          lobbyData.readyj2 && lobbyData.deckType === 'constructed' ? lobbyData.readyj2 : null,
-          lobbyData.deckType ?? 'random'
+          lobbyData.readyj1, // Deck du joueur 1
+          lobbyData.readyj2, // Deck du joueur 2
+          lobbyData.deckType ?? 'constructed'
         )
         // Update the lobby with the gameRef
         const lobbyRef = doc(db, 'lobbies', lobbyId)

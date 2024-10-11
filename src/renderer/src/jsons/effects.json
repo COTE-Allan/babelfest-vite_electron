@@ -9,7 +9,7 @@
   {
     "slug": "freeze",
     "name": "Regard de glace",
-    "desc": "À l'invocation, ciblez une carte ennemie, bloquez tout ses mouvements pendant le nombre de tour indiquée.",
+    "desc": "À l’invocation, cette carte cible une autre carte : Bloque tous les mouvements de la carte ciblée pendant le nombre de tour indiqué.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520364/babelfest/icons/froid_hs932w.webp",
     "type": "Débuffs"
   },
@@ -17,34 +17,34 @@
     "slug": "freeze",
     "name": "Congelé",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702647583/babelfest/icons/freeze.webp",
-    "desc": "Cette carte ne peut pas bouger pendant encore X tours.",
+    "desc": "Cette carte ne peut plus se déplacer pendant encore X tour(s).",
     "type": "Débuffs"
   },
   {
     "slug": "swapStats",
     "name": "Inversion",
-    "desc": "Quand cette carte attaque, elle inverse son ATK et ses HP.",
+    "desc": "Quand cette carte attaque, elle inverse son Attaque avec ses Points de Vie.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/inversion_w05qvg.webp",
     "type": "Tactiques"
   },
   {
     "slug": "trap",
     "name": "Piège à ours",
-    "desc": "Quand cette carte est ciblé par une attaque ou un soin, elle inflige un point de dégâts en retour.",
+    "desc": "Quand cette carte est ciblée par une attaque ou un soin, elle inflige un dégât en retour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/trap_buzj7i.webp",
     "type": "Pièges"
   },
   {
     "slug": "depBuff",
     "name": "Turbo",
-    "desc": "Au début d'une phase de déplacement, cette carte renforce la valeur de DEP de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
+    "desc": "Au début d’une phase de déplacement, cette carte augmente la capacité de Déplacement des alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950667/babelfest/icons/turbo.webp",
     "type": "Buffs"
   },
   {
     "slug": "defBuff",
     "name": "Bouclier Protecteur",
-    "desc": "Au début d'une phase d'attaque', cette carte renforce la défense de ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
+    "desc": "Au début d’une phase d’attaque, cette carte ajoute des Points de Défense à ses alliés adjacents de la valeur indiquée jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/shield_hueeo5.webp",
     "type": "Buffs"
   },
@@ -58,14 +58,14 @@
   {
     "slug": "deathCounter",
     "name": "Compte à rebours",
-    "desc": "Après invocation, cette carte sera détruite dans le nombre de tour indiquée.",
+    "desc": "Cette carte sera détruite dans le nombre de tour indiqué.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/countdown_dphplq.webp",
     "type": "Débuffs"
   },
   {
     "slug": "healer",
     "name": "Potion de soin",
-    "desc": "Cette carte n'inflige aucun dégâts, à la place, elle soigne ses cibles de la valeur de sa propre attaque.",
+    "desc": "Cette carte n’inflige aucun dégât. Quand elle attaque, cette carte soigne la carte ciblée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701521082/babelfest/icons/heal_ruslfb.webp",
     "type": "Tactiques"
   },
@@ -86,14 +86,14 @@
   {
     "slug": "fortress",
     "name": "Forteresse",
-    "desc": "La première attaque subie par cette carte sera annulé, l'effet est supprimé après utilisation.",
+    "desc": "La première attaque subie par cette carte est annulée. L'effet est ensuite supprimé.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/fortress_by4lr8.webp",
     "type": "Tactiques"
   },
   {
     "slug": "taser",
     "name": "Taser Post-Mortem",
-    "desc": "Tuer cette carte tue l'attaquant.",
+    "desc": "Détruire cette carte tue l’attaquant.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/defribilateur_c50qh9.webp",
     "type": "Pièges"
   },
@@ -128,21 +128,21 @@
   {
     "slug": "deathSummonGhost",
     "name": "Invocation Miroir",
-    "desc": "Quand cette carte est détruite, elle invoque la carte qui la tué.",
+    "desc": "Quand cette carte est détruite, elle invoque la carte qui l’a tuée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520359/babelfest/icons/ghost_vhg6cb.webp",
     "type": "Invocations"
   },
   {
     "slug": "defDebuff",
     "name": "Brise-Bouclier",
-    "desc": "Au début d'une phase d'attaque, appliquez l'effet 'Brisé' aux ennemis adjacents. (cette carte ne pourra pas avoir d'armure ce tour.)",
+    "desc": "Au début d’une phase d’attaque, cette carte applique l’effet “Brisé” aux cartes adverses adjacentes. Les cartes brisées ne peuvent pas recevoir de Point de Défense jusqu'à la fin du tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp",
     "type": "Débuffs"
   },
   {
     "slug": "defBroken",
     "name": "Brisé",
-    "desc": "Cette carte ne peut pas avoir d'armure pendant ce tour.",
+    "desc": "Cette carte ne peut pas recevoir de Point de Défense ce tour.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp",
     "type": "Débuffs"
   },
@@ -156,21 +156,21 @@
   {
     "slug": "moreReach",
     "name": "Archer",
-    "desc": "Cette carte peut attaquer en diagonale.",
+    "desc": "Cette carte peut attaquer les cartes adjacentes et en diagonale.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520358/babelfest/icons/archer_j7sz66.webp",
     "type": "Tactiques"
   },
   {
     "slug": "spawnSummon",
     "name": "Incantation de minions",
-    "desc": "À l'invocation, cette carte invoque le nombre indiquée de cartes dans l'arène.",
+    "desc": "À l’invocation, cette carte invoque le nombre indiqué de carte dans l’arène.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520365/babelfest/icons/minions_mr31r0.webp",
     "type": "Invocations"
   },
   {
     "slug": "stomp",
     "name": "Piétinement",
-    "desc": "Au début d'une phase d'attaque, cette carte inflige un point de dégâts à TOUTES les cartes adjacentes.",
+    "desc": "Au début d’une phase d’attaque, cette carte inflige un dégât à TOUTES les cartes adjacentes.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/stomp_tgd0eg.webp",
     "type": "Offensifs"
   },
@@ -191,21 +191,21 @@
   {
     "slug": "areaAttack",
     "name": "Pluie de flèches",
-    "desc": "Après une attaque, les cartes ennemies adjacentes à cette carte subissent un point de dégât.",
+    "desc": "Quand cette carte attaque, les cartes ennemies adjacentes à cette carte subissent un dégât.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520360/babelfest/icons/arrows_xrker8.webp",
     "type": "Offensifs"
   },
   {
     "slug": "timerSummon",
     "name": "Chronomètre de puissance",
-    "desc": "Cette carte évoluera en une forme plus puissante après le nombre de tours indiquée.",
+    "desc": "Cette carte évoluera en une forme plus puissante après le nombre de tour indiqué.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520369/babelfest/icons/chrono_ocydlb.webp",
     "type": "Invocations"
   },
   {
     "slug": "deathScythe",
     "name": "Force du dieu de la mort",
-    "desc": "Cette carte ignore l'effet Forteresse et la défense des cartes qu'elle attaque.",
+    "desc": "Cette carte ignore l’effet “Forteresse” et les Points de Défense des cartes qu’elle attaque.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520366/babelfest/icons/faux_jtztul.webp",
     "type": "Offensifs"
   },
@@ -219,7 +219,7 @@
   {
     "slug": "seeingEye",
     "name": "Troisième œil",
-    "desc": "Au début d'une phase de déplacement, révélez les cartes ennemies adjacentes dissimulées et supprimez leurs effets.",
+    "desc": "Au début d’une phase de déplacement, cette carte applique l’effet “Dévoilé” aux cartes dissimulées adverses adjacentes. Les cartes dévoilées perdent tous leurs effets.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950666/babelfest/icons/seeingEye.webp",
     "type": "Pièges"
   },
@@ -233,21 +233,21 @@
   {
     "slug": "shopSummon",
     "name": "Soldes",
-    "desc": "A l'invocation, cette carte invoque une copie d'une carte aléatoire de la boutique sur la case la plus proche.",
+    "desc": "À l’invocation, cette carte invoque une copie d'une carte aléatoire de la boutique sur la case la plus proche.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1702950666/babelfest/icons/soldes.webp",
     "type": "Invocations"
   },
   {
     "slug": "randomHP",
     "name": "Médecine douteuse",
-    "desc": "À l'invocation, cette carte obtient une valeur de points de vies aléatoire.",
+    "desc": "À l’invocation, cette carte obtient une valeur de Points de Vie aléatoire.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520367/babelfest/icons/random_nb5zhf.webp",
     "type": "Aléatoires"
   },
   {
     "slug": "chaosTP",
     "name": "Téléportations Chaotiques",
-    "desc": "À l'invocation, cette carte échange les positions de toutes les cartes dans l'arène. (sauf les cartes sur les bases.)",
+    "desc": "À l'invocation, cette carte échange les positions de toutes les cartes dans l'arène. (cartes sur bases exclues)",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1704926036/babelfest/icons/misdirection.webp",
     "type": "Aléatoires"
   },
@@ -261,7 +261,7 @@
   {
     "slug": "revealed",
     "name": "Dévoilé",
-    "desc": "Cette carte ne possède plus d'effets car elle a été révélée par le Troisième œil.",
+    "desc": "Cette carte ne possède plus d’effet car elle a été révélée par l’effet “Troisième œil”.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1705564482/babelfest/icons/muted.webp",
     "type": "Débuffs"
   },
@@ -276,62 +276,62 @@
     "slug": "grapple",
     "name": "Grappin",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1707128021/babelfest/icons/grapple.webp",
-    "desc": "À l'invocation, ciblez une carte (sauf cartes sur bases), téléportez là sur la case la plus proche de cette carte.",
+    "desc": "À l’invocation, cette carte cible une autre carte. Téléporte la cible sur la case la plus proche de cette carte (cartes sur bases exclues).",
     "type": "Tactiques"
   },
   {
     "slug": "diving",
     "name": "Plongeon",
-    "desc": "À l'invocation et au début d'une phase de préparation sur deux, cette carte obtient l'effet 'Sous l'eau' (elle ne peut ni attaquer ni être attaqué.)",
+    "desc": "À l'invocation et au début d'une phase de préparation sur deux, cette carte gagne l'effet “Sous l'eau”, l'empêchant d'attaquer ou d'être attaquée, mais lui permet de traverser les cases occupées.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520357/babelfest/icons/whale-tail.webp",
     "type": "Tactiques"
   },
   {
     "slug": "underwater",
     "name": "Sous l'eau",
-    "desc": "Cette carte peut traverser les cases occupées mais elle ne peut ni attaquer ni être attaqué jusqu'à la prochaine phase de préparation.",
+    "desc": "Cette carte peut traverser les cases occupées, mais ne peut ni attaquer ni être attaquée jusqu'à la prochaine phase de préparation.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1708444045/babelfest/icons/water-splash.webp",
     "type": "Tactiques"
   },
   {
     "slug": "metamorphSummon",
     "name": "Métamorphose",
-    "desc": "À l'invocation, ciblez une carte et métamorphosez-la.",
+    "desc": "À l’invocation, cette carte cible une autre carte et la métamorphose en une carte précise.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1711978902/babelfest/icons/metarmorph.webp",
     "type": "Invocations"
   },
   {
     "slug": "flame",
     "name": "Surchauffe",
-    "desc": "Quand cette carte en détruit une autre, brûlez la case de la cible, une case brûlée inflige un dégât quand une carte se déplace dessus.",
+    "desc": "Quand cette carte détruit une autre carte, la case de la cible est brûlée. Une case brûlée inflige un dégât quand une carte se déplace dessus puis redevient normale.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1717594834/babelfest/icons/flame.webp",
     "type": "Offensifs"
   },
   {
     "slug": "permAtk",
     "name": "Griffes d'acier",
-    "desc": "A l'invocation, augmentez l'ATK max des alliés adjacents de la valeur indiquée.",
+    "desc": "À l’invocation, cette carte augmente l’Attaque max des alliés adjacents de la valeur indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/monster-grasp.webp",
     "type": "Buffs"
   },
   {
     "slug": "permHP",
     "name": "Cœur d'acier",
-    "desc": "A l'invocation, augmentez les HP max des alliés adjacents de la valeur indiquée.",
+    "desc": "À l’invocation, cette carte augmente les Points de Vie max des alliés adjacents de la valeur indiquée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1718009120/babelfest/icons/heart-shield.webp",
     "type": "Buffs"
   },
   {
     "slug": "processorAlly",
     "name": "Processeur de bataille",
-    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiquée pour chaque carte Typique alliée.",
+    "desc": "À l’invocation, cette carte augmente ses statistiques de la valeur indiquée pour chaque carte Typique (1) alliée.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload/v1718009120/babelfest/icons/processor.webp",
     "type": "Buffs"
   },
   {
     "slug": "processorRival",
     "name": "Processeur de pression",
-    "desc": "A l'invocation, augmentez les statistiques de cette carte de la valeur indiquée pour chaque carte Épique ou Légendaire adverse.",
+    "desc": "À l’invocation, cette carte augmente ses statistiques de la valeur indiquée pour chaque carte Épique (3) et Légendaire (4) adverse.",
     "icon": "https://res.cloudinary.com/dxdtcakuv/image/upload//w_100/v1718009120/babelfest/icons/cpu-shot.webp",
     "type": "Buffs"
   }

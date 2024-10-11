@@ -436,9 +436,58 @@ export async function getPlayerRank(userId) {
     }
   }
 
+  // **Nouvelle requête pour le classement basé sur le PR**
+  const prQuery = query(usersRef, orderBy('stats.pr', 'desc'))
+  const prQuerySnapshot = await getDocs(prQuery)
+
+  let prRank = 0
+  let foundPr = false
+
+  for (const doc of prQuerySnapshot.docs) {
+    prRank++
+
+    if (doc.id === userId) {
+      foundPr = true
+      break
+    }
+  }
+
   return {
     mmrRank: foundMmr ? mmrRank : null,
-    levelXpRank: foundLevelXp ? levelXpRank : null
+    levelXpRank: foundLevelXp ? levelXpRank : null,
+    prRank: foundPr ? prRank : null // Ajouter le prRank au retour
+  }
+}
+
+export async function getTopUsersByPR(amount = 10) {
+  const usersRef = collection(db, 'users')
+
+  // Requête pour trier par PR descendant
+  const q = query(usersRef, orderBy('stats.pr', 'desc'), limit(amount))
+
+  try {
+    const querySnapshot = await getDocs(q)
+    const topUsers = []
+    let rank = 1
+
+    querySnapshot.forEach((doc) => {
+      let userData = doc.data()
+
+      // Vérifier si le champ `rank` existe et s'il est un objet, le supprimer
+      if (typeof userData.rank === 'object') {
+        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+        delete userData.rank // Supprime l'ancien champ `rank`
+      }
+
+      // Ajouter l'utilisateur avec le rang mis à jour
+      topUsers.push({ id: doc.id, rank, ...userData })
+      rank++
+    })
+
+    return topUsers
+  } catch (error) {
+    console.error('Erreur lors de la récupération des utilisateurs :', error)
+    return []
   }
 }
 
@@ -564,6 +613,7 @@ export function getPlayerStats(stats) {
       ranked: stats.gamesPlayed.ranked ?? 0,
       custom: stats.gamesPlayed.custom ?? 0
     },
+    pr: stats.pr,
     mmr: stats.mmr,
     winStreak: stats.winStreak ?? 0,
     longestWinStreak: stats.longestWinStreak ?? 0

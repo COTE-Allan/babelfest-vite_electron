@@ -3,7 +3,8 @@ import {
   getPlayerRank,
   getRankClass,
   getTopUsersByLevel,
-  getTopUsersByMMR
+  getTopUsersByMMR,
+  getTopUsersByPR // Importer la nouvelle fonction
 } from '../others/toolBox'
 import '../../styles/pages/leaderboards.scss'
 import { AuthContext } from '../../AuthContext'
@@ -16,8 +17,8 @@ import BackButton from '../items/BackButton'
 import HudNavLink from '../items/hudNavLink'
 import Logo from '../../assets/svg/babelfest.svg'
 import { MdOutlineSportsScore } from 'react-icons/md'
-import { FaStairs } from 'react-icons/fa6'
-import { FaStar } from 'react-icons/fa'
+import { FaStar, FaTrophy } from 'react-icons/fa' // Importer FaStairs depuis 'react-icons/fa'
+import { getRankProgress } from '../others/xpSystem'
 
 const Leaderboards = () => {
   const { user, userInfo, userSettings } = useContext(AuthContext)
@@ -43,23 +44,24 @@ const Leaderboards = () => {
       } else if (leaderboard === 'Level') {
         data = await getTopUsersByLevel(30)
         rank = (await getPlayerRank(user.uid)).levelXpRank
+      } else if (leaderboard === 'PR') {
+        data = await getTopUsersByPR(30)
+        rank = (await getPlayerRank(user.uid)).prRank
       }
 
-      // After fetching, update state
+      // Après la récupération, mettez à jour l'état
       setLeaderboardData(data)
       setMyRank(rank)
     } catch (error) {
       console.error('Error fetching leaderboard data:', error)
-      // Handle any errors in fetching data (e.g., set an error state if needed)
+      // Gérer les erreurs de récupération de données
     }
   }
 
-  // Fetch the selected leaderboard data whenever it changes
+  // Récupérer les données du classement sélectionné chaque fois qu'il change
   useEffect(() => {
     fetchLeaderboardData(selectedLeaderboard)
   }, [selectedLeaderboard, user.uid])
-
-  // return;
 
   return (
     <div className="leaderboard">
@@ -90,9 +92,21 @@ const Leaderboards = () => {
             <FaStar size={45} />
             <span className="hidden-span">Par niveau</span>
           </HudNavLink>
+          <HudNavLink
+            permOpen
+            onClick={() => {
+              setLeaderboardData(null)
+              setSelectedLeaderboard('PR')
+              select()
+            }}
+            className={selectedLeaderboard === 'PR' ? 'selected' : ''}
+          >
+            <FaTrophy size={45} />
+            <span className="hidden-span">Par PR</span>
+          </HudNavLink>
         </div>
 
-        {/* Display LoadingLogo while data is being fetched */}
+        {/* Afficher LoadingLogo pendant que les données sont en cours de récupération */}
         <div className="leaderboard-content">
           {leaderboardData && myRank !== null ? (
             <>
@@ -112,11 +126,22 @@ const Leaderboards = () => {
                     <div className="leaderboard-list-item-bannerWrapper">
                       <LeaderboardPlayerBanner user={user} accessProfile />
                     </div>
-                    <span className="value">
-                      {selectedLeaderboard === 'MMR'
-                        ? `MMR ${user.stats.mmr}`
-                        : `Niveau ${user.level}`}
-                    </span>
+                    <div className="stats">
+                      {selectedLeaderboard === 'PR' &&
+                        (() => {
+                          let rankInfos = getRankProgress(user.stats.pr)
+
+                          return (
+                            <span className={rankInfos.rankClass}>{rankInfos.currentRank}</span>
+                          )
+                        })()}
+
+                      <span className="value">
+                        {selectedLeaderboard === 'MMR' && `MMR ${user.stats.mmr}`}
+                        {selectedLeaderboard === 'Level' && `Niveau ${user.level}`}
+                        {selectedLeaderboard === 'PR' && ` - PR ${user.stats.pr}`}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -125,11 +150,20 @@ const Leaderboards = () => {
                 <div className="leaderboard-list-item-bannerWrapper">
                   <LeaderboardPlayerBanner user={userInfo} />
                 </div>
-                <span className="value">
-                  {selectedLeaderboard === 'MMR'
-                    ? `MMR ${userInfo.stats.mmr}`
-                    : `Niveau ${userInfo.level}`}
-                </span>
+                <div className="stats">
+                  {selectedLeaderboard === 'PR' &&
+                    (() => {
+                      let rankInfos = getRankProgress(userInfo.stats.pr)
+
+                      return <span className={rankInfos.rankClass}>{rankInfos.currentRank}</span>
+                    })()}
+
+                  <span className="value">
+                    {selectedLeaderboard === 'MMR' && `MMR ${userInfo.stats.mmr}`}
+                    {selectedLeaderboard === 'Level' && `Niveau ${userInfo.level}`}
+                    {selectedLeaderboard === 'PR' && ` - PR ${userInfo.stats.pr}`}
+                  </span>
+                </div>
               </div>
             </>
           ) : (

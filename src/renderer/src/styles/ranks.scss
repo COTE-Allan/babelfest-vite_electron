@@ -4,8 +4,10 @@
   /* Couleur du texte bronze */
   text-shadow:
     1px 1px 2px #000,
-    /* Ombre noire pour du contraste */ 0 0 1em #805a34,
-    /* Lueur externe légère */ 0 0 0.2em #805a34;
+    /* Ombre noire pour du contraste */
+    0 0 1em #805a34,
+    /* Lueur externe légère */
+    0 0 0.2em #805a34;
   /* Lueur externe plus sombre */
 }
 
@@ -15,8 +17,10 @@
   /* Couleur du texte argent */
   text-shadow:
     1px 1px 2px #000,
-    /* Ombre noire pour du contraste */ 0 0 1em #b3b3b3,
-    /* Lueur externe légère */ 0 0 0.2em #b3b3b3;
+    /* Ombre noire pour du contraste */
+    0 0 1em #b3b3b3,
+    /* Lueur externe légère */
+    0 0 0.2em #b3b3b3;
   /* Lueur externe plus sombre */
 }
 
@@ -26,8 +30,10 @@
   /* Couleur du texte or */
   text-shadow:
     1px 1px 2px #000,
-    /* Ombre noire pour du contraste */ 0 0 1em #e5c100,
-    /* Lueur externe dorée */ 0 0 0.2em #e5c100;
+    /* Ombre noire pour du contraste */
+    0 0 1em #e5c100,
+    /* Lueur externe dorée */
+    0 0 0.2em #e5c100;
   /* Lueur externe plus intense */
 }
 
@@ -37,8 +43,10 @@
   /* Couleur du texte diamant */
   text-shadow:
     1px 1px 2px #000,
-    /* Ombre noire pour du contraste */ 0 0 1em #a7e7ff,
-    /* Lueur externe bleu clair */ 0 0 0.2em #a7e7ff;
+    /* Ombre noire pour du contraste */
+    0 0 1em #a7e7ff,
+    /* Lueur externe bleu clair */
+    0 0 0.2em #a7e7ff;
   /* Lueur externe plus intense */
 }
 
@@ -48,17 +56,24 @@
   /* Couleur du texte */
   text-shadow:
     0 0 8px #ff0000,
-    /* Rouge */ 0 0 8px #ff7f00,
-    /* Orange */ 0 0 8px #ffff00,
-    /* Jaune */ 0 0 8px #00ff00,
-    /* Vert */ 0 0 8px #0000ff,
-    /* Bleu */ 0 0 8px #4b0082,
-    /* Indigo */ 0 0 8px #9400d3;
+    /* Rouge */
+    0 0 8px #ff7f00,
+    /* Orange */
+    0 0 8px #ffff00,
+    /* Jaune */
+    0 0 8px #00ff00,
+    /* Vert */
+    0 0 8px #0000ff,
+    /* Bleu */
+    0 0 8px #4b0082,
+    /* Indigo */
+    0 0 8px #9400d3;
   /* Violet */
   animation: rainbowTextShadow 6s linear infinite;
 }
 
 @keyframes rainbowTextShadow {
+
   0%,
   100% {
     text-shadow:
@@ -135,5 +150,28 @@
       0 0 8px #4b0082,
       0 0 8px #9400d3,
       0 0 8px #ff0000;
+  }
+}
+
+.rank-progress-bar {
+  width: 100%;
+  font-family: 'Kimberly Bl',
+    sans-serif;
+
+  .rank-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+
+  /* Styles communs pour la barre de progression */
+  .progressBarContainer {
+    width: 100%;
+
+    & span {
+      text-shadow: none !important;
+    }
+
   }
 }

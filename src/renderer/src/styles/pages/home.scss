@@ -334,6 +334,7 @@
       align-items: center;
       flex-wrap: nowrap;
       overflow: hidden;
+      border: rgba(255, 255, 255, 0.1) 2px solid;
 
       @include for-big-desktop-up {
         height: 100px;
@@ -344,13 +345,14 @@
       &-item {
         flex: 33%;
         height: 100%;
-        transition: opacity 250ms ease-in-out;
-        opacity: 0.6;
+        transition: opacity 250ms ease-in-out, filter 250ms ease-in-out;
+        // opacity: 0.6;
         filter: grayscale(25%);
 
         &:hover {
           opacity: 1;
           filter: grayscale(0);
+          transform: scale(1);
         }
 
         & svg {
@@ -359,7 +361,7 @@
         }
 
         &:nth-child(1) {
-          background-color: #1da0f2;
+          background-color: #161616;
 
         }
 

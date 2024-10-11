@@ -1,7 +1,23 @@
+import { getRankProgress } from '../others/xpSystem'
 import '../../styles/account/statsDisplayer.scss'
 import achievements from '../../jsons/achievements.json'
 
 export default function StatsDisplayer({ user, stats }) {
+  // Obtenir les PR du joueur
+  const pr = stats.pr || 0
+
+  // Utiliser getRankProgress pour obtenir les informations de rang
+  const rankProgress = getRankProgress(pr)
+  const currentRankName = rankProgress.currentRank
+  const rankClassName = rankProgress.rankClass
+  const nextRankName = rankProgress.nextRank
+  const nextRankClassName = rankProgress.nextRankClass
+  const prForNextRank = rankProgress.prForNextRank
+  const prInCurrentRank = rankProgress.prInCurrentRank
+
+  // Calculer le pourcentage de progression dans le rang actuel
+  const progressPercentage = ((pr - prInCurrentRank) / (prForNextRank - prInCurrentRank)) * 100
+
   return (
     <div className="statsDisplayer">
       <div className="statsDisplayer-content">
@@ -72,16 +88,18 @@ export default function StatsDisplayer({ user, stats }) {
               </span>
             </li>
             <li className="statsDisplayer-category-list-item">
-              <span className="statsDisplayer-category-list-item-value bronze">BRONZE V</span> Rang
-              de saison actuel
+              <span className={`statsDisplayer-category-list-item-value ${rankClassName}`}>
+                {currentRankName.toUpperCase()}
+              </span>{' '}
+              Rang de saison actuel
             </li>
             <li className="statsDisplayer-category-list-item">
-              <span className="statsDisplayer-category-list-item-value">0</span> Pts de rang
+              <span className="statsDisplayer-category-list-item-value">{pr}</span> Pts de rang
             </li>
           </ul>
         </div>
         <div className="statsDisplayer-category">
-          <h3>Perfomances</h3>
+          <h3>Performances</h3>
           <hr />
           <ul className="statsDisplayer-category-list">
             <li className="statsDisplayer-category-list-item">
@@ -107,7 +125,9 @@ export default function StatsDisplayer({ user, stats }) {
           <hr />
           <ul className="statsDisplayer-category-list">
             <li className="statsDisplayer-category-list-item">
-              <span className="statsDisplayer-category-list-item-value">0</span>
+              <span className="statsDisplayer-category-list-item-value">
+                {user.friends?.length || 0}
+              </span>
               Amis
             </li>
             <li className="statsDisplayer-category-list-item">
@@ -116,7 +136,7 @@ export default function StatsDisplayer({ user, stats }) {
             </li>
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">
-                {user.honored.quantity ?? 0}
+                {user.honored?.quantity ?? 0}
               </span>
               Honneurs envoyés
             </li>

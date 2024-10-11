@@ -5,6 +5,7 @@ import TutorialCardArena from '../../assets/img/tutorialMenuCard.png'
 import QuickplayCardArena from '../../assets/img/quickplayMenuCard.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../AuthContext'
+
 const GamemodeSelect = () => {
   const { userInfo } = useContext(AuthContext)
   let isTutorialFinished = userInfo.achievements.includes('HF_tutorial')
@@ -28,7 +29,13 @@ const GamemodeSelect = () => {
             where="/lobbyList"
             bg={RankedCardArena}
           />
-          <MenuCard disabled={"Ce mode de jeu n'est pas encore disponible."} />
+          <MenuCard
+            disabled={!isTutorialFinished ? lockedReason : false}
+            name="Partie classée"
+            desc="Affrontez des joueurs avec vos propres decks et grimpez le classement !"
+            where="/matchmakingQueue/ranked"
+            requiresDeck={true} // Indique que la sélection de deck est nécessaire
+          />
         </div>
         <div className="MenuCard-container-cards-list">
           <MenuCard
@@ -38,11 +45,12 @@ const GamemodeSelect = () => {
             where="/tutorial"
             bg={TutorialCardArena}
           />
-          {/* <MenuCard classNames="small" disabled={"Ce mode de jeu n'est pas encore disponible."} /> */}
+          {/* Autres cartes éventuelles */}
         </div>
       </div>
       <BackButton />
     </div>
   )
 }
+
 export default GamemodeSelect
