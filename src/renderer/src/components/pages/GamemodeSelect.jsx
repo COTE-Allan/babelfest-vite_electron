@@ -8,8 +8,9 @@ import { AuthContext } from '../../AuthContext'
 
 const GamemodeSelect = () => {
   const { userInfo } = useContext(AuthContext)
-  let isTutorialFinished = userInfo.achievements.includes('HF_tutorial')
+  const isTutorialFinished = userInfo.achievements.includes('HF_tutorial')
   const lockedReason = 'Terminez le tutoriel pour débloquer ce mode de jeu.'
+  const levelLockedReason = 'Atteignez le niveau 10 pour débloquer ce mode de jeu.'
 
   return (
     <div className="MenuCard-container">
@@ -30,11 +31,16 @@ const GamemodeSelect = () => {
             bg={RankedCardArena}
           />
           <MenuCard
-            disabled={!isTutorialFinished ? lockedReason : false}
+            disabled={
+              !isTutorialFinished ? lockedReason 
+              : userInfo.level <= 10 ? levelLockedReason 
+              : false
+            }
             name="Partie classée"
             desc="Affrontez des joueurs avec vos propres decks et grimpez le classement !"
             where="/matchmakingQueue/ranked"
-            requiresDeck={true} // Indique que la sélection de deck est nécessaire
+            requiresDeck={true} 
+            // bg={RankedCardArena}
           />
         </div>
         <div className="MenuCard-container-cards-list">

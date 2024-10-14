@@ -147,8 +147,8 @@ export const MatchmakingProvider = ({ children }) => {
         if (player.mode === 'quick') {
           mmrRange += 50
         } else if (player.mode === 'ranked') {
-          prRange += 100
-          mmrRange += 50
+          prRange += 300
+          mmrRange += 200
         }
         await new Promise((resolve) => setTimeout(resolve, 10000)) // Attendre 10 secondes
       }

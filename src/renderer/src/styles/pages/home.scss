@@ -280,10 +280,10 @@
       transition: opacity 200ms ease-in-out;
       opacity: 0.5;
       margin-bottom: 5px;
-      font-size: 20px;
+      font-size: 17px;
 
       @include for-big-desktop-up {
-        font-size: 25px;
+        font-size: 22px;
 
       }
     }
@@ -294,7 +294,9 @@
 
       &-item {
         width: 90px;
-
+        @include for-big-desktop-up {
+          width: 140px;
+        }
         opacity: 0.75;
         transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
 
@@ -321,7 +323,7 @@
   &-socials {
     @include for-big-desktop-up {
       & span {
-        font-size: 25px;
+        font-size: 22px;
       }
     }
 
@@ -416,10 +418,10 @@
       overflow: hidden;
       max-width: 100%;
       margin-bottom: 10px;
-      font-size: 20px;
+      font-size: 17px;
 
       @include for-big-desktop-up {
-        font-size: 25px;
+        font-size: 22px;
       }
     }
 

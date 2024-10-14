@@ -27,6 +27,14 @@
         text-align: center;
     }
 
+    & .season-info {
+        margin-bottom: 10px;
+        font-family: 'Kimberly Bl',
+        sans-serif;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
     @include for-big-desktop-up {
         height: 700px; // Ajustement de la hauteur pour les grands écrans
         width: 490px; // Ajustement de la largeur pour les grands écrans

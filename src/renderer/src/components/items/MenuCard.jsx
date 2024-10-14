@@ -3,11 +3,10 @@ import { useTransition } from '../../TransitionContext'
 import { useSendMessage } from '../others/toolBox'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
-import ClassicModal from '../items/ClassicModal'
-import Button from '../items/Button'
+import rankedSeasons from '../../jsons/rankedSeasons.json'
 
 const MenuCard = ({
   name,
@@ -25,6 +24,19 @@ const MenuCard = ({
   const { goForward } = useTransition()
   const sendMessage = useSendMessage()
   const [selectedDeck, setSelectedDeck] = useState(null)
+  const [seasonInfo, setSeasonInfo] = useState({ name: '', daysRemaining: 0 })
+
+  useEffect(() => {
+    const currentSeason = rankedSeasons[0] // Récupérer la première saison
+    const endDate = currentSeason.endDate * 1000 // Convertir la date de fin en millisecondes
+    const now = Date.now()
+    const daysRemaining = Math.max(0, Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)))
+    setSeasonInfo({
+      name: currentSeason.name,
+      daysRemaining,
+      hex: currentSeason.hex
+    })
+  }, [])
 
   const handleForward = () => {
     if (disabled) {
@@ -45,11 +57,18 @@ const MenuCard = ({
   return (
     <div className={`MenuCard ${classNames} `} onClick={handleForward} onMouseEnter={hover}>
       <span className="MenuCard-name">
-        {disabled && <FaLock size={40} />}
+        {disabled && <FaLock size={35} />}
         {disabled ? 'Bloqué' : name}
       </span>
+      {requiresDeck && !disabled && (
+        <span className="season-info" style={{backgroundColor: seasonInfo.hex}}>
+          {seasonInfo.name} - {seasonInfo.daysRemaining} jours restants
+        </span>
+      )}
+
       <span className="MenuCard-desc">{disabled ? disabled : desc}</span>
-      {requiresDeck && (
+
+      {requiresDeck && !disabled && (
         <select
           value={selectedDeck ? selectedDeck.id : ''}
           onChange={(e) =>
@@ -64,6 +83,7 @@ const MenuCard = ({
           ))}
         </select>
       )}
+
       <img src={bg} className="MenuCard-bg" />
     </div>
   )
