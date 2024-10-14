@@ -97,6 +97,10 @@ export default function Library({ editorMode, deck }) {
       borderRadius: '5px',
       border: 'solid 2px rgb(255, 255, 255)'
     }),
+    input: (provided) => ({
+      ...provided,
+      color: 'white',
+    }),
     option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected ? 'gray' : 'rgba(0, 0, 0, 0.5)',
@@ -134,10 +138,13 @@ export default function Library({ editorMode, deck }) {
   const years = [
     ...new Set(allCards.filter((card) => card.year).map((card) => card.year.toString()))
   ].map((year) => ({ value: year, label: year }))
-  const effects = getAllEffects().map((effect) => ({
+const effects = getAllEffects()
+  .map((effect) => ({
     value: effect.slug,
     label: effect.name
   }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+
   const rarityOptions = Object.entries({
     1: 'Typique',
     2: 'Rare',

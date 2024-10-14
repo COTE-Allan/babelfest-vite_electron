@@ -399,7 +399,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Zero Swordfire",
     "title": "Héros de la symphonie",
     "atk": 3,
@@ -455,6 +454,23 @@
         "base": false
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Tôteem",
+    "title": "Le manieur de chair",
+    "atk": 3,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "./cards/series/babelfest_2024series18.png",
+    "rarity": 1,
+    "cost": 2,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Eyessmanga"
   },
   {
     "featured": true,
