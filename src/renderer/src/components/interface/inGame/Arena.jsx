@@ -25,8 +25,8 @@ export default function Arena() {
   } = useContext(GlobalContext)
 
   {!isSpectator &&
-    ArenaController()
-    DeathController()
+    ArenaController() 
+    DeathController() 
   }
 
   return (

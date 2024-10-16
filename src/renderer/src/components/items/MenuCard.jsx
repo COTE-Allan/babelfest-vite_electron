@@ -61,7 +61,7 @@ const MenuCard = ({
         {disabled ? 'Bloqué' : name}
       </span>
       {requiresDeck && !disabled && (
-        <span className="season-info" style={{ backgroundColor: seasonInfo.hex }}>
+        <span className="season-info" style={{ backgroundColor: seasonInfo.hex + "50" }}>
           {seasonInfo.name} - {seasonInfo.daysRemaining} jours restants
         </span>
       )}

@@ -109,7 +109,8 @@ export function ArenaController() {
   }, [phaseEffects])
 
   useEffect(() => {
-    if (processDeath === null) {
+    console.log(!processDeath)
+    if (!processDeath) {
       console.log("trySpawn special");
       (async () => {
         await trySpawn();

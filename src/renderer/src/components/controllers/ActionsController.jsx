@@ -582,10 +582,7 @@ export const useTrySpawn = () => {
         const cell = toProcess.shift() // Take the first cell to process
 
         // Skip processing if the cell is already processed in this run
-        if (currentProcessedCells.has(cell.id)) {
-          continue
-        }
-        currentProcessedCells.add(cell.id)
+
 
         console.log(`Processing spawn effects for cell ${cell.id}`)
 
@@ -626,23 +623,6 @@ export const useTrySpawn = () => {
         effect.spawnUsed = true // Mark effect as used
       }
     })
-
-    // Check if any new spawn effects were added dynamically
-    const newSpawnEffect = cell.card.effects.some(
-      (effect) => effect.when?.includes('spawn') && !effect.spawnUsed
-    )
-
-    if (newSpawnEffect) {
-      console.log("Detected new spawn effects after initial processing for cell", cell.id)
-      await tryEffect('spawn', [], [cell.card.id, cell.id])
-
-      // Mark newly triggered effects as processed
-      cell.card.effects.forEach((effect) => {
-        if (effect.when?.includes('spawn')) {
-          effect.spawnUsed = true
-        }
-      })
-    }
   }
 
   return trySpawn

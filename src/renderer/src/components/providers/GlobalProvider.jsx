@@ -334,7 +334,6 @@ export const GlobalProvider = () => {
 
     return startWatchingTradePhase
   }
-
   let propsList = {
     room,
     user,

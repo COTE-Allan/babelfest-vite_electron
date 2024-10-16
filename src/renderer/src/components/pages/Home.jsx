@@ -17,13 +17,14 @@ import changelog from '../../jsons/changelog.json'
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaScroll, FaYoutube } from 'react-icons/fa'
-import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
+import { IoLibrarySharp, IoLogOut, IoTrophy } from 'react-icons/io5'
 import { FaXTwitter } from 'react-icons/fa6'
 import { MdLeaderboard } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
 import { useMusic } from '../providers/MusicProvider'
+import rankedSeasons from '../../jsons/rankedSeasons.json'
 
 const Home = () => {
   const { isPlaying } = useMusic()
@@ -117,6 +118,10 @@ const Home = () => {
           <a onClick={() => goForward('/leaderboards')} onMouseEnter={hover} onMouseDown={select}>
             <MdLeaderboard size={50} />
             Classements
+          </a>
+          <a onClick={() => goForward('/rankedInfos')} onMouseEnter={hover} onMouseDown={select} style={{color: rankedSeasons[0].hex}}>
+            <IoTrophy size={35} />
+           {rankedSeasons[0].name}
           </a>
           <a
             onClick={() => goForward(`/account/${user.uid}`)}

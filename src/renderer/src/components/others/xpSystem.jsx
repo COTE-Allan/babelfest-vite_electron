@@ -134,8 +134,8 @@ export function calculateMMRChange(currentMMR, opponentMMR, gameWon, gameMode) {
 
   // Application des limites
   const mmrChangeSign = Math.sign(mmrChangeValue)
-  const minLimit = minMMRChange * mmrChangeSign
-  const maxLimit = maxMMRChange * mmrChangeSign
+  const dynamicMinMMRChange = mmrDifference > 200 ? 30 : 15; // Par exemple, si la différence de MMR est grande, augmenter la perte minimale
+  const minLimit = dynamicMinMMRChange * mmrChangeSign;  const maxLimit = maxMMRChange * mmrChangeSign
 
   mmrChangeValue = Math.max(Math.min(mmrChangeValue, maxLimit), minLimit)
 
