@@ -30,9 +30,10 @@
     & .season-info {
         margin-bottom: 10px;
         font-family: 'Kimberly Bl',
-        sans-serif;
+            sans-serif;
         padding: 10px;
         border-radius: 10px;
+
     }
 
     @include for-big-desktop-up {

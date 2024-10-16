@@ -14,7 +14,7 @@ import { useContext } from 'react'
 import { getAllCards } from '../others/toolBox'
 import { drawRandomCards, generateDeck, getCardsFromArray } from '../effects/editCards'
 import { HeadOrTails } from '../effects/basics'
-import { calculateMMRChange } from '../others/xpSystem'
+import { calculateMMRChange, calculatePRChange } from '../others/xpSystem'
 
 // Créer un lobby et le rejoindre
 export function useCreateLobby() {
@@ -124,7 +124,11 @@ export function useLeaveLobby() {
 
               // Calcul du changement de PR
               const playerPR = userInfo.stats?.pr || 0
-              const prPenalty = calculatePRChange(false, userInfo.stats?.winStreak || 0)
+              const prPenalty = calculatePRChange(
+                false,
+                userInfo.stats?.winStreak || 0,
+                gameData.gamemode
+              )
 
               const userRef = doc(db, 'users', user.uid)
               const gamesPlayedKey = `stats.gamesPlayed.${gameData.gamemode}`
@@ -344,7 +348,7 @@ async function DrawCards(room, cardAmount) {
 
 async function DrawCardsWithRarityMax(room, cardAmount, deckJ1, deckJ2) {
   const deck = await getDeck(room)
-  console.log()
+  console.log(deckJ1, deckJ2)
   if (!deck || deck.length === 0) {
     throw new Error('Deck is undefined or empty')
   }
@@ -355,7 +359,7 @@ async function DrawCardsWithRarityMax(room, cardAmount, deckJ1, deckJ2) {
   // Draw hands for both players with the rarity constraint
 
   let hand1, hand2
-  if (deckJ1 && deckJ2) {
+  if (deckJ1 && typeof deckJ1 === 'object' && deckJ2 && typeof deckJ2 === 'object') {
     hand1 = await getCardsFromArray(deckJ1.cards)
     hand2 = await getCardsFromArray(deckJ2.cards)
   } else {

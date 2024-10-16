@@ -212,7 +212,7 @@ export default function Winner() {
 
       // Calculer les PR uniquement pour le mode 'ranked'
       if (gameMode === 'ranked') {
-        prChangeValue = calculatePRChange(gameWon, currentStreak)
+        prChangeValue = calculatePRChange(gameWon, currentStreak, gameMode)
         let potentialPR = newPR + prChangeValue
 
         // Vérifier si le PR potentiel est inférieur à zéro

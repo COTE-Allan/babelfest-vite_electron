@@ -77,9 +77,10 @@ export default function MatchSummaries({ summaries = [] }) {
               }}
             >
               <div className="matchSummaries-item-date">
-                Le {format(new Date(gameDetails.timestamp), 'dd/MM/yy à HH:mm')} |{' '}
-                {gameDetails.turnCount} tours | XP +{player.xpGained}{' '}
-                {gameDetails.mode === 'quick' && `| MMR ${player.mmrGained}`}
+                Le {format(new Date(gameDetails.timestamp), 'dd/MM/yy à HH:mm')} | Tour{' '}
+                {gameDetails.turnCount} | XP +{player.xpGained}{' '}
+                {gameDetails.mode !== 'custom' && `| MMR ${player.mmrGained}`}
+                {gameDetails.mode === 'ranked' && ` | PR ${player.prGained}`}
               </div>
               <div className="matchSummaries-item-user">
                 <div className="matchSummaries-item-user-tags">
