@@ -16,26 +16,36 @@ export default function RankProgressBar({ prObtained }) {
   const relativePr = pr - prInCurrentRank
   const maxPrInCurrentRank = prForNextRank - prInCurrentRank
 
+  const rankHexs = {
+    bronze: '#cd7f32',
+    argent: '#c0c0c0',
+    or: '#eaad20',
+    diamant: '#b9f2ff',
+    maitre: '#972c2c'
+  }
+
   return (
     <div className={`rank-progress-bar ${rankClass}`}>
       <div className="rank-info">
-        <span>{currentRank}</span>
+        <span>
+          {currentRank} - {prForNextRank - 100}
+        </span>
         {prObtained ? (
           <span>
             PR {prObtained > 0 ? 'gagnés' : 'perdus'} : {prObtained}
           </span>
         ) : (
-          <span>
-            {relativePr} / {maxPrInCurrentRank}
-          </span>
+          <span>{pr} PR</span>
         )}
-        <span>{nextRank}</span>
+        <span>
+          {nextRank} - {prForNextRank}
+        </span>
       </div>
       <ProgressBar
         className="progressBarContainer"
         padding={2}
         completed={relativePr}
-        bgColor={userInfo.primaryColor.hex}
+        bgColor={rankHexs[rankClass]}
         maxCompleted={maxPrInCurrentRank}
       />
     </div>

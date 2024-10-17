@@ -24,7 +24,6 @@ import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
 import { useMusic } from '../providers/MusicProvider'
-import rankedSeasons from '../../jsons/rankedSeasons.json'
 
 const Home = () => {
   const { isPlaying } = useMusic()
@@ -118,10 +117,6 @@ const Home = () => {
           <a onClick={() => goForward('/leaderboards')} onMouseEnter={hover} onMouseDown={select}>
             <MdLeaderboard size={50} />
             Classements
-          </a>
-          <a onClick={() => goForward('/rankedInfos')} onMouseEnter={hover} onMouseDown={select} style={{color: rankedSeasons[0].hex}}>
-            <IoTrophy size={35} />
-           {rankedSeasons[0].name}
           </a>
           <a
             onClick={() => goForward(`/account/${user.uid}`)}

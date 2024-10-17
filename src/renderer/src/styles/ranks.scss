@@ -55,7 +55,7 @@
   color: #fff;
   /* Couleur du texte */
   text-shadow:
-    0 0 8px #ff0000,
+    0 0 8px #cd9393,
     /* Rouge */
     0 0 8px #ff7f00,
     /* Orange */
@@ -70,6 +70,131 @@
     0 0 8px #9400d3;
   /* Violet */
   animation: rainbowTextShadow 6s linear infinite;
+}
+
+
+.rank-progress-bar {
+  width: 100%;
+  font-family: 'Kimberly Bl',
+    sans-serif;
+
+  .rank-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+
+  /* Styles communs pour la barre de progression */
+  .progressBarContainer {
+    width: 100%;
+
+    & span {
+      text-shadow: none !important;
+    }
+
+  }
+}
+
+.box-bronze {
+  box-shadow: inset 0 0 100px #cd7f3260;
+}
+
+/* Rang Argent */
+.box-argent {
+  box-shadow: inset 0 0 100px #c0c0c060;
+}
+
+/* Rang Or */
+.box-or {
+  box-shadow: inset 0 0 100px #eaad2060;
+}
+
+/* Rang Diamant */
+.box-diamant {
+  box-shadow: inset 0 0 100px #b9f2ff60;
+}
+
+/* Rang Maître (Arc-en-ciel animé pour l'ombre de texte) */
+.box-maitre {
+  background-color: #ffffff20;
+  box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.3);
+  animation: rainbowInsetShadow 6s linear infinite;
+}
+
+@keyframes rainbowInsetShadow {
+
+  0%,
+  100% {
+    box-shadow: inset 0 0 100px #ff000060;
+    /* Rouge */
+  }
+
+  16% {
+    box-shadow: inset 0 0 100px #ff7f0060;
+    /* Orange */
+  }
+
+  33% {
+    box-shadow: inset 0 0 100px #ffff0060;
+    /* Jaune */
+  }
+
+  50% {
+    box-shadow: inset 0 0 100px #00ff0060;
+    /* Vert */
+  }
+
+  66% {
+    box-shadow: inset 0 0 100px #0000ff60;
+    /* Bleu */
+  }
+
+  83% {
+    box-shadow: inset 0 0 100px #9400d360;
+    /* Indigo */
+  }
+}
+
+
+
+
+
+@keyframes rainbowBg {
+  0% {
+    background-color: #ff0000;
+    /* Rouge */
+  }
+
+  16% {
+    background-color: #ff7f00;
+    /* Orange */
+  }
+
+  33% {
+    background-color: #ffff00;
+    /* Jaune */
+  }
+
+  50% {
+    background-color: #00ff00;
+    /* Vert */
+  }
+
+  66% {
+    background-color: #0000ff;
+    /* Bleu */
+  }
+
+  83% {
+    background-color: #4b0082;
+    /* Indigo */
+  }
+
+  100% {
+    background-color: #9400d3;
+    /* Violet */
+  }
 }
 
 @keyframes rainbowTextShadow {
@@ -150,28 +275,5 @@
       0 0 8px #4b0082,
       0 0 8px #9400d3,
       0 0 8px #ff0000;
-  }
-}
-
-.rank-progress-bar {
-  width: 100%;
-  font-family: 'Kimberly Bl',
-    sans-serif;
-
-  .rank-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-  }
-
-
-  /* Styles communs pour la barre de progression */
-  .progressBarContainer {
-    width: 100%;
-
-    & span {
-      text-shadow: none !important;
-    }
-
   }
 }
