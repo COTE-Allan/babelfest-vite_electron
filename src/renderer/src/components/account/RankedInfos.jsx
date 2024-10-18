@@ -8,9 +8,7 @@ import { getRankProgress } from '../others/xpSystem'
 import SkinItem from './SkinItem'
 import { getSeasonalsSkins, getSkinsWithLevel } from '../others/toolBox'
 
-const RankedInfos = () => {
-  const { userInfo } = useContext(AuthContext)
-
+const RankedInfos = ({userInfo}) => {
   // const { currentRank, nextRank, prForNextRank, prInCurrentRank, rankClass } = getRankProgress(
   //   userInfo.stats.pr
   // )
@@ -19,6 +17,13 @@ const RankedInfos = () => {
   const now = Date.now()
   const daysRemaining = Math.max(0, Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)))
 
+  const maxPr = userInfo.stats.maxPr || 0;
+  const bronzePercentage = getXpPercentage(maxPr, 1, 499);
+  const argentPercentage = getXpPercentage(maxPr, 500, 999);
+  const orPercentage = getXpPercentage(maxPr, 1000, 1499);
+  const diamantPercentage = getXpPercentage(maxPr, 1500, 1999);
+  const maitrePercentage = getXpPercentage(maxPr, 2000, Infinity);
+  
   const seasonalsSkins = getSeasonalsSkins(rankedSeasons[0].id)
 
   return (
@@ -35,7 +40,7 @@ const RankedInfos = () => {
         <div className="rankedInfos-ranks">
           <div className="rankedInfos-ranks-item bronze box-bronze">
             <h2>BRONZE</h2>
-            <span>0-499 PR</span>
+            <span>1-499 PR</span>
           </div>
           <div className="rankedInfos-ranks-item argent box-argent">
             <h2>ARGENT</h2>
@@ -58,33 +63,33 @@ const RankedInfos = () => {
         <div className="rankedInfos-rewards">
           <div className="rankedInfos-rewards-item box-bronze" style={{opacity: seasonalsSkins[0] === "nothing" ? 0 : 1}}>
             {seasonalsSkins[0] &&
-            <SkinItem rankReward skin={seasonalsSkins[0]} userInfo={userInfo} xpPercentage={0} />
+            <SkinItem rankReward unlocked={bronzePercentage === 100} skin={seasonalsSkins[0]} userInfo={userInfo} xpPercentage={bronzePercentage} />
             }
           </div>
           <div className="rankedInfos-rewards-item box-argent" style={{opacity: seasonalsSkins[1] === "nothing" ? 0 : 1}}>
             {seasonalsSkins[1] &&
-            <SkinItem rankReward skin={seasonalsSkins[1]} userInfo={userInfo} xpPercentage={0} />
+            <SkinItem rankReward unlocked={argentPercentage === 100} skin={seasonalsSkins[1]} userInfo={userInfo} xpPercentage={argentPercentage} />
             }
           </div>
           <div className="rankedInfos-rewards-item box-or" style={{opacity: seasonalsSkins[2] === "nothing" ? 0 : 1}}>
             {seasonalsSkins[2] &&
-            <SkinItem rankReward skin={seasonalsSkins[2]} userInfo={userInfo} xpPercentage={0} />
+            <SkinItem rankReward unlocked={orPercentage === 100} skin={seasonalsSkins[2]} userInfo={userInfo} xpPercentage={orPercentage} />
             }
           </div>
           <div className="rankedInfos-rewards-item box-diamant" style={{opacity: seasonalsSkins[3] === "nothing" ? 0 : 1}}>
             {seasonalsSkins[3] &&
-            <SkinItem rankReward skin={seasonalsSkins[3]} userInfo={userInfo} xpPercentage={0} />
+            <SkinItem rankReward unlocked={diamantPercentage === 100} skin={seasonalsSkins[3]} userInfo={userInfo} xpPercentage={diamantPercentage} />
             }
           </div>
           <div className="rankedInfos-rewards-item box-maitre" style={{opacity: seasonalsSkins[4] === "nothing" ? 0 : 1}}>
             {seasonalsSkins[4] &&
-            <SkinItem rankReward skin={seasonalsSkins[4]} userInfo={userInfo} xpPercentage={0} />
+            <SkinItem rankReward unlocked={maitrePercentage === 100} skin={seasonalsSkins[4]} userInfo={userInfo} xpPercentage={maitrePercentage} />
             }
           </div>
         </div>
 
         <div className="rankedInfos-myRank">
-          <RankBar />
+          <RankBar customUser={userInfo} />
         </div>
       </div>
     </div>
@@ -92,3 +97,10 @@ const RankedInfos = () => {
 }
 
 export default RankedInfos
+
+
+const getXpPercentage = (pr, minPr, maxPr) => {
+  if (pr >= maxPr) return 100;
+  if (pr < minPr) return 0;
+  return Math.round(((pr - minPr) / (maxPr - minPr)) * 100);
+};

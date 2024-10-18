@@ -510,19 +510,18 @@ export function getSeasonalsSkins(seasonID) {
     .sort((a, b) => a.rankedReward.rankNeeded - b.rankedReward.rankNeeded)
 
   // Initialize an array of 5 elements with "nothing" as default
-  const result = new Array(5).fill("nothing");
+  const result = new Array(5).fill('nothing')
 
   // Place skins in their corresponding rankNeeded index
   seasonalsSkins.forEach((skin) => {
-    const index = skin.rankedReward.rankNeeded - 1; // Subtract 1 to match the array index (0-4)
+    const index = skin.rankedReward.rankNeeded - 1 // Subtract 1 to match the array index (0-4)
     if (index >= 0 && index < 5) {
-      result[index] = skin;
+      result[index] = skin
     }
-  });
+  })
 
-  return result;
+  return result
 }
-
 
 export function getSkinsByLevel(level) {
   // Filtrer les objets qui ont un 'level' égal à l'entrée
@@ -570,7 +569,6 @@ export function isUnlocked(item, userInfo) {
   let achievementCondition = item.achievement
     ? userInfo.achievements && userInfo.achievements.includes(item.achievement)
     : true
-
 
   return levelCondition && flagCondition && achievementCondition
 }
@@ -635,6 +633,7 @@ export function getPlayerStats(stats) {
       custom: stats.gamesPlayed.custom ?? 0
     },
     pr: stats.pr,
+    maxPr: stats.maxPr,
     mmr: stats.mmr,
     winStreak: stats.winStreak ?? 0,
     longestWinStreak: stats.longestWinStreak ?? 0
@@ -722,4 +721,40 @@ export function getCardsByIds(ids) {
     .sort((a, b) => a.rarity - b.rarity) // Trie les cartes par la rareté (en supposant que 'rarity' soit un nombre)
 
   return filteredCards
+}
+
+export function createUserInfo(userData, decks = null, email = null, id = null) {
+  console.log(userData.stats.maxPr)
+  return {
+    email,
+    username: userData.username || 'blank',
+    primaryColor: userData.primaryColor,
+    secondaryColor: userData.secondaryColor,
+    profilePic: userData.profilePic,
+    profileBorder: userData.profileBorder || null,
+    flags: userData.flags || [],
+    title: userData.title,
+    banner: userData.banner,
+    friends: [],
+    honor: userData.honor || 0,
+    honored: userData.honored || 0,
+    level: userData.level,
+    xp: userData.xp,
+    prestige: userData.prestige || null,
+    id,
+    stats: {
+      gamesPlayed: userData.stats?.gamesPlayed || 0,
+      victories: userData.stats?.victories || 0,
+      mmr: userData.stats?.mmr || 500,
+      winStreak: userData.stats?.winStreak || 0,
+      longestWinStreak: userData.stats?.longestWinStreak || 0,
+      pr: userData.stats.pr || 0,
+      maxPr: userData.stats.maxPr || 0
+    },
+    status: userData.status || null,
+    currentLobby: userData.currentLobby || null,
+    achievements: userData.achievements || [],
+    matchSummaries: userData.matchSummaries || [],
+    decks
+  }
 }

@@ -92,7 +92,7 @@ export default function UserAchievements({ userInfo }) {
         {page === 3 && (
           <CSSTransition key="ranked-page" timeout={300} classNames="fade">
             <div className="css-transition">
-              <RankedInfos />
+              <RankedInfos userInfo={userInfo} />
             </div>
           </CSSTransition>
         )}

@@ -281,6 +281,9 @@ export default function Winner() {
       }
       if (gameMode === 'ranked') {
         userUpdates['stats.pr'] = newPR
+        if (newPR > userInfo.stats.maxPr) {
+          userUpdates['stats.maxPr'] = newPR
+        }
       }
 
       batch.update(userRef, userUpdates)

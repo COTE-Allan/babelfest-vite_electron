@@ -5,6 +5,7 @@ import achievements from '../../jsons/achievements.json'
 export default function StatsDisplayer({ user, stats }) {
   // Obtenir les PR du joueur
   const pr = stats.pr || 0
+  const maxPr = stats.maxPr || 0
 
   // Utiliser getRankProgress pour obtenir les informations de rang
   const rankProgress = getRankProgress(pr)
@@ -95,6 +96,13 @@ export default function StatsDisplayer({ user, stats }) {
             </li>
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">{pr}</span> Pts de rang
+              <span className="statsDisplayer-category-list-item-rank">
+                (#{user.rank.prRank ?? 0} du classement)
+              </span>
+            </li>
+            <li className="statsDisplayer-category-list-item">
+              <span className="statsDisplayer-category-list-item-value">{maxPr}</span> PR max
+              atteint
             </li>
           </ul>
         </div>

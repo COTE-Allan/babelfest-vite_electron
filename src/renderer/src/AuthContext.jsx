@@ -16,7 +16,7 @@ import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
-import { useSendMessage } from './components/others/toolBox'
+import { createUserInfo, useSendMessage } from './components/others/toolBox'
 
 export const AuthContext = createContext()
 
@@ -77,37 +77,7 @@ export const AuthProvider = ({ children }) => {
       const decksSnapshot = await getDocs(decksRef)
       const decks = decksSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
 
-      const userInfo = {
-        email: currentUser.email,
-        username: userData.username || 'blank',
-        primaryColor: userData.primaryColor,
-        secondaryColor: userData.secondaryColor,
-        profilePic: userData.profilePic,
-        profileBorder: userData.profileBorder || null,
-        flags: userData.flags || [],
-        title: userData.title,
-        banner: userData.banner,
-        friends: [],
-        honor: userData.honor || 0,
-        honored: userData.honored || 0,
-        level: userData.level,
-        xp: userData.xp,
-        prestige: userData.prestige || null,
-        id: currentUser.uid,
-        stats: {
-          gamesPlayed: userData.stats?.gamesPlayed || 0,
-          victories: userData.stats?.victories || 0,
-          mmr: userData.stats?.mmr || 500,
-          winStreak: userData.stats?.winStreak || 0,
-          longestWinStreak: userData.stats?.longestWinStreak || 0,
-          pr: userData.stats.pr || 0
-        },
-        status: userData.status || null,
-        currentLobby: userData.currentLobby || null,
-        achievements: userData.achievements || [],
-        matchSummaries: userData.matchSummaries || [],
-        decks // Add decks to the userInfo
-      }
+      const userInfo = createUserInfo(userData, decks, currentUser.email, currentUser.uid)
       setUserInfo(userInfo)
     }
   }

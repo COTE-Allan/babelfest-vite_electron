@@ -4,7 +4,7 @@ import ProfileDisplayer from '../account/ProfileDisplayer'
 import { useLocation, useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
-import { getPlayerRank, getPlayerStats } from '../others/toolBox'
+import { createUserInfo, getPlayerRank, getPlayerStats } from '../others/toolBox'
 
 const Account = () => {
   const { userInfo, user } = useContext(AuthContext)
@@ -18,30 +18,7 @@ const Account = () => {
 
     if (docSnap.exists()) {
       const userData = docSnap.data()
-      const userInfo = {
-        username: userData.username,
-        primaryColor: userData.primaryColor,
-        profilePic: userData.profilePic,
-        profileBorder: userData.profileBorder,
-        title: userData.title,
-        banner: userData.banner,
-        level: userData.level,
-        honor: userData.honor,
-        xp: userData.xp ?? 0,
-        stats: {
-          gamesPlayed: userData.stats?.gamesPlayed || 0,
-          victories: userData.stats?.victories || 0,
-          mmr: userData.stats?.mmr || 500,
-          winStreak: userData.stats?.winStreak || 0,
-          longestWinStreak: userData.stats?.longestWinStreak || 0,
-          pr: userData.stats?.pr || 0
-        },
-        status: userData.status,
-        achievements: userData.achievements || [],
-        honored: userData.honored || { timestamp: 0, quantity: 0 },
-        matchSummaries: userData.matchSummaries,
-        prestige: userData.prestige ?? null
-      }
+      const userInfo = createUserInfo(userData)
       let stats = getPlayerStats(userInfo.stats)
       userInfo.stats = stats
       userInfo.id = userId

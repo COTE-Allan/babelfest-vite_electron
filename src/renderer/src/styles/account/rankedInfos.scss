@@ -1,104 +1,106 @@
 .rankedInfos {
-    font-family: 'Kimberly Bl', sans-serif;
-    overflow: auto;
+  font-family: 'Kimberly Bl', sans-serif;
+  overflow: auto;
 
-    & h1,
-    h2,
-    h3 {
-        height: auto;
-        margin: 0;
+  & h1,
+  h2,
+  h3 {
+    height: auto;
+    margin: 0;
+  }
+
+  &-wrapper {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-header {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & h1 {
+      font-size: 25px;
     }
 
-    &-wrapper {
-        width: calc(100% - 20px);
-        padding: 10px;
-        border-radius: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    & h2 {
+      font-size: 15px;
     }
+  }
 
-    &-header {
-        width: calc(100% - 20px);
-        padding: 10px;
-        border-radius: 15px;
-        margin-bottom: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+  &-ranks {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
 
-        & h1 {
-            font-size: 25px;
+    &-item {
+      border-radius: 15px;
+      flex: calc(20% - 10px) 0 0;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-        }
+      & h2 {
+        font-size: 30px;
+      }
 
-        & h2 {
-            font-size: 15px;
-        }
+      & span {
+        font-size: 15px;
+      }
     }
+  }
 
-    &-ranks {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 5px 0;
+  &-rewards {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 5px 0;
 
-        &-item {
-            border-radius: 15px;
-            flex: calc(20% - 10px) 0 0;
-            height: 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            & h2 {
-                font-size: 30px;
-
-            }
-
-            & span {
-                font-size: 15px;
-            }
-
-        }
+    &-item {
+      position: relative;
+      border-radius: 15px;
+      flex: calc(20% - 10px) 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
+  }
 
-    &-rewards {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        padding: 5px 0;
+  &-myRank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
-        &-item {
-            border-radius: 15px;
-            flex: calc(20% - 10px) 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-
-        }
+    & h3 {
+      margin-bottom: 5px;
     }
+  }
 
-    &-myRank {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+  .achievements-levels-item {
+    // height: 100px
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent !important;
+    overflow: hidden;
+  }
 
-        & h3 {
-            margin-bottom: 5px;
-        }
-    }
-
-    .achievements-levels-item,
-    .xp-progress-background {
-        height: 100px;
-        width: 100%;
-        background-color: transparent !important;
-    }
-
+  .xp-progress-background {
+    border-radius: 15px 0 0 15px !important;
+    background-color: rgba(212, 212, 212, 0.3) !important;
+  }
 }

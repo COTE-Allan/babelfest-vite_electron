@@ -3,11 +3,11 @@ import { AuthContext } from '../../AuthContext'
 import { getRankProgress } from '../others/xpSystem'
 import { useContext } from 'react'
 
-export default function RankProgressBar({ prObtained }) {
+export default function RankProgressBar({ prObtained, customUser }) {
   const { userInfo } = useContext(AuthContext)
 
   // Obtenir les PR du joueur
-  const pr = userInfo.stats?.pr || 0
+  const pr = customUser ? customUser.stats.pr || 0 : userInfo.stats?.pr || 0
 
   // Obtenir les détails de progression du rang
   const { currentRank, nextRank, prForNextRank, prInCurrentRank, rankClass } = getRankProgress(pr)
