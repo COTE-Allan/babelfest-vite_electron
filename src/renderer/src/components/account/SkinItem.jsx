@@ -1,6 +1,6 @@
 import { FaLock, FaLockOpen } from 'react-icons/fa'
 
-function SkinItem({ skin, userInfo, xpPercentage }) {
+function SkinItem({ skin, userInfo, xpPercentage, rankReward = false }) {
   const { level, url, hex, gradient, name, classe } = skin
   const lock = userInfo.level >= level ? <FaLockOpen /> : <FaLock />
   let content
@@ -40,12 +40,16 @@ function SkinItem({ skin, userInfo, xpPercentage }) {
       }}
     >
       <div className="achievements-levels-item-wrapper">
+        {!rankReward && 
+        <>
         <span className="level">{level}</span>
         <hr />
+        </>
+        }
         {content}
         {skin.type !== 'Titre' && <span className="skin-name">{name}</span>}
         <span className="type">
-          {skin.type} {lock}
+          {skin.type} {!rankReward && lock}
         </span>
       </div>
       {/* Add a div to show XP progress */}

@@ -504,6 +504,26 @@ export function getSkinsWithLevel() {
   return skinsWithLevel
 }
 
+export function getSeasonalsSkins(seasonID) {
+  const seasonalsSkins = allSkins
+    .filter((skin) => skin.hasOwnProperty('rankedReward') && skin.rankedReward.id === seasonID)
+    .sort((a, b) => a.rankedReward.rankNeeded - b.rankedReward.rankNeeded)
+
+  // Initialize an array of 5 elements with "nothing" as default
+  const result = new Array(5).fill("nothing");
+
+  // Place skins in their corresponding rankNeeded index
+  seasonalsSkins.forEach((skin) => {
+    const index = skin.rankedReward.rankNeeded - 1; // Subtract 1 to match the array index (0-4)
+    if (index >= 0 && index < 5) {
+      result[index] = skin;
+    }
+  });
+
+  return result;
+}
+
+
 export function getSkinsByLevel(level) {
   // Filtrer les objets qui ont un 'level' égal à l'entrée
   return allSkins.filter((skin) => skin.level === level)
@@ -550,6 +570,7 @@ export function isUnlocked(item, userInfo) {
   let achievementCondition = item.achievement
     ? userInfo.achievements && userInfo.achievements.includes(item.achievement)
     : true
+
 
   return levelCondition && flagCondition && achievementCondition
 }

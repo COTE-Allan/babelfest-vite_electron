@@ -2,22 +2,24 @@ import BackButton from '../items/BackButton'
 import { useContext } from 'react'
 import { AuthContext } from '../../AuthContext'
 import RankBar from '../interface/RankBar'
-import '../../styles/pages/rankedInfos.scss'
+import '../../styles/account/rankedInfos.scss'
 import rankedSeasons from '../../jsons/rankedSeasons.json'
 import { getRankProgress } from '../others/xpSystem'
 import SkinItem from './SkinItem'
-import { getSkinsWithLevel } from '../others/toolBox'
+import { getSeasonalsSkins, getSkinsWithLevel } from '../others/toolBox'
 
 const RankedInfos = () => {
   const { userInfo } = useContext(AuthContext)
 
-  const { currentRank, nextRank, prForNextRank, prInCurrentRank, rankClass } = getRankProgress(
-    userInfo.stats.pr
-  )
+  // const { currentRank, nextRank, prForNextRank, prInCurrentRank, rankClass } = getRankProgress(
+  //   userInfo.stats.pr
+  // )
 
   const endDate = rankedSeasons[0].endDate * 1000 // Convertir la date de fin en millisecondes
   const now = Date.now()
   const daysRemaining = Math.max(0, Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)))
+
+  const seasonalsSkins = getSeasonalsSkins(rankedSeasons[0].id)
 
   return (
     <div className="rankedInfos">
@@ -54,20 +56,30 @@ const RankedInfos = () => {
         </div>
 
         <div className="rankedInfos-rewards">
-          <div className="rankedInfos-rewards-item box-bronze">
-            <SkinItem skin={getSkinsWithLevel()[0]} userInfo={userInfo} xpPercentage={0} />
+          <div className="rankedInfos-rewards-item box-bronze" style={{opacity: seasonalsSkins[0] === "nothing" ? 0 : 1}}>
+            {seasonalsSkins[0] &&
+            <SkinItem rankReward skin={seasonalsSkins[0]} userInfo={userInfo} xpPercentage={0} />
+            }
           </div>
-          <div className="rankedInfos-rewards-item box-argent">
-            <SkinItem skin={getSkinsWithLevel()[1]} userInfo={userInfo} xpPercentage={0} />
+          <div className="rankedInfos-rewards-item box-argent" style={{opacity: seasonalsSkins[1] === "nothing" ? 0 : 1}}>
+            {seasonalsSkins[1] &&
+            <SkinItem rankReward skin={seasonalsSkins[1]} userInfo={userInfo} xpPercentage={0} />
+            }
           </div>
-          <div className="rankedInfos-rewards-item box-or">
-            <SkinItem skin={getSkinsWithLevel()[2]} userInfo={userInfo} xpPercentage={0} />
+          <div className="rankedInfos-rewards-item box-or" style={{opacity: seasonalsSkins[2] === "nothing" ? 0 : 1}}>
+            {seasonalsSkins[2] &&
+            <SkinItem rankReward skin={seasonalsSkins[2]} userInfo={userInfo} xpPercentage={0} />
+            }
           </div>
-          <div className="rankedInfos-rewards-item box-diamant">
-            <SkinItem skin={getSkinsWithLevel()[3]} userInfo={userInfo} xpPercentage={0} />
+          <div className="rankedInfos-rewards-item box-diamant" style={{opacity: seasonalsSkins[3] === "nothing" ? 0 : 1}}>
+            {seasonalsSkins[3] &&
+            <SkinItem rankReward skin={seasonalsSkins[3]} userInfo={userInfo} xpPercentage={0} />
+            }
           </div>
-          <div className="rankedInfos-rewards-item box-maitre">
-            <SkinItem skin={getSkinsWithLevel()[4]} userInfo={userInfo} xpPercentage={0} />
+          <div className="rankedInfos-rewards-item box-maitre" style={{opacity: seasonalsSkins[4] === "nothing" ? 0 : 1}}>
+            {seasonalsSkins[4] &&
+            <SkinItem rankReward skin={seasonalsSkins[4]} userInfo={userInfo} xpPercentage={0} />
+            }
           </div>
         </div>
 

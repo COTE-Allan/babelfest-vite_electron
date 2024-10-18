@@ -283,6 +283,9 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   skin.lock = isUnlocked(skin, user)
   const sendMessage = useSendMessage()
+  
+  // TODO: Débloquer le skin ICI
+  const rankedLock = skin.rankedReward ? true : false;  
 
   const relatedSkinsParams = {
     avatar: 'profilePic',
@@ -331,6 +334,8 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
     // Mettre à jour customizedUserInfo
     setCustomizedUserInfo(updatedUserInfo)
   }
+
+  if (rankedLock) return;
 
   return (
     <div

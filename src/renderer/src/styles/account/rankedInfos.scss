@@ -1,6 +1,4 @@
 .rankedInfos {
-    height: 100%;
-    width: 100%;
     font-family: 'Kimberly Bl', sans-serif;
     overflow: auto;
 
@@ -12,6 +10,7 @@
     }
 
     &-wrapper {
+        width: calc(100% - 20px);
         padding: 10px;
         border-radius: 15px;
         display: flex;
@@ -20,7 +19,7 @@
     }
 
     &-header {
-        width: 100%;
+        width: calc(100% - 20px);
         padding: 10px;
         border-radius: 15px;
         margin-bottom: 10px;
@@ -68,13 +67,12 @@
     &-rewards {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         margin-bottom: 20px;
         padding: 5px 0;
 
         &-item {
             border-radius: 15px;
-            background-color: rgba(255, 255, 255, 0.2);
             flex: calc(20% - 10px) 0 0;
             display: flex;
             flex-direction: column;
@@ -98,6 +96,8 @@
 
     .achievements-levels-item,
     .xp-progress-background {
+        height: 100px;
+        width: 100%;
         background-color: transparent !important;
     }
 
