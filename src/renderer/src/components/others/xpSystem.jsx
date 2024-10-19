@@ -134,8 +134,9 @@ export function calculateMMRChange(currentMMR, opponentMMR, gameWon, gameMode) {
 
   // Application des limites
   const mmrChangeSign = Math.sign(mmrChangeValue)
-  const dynamicMinMMRChange = mmrDifference > 200 ? 30 : 15; // Par exemple, si la différence de MMR est grande, augmenter la perte minimale
-  const minLimit = dynamicMinMMRChange * mmrChangeSign;  const maxLimit = maxMMRChange * mmrChangeSign
+  const dynamicMinMMRChange = mmrDifference > 200 ? 30 : 15 // Par exemple, si la différence de MMR est grande, augmenter la perte minimale
+  const minLimit = dynamicMinMMRChange * mmrChangeSign
+  const maxLimit = maxMMRChange * mmrChangeSign
 
   mmrChangeValue = Math.max(Math.min(mmrChangeValue, maxLimit), minLimit)
 
@@ -146,13 +147,13 @@ export function calculateMMRChange(currentMMR, opponentMMR, gameWon, gameMode) {
 // Fonction pour calculer le changement de PR
 export function calculatePRChange(gameWon, currentStreak, gameMode) {
   if (gameMode !== 'ranked') return 0
-  const basePR = gameWon ? 40 : -20
+  const basePR = gameWon ? 50 : -25
   let streakBonus = 0
   if (gameWon) {
     if (currentStreak >= 4) {
-      streakBonus = 10
+      streakBonus = 30
     } else if (currentStreak >= 2) {
-      streakBonus = 5
+      streakBonus = 15
     }
   }
   const totalPRChange = basePR + streakBonus

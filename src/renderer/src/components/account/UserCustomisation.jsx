@@ -277,15 +277,21 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
 }
 
 function SkinItem({ skin, type, children, setHoveredSkin }) {
-  const { userSettings } = useContext(AuthContext)
+  const { userSettings, userInfo } = useContext(AuthContext)
   const { customizedUserInfo, setCustomizedUserInfo, user } = useContext(CustomizedUserInfoContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   skin.lock = isUnlocked(skin, user)
   const sendMessage = useSendMessage()
-  
+
   // TODO: Débloquer le skin ICI
-  const rankedLock = skin.rankedReward ? true : false;  
+  let rankedLock = skin.rankedReward ? true : false
+  if (rankedLock) {
+    const focusedSeason = userInfo.pastSeasons.find((season) => season.id === skin.rankedReward.id)
+    if (focusedSeason?.rankReached >= skin.rankedReward.rankNeeded) {
+      rankedLock = false
+    }
+  }
 
   const relatedSkinsParams = {
     avatar: 'profilePic',
@@ -335,7 +341,7 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
     setCustomizedUserInfo(updatedUserInfo)
   }
 
-  if (rankedLock) return;
+  if (rankedLock) return
 
   return (
     <div

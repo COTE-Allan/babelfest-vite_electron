@@ -1,6 +1,6 @@
 import { FaLock } from 'react-icons/fa'
 import { useTransition } from '../../TransitionContext'
-import { useSendMessage } from '../others/toolBox'
+import { getCurrentSeason, useSendMessage } from '../others/toolBox'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import { useContext, useState, useEffect } from 'react'
@@ -27,7 +27,7 @@ const MenuCard = ({
   const [seasonInfo, setSeasonInfo] = useState({ name: '', daysRemaining: 0 })
 
   useEffect(() => {
-    const currentSeason = rankedSeasons[0] // Récupérer la première saison
+    const currentSeason = getCurrentSeason() // Récupérer la première saison
     const endDate = currentSeason.endDate * 1000 // Convertir la date de fin en millisecondes
     const now = Date.now()
     const daysRemaining = Math.max(0, Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)))
@@ -61,7 +61,7 @@ const MenuCard = ({
         {disabled ? 'Bloqué' : name}
       </span>
       {requiresDeck && !disabled && (
-        <span className="season-info" style={{ backgroundColor: seasonInfo.hex + "50" }}>
+        <span className="season-info" style={{ backgroundColor: seasonInfo.hex + '50' }}>
           {seasonInfo.name} - {seasonInfo.daysRemaining} jours restants
         </span>
       )}

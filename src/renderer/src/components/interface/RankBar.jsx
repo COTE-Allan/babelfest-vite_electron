@@ -37,14 +37,18 @@ export default function RankProgressBar({ prObtained, customUser }) {
         ) : (
           <span>{pr} PR</span>
         )}
-        <span>
-          {nextRank} - {prForNextRank}
-        </span>
+        {prForNextRank !== 2100 ? (
+          <span>
+            {nextRank} - {prForNextRank}
+          </span>
+        ) : (
+          <span>2000+</span>
+        )}
       </div>
       <ProgressBar
         className="progressBarContainer"
         padding={2}
-        completed={relativePr}
+        completed={pr >= 2000 ? 100 : relativePr}
         bgColor={rankHexs[rankClass]}
         maxCompleted={maxPrInCurrentRank}
       />

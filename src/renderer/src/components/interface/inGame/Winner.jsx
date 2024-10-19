@@ -21,6 +21,7 @@ import { deleteAllLogs } from '../../others/manageFirestore'
 import useCheckForAchievements from '../../controllers/AchievementsController'
 import { useNavigate } from 'react-router-dom'
 import RankProgressBar from '../RankBar'
+import { getCurrentSeason } from '../../others/toolBox'
 
 export default function Winner() {
   const {
@@ -281,9 +282,10 @@ export default function Winner() {
       }
       if (gameMode === 'ranked') {
         userUpdates['stats.pr'] = newPR
-        if (newPR > userInfo.stats.maxPr) {
-          userUpdates['stats.maxPr'] = newPR
-        }
+        let currentSeason = getCurrentSeason()
+        if (!userInfo.stats.prSeasonId || userInfo.stats.prSeasonId !== currentSeason.id)
+          userUpdates['stats.prSeasonId'] = currentSeason.id
+        if (newPR > userInfo.stats.maxPr) userUpdates['stats.maxPr'] = newPR
       }
 
       batch.update(userRef, userUpdates)

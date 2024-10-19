@@ -200,7 +200,7 @@
     "name": "Babelfest en bronze",
     "unlockTip": "Obtenu en atteignant le rang bronze en saison 0.",
     "rankedReward": {
-      "id": "s0_alpha",
+      "id": "s1_alpha",
       "rankNeeded": 1
     }
   },
@@ -209,7 +209,7 @@
     "name": "Babelfest argenté",
     "unlockTip": "Obtenu en atteignant le rang argent en saison 0.",
     "rankedReward": {
-      "id": "s0_alpha",
+      "id": "s1_alpha",
       "rankNeeded": 2
     }
   },
@@ -218,7 +218,7 @@
     "name": "Babelfest 24 Carats",
     "unlockTip": "Obtenu en atteignant le rang or en saison 0.",
     "rankedReward": {
-      "id": "s0_alpha",
+      "id": "s1_alpha",
       "rankNeeded": 3
     }
   },
@@ -227,7 +227,7 @@
     "name": "Babelfest Diamantée",
     "unlockTip": "Obtenu en atteignant le rang diamant en saison 0.",
     "rankedReward": {
-      "id": "s0_alpha",
+      "id": "s1_alpha",
       "rankNeeded": 4
     }
   },
@@ -236,7 +236,7 @@
     "name": "Babelfest Chromatique",
     "unlockTip": "Obtenu en atteignant le rang maître en saison 0.",
     "rankedReward": {
-      "id": "s0_alpha",
+      "id": "s1_alpha",
       "rankNeeded": 5
     }
   }

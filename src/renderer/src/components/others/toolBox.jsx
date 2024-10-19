@@ -26,6 +26,8 @@ import avatarData from '../../jsons/skins/avatars.json'
 import titleData from '../../jsons/skins/titles.json'
 import prestigeData from '../../jsons/skins/prestigeColor.json'
 
+import rankedSeasons from '../../jsons/rankedSeasons.json'
+
 const borders = bordersData.map((item, index) => ({
   ...item,
   id: `border-${index}`,
@@ -437,7 +439,12 @@ export async function getPlayerRank(userId) {
   }
 
   // **Nouvelle requête pour le classement basé sur le PR**
-  const prQuery = query(usersRef, orderBy('stats.pr', 'desc'))
+  const currentSeason = getCurrentSeason()
+  const prQuery = query(
+    usersRef,
+    orderBy('stats.pr', 'desc'),
+    where('stats.prSeasonId', '==', currentSeason.id)
+  )
   const prQuerySnapshot = await getDocs(prQuery)
 
   let prRank = 0
@@ -463,7 +470,13 @@ export async function getTopUsersByPR(amount = 10) {
   const usersRef = collection(db, 'users')
 
   // Requête pour trier par PR descendant
-  const q = query(usersRef, orderBy('stats.pr', 'desc'), limit(amount))
+  const currentSeason = getCurrentSeason()
+  const q = query(
+    usersRef,
+    orderBy('stats.pr', 'desc'),
+    limit(amount),
+    where('stats.prSeasonId', '==', currentSeason.id)
+  )
 
   try {
     const querySnapshot = await getDocs(q)
@@ -723,7 +736,7 @@ export function getCardsByIds(ids) {
   return filteredCards
 }
 
-export function createUserInfo(userData, decks = null, email = null, id = null) {
+export function createUserInfo(userData, decks = null, email = null, id = null, pastSeasons) {
   console.log(userData.stats.maxPr)
   return {
     email,
@@ -749,12 +762,36 @@ export function createUserInfo(userData, decks = null, email = null, id = null) 
       winStreak: userData.stats?.winStreak || 0,
       longestWinStreak: userData.stats?.longestWinStreak || 0,
       pr: userData.stats.pr || 0,
-      maxPr: userData.stats.maxPr || 0
+      maxPr: userData.stats.maxPr || 0,
+      prSeasonId: userData.stats.prSeasonId || null
     },
     status: userData.status || null,
     currentLobby: userData.currentLobby || null,
     achievements: userData.achievements || [],
     matchSummaries: userData.matchSummaries || [],
-    decks
+    decks,
+    pastSeasons: pastSeasons || []
   }
+}
+
+export const getCurrentSeason = () => {
+  if (!rankedSeasons || rankedSeasons.length === 0) {
+    return null // ou une valeur par défaut
+  }
+
+  // Trier les saisons par date de début pour garantir l'ordre chronologique
+  rankedSeasons.sort((a, b) => a.startDate - b.startDate)
+
+  const currentTime = Math.floor(Date.now() / 1000) // Timestamp actuel
+  const currentSeason = rankedSeasons.find(
+    (season) => currentTime >= season.startDate && currentTime < season.endDate
+  )
+
+  // Si aucune saison actuelle n'est trouvée, renvoyer la dernière saison si elle est encore active
+  if (!currentSeason) {
+    const lastSeason = rankedSeasons[rankedSeasons.length - 1]
+    return currentTime < lastSeason.endDate ? lastSeason : null
+  }
+
+  return currentSeason
 }

@@ -16,13 +16,15 @@ import { toast } from 'react-toastify'
 import useSound from 'use-sound'
 import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
-import { createUserInfo, useSendMessage } from './components/others/toolBox'
+import { createUserInfo, getCurrentSeason, useSendMessage } from './components/others/toolBox'
+import rankedSeasons from './jsons/rankedSeasons.json'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [readyToCheckSeasons, setReadyToCheckSeasons] = useState(false)
   const [userInfo, setUserInfo] = useState({})
   const [userSettings, setUserSettings] = useState({})
   const sendMessage = useSendMessage()
@@ -77,8 +79,21 @@ export const AuthProvider = ({ children }) => {
       const decksSnapshot = await getDocs(decksRef)
       const decks = decksSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
 
-      const userInfo = createUserInfo(userData, decks, currentUser.email, currentUser.uid)
+      const userPastSeasonsRef = collection(db, `users/${currentUser.uid}/seasons`)
+      const userPastSeasonsSnapshot = await getDocs(userPastSeasonsRef)
+      const userPastSeasons = userPastSeasonsSnapshot.docs.map((doc) => ({
+        ...doc.data()
+      }))
+
+      const userInfo = createUserInfo(
+        userData,
+        decks,
+        currentUser.email,
+        currentUser.uid,
+        userPastSeasons
+      )
       setUserInfo(userInfo)
+      setReadyToCheckSeasons(true)
     }
   }
 
@@ -255,6 +270,122 @@ export const AuthProvider = ({ children }) => {
       achievements: [...prev.achievements, achievement.id]
     }))
   }
+
+  const handleEndOfSeason = async () => {
+    const currentTime = Math.floor(Date.now() / 1000) // Timestamp actuel
+
+    // Obtenir les saisons passées (celles dont la date de fin est dépassée)
+    const pastSeasons = rankedSeasons.filter((season) => currentTime >= season.endDate)
+    if (pastSeasons.length === 0) {
+      console.log('Aucune saison passée à traiter.')
+      return
+    }
+
+    // Sélectionner la saison précédente (la dernière dans la liste des saisons passées)
+    const previousSeason = pastSeasons[pastSeasons.length - 1]
+
+    // Vérifier si l'utilisateur est connecté et a des statistiques disponibles
+    if (!user || !userInfo || !userInfo.stats) {
+      console.log('Aucun utilisateur ou statistiques non disponibles.')
+      return
+    }
+
+    const userId = user.uid
+    const { pr, maxPr, prSeasonId } = userInfo.stats
+
+    // Vérifier si les récompenses pour la saison précédente ont déjà été attribuées
+
+    if (userInfo.pastSeasons.find((season) => season.id === previousSeason.id)) {
+      console.log(
+        `Les récompenses pour la saison ${previousSeason.name} ont déjà été attribuées pour l'utilisateur ${userId}.`
+      )
+      return
+    }
+
+    // Vérifier que les pr et maxPr correspondent à la saison précédente
+    if (prSeasonId !== previousSeason.id) {
+      console.log(`L'utilisateur ${userId} n'a pas joué pendant la saison précédente.`)
+      return
+    }
+
+    // Vérifier si le joueur a un pr > 0
+    if (pr > 0) {
+      // Calcul du rang atteint en fonction de maxPr
+      let rankReached = 1 // Bronze par défaut
+      if (maxPr >= 500 && maxPr <= 999) {
+        rankReached = 2 // Argent
+      } else if (maxPr >= 1000 && maxPr <= 1499) {
+        rankReached = 3 // Or
+      } else if (maxPr >= 1500 && maxPr <= 1999) {
+        rankReached = 4 // Diamant
+      } else if (maxPr >= 2000) {
+        rankReached = 5 // Maître
+      }
+
+      // Stocker les stats dans un sous-document pour la saison précédente
+      const userRef = doc(db, 'users', userId)
+      const seasonStatsRef = doc(userRef, 'seasons', previousSeason.id)
+      await setDoc(seasonStatsRef, {
+        pr,
+        maxPr,
+        id: previousSeason.id,
+        rankReached
+      })
+
+      console.log(
+        `Les récompenses pour la saison ${previousSeason.name} ont été attribuées à l'utilisateur ${userId}.`
+      )
+
+      // Réinitialiser les stats pr et maxPr à 0 et mettre à jour prSeasonId pour la nouvelle saison
+      const currentSeason = getCurrentSeason()
+      const newPrSeasonId = currentSeason ? currentSeason.id : null
+
+      const newBasePr = Math.ceil(pr > 3000 ? 1500 : pr / 2)
+      await updateDoc(userRef, {
+        'stats.pr': newBasePr,
+        'stats.maxPr': newBasePr,
+        'stats.prSeasonId': newPrSeasonId
+      })
+
+      // Mettre à jour userInfo localement
+
+      setUserInfo((prev) => ({
+        ...prev,
+        stats: {
+          ...prev.stats,
+          pr: newBasePr,
+          maxPr: newBasePr,
+          prSeasonId: newPrSeasonId
+        },
+        pastSeasons: [
+          ...prev.pastSeasons, // Copie les éléments existants de pastSeasons
+          {
+            pr,
+            maxPr,
+            id: previousSeason.id,
+            rankReached
+          }
+        ]
+      }))
+      sendMessage(
+        `La ${previousSeason.name} est terminée ! Vos récompenses de saisons vous attendent sur votre profil.`,
+        'success'
+      )
+      console.log(`L'utilisateur ${userId} a été mis à jour pour la fin de la saison.`)
+    } else {
+      console.log(`L'utilisateur ${userId} n'a pas joué pendant la saison précédente.`)
+    }
+  }
+
+  useEffect(() => {
+    if (user && userInfo && userInfo.pastSeasons && readyToCheckSeasons) {
+      const currentSeason = getCurrentSeason()
+      if (userInfo.stats.prSeasonId !== currentSeason.id) {
+        handleEndOfSeason()
+      }
+      setReadyToCheckSeasons(false)
+    }
+  }, [readyToCheckSeasons])
 
   const contextValue = {
     user,

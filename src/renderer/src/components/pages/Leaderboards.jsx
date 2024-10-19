@@ -108,7 +108,7 @@ const Leaderboards = () => {
 
         {/* Afficher LoadingLogo pendant que les données sont en cours de récupération */}
         <div className="leaderboard-content">
-          {leaderboardData && myRank !== null ? (
+          {leaderboardData ? (
             <>
               <div className="leaderboard-list">
                 {leaderboardData.map((user) => (
