@@ -67,12 +67,6 @@ export default function Card({ card }) {
   }
 
   useEffect(() => {
-    if (card.revealed) {
-      setIsHidden(false)
-    }
-  }, [card])
-
-  useEffect(() => {
     const isSelected = selectedCards.some((selectedCard) => {
       return selectedCard.id === card.id
     })

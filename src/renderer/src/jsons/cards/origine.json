@@ -768,13 +768,13 @@
     "title": "Impénétrable",
     "atk": 1,
     "dep": 1,
-    "hp": 6,
+    "hp": 4,
     "baseatk": 1,
     "basedep": 1,
-    "basehp": 6,
+    "basehp": 4,
     "url": "./cards/origine/babelfest_origine35.png",
     "rarity": 2,
-    "cost": 8,
+    "cost": 7,
     "collection": "Origine",
     "year": 2023,
     "author": "Mimo",
@@ -1146,6 +1146,11 @@
     "attackCount": 3,
     "baseattackCount": 3,
     "effects": [
+      {
+        "type": "stomp",
+        "when": [3],
+        "target": "any"
+      },
       {
         "type": "tripleSword"
       }

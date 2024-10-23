@@ -412,8 +412,13 @@ export function depEdit(user, value, targets) {
 }
 
 // Ajouter aux hp existants
-export function hpEdit(value, targets, specialDeath = false, attacker = null) {
+export function hpEdit(value, targets, specialDeath = false, attacker = null, isAttack = true) {
   targets.forEach(async (target) => {
+    if (target.card.fortress && isAttack) {
+      // TODO: ici ça renvoie quand même -1 dans le log :/
+      delete target.card.fortress
+      return
+    }
     target.card.hp = target.card.hp + value
     if (target.card.hp <= 0) {
       target.card.dead = {

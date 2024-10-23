@@ -17,6 +17,8 @@ import queueSound from '../../assets/sfx/queue_tick.mp3'
 import cancelSfx from '../../assets/sfx/menu_cancel.flac'
 import successSound from '../../assets/sfx/success_bell.mp3'
 import useSound from 'use-sound'
+import { useLocation } from 'react-router-dom'
+import { useTransition } from '../../TransitionContext'
 
 export const MatchmakingContext = createContext()
 
@@ -35,6 +37,9 @@ export const MatchmakingProvider = ({ children }) => {
   const createLobby = useCreateLobby()
   const joinLobby = useJoinLobby()
   const verName = changelog.slice(-1)[0].title
+
+  const location = useLocation()
+  const { goHome } = useTransition()
 
   const intervalTime = 10000
 
@@ -176,6 +181,10 @@ export const MatchmakingProvider = ({ children }) => {
       setCurrentUser(null)
       setMatch(null)
       setMatchmakingSearch(false)
+
+      if (location.pathname.includes('matchmakingQueue')) {
+        goHome()
+      }
     }
   }
 

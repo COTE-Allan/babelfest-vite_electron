@@ -38,22 +38,14 @@ export default function Effects() {
   )
 
   const categoryImages = {
-    Pièges:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1701520367/babelfest/icons/trap_buzj7i.webp',
-    Malus:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1705564482/babelfest/icons/muted.webp',
-    Aléatoires:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1701520365/babelfest/icons/d%C3%A9_r3sqg6.webp',
-    Invocations:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1701520365/babelfest/icons/minions_mr31r0.webp',
-    Buffs:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1701520356/babelfest/icons/forge_yoef1f.webp',
-    Débuffs:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1701520371/babelfest/icons/broken_fnn5ex.webp',
-    Tactiques:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1707128021/babelfest/icons/grapple.webp',
-    Offensifs:
-      'https://res.cloudinary.com/dxdtcakuv/image/upload/w_75/v1708527362/babelfest/icons/sword.webp'
+    Pièges: './effects/trap.png',
+    Malus: './effects/muted.png',
+    Aléatoires: './effects/dé.png',
+    Invocations: './effects/minions.png',
+    Buffs: './effects/forge.png',
+    Débuffs: './effects/broken.png',
+    Tactiques: './effects/grapple.png',
+    Offensifs: './effects/sword.png'
   }
 
   const categories = Object.keys(groupedEffects)
@@ -128,7 +120,7 @@ export default function Effects() {
             }}
             onMouseEnter={hover}
           >
-            <img src={categoryImages[type]} alt={`Icone de la catégorie ${type}`} />
+            <img src={categoryImages[type]} width={75} alt={`Icone de la catégorie ${type}`} />
             {type}
           </div>
         ))}

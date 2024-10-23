@@ -82,6 +82,7 @@ export function TroisiemeOeil({ item, pattern, effect, effectInfos }) {
       target = removeEffects(target)
       target.card.isRecto = true
       target.card.effects = [{ type: 'revealed' }]
+      target.card.revealed = true
       ach = 'HF_thirdEye'
       cancel = false
     }
@@ -113,6 +114,7 @@ export function AbsoluteTroisiemeOeil({ item, pattern, effect, effectInfos }) {
     target = removeEffects(target)
     target.card.isRecto = true
     target.card.effects = [{ type: 'revealed' }]
+    target.card.revealed = true
   })
 
   const targetsCards = targets.map((target) => target.card)

@@ -24,9 +24,9 @@ export default function Arena() {
     isSpectator
   } = useContext(GlobalContext)
 
-  {!isSpectator &&
-    ArenaController() 
-    DeathController() 
+  {
+    !isSpectator && ArenaController()
+    DeathController()
   }
 
   return (
@@ -45,6 +45,8 @@ export default function Arena() {
         centerOnInit={true}
         doubleClick={{ disabled: true }}
         velocityAnimation={{ disabled: false, sensitivity: 100 }}
+        // limitToBounds={false}
+        limitToWrapper={true}
       >
         <TransformComponent>
           <div className={`arena-coords ${host ? 'reversed' : ''}`}>

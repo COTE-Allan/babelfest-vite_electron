@@ -293,7 +293,7 @@ export const useTryAttack = () => {
           targets: [cardTarget],
           result: {
             custom: true,
-            icon: 'https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/fortress_by4lr8.webp',
+            icon: './effects/fortress.png',
             value: false
           }
         })
@@ -583,19 +583,19 @@ export const useTrySpawn = () => {
 
         // Skip processing if the cell is already processed in this run
 
-
         console.log(`Processing spawn effects for cell ${cell.id}`)
 
         // Process the cell's spawn effects
         await processCellSpawn(cell)
-        console.log("Finished processing spawn for cell", cell.id)
+        console.log('Finished processing spawn for cell', cell.id)
 
         // Fetch updated pattern to check for newly spawned cells
         let updatedPattern = await getPattern(room)
-        const newSpawns = updatedPattern.filter((newCell) =>
-          newCell.card?.effects?.some(
-            (effect) => effect.when?.includes('spawn') && !effect.spawnUsed
-          ) && !currentProcessedCells.has(newCell.id)
+        const newSpawns = updatedPattern.filter(
+          (newCell) =>
+            newCell.card?.effects?.some(
+              (effect) => effect.when?.includes('spawn') && !effect.spawnUsed
+            ) && !currentProcessedCells.has(newCell.id)
         )
 
         // Append any new spawns to the end of the list to be processed
@@ -615,7 +615,7 @@ export const useTrySpawn = () => {
 
     // Initial spawn effects processing
     await tryEffect('spawn', [], [cell.card.id, cell.id])
-    console.log("Finished initial tryEffect for spawn for cell", cell.id)
+    console.log('Finished initial tryEffect for spawn for cell', cell.id)
 
     // Mark initial spawn effects as processed
     cell.card.effects.forEach((effect) => {

@@ -133,11 +133,7 @@ export default function Logs(props) {
                               <div key={idx} className="logs-item-header">
                                 <img
                                   className="icon-action-img"
-                                  src={
-                                    isVisible
-                                      ? log.effectInfos.icon
-                                      : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
-                                  }
+                                  src={isVisible ? log.effectInfos.icon : './effects/random.png'}
                                   alt="icone de l'effet"
                                 />
                                 <span className="icon-action-label">
@@ -151,11 +147,7 @@ export default function Logs(props) {
                             <div className="logs-item-header">
                               <img
                                 className="icon-action-img"
-                                src={
-                                  isVisible
-                                    ? log.effectInfos.icon
-                                    : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
-                                }
+                                src={isVisible ? log.effectInfos.icon : './effects/random.png'}
                                 alt="icone de l'effet"
                               />
                               <span className="icon-action-label">
@@ -181,7 +173,7 @@ export default function Logs(props) {
                                 src={
                                   isVisible || log.action === 'trade'
                                     ? trigger.url
-                                    : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                                    : './effects/random.png'
                                 }
                                 className={!isVisible && log.action !== 'trade' ? 'hidden' : ''}
                                 alt={`carte qui active l'action ${trigger.name}`}
@@ -194,7 +186,7 @@ export default function Logs(props) {
                               src={
                                 isVisible || log.action === 'trade'
                                   ? log.trigger.url
-                                  : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                                  : './effects/random.png'
                               }
                               className={!isVisible && log.action !== 'trade' ? 'hidden' : ''}
                               alt={`carte qui active l'action ${log.trigger.name}`}
@@ -226,7 +218,7 @@ export default function Logs(props) {
                                 isCardMine(target, pattern, playerID) ||
                                 log.action === 'trade'
                                   ? target.url
-                                  : 'https://res.cloudinary.com/dxdtcakuv/image/upload/v1701520367/babelfest/icons/random_nb5zhf.webp'
+                                  : './effects/random.png'
                               }
                               className={
                                 !(

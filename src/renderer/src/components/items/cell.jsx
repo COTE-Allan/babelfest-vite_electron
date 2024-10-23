@@ -1,5 +1,5 @@
 import '../../styles/items/cell.scss'
-import { GiConfirmed } from 'react-icons/gi'
+import { GiConfirmed, GiSemiClosedEye } from 'react-icons/gi'
 import { AiFillEyeInvisible } from 'react-icons/ai'
 import { useEffect, useMemo, useContext } from 'react'
 import { GlobalContext } from '../providers/GlobalProvider'
@@ -212,6 +212,11 @@ export default function Cell({ active, confirmModal, cell }) {
               {card.deathCounter && card.deathCounter !== 0 && (
                 <div className="cell-card-counter">{card.deathCounter}</div>
               )}
+              {card.revealed && (
+                <div className="cell-card-revealed">
+                  <GiSemiClosedEye />
+                </div>
+              )}
               {card.timerSummon && <div className="cell-card-counter">{card.timerSummon}</div>}
               {typeof card.def === 'number' && card.def !== 0 && (
                 <div className={`cell-card-def ${card.broken ? 'disabled' : ''}`}>{card.def}</div>
@@ -219,11 +224,7 @@ export default function Cell({ active, confirmModal, cell }) {
 
               <div className="img-container">
                 {card.freeze && (
-                  <img
-                    src="https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702647583/babelfest/icons/freeze.webp"
-                    alt="Icone Congelé"
-                    className="freeze-icon"
-                  />
+                  <img src="./effects/freeze.png" alt="Icone Congelé" className="freeze-icon" />
                 )}
                 <img src={card.url} className="cell-card-visual" alt="Card" />
               </div>

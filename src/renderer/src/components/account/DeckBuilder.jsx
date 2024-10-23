@@ -21,7 +21,7 @@ export default function DeckBuilder() {
       <h1>Mes decks</h1>
       <hr />
       <div className="deckBuilder-list">
-        {userInfo.decks.length <= 8 && (
+        {userInfo.decks.length < 8 && (
           <div
             className="deckBuilder-list-item createNew"
             onMouseEnter={hover}
@@ -83,9 +83,7 @@ export default function DeckBuilder() {
                 </div>
                 <div className="deckBuilder-list-deck-infos">
                   <h2>{deck.name}</h2>
-                  <h3>
-                    Coût : {deck.cost}
-                  </h3>
+                  <h3>Coût : {deck.cost}</h3>
                 </div>
               </div>
             </div>

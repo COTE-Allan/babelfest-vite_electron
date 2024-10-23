@@ -61,10 +61,7 @@ export function CardEffects({ detailCard, setLinkedCard }) {
       {detailCard.freeze && (
         <div className="details-card-effect">
           <div className="details-card-effect-img">
-            <img
-              src="https://res.cloudinary.com/dxdtcakuv/image/upload/w_auto/v1702647583/babelfest/icons/freeze.webp"
-              alt="Icone Congelé"
-            />
+            <img src="./effects/freeze.png" alt="Icone Congelé" />
           </div>
           <div className="details-card-effect-txt">
             <span>Congelé</span>
@@ -75,10 +72,7 @@ export function CardEffects({ detailCard, setLinkedCard }) {
       {detailCard.broken && (
         <div className="details-card-effect">
           <div className="details-card-effect-img">
-            <img
-              src="https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1701520371/babelfest/icons/broken_fnn5ex.webp"
-              alt="Icone Brisé"
-            />
+            <img src="./effects/broken.png" alt="Icone Brisé" />
           </div>
           <div className="details-card-effect-txt">
             <span>Brisé</span>
@@ -89,10 +83,7 @@ export function CardEffects({ detailCard, setLinkedCard }) {
       {detailCard.diving && (
         <div className="details-card-effect">
           <div className="details-card-effect-img">
-            <img
-              src="https://res.cloudinary.com/dxdtcakuv/image/upload/w_100/v1708444045/babelfest/icons/water-splash.webp"
-              alt="Icone Sous l'eau"
-            />
+            <img src="./effects/water-splash.png" alt="Icone Sous l'eau" />
           </div>
           <div className="details-card-effect-txt">
             <span>Sous l'eau</span>

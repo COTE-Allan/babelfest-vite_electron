@@ -65,7 +65,7 @@ const RankedInfos = ({ userInfo }) => {
             {seasonalsSkins[0] && (
               <SkinItem
                 rankReward
-                unlocked={bronzePercentage === 100}
+                unlocked={diamantPercentage > 1}
                 skin={seasonalsSkins[0]}
                 userInfo={userInfo}
                 xpPercentage={bronzePercentage}
@@ -79,7 +79,7 @@ const RankedInfos = ({ userInfo }) => {
             {seasonalsSkins[1] && (
               <SkinItem
                 rankReward
-                unlocked={argentPercentage === 100}
+                unlocked={diamantPercentage > 1}
                 skin={seasonalsSkins[1]}
                 userInfo={userInfo}
                 xpPercentage={argentPercentage}
@@ -93,7 +93,7 @@ const RankedInfos = ({ userInfo }) => {
             {seasonalsSkins[2] && (
               <SkinItem
                 rankReward
-                unlocked={orPercentage === 100}
+                unlocked={diamantPercentage > 1}
                 skin={seasonalsSkins[2]}
                 userInfo={userInfo}
                 xpPercentage={orPercentage}
@@ -107,7 +107,7 @@ const RankedInfos = ({ userInfo }) => {
             {seasonalsSkins[3] && (
               <SkinItem
                 rankReward
-                unlocked={diamantPercentage === 100}
+                unlocked={diamantPercentage > 1}
                 skin={seasonalsSkins[3]}
                 userInfo={userInfo}
                 xpPercentage={diamantPercentage}
@@ -121,7 +121,7 @@ const RankedInfos = ({ userInfo }) => {
             {seasonalsSkins[4] && (
               <SkinItem
                 rankReward
-                unlocked={maitrePercentage === 100}
+                unlocked={diamantPercentage > 1}
                 skin={seasonalsSkins[4]}
                 userInfo={userInfo}
                 xpPercentage={maitrePercentage}

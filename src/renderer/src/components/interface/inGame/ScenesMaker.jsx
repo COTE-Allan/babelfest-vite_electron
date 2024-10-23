@@ -97,8 +97,7 @@ export default function ScenesMaker() {
     return () => clearTimeout(timer)
   }, [effect, scene.id, scene.sound])
 
-  let hiddenCard =
-    'https://res.cloudinary.com/dxdtcakuv/image/upload/v1718782860/babelfest/card_unknown.webp'
+  let hiddenCard = './effects/card_unknown.png'
 
   return (
     <Modal className={`fade-in-out zindex11`}>
