@@ -113,7 +113,7 @@ const AppContent = () => {
                           />
                           <MenuCard
                             name="Arènes"
-                            desc="Affichez une liste de toutes les arènes jouables"
+                            desc="Affichez une liste des arènes jouables"
                             where="/arenasList"
                             bg={MenuCardArena}
                           />

@@ -28,6 +28,7 @@ export function ArenaController() {
     pattern,
     setGreenCells,
     myTurn,
+    firstToPlay,
     phaseEffects,
     placementCostLeft,
     setPhaseEffects,
@@ -37,12 +38,12 @@ export function ArenaController() {
     setMusicPlayer,
     processDeath
   } = useContext(GlobalContext)
-  const { userSettings } = useContext(AuthContext)
 
   const placementHalfMap = usePlacementHalfMap()
   const getAdjacentCells = useGetAdjacentsCells()
   const tryEffect = useTryEffect()
   const trySpawn = useTrySpawn()
+  const EndTurn = useEndTurn()
 
   // playerSelf.handle card selection changes
   useEffect(() => {
@@ -103,21 +104,45 @@ export function ArenaController() {
   }, [phase, standby])
 
   useEffect(() => {
-    if (phaseEffects == phase && phase != 0) {
-      tryEffect(phase, undefined, undefined, undefined, true)
+    if (phaseEffects === phase && phase !== 0) {
+      ;(async () => {
+        await tryEffect(phase, undefined, undefined, undefined, true)
+        if (
+          playerSelf.hand.length === 0 &&
+          (phase === 1 || phase === 4) &&
+          myTurn &&
+          playerID === firstToPlay
+        ) {
+          EndTurn(true)
+          console.log('mettre fin à son tour en premier joueur')
+        }
+      })()
     }
   }, [phaseEffects])
 
   useEffect(() => {
-    console.log(!processDeath)
-    if (!processDeath) {
-      console.log("trySpawn special");
-      (async () => {
-        await trySpawn();
-      })();
+    if (
+      !phaseEffects &&
+      myTurn &&
+      playerID !== firstToPlay &&
+      playerSelf.hand.length === 0 &&
+      (phase === 1 || phase === 4)
+    ) {
+      ;(async () => {
+        EndTurn(true)
+        console.log('mettre fin à son tour en deuxième joueur')
+      })()
     }
-  }, [pattern, processDeath]);
-  
+  }, [myTurn, phaseEffects])
+
+  useEffect(() => {
+    if (!processDeath) {
+      console.log('trySpawn special')
+      ;(async () => {
+        await trySpawn()
+      })()
+    }
+  }, [pattern, processDeath])
 
   // Propose action or movement based on the current game phase
   function proposeMove(phase) {

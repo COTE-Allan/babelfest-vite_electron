@@ -40,8 +40,8 @@ export default function Card({ card }) {
     if (max === 0) return
     if (myTurn || phase == 0) {
       select()
-      const cardId = card.id
-      const isSelected = selectedCards.some((e) => e.id === cardId)
+      const cardUniqueID = card.uniqueID
+      const isSelected = selectedCards.some((e) => e.uniqueID === cardUniqueID)
 
       if (placementCostLeft - card.rarity < 0) return
 
@@ -49,7 +49,7 @@ export default function Card({ card }) {
 
       if (isSelected) {
         // Si la carte est déjà sélectionnée, la désélectionner
-        updatedCards = selectedCards.filter((item) => item.id !== cardId)
+        updatedCards = selectedCards.filter((item) => item.uniqueID !== cardUniqueID)
         setConfirmModal(false)
       } else {
         // Si la carte n'est pas sélectionnée
@@ -68,7 +68,7 @@ export default function Card({ card }) {
 
   useEffect(() => {
     const isSelected = selectedCards.some((selectedCard) => {
-      return selectedCard.id === card.id
+      return selectedCard.uniqueID === card.uniqueID
     })
     setSelected(isSelected)
   }, [selectedCards])

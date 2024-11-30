@@ -33,8 +33,6 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
     setCustomizedUserInfo(null)
   }
 
-  console.log(userInfo)
-
   return (
     <div className="profileDisplayer">
       <BackButton />

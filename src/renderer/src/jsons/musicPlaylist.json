@@ -90,6 +90,11 @@
     "role": "ingame"
   },
   {
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1729714633/babelfest/musiques/Babelfest_OST_-_Combat_du_Colis%C3%A9e.mp3",
+    "name": "Babelfest OST - Combat du Colisée",
+    "role": "ingame"
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726750774/babelfest/musiques/Babelfest_OST_-_Tuto_avec_Tuto.mp3",
     "name": "Babelfest OST - Tuto avec Tuto",
     "role": "tutorial"

@@ -120,7 +120,13 @@ export default function UserSettings() {
             id="usernameInput"
             type="text"
             defaultValue={userInfo.username}
-            onChange={(e) => setUsername(e.target.value)}
+            maxLength={10} // Limite le nombre de caractères à 10
+            onChange={(e) => {
+              const value = e.target.value
+              if (value.length <= 10) {
+                setUsername(value)
+              }
+            }}
           />
         </div>
         <div className="userSettings-input">

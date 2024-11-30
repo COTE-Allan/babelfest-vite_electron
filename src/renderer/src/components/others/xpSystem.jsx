@@ -147,13 +147,13 @@ export function calculateMMRChange(currentMMR, opponentMMR, gameWon, gameMode) {
 // Fonction pour calculer le changement de PR
 export function calculatePRChange(gameWon, currentStreak, gameMode) {
   if (gameMode !== 'ranked') return 0
-  const basePR = gameWon ? 50 : -25
+  const basePR = gameWon ? 50 : -15
   let streakBonus = 0
   if (gameWon) {
     if (currentStreak >= 4) {
-      streakBonus = 30
+      streakBonus = 40
     } else if (currentStreak >= 2) {
-      streakBonus = 15
+      streakBonus = 20
     }
   }
   const totalPRChange = basePR + streakBonus

@@ -157,8 +157,14 @@ export default function LobbyList() {
           <Modal>
             <div className="modal-container">
               <input
-                onChange={(e) => setLobbyName(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value
+                  if (value.length <= 13) {
+                    setLobbyName(value)
+                  }
+                }}
                 type="text"
+                maxLength={13} // Limite directement à 13 caractères
                 placeholder="Nom du salon"
               />
               <input

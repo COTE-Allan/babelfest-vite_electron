@@ -230,7 +230,6 @@ export default function Winner() {
 
         // Mettre à jour l'état local si nécessaire
         setPrChange(prChangeValue)
-        console.log(currentRank)
         setNewRank(currentRank)
       }
 

@@ -1,7 +1,7 @@
 import ProfilePicture from '../../esthetics/profilePicture'
 import '../../../styles/interface/inGame/turnTracker.scss'
 import { GlobalContext } from '../../providers/GlobalProvider'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { getBackgroundStyle } from '../../others/toolBox'
 
 export default function TurnTracker() {
@@ -18,6 +18,8 @@ export default function TurnTracker() {
     playerRival
   } = useContext(GlobalContext)
 
+  const [isOpen, setIsOpen] = useState(false)
+
   const phaseLabel = {
     0: "Échange avec l'autre joueur",
     1: 'Phase de préparation',
@@ -31,8 +33,13 @@ export default function TurnTracker() {
     ? playerSelf?.username || 'Joueur 1'
     : playerRival?.username || 'Joueur 2'
 
+  // Gestionnaire pour alterner la classe 'open'
+  const toggleOpen = () => {
+    setIsOpen((prev) => !prev)
+  }
+
   return (
-    <div className="turnTracker">
+    <div className={`turnTracker ${isOpen ? 'open' : ''}`} onClick={toggleOpen}>
       <div className="turnTracker-content">
         <span className="turnTracker-activePlayer">
           {isSpectator

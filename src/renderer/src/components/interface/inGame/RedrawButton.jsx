@@ -32,9 +32,6 @@ export default function RedrawButton() {
 
       setSelectedCards([])
 
-      console.log('Avant redraw, main du joueur:', playerSelf.hand)
-      console.log('Nouveau deck après redraw:', newDeck)
-
       const handKey = playerID === 1 ? 'handJ1' : 'handJ2'
 
       await updateDoc(doc(db, 'games', room), {
@@ -49,8 +46,6 @@ export default function RedrawButton() {
         // If you maintain deck in state, update it here
         // deck: newDeck
       }))
-
-      console.log("Après mise à jour, nouvelle main dans l'état local:", newDeck)
 
       setRedrawUsed(true)
     } catch (error) {

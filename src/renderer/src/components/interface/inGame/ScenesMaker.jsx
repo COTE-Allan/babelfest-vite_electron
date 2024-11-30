@@ -13,6 +13,7 @@ import attackSfx from '../../../assets/sfx/ingame_attack.mp3'
 import healSfx from '../../../assets/sfx/ingame_heal.wav'
 import blockSfx from '../../../assets/sfx/ingame_block.mp3'
 import deathSfx from '../../../assets/sfx/ingame_death.mp3'
+import hiddenCard from '../../../assets/img/card_unknown.png'
 
 export default function ScenesMaker() {
   const { scenes, user, room, pattern, playerID, isSpectator } = useContext(GlobalContext)
@@ -96,8 +97,6 @@ export default function ScenesMaker() {
     // Nettoyer le timer quand le composant est démonté
     return () => clearTimeout(timer)
   }, [effect, scene.id, scene.sound])
-
-  let hiddenCard = './effects/card_unknown.png'
 
   return (
     <Modal className={`fade-in-out zindex11`}>

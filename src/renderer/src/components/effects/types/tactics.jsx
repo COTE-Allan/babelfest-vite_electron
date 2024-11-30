@@ -12,12 +12,6 @@ export function Inversion({ item, effectInfos }) {
   target.card.atk = hp
   target.card.baseatk = hp
 
-  console.log('Inversion Effect Applied:', {
-    card: item.card,
-    newHp: target.card.hp,
-    newAtk: target.card.atk
-  })
-
   return {
     targets: [target],
     log: {

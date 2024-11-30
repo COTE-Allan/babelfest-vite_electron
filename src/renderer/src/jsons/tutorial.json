@@ -1,21 +1,21 @@
 [
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Ah, te voilà enfin, je commençais à m'impatienter. Bon t'attend quoi allez rentre viens !",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Ah, te voilà enfin ! Je commençais à m'impatienter. Bon, t'attends quoi ? Allez rentre viens !",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "center"
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Bienvenue au festival de Babel, aussi appellé Babelfest, il s'agit d'un grand tournoi ou des gens venu de tous le multivers s'affrontent.",
+    "text": "Bienvenue au festival de Babel, aussi appelé Babelfest ! Il s'agit d'un grand tournoi où des combattants venus de tous les univers se réunissent.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "center"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Les combattants s'affrontent dans l'arène sous forme de cartes, pour gagner, ils doivent capturer la base de l'équipe adverse ou mettre K-O tous leurs adversaires.",
+    "url": "./images/tuto_sournois.png",
+    "text": "Les combattants s'affrontent dans l'arène sous forme de cartes. Pour gagner, ils doivent capturer la base de l'équipe adverse ou mettre K-O tous leurs adversaires.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "top-left",
@@ -30,8 +30,8 @@
     "highlightedElements": ["arena"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Voici ton deck. Tu pourra les placer dans l'arène au fur et à mesure du match, si tu perd toutes tes cartes, tu perd la partie.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Voici les cartes de ta main. Bon, elles ne sont pas dingue... Normal, je n'en fais pas partie.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-hand",
@@ -39,27 +39,35 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Maintenant que ta les bases, on va faire un tour de jeu entier, j'ai moi aussi un deck de 4 cartes.",
+    "text": "Tu pourras placer tes cartes dans l'arène au fur et à mesure du match. Si tu perds toutes tes cartes, tu perds la partie.",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "above-hand",
+    "highlightedElements": ["hand"]
+  },
+  {
+    "url": "./images/tuto_hautain.png",
+    "text": "Maintenant que t'as les bases, on va faire un tour de jeu complet. J'ai moi aussi une main de 4 cartes pour garder le match équitable (même si tu n'as aucune chance).",
     "clickOn": { "element": "dialog" },
     "position": "top-left"
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Pendant une partie de Babelfest, les deux joueurs agissent selon 4 phases distinctes.",
     "clickOn": { "element": "dialog" },
     "position": "top-left"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Tu pourra suivre la progression des phases ici.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Tu peux suivre la progression des phases ici, survole la fenêtre avec ta souris, tu verras, c'est sympa.",
     "clickOn": { "element": "dialog" },
     "position": "under-tracker",
     "modal": true,
     "highlightedElements": ["tracker"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "La première phase c'est la phase de préparation. Elle consiste en l'invocation de nos cartes dans l'arène, je commence, regarde.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "La première phase c'est la phase de préparation. Elle consiste à placer nos cartes dans l'arène, je commence regarde.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "addCard": { "where": "cell", "id": 60, "to": 14, "owner": 2 },
@@ -67,13 +75,13 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Voilà, j'ai invoqué une carte en C4, tu ne peut invoquer que sur ta moitié de l'arène.",
+    "text": "Voilà, j'ai placé une carte en C4. À noter que tu ne peux que invoquer des cartes sur ta moitié de l'arène.",
     "clickOn": { "element": "dialog" },
     "position": "top-left"
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Une carte est composée de trois statistiques et d'un assortiments d'effets.",
+    "text": "Une carte est composée de trois statistiques et d'un assortiments d'effets. Voici un aperçu des informations de ma carte.",
     "clickOn": { "element": "dialog" },
     "position": "top-center",
     "image": "./images/schema_tutoriel.png",
@@ -82,38 +90,52 @@
     "sound": "summon"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "J'invoque une deuxième carte, face caché, directement sur ma base en C1 pour empêcher une capture et je termine mon tour.",
+    "url": "./images/tuto_sournois.png",
+    "text": "Je place une deuxième carte face cachée directement sur ma base en C1. Tout ça pour t'empêcher de la capturer, et je termine mon tour.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "turn": 2,
     "sound": "turn"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Maintenant c'est ton tour, tu va pouvoir invoquer des cartes dans l'arène.",
+    "url": "./images/tuto_rire.png",
+    "text": "Maintenant c'est ton tour, tu vas pouvoir placer des cartes dans l'arène. T'as le meilleur prof, tu peux pas te tromper !",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "center"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Tu vois ça ? C'est ton énergie, invoquer une carte consomme l'énergie indiqué sur celle-ci, tu remonte à 4 énergies à chaque fin de tour.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Tu vois ça, c'est ton énergie. Placer une carte consomme l'énergie indiquée sur celle-ci. Chaque tour tu reviens à 4 énergies, et elles ne s'accumulent pas, alors ça ne sert à rien de l'économiser.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
     "highlightedElements": ["bottom-menu"]
   },
   {
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Plus une carte coûte en énergie, plus elle sera puissante. Fais attention à l'ordre dans lequel tu poses tes cartes au fil des tours ; c'est super important !",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "center"
+  },
+  {
     "url": "./images/tuto_hautain.png",
-    "text": "Bien, sélectionne 'Mandarine-Man'.",
+    "text": "Il existe 4 types de rareté. Chaque type a un coût différent : Typique (1); Rare (2); Épique (3); Légendaire (4).",
+    "clickOn": { "element": "dialog" },
+    "modal": true,
+    "position": "center"
+  },
+  {
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Bien, sélectionne la carte Épique de ta main 'Mandarine-Man'.",
     "clickOn": { "element": "card", "id": 48 },
     "position": "top-left",
     "highlightedElements": ["hand", "hand-48"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Invoque ta carte en C5.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Place ta carte en C5.",
     "clickOn": { "element": "cell", "id": 18 },
     "position": "top-left",
     "highlightedElements": ["cell-18"],
@@ -122,7 +144,7 @@
   },
   {
     "confirm": ["cell-18"],
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Confirme ton choix pour invoquer la carte.",
     "clickOn": { "element": "cell", "id": 18 },
     "position": "top-left",
@@ -135,30 +157,30 @@
     "sound": "summon"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Tu viens d'invoquer une carte Épique, elle coûte 3 énergies pour être invoquées.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Tu viens de placer une carte Épique, elle t'a coûté 3 énergies pour être invoquée.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Comme tu peut le voir, ton énergie à été consommée, tu peut encore invoquer un combattant de rareté Typique, qui ne coûte qu'une énergie ou tu peut passer ton tour.",
+    "text": "Comme tu peux le voir, ton énergie a été consommée. Tu peux encore placer un combattant de rareté Typique, qui coûte 1 énergie, ou tu peux passer ton tour.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
     "highlightedElements": ["bottom-menu"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Profite-en pour invoquer 'Xyphias Tonitruo'.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Profites-en pour invoquer 'Xyphias Tonitruo'.",
     "clickOn": { "element": "card", "id": 15 },
     "position": "top-left",
     "highlightedElements": ["hand", "hand-15"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Profite-en pour invoquer 'Xyphias Tonitruo'.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Profites-en pour invoquer 'Xyphias Tonitruo'.",
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
     "highlightedElements": ["cell-17"],
@@ -166,8 +188,8 @@
     "selected": ["hand-15"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Profite-en pour invoquer 'Xyphias Tonitruo'.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Profites-en pour invoquer 'Xyphias Tonitruo'.",
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
     "highlightedElements": ["cell-17"],
@@ -181,7 +203,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Ton tour va se terminer automatiquement car tu a consommé ta dernière énergie. Les deux joueurs ayant joué la phase, on passe à la suivante.",
+    "text": "Ton tour se termine automatiquement car tu as consommé ta dernière énergie. Les deux joueurs ayant joué la phase, on passe à la suivante.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
@@ -192,14 +214,14 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Dans la deuxième phase, nous allons déplacer nos combattants pour capturer la base ou préparer notre attaque.",
+    "text": "Dans la deuxième phase, nous allons déplacer nos combattants l'un après l'autre pour capturer la base ou préparer notre attaque.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "center"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Observe, je vais déplacer une carte.",
+    "url": "./images/tuto_sournois.png",
+    "text": "Observe... Je vais déplacer une carte incroyable !",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "moveCard": {
@@ -208,15 +230,15 @@
     }
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "En déplacant la carte 'Tuto' de C1 vers C3, elle se révèle.",
+    "url": "./images/tuto_rire.png",
+    "text": "En déplaçant ma carte 'Tuto' de C1 vers C3, elle se révèle. T'as vu elle est belle hein ?",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "tired": ["cell-10"]
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Bien qu'il me reste de l'énergie, je termine ma phase, à ton tour de te déplacer.",
+    "text": "Bien qu'il me reste de l'énergie, je termine ma phase. À ton tour de te déplacer.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "tired": ["cell-10"],
@@ -224,8 +246,8 @@
     "sound": "turn"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "De la même façon que pour invoquer, tu possède de l'énergie qui se consomme pour chaque case traversé.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "De la même façon que pour invoquer, tu possèdes de l'énergie qui se consomme pour chaque case traversée.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
@@ -233,23 +255,23 @@
     "tired": ["cell-10"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "La distance maximale qu'une carte peut traverser en une phase est indiquée par sa valeur de DEP.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "La distance maximale qu'une carte peut traverser en une phase est indiquée par sa valeur de déplacement. Une carte ne peut pas se déplacer de plus de 4 cases.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "highlightedElements": ["arena"],
     "modal": true
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Déplace 'Xyphias Tonitruo'.",
+    "url": "./images/tuto_sournois.png",
+    "text": "Écoute-moi et déplace 'Xyphias Tonitruo'.",
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
     "highlightedElements": ["cell-17"],
     "tired": ["cell-10"]
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Sélectionne la case d'arrivée.",
     "clickOn": { "element": "cell", "id": 9 },
     "position": "top-left",
@@ -259,7 +281,7 @@
     "tired": ["cell-10"]
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Sélectionne la case d'arrivée.",
     "clickOn": { "element": "cell", "id": 9 },
     "position": "top-left",
@@ -276,14 +298,14 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Ton carte viens de se déplacer de B5 vers B3, retiens que peu importe l'énergie qu'il te reste, tu ne pourra pas le redéplacer ce tour.",
+    "text": "Ta carte vient de se déplacer de B5 vers B3. Retiens que peu importe l'énergie qu'il te reste, tu ne pourras pas la redéplacer ce tour.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "tired": ["cell-10", "cell-9"]
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Toutefois, tu peut continuer à déplacer d'autres cartes, vu qu'il te reste de l'énergie.",
+    "text": "Toutefois, tu peux continuer à déplacer d'autres cartes vu qu'il te reste de l'énergie.",
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
@@ -292,7 +314,16 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Ta phase de déplacement se termine quand tu épuise ton énergie ou quand tu passe ton tour. Passe ton tour pour cette fois.",
+    "text": "Ta phase de déplacement se termine quand tu épuises ton énergie ou quand tu passe ton tour.",
+    "clickOn": { "element": "dialog" },
+    "position": "above-buttons",
+    "modal": true,
+    "highlightedElements": ["bottom-menu"],
+    "tired": ["cell-10", "cell-9"]
+  },
+  {
+    "url": "./images/tuto_sournois.png",
+    "text": "Passe ton tour pour cette fois, je te prépare une petite surprise héhéhé...",
     "clickOn": { "element": "validate" },
     "position": "above-buttons",
     "modal": true,
@@ -305,14 +336,14 @@
     "editCard": { "id": 14, "atk": 5 }
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Après avoir invoquer et déplacer les combattants, la phase suivante est l'attaque.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Après avoir posé et déplacé nos combattants, la phase suivante est l'attaque !",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Le plus important à retenir c'est que les combattants ne peuvent attaquer qu'une fois par tour et uniquement les cibles adjacentes. (haut, bas, gauche, droite)",
     "clickOn": { "element": "dialog" },
     "position": "center",
@@ -320,15 +351,15 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Observe la disposition de mes cartes, 'Tuto', en C3 offre un bonus d'attaque aux alliés adjacents, c'est l'un de ses effets.",
+    "text": "Observe la disposition de mes cartes, 'Tuto', en C3 offre un bonus d'attaque aux alliés adjacents, c'est l'un de ses effets. Stylé hein ?",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "highlightedElements": ["arena"],
     "modal": true
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Avec l'effet de 'Tuto', 'The Outsider' à maintenant 5 points d'ATK",
+    "url": "./images/tuto_rire.png",
+    "text": "Avec l'effet de 'Tuto', ma carte 'The Outsider' a maintenant 5 Points d'Attaque. Suffisant pour détruire ton 'Mandarine-man'.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "highlightedElements": ["arena"],
@@ -344,14 +375,14 @@
     "turn": 2
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "'The Outsider' inflige 5 dégâts à 'Mandarine-man' ce qui fait tomber ses PV à 0, détruisant ta carte.",
+    "url": "./images/tuto_rire.png",
+    "text": "'The Outsider' inflige 5 dégâts à 'Mandarine-man' ce qui fait tomber ses PV à 0, détruisant ta carte. Je suis vraiment trop intelligent.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "tired": ["cell-14"]
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "J'ai attaqué une fois, c'est à ton tour, sélectionne l'attaquant.",
     "clickOn": { "element": "cell", "id": 9 },
     "position": "top-left",
@@ -359,7 +390,7 @@
     "highlightedElements": ["cell-9"]
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Maintenant la cible.",
     "clickOn": { "element": "cell", "id": 10 },
     "position": "top-left",
@@ -369,7 +400,7 @@
     "green": ["cell-10"]
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "Maintenant la cible.",
     "clickOn": { "element": "cell", "id": 10 },
     "position": "top-left",
@@ -382,23 +413,30 @@
     "sound": "death"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "'Xyphias Tonitruo' inflige 2 dégâts à 'Tuto' ce qui fait tomber ses PV à 0.",
+    "url": "./images/tuto_stress.png",
+    "text": "'Xyphias Tonitruo' inflige 2 dégâts à 'Tuto' ce qui fait tomber ses PV à 0...",
     "tired": ["cell-14", "cell-9"],
     "clickOn": { "element": "dialog" },
     "position": "top-left"
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Maintenant que tu a attaqué une fois, je peut réattaquer à nouveau, mais je n'ai aucun combattant qui en a la possibilité, donc je met fin à mon tour.",
+    "url": "./images/tuto_pleure.png",
+    "text": "ATTENDS QUOI QU'EST CE QUE J'AI FAIT !?",
+    "tired": ["cell-14", "cell-9"],
+    "clickOn": { "element": "dialog" },
+    "position": "top-left"
+  },
+  {
+    "url": "./images/tuto_sournois.png",
+    "text": "Grrr...Maintenant que tu as attaqué une fois, je peux attaquer à nouveau. Mais je n'ai aucun combattant qui en a la possibilité, donc je mets fin à mon tour.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "tired": ["cell-14", "cell-9"],
     "modal": true
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Tu peut donc attaquer à nouveau toi aussi, mais tu n'a aucun combattant valide, passe ton tour.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Tu peux donc attaquer à nouveau toi aussi. Tu n'as aucun combattant valide, alors passe ton tour.",
     "clickOn": { "element": "validate" },
     "position": "above-buttons",
     "modal": true,
@@ -408,7 +446,7 @@
     "sound": "turn"
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "text": "La dernière phase d'un tour c'est le troc.",
     "clickOn": { "element": "dialog" },
     "position": "center",
@@ -416,16 +454,16 @@
     "phase": 4
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "L'objectif de cette phase est d'échanger des cartes avec la 'boutique', qui contient 9 cartes aléatoires. L'échange est optionnel et sert à renforcer ton équipe en remplacant des combattants que tu ne veut pas jouer.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "L'objectif de cette phase vise à échanger des cartes avec la 'boutique', qui contient 9 cartes aléatoires. L'échange est optionnel et sert à renforcer ou adapter ta stratégie en remplaçant des combattants que tu ne veux pas jouer.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
     "highlightedElements": ["shop"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "La valeur que tu vois ici c'est le coût de l'échange, le coût va baisser quand tu achète une carte et va augmenter quand tu va en vendre, il doit être supérieur ou égal à 0 pour conclure l'achat.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "La valeur que tu vois ici c'est le coût de l'échange. Le coût baisse quand tu achètes une carte et augmente quand tu en vends. Il doit être supérieur ou égal à 0 pour conclure l'achat.",
     "clickOn": { "element": "dialog" },
     "position": "above-buttons",
     "modal": true,
@@ -433,7 +471,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Commence par choisir une carte que tu veut acheter.",
+    "text": "Commence par choisir une carte que tu veux acheter.",
     "clickOn": { "element": "shop", "id": 42 },
     "position": "above-buttons",
     "modal": true,
@@ -441,8 +479,8 @@
     "diff": -3
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Le différentiel baisse de 3, car la carte que veut acheter coûte 3 énergies pour être invoqué.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Le différentiel baisse de 3, car la carte que tu veux acheter coûte 3 énergies pour être invoquée.",
     "clickOn": { "element": "dialog" },
     "position": "above-buttons",
     "modal": true,
@@ -450,8 +488,8 @@
     "selected": ["shop-42"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Sélectionne une carte que tu va vendre.",
+    "url": "./images/tuto_sournois.png",
+    "text": "Sélectionne une carte de ta main que tu vas vendre. Tiens, celle-ci !",
     "clickOn": { "element": "card", "id": 36 },
     "position": "above-buttons",
     "modal": true,
@@ -460,8 +498,8 @@
     "selected": ["shop-42"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Le différentiel augmente de 2, car la carte coûte 2 énergies pour être invoqué. Ce n'est pas assez pour valider l'échange.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Le différentiel augmente de 2, car la carte coûte 2 énergies pour être invoquée. Ce n'est pas assez pour valider l'échange.",
     "clickOn": { "element": "dialog" },
     "position": "above-buttons",
     "modal": true,
@@ -470,7 +508,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Sélectionne une deuxième carte à vendre.",
+    "text": "Sélectionne l'autre carte de ta main à vendre.",
     "clickOn": { "element": "card", "id": 25 },
     "position": "above-buttons",
     "modal": true,
@@ -480,7 +518,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "L'échange est valide, tu peut maintenant confirmer.",
+    "text": "L'échange est valide, tu peux maintenant confirmer.",
     "clickOn": { "element": "validate" },
     "position": "above-buttons",
     "modal": true,
@@ -490,8 +528,8 @@
     "selected": ["shop-42", "hand-36", "hand-25"]
   },
   {
-    "url": "./images/tuto_hautain.png",
-    "text": "Tu a terminé ton premier échange, retiens que tu peut aussi prendre plusieurs cartes de la boutique d'un coup.",
+    "url": "./images/tuto_nonchalent.png",
+    "text": "Tu as terminé ton premier échange, retiens que tu peux aussi prendre plusieurs cartes de la boutique d'un coup.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
@@ -500,7 +538,7 @@
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "En terminant la phase de troc, on passe au tour suivant et on recommence les phases ( Invocation, Déplacement, Attaque et Troc ) en inversant l'ordre de jeu.",
+    "text": "En terminant la phase de troc, on passe au tour suivant et on recommence les phases (Préparation, Déplacement, Attaque et Troc) en inversant l'ordre de jeu.",
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
@@ -510,25 +548,25 @@
     "editCard": { "id": 14, "atk": 4 }
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "clickOn": { "element": "card", "id": 42 },
-    "text": "Ce tour-ci, tu commence, invoque en premier, effectue ta phase de préparation.",
+    "text": "Ce tour-ci, tu commences. Invoque en premier et effectue ta phase de préparation.",
     "highlightedElements": ["hand-42"],
     "position": "top-left"
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "clickOn": { "element": "cell", "id": 29 },
-    "text": "Ce tour-ci, tu commence, invoque en premier, effectue ta phase de préparation.",
+    "text": "Ce tour-ci, tu commences. Invoque en premier et effectue ta phase de préparation.",
     "highlightedElements": ["cell-29"],
     "green": ["cell-29"],
     "selected": ["hand-42"],
     "position": "top-left"
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "clickOn": { "element": "cell", "id": 29 },
-    "text": "Ce tour-ci, tu commence, invoque en premier, effectue ta phase de préparation.",
+    "text": "Ce tour-ci, tu commences. Invoque en premier et effectue ta phase de préparation.",
     "highlightedElements": ["cell-29"],
     "green": ["cell-29"],
     "selected": ["hand-42", "cell-29"],
@@ -540,7 +578,7 @@
     "phase": 2
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_sournois.png",
     "clickOn": { "element": "dialog" },
     "text": "Cette fois-ci, je décide de ne pas invoquer, la phase de déplacement commence.",
     "position": "center",
@@ -550,7 +588,7 @@
     "url": "./images/tuto_hautain.png",
     "clickOn": { "element": "cell", "id": 9 },
     "highlightedElements": ["arena", "cell-9"],
-    "text": "Ta carte 'Xyphias Tonitruo', possède 4 points de déplacements, tu peut donc te déplacer sur ma base en C3 pour la capturer.",
+    "text": "Ta carte 'Xyphias Tonitruo' possède 4 Points de Déplacement, tu peux donc te déplacer sur ma base en C3 pour la capturer.",
     "position": "top-left"
   },
   {
@@ -559,7 +597,7 @@
     "highlightedElements": ["arena", "cell-9"],
     "selected": ["cell-9"],
     "green": ["cell-2"],
-    "text": "Ta carte 'Xyphias Tonitruo', possède 4 points de déplacements, tu peut donc te déplacer sur ma base en C3 pour la capturer.",
+    "text": "Ta carte 'Xyphias Tonitruo' possède 4 Points de Déplacement, tu peux donc te déplacer sur ma base en C3 pour la capturer.",
     "position": "top-left"
   },
   {
@@ -569,7 +607,7 @@
     "green": ["cell-2"],
     "selected": ["cell-9", "cell-2"],
     "confirm": ["cell-2"],
-    "text": "Ta carte 'Xyphias Tonitruo', possède 4 points de déplacements, tu peut donc te déplacer sur ma base en C3 pour la capturer.",
+    "text": "Ta carte 'Xyphias Tonitruo' possède 4 Points de Déplacement, tu peux donc te déplacer sur ma base en C3 pour la capturer.",
     "position": "top-left",
     "moveCard": {
       "from": 9,
@@ -578,24 +616,24 @@
     "sound": "end"
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_nonchalent.png",
     "clickOn": { "element": "dialog" },
-    "text": "Félicitation, tu viens de gagner via capture. N'oublie pas que tu peut aussi gagner en éliminant tout les combattants adverses.",
+    "text": "Félicitations, tu viens de gagner en capturant ma base. N'oublie pas que tu peux aussi gagner en éliminant tous les combattants adverses.",
     "position": "center",
     "modal": true
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_rire.png",
     "clickOn": { "element": "dialog" },
-    "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, bonne chance.",
+    "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, ça ne sera pas aussi simple que contre moi. Alors bonne chance !",
     "position": "center",
     "modal": true,
     "win": true
   },
   {
-    "url": "./images/tuto_hautain.png",
+    "url": "./images/tuto_rire.png",
     "clickOn": { "element": "end" },
-    "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, bonne chance.",
+    "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, ça ne sera pas aussi simple que contre moi. Alors bonne chance !",
     "position": "center",
     "modal": true
   }

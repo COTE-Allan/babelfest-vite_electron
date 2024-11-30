@@ -8,18 +8,29 @@
   left: 50%;
   top: 0;
   z-index: 5;
-  transform: translateX(-50%) translateY(-90px);
+  transform: translateX(-50%) translateY(-70px);
   font-family: 'Kimberly Bl', sans-serif;
   box-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
   border-radius: 0 0 10px 10px;
-  transition: transform 200ms ease-in-out;
+  transition:
+    transform 200ms ease-in-out,
+    border-width 200ms ease-in;
   border: rgb(255, 255, 255) 4px solid;
   border-top: none;
   background-color: $black;
   width: 300px;
 
-  &:hover {
+  &:hover,
+  &.open {
     transform: translateX(-50%) translateY(0px);
+  }
+
+  &:hover {
+    cursor: url('../../../assets/svg/pointer.svg'), auto;
+  }
+
+  &.open {
+    border-width: 6px;
   }
 
   &-content {
@@ -27,8 +38,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 90px;
-    font-size: 13px;
+    min-height: 70px;
+    // font-size: 12px;
     transition:
       border 200ms ease-in-out,
       width 200ms ease-in-out;
@@ -42,10 +53,10 @@
   }
 
   &-order {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   &-activePlayer {
-    font-size: 20px;
+    font-size: 18px;
   }
 }

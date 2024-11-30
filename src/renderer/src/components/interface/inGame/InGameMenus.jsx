@@ -100,7 +100,7 @@ export default function InGameMenus() {
             onClick={() => {
               if (myTurn) EndTurn(true)
             }}
-            className={`${!myTurn && 'disabled'}`}
+            className={`alwaysOpen ${!myTurn && 'disabled'}`}
           >
             <span>Fin de phase</span>
             <PiFlagCheckeredFill size={45} />

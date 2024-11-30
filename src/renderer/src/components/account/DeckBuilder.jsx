@@ -16,6 +16,9 @@ export default function DeckBuilder() {
   const { userInfo, userSettings } = useContext(AuthContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
+
+  // Référence pour capturer l'élément
+
   return (
     <div className="deckBuilder">
       <h1>Mes decks</h1>
@@ -36,6 +39,7 @@ export default function DeckBuilder() {
         )}
         {userInfo.decks.map((deck) => (
           <div
+            key={deck.name}
             className="deckBuilder-list-deck"
             onMouseEnter={hover}
             onClick={() => {
@@ -45,8 +49,8 @@ export default function DeckBuilder() {
           >
             <div className="deckBuilder-list-deck-wrapper">
               <div className="deckBuilder-list-deck-preview">
-                <img src={deck.cards[7].image} className="main" />
-                <img src={deck.cards[0].image} className="secondary" />
+                <img src={deck.cards[7].image} className="main" alt="Main card" />
+                <img src={deck.cards[0].image} className="secondary" alt="Secondary card" />
               </div>
               <div className="deckBuilder-list-deck-infos">
                 <h2>{deck.name}</h2>
@@ -55,9 +59,6 @@ export default function DeckBuilder() {
                 </h3>
               </div>
             </div>
-            {/* <div className="deckBuilder-list-item-bg">
-              <img src={deck.cards[7].image} />
-            </div> */}
           </div>
         ))}
       </div>
@@ -69,6 +70,7 @@ export default function DeckBuilder() {
           deck.cost = getTotalCost(deck.cards)
           return (
             <div
+              key={deck.name}
               className="deckBuilder-list-deck"
               onMouseEnter={hover}
               onClick={() => {
@@ -78,8 +80,8 @@ export default function DeckBuilder() {
             >
               <div className="deckBuilder-list-deck-wrapper">
                 <div className="deckBuilder-list-deck-preview">
-                  <img src={deck.cards[7].image} className="main" />
-                  <img src={deck.cards[0].image} className="secondary" />
+                  <img src={deck.cards[7].image} className="main" alt="Main card" />
+                  <img src={deck.cards[0].image} className="secondary" alt="Secondary card" />
                 </div>
                 <div className="deckBuilder-list-deck-infos">
                   <h2>{deck.name}</h2>
@@ -93,7 +95,8 @@ export default function DeckBuilder() {
       {deckBuilderOn && (
         <Modal className="deckBuilder-editor">
           <Library editorMode={setDeckBuilderOn} deck={deckBuilderOn !== 'open' && deckBuilderOn} />
-          <img className="deckBuilder-editor-bg" src={BabelfestBackground} />
+          <img className="deckBuilder-editor-bg" src={BabelfestBackground} alt="Background" />
+          <div className="deckBuilder-editor-black"></div>
         </Modal>
       )}
     </div>

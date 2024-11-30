@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import { GlobalContext } from '../providers/GlobalProvider'
 import '../../styles/esthetics/TurnAlert.scss'
 import useSound from 'use-sound'
@@ -25,6 +25,10 @@ export default function TurnAlert() {
   const [turnTxt, setTurnTxt] = useState('')
   const [phaseTxt, setPhaseTxt] = useState('')
 
+  // Ref to manage sound cooldown
+  const lastSoundTimeRef = useRef(0)
+  const cooldown = 2000 // Cooldown in milliseconds (2 seconds)
+
   useEffect(() => {
     let turnText = ''
     let phaseText = phases[phase - 1] // En supposant que phase est entre 1 et 4
@@ -47,9 +51,13 @@ export default function TurnAlert() {
 
   useEffect(() => {
     if (myTurn && !isSpectator) {
-      notif()
+      const currentTime = Date.now()
+      if (currentTime - lastSoundTimeRef.current > cooldown) {
+        notif()
+        lastSoundTimeRef.current = currentTime // Update last sound time
+      }
     }
-  }, [myTurn, isSpectator])
+  }, [myTurn, isSpectator, notif])
 
   return (
     <div

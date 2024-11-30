@@ -348,7 +348,6 @@ async function DrawCards(room, cardAmount) {
 
 async function DrawCardsWithRarityMax(room, cardAmount, deckJ1, deckJ2) {
   const deck = await getDeck(room)
-  console.log(deckJ1, deckJ2)
   if (!deck || deck.length === 0) {
     throw new Error('Deck is undefined or empty')
   }

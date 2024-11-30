@@ -42,11 +42,12 @@
       transition:
         max-width 200ms ease-in-out,
         margin 200ms ease-in-out;
-      font-size: 20px;
+      font-size: 16px;
       white-space: nowrap;
     }
 
-    &:hover {
+    &:hover,
+    &.alwaysOpen {
       & span {
         max-width: 250px;
         margin: 0 5px;
@@ -80,7 +81,6 @@
     }
   }
 }
-
 
 .ig-settings {
   height: 100%;

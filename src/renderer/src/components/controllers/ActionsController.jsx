@@ -5,7 +5,7 @@ import { db } from '../../Firebase'
 import { useEndTurn } from './PhaseController'
 import { removeCardAndBatch } from '../effects/editCards'
 import { useTryEffect } from './EffectsController'
-import { generateUniqueID, getPattern } from '../others/toolBox'
+import { getPattern } from '../others/toolBox'
 import { usePushLogsIntoBatch, usePushSceneIntoBatch } from './LogsController'
 import { getEffectInfo } from '../effects/basics'
 import { AuthContext } from '../../AuthContext'
@@ -138,7 +138,6 @@ export const usePlaceCardOnArea = () => {
     const targetPlayer = host ? 'player1.placementLeft' : 'player2.placementLeft'
 
     cardToPlace.isRecto = isRecto
-    cardToPlace.uniqueID = generateUniqueID()
     cardToPlace.owner = { name: playerSelf.username, hex: playerSelf.primaryColor.hex }
 
     const batch = writeBatch(db)
@@ -193,8 +192,6 @@ export const usePlaceCardOnArea = () => {
         setSelectedCards([])
         setConfirmModal(null)
         setBatchCommit(false)
-        // console.log("tryspawn placecard")
-        // await trySpawn()
         if (placementCostLeft == 0) {
           EndTurn()
         }

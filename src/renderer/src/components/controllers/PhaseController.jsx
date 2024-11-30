@@ -61,7 +61,9 @@ export const useEndTurn = () => {
     playerID,
     phase,
     room,
-    turn
+    turn,
+    playerSelf,
+    playerRival
   } = useContext(GlobalContext)
   const pushLogsIntoBatch = usePushLogsIntoBatch()
 

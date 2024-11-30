@@ -508,7 +508,7 @@ export const Tutorial = () => {
             )}
             {phase !== null && (
               <IconButton
-                className={`${tutorialStep.clickOn.element !== 'validate' ? 'disabled' : 'alert'}`}
+                className={`alwaysOpen ${tutorialStep.clickOn.element !== 'validate' ? 'disabled' : 'alert'}`}
                 onClick={() => {
                   handleClick('validate')
                 }}

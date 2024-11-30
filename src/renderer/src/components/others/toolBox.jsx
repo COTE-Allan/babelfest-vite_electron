@@ -697,7 +697,6 @@ export function getAllUniqueArtists() {
   })
 
   // Convertir le Set en tableau pour avoir une liste exploitable
-  console.log(uniqueArtists)
   return Array.from(uniqueArtists)
 }
 
@@ -737,7 +736,6 @@ export function getCardsByIds(ids) {
 }
 
 export function createUserInfo(userData, decks = null, email = null, id = null, pastSeasons) {
-  console.log(userData.stats.maxPr)
   return {
     email,
     username: userData.username || 'blank',

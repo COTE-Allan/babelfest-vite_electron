@@ -203,7 +203,13 @@ const Login = () => {
               <input
                 type="text"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                maxLength={10} // Limite le nombre de caractères à 10
+                onChange={(e) => {
+                  const value = e.target.value
+                  if (value.length <= 10) {
+                    setUsername(value)
+                  }
+                }}
                 placeholder="Nom d'utilisateur"
                 ref={usernameInputRef}
               />

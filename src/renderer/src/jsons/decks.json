@@ -40,5 +40,19 @@
       { "name": "Kl'rgh", "title": "Le petit conquérant" },
       { "name": "Shiro", "title": "Héraut du blizzard" }
     ]
+  },
+  {
+    "name": "Éclat d'Espoir",
+    "creator": "Babel",
+    "content": [
+      { "name": "Mira l'alchimiste", "title": "Breuvage régénérateur" },
+      { "name": "La reine meurtrie", "title": "Volonté de fer" },
+      { "name": "Tuto", "title": "Soutien psychologique" },
+      { "name": "Karmine Jirr", "title": "Leader du mouvement rogue" },
+      { "name": "Kenshi", "title": "Faucon noir" },
+      { "name": "Ikéa", "title": "Adorable tabouret" },
+      { "name": "Boadicée", "title": "Cheffe de guerre" },
+      { "name": "Erin", "title": "L'Éclat d'Espoir" }
+    ]
   }
 ]

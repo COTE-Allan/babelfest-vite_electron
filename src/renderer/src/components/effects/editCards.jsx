@@ -25,7 +25,9 @@ export async function drawRandomCards(deck, amount) {
   const drawnCards = []
   for (let i = 0; i < amount; i++) {
     const random = Math.floor(Math.random() * deck.length)
-    drawnCards.push(deck[random])
+    const card = { ...deck[random] }
+    card.uniqueID = generateUniqueID()
+    drawnCards.push(card)
     deck.splice(random, 1)
   }
   return drawnCards
@@ -244,6 +246,7 @@ export function generateDeck(cardAmount = 8) {
 
     // Ajouter une carte aléatoire parmi les cartes valides
     const card = validCards[Math.floor(Math.random() * validCards.length)]
+    card.uniqueID = generateUniqueID()
     deck.push(card)
     rarityCounts[card.rarity]++
     deckCost += card.cost // Utiliser le paramètre cost de la carte
@@ -513,6 +516,8 @@ export function randomEffect(target, index) {
 export function getCardsFromArray(cardsArray) {
   return cardsArray.map((cardInfo) => {
     const { name, title } = cardInfo
-    return getCardBasedOnNameAndTitle({ name, title })
+    let card = getCardBasedOnNameAndTitle({ name, title })
+    card.uniqueID = generateUniqueID()
+    return card
   })
 }

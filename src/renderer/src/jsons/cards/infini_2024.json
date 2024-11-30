@@ -136,10 +136,10 @@
     "name": "Azuki",
     "title": "Anemoi Gryphus",
     "atk": 3,
-    "dep": 0,
+    "dep": "?",
     "hp": 2,
     "baseatk": 3,
-    "basedep": 0,
+    "basedep": "?",
     "basehp": 2,
     "url": "./cards/series/babelfest_2024series6.png",
     "rarity": 1,
@@ -237,10 +237,10 @@
     "title": "Génie du bonheur",
     "atk": 1,
     "dep": 4,
-    "hp": 0,
+    "hp": "?",
     "baseatk": 1,
     "basedep": 4,
-    "basehp": 0,
+    "basehp": "?",
     "url": "./cards/series/babelfest_2024series10.png",
     "rarity": 3,
     "cost": 12,
@@ -475,6 +475,31 @@
   {
     "featured": true,
     "name": "Lukas",
+    "title": "à bout de force",
+    "atk": 0,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 0,
+    "basedep": 1,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series19.png",
+    "rarity": 2,
+    "cost": 6,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Cielesis",
+    "timerSummon": 4,
+    "effects": [
+      {
+        "when": [1],
+        "type": "timerSummon",
+        "cards": [{ "name": "Lukas", "title": "Fusion du coeur" }]
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Lukas",
     "title": "Fusion du coeur",
     "atk": 6,
     "dep": 6,
@@ -519,6 +544,94 @@
         "type": "absoluteSeeingEye",
         "target": "any",
         "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Le mur",
+    "title": "Colisée vivant de Babelfest",
+    "atk": 0,
+    "dep": 0,
+    "hp": 4,
+    "baseatk": 0,
+    "basedep": 0,
+    "basehp": 4,
+    "cost": 4,
+    "url": "./cards/series/babelfest_2024series22.png",
+    "rarity": 2,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Kiba",
+    "effects": [
+      {
+        "when": ["death"],
+        "type": "deathSummon",
+        "location": "self",
+        "cards": [{ "name": "Le golem", "title": "Colisée vivant de Babelfest" }]
+      },
+      { "when": ["attacked"], "type": "trap" },
+      { "when": ["attacked"], "type": "trap" }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Le golem",
+    "title": "Colisée vivant de Babelfest",
+    "atk": 3,
+    "dep": 2,
+    "hp": 1,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series23.png",
+    "rarity": 5,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Kiba",
+    "effects": [
+      {
+        "type": "stomp",
+        "when": [3],
+        "target": "any"
+      },
+      {
+        "type": "stomp",
+        "when": [3],
+        "target": "any"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Erin",
+    "title": "L'Éclat d'Espoir",
+    "atk": 3,
+    "dep": 3,
+    "hp": "?",
+    "baseatk": 3,
+    "basedep": 3,
+    "basehp": "?",
+    "url": "./cards/series/babelfest_2024series24.png",
+    "rarity": 3,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "cost": 13,
+    "author": "Ayuumiko",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "randomHP",
+        "when": ["spawn"],
+        "range": [2, 3, 4, 4, 5],
+        "spawnUsed": false
+      },
+      {
+        "type": "moreReach"
+      },
+      {
+        "when": ["attack"],
+        "type": "swapStats"
       }
     ]
   }

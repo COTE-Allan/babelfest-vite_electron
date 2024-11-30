@@ -14,6 +14,7 @@ export default function HudNavLink(props) {
   return (
     <div
       onMouseEnter={hover}
+      id={props.id}
       className={`hudNavLink ${props.className} ${props.selected ? 'selected' : ''} ${props.permOpen ? 'open' : ''} ${
         !props.to || props.to === -1
       }`}

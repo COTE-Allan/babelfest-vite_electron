@@ -42,7 +42,6 @@ export default function Loading(params) {
     } else if (user === false) {
       navigate('/login')
     }
-    console.log(user)
   }, [userInfo])
 
   useEffect(() => {

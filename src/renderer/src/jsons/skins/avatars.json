@@ -70,9 +70,33 @@
     "author": "LeRatonVoyer & Sanga"
   },
   {
+    "url": "./skins/avatars/avatar_astrid.jpg",
+    "name": "Astrid",
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Abysson"
+  },
+  {
+    "url": "./skins/avatars/avatar_mandarine_3.png",
+    "name": "Clémentine-boy",
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Adsanman & Clem-san"
+  },
+  {
+    "url": "./skins/avatars/avatar_mandarine_6.png",
+    "name": "Mandarine-chat",
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Adsanman & Clem-san"
+  },
+  {
+    "url": "./skins/avatars/avatar_mandarine_1.png",
+    "name": "Mandarine-woman",
+    "unlockTip": "Débloqué par défaut.",
+    "author": "Adsanman & Clem-san"
+  },
+  {
     "url": "./skins/avatars/avatar_clem_1.png",
     "name": "Clémentine",
-    "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative.",
+    "unlockTip": "Débloqué pour tous en atteignant 1fa00% sur la campagne du tome 1 d'Alternative.",
     "author": "Cielesis"
   },
   {
@@ -153,11 +177,39 @@
     "author": "Kiba"
   },
   {
+    "url": "./skins/avatars/avatar_gaius.jpg",
+    "name": "Gaius",
+    "unlockTip": "Obtenu en atteignant le niveau 51.",
+    "level": 51,
+    "author": "Abysson"
+  },
+  {
+    "url": "./skins/avatars/avatar_mandarine_2.png",
+    "name": "Laura Rougefleure",
+    "unlockTip": "Obtenu en atteignant le niveau 53.",
+    "level": 53,
+    "author": "Adsanman & Clem-san"
+  },
+  {
     "url": "./skins/avatars/avatar_tulip_2.png",
     "name": "Tulip sérieuse",
     "unlockTip": "Obtenu en atteignant le niveau 64.",
     "level": 64,
     "author": "Antoine Bordon"
+  },
+  {
+    "url": "./skins/avatars/avatar_kereth.jpg",
+    "name": "Kereth",
+    "unlockTip": "Obtenu en atteignant le niveau 76.",
+    "level": 76,
+    "author": "Abysson"
+  },
+  {
+    "url": "./skins/avatars/avatar_mandarine_4.png",
+    "name": "Arnold",
+    "unlockTip": "Obtenu en atteignant le niveau 82.",
+    "level": 82,
+    "author": "Adsanman & Clem-san"
   },
   {
     "url": "./skins/avatars/avatar_tuto_1.jpg",

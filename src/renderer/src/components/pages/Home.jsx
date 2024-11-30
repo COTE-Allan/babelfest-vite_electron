@@ -147,7 +147,10 @@ const Home = () => {
             <div className="home-featured-list">
               {featuredCards.slice(0, 4).map((card, index) => {
                 return (
-                  <div className={`home-featured-list-item ${card.shiny && card.shiny}`}>
+                  <div
+                    className={`home-featured-list-item ${card.shiny && card.shiny}`}
+                    key={card.id}
+                  >
                     <div className="img-container">
                       <img
                         onMouseEnter={hover}

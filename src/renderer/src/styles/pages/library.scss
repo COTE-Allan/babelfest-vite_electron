@@ -49,7 +49,6 @@
         background-color: rgba(255, 255, 255, 0.9);
         color: black;
         cursor: url('../../assets/svg/pointer.svg'), auto;
-
       }
     }
   }
@@ -79,7 +78,6 @@
         text-align: center;
         justify-content: center;
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        ;
         padding: 7px;
         font-size: 14px;
         margin: 3px;
@@ -97,7 +95,6 @@
 
         &:hover {
           cursor: url('../../assets/svg/pointer.svg'), auto;
-          ;
           background: white !important;
           color: black;
         }
@@ -106,7 +103,6 @@
           position: absolute;
           opacity: 0;
           cursor: url('../../assets/svg/pointer.svg'), auto;
-          ;
         }
       }
     }
@@ -127,7 +123,6 @@
 
           &:hover {
             cursor: url('../../assets/svg/pointer.svg'), auto;
-
           }
         }
 
@@ -158,12 +153,9 @@
           background-color: #8f8f8f;
           cursor: url('../../assets/svg/pointer.svg'), auto;
         }
-
       }
     }
   }
-
-
 
   & .close {
     top: 50px;
@@ -178,7 +170,6 @@
     right: 20px;
   }
 
-
   .modal {
     & .hudNavLink {
       position: absolute;
@@ -192,8 +183,6 @@
       top: 50%;
       left: 0;
     }
-
-
 
     &-tilt {
       & img {
@@ -225,7 +214,7 @@
       margin-bottom: 10px;
     }
 
-    & h1+h2 {
+    & h1 + h2 {
       font-size: 18px;
     }
 
@@ -239,14 +228,11 @@
     }
 
     & li {
-      transition: font-weight 50ms ease-in-out;
-      font-weight: 500;
+      transition: transform 50ms ease-in-out;
 
       &:hover {
-        font-weight: 800;
-
+        transform: scale(1.05);
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        ;
       }
     }
   }
@@ -294,16 +280,12 @@
         background-color: rgb(255, 255, 255);
         margin: 5px 0;
       }
-
     }
-
 
     & h2 {
       margin: 0 !important;
       font-size: 20px;
     }
-
-
 
     & h3 {
       margin: 5px 0 !important;
@@ -325,29 +307,27 @@
     }
 
     &-control {
+      flex-wrap: wrap;
       margin-top: auto;
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
       margin-bottom: 10px;
 
       & .hudNavLink {
-        justify-content: center;
         margin: 5px 0;
-
+        width: calc(50% - 10px);
         // &.back {
         //   position: absolute;
         //   bottom: 15px;
         //   left: 20px;
         // }
-
         & span {
-          font-size: 18px;
+          font-size: 13px;
         }
       }
     }
 
     &-card {
-
       position: relative;
       background-color: rgba(0, 0, 0, 0.5);
       width: 100%;
@@ -396,8 +376,6 @@
         font-size: 0.8em;
         margin: 0;
       }
-
-
     }
   }
 
@@ -514,7 +492,6 @@
         border: 3px solid white;
         cursor: url('../../assets/svg/pointer.svg'), auto;
         opacity: 1 !important;
-
       }
     }
   }
