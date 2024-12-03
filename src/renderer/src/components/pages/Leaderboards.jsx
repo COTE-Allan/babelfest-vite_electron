@@ -17,7 +17,7 @@ import BackButton from '../items/BackButton'
 import HudNavLink from '../items/hudNavLink'
 import Logo from '../../assets/svg/babelfest.svg'
 import { MdOutlineSportsScore } from 'react-icons/md'
-import { FaStar, FaTrophy } from 'react-icons/fa' // Importer FaStairs depuis 'react-icons/fa'
+import { FaStar, FaTrophy } from 'react-icons/fa'
 import { getRankProgress } from '../others/xpSystem'
 
 const Leaderboards = () => {
@@ -35,23 +35,24 @@ const Leaderboards = () => {
     setLeaderboardData(null)
     setMyRank(null)
     let data = null
-    let rank = null
 
     try {
+      const rankData = await getPlayerRank(user.uid)
+
+      // Déterminer quelle liste de classement récupérer en fonction du leaderboard sélectionné
       if (leaderboard === 'MMR') {
         data = await getTopUsersByMMR(30)
-        rank = (await getPlayerRank(user.uid)).mmrRank
+        setMyRank(rankData.mmrRank)
       } else if (leaderboard === 'Level') {
         data = await getTopUsersByLevel(30)
-        rank = (await getPlayerRank(user.uid)).levelXpRank
+        setMyRank(rankData.levelXpRank)
       } else if (leaderboard === 'PR') {
         data = await getTopUsersByPR(30)
-        rank = (await getPlayerRank(user.uid)).prRank
+        setMyRank(rankData.prRank)
       }
 
-      // Après la récupération, mettez à jour l'état
+      // Mettre à jour l'état après la récupération
       setLeaderboardData(data)
-      setMyRank(rank)
     } catch (error) {
       console.error('Error fetching leaderboard data:', error)
       // Gérer les erreurs de récupération de données

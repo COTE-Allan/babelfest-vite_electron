@@ -634,5 +634,34 @@
         "type": "swapStats"
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Lexie",
+    "title": "Justice Implacable",
+    "atk": 2,
+    "dep": 4,
+    "hp": 3,
+    "baseatk": 2,
+    "basedep": 4,
+    "basehp": 3,
+    "url": "./cards/series/babelfest_2024series25.png",
+    "rarity": 2,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "cost": 6,
+    "author": "Hedrick",
+    "attackCount": 2,
+    "baseattackCount": 2,
+    "effects": [
+      {
+        "when": [3],
+        "type": "rageShield",
+        "target": "rival"
+      },
+      {
+        "type": "doubleSword"
+      }
+    ]
   }
 ]

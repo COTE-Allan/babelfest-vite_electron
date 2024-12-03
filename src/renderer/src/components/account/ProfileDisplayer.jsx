@@ -28,7 +28,12 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
   const sendMessage = useSendMessage()
 
   const handleUpdateUser = async () => {
-    await updateUser(customizedUserInfo)
+    let updatesUserInfo = customizedUserInfo
+    delete updatesUserInfo.pastSeasons
+    delete updatesUserInfo.stats.defeats
+    delete updatesUserInfo.stats.totalGamesPlayed
+    delete updatesUserInfo.stats.winPercentage
+    await updateUser(updatesUserInfo)
     setUser(customizedUserInfo)
     setCustomizedUserInfo(null)
   }

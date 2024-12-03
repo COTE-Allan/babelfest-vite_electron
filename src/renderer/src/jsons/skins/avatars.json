@@ -198,6 +198,13 @@
     "author": "Antoine Bordon"
   },
   {
+    "url": "./skins/avatars/avatar_erin_ayu.png",
+    "name": "Erin",
+    "unlockTip": "Obtenu en atteignant le niveau 73.",
+    "level": 73,
+    "author": "Ayuumiko"
+  },
+  {
     "url": "./skins/avatars/avatar_kereth.jpg",
     "name": "Kereth",
     "unlockTip": "Obtenu en atteignant le niveau 76.",

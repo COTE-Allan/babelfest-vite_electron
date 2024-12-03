@@ -284,7 +284,6 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   skin.lock = isUnlocked(skin, user)
   const sendMessage = useSendMessage()
 
-  // TODO: Débloquer le skin ICI
   let rankedLock = skin.rankedReward ? true : false
   if (rankedLock) {
     const focusedSeason = userInfo.pastSeasons.find((season) => season.id === skin.rankedReward.id)

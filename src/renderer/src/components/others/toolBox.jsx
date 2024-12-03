@@ -353,16 +353,20 @@ export async function getTopUsersByMMR(amount = 10) {
     let rank = 1
 
     querySnapshot.forEach((doc) => {
-      // Vérifie si le champ `rank` existe et s'il est un objet, le supprime
       let userData = doc.data()
-      if (typeof userData.rank === 'object') {
-        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
-        delete userData.rank // Supprime l'ancien champ `rank`
-      }
 
-      // Ajoute l'utilisateur avec le rang mis à jour
-      topUsers.push({ id: doc.id, rank, ...userData })
-      rank++
+      // Filtrer les utilisateurs qui n'ont pas `dev` défini à `true`
+      if (!userData.dev || userData.dev !== true) {
+        // Vérifie si le champ `rank` existe et s'il est un objet, le supprime
+        if (typeof userData.rank === 'object') {
+          console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+          delete userData.rank // Supprime l'ancien champ `rank`
+        }
+
+        // Ajoute l'utilisateur avec le rang mis à jour
+        topUsers.push({ id: doc.id, rank, ...userData })
+        rank++
+      }
     })
 
     return topUsers
@@ -384,16 +388,20 @@ export async function getTopUsersByLevel(amount = 10) {
     let rank = 1
 
     querySnapshot.forEach((doc) => {
-      // Si le champ `rank` existe déjà dans les données et que c'est un objet, remplace-le
-      let userData = doc.data()
-      if (typeof userData.rank === 'object') {
-        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
-        delete userData.rank // Supprimer l'ancien champ `rank`
-      }
+      const userData = doc.data()
 
-      // Ajouter l'utilisateur avec le rang mis à jour
-      topUsers.push({ id: doc.id, rank, ...userData })
-      rank++
+      // Vérifier si `dev` n'existe pas ou est différent de `true`
+      if (!userData.dev || userData.dev !== true) {
+        // Si le champ `rank` existe déjà dans les données et que c'est un objet, remplace-le
+        if (typeof userData.rank === 'object') {
+          console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+          delete userData.rank // Supprimer l'ancien champ `rank`
+        }
+
+        // Ajouter l'utilisateur avec le rang mis à jour
+        topUsers.push({ id: doc.id, rank, ...userData })
+        rank++
+      }
     })
 
     return topUsers
@@ -403,7 +411,7 @@ export async function getTopUsersByLevel(amount = 10) {
   }
 }
 
-export async function getPlayerRank(userId) {
+export async function getPlayerRank(userId, dev = false) {
   const usersRef = collection(db, 'users')
 
   // Requête pour le classement basé sur le MMR
@@ -414,6 +422,13 @@ export async function getPlayerRank(userId) {
   let foundMmr = false
 
   for (const doc of mmrQuerySnapshot.docs) {
+    const userData = doc.data()
+
+    // Ignorer les utilisateurs `dev` si le paramètre `dev` est `false`
+    if (!dev && userData.dev === true) {
+      continue
+    }
+
     mmrRank++
 
     if (doc.id === userId) {
@@ -430,6 +445,13 @@ export async function getPlayerRank(userId) {
   let foundLevelXp = false
 
   for (const doc of levelXpQuerySnapshot.docs) {
+    const userData = doc.data()
+
+    // Ignorer les utilisateurs `dev` si le paramètre `dev` est `false`
+    if (!dev && userData.dev === true) {
+      continue
+    }
+
     levelXpRank++
 
     if (doc.id === userId) {
@@ -438,7 +460,7 @@ export async function getPlayerRank(userId) {
     }
   }
 
-  // **Nouvelle requête pour le classement basé sur le PR**
+  // Nouvelle requête pour le classement basé sur le PR
   const currentSeason = getCurrentSeason()
   const prQuery = query(
     usersRef,
@@ -451,6 +473,13 @@ export async function getPlayerRank(userId) {
   let foundPr = false
 
   for (const doc of prQuerySnapshot.docs) {
+    const userData = doc.data()
+
+    // Ignorer les utilisateurs `dev` si le paramètre `dev` est `false`
+    if (!dev && userData.dev === true) {
+      continue
+    }
+
     prRank++
 
     if (doc.id === userId) {
@@ -469,13 +498,13 @@ export async function getPlayerRank(userId) {
 export async function getTopUsersByPR(amount = 10) {
   const usersRef = collection(db, 'users')
 
-  // Requête pour trier par PR descendant
+  // Requête pour trier par PR descendant et filtrer par saison courante
   const currentSeason = getCurrentSeason()
   const q = query(
     usersRef,
     orderBy('stats.pr', 'desc'),
-    limit(amount),
-    where('stats.prSeasonId', '==', currentSeason.id)
+    where('stats.prSeasonId', '==', currentSeason.id),
+    limit(amount)
   )
 
   try {
@@ -486,15 +515,18 @@ export async function getTopUsersByPR(amount = 10) {
     querySnapshot.forEach((doc) => {
       let userData = doc.data()
 
-      // Vérifier si le champ `rank` existe et s'il est un objet, le supprimer
-      if (typeof userData.rank === 'object') {
-        console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
-        delete userData.rank // Supprime l'ancien champ `rank`
-      }
+      // Filtrer les utilisateurs qui n'ont pas `dev` défini à `true`
+      if (!userData.dev || userData.dev !== true) {
+        // Vérifier si le champ `rank` existe et s'il est un objet, le supprimer
+        if (typeof userData.rank === 'object') {
+          console.warn(`Remplacement de rank objet pour l'utilisateur ${doc.id}`)
+          delete userData.rank // Supprime l'ancien champ `rank`
+        }
 
-      // Ajouter l'utilisateur avec le rang mis à jour
-      topUsers.push({ id: doc.id, rank, ...userData })
-      rank++
+        // Ajouter l'utilisateur avec le rang mis à jour
+        topUsers.push({ id: doc.id, rank, ...userData })
+        rank++
+      }
     })
 
     return topUsers

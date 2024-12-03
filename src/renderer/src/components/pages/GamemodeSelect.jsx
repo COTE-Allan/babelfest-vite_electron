@@ -24,7 +24,7 @@ const GamemodeSelect = () => {
               !isTutorialFinished ? lockedReason : matchmakingSearch ? inSearchReason : false
             }
             name="Partie rapide"
-            desc="Avec un deck généré aléatoirement, affrontez un adversaire de niveau similaire"
+            desc="Avec un deck aléatoire, affrontez un adversaire de niveau similaire"
             where="/matchmakingQueue/quick"
             bg={QuickplayCardArena}
           />
@@ -33,7 +33,7 @@ const GamemodeSelect = () => {
               !isTutorialFinished ? lockedReason : matchmakingSearch ? inSearchReason : false
             }
             name="Partie custom"
-            desc="Jouez entre amis avec des règles modifiables et des decks construits"
+            desc="Jouez entre amis avec des règles spéciales et modifiables"
             where="/lobbyList"
             bg={RankedCardArena}
           />
@@ -51,7 +51,7 @@ const GamemodeSelect = () => {
             desc="Affrontez des joueurs avec vos propres decks et grimpez le classement !"
             where="/matchmakingQueue/ranked"
             requiresDeck={true}
-            // bg={RankedCardArena}
+            bg={RankedCardArena}
           />
         </div>
         <div className="MenuCard-container-cards-list">
