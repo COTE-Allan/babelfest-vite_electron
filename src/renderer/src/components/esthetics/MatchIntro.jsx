@@ -56,15 +56,17 @@ export default function MatchIntro() {
       <div
         className="matchIntro-player1"
         style={{
-          background: getBackgroundStyle(player1.primaryColor, 'to right'),
+          background: getBackgroundStyle(player1.skin.primaryColor, 'to right'),
           width: showFirstToPlay && firstToPlay === 1 ? '100%' : showFirstToPlay ? '0%' : '50%'
         }}
       >
         <ProfilePicture size={250} customUser={player1} />
-        <div className={`name ${player1.prestige ? 'prestige' : ''}`}>
-          <div className={`${player1.prestige ?? 'no-prestige'}`}>{player1.username}</div>
+        <div className={`name ${player1.skin.prestige ? 'prestige' : ''}`}>
+          <div className={`${player1.skin.prestige ?? 'no-prestige'}`}>{player1.username}</div>
         </div>
-        <span>{player1.title === 'level' ? `Niveau ${player1.level}` : player1.title}</span>
+        <span>
+          {player1.skin.title === 'level' ? `Niveau ${player1.stats.level}` : player1.skin.title}
+        </span>
       </div>
       <div className="matchIntro-VS" style={{ opacity: showFirstToPlay ? '0%' : '100%' }}>
         VS
@@ -72,15 +74,17 @@ export default function MatchIntro() {
       <div
         className="matchIntro-player2"
         style={{
-          background: getBackgroundStyle(player2.primaryColor, 'to right'),
+          background: getBackgroundStyle(player2.skin.primaryColor, 'to right'),
           width: showFirstToPlay && firstToPlay === 2 ? '100%' : showFirstToPlay ? '0%' : '50%'
         }}
       >
         <ProfilePicture size={250} customUser={player2} />
-        <div className={`name ${player2.prestige ? 'prestige' : ''}`}>
-          <div className={`${player2.prestige ?? 'no-prestige'}`}>{player2.username}</div>
+        <div className={`name ${player2.skin.prestige ? 'prestige' : ''}`}>
+          <div className={`${player2.skin.prestige ?? 'no-prestige'}`}>{player2.username}</div>
         </div>
-        <span>{player2.title === 'level' ? `Niveau ${player2.level}` : player2.title}</span>
+        <span>
+          {player2.skin.title === 'level' ? `Niveau ${player2.stats.level}` : player2.skin.title}
+        </span>
       </div>
       {showFirstToPlay && <div className="matchIntro-starting">Premier joueur</div>}
     </div>

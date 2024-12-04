@@ -181,9 +181,7 @@ export function useLeaveLobby() {
       }
 
       await batch.commit()
-      if (deservePenalty) {
-        await updateUserState(user)
-      }
+      await updateUserState(user)
       navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
     } catch (error) {
       console.error('Error leaving lobby: ', error)

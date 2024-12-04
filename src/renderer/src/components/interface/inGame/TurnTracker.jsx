@@ -1,4 +1,3 @@
-import ProfilePicture from '../../esthetics/profilePicture'
 import '../../../styles/interface/inGame/turnTracker.scss'
 import { GlobalContext } from '../../providers/GlobalProvider'
 import { useContext, useState } from 'react'

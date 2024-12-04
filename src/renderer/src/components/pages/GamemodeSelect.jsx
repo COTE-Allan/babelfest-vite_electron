@@ -41,7 +41,7 @@ const GamemodeSelect = () => {
             disabled={
               !isTutorialFinished
                 ? lockedReason
-                : userInfo.level <= 10
+                : userInfo.stats.level <= 10
                   ? levelLockedReason
                   : matchmakingSearch
                     ? inSearchReason

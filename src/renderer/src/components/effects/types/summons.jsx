@@ -28,7 +28,7 @@ export async function PiochePostMortem({ item, room, effectInfos, player }) {
   let card = await drawSingleCardAndUpdateDeck(room)
 
   target.card = card
-  target.card.owner = { name: player.username, hex: player.primaryColor.hex }
+  target.card.owner = { name: player.username, hex: player.skin.primaryColor.hex }
   target.card.isRecto = true
   target.card.uniqueID = generateUniqueID()
 
@@ -61,7 +61,7 @@ export function InvocationMiroir({ item, killer, effectInfos, player }) {
   let attacker = killer
   let target = { ...item }
   target.card = getCardBasedOnID(attacker.card.id)
-  target.card.owner = { name: player.username, hex: player.primaryColor.hex }
+  target.card.owner = { name: player.username, hex: player.skin.primaryColor.hex }
   target.card.uniqueID = generateUniqueID()
   target.card.isRecto = true
 
@@ -87,7 +87,7 @@ export function CompteurPuissance({ item, effect, effectInfos, player }) {
   if (target.card.timerSummon <= 0) {
     target.card = getCardBasedOnNameAndTitle(effect.cards[0])
     target.card.isRecto = true
-    target.card.owner = { name: player.username, hex: player.primaryColor.hex }
+    target.card.owner = { name: player.username, hex: player.skin.primaryColor.hex }
     target.card.uniqueID = generateUniqueID()
     summoned = true
   }
@@ -124,7 +124,7 @@ export function Soldes({ item, shop, pattern, effectInfos, player }) {
     let newCard = getRandomFromArray(shop, 1)[0]
     cell.card = newCard
     cell.card.isRecto = true
-    cell.card.owner = { name: player.username, hex: player.primaryColor.hex }
+    cell.card.owner = { name: player.username, hex: player.skin.primaryColor.hex }
     cell.card.uniqueID = generateUniqueID()
     cell.owner = item.owner
   })

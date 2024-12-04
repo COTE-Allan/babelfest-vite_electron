@@ -27,7 +27,7 @@ function SkinItem({ skin, userInfo, xpPercentage, rankReward = false, unlocked =
   }
 
   // Determine if the progress bar should be full width (100%)
-  const isUnlocked = userInfo.level >= level
+  const isUnlocked = userInfo.stats.level >= level
   const progressWidth = isUnlocked ? 100 : xpPercentage
 
   return (
@@ -63,7 +63,7 @@ function SkinItem({ skin, userInfo, xpPercentage, rankReward = false, unlocked =
             opacity: 0.5,
             height: '100%',
             width: `${progressWidth}%`, // Set width based on XP percentage or full width if unlocked
-            backgroundColor: userInfo.primaryColor.hex + '80', // Semi-transparent color for visual effect
+            backgroundColor: userInfo.skin.primaryColor.hex + '80', // Semi-transparent color for visual effect
             zIndex: 0, // Ensure it’s behind the content
             borderRadius: '4px'
           }}

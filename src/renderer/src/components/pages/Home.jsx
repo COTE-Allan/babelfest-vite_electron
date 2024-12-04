@@ -35,12 +35,12 @@ const Home = () => {
   const joinLobby = useJoinLobby()
   const leaveLobby = useLeaveLobby()
   const [lastBlogPost, setLastBlogPost] = useState(null)
-  const { userSettings, user } = useContext(AuthContext)
+  const { userSettings, user, userInfo } = useContext(AuthContext)
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [featuredCards, setFeaturedCards] = useState(null)
   const [askForLogout, setAskForLogout] = useState(false)
-
+  console.log(userInfo)
   const handleLeaveGame = () => {
     if (askForLogout) {
       // Envoyer un événement IPC pour fermer l'application

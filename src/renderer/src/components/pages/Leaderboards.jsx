@@ -139,7 +139,7 @@ const Leaderboards = () => {
 
                       <span className="value">
                         {selectedLeaderboard === 'MMR' && `MMR ${user.stats.mmr}`}
-                        {selectedLeaderboard === 'Level' && `Niveau ${user.level}`}
+                        {selectedLeaderboard === 'Level' && `Niveau ${user.stats.level}`}
                         {selectedLeaderboard === 'PR' && ` - PR ${user.stats.pr}`}
                       </span>
                     </div>
@@ -161,7 +161,7 @@ const Leaderboards = () => {
 
                   <span className="value">
                     {selectedLeaderboard === 'MMR' && `MMR ${userInfo.stats.mmr}`}
-                    {selectedLeaderboard === 'Level' && `Niveau ${userInfo.level}`}
+                    {selectedLeaderboard === 'Level' && `Niveau ${userInfo.stats.level}`}
                     {selectedLeaderboard === 'PR' && ` - PR ${userInfo.stats.pr}`}
                   </span>
                 </div>

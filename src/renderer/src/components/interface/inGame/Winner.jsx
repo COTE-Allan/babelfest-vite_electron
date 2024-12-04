@@ -160,7 +160,7 @@ export default function Winner() {
       setXpGained(xpObtained)
 
       // Mettre à jour l'expérience du joueur
-      let newPlayerExp = addExpToPlayer(userInfo.level, userInfo.xp, xpObtained)
+      let newPlayerExp = addExpToPlayer(userInfo.stats.level, userInfo.stats.xp, xpObtained)
 
       // Préparer la mise à jour des statistiques
       const gameMode = gameData.gamemode
@@ -266,8 +266,8 @@ export default function Winner() {
       // Préparer les mises à jour pour l'utilisateur
       const userRef = doc(db, 'users', user.uid)
       let userUpdates = {
-        level: newPlayerExp.level,
-        xp: newPlayerExp.xp,
+        'stats.level': newPlayerExp.level,
+        'stats.xp': newPlayerExp.xp,
         'stats.winStreak': currentStreak,
         'stats.longestWinStreak': longestStreak,
         ...gamesPlayedUpdate,

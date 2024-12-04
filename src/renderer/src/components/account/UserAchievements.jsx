@@ -27,16 +27,16 @@ export default function UserAchievements({ userInfo }) {
   const [achievementFilter, setAchievementFilter] = useState('all')
 
   // Calculate player's current XP percentage
-  const xpMax = getCurrentExpMax(userInfo.level)
-  const xpPercentage = (userInfo.xp / xpMax) * 100
+  const xpMax = getCurrentExpMax(userInfo.stats.level)
+  const xpPercentage = (userInfo.stats.xp / xpMax) * 100
 
   // Filter to find the first skin not unlocked yet (next reward to unlock)
-  const nextUnlockableSkin = skinsWithLevel.find((skin) => userInfo.level + 1 === skin.level)
+  const nextUnlockableSkin = skinsWithLevel.find((skin) => userInfo.stats.level + 1 === skin.level)
 
   // Filter skins based on whether or not to show unlocked skins
   const filteredSkinsWithLevel = showUnlocked
     ? skinsWithLevel
-    : skinsWithLevel.filter((skin) => userInfo.level < skin.level)
+    : skinsWithLevel.filter((skin) => userInfo.stats.level < skin.level)
 
   // Filter achievements based on user selection
   const filteredAchievements = achievements.filter((achievement) => {
@@ -55,7 +55,7 @@ export default function UserAchievements({ userInfo }) {
   }
 
   const calculateLevelCompletion = () => {
-    const unlockedSkins = skinsWithLevel.filter((skin) => userInfo.level >= skin.level)
+    const unlockedSkins = skinsWithLevel.filter((skin) => userInfo.stats.level >= skin.level)
     return (unlockedSkins.length / skinsWithLevel.length) * 100
   }
 

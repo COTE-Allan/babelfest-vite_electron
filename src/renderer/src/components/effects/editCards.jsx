@@ -485,7 +485,9 @@ export function summonCardsFromCardsArray(
     let newCard = getCardBasedOnNameAndTitle(infos[index])
     let oldOwner = cell.card?.owner
     cell.card = newCard
-    cell.card.owner = keepOwner ? oldOwner : { name: player.username, hex: player.primaryColor.hex }
+    cell.card.owner = keepOwner
+      ? oldOwner
+      : { name: player.username, hex: player.skin.primaryColor.hex }
     cell.card.isRecto = true
     cell.card.uniqueID = generateUniqueID()
     cell.owner = owner ? owner : cell.owner

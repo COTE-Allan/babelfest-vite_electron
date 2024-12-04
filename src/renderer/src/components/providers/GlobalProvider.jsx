@@ -187,8 +187,8 @@ export const GlobalProvider = () => {
         setMovesLeft(isHost ? player1.movesLeft : player2.movesLeft)
 
         if (userSettings.customColors) {
-          let myColor = isHost ? player1.primaryColor : player2.primaryColor
-          let rivalColor = isHost ? player2.primaryColor : player1.primaryColor
+          let myColor = isHost ? player1.skin.primaryColor : player2.skin.primaryColor
+          let rivalColor = isHost ? player2.skin.primaryColor : player1.skin.primaryColor
 
           // Vérifier si les deux joueurs ont la même couleur
           if (myColor.hex === rivalColor.hex) {

@@ -8,18 +8,18 @@ export default function ExperienceBar({ customUserInfo = null }) {
 
   const finalUserInfo = customUserInfo ?? userInfo
 
-  const xpMax = getCurrentExpMax(finalUserInfo.level)
-  const xpPercentage = (finalUserInfo.xp / xpMax) * 100
+  const xpMax = getCurrentExpMax(finalUserInfo.stats.level)
+  const xpPercentage = (finalUserInfo.stats.xp / xpMax) * 100
 
   return (
     <div className="xp-bar">
       <span className="xp-bar-infos">
-        Niveau {finalUserInfo.level} ({finalUserInfo.xp}/{xpMax} XP)
+        Niveau {finalUserInfo.stats.level} ({finalUserInfo.stats.xp}/{xpMax} XP)
       </span>
       <ProgressBar
         padding={2}
-        completed={finalUserInfo.xp}
-        bgColor={finalUserInfo.primaryColor.hex}
+        completed={finalUserInfo.stats.xp}
+        bgColor={finalUserInfo.skin.primaryColor.hex}
         labelColor="#fff"
         maxCompleted={xpMax}
         customLabel={`${xpPercentage.toFixed(0)}%`}

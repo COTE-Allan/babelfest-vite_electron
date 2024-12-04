@@ -380,7 +380,12 @@ export async function getTopUsersByLevel(amount = 10) {
   const usersRef = collection(db, 'users')
 
   // Utiliser d'abord orderBy pour le niveau, puis pour l'xp pour gérer les égalités
-  const q = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'), limit(amount))
+  const q = query(
+    usersRef,
+    orderBy('stats.level', 'desc'),
+    orderBy('stats.xp', 'desc'),
+    limit(amount)
+  )
 
   try {
     const querySnapshot = await getDocs(q)
@@ -438,7 +443,7 @@ export async function getPlayerRank(userId, dev = false) {
   }
 
   // Requête pour le classement basé sur le niveau et l'XP
-  const levelXpQuery = query(usersRef, orderBy('level', 'desc'), orderBy('xp', 'desc'))
+  const levelXpQuery = query(usersRef, orderBy('stats.level', 'desc'), orderBy('stats.xp', 'desc'))
   const levelXpQuerySnapshot = await getDocs(levelXpQuery)
 
   let levelXpRank = 0
@@ -609,7 +614,7 @@ export function getRandomPattern() {
 }
 
 export function isUnlocked(item, userInfo) {
-  let levelCondition = item.level ? userInfo.level >= item.level : true
+  let levelCondition = item.level ? userInfo.stats.level >= item.level : true
   let flagCondition = item.flag ? userInfo.flags && userInfo.flags.includes(item.flag) : true
   let achievementCondition = item.achievement
     ? userInfo.achievements && userInfo.achievements.includes(item.achievement)
@@ -681,7 +686,11 @@ export function getPlayerStats(stats) {
     maxPr: stats.maxPr,
     mmr: stats.mmr,
     winStreak: stats.winStreak ?? 0,
-    longestWinStreak: stats.longestWinStreak ?? 0
+    longestWinStreak: stats.longestWinStreak ?? 0,
+    xp: stats.xp,
+    level: stats.level,
+    honored: stats.honored,
+    honor: stats.honor
   }
 }
 
@@ -771,30 +780,12 @@ export function createUserInfo(userData, decks = null, email = null, id = null, 
   return {
     email,
     username: userData.username || 'blank',
-    primaryColor: userData.primaryColor,
-    secondaryColor: userData.secondaryColor,
-    profilePic: userData.profilePic,
-    profileBorder: userData.profileBorder || null,
     flags: userData.flags || [],
-    title: userData.title,
-    banner: userData.banner,
-    friends: [],
-    honor: userData.honor || 0,
-    honored: userData.honored || 0,
-    level: userData.level,
-    xp: userData.xp,
-    prestige: userData.prestige || null,
+    // friends: [],
+
     id,
-    stats: {
-      gamesPlayed: userData.stats?.gamesPlayed || 0,
-      victories: userData.stats?.victories || 0,
-      mmr: userData.stats?.mmr || 500,
-      winStreak: userData.stats?.winStreak || 0,
-      longestWinStreak: userData.stats?.longestWinStreak || 0,
-      pr: userData.stats.pr || 0,
-      maxPr: userData.stats.maxPr || 0,
-      prSeasonId: userData.stats.prSeasonId || null
-    },
+    skin: userData.skin,
+    stats: userData.stats,
     status: userData.status || null,
     currentLobby: userData.currentLobby || null,
     achievements: userData.achievements || [],

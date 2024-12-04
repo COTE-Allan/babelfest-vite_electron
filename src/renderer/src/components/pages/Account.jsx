@@ -34,7 +34,7 @@ const Account = () => {
         const rank = await getPlayerRank(user.uid)
 
         const extendedUserInfo = {
-          ...userInfo, // Conserver les propriétés existantes de userInfo
+          ...structuredClone(userInfo), // Conserver les propriétés existantes de userInfo
           id: user.uid, // Ajouter la propriété id depuis user
           stats: getPlayerStats(userInfo.stats),
           rank: rank

@@ -22,9 +22,16 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
   const [page, setPage] = useState(1)
   const [hoveredSkin, setHoveredSkin] = useState(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [showUnlocked, setShowUnlocked] = useState(false) // Nouvel état
   const detailsRef = useRef(null)
 
   const skins = getSkins()
+
+  // Filtrer les skins en fonction de l'état "Uniquement débloqué"
+  const filteredSkins = skins.filter((skin) => {
+    if (showUnlocked) return isUnlocked(skin, user)
+    return true
+  })
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -33,11 +40,9 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
         const componentWidth = detailsRect.width
         const componentHeight = detailsRect.height
 
-        // Positionner légèrement à droite et en dessous du curseur
         let x = e.clientX + 50
         let y = e.clientY - 50
 
-        // Empêcher la modale de sortir de l'écran (à droite ou en bas)
         if (x + componentWidth > window.innerWidth) {
           x = e.clientX - componentWidth - 20
         }
@@ -51,16 +56,26 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
     }
 
     window.addEventListener('mousemove', handleMouseMove)
-
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
 
+  function ShowUnlockButton() {
+    return (
+      <div className="filter-container">
+        <button className="filter-button" onClick={() => setShowUnlocked(!showUnlocked)}>
+          {!showUnlocked ? 'Tous les cosmétiques' : 'Uniquement débloqués'}
+        </button>
+      </div>
+    )
+  }
+
   return (
     <CustomizedUserInfoContext.Provider value={{ customizedUserInfo, setCustomizedUserInfo, user }}>
       <div className="customize">
         <nav className="customize-nav">
+          {/* Boutons pour changer de page */}
           <HudNavLink onClick={() => setPage(1)} selected={page === 1} permOpen>
             <BiSolidUserRectangle size={45} />
             <span className="hidden-span">Avatar</span>
@@ -86,13 +101,18 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
             <span className="hidden-span">Prestige</span>
           </HudNavLink>
         </nav>
+
+        {/* Bouton pour basculer l'affichage des débloqués */}
+
         <TransitionGroup className="customize-content">
           {page === 1 && (
             <CSSTransition key="custom-1" timeout={300} classNames="fade">
               <div className="css-transition">
-                <h2>Avatars</h2>
+                <h2>
+                  Avatars <ShowUnlockButton />
+                </h2>
                 <div className="customize-list">
-                  {skins
+                  {filteredSkins
                     .filter((skin) => skin.type === 'Avatar')
                     .map((avatar) => (
                       <SkinItem
@@ -111,7 +131,9 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
           {page === 2 && (
             <CSSTransition key="custom-2" timeout={300} classNames="fade">
               <div className="css-transition">
-                <h2>Cadres</h2>
+                <h2>
+                  Cadres <ShowUnlockButton />
+                </h2>
                 <div className="customize-list">
                   <SkinItem
                     key="cadre-0"
@@ -124,14 +146,14 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                       remove: true
                     }}
                   >
-                    <img src={userInfo.profilePic} className="user-avatar" />{' '}
+                    <img src={userInfo.skin.avatar} className="user-avatar" />{' '}
                   </SkinItem>
-                  {skins
+                  {filteredSkins
                     .filter((skin) => skin.type === 'Bordure')
                     .map((el) => (
                       <SkinItem key={el.id} skin={el} type="cadre" setHoveredSkin={setHoveredSkin}>
                         <img src={el.url} alt="visuel du cadre" className="skin" />
-                        <img src={userInfo.profilePic} className="user-avatar" />
+                        <img src={userInfo.skin.avatar} className="user-avatar" />
                       </SkinItem>
                     ))}
                 </div>
@@ -141,9 +163,11 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
           {page === 3 && (
             <CSSTransition key="custom-3" timeout={300} classNames="fade">
               <div className="css-transition">
-                <h2>Titres</h2>
+                <h2>
+                  Titres <ShowUnlockButton />
+                </h2>
                 <div className="customize-list">
-                  {skins
+                  {filteredSkins
                     .filter((skin) => skin.type === 'Titre')
                     .map((el) => (
                       <SkinItem key={el.id} skin={el} type="titre" setHoveredSkin={setHoveredSkin}>
@@ -157,9 +181,11 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
           {page === 4 && (
             <CSSTransition key="custom-4" timeout={300} classNames="fade">
               <div className="css-transition">
-                <h2>Bannières</h2>
+                <h2>
+                  Bannières <ShowUnlockButton />
+                </h2>
                 <div className="customize-list">
-                  {skins
+                  {filteredSkins
                     .filter((skin) => skin.type === 'Bannière')
                     .map((el) => (
                       <SkinItem key={el.id} skin={el} type="banner" setHoveredSkin={setHoveredSkin}>
@@ -173,9 +199,11 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
           {page === 5 && (
             <CSSTransition key="custom-5" timeout={300} classNames="fade">
               <div className="css-transition">
-                <h2>Couleurs</h2>
+                <h2>
+                  Couleurs <ShowUnlockButton />
+                </h2>
                 <div className="customize-list">
-                  {skins
+                  {filteredSkins
                     .filter((skin) => skin.type === 'Couleur')
                     .map((el) => (
                       <SkinItem key={el.id} skin={el} type="color" setHoveredSkin={setHoveredSkin}>
@@ -196,7 +224,9 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
           {page === 6 && (
             <CSSTransition key="custom-6" timeout={300} classNames="fade">
               <div className="css-transition">
-                <h2>Prestige</h2>
+                <h2>
+                  Prestige <ShowUnlockButton />
+                </h2>
                 <div className="customize-list">
                   <SkinItem
                     key="prestige-0"
@@ -211,7 +241,7 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                   >
                     <div className={`prestige prestige-default`}>Par défaut</div>
                   </SkinItem>
-                  {skins
+                  {filteredSkins
                     .filter((skin) => skin.type === 'Prestige')
                     .map((el) => (
                       <SkinItem
@@ -226,7 +256,7 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                 </div>
               </div>
             </CSSTransition>
-          )}
+          )}{' '}
         </TransitionGroup>
 
         {hoveredSkin && (
@@ -250,17 +280,9 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
               ></div>
             )}
             <div className="details-modale-content">
-              {hoveredSkin.classe ? (
-                <h2 className="skin-name prestige">
-                  <div className={hoveredSkin.classe}>
-                    {hoveredSkin.name} {!hoveredSkin.lock && <FaLock />}
-                  </div>
-                </h2>
-              ) : (
-                <h2 className="skin-name">
-                  {hoveredSkin.name} {!hoveredSkin.lock && <FaLock />}
-                </h2>
-              )}
+              <h2 className="skin-name">
+                {hoveredSkin.name} {!hoveredSkin.lock && <FaLock />}
+              </h2>
               {hoveredSkin.author && <span className="skin-artist">Par {hoveredSkin.author}</span>}
               <p className="skin-unlock-method">{hoveredSkin.unlockTip}</p>
               {hoveredSkin.lock ? (
@@ -293,11 +315,11 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   }
 
   const relatedSkinsParams = {
-    avatar: 'profilePic',
+    avatar: 'avatar',
     color: 'primaryColor',
     banner: 'banner',
     prestige: 'prestige',
-    cadre: 'profileBorder',
+    cadre: 'border',
     titre: 'title'
   }
 
@@ -329,11 +351,10 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
 
     // Si customizedUserInfo est null, on le remplace par userInfo
     let updatedUserInfo = customizedUserInfo ? { ...customizedUserInfo } : { ...user }
-
     // Appliquer la bonne valeur selon le type
     if (relatedSkinsParams[type]) {
       const paramKey = relatedSkinsParams[type]
-      updatedUserInfo[paramKey] = relatedSkinValue[type]
+      updatedUserInfo.skin[paramKey] = relatedSkinValue[type]
     }
 
     // Mettre à jour customizedUserInfo

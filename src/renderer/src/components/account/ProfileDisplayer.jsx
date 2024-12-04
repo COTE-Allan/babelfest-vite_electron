@@ -25,7 +25,6 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
   const [page, setPage] = useState(defaultPage)
   const [customizedUserInfo, setCustomizedUserInfo] = useState(null)
   const { updateUser } = useContext(AuthContext)
-  const sendMessage = useSendMessage()
 
   const handleUpdateUser = async () => {
     let updatesUserInfo = customizedUserInfo
@@ -33,6 +32,7 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
     delete updatesUserInfo.stats.defeats
     delete updatesUserInfo.stats.totalGamesPlayed
     delete updatesUserInfo.stats.winPercentage
+    delete updatesUserInfo.rank
     await updateUser(updatesUserInfo)
     setUser(customizedUserInfo)
     setCustomizedUserInfo(null)

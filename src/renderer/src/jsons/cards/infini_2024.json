@@ -663,5 +663,37 @@
         "type": "doubleSword"
       }
     ]
+  },
+  {
+    "featured": true,
+    "name": "Astrid",
+    "title": "Mediatrice et espionne",
+    "atk": 0,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 0,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "./cards/series/babelfest_2024series26.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "cost": 4,
+    "author": "Abysson",
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "permHP",
+        "value": 1,
+        "target": "ally",
+        "spawnUsed": false
+      },
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 1,
+        "target": "ally"
+      }
+    ]
   }
 ]

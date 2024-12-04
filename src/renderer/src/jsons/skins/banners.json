@@ -122,9 +122,16 @@
   {
     "url": "./skins/banners/banner_oldSchoolKarnoie.png",
     "name": "Old School Karnoie",
-    "unlockTip": "Obtenu en atteignant le niveau 43.",
+    "unlockTip": "Obtenu en atteignant le niveau 46.",
     "level": 46,
     "author": "LeRatonVoyer & Sanga"
+  },
+  {
+    "url": "./skins/banners/banner_mandarine_retro.png",
+    "name": "Mandarine-retro",
+    "unlockTip": "Obtenu en atteignant le niveau 48.",
+    "level": 48,
+    "author": "Adsanman"
   },
   {
     "url": "./skins/banners/banner_rid_4.png",

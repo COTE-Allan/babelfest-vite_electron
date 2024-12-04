@@ -1,7 +1,6 @@
 @import '../variables.scss';
 
 .customize {
-
   & .details-modale {
     background-color: rgba(0, 0, 0, 0.85);
     border-radius: 10px;
@@ -51,7 +50,6 @@
         padding: 0;
       }
 
-
       .skin-artist {
         font-size: 13px;
       }
@@ -88,9 +86,12 @@
         margin-top: 5px;
       }
     }
+  }
 
-
-
+  h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &-list {
@@ -114,7 +115,6 @@
         width: 280px;
         // height: 80px;
 
-
         & img {
           height: 100%;
           width: 100%;
@@ -127,8 +127,6 @@
         width: 80px;
         height: 80px;
         position: relative;
-
-
 
         & img {
           width: 100%;
@@ -145,9 +143,7 @@
           top: 0;
           left: 0;
         }
-
       }
-
     }
   }
 

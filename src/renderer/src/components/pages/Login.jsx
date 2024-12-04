@@ -6,7 +6,7 @@ import {
   sendEmailVerification,
   signOut
 } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, getDocs, setDoc } from 'firebase/firestore'
 
 import '../../styles/pages/home.scss'
 import { useState, useEffect, useRef } from 'react'
@@ -136,6 +136,18 @@ const Login = () => {
 
     setLoading(true)
     try {
+      // Vérifier si le pseudo est déjà pris
+      const usersRef = collection(db, 'users')
+      const q = query(usersRef, where('username', '==', username))
+      const querySnapshot = await getDocs(q)
+
+      if (!querySnapshot.empty) {
+        setErrorUsername("Ce nom d'utilisateur est déjà pris.")
+        setLoading(false)
+        return
+      }
+
+      // Créer un nouvel utilisateur
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       const user = userCredential.user
 
@@ -143,22 +155,31 @@ const Login = () => {
       const userRef = doc(db, 'users', user.uid)
       await setDoc(userRef, {
         username: username,
-        profilePic: './skins/avatars/avatar_babelfest.png',
-        flags: ['betaTest'],
-        primaryColor: { hex: '#40a8f5' },
-        secondaryColor: { hex: '#e62e31' },
-        banner: './skins/banners/banner_default.png',
-        level: 1,
         id: user.uid,
-        xp: 0,
-        mmr: 500,
-        title: 'level',
+        skin: {
+          avatar: './skins/avatars/avatar_babelfest.png',
+          primaryColor: { hex: '#40a8f5' },
+          secondaryColor: { hex: '#e62e31' },
+          banner: './skins/banners/banner_default.png',
+          title: 'level'
+        },
         stats: {
           gamesPlayed: 0,
-          victories: 0
+          victories: 0,
+          mmr: 500,
+          winStreak: 0,
+          longestWinStreak: 0,
+          pr: 0,
+          maxPr: 0,
+          prSeasonId: null,
+          honor: 0,
+          honored: { quantity: 0, timestamp: 0 },
+          level: 1,
+          xp: 0
         },
         achievements: [],
-        matchSummaries: []
+        matchSummaries: [],
+        flags: ['betaTest']
       })
 
       await sendEmailVerification(user)

@@ -17,16 +17,19 @@ export default function LeaderboardPlayerBanner({ user, accessProfile, cards, re
         }
       }}
     >
-      <img src={user.banner} alt="bannière du joueur" className="leaderboardPlayerBanner-banner" />
+      <img
+        src={user.skin.banner}
+        alt="bannière du joueur"
+        className="leaderboardPlayerBanner-banner"
+      />
       {!reverse && (
         <>
           <ProfilePicture
             size={75}
             customUser={{
-              profilePic: user.profilePic,
-              profileBorder: user.profileBorder
+              skin: user.skin
             }}
-            border={user.primaryColor}
+            border={user.skin.primaryColor}
           />
           <div className="leaderboardPlayerBanner-content">
             <NameAndTitle user={user} />
@@ -54,10 +57,9 @@ export default function LeaderboardPlayerBanner({ user, accessProfile, cards, re
           <ProfilePicture
             size={75}
             customUser={{
-              profilePic: user.profilePic,
-              profileBorder: user.profileBorder
+              skin: user.skin
             }}
-            border={user.primaryColor}
+            border={user.skin.primaryColor}
           />
         </>
       )}

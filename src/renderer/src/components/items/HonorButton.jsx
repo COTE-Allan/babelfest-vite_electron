@@ -16,8 +16,8 @@ const HonorButton = ({ targetUserId, targetUser }) => {
   useEffect(() => {
     const currentTime = Date.now()
     if (
-      !userInfo.honored.timestamp ||
-      currentTime - userInfo.honored.timestamp >= 24 * 60 * 60 * 1000
+      !userInfo.stats.honored ||
+      currentTime - userInfo.stats.honored.timestamp >= 24 * 60 * 60 * 1000
     ) {
       setCanHonor(true)
     } else {
@@ -28,7 +28,7 @@ const HonorButton = ({ targetUserId, targetUser }) => {
   const handleHonor = async () => {
     const currentTime = Date.now()
     if (!canHonor) {
-      const nextAvailableTime = new Date(userInfo.honored.timestamp + 24 * 60 * 60 * 1000)
+      const nextAvailableTime = new Date(userInfo.stats.honored.timestamp + 24 * 60 * 60 * 1000)
       sendMessage(
         `Vous pourrez honorer à nouveau le ${nextAvailableTime.toLocaleDateString()} à ${nextAvailableTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`,
         'error'
@@ -40,23 +40,23 @@ const HonorButton = ({ targetUserId, targetUser }) => {
       const userRef = doc(db, 'users', user.uid)
       const targetUserRef = doc(db, 'users', targetUserId)
 
-      if (userInfo.honored.quantity + 1 === 1) {
+      if (userInfo.stats.honored.quantity ?? 0 + 1 === 1) {
         await giveAchievement('HF_1honored')
       }
 
-      if (userInfo.honored.quantity + 1 === 50) {
+      if (userInfo.stats.honored.quantity ?? 0 + 1 === 50) {
         await giveAchievement('HF_50honored')
       }
 
       // Mettre à jour le timestamp et incrémenter la quantité dans honored
       await updateDoc(userRef, {
-        'honored.timestamp': currentTime,
-        'honored.quantity': increment(1)
+        'stats.honored.timestamp': currentTime,
+        'stats.honored.quantity': increment(1)
       })
 
       // Incrémenter le compteur honor de targetUser
       await updateDoc(targetUserRef, {
-        honor: increment(1)
+        'stats.honor': increment(1)
       })
 
       sendMessage(`Vous avez honoré ${targetUser.username} !`, 'success')

@@ -138,7 +138,7 @@ export const usePlaceCardOnArea = () => {
     const targetPlayer = host ? 'player1.placementLeft' : 'player2.placementLeft'
 
     cardToPlace.isRecto = isRecto
-    cardToPlace.owner = { name: playerSelf.username, hex: playerSelf.primaryColor.hex }
+    cardToPlace.owner = { name: playerSelf.username, hex: playerSelf.skin.primaryColor.hex }
 
     const batch = writeBatch(db)
 

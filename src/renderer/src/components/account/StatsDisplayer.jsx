@@ -18,7 +18,6 @@ export default function StatsDisplayer({ user, stats }) {
 
   // Calculer le pourcentage de progression dans le rang actuel
   const progressPercentage = ((pr - prInCurrentRank) / (prForNextRank - prInCurrentRank)) * 100
-
   return (
     <div className="statsDisplayer">
       <div className="statsDisplayer-content">
@@ -75,7 +74,7 @@ export default function StatsDisplayer({ user, stats }) {
           <hr />
           <ul className="statsDisplayer-category-list">
             <li className="statsDisplayer-category-list-item">
-              <span className="statsDisplayer-category-list-item-value">{user.level}</span>
+              <span className="statsDisplayer-category-list-item-value">{user.stats.level}</span>
               niveaux
               <span className="statsDisplayer-category-list-item-rank">
                 (#{user.rank.levelXpRank ?? 0} du classement)
@@ -132,19 +131,19 @@ export default function StatsDisplayer({ user, stats }) {
           <h3>Social</h3>
           <hr />
           <ul className="statsDisplayer-category-list">
-            <li className="statsDisplayer-category-list-item">
+            {/* <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">
                 {user.friends?.length || 0}
               </span>
               Amis
-            </li>
+            </li> */}
             <li className="statsDisplayer-category-list-item">
-              <span className="statsDisplayer-category-list-item-value">{user.honor ?? 0}</span>
+              <span className="statsDisplayer-category-list-item-value">{stats.honor ?? 0}</span>
               Honneurs reçus
             </li>
             <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">
-                {user.honored?.quantity ?? 0}
+                {stats.honored?.quantity ?? 0}
               </span>
               Honneurs envoyés
             </li>
