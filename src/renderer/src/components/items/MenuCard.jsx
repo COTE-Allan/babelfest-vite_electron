@@ -25,10 +25,11 @@ const MenuCard = ({
   const sendMessage = useSendMessage()
   const [selectedDeck, setSelectedDeck] = useState(null)
   const [seasonInfo, setSeasonInfo] = useState({ name: '', daysRemaining: 0 })
+  const [showSelect, setShowSelect] = useState(false) // Nouvel état pour gérer l'affichage du select
 
   useEffect(() => {
-    const currentSeason = getCurrentSeason() // Récupérer la première saison
-    const endDate = currentSeason.endDate * 1000 // Convertir la date de fin en millisecondes
+    const currentSeason = getCurrentSeason()
+    const endDate = currentSeason.endDate * 1000
     const now = Date.now()
     const daysRemaining = Math.max(0, Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)))
     setSeasonInfo({
@@ -41,34 +42,37 @@ const MenuCard = ({
   const handleForward = () => {
     if (disabled) {
       sendMessage(disabled, 'info')
-    } else {
-      if (requiresDeck) {
+    } else if (requiresDeck) {
+      select()
+      if (showSelect) {
         if (selectedDeck) {
-          select()
           goForward(where, { state: { deck: selectedDeck } })
         }
       } else {
-        select()
-        goForward(where, state)
+        // Sinon, afficher le select
+        setShowSelect(true)
       }
+    } else {
+      select()
+      goForward(where, state)
     }
   }
 
   return (
     <div className={`MenuCard ${classNames} `} onClick={handleForward} onMouseEnter={hover}>
+      {requiresDeck && (
+        <span style={{ color: seasonInfo.hex }} className="season-info">
+          {seasonInfo.name} : {seasonInfo.daysRemaining} jours restants
+        </span>
+      )}
+
       <span className="MenuCard-name">
         {disabled && <FaLock size={35} />}
         {disabled ? 'Bloqué' : name}
       </span>
-      {requiresDeck && !disabled && (
-        <span className="season-info" style={{ backgroundColor: seasonInfo.hex + '50' }}>
-          {seasonInfo.name} - {seasonInfo.daysRemaining} jours restants
-        </span>
-      )}
 
-      <span className="MenuCard-desc">{disabled ? disabled : desc}</span>
-
-      {requiresDeck && !disabled && (
+      {!showSelect && <span className="MenuCard-desc">{disabled ? disabled : desc}</span>}
+      {requiresDeck && showSelect && !disabled && (
         <select
           value={selectedDeck ? selectedDeck.id : ''}
           onChange={(e) =>

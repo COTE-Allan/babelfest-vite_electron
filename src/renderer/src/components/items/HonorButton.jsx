@@ -8,7 +8,7 @@ import HudNavLink from '../items/hudNavLink'
 import useCheckForAchievements from '../controllers/AchievementsController'
 
 const HonorButton = ({ targetUserId, targetUser }) => {
-  const { user, userInfo, updateUserState, userSettings, giveAchievement } = useContext(AuthContext)
+  const { user, userInfo, updateUserState } = useContext(AuthContext)
   const [canHonor, setCanHonor] = useState(false)
   const sendMessage = useSendMessage()
   const checkForAchievements = useCheckForAchievements()
@@ -40,14 +40,6 @@ const HonorButton = ({ targetUserId, targetUser }) => {
       const userRef = doc(db, 'users', user.uid)
       const targetUserRef = doc(db, 'users', targetUserId)
 
-      if (userInfo.stats.honored.quantity ?? 0 + 1 === 1) {
-        await giveAchievement('HF_1honored')
-      }
-
-      if (userInfo.stats.honored.quantity ?? 0 + 1 === 50) {
-        await giveAchievement('HF_50honored')
-      }
-
       // Mettre à jour le timestamp et incrémenter la quantité dans honored
       await updateDoc(userRef, {
         'stats.honored.timestamp': currentTime,
@@ -62,6 +54,7 @@ const HonorButton = ({ targetUserId, targetUser }) => {
       sendMessage(`Vous avez honoré ${targetUser.username} !`, 'success')
       await updateUserState(user)
       setCanHonor(false)
+      checkForAchievements()
     } catch (error) {
       console.error("Erreur lors de l'honoration:", error)
     }

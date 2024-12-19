@@ -84,6 +84,7 @@ const Login = () => {
   }
 
   const handleFirebaseError = (errorCode) => {
+    console.log(errorCode)
     switch (errorCode) {
       case 'auth/user-not-found':
       case 'auth/wrong-password':
@@ -133,20 +134,8 @@ const Login = () => {
 
   const handleRegister = async () => {
     if (!validateForm()) return
-
     setLoading(true)
     try {
-      // Vérifier si le pseudo est déjà pris
-      const usersRef = collection(db, 'users')
-      const q = query(usersRef, where('username', '==', username))
-      const querySnapshot = await getDocs(q)
-
-      if (!querySnapshot.empty) {
-        setErrorUsername("Ce nom d'utilisateur est déjà pris.")
-        setLoading(false)
-        return
-      }
-
       // Créer un nouvel utilisateur
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       const user = userCredential.user

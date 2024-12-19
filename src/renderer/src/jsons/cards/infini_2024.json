@@ -423,7 +423,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Nodoka",
     "title": "Fille de démon",
     "atk": 1,
@@ -456,7 +455,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Tôteem",
     "title": "Le manieur de chair",
     "atk": 3,
@@ -473,7 +471,6 @@
     "author": "Eyessmanga"
   },
   {
-    "featured": true,
     "name": "Lukas",
     "title": "à bout de force",
     "atk": 0,
@@ -498,7 +495,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Lukas",
     "title": "Fusion du coeur",
     "atk": 6,
@@ -522,7 +518,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Pink",
     "title": "Fan de disco",
     "atk": 7,
@@ -548,7 +543,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Le mur",
     "title": "Colisée vivant de Babelfest",
     "atk": 0,
@@ -575,7 +569,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Le golem",
     "title": "Colisée vivant de Babelfest",
     "atk": 3,
@@ -693,6 +686,112 @@
         "type": "defBuff",
         "value": 1,
         "target": "ally"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Eden Iris",
+    "title": "Magical girl au cœur ardent",
+    "atk": 1,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 1,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "./cards/series/babelfest_2024series27.png",
+    "rarity": 1,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "cost": 3,
+    "author": "Piku",
+    "reach": 1,
+    "effects": [
+      {
+        "type": "moreReach"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Neva",
+    "title": "Championne Nivale",
+    "atk": 0,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 0,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "./cards/series/babelfest_2024series28.png",
+    "rarity": 3,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "cost": 11,
+    "author": "Xyphias_",
+    "effects": [
+      {
+        "when": [3],
+        "type": "defBuff",
+        "value": 2,
+        "target": "ally"
+      },
+      {
+        "when": ["spawn"],
+        "type": "spawnSummon",
+        "cards": [{ "name": "Edelice", "title": "Fleur Nivéale" }],
+        "value": 1,
+        "spawnUsed": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Edelice",
+    "title": "Fleur Nivéale",
+    "atk": 2,
+    "dep": 2,
+    "hp": 4,
+    "baseatk": 2,
+    "basedep": 2,
+    "basehp": 4,
+    "url": "./cards/series/babelfest_2024series29.png",
+    "rarity": 5,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Xyphias_",
+    "effects": [
+      {
+        "type": "rageSwordAlly",
+        "when": [3],
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Cipher",
+    "title": "L'immergé",
+    "atk": 3,
+    "dep": 2,
+    "hp": 3,
+    "baseatk": 3,
+    "basedep": 2,
+    "basehp": 3,
+    "url": "./cards/series/babelfest_2024series30.png",
+    "rarity": 3,
+    "collection": "Série Infinie",
+    "year": 2024,
+    "author": "Brazmat",
+    "effects": [
+      {
+        "when": [3],
+        "type": "rageShield",
+        "target": "rival"
+      },
+      {
+        "when": [3],
+        "type": "rageSword",
+        "target": "rival"
       }
     ]
   }

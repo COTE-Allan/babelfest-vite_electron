@@ -1,7 +1,6 @@
 @import '../variables.scss';
 
 .credits {
-
   & h2,
   & h3,
   ul {
@@ -16,8 +15,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-family: 'Kimberly Bl',
-  sans-serif;
+  font-family: 'Kimberly Bl', sans-serif;
 
   & .logo {
     width: 350px;
@@ -33,7 +31,7 @@
     align-items: center;
     overflow-y: auto;
     height: 100%;
-    width: 70vw;
+    width: 50vw;
     overflow-x: hidden;
   }
 
@@ -46,19 +44,17 @@
     padding: 0;
 
     & .md {
-      background-color: #EA5427;
+      background-color: #ea5427;
       padding: 12px 7px;
       margin-top: 15px;
       width: 100%;
       border-radius: 5px;
     }
-
   }
 
   & hr {
     width: 100%;
   }
-
 
   & h2 {
     font-size: 28px;
@@ -84,9 +80,6 @@
 
     &:hover {
       transform: scale(1.02);
-
     }
   }
-
-
 }

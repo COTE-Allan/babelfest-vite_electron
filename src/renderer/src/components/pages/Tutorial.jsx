@@ -40,6 +40,7 @@ export const Tutorial = () => {
   const [tutorialStep, setTutorialStep] = useState(null)
   const [step, setStep] = useState(0)
   const [detailCard, setDetailCard] = useState(null)
+
   const navigate = useNavigate()
 
   const [playSummon] = useSound(summonSfx, { volume: userSettings.sfxVolume })
@@ -76,9 +77,26 @@ export const Tutorial = () => {
   }, [])
 
   useEffect(() => {
-    // Définition de l'étape tutoriel
     setTutorialStep(tutorialSteps[step])
   }, [step])
+
+  // État pour gérer le son actuel
+  const [currentVoiceLine, setCurrentVoiceLine] = useState(null)
+
+  useEffect(() => {
+    if (tutorialStep && tutorialStep.voiceline) {
+      if (currentVoiceLine) {
+        currentVoiceLine.pause()
+        currentVoiceLine.currentTime = 0
+      }
+
+      const newVoice = new Audio(tutorialStep.voiceline)
+      newVoice.volume = userSettings.sfxVolume ?? 1
+      newVoice.play().catch((err) => console.warn('Impossible de lire la voiceline', err))
+
+      setCurrentVoiceLine(newVoice)
+    }
+  }, [tutorialStep, userSettings.sfxVolume])
 
   function handleClick(element, id) {
     if (tutorialStep.clickOn.element === element) {
@@ -471,6 +489,7 @@ export const Tutorial = () => {
           <div className="ig-menu top" style={{ zIndex: 11 }}>
             <IconButton
               onClick={() => {
+                currentVoiceLine.pause()
                 navigate('/home')
               }}
             >

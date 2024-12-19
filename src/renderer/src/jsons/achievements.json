@@ -71,7 +71,7 @@
     "desc": "Obtenez 10 honneurs de la part d'autres joueurs.",
     "url": "./skins/icon_success_title.png",
     "objective": {
-      "profile": "honor",
+      "stat": "honor",
       "value": 10
     }
   },
@@ -81,7 +81,7 @@
     "desc": "Obtenez 50 honneurs de la part d'autres joueurs.",
     "url": "./skins/borders/cadre_or_honor.png",
     "objective": {
-      "profile": "honor",
+      "stat": "honor",
       "value": 50
     }
   },
@@ -91,7 +91,7 @@
     "desc": "Honorez un autre joueur depuis son profil.",
     "url": "./skins/borders/cadre_blushing.png",
     "objective": {
-      "profile": "honored.quantity",
+      "stat": "honored.quantity",
       "value": 1
     }
   },
@@ -101,7 +101,7 @@
     "desc": "Honorez 50 fois.",
     "url": "./skins/borders/cadre_rainbow.png",
     "objective": {
-      "profile": "honored.quantity",
+      "stat": "honored.quantity",
       "value": 50
     }
   },

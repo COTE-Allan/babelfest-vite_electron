@@ -4,14 +4,16 @@
     "text": "Ah, te voilà enfin ! Je commençais à m'impatienter. Bon, t'attends quoi ? Allez rentre viens !",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "position": "center"
+    "position": "center",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/01.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Bienvenue au festival de Babel, aussi appelé Babelfest ! Il s'agit d'un grand tournoi où des combattants venus de tous les univers se réunissent.",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "position": "center"
+    "position": "center",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/02.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -19,7 +21,8 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "top-left",
-    "highlightedElements": ["arena"]
+    "highlightedElements": ["arena"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/03.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -27,7 +30,8 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "top-left",
-    "highlightedElements": ["arena"]
+    "highlightedElements": ["arena"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/04.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -35,7 +39,8 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-hand",
-    "highlightedElements": ["hand"]
+    "highlightedElements": ["hand"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/05.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -43,19 +48,22 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-hand",
-    "highlightedElements": ["hand"]
+    "highlightedElements": ["hand"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/06.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Maintenant que t'as les bases, on va faire un tour de jeu complet. J'ai moi aussi une main de 4 cartes pour garder le match équitable (même si tu n'as aucune chance).",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/07.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Pendant une partie de Babelfest, les deux joueurs agissent selon 4 phases distinctes.",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/08.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -63,7 +71,8 @@
     "clickOn": { "element": "dialog" },
     "position": "under-tracker",
     "modal": true,
-    "highlightedElements": ["tracker"]
+    "highlightedElements": ["tracker"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/09.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -71,13 +80,15 @@
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "addCard": { "where": "cell", "id": 60, "to": 14, "owner": 2 },
-    "sound": "summon"
+    "sound": "summon",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/10.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
-    "text": "Voilà, j'ai placé une carte en C4. À noter que tu ne peux que invoquer des cartes sur ta moitié de l'arène.",
+    "text": "Voilà, j'ai placé une carte en C4. À noter que tu ne peux invoquer des cartes que sur ta moitié de l'arène.",
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/11.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -87,7 +98,8 @@
     "image": "./images/schema_tutoriel.png",
     "modal": true,
     "addCard": { "where": "cell", "id": 3, "to": 2, "owner": 2, "hidden": true },
-    "sound": "summon"
+    "sound": "summon",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/12.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -95,14 +107,16 @@
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "turn": 2,
-    "sound": "turn"
+    "sound": "turn",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/13.wav"
   },
   {
     "url": "./images/tuto_rire.png",
     "text": "Maintenant c'est ton tour, tu vas pouvoir placer des cartes dans l'arène. T'as le meilleur prof, tu peux pas te tromper !",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "position": "center"
+    "position": "center",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/14.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -110,28 +124,32 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
-    "highlightedElements": ["bottom-menu"]
+    "highlightedElements": ["bottom-menu"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/15.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Plus une carte coûte en énergie, plus elle sera puissante. Fais attention à l'ordre dans lequel tu poses tes cartes au fil des tours ; c'est super important !",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "position": "center"
+    "position": "center",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/16.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Il existe 4 types de rareté. Chaque type a un coût différent : Typique (1); Rare (2); Épique (3); Légendaire (4).",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "position": "center"
+    "position": "center",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/17.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Bien, sélectionne la carte Épique de ta main 'Mandarine-Man'.",
     "clickOn": { "element": "card", "id": 48 },
     "position": "top-left",
-    "highlightedElements": ["hand", "hand-48"]
+    "highlightedElements": ["hand", "hand-48"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/18.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -140,7 +158,8 @@
     "position": "top-left",
     "highlightedElements": ["cell-18"],
     "green": ["cell-18"],
-    "selected": ["hand-48"]
+    "selected": ["hand-48"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/19.wav"
   },
   {
     "confirm": ["cell-18"],
@@ -154,14 +173,16 @@
     "removeCard": { "where": "hand", "id": [48] },
     "addCard": { "where": "cell", "id": 48, "to": 18, "owner": 1 },
     "cost": 1,
-    "sound": "summon"
+    "sound": "summon",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/20.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Tu viens de placer une carte Épique, elle t'a coûté 3 énergies pour être invoquée.",
     "clickOn": { "element": "dialog" },
     "position": "center",
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/21.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -169,14 +190,16 @@
     "clickOn": { "element": "dialog" },
     "modal": true,
     "position": "above-buttons",
-    "highlightedElements": ["bottom-menu"]
+    "highlightedElements": ["bottom-menu"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/22.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Profites-en pour invoquer 'Xyphias Tonitruo'.",
     "clickOn": { "element": "card", "id": 15 },
     "position": "top-left",
-    "highlightedElements": ["hand", "hand-15"]
+    "highlightedElements": ["hand", "hand-15"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/23.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -210,14 +233,16 @@
     "cost": 4,
     "phase": 2,
     "turn": 1,
-    "sound": "turn"
+    "sound": "turn",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/24.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
     "text": "Dans la deuxième phase, nous allons déplacer nos combattants l'un après l'autre pour capturer la base ou préparer notre attaque.",
     "clickOn": { "element": "dialog" },
     "modal": true,
-    "position": "center"
+    "position": "center",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/25.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -226,7 +251,8 @@
     "position": "top-left",
     "moveCard": {
       "from": 2,
-      "to": 10
+      "to": 10,
+      "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/26.wav"
     }
   },
   {
@@ -234,7 +260,8 @@
     "text": "En déplaçant ma carte 'Tuto' de C1 vers C3, elle se révèle. T'as vu elle est belle hein ?",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
-    "tired": ["cell-10"]
+    "tired": ["cell-10"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/27.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -243,7 +270,8 @@
     "position": "top-left",
     "tired": ["cell-10"],
     "turn": 2,
-    "sound": "turn"
+    "sound": "turn",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/28.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -252,7 +280,8 @@
     "modal": true,
     "position": "above-buttons",
     "highlightedElements": ["bottom-menu"],
-    "tired": ["cell-10"]
+    "tired": ["cell-10"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/29.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -260,7 +289,8 @@
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "highlightedElements": ["arena"],
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/30.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -268,7 +298,8 @@
     "clickOn": { "element": "cell", "id": 17 },
     "position": "top-left",
     "highlightedElements": ["cell-17"],
-    "tired": ["cell-10"]
+    "tired": ["cell-10"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/31.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -278,7 +309,8 @@
     "highlightedElements": ["cell-9"],
     "selected": ["cell-17"],
     "green": ["cell-9"],
-    "tired": ["cell-10"]
+    "tired": ["cell-10"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/32.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -301,7 +333,8 @@
     "text": "Ta carte vient de se déplacer de B5 vers B3. Retiens que peu importe l'énergie qu'il te reste, tu ne pourras pas la redéplacer ce tour.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
-    "tired": ["cell-10", "cell-9"]
+    "tired": ["cell-10", "cell-9"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/33.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -310,7 +343,8 @@
     "modal": true,
     "position": "above-buttons",
     "highlightedElements": ["bottom-menu"],
-    "tired": ["cell-10", "cell-9"]
+    "tired": ["cell-10", "cell-9"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/34.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -319,7 +353,8 @@
     "position": "above-buttons",
     "modal": true,
     "highlightedElements": ["bottom-menu"],
-    "tired": ["cell-10", "cell-9"]
+    "tired": ["cell-10", "cell-9"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/35.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -333,21 +368,24 @@
     "phase": 3,
     "cost": 4,
     "sound": "turn",
-    "editCard": { "id": 14, "atk": 5 }
+    "editCard": { "id": 14, "atk": 5 },
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/36.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Après avoir posé et déplacé nos combattants, la phase suivante est l'attaque !",
     "clickOn": { "element": "dialog" },
     "position": "center",
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/37.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "text": "Le plus important à retenir c'est que les combattants ne peuvent attaquer qu'une fois par tour et uniquement les cibles adjacentes. (haut, bas, gauche, droite)",
     "clickOn": { "element": "dialog" },
     "position": "center",
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/38.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -355,7 +393,8 @@
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "highlightedElements": ["arena"],
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/39.wav"
   },
   {
     "url": "./images/tuto_rire.png",
@@ -363,7 +402,8 @@
     "clickOn": { "element": "dialog" },
     "position": "top-left",
     "highlightedElements": ["arena"],
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/40.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -372,14 +412,16 @@
     "position": "top-left",
     "removeCard": { "where": "cell", "id": 18 },
     "sound": "death",
-    "turn": 2
+    "turn": 2,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/41.wav"
   },
   {
     "url": "./images/tuto_rire.png",
     "text": "'The Outsider' inflige 5 dégâts à 'Mandarine-man' ce qui fait tomber ses PV à 0, détruisant ta carte. Je suis vraiment trop intelligent.",
     "clickOn": { "element": "dialog" },
     "position": "top-left",
-    "tired": ["cell-14"]
+    "tired": ["cell-14"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/42.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -387,7 +429,8 @@
     "clickOn": { "element": "cell", "id": 9 },
     "position": "top-left",
     "tired": ["cell-14"],
-    "highlightedElements": ["cell-9"]
+    "highlightedElements": ["cell-9"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/43.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -397,7 +440,8 @@
     "tired": ["cell-14"],
     "highlightedElements": ["cell-10"],
     "selected": ["cell-9"],
-    "green": ["cell-10"]
+    "green": ["cell-10"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/44.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -417,14 +461,16 @@
     "text": "'Xyphias Tonitruo' inflige 2 dégâts à 'Tuto' ce qui fait tomber ses PV à 0...",
     "tired": ["cell-14", "cell-9"],
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/45.wav"
   },
   {
     "url": "./images/tuto_pleure.png",
     "text": "ATTENDS QUOI QU'EST CE QUE J'AI FAIT !?",
     "tired": ["cell-14", "cell-9"],
     "clickOn": { "element": "dialog" },
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/46.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -432,7 +478,8 @@
     "clickOn": { "element": "dialog" },
     "position": "center",
     "tired": ["cell-14", "cell-9"],
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/47.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -443,7 +490,8 @@
     "highlightedElements": ["bottom-menu"],
     "tired": ["cell-14", "cell-9"],
     "turn": 1,
-    "sound": "turn"
+    "sound": "turn",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/48.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -451,7 +499,8 @@
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
-    "phase": 4
+    "phase": 4,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/49.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -459,7 +508,8 @@
     "clickOn": { "element": "dialog" },
     "position": "center",
     "modal": true,
-    "highlightedElements": ["shop"]
+    "highlightedElements": ["shop"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/50.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -467,7 +517,8 @@
     "clickOn": { "element": "dialog" },
     "position": "above-buttons",
     "modal": true,
-    "highlightedElements": ["bottom-menu", "shop"]
+    "highlightedElements": ["bottom-menu", "shop"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/51.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -476,7 +527,8 @@
     "position": "above-buttons",
     "modal": true,
     "highlightedElements": ["bottom-menu", "shop", "shop-42"],
-    "diff": -3
+    "diff": -3,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/52.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -485,7 +537,8 @@
     "position": "above-buttons",
     "modal": true,
     "highlightedElements": ["bottom-menu", "shop"],
-    "selected": ["shop-42"]
+    "selected": ["shop-42"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/53.wav"
   },
   {
     "url": "./images/tuto_sournois.png",
@@ -495,7 +548,8 @@
     "modal": true,
     "highlightedElements": ["bottom-menu", "hand", "shop", "hand-36"],
     "diff": -1,
-    "selected": ["shop-42"]
+    "selected": ["shop-42"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/54.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -504,7 +558,8 @@
     "position": "above-buttons",
     "modal": true,
     "highlightedElements": ["bottom-menu", "hand", "shop"],
-    "selected": ["shop-42", "hand-36"]
+    "selected": ["shop-42", "hand-36"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/55.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -514,7 +569,8 @@
     "modal": true,
     "highlightedElements": ["bottom-menu", "hand", "shop", "hand-25"],
     "diff": "0",
-    "selected": ["shop-42", "hand-36"]
+    "selected": ["shop-42", "hand-36"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/56.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -525,7 +581,8 @@
     "highlightedElements": ["bottom-menu", "shop", "hand"],
     "removeCard": { "where": "hand", "id": [25, 36] },
     "addCard": { "where": "hand", "id": 42 },
-    "selected": ["shop-42", "hand-36", "hand-25"]
+    "selected": ["shop-42", "hand-36", "hand-25"],
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/57.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -534,7 +591,8 @@
     "position": "center",
     "modal": true,
     "highlightedElements": ["bottom-menu", "hand"],
-    "phase": 1
+    "phase": 1,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/58.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -545,14 +603,16 @@
     "order": 2,
     "turn": 2,
     "sound": "turn",
-    "editCard": { "id": 14, "atk": 4 }
+    "editCard": { "id": 14, "atk": 4 },
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/59.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
     "clickOn": { "element": "card", "id": 42 },
     "text": "Ce tour-ci, tu commences. Invoque en premier et effectue ta phase de préparation.",
     "highlightedElements": ["hand-42"],
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/60.wav"
   },
   {
     "url": "./images/tuto_nonchalent.png",
@@ -582,14 +642,16 @@
     "clickOn": { "element": "dialog" },
     "text": "Cette fois-ci, je décide de ne pas invoquer, la phase de déplacement commence.",
     "position": "center",
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/61.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
     "clickOn": { "element": "cell", "id": 9 },
     "highlightedElements": ["arena", "cell-9"],
     "text": "Ta carte 'Xyphias Tonitruo' possède 4 Points de Déplacement, tu peux donc te déplacer sur ma base en C3 pour la capturer.",
-    "position": "top-left"
+    "position": "top-left",
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/62.wav"
   },
   {
     "url": "./images/tuto_hautain.png",
@@ -620,7 +682,8 @@
     "clickOn": { "element": "dialog" },
     "text": "Félicitations, tu viens de gagner en capturant ma base. N'oublie pas que tu peux aussi gagner en éliminant tous les combattants adverses.",
     "position": "center",
-    "modal": true
+    "modal": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/63.wav"
   },
   {
     "url": "./images/tuto_rire.png",
@@ -628,7 +691,8 @@
     "text": "Maintenant, l'heure est venue pour toi de jouer pour de vrai, ça ne sera pas aussi simple que contre moi. Alors bonne chance !",
     "position": "center",
     "modal": true,
-    "win": true
+    "win": true,
+    "voiceline": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734516950/babelfest/voicelines%20tutoriel/64.wav"
   },
   {
     "url": "./images/tuto_rire.png",

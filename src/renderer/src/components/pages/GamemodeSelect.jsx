@@ -1,8 +1,9 @@
 import BackButton from '../items/BackButton'
 import MenuCard from '../items/MenuCard'
-import RankedCardArena from '../../assets/img/rankedMenuCard.png'
-import TutorialCardArena from '../../assets/img/tutorialMenuCard.png'
-import QuickplayCardArena from '../../assets/img/quickplayMenuCard.png'
+import TutorialCardArena from '../../assets/img/gamemode_tutoriel.png'
+import RankedCardArena from '../../assets/img/gamemode_ranked.png'
+import CustomCardArena from '../../assets/img/gamemode_custom.png'
+import QuickplayCardArena from '../../assets/img/gamemode_quick.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../AuthContext'
 import { MatchmakingContext } from '../providers/MatchmakingProvider'
@@ -14,7 +15,6 @@ const GamemodeSelect = () => {
   const lockedReason = 'Terminez le tutoriel pour débloquer ce mode de jeu.'
   const levelLockedReason = 'Atteignez le niveau 10 pour débloquer ce mode de jeu.'
   const inSearchReason = 'Quittez la recherche actuelle pour accéder à ce mode de jeu.'
-
   return (
     <div className="MenuCard-container">
       <div className="MenuCard-container-cards">
@@ -35,17 +35,17 @@ const GamemodeSelect = () => {
             name="Partie custom"
             desc="Jouez entre amis avec des règles spéciales et modifiables"
             where="/lobbyList"
-            bg={RankedCardArena}
+            bg={CustomCardArena}
           />
           <MenuCard
             disabled={
               !isTutorialFinished
                 ? lockedReason
-                : userInfo.stats.level <= 10
-                  ? levelLockedReason
-                  : matchmakingSearch
+                : userInfo.stats.level >= 10
+                  ? matchmakingSearch
                     ? inSearchReason
                     : false
+                  : levelLockedReason
             }
             name="Partie classée"
             desc="Affrontez des joueurs avec vos propres decks et grimpez le classement !"

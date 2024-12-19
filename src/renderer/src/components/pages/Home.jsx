@@ -40,7 +40,6 @@ const Home = () => {
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [featuredCards, setFeaturedCards] = useState(null)
   const [askForLogout, setAskForLogout] = useState(false)
-  console.log(userInfo)
   const handleLeaveGame = () => {
     if (askForLogout) {
       // Envoyer un événement IPC pour fermer l'application

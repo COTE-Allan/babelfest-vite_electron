@@ -20,21 +20,25 @@ const getValue = (obj, path) => {
 // Fonction pour vérifier un objectif
 const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
   if (objective.win) {
-    // Si l'objectif requiert de gagner, vérifiez si le joueur a gagné
     if (!winner) {
       return false
     }
   }
 
-  if (objective.stat && playerStats[objective.stat] !== undefined) {
-    return playerStats[objective.stat] >= objective.value
+  let value
+
+  if (objective.stat) {
+    value = getNestedValue(playerStats, objective.stat)
+    console.log(objective, value, objective.value, value >= objective.value)
+    if (value !== undefined) {
+      return value >= objective.value
+    }
   } else if (objective.profile) {
-    const value = getValue(userInfo, objective.profile)
+    value = getValue(userInfo, objective.profile)
     return value !== undefined && value >= objective.value
   } else if (objective.gameData) {
-    // Vérifie si le mode de jeu courant est inclus dans la liste des modes de jeu spécifiés dans l'objectif
     if (objective.gamemode.includes(gameData.gamemode)) {
-      const value = getValue(gameData, objective.gameData)
+      value = getValue(gameData, objective.gameData)
       if (value !== undefined) {
         if (objective.condition.startsWith('<')) {
           return value < parseInt(objective.condition.substring(1), 10)
@@ -50,11 +54,24 @@ const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
   return false
 }
 
+const getNestedValue = (obj, path) => {
+  const parts = path.split('.')
+  let current = obj
+  for (const part of parts) {
+    if (current[part] === undefined) {
+      return undefined
+    }
+    current = current[part]
+  }
+  return current
+}
+
 // Hook pour vérifier et décerner les succès
 export const useCheckForAchievements = () => {
   const { userInfo, giveAchievement } = useContext(AuthContext)
 
   const checkForAchievements = async (gameData = null, winner = false) => {
+    console.log('checkForAchivement')
     const userAchievements = userInfo.achievements
     const playerStats = getPlayerStats(userInfo.stats)
     const achievementsToCheck = achievements.filter((achievement) => {
@@ -86,7 +103,6 @@ export const useCheckAchievementValue = () => {
     }
 
     const playerStats = getPlayerStats(userInfo.stats)
-
     if (achievement.objective.stat && playerStats[achievement.objective.stat] !== undefined) {
       return playerStats[achievement.objective.stat]
     } else if (achievement.objective.profile) {
