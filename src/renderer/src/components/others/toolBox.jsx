@@ -28,6 +28,8 @@ import prestigeData from '../../jsons/skins/prestigeColor.json'
 
 import rankedSeasons from '../../jsons/rankedSeasons.json'
 
+import changelog from '../../jsons/changelog.json'
+
 const borders = bordersData.map((item, index) => ({
   ...item,
   id: `border-${index}`,
@@ -690,7 +692,8 @@ export function getPlayerStats(stats) {
     xp: stats.xp,
     level: stats.level,
     honored: stats.honored,
-    honor: stats.honor
+    honor: stats.honor,
+    coins: stats.coins ?? 0
   }
 }
 
@@ -781,8 +784,6 @@ export function createUserInfo(userData, decks = null, email = null, id = null, 
     email,
     username: userData.username || 'blank',
     flags: userData.flags || [],
-    // friends: [],
-
     id,
     skin: userData.skin,
     stats: userData.stats,
@@ -791,7 +792,8 @@ export function createUserInfo(userData, decks = null, email = null, id = null, 
     achievements: userData.achievements || [],
     matchSummaries: userData.matchSummaries || [],
     decks,
-    pastSeasons: pastSeasons || []
+    pastSeasons: pastSeasons || [],
+    alternates: userData.alternates || []
   }
 }
 
@@ -815,4 +817,79 @@ export const getCurrentSeason = () => {
   }
 
   return currentSeason
+}
+
+export function IsDeckValid(deck) {
+  // Sinon, on récupère la liste de toutes les cartes
+  const cards = getAllCards()
+
+  // On calcule le coût total en trouvant la carte correspondante puis en cumulant son coût
+  const totalCost = deck.cards.reduce((acc, card) => {
+    // On recherche la carte correspondante dans la liste globale
+    const foundCard = cards.find((dcard) => dcard.name === card.name && dcard.title === card.title)
+    // On ajoute le coût de la carte si elle est trouvée, sinon 0
+    return acc + (foundCard?.cost ?? 0)
+  }, 0)
+
+  // On vérifie si le coût total est dans la limite
+  return totalCost <= 50
+}
+
+export function getDeckWithUpdatedCosts(deck) {
+  // Récupère toutes les cartes existantes (avec leurs coûts à jour).
+  const allCards = getAllCards()
+
+  // Reconstruit la liste de cartes du deck avec les coûts à jour.
+  const updatedCards = deck.cards.map((card) => {
+    // Recherche la carte correspondante dans allCards
+    const foundCard = allCards.find(
+      (dcard) => dcard.name === card.name && dcard.title === card.title
+    )
+    // On renvoie la même carte en remplaçant son coût par celui trouvé (si la carte existe).
+    return {
+      ...card,
+      cost: foundCard?.cost ?? card.cost // Si la carte n'est pas trouvée, on garde l'ancien coût
+    }
+  })
+
+  // Calcule le coût total du deck après la mise à jour
+  const totalCost = updatedCards.reduce((acc, card) => acc + card.cost, 0)
+
+  // On retourne un nouvel objet deck
+  return {
+    cards: updatedCards,
+    cost: totalCost
+  }
+}
+
+export function getAllAlternates() {
+  // 1. On récupère déjà toutes les cartes de base
+  let allCards = [
+    ...originCards,
+    ...reinforcementCards,
+    ...babelfish,
+    ...mecanicaCards,
+    ...promoCards,
+    ...twentyfourCards
+  ]
+
+  // 2. On parcourt chaque carte et on accumule toutes les alternates
+  let allAlternates = []
+  allCards.forEach((card) => {
+    if (card.alternates && Array.isArray(card.alternates)) {
+      // Pour chaque alternate, on y injecte (ou recopie) le nom et le titre de la carte parente
+      card.alternates.forEach((alt) => {
+        const altWithParentInfo = {
+          ...alt,
+          name: card.name,
+          title: card.title
+        }
+        allAlternates.push(altWithParentInfo)
+      })
+    }
+  })
+
+  // Retourne un simple array contenant tous les 'alternates',
+  // chacun enrichi des champs "parentName" et "parentTitle"
+  return allAlternates
 }

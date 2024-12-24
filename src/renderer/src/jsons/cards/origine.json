@@ -930,6 +930,20 @@
     "basedep": 2,
     "basehp": 2,
     "url": "./cards/origine/babelfest_origine41.png",
+    "alternates": [
+      {
+        "altId": "ori41-alt-1",
+        "url": "./cards/alternates/babelfest_origine41-2.png",
+        "artist": "Cielesis",
+        "cost": 100
+      },
+      {
+        "altId": "ori41-alt-2",
+        "url": "./cards/alternates/babelfest_origine41-3.png",
+        "artist": "Cielesis",
+        "cost": 500
+      }
+    ],
     "rarity": 3,
     "cost": 10,
     "shiny": "metal",
@@ -1137,6 +1151,14 @@
     "basedep": 2,
     "basehp": 5,
     "url": "./cards/origine/babelfest_origine48.png",
+    "alternates": [
+      {
+        "altId": "ori48-alt-1",
+        "url": "./cards/alternates/babelfest_origine48-2.png",
+        "artist": "Adsanman & Clem-san",
+        "cost": 500
+      }
+    ],
     "rarity": 3,
     "cost": 13,
     "shiny": "metal",

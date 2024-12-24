@@ -90,6 +90,11 @@
     "achievement": "HF_deckCreator"
   },
   {
+    "name": "Acheteur fou",
+    "unlockTip": "Obtenu en récompense du succès : 'Acheteur fou'",
+    "achievement": "HF_shopBuy"
+  },
+  {
     "name": "Sérial Winner",
     "unlockTip": "Obtenu en récompense du succès : 'Sérial Winner'",
     "achievement": "HF_5winStreak"

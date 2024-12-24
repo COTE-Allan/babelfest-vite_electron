@@ -17,13 +17,14 @@ import changelog from '../../jsons/changelog.json'
 import Logo from '../../assets/svg/babelfest.svg'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { FaCircle, FaCompactDisc, FaDiscord, FaPlay, FaScroll, FaYoutube } from 'react-icons/fa'
-import { IoLibrarySharp, IoLogOut, IoTrophy } from 'react-icons/io5'
+import { IoLibrarySharp, IoLogOut } from 'react-icons/io5'
 import { FaXTwitter } from 'react-icons/fa6'
 import { MdLeaderboard } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
 import { useMusic } from '../providers/MusicProvider'
+import { GiPriceTag } from 'react-icons/gi'
 
 const Home = () => {
   const { isPlaying } = useMusic()
@@ -124,6 +125,10 @@ const Home = () => {
           >
             <ProfilePicture size={35} />
             Profil
+          </a>
+          <a onClick={() => goForward(`/shop`)} onMouseEnter={hover} onMouseDown={select}>
+            <GiPriceTag size={35} />
+            Boutique
           </a>
           <a onClick={() => goForward('/settings')} onMouseEnter={hover} onMouseDown={select}>
             <IoMdSettings size={35} />

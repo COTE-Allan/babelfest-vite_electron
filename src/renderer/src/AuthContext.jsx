@@ -18,6 +18,7 @@ import achievementSfx from './assets/sfx/notification_achievement.mp3'
 import { getAchievementById } from './components/controllers/AchievementsController'
 import { createUserInfo, getCurrentSeason, useSendMessage } from './components/others/toolBox'
 import rankedSeasons from './jsons/rankedSeasons.json'
+import changelog from './jsons/changelog.json'
 
 export const AuthContext = createContext()
 
@@ -111,7 +112,8 @@ export const AuthProvider = ({ children }) => {
       cards: deckCards,
       cost: deckCost,
       creator: userInfo.username,
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      ver: changelog.slice(-1)[0].title
     })
     // Update userInfo with the new deck
     setUserInfo((prev) => ({
@@ -123,7 +125,8 @@ export const AuthProvider = ({ children }) => {
           name: deckName,
           cards: deckCards,
           cost: deckCost,
-          creator: userInfo.username
+          creator: userInfo.username,
+          ver: changelog.slice(-1)[0].title
         }
       ]
     }))
@@ -134,13 +137,15 @@ export const AuthProvider = ({ children }) => {
   // Function to modify an existing deck
   const modifyDeck = async (deckId, updatedDeck) => {
     if (!user) return
+    updatedDeck.ver = changelog.slice(-1)[0].title
     const deckRef = doc(db, `users/${user.uid}/decks`, deckId)
     await updateDoc(deckRef, updatedDeck)
 
     // Update the decks in userInfo
     setUserInfo((prev) => ({
       ...prev,
-      decks: prev.decks.map((deck) => (deck.id === deckId ? { ...deck, ...updatedDeck } : deck))
+      decks: prev.decks.map((deck) => (deck.id === deckId ? { ...deck, ...updatedDeck } : deck)),
+      ver: changelog.slice(-1)[0].title
     }))
     sendMessage(`Deck "${updatedDeck.name}" modifié avec succès!`, 'success')
   }
@@ -377,6 +382,78 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const addIdToUserList = async (field, itemId, coinsCost = 0) => {
+    if (!user) {
+      console.error('Aucun utilisateur connecté.')
+      return
+    }
+
+    try {
+      // 1. Récupérer le nombre de coins actuels côté local
+      const currentCoins = userInfo?.stats?.coins ?? 0
+
+      // 2. Si le paramètre coinsCost est supérieur à 0,
+      //    on vérifie que l'utilisateur a assez de pièces
+      if (coinsCost > 0) {
+        if (currentCoins < coinsCost) {
+          // Pas assez de coins
+          sendMessage?.("Vous n'avez pas suffisamment de pièces pour acheter ceci.", 'error')
+          return
+        }
+      }
+
+      // 3. Préparer l'objet de mise à jour Firestore
+      //    - On utilise arrayUnion pour ajouter itemId
+      //    - On déduit le coût si coinsCost > 0
+      const userRef = doc(db, 'users', user.uid)
+      const updatePayload = {
+        [field]: arrayUnion(itemId)
+      }
+
+      // S'il y a un coût, on met à jour stats.coins
+      if (coinsCost > 0) {
+        updatePayload['stats.coins'] = currentCoins - coinsCost
+      }
+
+      // 4. Mettre à jour dans Firestore
+      await updateDoc(userRef, updatePayload)
+
+      // 5. Mettre à jour localement l’état userInfo pour refléter immédiatement la modification
+      setUserInfo((prev) => {
+        if (!prev) return prev // Sécurité si jamais userInfo est vide
+
+        // Récupérer le tableau existant (flags, alternates, etc.)
+        const currentArray = prev[field] || []
+
+        // Vérifier si l'ID est déjà présent (arrayUnion évite le doublon côté Firestore,
+        // mais on fait de même en local pour éviter toute redondance)
+        const newArray = currentArray.includes(itemId) ? currentArray : [...currentArray, itemId]
+
+        // Mettre à jour coins si nécessaire
+        let newCoins = prev.stats?.coins ?? 0
+        if (coinsCost > 0) {
+          newCoins = newCoins - coinsCost
+        }
+
+        return {
+          ...prev,
+          [field]: newArray,
+          stats: {
+            ...prev.stats,
+            coins: newCoins
+          }
+        }
+      })
+
+      // 6. Message de succès
+      sendMessage?.(coinsCost > 0 ? `Achat réussi !` : `Récompense obtenue.`, 'success')
+      if (coinsCost > 0) await giveAchievement('HF_shopBuy')
+    } catch (error) {
+      console.error(`Erreur lors de l’ajout de l’ID "${itemId}" à "${field}" :`, error)
+      sendMessage?.(`Erreur lors de l’ajout de "${itemId}".`, 'error')
+    }
+  }
+
   useEffect(() => {
     if (user && userInfo && userInfo.pastSeasons && readyToCheckSeasons) {
       const currentSeason = getCurrentSeason()
@@ -403,7 +480,8 @@ export const AuthProvider = ({ children }) => {
     giveAchievement,
     saveDeck,
     modifyDeck,
-    deleteDeck
+    deleteDeck,
+    addIdToUserList
   }
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

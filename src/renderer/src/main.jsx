@@ -35,6 +35,7 @@ import MatchmakingQueue from './components/pages/MatchmakingQueue'
 import MatchmakingTracker from './components/interface/MatchmakingTracker'
 import Credits from './components/pages/Credits'
 import { Tutorial } from './components/pages/Tutorial'
+import Shop from './components/pages/Shop'
 
 // Composant Layout
 const Layout = ({ children }) => {
@@ -141,6 +142,16 @@ const AppContent = () => {
                 <Layout>
                   <TransitionWrapper>
                     <GamemodeSelect />
+                  </TransitionWrapper>
+                </Layout>
+              }
+            />
+            <Route
+              path="/shop"
+              element={
+                <Layout>
+                  <TransitionWrapper>
+                    <Shop />
                   </TransitionWrapper>
                 </Layout>
               }

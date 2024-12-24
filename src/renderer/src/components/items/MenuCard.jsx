@@ -1,6 +1,6 @@
 import { FaLock } from 'react-icons/fa'
 import { useTransition } from '../../TransitionContext'
-import { getCurrentSeason, useSendMessage } from '../others/toolBox'
+import { getCurrentSeason, IsDeckValid, useSendMessage } from '../others/toolBox'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import { useContext, useState, useEffect } from 'react'
@@ -23,9 +23,10 @@ const MenuCard = ({
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const { goForward } = useTransition()
   const sendMessage = useSendMessage()
+
   const [selectedDeck, setSelectedDeck] = useState(null)
   const [seasonInfo, setSeasonInfo] = useState({ name: '', daysRemaining: 0 })
-  const [showSelect, setShowSelect] = useState(false) // Nouvel état pour gérer l'affichage du select
+  const [showSelect, setShowSelect] = useState(false)
 
   useEffect(() => {
     const currentSeason = getCurrentSeason()
@@ -41,15 +42,17 @@ const MenuCard = ({
 
   const handleForward = () => {
     if (disabled) {
+      // Cas où le bouton/menu est désactivé
       sendMessage(disabled, 'info')
     } else if (requiresDeck) {
       select()
       if (showSelect) {
+        // Une fois le select visible, on vérifie si un deck est choisi
         if (selectedDeck) {
           goForward(where, { state: { deck: selectedDeck } })
         }
       } else {
-        // Sinon, afficher le select
+        // On affiche le select
         setShowSelect(true)
       }
     } else {
@@ -59,7 +62,7 @@ const MenuCard = ({
   }
 
   return (
-    <div className={`MenuCard ${classNames} `} onClick={handleForward} onMouseEnter={hover}>
+    <div className={`MenuCard ${classNames}`} onClick={handleForward} onMouseEnter={hover}>
       {requiresDeck && (
         <span style={{ color: seasonInfo.hex }} className="season-info">
           {seasonInfo.name} : {seasonInfo.daysRemaining} jours restants
@@ -72,6 +75,7 @@ const MenuCard = ({
       </span>
 
       {!showSelect && <span className="MenuCard-desc">{disabled ? disabled : desc}</span>}
+
       {requiresDeck && showSelect && !disabled && (
         <select
           value={selectedDeck ? selectedDeck.id : ''}
@@ -80,15 +84,20 @@ const MenuCard = ({
           }
         >
           <option value="">-- Choisir un deck --</option>
-          {userInfo.decks.map((deck) => (
-            <option key={deck.id} value={deck.id}>
-              {deck.name}
-            </option>
-          ))}
+          {
+            // On ne propose que les decks valides
+            userInfo.decks
+              .filter((deck) => IsDeckValid(deck))
+              .map((deck) => (
+                <option key={deck.id} value={deck.id}>
+                  {deck.name}
+                </option>
+              ))
+          }
         </select>
       )}
 
-      <img src={bg} className="MenuCard-bg" />
+      <img src={bg} className="MenuCard-bg" alt="" />
     </div>
   )
 }

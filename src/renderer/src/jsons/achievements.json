@@ -164,5 +164,11 @@
     "name": "Créateur de decks",
     "desc": "Créez un deck personnalisé.",
     "url": "./skins/icon_success_title.png"
+  },
+  {
+    "id": "HF_shopBuy",
+    "name": "Acheteur fou",
+    "desc": "Achetez quelque chose dans la boutique.",
+    "url": "./skins/icon_success_title.png"
   }
 ]

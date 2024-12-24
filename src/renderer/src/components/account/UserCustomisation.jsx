@@ -306,12 +306,16 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   skin.lock = isUnlocked(skin, user)
   const sendMessage = useSendMessage()
 
-  let rankedLock = skin.rankedReward ? true : false
-  if (rankedLock) {
+  let rankedLock = false
+  if (skin.rankedReward) {
     const focusedSeason = userInfo.pastSeasons.find((season) => season.id === skin.rankedReward.id)
-    if (focusedSeason?.rankReached >= skin.rankedReward.rankNeeded) {
-      rankedLock = false
-    }
+    rankedLock = !(focusedSeason?.rankReached >= skin.rankedReward.rankNeeded)
+  }
+
+  let flagLock = false
+  if (skin.flag) {
+    // Le lock est "true" tant que l'utilisateur ne possède pas le flag
+    flagLock = !userInfo.flags.includes(skin.flag)
   }
 
   const relatedSkinsParams = {
@@ -361,7 +365,7 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
     setCustomizedUserInfo(updatedUserInfo)
   }
 
-  if (rankedLock) return
+  if (rankedLock || flagLock) return
 
   return (
     <div

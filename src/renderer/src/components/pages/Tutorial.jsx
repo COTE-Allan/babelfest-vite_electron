@@ -153,7 +153,11 @@ export const Tutorial = () => {
   useEffect(() => {
     if (win) {
       giveAchievement('HF_tutorial')
+
       setTimeout(() => {
+        if (currentVoiceLine) {
+          currentVoiceLine.pause()
+        }
         navigate('/home')
       }, 2000)
     }

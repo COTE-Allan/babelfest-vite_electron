@@ -211,3 +211,53 @@ export function getRankProgress(pr) {
     nextRankClass: nextRank.className
   }
 }
+
+export function getCoinsEarned(gameWon, turnCount, gameMode, isFirstGameOfDay, isFirstWinOfDay) {
+  // Valeur de base
+  let coins = 10
+
+  if (turnCount === 1) {
+    return 1
+  }
+
+  // Bonus si la partie est gagnée
+  if (gameWon) {
+    coins += 20
+  }
+
+  // Bonus en fonction du nombre de tours (logique simpliste)
+  if (turnCount > 10) {
+    coins += Math.floor((turnCount - 10) * 0.5) // Bonus de +0.5 coin par tour au-dessus de 10
+  }
+
+  // Bonus/malus selon le mode de jeu
+  switch (gameMode) {
+    case 'ranked':
+      coins += 10
+      break
+    case 'custom':
+      // Custom : moins de coins, par exemple
+      coins -= 5
+      break
+    default:
+      // Ex: casual, normal, etc.
+      break
+  }
+
+  // Bonus si c'est la première partie de la journée
+  if (isFirstGameOfDay) {
+    coins += 5
+  }
+
+  // Bonus si c'est la première victoire de la journée
+  if (gameWon && isFirstWinOfDay) {
+    coins += 5
+  }
+
+  // Minimum de 0 coins
+  if (coins < 0) {
+    coins = 0
+  }
+
+  return coins
+}

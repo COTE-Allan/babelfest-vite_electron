@@ -3,8 +3,6 @@
 .card {
   margin: 5px;
 
-
-
   &-selected {
     transform: translateY(-30px);
     // height: 200px;
@@ -25,6 +23,15 @@
 
     border-radius: 0 0 5px 0;
     font-family: 'Kimberly Bl';
+  }
+
+  &-alternates {
+    position: absolute;
+    background-color: black;
+    padding: 5px;
+    bottom: 0;
+    // right: 0;
+    color: rgb(231, 192, 16);
   }
 
   &-unusable {

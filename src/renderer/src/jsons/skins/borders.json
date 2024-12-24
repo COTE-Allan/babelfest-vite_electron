@@ -23,12 +23,6 @@
     "author": "Spait"
   },
   {
-    "url": "./skins/borders/cadre_alpha.png",
-    "name": "Cadre Alpha",
-    "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
-    "flag": "betaTest"
-  },
-  {
     "url": "./skins/borders/cadre_clem_1.png",
     "name": "Perruque Clémentine",
     "unlockTip": "Débloqué pour tous en atteignant 100% sur la campagne du tome 1 d'Alternative.",
@@ -194,6 +188,19 @@
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
     "flag": "alphaTest",
     "author": "Spait"
+  },
+  {
+    "url": "./skins/borders/cadre_stressrush.png",
+    "name": "Stress Rush",
+    "unlockTip": "Offert aux participants de la période de test 'Stress Rush'",
+    "flag": "stressRush",
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/borders/cadre_alpha.png",
+    "name": "Cadre Alpha",
+    "unlockTip": "Offert aux joueurs inscrits pendant l'alpha.",
+    "flag": "betaTest"
   },
   {
     "url": "./skins/borders/cadre_season0_bronze.png",

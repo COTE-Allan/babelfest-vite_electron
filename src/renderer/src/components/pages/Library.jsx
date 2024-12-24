@@ -14,12 +14,19 @@ import {
   FaArrowRight,
   FaCamera,
   FaCopy,
+  FaLock,
   FaPen,
   FaSave,
   FaShare,
+  FaStar,
   FaTrash
 } from 'react-icons/fa'
-import { getAllCards, useSendMessage } from '../others/toolBox'
+import {
+  getAllCards,
+  getDeckWithUpdatedCosts,
+  IsDeckValid,
+  useSendMessage
+} from '../others/toolBox'
 import BackButton from '../items/BackButton'
 import LoadingLogo from '../items/LoadingLogo'
 import { AuthContext } from '../../AuthContext'
@@ -58,15 +65,54 @@ export default function Library({ editorMode, deck }) {
   const [deckCost, setDeckCost] = useState(0)
   const [showDeckOnly, setShowDeckOnly] = useState(false)
   const [shareMode, setShareMode] = useState(false)
+  const [pendingCard, setPendingCard] = useState(null)
+  const [showAlternateSelector, setShowAlternateSelector] = useState(false)
 
   // Initialize deck data if in editorMode and a valid deck is provided
   useEffect(() => {
     if (editorMode && deck) {
       setDeckName(deck.name || '')
-      setDeckCards(deck.cards || [])
-      setDeckCost(deck.cost || 0)
+      let newDeck = getDeckWithUpdatedCosts(deck)
+      setDeckCards(newDeck.cards)
+      setDeckCost(newDeck.cost)
     }
   }, [editorMode, deck])
+
+  // --- Alternates ---
+  // Permet de gérer l'index actuel d'alternate
+  const [currentAlternateIndex, setCurrentAlternateIndex] = useState(0)
+  // Tableau de toutes les images (base + alternates)
+  const [alternateImages, setAlternateImages] = useState([])
+
+  useEffect(() => {
+    if (selected) {
+      // On prend l'URL de base
+      let images = [selected.url]
+
+      // S'il existe des alternates, on ajoute leurs URLs
+      if (selected.alternates && selected.alternates.length > 0) {
+        images = [selected.url, ...selected.alternates.map((alt) => alt.url)]
+      }
+
+      // On met à jour le state
+      setAlternateImages(images)
+      setCurrentAlternateIndex(0)
+    }
+  }, [selected])
+
+  const handleNextAlternate = () => {
+    setCurrentAlternateIndex((prevIndex) => {
+      // On avance l'index en boucle (modulo la longueur)
+      return (prevIndex + 1) % alternateImages.length
+    })
+  }
+
+  const handlePrevAlternate = () => {
+    setCurrentAlternateIndex((prevIndex) => {
+      // On recule l'index en boucle (modulo la longueur)
+      return (prevIndex - 1 + alternateImages.length) % alternateImages.length
+    })
+  }
 
   const rarityOrder = [1, 2, 3, 4, 5]
   const rarityLabels = {
@@ -196,89 +242,98 @@ export default function Library({ editorMode, deck }) {
     select()
 
     if (editorMode) {
-      if (card.rarity !== 5) {
-        const isCardInDeck = deckCards.some(
-          (deckCard) => deckCard.name === card.name && deckCard.title === card.title
-        )
-
-        // Compter le nombre de cartes par rareté
-        const rarityCount = deckCards.reduce((acc, deckCard) => {
-          acc[deckCard.rarity] = (acc[deckCard.rarity] || 0) + 1
-          return acc
-        }, {})
-
-        // Enforce rarity limits
-        if (isCardInDeck) {
-          // Retirer la carte si elle est déjà dans le deck
-          setDeckCards(
-            deckCards.filter(
-              (deckCard) => deckCard.name !== card.name || deckCard.title !== card.title
-            )
-          )
-          setDeckCost(deckCost - card.cost)
-        } else {
-          // Vérifier la nouvelle contrainte pour les raretés 3 et 4
-          const numberOfRarity3 = rarityCount[3] || 0
-          const hasRarity4 = (rarityCount[4] || 0) > 0
-
-          // Si on essaie d'ajouter une carte de rareté 4
-          if (card.rarity === 4) {
-            if (numberOfRarity3 >= 2) {
-              sendMessage(
-                'Vous ne pouvez pas ajouter une carte légendaire si vous avez déjà deux cartes épiques.',
-                'warn'
-              )
-              return
-            }
-          }
-
-          // Si on essaie d'ajouter une carte de rareté 3
-          if (card.rarity === 3) {
-            if (numberOfRarity3 >= 2) {
-              sendMessage('Vous avez atteint la limite pour les cartes épiques.', 'warn')
-              return
-            }
-            if (numberOfRarity3 >= 1 && hasRarity4) {
-              sendMessage(
-                'Vous ne pouvez pas avoir à la fois deux cartes épiques et une carte légendaire.',
-                'warn'
-              )
-              return
-            }
-          }
-
-          // Vérifier les limites de chaque rareté
-          if (
-            (card.rarity === 4 && (rarityCount[4] || 0) >= 1) ||
-            (card.rarity === 2 && (rarityCount[2] || 0) >= 3)
-          ) {
-            sendMessage(
-              `Vous avez atteint la limite pour les cartes ${rarityLabels[card.rarity]}.`,
-              'warn'
-            )
-            return
-          }
-
-          // Ajouter la carte au deck si la limite n'a pas été atteinte
-          if (deckCards.length < 8) {
-            setDeckCards([
-              ...deckCards,
-              {
-                name: card.name,
-                title: card.title,
-                image: card.url,
-                rarity: card.rarity,
-                cost: card.cost
-              }
-            ])
-            setDeckCost(deckCost + card.cost)
-          }
-        }
-      } else {
+      // Les cartes Spéciales (rarity=5) ne peuvent pas être ajoutées
+      if (card.rarity === 5) {
         sendMessage('Les cartes spéciales doivent être invoquées via un effet.', 'warn')
+        return
+      }
+
+      const isCardInDeck = deckCards.some(
+        (deckCard) => deckCard.name === card.name && deckCard.title === card.title
+      )
+      // S’il y a des alternates, on passe par une fenêtre de choix
+      if (card.alternates && card.alternates.length > 0 && !isCardInDeck) {
+        setPendingCard(card)
+        setShowAlternateSelector(true)
+      } else {
+        // Pas d’alternates, on ajoute directement
+        handleAddCardToDeck(card)
       }
     } else {
+      // On est en simple mode Library (non éditeur) : on affiche la carte
       setSelected(card)
+    }
+  }
+
+  const handleAddCardToDeck = (card, altId = null) => {
+    const isCardInDeck = deckCards.some(
+      (deckCard) => deckCard.name === card.name && deckCard.title === card.title
+    )
+
+    // Compter le nombre de cartes par rareté
+    const rarityCount = deckCards.reduce((acc, deckCard) => {
+      acc[deckCard.rarity] = (acc[deckCard.rarity] || 0) + 1
+      return acc
+    }, {})
+
+    // Enforce rarity limits
+    if (isCardInDeck) {
+      // Retirer la carte si elle est déjà dans le deck
+      setDeckCards(
+        deckCards.filter((deckCard) => deckCard.name !== card.name || deckCard.title !== card.title)
+      )
+      setDeckCost(deckCost - card.cost)
+    } else {
+      const numberOfRarity3 = rarityCount[3] || 0
+      const hasRarity4 = (rarityCount[4] || 0) > 0
+
+      // Vérifs légendaires/épiques (règles personnalisées)
+      if (card.rarity === 4 && numberOfRarity3 >= 2) {
+        sendMessage(
+          'Vous ne pouvez pas ajouter une carte légendaire si vous avez déjà deux cartes épiques.',
+          'warn'
+        )
+        return
+      }
+      if (card.rarity === 3) {
+        if (numberOfRarity3 >= 2) {
+          sendMessage('Vous avez atteint la limite pour les cartes épiques.', 'warn')
+          return
+        }
+        if (numberOfRarity3 >= 1 && hasRarity4) {
+          sendMessage(
+            'Vous ne pouvez pas avoir à la fois deux cartes épiques et une carte légendaire.',
+            'warn'
+          )
+          return
+        }
+      }
+
+      // Vérifs limites
+      if (card.rarity === 4 && (rarityCount[4] || 0) >= 1) {
+        sendMessage(`Vous avez atteint la limite pour les cartes Légendaires.`, 'warn')
+        return
+      }
+      if (card.rarity === 2 && (rarityCount[2] || 0) >= 3) {
+        sendMessage(`Vous avez atteint la limite pour les cartes Rares.`, 'warn')
+        return
+      }
+
+      // Ajouter la carte au deck si la limite n'a pas été atteinte
+      if (deckCards.length < 8) {
+        setDeckCards([
+          ...deckCards,
+          {
+            name: card.name,
+            title: card.title,
+            image: card.url, // ou l’URL d’alternate si besoin
+            rarity: card.rarity,
+            cost: card.cost,
+            altId: altId // On stocke l’altId (ou null si c’est la base)
+          }
+        ])
+        setDeckCost(deckCost + card.cost)
+      }
     }
   }
 
@@ -655,6 +710,11 @@ export default function Library({ editorMode, deck }) {
                                     {card.cost}
                                   </div>
                                 )}
+                                {card.alternates && (
+                                  <div className="card-alternates">
+                                    <FaStar scale={20} />
+                                  </div>
+                                )}
                                 <img
                                   id={`card-img-${card.id}`}
                                   className="library-list-item-img"
@@ -907,6 +967,24 @@ export default function Library({ editorMode, deck }) {
                     </>
                   )}
                   {selected.explaination && <p>{selected.explaination}</p>}
+                  {selected.alternates && selected.alternates.length > 0 && (
+                    <div className="alternates">
+                      <hr />
+                      <h3>
+                        <FaStar size={25} /> Alternates
+                      </h3>
+                      <div className="alternates-controller">
+                        <HudNavLink onClick={handlePrevAlternate}>
+                          <FaArrowLeft size={25} />
+                          <span className="hidden-span">Précedente</span>
+                        </HudNavLink>
+                        <HudNavLink onClick={handleNextAlternate}>
+                          <span className="hidden-span">Suivante</span>
+                          <FaArrowRight size={25} />
+                        </HudNavLink>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <Tilt
                   glareEnable={true}
@@ -921,7 +999,7 @@ export default function Library({ editorMode, deck }) {
                 >
                   <div className="img-container">
                     <img
-                      src={selected.url}
+                      src={alternateImages[currentAlternateIndex]}
                       alt={`détails de la carte ${selected.name} de la collection ${selected.collection}`}
                     />
                   </div>
@@ -963,6 +1041,69 @@ export default function Library({ editorMode, deck }) {
                   Oui, je suis sûr
                 </Button>
                 <Button onClick={() => setConfirmDelete(false)}>Annuler</Button>
+              </div>
+            </Modal>
+          )}
+
+          {editorMode && showAlternateSelector && pendingCard && (
+            <Modal>
+              <div className="alternates-selector">
+                <h2>Choisir une Alternate</h2>
+
+                <div className="alternates-selector-list">
+                  {/* Bouton version de base */}
+                  <div
+                    className="alternates-selector-item"
+                    onMouseEnter={hover}
+                    onClick={() => {
+                      handleAddCardToDeck(pendingCard, null)
+                      setShowAlternateSelector(false)
+                      setPendingCard(null)
+                      select()
+                    }}
+                  >
+                    <img src={pendingCard.url} alt="Base" />
+                  </div>
+
+                  {/* Liste des alternates */}
+                  {pendingCard.alternates.map((alt) => (
+                    <div
+                      key={alt.altId}
+                      className={`alternates-selector-item ${userInfo.alternates.includes(alt.altId) ? '' : 'locked'}`}
+                      onMouseEnter={hover}
+                      onClick={() => {
+                        if (!userInfo.alternates.includes(alt.altId)) return
+                        handleAddCardToDeck(
+                          {
+                            ...pendingCard,
+                            url: alt.url
+                          },
+                          alt.altId
+                        )
+                        setShowAlternateSelector(false)
+                        setPendingCard(null)
+                        select()
+                      }}
+                    >
+                      <img src={alt.url} alt={alt.altId} />
+                      {!userInfo.alternates.includes(alt.altId) && (
+                        <FaLock className="lock" size={50} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <HudNavLink
+                  onClick={() => {
+                    // Annuler
+                    setShowAlternateSelector(false)
+                    setPendingCard(null)
+                  }}
+                  className="close"
+                >
+                  <span className="hidden-span">Fermer</span>
+                  <ImCross size={40} color="#e62e31" />
+                </HudNavLink>
               </div>
             </Modal>
           )}

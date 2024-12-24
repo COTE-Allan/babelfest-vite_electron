@@ -20,6 +20,7 @@ import LoadingLogo from '../items/LoadingLogo'
 import { PiCards } from 'react-icons/pi'
 import { TbCardsFilled } from 'react-icons/tb'
 import DeckBuilder from './DeckBuilder'
+import { GiCoins, GiTwoCoins } from 'react-icons/gi'
 
 export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPage }) {
   const [page, setPage] = useState(defaultPage)
@@ -49,6 +50,11 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
                 <LeaderboardPlayerBanner user={customizedUserInfo ?? userInfo} />
                 <ExperienceBar customUserInfo={userInfo} />
               </div>
+              {isMine && (
+                <span className="profileDisplayer-user-coinsAmount">
+                  <GiTwoCoins size={30} /> {userInfo.stats.coins}
+                </span>
+              )}
               {!isMine && (
                 <div className="profileDisplayer-user-controller">
                   <HonorButton targetUser={userInfo} targetUserId={userInfo.id} />

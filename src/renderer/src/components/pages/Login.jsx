@@ -164,11 +164,12 @@ const Login = () => {
           honor: 0,
           honored: { quantity: 0, timestamp: 0 },
           level: 1,
-          xp: 0
+          xp: 0,
+          coins: 0
         },
         achievements: [],
         matchSummaries: [],
-        flags: ['betaTest']
+        flags: ['betaTest', 'stressRush']
       })
 
       await sendEmailVerification(user)

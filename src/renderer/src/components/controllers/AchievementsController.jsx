@@ -29,7 +29,6 @@ const checkObjective = (objective, userInfo, playerStats, gameData, winner) => {
 
   if (objective.stat) {
     value = getNestedValue(playerStats, objective.stat)
-    console.log(objective, value, objective.value, value >= objective.value)
     if (value !== undefined) {
       return value >= objective.value
     }

@@ -14,6 +14,9 @@ import { getArenaPattern, getRandomPattern, useSendMessage } from '../others/too
 import { IoMdSettings } from 'react-icons/io'
 import ArenaPicker from '../others/ArenaPicker'
 
+// >>> Assure-toi d’importer IsDeckValid au bon endroit <<<
+import { IsDeckValid } from '../others/toolBox'
+
 const Lobby = () => {
   const { lobbyId } = useParams()
   const [lobbyData, setLobbyData] = useState(null)
@@ -21,18 +24,21 @@ const Lobby = () => {
   const [player2, setPlayer2] = useState(null)
   const [selectedDeck, setSelectedDeck] = useState(null)
   const [mapChoice, setMapChoice] = useState(false)
-  const [selectedMaps, setSelectedMaps] = useState([]) // État pour gérer plusieurs arènes sélectionnées
+  const [selectedMaps, setSelectedMaps] = useState([])
 
   const { user, userInfo } = useContext(AuthContext)
   const leaveLobby = useLeaveLobby()
   const createGame = useCreateGame()
   const navigate = useNavigate()
   const location = useLocation()
-  let isSpectator = location.state?.spectator ?? false
+
+  const isSpectator = location.state?.spectator ?? false
   const deckFromState = location.state?.deck ?? null // Récupérer le deck depuis le state
   const sendMessage = useSendMessage()
 
-  // Fetch lobby and listen for changes
+  // ================================================
+  // FETCH LOBBY
+  // ================================================
   useEffect(() => {
     if (!lobbyId) return
 
@@ -45,11 +51,12 @@ const Lobby = () => {
         navigate('/lobbyList')
       }
     })
-
     return () => unsubscribe()
   }, [lobbyId])
 
-  // Set player info
+  // ================================================
+  // FETCH PLAYERS
+  // ================================================
   useEffect(() => {
     let unsubscribeJ1, unsubscribeJ2
 
@@ -78,9 +85,11 @@ const Lobby = () => {
     }
   }, [lobbyData])
 
-  const isUserHost = user && user.uid === lobbyData?.j1?.id // Only player 1 is the host
+  // ================================================
+  // UTILS & VARIABLES
+  // ================================================
+  const isUserHost = user && user.uid === lobbyData?.j1?.id // Seul le joueur 1 est l'hôte
 
-  // Update local state from lobbyData
   const deckType = lobbyData?.deckType || 'random'
   const cardsPerHand = lobbyData?.cardsPerHand || 8
   const anyPlayerReady = lobbyData?.readyj1 || lobbyData?.readyj2
@@ -88,24 +97,23 @@ const Lobby = () => {
     (user.uid === player1?.id && lobbyData?.readyj1) ||
     (user.uid === player2?.id && lobbyData?.readyj2)
 
-  // Handle deckType change
+  // ================================================
+  // FONCTIONS D’UPDATE
+  // ================================================
   const handleDeckTypeChange = async (newDeckType) => {
-    if (!isUserHost || anyPlayerReady) return // Only the host can change the deck type when no one is ready
-
+    if (!isUserHost || anyPlayerReady) return // L’hôte seulement peut changer le type de deck si personne n’est prêt
     const lobbyRef = doc(db, 'lobbies', lobbyId)
     await updateDoc(lobbyRef, { deckType: newDeckType })
   }
 
-  // Handle cardsPerHand change
   const handleCardsPerHandChange = async (value) => {
     if (!isUserHost || anyPlayerReady) return
-
     const lobbyRef = doc(db, 'lobbies', lobbyId)
     await updateDoc(lobbyRef, { cardsPerHand: value })
   }
 
-  // Toggle "ready" status based on deckType
   const toggleReady = async () => {
+    // Dans le cas d’un deck construit, on force l’utilisateur à choisir un deck
     if (deckType === 'constructed' && !selectedDeck) {
       sendMessage('Veuillez choisir un deck avant de vous déclarer prêt.', 'warn')
       return
@@ -135,7 +143,9 @@ const Lobby = () => {
     )
   }
 
-  // Automatically set player as ready if gamemode is not 'custom'
+  // ================================================
+  // AUTO-READY SI GAMEMODE != 'custom'
+  // ================================================
   useEffect(() => {
     const autoReady = async () => {
       if (lobbyData && lobbyData.gamemode !== 'custom') {
@@ -143,9 +153,9 @@ const Lobby = () => {
         const updatePayload = {}
 
         if (user.uid === player1?.id && !lobbyData.readyj1) {
-          updatePayload.readyj1 = deckFromState || true // Définir readyj1 avec le deck
+          updatePayload.readyj1 = deckFromState || true
         } else if (user.uid === player2?.id && !lobbyData.readyj2) {
-          updatePayload.readyj2 = deckFromState || true // Définir readyj2 avec le deck
+          updatePayload.readyj2 = deckFromState || true
         }
 
         if (Object.keys(updatePayload).length > 0) {
@@ -156,20 +166,23 @@ const Lobby = () => {
     autoReady()
   }, [lobbyData, user.uid, player1, player2])
 
-  // Start the game when both players are ready
+  // ================================================
+  // START GAME SI LES DEUX JOUEURS SONT PRÊTS
+  // ================================================
   useEffect(() => {
     const startGame = async () => {
       const arenas = getArenaPattern()
+
       if (lobbyData && lobbyData.readyj1 && lobbyData.readyj2 && isUserHost && !lobbyData.gameRef) {
         let mapPattern
         if (selectedMaps.length === 0 || selectedMaps.length === arenas.length) {
-          // Aucune arène sélectionnée ou toutes sont sélectionnées, choisir aléatoirement parmi toutes
+          // Aucune arène sélectionnée ou toutes sélectionnées → aléatoire global
           mapPattern = getRandomPattern()
         } else if (selectedMaps.length === 1) {
-          // Une seule arène sélectionnée, l'utiliser
+          // Une seule arène → on l’utilise
           mapPattern = selectedMaps[0].pattern
         } else {
-          // Plusieurs arènes sélectionnées, en choisir une aléatoirement parmi celles-ci
+          // Plusieurs arènes → on en choisit une aléatoirement
           const randomIndex = Math.floor(Math.random() * selectedMaps.length)
           mapPattern = selectedMaps[randomIndex].pattern
         }
@@ -191,7 +204,7 @@ const Lobby = () => {
           lobbyData.readyj2, // Deck du joueur 2
           lobbyData.deckType ?? 'constructed'
         )
-        // Update the lobby with the gameRef
+        // Mettre à jour le lobby avec la référence de la game créée
         const lobbyRef = doc(db, 'lobbies', lobbyId)
         await updateDoc(lobbyRef, { gameRef: gameRef.id })
       }
@@ -199,7 +212,9 @@ const Lobby = () => {
     startGame()
   }, [lobbyData, isUserHost, selectedMaps])
 
-  // Navigate to game when gameRef is set
+  // ================================================
+  // NAVIGUER VERS /game/ LORSQUE gameRef EST SET
+  // ================================================
   useEffect(() => {
     if (lobbyData && lobbyData.gameRef) {
       const gameRef = doc(db, 'games', lobbyData.gameRef)
@@ -215,6 +230,9 @@ const Lobby = () => {
     }
   }, [lobbyData])
 
+  // ================================================
+  // RENDER
+  // ================================================
   if (!lobbyData) {
     return <div>Chargement du lobby...</div>
   }
@@ -237,10 +255,9 @@ const Lobby = () => {
             </h3>
             <hr />
 
-            {/* Settings visible to the host */}
+            {/* Paramètres réservés à l’hôte */}
             {isUserHost && !isSpectator && (
               <>
-                {/* Deck Type Selection */}
                 <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                   <span>Type de deck :</span>
                   <select
@@ -253,7 +270,6 @@ const Lobby = () => {
                   </select>
                 </div>
 
-                {/* Number of Cards Per Hand if in "random" mode */}
                 {deckType === 'random' && (
                   <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                     <span>Nombre de cartes en main : {cardsPerHand}</span>
@@ -273,19 +289,18 @@ const Lobby = () => {
                   </div>
                 )}
 
-                {/* Map Selection */}
                 <div className={`lobby-settings-item ${anyPlayerReady && 'disabled'}`}>
                   <Button onClick={() => setMapChoice(true)} disabled={anyPlayerReady}>
                     Arène actuelle :{' '}
                     {selectedMaps.length === 0
                       ? 'Aléatoire'
-                      : selectedMaps.length + ' arènes sélectionnées'}
+                      : `${selectedMaps.length} arène(s) sélectionnée(s)`}
                   </Button>
                 </div>
               </>
             )}
 
-            {/* Deck Selection for all players if in "constructed" mode */}
+            {/* Sélection de deck pour tout le monde si c’est un deck construit */}
             {deckType === 'constructed' && !isSpectator && (
               <div className={`lobby-settings-item ${userIsReady && 'disabled'}`}>
                 <span>Choisir un deck :</span>
@@ -297,11 +312,17 @@ const Lobby = () => {
                   disabled={userIsReady}
                 >
                   <option value="">Aucun deck sélectionné</option>
-                  {userInfo.decks.map((deck) => (
-                    <option key={deck.id} value={deck.id}>
-                      {deck.name}
-                    </option>
-                  ))}
+                  {
+                    // 1) On filtre les decks qui sont valides,
+                    // 2) On en génère les <option>
+                    userInfo.decks
+                      .filter((deck) => IsDeckValid(deck))
+                      .map((deck) => (
+                        <option key={deck.id} value={deck.id}>
+                          {deck.name}
+                        </option>
+                      ))
+                  }
                 </select>
                 {(!userInfo.decks || userInfo.decks.length === 0) && (
                   <span className="alert">Créez un deck depuis votre profil !</span>

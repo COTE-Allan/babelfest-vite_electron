@@ -258,6 +258,14 @@
     "basedep": 2,
     "basehp": 3,
     "url": "./cards/renfort/babelfest_renfort11.png",
+    "alternates": [
+      {
+        "altId": "renf11-alt-1",
+        "url": "./cards/alternates/babelfest_renfort11-2.png",
+        "artist": "Antoine Bordon",
+        "cost": 500
+      }
+    ],
     "rarity": 2,
     "cost": 5,
     "collection": "Renfort",

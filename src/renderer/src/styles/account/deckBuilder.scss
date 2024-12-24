@@ -57,7 +57,10 @@
       height: 100px;
       border-radius: 10px;
       transition: background-color 150ms ease-in-out;
-
+      &.invalid {
+        border-color: rgb(218, 25, 25);
+        color: rgb(218, 25, 25);
+      }
       &:hover {
         background-color: rgba(255, 255, 255, 0.3);
         cursor: url('../../assets/svg/pointer.svg'), auto;

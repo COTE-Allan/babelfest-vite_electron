@@ -10,6 +10,7 @@ import selectSfx from '../../assets/sfx/menu_select.wav'
 import useSound from 'use-sound'
 import baseDecks from '../../jsons/decks.json'
 import { getCardsBasedOnMultipleInfos, getTotalCost } from '../effects/basics'
+import { IsDeckValid } from '../others/toolBox'
 
 export default function DeckBuilder() {
   const [deckBuilderOn, setDeckBuilderOn] = useState(false)
@@ -40,7 +41,7 @@ export default function DeckBuilder() {
         {userInfo.decks.map((deck) => (
           <div
             key={deck.name}
-            className="deckBuilder-list-deck"
+            className={`deckBuilder-list-deck ${IsDeckValid(deck) ? '' : 'invalid'}`}
             onMouseEnter={hover}
             onClick={() => {
               select()

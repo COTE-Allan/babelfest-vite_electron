@@ -517,9 +517,19 @@ export function randomEffect(target, index) {
 
 export function getCardsFromArray(cardsArray) {
   return cardsArray.map((cardInfo) => {
-    const { name, title } = cardInfo
+    const { name, title, altId } = cardInfo
+    console.log(name, altId)
     let card = getCardBasedOnNameAndTitle({ name, title })
     card.uniqueID = generateUniqueID()
+
+    // Si on possède un altId, on recherche l’alternate correspondante
+    if (altId && card.alternates && card.alternates.length > 0) {
+      const foundAlt = card.alternates.find((a) => a.altId === altId)
+      if (foundAlt) {
+        card.url = foundAlt.url
+      }
+    }
+
     return card
   })
 }
