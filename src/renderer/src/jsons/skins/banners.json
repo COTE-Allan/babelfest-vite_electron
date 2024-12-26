@@ -195,5 +195,11 @@
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
     "flag": "alphaTest",
     "author": "ChouetteBlancheRoliste & Seilongk"
+  },
+  {
+    "url": "./skins/banners/banner_patreon_month_2.png",
+    "name": "Patreon fidèle",
+    "unlockTip": "Offert aux abonnés Patreons pour deux mois d'abonnements.",
+    "flag": "patreon-month-1"
   }
 ]

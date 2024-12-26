@@ -95,6 +95,12 @@
   }
 
   &-list {
+    &-wrapper {
+      overflow-y: auto;
+      height: 85%;
+      padding: 0 10px;
+    }
+
     &-item {
       margin: 5px;
       @include greyBorders();
@@ -150,5 +156,14 @@
   .color-div {
     height: 100%;
     width: 100%;
+  }
+
+  &-content {
+    height: 100%;
+  }
+
+  & .css-transition {
+    // height: 100%;
+    overflow: hidden;
   }
 }

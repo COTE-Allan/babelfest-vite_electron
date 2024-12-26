@@ -779,6 +779,7 @@
     "basehp": 3,
     "url": "./cards/series/babelfest_2024series30.png",
     "rarity": 3,
+    "cost": 11,
     "collection": "Série Infinie",
     "year": 2024,
     "author": "Brazmat",

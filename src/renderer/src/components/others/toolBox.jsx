@@ -33,40 +33,62 @@ import changelog from '../../jsons/changelog.json'
 const borders = bordersData.map((item, index) => ({
   ...item,
   id: `border-${index}`,
-  type: 'Bordure'
+  type: 'Cadre',
+  category: getSkinCategory(item)
 }))
 
 const colors = colorsData.map((item, index) => ({
   ...item,
   id: `color-${index}`,
-  type: 'Couleur'
+  type: 'Couleur',
+  category: getSkinCategory(item)
 }))
 
 const banner = bannerData.map((item, index) => ({
   ...item,
   id: `banner-${index}`,
-  type: 'Bannière'
+  type: 'Bannière',
+  category: getSkinCategory(item)
 }))
 
 const avatar = avatarData.map((item, index) => ({
   ...item,
   id: `avatar-${index}`,
-  type: 'Avatar'
+  type: 'Avatar',
+  category: getSkinCategory(item)
 }))
 
 const title = titleData.map((item, index) => ({
   ...item,
   id: `title-${index}`,
-  type: 'Titre'
+  type: 'Titre',
+  category: getSkinCategory(item)
 }))
 
 const prestige = prestigeData.map((item, index) => ({
   ...item,
   id: `prestige-${index}`,
-  type: 'Prestige'
+  type: 'Prestige',
+  category: getSkinCategory(item)
 }))
 
 const allSkins = [...borders, ...colors, ...banner, ...avatar, ...title, ...prestige]
+
+function getSkinCategory(item) {
+  if (item.level != null) {
+    return 'Niveaux'
+  } else if (item.achievement) {
+    return 'Succès'
+  } else if (item.flag) {
+    return 'Spéciaux'
+  } else if (item.rankedReward) {
+    return 'Classé'
+  } else if (item.shopFlag) {
+    return 'Boutique'
+  } else {
+    return 'Basiques'
+  }
+}
 
 import useSound from 'use-sound'
 import errorSfx from '../../assets/sfx/menu_unauthorized.mp3'
@@ -621,8 +643,9 @@ export function isUnlocked(item, userInfo) {
   let achievementCondition = item.achievement
     ? userInfo.achievements && userInfo.achievements.includes(item.achievement)
     : true
+  let isShopBuy = item.shopFlag ? userInfo.shopFlags.includes(item.shopFlag) : true
 
-  return levelCondition && flagCondition && achievementCondition
+  return levelCondition && flagCondition && achievementCondition && isShopBuy
 }
 
 export function isCardMine(card, pattern, playerID) {
@@ -793,7 +816,8 @@ export function createUserInfo(userData, decks = null, email = null, id = null, 
     matchSummaries: userData.matchSummaries || [],
     decks,
     pastSeasons: pastSeasons || [],
-    alternates: userData.alternates || []
+    alternates: userData.alternates || [],
+    shopFlags: userData.shopFlags || []
   }
 }
 
@@ -892,4 +916,8 @@ export function getAllAlternates() {
   // Retourne un simple array contenant tous les 'alternates',
   // chacun enrichi des champs "parentName" et "parentTitle"
   return allAlternates
+}
+
+export function getAllShopSkin() {
+  return allSkins.filter((skin) => skin.shopFlag != null)
 }

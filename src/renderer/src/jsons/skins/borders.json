@@ -246,5 +246,13 @@
       "id": "s1_alpha",
       "rankNeeded": 5
     }
+  },
+  {
+    "url": "./skins/borders/cadre_luxueux.png",
+    "name": "Luxueux",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "border_luxe",
+    "cost": 100,
+    "artist": "Freepik"
   }
 ]

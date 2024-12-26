@@ -25,8 +25,9 @@
   },
   {
     "name": "Plaqué Or",
-    "unlockTip": "Offert aux abonnés Patreons.",
-    "classe": "prestige-gold"
+    "unlockTip": "Offert aux abonnés Patreons pour un mois d'abonnement.",
+    "classe": "prestige-gold",
+    "flag": "patreon-month-1"
   },
   {
     "name": "Flammes du conquérant",
