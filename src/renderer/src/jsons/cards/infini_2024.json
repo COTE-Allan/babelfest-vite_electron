@@ -9,7 +9,7 @@
     "basedep": 3,
     "basehp": 3,
     "url": "./cards/series/babelfest_2024series1.png",
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "rarity": 3,
     "cost": 10,
     "year": 2024,
@@ -37,7 +37,7 @@
     "basedep": 4,
     "basehp": 1,
     "url": "./cards/series/babelfest_2024series2.png",
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "rarity": 1,
     "cost": 2,
     "year": 2024,
@@ -59,7 +59,7 @@
     "basedep": 1,
     "basehp": 1,
     "url": "./cards/series/babelfest_2024series3.png",
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "rarity": 1,
     "cost": 2,
     "year": 2024,
@@ -89,7 +89,7 @@
     "basedep": 1,
     "basehp": 4,
     "url": "./cards/series/babelfest_2024series4.png",
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "rarity": 2,
     "cost": 7,
     "year": 2024,
@@ -122,7 +122,7 @@
     "url": "./cards/series/babelfest_2024series5.png",
     "rarity": 1,
     "cost": 3,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "YunenDraws",
     "reach": 1,
@@ -144,7 +144,7 @@
     "url": "./cards/series/babelfest_2024series6.png",
     "rarity": 1,
     "cost": 1,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "RID",
     "effects": [
@@ -168,7 +168,7 @@
     "url": "./cards/series/babelfest_2024series7.png",
     "rarity": 1,
     "cost": 3,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Abuse",
     "deathCounter": 2,
@@ -196,7 +196,7 @@
     "url": "./cards/series/babelfest_2024series8.png",
     "rarity": 1,
     "cost": 2,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Haeri3rd"
   },
@@ -212,7 +212,7 @@
     "url": "./cards/series/babelfest_2024series9.png",
     "rarity": 1,
     "cost": 2,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Haeri3rd",
     "healer": true,
@@ -245,7 +245,7 @@
     "rarity": 3,
     "cost": 12,
     "shiny": "metal",
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Haeri3rd",
     "effects": [
@@ -282,7 +282,7 @@
     "url": "./cards/series/babelfest_2024series11.png",
     "rarity": 2,
     "cost": 3,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Hampoule",
     "fortress": true,
@@ -307,7 +307,7 @@
     "basedep": 4,
     "basehp": 2,
     "url": "./cards/series/babelfest_2024series12.png",
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "rarity": 2,
     "cost": 3,
     "year": 2024,
@@ -331,7 +331,7 @@
     "url": "./cards/series/babelfest_2024series13.png",
     "rarity": 2,
     "cost": 7,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "GM et NooB",
     "healer": true,
@@ -357,7 +357,7 @@
     "url": "./cards/series/babelfest_2024series14.png",
     "rarity": 1,
     "cost": 7,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Karel Barreau",
     "effects": [
@@ -386,7 +386,7 @@
     "url": "./cards/series/babelfest_2024series15.png",
     "rarity": 2,
     "cost": 4,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Kula",
     "diving": true,
@@ -410,7 +410,7 @@
     "url": "./cards/series/babelfest_2024series16.png",
     "rarity": 1,
     "cost": 3,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Thibault Deboom",
     "effects": [
@@ -434,7 +434,7 @@
     "url": "./cards/series/babelfest_2024series17.png",
     "rarity": 1,
     "cost": 6,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Gotho",
     "effects": [
@@ -466,7 +466,7 @@
     "url": "./cards/series/babelfest_2024series18.png",
     "rarity": 1,
     "cost": 2,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Eyessmanga"
   },
@@ -482,7 +482,7 @@
     "url": "./cards/series/babelfest_2024series19.png",
     "rarity": 2,
     "cost": 6,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Cielesis",
     "timerSummon": 4,
@@ -505,7 +505,7 @@
     "basehp": 6,
     "url": "./cards/series/babelfest_2024series20.png",
     "rarity": 5,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "shiny": "gold",
     "author": "Cielesis",
@@ -529,7 +529,7 @@
     "cost": 25,
     "url": "./cards/series/babelfest_2024series21.png",
     "rarity": 4,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "shiny": "gold",
     "author": "Kiba",
@@ -554,7 +554,7 @@
     "cost": 4,
     "url": "./cards/series/babelfest_2024series22.png",
     "rarity": 2,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Kiba",
     "effects": [
@@ -579,7 +579,7 @@
     "basehp": 1,
     "url": "./cards/series/babelfest_2024series23.png",
     "rarity": 5,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Kiba",
     "effects": [
@@ -607,11 +607,19 @@
     "basehp": "?",
     "url": "./cards/series/babelfest_2024series24.png",
     "rarity": 3,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "cost": 13,
     "author": "Ayuumiko",
     "reach": 1,
+    "alternates": [
+      {
+        "altId": "inf24-24-alt-1",
+        "url": "./cards/alternates/babelfest_2024series24-2.png",
+        "author": "Ayuumiko",
+        "cost": 1000
+      }
+    ],
     "effects": [
       {
         "type": "randomHP",
@@ -629,7 +637,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Lexie",
     "title": "Justice Implacable",
     "atk": 2,
@@ -640,7 +647,7 @@
     "basehp": 3,
     "url": "./cards/series/babelfest_2024series25.png",
     "rarity": 2,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "cost": 6,
     "author": "Hedrick",
@@ -658,7 +665,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Astrid",
     "title": "Mediatrice et espionne",
     "atk": 0,
@@ -669,7 +675,7 @@
     "basehp": 2,
     "url": "./cards/series/babelfest_2024series26.png",
     "rarity": 1,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "cost": 4,
     "author": "Abysson",
@@ -690,7 +696,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Eden Iris",
     "title": "Magical girl au cœur ardent",
     "atk": 1,
@@ -701,7 +706,7 @@
     "basehp": 3,
     "url": "./cards/series/babelfest_2024series27.png",
     "rarity": 1,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "cost": 3,
     "author": "Piku",
@@ -713,7 +718,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Neva",
     "title": "Championne Nivale",
     "atk": 0,
@@ -724,14 +728,14 @@
     "basehp": 3,
     "url": "./cards/series/babelfest_2024series28.png",
     "rarity": 3,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "cost": 11,
     "author": "Xyphias_",
     "effects": [
       {
         "when": [3],
-        "type": "defBuff",
+        "type": "atkBuff",
         "value": 2,
         "target": "ally"
       },
@@ -745,7 +749,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Edelice",
     "title": "Fleur Nivéale",
     "atk": 2,
@@ -756,7 +759,7 @@
     "basehp": 4,
     "url": "./cards/series/babelfest_2024series29.png",
     "rarity": 5,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Xyphias_",
     "effects": [
@@ -780,7 +783,7 @@
     "url": "./cards/series/babelfest_2024series30.png",
     "rarity": 3,
     "cost": 11,
-    "collection": "Série Infinie",
+    "collection": "Série Infinie 2024",
     "year": 2024,
     "author": "Brazmat",
     "effects": [
@@ -793,6 +796,72 @@
         "when": [3],
         "type": "rageSword",
         "target": "rival"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Yasushi",
+    "title": "Allié tonitruant",
+    "atk": 2,
+    "dep": 4,
+    "hp": 1,
+    "baseatk": 2,
+    "basedep": 4,
+    "basehp": 1,
+    "url": "./cards/series/babelfest_2024series31.png",
+    "rarity": 2,
+    "cost": 4,
+    "collection": "Série Infinie 2024",
+    "year": 2024,
+    "author": "RID",
+    "effects": [
+      {
+        "when": [2],
+        "type": "depBuff",
+        "value": 2,
+        "target": "ally"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Hiroshi",
+    "title": "Feu du ciel",
+    "atk": 5,
+    "dep": 2,
+    "hp": 4,
+    "baseatk": 5,
+    "basedep": 2,
+    "basehp": 4,
+    "url": "./cards/series/babelfest_2024series32.png",
+    "rarity": 4,
+    "cost": 20,
+    "collection": "Série Infinie 2024",
+    "year": 2024,
+    "author": "RID",
+    "shiny": "gold",
+    "alternates": [
+      {
+        "altId": "inf24-32-alt-1",
+        "url": "./cards/alternates/babelfest_2024series32-2.png",
+        "author": "RID",
+        "cost": 1000
+      }
+    ],
+    "effects": [
+      {
+        "when": ["spawn"],
+        "type": "fireball",
+        "target": "every",
+        "spawnUsed": false,
+        "choice": "target"
+      },
+      {
+        "when": ["cardDeath"],
+        "byme": true,
+        "type": "flame",
+        "alreadyUsed": false
       }
     ]
   }

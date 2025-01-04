@@ -205,7 +205,7 @@
   {
     "url": "./skins/borders/cadre_season0_bronze.png",
     "name": "Babelfest en bronze",
-    "unlockTip": "Obtenu en atteignant le rang bronze en saison 0.",
+    "unlockTip": "Obtenu en atteignant le rang bronze en saison 1.",
     "rankedReward": {
       "id": "s1_alpha",
       "rankNeeded": 1
@@ -214,7 +214,7 @@
   {
     "url": "./skins/borders/cadre_season0_silver.png",
     "name": "Babelfest argenté",
-    "unlockTip": "Obtenu en atteignant le rang argent en saison 0.",
+    "unlockTip": "Obtenu en atteignant le rang argent en saison 1.",
     "rankedReward": {
       "id": "s1_alpha",
       "rankNeeded": 2
@@ -223,7 +223,7 @@
   {
     "url": "./skins/borders/cadre_season0_gold.png",
     "name": "Babelfest 24 Carats",
-    "unlockTip": "Obtenu en atteignant le rang or en saison 0.",
+    "unlockTip": "Obtenu en atteignant le rang or en saison 1.",
     "rankedReward": {
       "id": "s1_alpha",
       "rankNeeded": 3
@@ -232,7 +232,7 @@
   {
     "url": "./skins/borders/cadre_season0_diamond.png",
     "name": "Babelfest Diamantée",
-    "unlockTip": "Obtenu en atteignant le rang diamant en saison 0.",
+    "unlockTip": "Obtenu en atteignant le rang diamant en saison 1.",
     "rankedReward": {
       "id": "s1_alpha",
       "rankNeeded": 4
@@ -241,7 +241,7 @@
   {
     "url": "./skins/borders/cadre_season0_master.png",
     "name": "Babelfest Chromatique",
-    "unlockTip": "Obtenu en atteignant le rang maître en saison 0.",
+    "unlockTip": "Obtenu en atteignant le rang maître en saison 1.",
     "rankedReward": {
       "id": "s1_alpha",
       "rankNeeded": 5
@@ -253,6 +253,6 @@
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "border_luxe",
     "cost": 100,
-    "artist": "Freepik"
+    "author": "Freepik"
   }
 ]

@@ -10,25 +10,23 @@
     margin-left: auto;
   }
 
-
   &-list {
     &-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.978);
-      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
       margin: 0 10px;
       margin-bottom: 10px;
-      width: calc(50% - 20px - 20px - 6px);
+      width: 100%;
       font-family: 'Kimberly Bl', sans-serif;
-      border-radius: 15px;
+      border-radius: 5px;
+      border-width: 0 0 4px 0 !important;
       @include greyBorders();
-      height: 100px;
 
       &-infos {
         max-width: 75%;
-
         & h3 {
           margin: 0;
         }
@@ -66,9 +64,6 @@
         border-radius: 15px;
         background-color: rgba(230, 230, 230, 0.341);
       }
-
-
-
     }
   }
 
@@ -84,7 +79,6 @@
     position: absolute;
     top: 0;
     left: 0;
-
 
     &-item {
       position: relative;
@@ -152,10 +146,8 @@
           line-height: 30px;
           color: rgb(222, 222, 222);
           -webkit-text-stroke: 1px black;
-
         }
       }
-
     }
   }
 }

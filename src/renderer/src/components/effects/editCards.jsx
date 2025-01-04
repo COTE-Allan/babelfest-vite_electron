@@ -527,6 +527,7 @@ export function getCardsFromArray(cardsArray) {
       const foundAlt = card.alternates.find((a) => a.altId === altId)
       if (foundAlt) {
         card.url = foundAlt.url
+        card.author = foundAlt.author
       }
     }
 

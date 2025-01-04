@@ -201,5 +201,53 @@
     "name": "Patreon fidèle",
     "unlockTip": "Offert aux abonnés Patreons pour deux mois d'abonnements.",
     "flag": "patreon-month-1"
+  },
+  {
+    "url": "./skins/banners/banner_ame_resolue.png",
+    "name": "Ame résolue",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_rid_1",
+    "cost": 250,
+    "author": "RID"
+  },
+  {
+    "url": "./skins/banners/banner_noblesse_oblige.png",
+    "name": "Noblesse oblige",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_rid_2",
+    "cost": 250,
+    "author": "RID"
+  },
+  {
+    "url": "./skins/banners/banner_hiroshi_alt.png",
+    "name": "Hiroshi Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_rid_3",
+    "cost": 250,
+    "author": "RID"
+  },
+  {
+    "url": "./skins/banners/banner_clemween.png",
+    "name": "Clémentine la sorcière",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_clemween",
+    "cost": 250,
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/banners/banner_mandarine_alt.png",
+    "name": "Mandarine Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_mandarine_alt",
+    "cost": 250,
+    "author": "Adsanman & Clem-san"
+  },
+  {
+    "url": "./skins/banners/banner_princesse_erin.png",
+    "name": "Erin Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_erin_alt",
+    "cost": 250,
+    "author": "Ayuumiko"
   }
 ]

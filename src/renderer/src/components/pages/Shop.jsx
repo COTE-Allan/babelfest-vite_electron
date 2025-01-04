@@ -70,7 +70,7 @@ const Shop = () => {
       const filtered = skins.filter(
         (skin) =>
           skin.name.toLowerCase().includes(lowerSearch) ||
-          (skin.artist && skin.artist.toLowerCase().includes(lowerSearch))
+          (skin.author && skin.author.toLowerCase().includes(lowerSearch))
       )
       return [type, filtered]
     })
@@ -107,12 +107,12 @@ const Shop = () => {
                 <div className="search-controls">
                   <input
                     type="text"
-                    placeholder="Rechercher un alternate..."
+                    placeholder="Rechercher une carte..."
                     value={searchAlternate}
                     onChange={(e) => setSearchAlternate(e.target.value)}
                   />
                 </div>
-
+                <p>Les Alternates sont des skins pour vos cartes, équipez-les en créant un deck.</p>
                 <div className="menuShop-list">
                   {filteredAlternates.map((card) => (
                     <div
@@ -144,7 +144,7 @@ const Shop = () => {
                       <img src={card.url} alt={card.altId} />
                       <h1>{card.name}</h1>
                       <h2>{card.title}</h2>
-                      <h3>Par {card.artist}</h3>
+                      <h3>Par {card.author}</h3>
                     </div>
                   ))}
                 </div>
@@ -176,53 +176,54 @@ const Shop = () => {
                     onChange={(e) => setSearchCosmetic(e.target.value)}
                   />
                 </div>
+                <div className="menuShop-list-wrapper">
+                  {/* On parcourt les types filtrés */}
+                  {filteredShopSkinsByType.map(([type, skins]) => {
+                    // S'il n'y a aucun skin après filtrage, on saute
+                    if (!skins || !skins.length) return null
 
-                {/* On parcourt les types filtrés */}
-                {filteredShopSkinsByType.map(([type, skins]) => {
-                  // S'il n'y a aucun skin après filtrage, on saute
-                  if (!skins || !skins.length) return null
-
-                  return (
-                    <div key={type} className="menuShop-typeSection">
-                      <h2>{type}</h2>
-                      <div className="menuShop-list">
-                        {skins.map((skin) => (
-                          <div
-                            className={`menuShop-list-card ${
-                              userInfo.shopFlags.includes(skin.shopFlag) && 'sold'
-                            }`}
-                            key={skin.shopFlag}
-                            onMouseEnter={() => {
-                              if (!userInfo.shopFlags.includes(skin.shopFlag)) hover()
-                            }}
-                            onClick={() => {
-                              if (!userInfo.shopFlags.includes(skin.shopFlag)) {
-                                select()
-                                // Ici, tu peux lancer une modal “acheter ce skin”
-                                setBuyingSkin(skin)
-                              }
-                            }}
-                          >
-                            <span>
-                              {!userInfo.shopFlags.includes(skin.shopFlag) ? (
-                                <>
-                                  <GiTwoCoins size={30} /> {skin.cost}
-                                </>
-                              ) : (
-                                <>
-                                  <FaCheck size={30} /> Acheté !
-                                </>
-                              )}
-                            </span>
-                            <img src={skin.url} alt={skin.shopFlag} />
-                            <h1>{skin.name}</h1>
-                            <h3>Par {skin.artist}</h3>
-                          </div>
-                        ))}
+                    return (
+                      <div key={type} className="menuShop-typeSection">
+                        <h2>{type}</h2>
+                        <div className="menuShop-list">
+                          {skins.map((skin) => (
+                            <div
+                              className={`menuShop-list-card ${
+                                userInfo.shopFlags.includes(skin.shopFlag) && 'sold'
+                              } ${skin.type}`}
+                              key={skin.shopFlag}
+                              onMouseEnter={() => {
+                                if (!userInfo.shopFlags.includes(skin.shopFlag)) hover()
+                              }}
+                              onClick={() => {
+                                if (!userInfo.shopFlags.includes(skin.shopFlag)) {
+                                  select()
+                                  // Ici, tu peux lancer une modal “acheter ce skin”
+                                  setBuyingSkin(skin)
+                                }
+                              }}
+                            >
+                              <span>
+                                {!userInfo.shopFlags.includes(skin.shopFlag) ? (
+                                  <>
+                                    <GiTwoCoins size={30} /> {skin.cost}
+                                  </>
+                                ) : (
+                                  <>
+                                    <FaCheck size={30} /> Acheté !
+                                  </>
+                                )}
+                              </span>
+                              <img className="skin" src={skin.url} alt={skin.shopFlag} />
+                              <h1>{skin.name}</h1>
+                              <h3>Par {skin.author}</h3>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
+                </div>
               </div>
             </CSSTransition>
           )}
@@ -313,7 +314,12 @@ const Shop = () => {
             <HudNavLink
               permOpen
               onClick={() => {
-                addIdToUserList('alternates', buyingAlternate.altId, buyingAlternate.cost)
+                addIdToUserList(
+                  'alternates',
+                  buyingAlternate.altId,
+                  buyingAlternate.cost,
+                  userInfo.alternates.length
+                )
                 setBuyingAlternate(null)
               }}
             >
@@ -331,7 +337,7 @@ const Shop = () => {
       {/* Buying skin */}
       {buyingSkin && (
         <Modal className="confirmShop">
-          <div className="img-container">
+          <div className={`img-container skin-container ${buyingSkin.type}`}>
             <img src={buyingSkin.url} alt={`détails de la carte ${buyingSkin.shopFlag}`} />
           </div>
           <h1>
@@ -342,7 +348,12 @@ const Shop = () => {
             <HudNavLink
               permOpen
               onClick={() => {
-                addIdToUserList('shopFlags', buyingSkin.shopFlag, buyingSkin.cost)
+                addIdToUserList(
+                  'shopFlags',
+                  buyingSkin.shopFlag,
+                  buyingSkin.cost,
+                  userInfo.alternates.length
+                )
                 setBuyingSkin(null)
               }}
             >

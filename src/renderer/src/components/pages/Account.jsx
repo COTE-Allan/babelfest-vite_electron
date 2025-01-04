@@ -12,6 +12,8 @@ const Account = () => {
   const { userId } = useParams()
   const isMine = userId === user.uid
   const location = useLocation()
+  console.log(userInfo)
+
   async function GetUser(userId) {
     const userRef = doc(db, 'users', userId)
     const docSnap = await getDoc(userRef)
@@ -39,6 +41,7 @@ const Account = () => {
           stats: getPlayerStats(userInfo.stats),
           rank: rank
         }
+        console.log(extendedUserInfo)
         setTargetUser(extendedUserInfo)
       } else {
         await GetUser(userId) // Appeler GetUser avec await

@@ -55,7 +55,8 @@ export const useTryEffect = () => {
     areaAttack: Tactics.PluieFleche,
     grapple: Tactics.Grappin,
     diving: Tactics.Plongeon,
-    flame: Offensives.Surchauffe
+    flame: Offensives.Surchauffe,
+    fireball: Offensives.Fireball
   }
 
   const {
@@ -113,7 +114,10 @@ export const useTryEffect = () => {
 
           switch (when) {
             case 'death':
-              return effect.when.includes('death') && cell.card.uniqueID === updatedDeadCell?.card?.uniqueID
+              return (
+                effect.when.includes('death') &&
+                cell.card.uniqueID === updatedDeadCell?.card?.uniqueID
+              )
             case 'cardDeath':
               const bymeCheck = effect.byme ? killer?.card?.uniqueID === cell.card.uniqueID : true
               console.log(cell.card.name, effect.byme, bymeCheck, killer)

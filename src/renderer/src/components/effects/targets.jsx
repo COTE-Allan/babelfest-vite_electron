@@ -42,8 +42,9 @@ export function getAdjacentCells(originCell, type, pattern) {
 export function getAllCardsOnArena(originCell, type, pattern, onBase = true) {
   // Filtrer les cells en fonction du type
   return pattern.filter((cell) => {
-    if (cell.id === originCell.id || cell.card == null) return false
+    // Vérifier les conditions générales
     if (!onBase && cell.base) return false
+
     // Comparaison en fonction du type
     switch (type) {
       case 'ally':
@@ -52,6 +53,8 @@ export function getAllCardsOnArena(originCell, type, pattern, onBase = true) {
         return cell.owner !== originCell.owner && cell.owner != null
       case 'any':
         return cell.owner !== null
+      case 'every':
+        return true // Inclut toutes les cases
       default:
         return false
     }

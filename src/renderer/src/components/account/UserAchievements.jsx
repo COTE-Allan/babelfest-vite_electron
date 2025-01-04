@@ -3,7 +3,7 @@ import { getSkinsWithLevel } from '../others/toolBox'
 import '../../styles/account/userAchievements.scss'
 import achievements from '../../jsons/achievements.json'
 import { AuthContext } from '../../AuthContext'
-import { FaEye, FaEyeSlash, FaLock, FaLockOpen, FaTrophy } from 'react-icons/fa'
+import { FaCheck, FaEye, FaEyeSlash, FaLock, FaLockOpen, FaTrophy } from 'react-icons/fa'
 import { useCheckAchievementValue } from '../controllers/AchievementsController'
 import HudNavLink from '../items/hudNavLink'
 import { FaArrowTrendUp } from 'react-icons/fa6'
@@ -123,7 +123,15 @@ export default function UserAchievements({ userInfo }) {
                     <div className="achievements-list-item-infos">
                       <h3>
                         {achievement.name}{' '}
-                        {!userInfo.achievements?.includes(achievement.id) && <FaLock />}
+                        {!userInfo.achievements?.includes(achievement.id) ? (
+                          <span className="lock warning">
+                            <FaLock /> (non atteint)
+                          </span>
+                        ) : (
+                          <span className="lock green">
+                            <FaCheck /> (terminé)
+                          </span>
+                        )}
                       </h3>
                       <span>{achievement.desc}</span>
                     </div>

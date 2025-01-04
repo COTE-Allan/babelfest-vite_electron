@@ -46,5 +46,11 @@
     "unlockTip": "Offert aux joueurs qui ont grandement aidé au développement du jeu.",
     "classe": "prestige-blueAlpha",
     "flag": "alphaTest"
+  },
+  {
+    "name": "Stress Rush",
+    "unlockTip": "Un prestige rare, offert aux dix meilleurs joueurs du Stress Rush.",
+    "classe": "prestige-babel",
+    "flag": "stressRushWinner"
   }
 ]

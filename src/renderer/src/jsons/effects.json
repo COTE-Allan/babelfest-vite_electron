@@ -227,7 +227,7 @@
     "slug": "absoluteSeeingEye",
     "name": "Troisième œil absolu",
     "desc": "A l'invocation, supprimez les effets de TOUTES les cartes adjacentes.",
-    "icon": "./effects/seeingEye.png",
+    "icon": "./effects/absolutethirdeye.png",
     "type": "Pièges"
   },
   {
@@ -334,5 +334,12 @@
     "desc": "À l’invocation, cette carte augmente ses statistiques de la valeur indiquée pour chaque carte Épique (3) et Légendaire (4) adverse.",
     "icon": "./effects/cpu-shot.png",
     "type": "Buffs"
+  },
+  {
+    "slug": "fireball",
+    "name": "Boule de feu",
+    "desc": "À l’invocation, sélectionnez une case et brûlez-la. Une case brûlée inflige un dégât quand une carte se déplace dessus puis redevient normale.",
+    "icon": "./effects/fireball.png",
+    "type": "Pièges"
   }
 ]

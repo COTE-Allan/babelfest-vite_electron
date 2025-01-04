@@ -8,8 +8,10 @@
   align-items: center;
   justify-content: center;
 
-  & h1 {
+  & h1,
+  p {
     font-family: 'Kimberly Bl', sans-serif;
+    text-align: center;
   }
 
   &-typeSection h2 {
@@ -61,17 +63,33 @@
   .css-transition {
     height: 100%;
   }
+
   &-list {
-    max-height: 100%;
+    max-height: 79%;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
+    gap: 10px; /* Définit un espacement constant entre les éléments */
+    justify-content: space-between; /* Applique un espacement uniforme entre les éléments */
+    padding: 0 10px;
+    padding-top: 10px;
+    &::after {
+      content: '';
+      flex-grow: 1;
+      max-width: 10px; /* Limite la taille de l'espace fantôme */
+    }
+    &-wrapper {
+      overflow-y: auto;
+      height: 90%;
+    }
+
     &-card {
-      margin: 10px;
+      margin: 0; /* Le gap gère les marges entre éléments */
       font-family: 'Kimberly Bl', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
+
       & img {
         border: 3px solid white;
         border-radius: 5px;
@@ -79,29 +97,43 @@
         border: 3px solid transparent;
         border-radius: 5px;
         position: relative;
-        width: 200px;
+        width: 210px;
+
         &:hover {
           transform: scale(1.05);
           border: 3px solid white;
           cursor: url('../../assets/svg/pointer.svg'), auto;
           opacity: 1 !important;
         }
+
+        &.skin {
+          width: 150px;
+        }
       }
 
       &.sold {
         opacity: 0.2 !important;
+
         & img:hover {
           border: 3px solid transparent;
           transform: none;
         }
       }
 
+      &.Bannière {
+        & img {
+          width: 250px;
+        }
+      }
+
       & span {
         display: flex;
         align-items: center;
+
         & svg {
           margin-right: 5px;
         }
+
         background-color: rgba(0, 0, 0, 0.5);
         padding: 5px 30px;
         border-radius: 15px;
@@ -109,19 +141,24 @@
       }
 
       & h1 {
-        font-size: 20px;
+        font-size: 15px;
+        text-align: center;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+        width: 150px;
         margin: 0;
         margin-top: 10px;
       }
 
       & h2 {
-        font-size: 15px;
+        font-size: 13px;
         margin: 0;
       }
 
       & h3 {
         margin: 0;
-        font-size: 13px;
+        font-size: 11px;
       }
     }
   }
@@ -179,6 +216,7 @@
 
   .confirmShop {
     &-card {
+      box-shadow: rgba(255, 255, 255, 0.1) 0 0 10px;
       & img {
         width: 400px;
       }
@@ -304,5 +342,17 @@
         width: 200px;
       }
     }
+  }
+}
+
+.skin-container {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  height: 400px;
+
+  &.Bannière {
+    height: 150px;
+    width: auto;
   }
 }

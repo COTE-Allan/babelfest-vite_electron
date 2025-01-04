@@ -116,6 +116,12 @@ export default function StatsDisplayer({ user, stats }) {
               sur {achievements.length} succès obtenus
             </li>
             <li className="statsDisplayer-category-list-item">
+              <span className="statsDisplayer-category-list-item-value">
+                {user.alternates.length + user.shopFlags.length}
+              </span>
+              objets achetés
+            </li>
+            <li className="statsDisplayer-category-list-item">
               <span className="statsDisplayer-category-list-item-value">{stats.winStreak}</span>
               Série de victoires actuelle
             </li>

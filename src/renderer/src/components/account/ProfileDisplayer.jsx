@@ -28,7 +28,7 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
   const { updateUser } = useContext(AuthContext)
 
   const handleUpdateUser = async () => {
-    let updatesUserInfo = customizedUserInfo
+    let updatesUserInfo = structuredClone(customizedUserInfo)
     delete updatesUserInfo.pastSeasons
     delete updatesUserInfo.stats.defeats
     delete updatesUserInfo.stats.totalGamesPlayed
@@ -50,11 +50,11 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
                 <LeaderboardPlayerBanner user={customizedUserInfo ?? userInfo} />
                 <ExperienceBar customUserInfo={userInfo} />
               </div>
-              {isMine && (
+              {/* {isMine && (
                 <span className="profileDisplayer-user-coinsAmount">
                   <GiTwoCoins size={30} /> {userInfo.stats.coins}
                 </span>
-              )}
+              )} */}
               {!isMine && (
                 <div className="profileDisplayer-user-controller">
                   <HonorButton targetUser={userInfo} targetUserId={userInfo.id} />
@@ -71,7 +71,7 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
                     onClick={() => setCustomizedUserInfo(null)}
                     className="fade-in unsave"
                   >
-                    <span className="hidden-span">Annuler le skin</span>
+                    <span className="hidden-span">Annuler</span>
                     <ImCross size={30} />
                   </HudNavLink>
                 </div>

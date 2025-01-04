@@ -159,25 +159,6 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                         <div key={catName} className="category-block">
                           <h3>{catName}</h3>
                           <div className="customize-list">
-                            {catName === 'Basiques' && (
-                              <SkinItem
-                                key="avatar-0"
-                                type="avatar"
-                                setHoveredSkin={setHoveredSkin}
-                                skin={{
-                                  lock: false,
-                                  name: 'Rien',
-                                  unlockTip: "N'équipez aucun avatar.",
-                                  remove: true
-                                }}
-                              >
-                                <img
-                                  src={userInfo.skin.avatar}
-                                  alt="avatar actuel de l'utilisateur"
-                                  className="user-avatar"
-                                />
-                              </SkinItem>
-                            )}
                             {items.map((avatar) => (
                               <SkinItem
                                 key={avatar.id}
@@ -288,23 +269,27 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                       if (catName !== 'Basiques' && (!items || !items.length)) {
                         return null
                       }
+
                       return (
                         <div key={catName} className="category-block">
                           <h3>{catName}</h3>
                           <div className="customize-list">
                             {catName === 'Basiques' && (
                               <SkinItem
-                                key="titre-0"
+                                key="title-0"
                                 type="titre"
                                 setHoveredSkin={setHoveredSkin}
                                 skin={{
                                   lock: false,
-                                  name: 'Rien',
-                                  unlockTip: "N'équipez aucun titre.",
+                                  name: 'Niveau ' + userInfo.stats.level,
+                                  trueName: 'level',
+                                  unlockTip: 'Affichez votre niveau actuel.',
                                   remove: true
                                 }}
                               >
-                                <span className="titre">Rien</span>
+                                <div className="prestige prestige-default">
+                                  Niveau {userInfo.stats.level}
+                                </div>
                               </SkinItem>
                             )}
                             {items.map((title) => (
@@ -387,22 +372,6 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                         <div key={catName} className="category-block">
                           <h3>{catName}</h3>
                           <div className="customize-list">
-                            {catName === 'Basiques' && (
-                              <SkinItem
-                                key="color-0"
-                                type="color"
-                                setHoveredSkin={setHoveredSkin}
-                                skin={{
-                                  lock: false,
-                                  name: 'Rien',
-                                  unlockTip: "N'équipez aucune couleur.",
-                                  remove: true
-                                }}
-                              >
-                                {/* Exemple d'affichage "aucune couleur" */}
-                                <div className="color-div" style={{ background: '#bbb' }}></div>
-                              </SkinItem>
-                            )}
                             {items.map((color) => (
                               <SkinItem
                                 key={color.id}
@@ -448,7 +417,7 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                         <div key={catName} className="category-block">
                           <h3>{catName}</h3>
                           <div className="customize-list">
-                            {catName === 'Basiques' && (
+                            {catName === 'Niveaux' && (
                               <SkinItem
                                 key="prestige-0"
                                 type="prestige"
@@ -504,12 +473,16 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                 }}
               ></div>
             )}
-            <div className="details-modale-content">
-              <h2 className="skin-name">
+            <div
+              className={`details-modale-content ${hoveredSkin.type === 'Prestige' ? 'prestige' : ''}`}
+            >
+              <div
+                className={`skin-name ${hoveredSkin.type === 'Prestige' ? hoveredSkin.classe : ''}`}
+              >
                 {hoveredSkin.name}{' '}
                 {/* Si c'est débloqué ou pas : on affiche FaLock si c'est lock ? */}
                 {!hoveredSkin.lock && <FaLock />}
-              </h2>
+              </div>
               {hoveredSkin.author && <span className="skin-artist">Par {hoveredSkin.author}</span>}
               <p className="skin-unlock-method">{hoveredSkin.unlockTip}</p>
               {hoveredSkin.lock ? (
@@ -562,7 +535,7 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
     banner: skin.url,
     prestige: skin.classe,
     cadre: skin.url,
-    titre: skin.name
+    titre: skin.trueName ?? skin.name
   }
 
   const handleEnter = () => {

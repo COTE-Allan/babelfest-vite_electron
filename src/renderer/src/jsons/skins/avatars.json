@@ -219,6 +219,13 @@
     "author": "Adsanman & Clem-san"
   },
   {
+    "url": "./skins/avatars/avatar_yasushi.png",
+    "name": "Yasushi",
+    "unlockTip": "Obtenu en atteignant le niveau 88.",
+    "author": "RID",
+    "level": 88
+  },
+  {
     "url": "./skins/avatars/avatar_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
@@ -227,7 +234,7 @@
   },
   {
     "url": "./skins/avatars/avatar_tuto_2.png",
-    "name": "Tuto Confiant",
+    "name": "Tuto malfaisant",
     "unlockTip": "Obtenu en récompense du succès : 'Le meilleur joueur du monde'",
     "achievement": "HF_5win",
     "author": "Kiba"
@@ -245,5 +252,84 @@
     "unlockTip": "Obtenu en récompense du succès : 'One Punch Man'",
     "achievement": "HF_11dmg",
     "author": "Abuse"
+  },
+  {
+    "url": "./skins/avatars/avatar_clemmono.png",
+    "name": "Clémentine Monochrome",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "clem_mono",
+    "cost": 100,
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/avatars/avatar_lukasmono.png",
+    "name": "Lukas Monochrome",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "lukas_mono",
+    "cost": 100,
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/avatars/avatar_clemween.png",
+    "name": "Clémentine la sorcière",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "clem_ween_1",
+    "cost": 200,
+    "author": "Cielesis"
+  },
+  {
+    "url": "./images/tuto_rire.png",
+    "name": "Tuto confiant",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "tuto_1",
+    "cost": 100,
+    "author": "Kiba"
+  },
+  {
+    "url": "./images/tuto_regles.png",
+    "name": "Tuto et les règles",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "tuto_2",
+    "cost": 100,
+    "author": "Kiba"
+  },
+  {
+    "url": "./images/tuto_souriant.png",
+    "name": "Tuto souriant",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "tuto_3",
+    "cost": 100,
+    "author": "Kiba"
+  },
+  {
+    "url": "./skins/avatars/avatar_ava.png",
+    "name": "A.V.A",
+    "unlockTip": "Acheté en boutique.",
+    "author": "RID",
+    "shopFlag": "avatar_rid_1",
+    "cost": 100
+  },
+  {
+    "url": "./skins/avatars/avatar_azuki.png",
+    "name": "Azuki",
+    "unlockTip": "Acheté en boutique.",
+    "author": "RID",
+    "shopFlag": "avatar_rid_2",
+    "cost": 100
+  },
+  {
+    "url": "./skins/avatars/avatar_hiroshi.png",
+    "name": "Hiroshi",
+    "unlockTip": "Acheté en boutique.",
+    "author": "RID",
+    "shopFlag": "avatar_rid_3",
+    "cost": 100
+  },
+  {
+    "url": "./skins/avatars/avatar_hiroshi_alt.png",
+    "name": "Hiroshi Alternatif",
+    "unlockTip": "Obtenu en récompense du succès : 'Acheteur compulsif'",
+    "achievement": "HF_shopBuy10",
+    "author": "RID"
   }
 ]

@@ -726,6 +726,14 @@
     "collection": "Origine",
     "year": 2023,
     "author": "Woodsmen",
+    "alternates": [
+      {
+        "altId": "ori33-alt-1",
+        "url": "./cards/alternates/babelfest_origine33-2.png",
+        "author": "Cielesis",
+        "cost": 250
+      }
+    ],
     "effects": [
       {
         "when": [3],
@@ -934,13 +942,13 @@
       {
         "altId": "ori41-alt-1",
         "url": "./cards/alternates/babelfest_origine41-2.png",
-        "artist": "Cielesis",
+        "author": "Cielesis",
         "cost": 100
       },
       {
         "altId": "ori41-alt-2",
         "url": "./cards/alternates/babelfest_origine41-3.png",
-        "artist": "Cielesis",
+        "author": "Cielesis",
         "cost": 500
       }
     ],
@@ -1155,7 +1163,7 @@
       {
         "altId": "ori48-alt-1",
         "url": "./cards/alternates/babelfest_origine48-2.png",
-        "artist": "Adsanman & Clem-san",
+        "author": "Adsanman & Clem-san",
         "cost": 500
       }
     ],

@@ -119,7 +119,7 @@ export default function Cell({ active, confirmModal, cell }) {
       ${tiredClass}
       ${card && card.isRecto && card.diving ? 'diving' : ''}
       `
-  }, [card, owner, isSelected, isBase, team, player, phase, confirmModal])
+  }, [cell, card, owner, isSelected, isBase, team, player, phase, confirmModal])
 
   const bgColor = useMemo(() => {
     if (isBase) {

@@ -199,6 +199,7 @@ export default function Winner() {
       }
 
       // --- PR (Rank) ---
+      // --- PR (Rank) ---
       let prChangeValue = 0
       let newPR = playerSelf.stats?.pr || 0
 
@@ -206,6 +207,7 @@ export default function Winner() {
         prChangeValue = calculatePRChange(gameWon, currentStreak, gameMode)
         let potentialPR = newPR + prChangeValue
 
+        // Empêcher le PR de descendre en dessous de 0
         if (potentialPR < 0) {
           prChangeValue = -newPR
           newPR = 0

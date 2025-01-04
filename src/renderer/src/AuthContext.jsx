@@ -382,7 +382,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const addIdToUserList = async (field, itemId, coinsCost = 0) => {
+  const addIdToUserList = async (field, itemId, coinsCost = 0, amountOfItemBuyed) => {
     if (!user) {
       console.error('Aucun utilisateur connecté.')
       return
@@ -448,6 +448,7 @@ export const AuthProvider = ({ children }) => {
       // 6. Message de succès
       sendMessage?.(coinsCost > 0 ? `Achat réussi !` : `Récompense obtenue.`, 'success')
       if (coinsCost > 0) await giveAchievement('HF_shopBuy')
+      if (amountOfItemBuyed + 1 >= 10) await giveAchievement('HF_shopBuy10')
     } catch (error) {
       console.error(`Erreur lors de l’ajout de l’ID "${itemId}" à "${field}" :`, error)
       sendMessage?.(`Erreur lors de l’ajout de "${itemId}".`, 'error')

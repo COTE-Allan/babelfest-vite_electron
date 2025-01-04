@@ -1,20 +1,22 @@
 // Card shines
 .foil .img-container {
   clip-path: url(#myClip);
-  background: linear-gradient(48deg,
-      #e3c1f45d,
-      #d9d7ed5d,
-      #dff7f15d,
-      #acf0ff5d,
-      #e3c1f45d,
-      #d9d7ed5d,
-      #dff7f15d,
-      #acf0ff5d,
-      #e3c1f45d,
-      #d9d7ed5d,
-      #dff7f15d,
-      #acf0ff5d,
-      #e3c1f45d);
+  background: linear-gradient(
+    48deg,
+    #e3c1f45d,
+    #d9d7ed5d,
+    #dff7f15d,
+    #acf0ff5d,
+    #e3c1f45d,
+    #d9d7ed5d,
+    #dff7f15d,
+    #acf0ff5d,
+    #e3c1f45d,
+    #d9d7ed5d,
+    #dff7f15d,
+    #acf0ff5d,
+    #e3c1f45d
+  );
   /* Répéter les couleurs pour doubler la longueur */
   animation: foil 2s linear infinite;
   background-size: 400% 400%;
@@ -53,10 +55,12 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(ellipse farthest-corner at right bottom,
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
         #c0c0c0 0%,
         #a8a8a8 40%,
-        transparent 80%),
+        transparent 80%
+      ),
       radial-gradient(ellipse farthest-corner at left top, #e6e6e6 0%, #b0b0b0 62.5%, #b0b0b0 100%);
 
     animation: gold-foil 5s ease-in-out infinite;
@@ -72,10 +76,12 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(ellipse farthest-corner at right bottom,
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
         #c0c0c0 0%,
         #a8a8a8 40%,
-        transparent 80%),
+        transparent 80%
+      ),
       radial-gradient(ellipse farthest-corner at left top, #e6e6e6 0%, #b0b0b0 62.5%, #b0b0b0 100%);
     animation: gold-foil 5s ease-in-out infinite;
     animation-delay: 70ms;
@@ -93,10 +99,12 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(ellipse farthest-corner at right bottom,
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
         #9f7928 0%,
         #8a6e2f 40%,
-        transparent 80%),
+        transparent 80%
+      ),
       radial-gradient(ellipse farthest-corner at left top, #d1b464 0%, #5d4a1f 62.5%, #5d4a1f 100%);
     animation: gold-foil 5s ease-in-out infinite;
     mix-blend-mode: overlay;
@@ -111,10 +119,12 @@
     height: calc(100% + 100px);
     transform: rotate(10deg);
     content: '';
-    background: radial-gradient(ellipse farthest-corner at right bottom,
+    background: radial-gradient(
+        ellipse farthest-corner at right bottom,
         #9f7928 0%,
         #8a6e2f 40%,
-        transparent 80%),
+        transparent 80%
+      ),
       radial-gradient(ellipse farthest-corner at left top, #d1b464 0%, #5d4a1f 62.5%, #5d4a1f 100%);
     animation: gold-foil 5s ease-in-out infinite;
     animation-delay: 70ms;
@@ -139,7 +149,6 @@
 }
 
 @keyframes shiner {
-
   0%,
   100% {
     filter: brightness(1) saturate(1);
@@ -170,8 +179,6 @@
   }
 }
 
-
-
 // Couleurs animés
 .rainbow {
   animation: rainbow 20s linear;
@@ -179,7 +186,6 @@
 }
 
 @keyframes rainbow {
-
   100%,
   0% {
     background-color: hsl(0, 100%, 75%);
@@ -188,7 +194,7 @@
 
   8% {
     background-color: hsl(30, 100%, 70%);
-    border-color: hsl(30, 100%, 70%)
+    border-color: hsl(30, 100%, 70%);
   }
 
   16% {
@@ -242,10 +248,8 @@
   }
 }
 
-
 .name {
   -webkit-text-stroke: 1.3px black;
-
 }
 
 .title {
@@ -273,207 +277,222 @@
     position: relative;
 
     &.prestige {
-
       &-default {
-        background:
-          white;
+        background: white;
       }
 
       &-promo {
-        background: linear-gradient(48deg,
-            #e3c1f4,
-            #d9d7ed,
-            #dff7f1,
-            #acf0ff,
-            #e3c1f4,
-            #d9d7ed,
-            #dff7f1,
-            #acf0ff,
-            #e3c1f4,
-            #d9d7ed,
-            #dff7f1,
-            #acf0ff,
-            #e3c1f4);
+        background: linear-gradient(
+          48deg,
+          #e3c1f4,
+          #d9d7ed,
+          #dff7f1,
+          #acf0ff,
+          #e3c1f4,
+          #d9d7ed,
+          #dff7f1,
+          #acf0ff,
+          #e3c1f4,
+          #d9d7ed,
+          #dff7f1,
+          #acf0ff,
+          #e3c1f4
+        );
+      }
+
+      &-babel {
+        background: linear-gradient(
+          48deg,
+          #e62e31,
+          #f06568,
+          // Une teinte plus claire de rouge
+          #40a8f5,
+          #7bc1f8,
+          // Une teinte plus claire de bleu
+          #e62e31,
+          #f06568,
+          #40a8f5,
+          #7bc1f8,
+          #e62e31
+        );
       }
 
       &-gold {
-        background: linear-gradient(48deg,
-            #f6e27a,
-            #f9c55d,
-            #e0a424,
-            #d4af37,
-            #f9c55d,
-            #f6e27a,
-            #f9c55d,
-            #d4af37,
-            #f9c55d,
-            #f6e27a);
+        background: linear-gradient(
+          48deg,
+          #f6e27a,
+          #f9c55d,
+          #e0a424,
+          #d4af37,
+          #f9c55d,
+          #f6e27a,
+          #f9c55d,
+          #d4af37,
+          #f9c55d,
+          #f6e27a
+        );
       }
 
       &-ocean {
-        background: linear-gradient(48deg,
-            #00c6ff,
-            #0072ff,
-            #00c6ff,
-            #0072ff,
-            #00c6ff,
-            #0072ff,
-            #00c6ff,
-            #0072ff);
+        background: linear-gradient(
+          48deg,
+          #00c6ff,
+          #0072ff,
+          #00c6ff,
+          #0072ff,
+          #00c6ff,
+          #0072ff,
+          #00c6ff,
+          #0072ff
+        );
       }
 
       &-forest {
-        background: linear-gradient(48deg,
-            #a8e063,
-            #56ab2f,
-            #a8e063,
-            #56ab2f,
-            #a8e063,
-            #56ab2f,
-            #a8e063,
-            #56ab2f);
+        background: linear-gradient(
+          48deg,
+          #a8e063,
+          #56ab2f,
+          #a8e063,
+          #56ab2f,
+          #a8e063,
+          #56ab2f,
+          #a8e063,
+          #56ab2f
+        );
       }
 
       &-sunset {
-        background: linear-gradient(48deg,
-            #ff6a88,
-            #ffcc00,
-            #ff6a88,
-            #ffcc00,
-            #ff6a88,
-            #ffcc00,
-            #ff6a88,
-            #ffcc00);
+        background: linear-gradient(
+          48deg,
+          #ff6a88,
+          #ffcc00,
+          #ff6a88,
+          #ffcc00,
+          #ff6a88,
+          #ffcc00,
+          #ff6a88,
+          #ffcc00
+        );
       }
 
       &-neon {
-        background: linear-gradient(48deg,
-            #f953c6,
-            #59ebf3,
-            #f953c6,
-            #59ebf3,
-            #f953c6,
-            #59ebf3,
-            #f953c6,
-            #59ebf3);
+        background: linear-gradient(
+          48deg,
+          #f953c6,
+          #59ebf3,
+          #f953c6,
+          #59ebf3,
+          #f953c6,
+          #59ebf3,
+          #f953c6,
+          #59ebf3
+        );
       }
 
       &-ice {
-        background: linear-gradient(48deg,
-            #00f260,
-            #0575e6,
-            #00f260,
-            #0575e6,
-            #00f260,
-            #0575e6,
-            #00f260,
-            #0575e6);
+        background: linear-gradient(
+          48deg,
+          #00f260,
+          #0575e6,
+          #00f260,
+          #0575e6,
+          #00f260,
+          #0575e6,
+          #00f260,
+          #0575e6
+        );
       }
 
       &-metal {
-        background: linear-gradient(48deg,
-            #bdc3c7,
-            #89a1b9,
-            #bdc3c7,
-            #89a1b9,
-            #bdc3c7,
-            #89a1b9,
-            #bdc3c7,
-            #89a1b9);
+        background: linear-gradient(
+          48deg,
+          #bdc3c7,
+          #89a1b9,
+          #bdc3c7,
+          #89a1b9,
+          #bdc3c7,
+          #89a1b9,
+          #bdc3c7,
+          #89a1b9
+        );
       }
 
       &-redAlpha {
-        background: linear-gradient(48deg,
-            #ffa5a5,
-            /* Rouge clair */
-            #ff5b5e,
-            /* Rouge un peu plus foncé */
-            #ffa5a5,
-            #ff5b5e,
-            #ffa5a5,
-            #ff5b5e,
-            #ffa5a5,
-            #ff5b5e);
+        background: linear-gradient(
+          48deg,
+          #ffa5a5,
+          /* Rouge clair */ #ff5b5e,
+          /* Rouge un peu plus foncé */ #ffa5a5,
+          #ff5b5e,
+          #ffa5a5,
+          #ff5b5e,
+          #ffa5a5,
+          #ff5b5e
+        );
       }
 
       &-blueAlpha {
-        background: linear-gradient(48deg,
-            #7bc6ff,
-            /* Bleu clair */
-            #b5d2ff,
-            /* Bleu un peu plus foncé */
-            #7bc6ff,
-            #b5d2ff,
-            #7bc6ff,
-            #b5d2ff,
-            #7bc6ff,
-            #b5d2ff);
+        background: linear-gradient(
+          48deg,
+          #7bc6ff,
+          /* Bleu clair */ #b5d2ff,
+          /* Bleu un peu plus foncé */ #7bc6ff,
+          #b5d2ff,
+          #7bc6ff,
+          #b5d2ff,
+          #7bc6ff,
+          #b5d2ff
+        );
       }
 
       &-galaxy {
-        background: linear-gradient(48deg,
-            #f8c1a1,
-            /* Rose doré clair */
-            #f9a37d,
-            /* Rose cuivré doux */
-            #e78b5e,
-            /* Or rose plus intense */
-            #d08c64,
-            /* Cuivre doré */
-            #f9a37d,
-            /* Retour au rose cuivré doux */
-            #f8c1a1,
-            /* Retour au rose doré clair */
-            #f9a37d,
-            #e78b5e,
-            #f9a37d,
-            #f8c1a1);
+        background: linear-gradient(
+          48deg,
+          #f8c1a1,
+          /* Rose doré clair */ #f9a37d,
+          /* Rose cuivré doux */ #e78b5e,
+          /* Or rose plus intense */ #d08c64,
+          /* Cuivre doré */ #f9a37d,
+          /* Retour au rose cuivré doux */ #f8c1a1,
+          /* Retour au rose doré clair */ #f9a37d,
+          #e78b5e,
+          #f9a37d,
+          #f8c1a1
+        );
       }
 
-
       &-cosmicPulse {
-        background: linear-gradient(48deg,
-            #ff33cc,
-            /* Rose néon plus vif */
-            #6666ff,
-            /* Bleu électrique plus clair */
-            #33ffcc,
-            /* Turquoise éclatant et lumineux */
-            #ffcc33,
-            /* Orange doré plus lumineux */
-            #ff33cc,
-            /* Retour au rose néon plus vif */
-            #6666ff,
-            #33ffcc,
-            #ffcc33);
+        background: linear-gradient(
+          48deg,
+          #ff33cc,
+          /* Rose néon plus vif */ #6666ff,
+          /* Bleu électrique plus clair */ #33ffcc,
+          /* Turquoise éclatant et lumineux */ #ffcc33,
+          /* Orange doré plus lumineux */ #ff33cc,
+          /* Retour au rose néon plus vif */ #6666ff,
+          #33ffcc,
+          #ffcc33
+        );
       }
 
       &-championFlame {
-        background: linear-gradient(48deg,
-            #f83600,
-            /* Orange vif */
-            #f9d423,
-            /* Jaune doré */
-            #f83600,
-            #f9d423,
-            #f83600,
-            #f9d423,
-            #f83600,
-            #f9d423);
+        background: linear-gradient(
+          48deg,
+          #f83600,
+          /* Orange vif */ #f9d423,
+          /* Jaune doré */ #f83600,
+          #f9d423,
+          #f83600,
+          #f9d423,
+          #f83600,
+          #f9d423
+        );
       }
-
     }
   }
 }
 
-
-
-
-
-
-
 @keyframes prestige_animation {
-
   0%,
   100% {
     background-position: 0 0;

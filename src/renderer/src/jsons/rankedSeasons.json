@@ -1,16 +1,9 @@
 [
   {
-    "id": "s2_alpha",
-    "name": "Saison Alpha #2",
-    "endDate": 1738364400,
-    "startDate": 1733007600,
-    "hex": "#ff795c"
-  },
-  {
     "id": "s1_alpha",
-    "name": "Saison Alpha #1",
-    "endDate": 1733007600,
+    "name": "Stress Rush",
+    "endDate": 1738364400,
     "startDate": 0,
-    "hex": "#ff795c"
+    "hex": "#40a8f5"
   }
 ]

@@ -58,6 +58,7 @@
         font-size: 20px;
         display: flex;
         align-items: center;
+        font-family: 'Kimberly Bl', sans-serif;
 
         & svg {
           margin-left: 5px;
@@ -118,7 +119,7 @@
       }
 
       &.banner {
-        width: 280px;
+        width: 270px;
         // height: 80px;
 
         & img {

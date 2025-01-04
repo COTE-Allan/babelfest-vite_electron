@@ -912,7 +912,7 @@ export function getAllAlternates() {
       })
     }
   })
-
+  allAlternates.sort((a, b) => a.cost - b.cost)
   // Retourne un simple array contenant tous les 'alternates',
   // chacun enrichi des champs "parentName" et "parentTitle"
   return allAlternates

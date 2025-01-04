@@ -15,7 +15,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
 }
 
 #root {
@@ -140,7 +139,6 @@ button:focus-visible {
     width: 100%;
     background-color: white;
   }
-
 }
 
 ::-webkit-scrollbar {
@@ -199,7 +197,6 @@ a {
 }
 
 .back-button {
-
   font-family: 'Kimberly Bl', sans-serif;
   font-size: 35px;
   background-color: rgba(122, 122, 122, 0.2);
@@ -219,7 +216,6 @@ a {
     position: relative !important;
   }
 }
-
 
 input,
 select {
@@ -305,8 +301,6 @@ select {
   animation: rotation 1s linear infinite;
 }
 
-
-
 .mobile-block {
   display: flex;
   align-items: center;
@@ -336,6 +330,10 @@ select {
   text-align: center;
 }
 
+.green {
+  color: green;
+}
+
 .disabled {
   opacity: 25%;
 
@@ -346,9 +344,7 @@ select {
 
 a:hover {
   cursor: url('../assets/svg/pointer.svg'), auto;
-
 }
-
 
 @include txt-rarities();
 @include border-rarities();
@@ -368,8 +364,6 @@ button.alert {
     color: white;
   }
 }
-
-
 
 .loadingScreen {
   position: absolute;
@@ -414,7 +408,6 @@ button.alert {
   animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation-delay: 1s;
 }
-
 
 .window {
   overflow: hidden;
@@ -510,8 +503,6 @@ button.alert {
   }
 }
 
-
-
 .cet-container {
   overflow: hidden !important;
 }
@@ -522,12 +513,9 @@ button.alert {
   animation: important 2s ease-in-out both infinite;
 }
 
-
-
 .rc-slider-handle {
   z-index: 0 !important;
 }
-
 
 /* Container pour les transitions */
 .transition-group {
@@ -594,9 +582,6 @@ button.alert {
   transform: translateX(100%);
   transition: transform 300ms ease;
 }
-
-
-
 
 .arenasList {
   height: 100%;

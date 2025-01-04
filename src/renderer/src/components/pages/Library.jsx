@@ -1072,7 +1072,10 @@ export default function Library({ editorMode, deck }) {
                       className={`alternates-selector-item ${userInfo.alternates.includes(alt.altId) ? '' : 'locked'}`}
                       onMouseEnter={hover}
                       onClick={() => {
-                        if (!userInfo.alternates.includes(alt.altId)) return
+                        if (!userInfo.alternates.includes(alt.altId)) {
+                          sendMessage('Achetez cette Alternate dans la boutique.', 'error')
+                          return
+                        }
                         handleAddCardToDeck(
                           {
                             ...pendingCard,
