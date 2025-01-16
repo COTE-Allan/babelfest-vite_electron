@@ -214,10 +214,10 @@ export function getRankProgress(pr) {
 
 export function getCoinsEarned(gameWon, turnCount, gameMode, isFirstGameOfDay, isFirstWinOfDay) {
   // Valeur de base
-  let coins = 10
+  let coins = 25
 
   if (turnCount === 1) {
-    return 1
+    return 10
   }
 
   // Bonus si la partie est gagnée
@@ -226,21 +226,13 @@ export function getCoinsEarned(gameWon, turnCount, gameMode, isFirstGameOfDay, i
   }
 
   // Bonus en fonction du nombre de tours (logique simpliste)
-  if (turnCount > 10) {
-    coins += Math.floor((turnCount - 10) * 0.5) // Bonus de +0.5 coin par tour au-dessus de 10
-  }
+
+  coins += turnCount // Bonus de +0.5 coin par tour au-dessus de 10
 
   // Bonus/malus selon le mode de jeu
   switch (gameMode) {
     case 'ranked':
       coins += 10
-      break
-    case 'custom':
-      // Custom : moins de coins, par exemple
-      coins -= 5
-      break
-    default:
-      // Ex: casual, normal, etc.
       break
   }
 

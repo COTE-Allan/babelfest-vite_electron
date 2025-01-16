@@ -106,7 +106,8 @@
         "target": "any",
         "spawnUsed": false,
         "choice": "target",
-        "base": false
+        "base": false,
+        "self": false
       }
     ]
   },
@@ -450,7 +451,8 @@
         "target": "any",
         "spawnUsed": false,
         "choice": "target",
-        "base": false
+        "base": false,
+        "self": false
       }
     ]
   },

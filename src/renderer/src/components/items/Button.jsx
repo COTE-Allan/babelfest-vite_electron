@@ -11,6 +11,7 @@ export default function Button(props) {
 
   return (
     <button
+      type={props.type ? 'submit' : 'button'}
       className={props.className}
       onClick={() => {
         select()

@@ -20,6 +20,7 @@ export const MusicProvider = ({ children }) => {
 
   useEffect(() => {
     // Mettre à jour la playlist lorsque le rôle change
+    console.log('new role', role)
     setPlaylist(
       shuffleArray(musicPlaylist.filter((music) => music.role === role || music.role === 'any'))
     )

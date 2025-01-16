@@ -1,6 +1,5 @@
 @import '../variables.scss';
 
-
 .home {
   display: flex;
   height: 100%;
@@ -41,13 +40,14 @@
       max-width: 0;
       white-space: nowrap;
       overflow: hidden;
-      transition: max-width 200ms ease-in-out, opacity 500ms ease-in-out;
+      transition:
+        max-width 200ms ease-in-out,
+        opacity 500ms ease-in-out;
       opacity: 0;
     }
 
     &:hover {
       & .home-music-wrapper {
-
         max-width: 400px;
         opacity: 1;
       }
@@ -60,7 +60,6 @@
 
       &:hover {
         cursor: url('../../assets/svg/pointer.svg'), auto;
-        ;
       }
     }
   }
@@ -85,6 +84,10 @@
 
     & h1 {
       margin-bottom: 10px;
+    }
+
+    & .logo {
+      animation: float 6s ease-in-out infinite;
     }
   }
 
@@ -128,7 +131,9 @@
       overflow-x: hidden;
       margin-top: 5px;
       font-size: 17px;
-      transition: max-height 120ms ease-in-out, width 300ms ease-in-out;
+      transition:
+        max-height 120ms ease-in-out,
+        width 300ms ease-in-out;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -139,7 +144,6 @@
         &:hover {
           text-decoration: underline;
           cursor: url('../../assets/svg/pointer.svg'), auto;
-          ;
         }
       }
     }
@@ -284,7 +288,6 @@
 
       @include for-big-desktop-up {
         font-size: 22px;
-
       }
     }
 
@@ -298,7 +301,9 @@
           width: 140px;
         }
         opacity: 0.75;
-        transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+        transition:
+          transform 200ms ease-in-out,
+          opacity 200ms ease-in-out;
 
         &:hover {
           cursor: url('../../assets/svg/pointer.svg'), auto;
@@ -308,15 +313,12 @@
       }
     }
 
-
     & img {
       width: 90px;
 
       @include for-big-desktop-up {
         width: 140px;
       }
-
-
     }
   }
 
@@ -343,11 +345,12 @@
         width: 600px;
       }
 
-
       &-item {
         flex: 33%;
         height: 100%;
-        transition: opacity 250ms ease-in-out, filter 250ms ease-in-out;
+        transition:
+          opacity 250ms ease-in-out,
+          filter 250ms ease-in-out;
         // opacity: 0.6;
         filter: grayscale(25%);
 
@@ -364,19 +367,14 @@
 
         &:nth-child(1) {
           background-color: #161616;
-
         }
 
         &:nth-child(2) {
           background-color: #7289da;
-
-
         }
 
         &:nth-child(3) {
           background-color: #ff0000;
-
-
         }
       }
     }

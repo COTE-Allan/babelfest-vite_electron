@@ -164,7 +164,8 @@ export const useTryEffect = () => {
                     item,
                     effect.target,
                     pattern,
-                    effect.base ?? true
+                    effect.base ?? true,
+                    effect.self ?? true
                   )
                   if (possibleTargets.length !== 0) {
                     await goingStandby(room, playerID === 1 ? 2 : 1, false)

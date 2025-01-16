@@ -254,5 +254,29 @@
     "shopFlag": "border_luxe",
     "cost": 100,
     "author": "Freepik"
+  },
+  {
+    "url": "./skins/borders/cadre_verdure.png",
+    "name": "Verdure",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "border_verdure",
+    "cost": 100,
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/borders/cadre_verre_trempé.png",
+    "name": "Verre Trempé",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "border_verre",
+    "cost": 100,
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/borders/cadre_flammes_ombrales.png",
+    "name": "Flammes Ombrales",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "border_flammes_ombrales",
+    "cost": 100,
+    "author": "Cielesis"
   }
 ]

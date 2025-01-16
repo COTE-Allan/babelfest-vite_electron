@@ -5,7 +5,7 @@ import '../../styles/pages/home.scss'
 import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import { useContext, useEffect, useState } from 'react'
-import { getFeaturedCards, getOnlineUsers, shuffleArray } from '../others/toolBox'
+import { getFeaturedCards, getOnlineUsers, shuffleArray, useSendMessage } from '../others/toolBox'
 import { AuthContext } from '../../AuthContext'
 import useSound from 'use-sound'
 import ClassicModal from '../items/ClassicModal'
@@ -25,6 +25,7 @@ import { useTransition } from '../../TransitionContext'
 import MusicPlayer from '../interface/musicPlayer'
 import { useMusic } from '../providers/MusicProvider'
 import { GiPriceTag } from 'react-icons/gi'
+import { ServerContext } from '../../ServerContext'
 
 const Home = () => {
   const { isPlaying } = useMusic()
@@ -50,6 +51,9 @@ const Home = () => {
       setAskForLogout(true)
     }
   }
+
+  const { serverStatus } = useContext(ServerContext)
+  const sendMessage = useSendMessage()
 
   useEffect(() => {
     setFeaturedCards(shuffleArray(getFeaturedCards()))
@@ -106,7 +110,18 @@ const Home = () => {
       <div className="home-col home-nav">
         <img src={Logo} className="logo" alt="Babelfest Logo" />
         <nav>
-          <a onClick={() => goForward('/gamemode')} onMouseEnter={hover} onMouseDown={select}>
+          <a
+            className={serverStatus !== 'online' && 'disabled'}
+            onClick={() => {
+              if (serverStatus === 'online') {
+                goForward('/gamemode')
+              } else {
+                sendMessage('Les serveurs de jeux sont actuellements désactivés.', 'error')
+              }
+            }}
+            onMouseEnter={hover}
+            onMouseDown={select}
+          >
             <FaPlay size={50} />
             Jouer
           </a>

@@ -15,6 +15,7 @@ import { getAllCards } from '../others/toolBox'
 import { drawRandomCards, generateDeck, getCardsFromArray } from '../effects/editCards'
 import { HeadOrTails } from '../effects/basics'
 import { calculateMMRChange, calculatePRChange } from '../others/xpSystem'
+import { useMusic } from '../providers/MusicProvider'
 
 // Créer un lobby et le rejoindre
 export function useCreateLobby() {
@@ -54,6 +55,7 @@ export function useJoinLobby() {
 export function useLeaveLobby() {
   const navigate = useNavigate()
   const { user, userInfo, updateUserState } = useContext(AuthContext)
+  const { setRole } = useMusic()
 
   const leaveLobby = async (
     lobbyId,
@@ -183,6 +185,7 @@ export function useLeaveLobby() {
       await batch.commit()
       await updateUserState(user)
       navigate(gamemode === 'custom' ? '/lobbyList' : '/home')
+      setRole('menu')
     } catch (error) {
       console.error('Error leaving lobby: ', error)
     }

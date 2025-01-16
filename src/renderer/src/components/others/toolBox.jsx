@@ -244,23 +244,23 @@ export function useSendMessage() {
   const [success] = useSound(successSfx, { volume: userSettings.sfxVolume })
   const [error] = useSound(errorSfx, { volume: userSettings.sfxVolume })
 
-  const sendMessage = (msg, type = 'error') => {
+  const sendMessage = (msg, type = 'error', time = 5000) => {
     switch (type) {
       case 'warn':
         info()
-        toast.warn(msg)
+        toast.warn(msg, { autoClose: time })
         break
       case 'error':
         error()
-        toast.error(msg)
+        toast.error(msg, { autoClose: time })
         break
       case 'info':
         info()
-        toast.info(msg)
+        toast.info(msg, { autoClose: time })
         break
       case 'success':
         success()
-        toast.success(msg)
+        toast.success(msg, { autoClose: time })
         break
       default:
         break

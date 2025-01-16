@@ -155,8 +155,17 @@ app.whenReady().then(() => {
     return settings
   })
 
+  ipcMain.handle('get-mail', () => {
+    const mail = store.get('mail', '')
+    return mail
+  })
+
   ipcMain.handle('is-fullscreen', () => {
     return mainWindow.isFullScreen()
+  })
+
+  ipcMain.on('save-mail', (_, mail) => {
+    store.set('mail', mail)
   })
 
   ipcMain.on('settings', (_, settings) => {

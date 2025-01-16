@@ -148,6 +148,20 @@
     "author": "Antoine Bordon"
   },
   {
+    "url": "./skins/banners/banner_jours_paisibles.png",
+    "name": "Jours Paisibles",
+    "unlockTip": "Obtenu en atteignant le niveau 74.",
+    "level": 74,
+    "author": "RID"
+  },
+  {
+    "url": "./skins/banners/banner_grondement_scintillant.png",
+    "name": "Grondement Scintillant",
+    "unlockTip": "Obtenu en atteignant le niveau 84.",
+    "level": 84,
+    "author": "RID"
+  },
+  {
     "url": "./skins/banners/banner_tuto_1.jpg",
     "name": "Tuto",
     "unlockTip": "Obtenu en récompense du succès : 'Le match du siècle'",
@@ -249,5 +263,13 @@
     "shopFlag": "banner_erin_alt",
     "cost": 250,
     "author": "Ayuumiko"
+  },
+  {
+    "url": "./skins/banners/banner_clementine_cramoisie.png",
+    "name": "Clémentine Cramoisie",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_clem_bloody",
+    "cost": 250,
+    "author": "RID"
   }
 ]

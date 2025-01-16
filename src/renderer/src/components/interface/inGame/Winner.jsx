@@ -229,7 +229,7 @@ export default function Winner() {
         isFirstWinOfDay
       )
       setCoinsGained(coins)
-
+      console.log(playerRival, playerRival.username)
       // --- MISE À JOUR DU MATCH SUMMARY ---
       const matchSummary = {
         player: {
@@ -242,7 +242,8 @@ export default function Winner() {
           gameWon: gameWon
         },
         opponent: {
-          id: playerRival.id
+          id: playerRival.id,
+          name: playerRival.username
         },
         gameDetails: {
           mode: gameData.gamemode,
@@ -251,6 +252,8 @@ export default function Winner() {
           result: gameWon ? 'victory' : 'defeat'
         }
       }
+
+      console.log(matchSummary)
 
       let updatedMatchSummaries = userInfo.matchSummaries ? [...userInfo.matchSummaries] : []
       updatedMatchSummaries.push(matchSummary)

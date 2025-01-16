@@ -13,10 +13,15 @@ import { useSendMessage } from '../others/toolBox'
 import BackButton from '../items/BackButton'
 import { useNavigate } from 'react-router-dom'
 import HudNavLink from '../items/hudNavLink'
+import { ServerContext } from '../../ServerContext'
+import { useTransition } from '../../TransitionContext'
 
 export default function LobbyList() {
   const verName = changelog.slice(-1)[0].title
   const { user, userInfo } = useContext(AuthContext)
+  const { serverStatus } = useContext(ServerContext)
+  const { goHome } = useTransition()
+
   const [lobbies, setLobbies] = useState([])
   const navigate = useNavigate()
 
@@ -30,6 +35,13 @@ export default function LobbyList() {
   const joinLobby = useJoinLobby()
   const createLobby = useCreateLobby()
   const sendMessage = useSendMessage()
+
+  useEffect(() => {
+    if (serverStatus !== 'online') {
+      sendMessage('Les serveurs sont désactivés pour le moment.', 'error')
+      goHome()
+    }
+  }, [serverStatus])
 
   const fetchLobbies = () => {
     const collectionRef = collection(db, 'lobbies')
@@ -75,7 +87,7 @@ export default function LobbyList() {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {
         joinLobby(lobbyID)
       } else {
-        handleJoinAsSpectator(lobbyID)
+        // handleJoinAsSpectator(lobbyID)
       }
     }
   }
@@ -138,7 +150,7 @@ export default function LobbyList() {
                     </HudNavLink>
                     <HudNavLink
                       onClick={() => {
-                        handleJoinAsSpectator(lobby.id)
+                        // handleJoinAsSpectator(lobby.id)
                       }}
                     >
                       <span className="hidden-span">Regarder</span>

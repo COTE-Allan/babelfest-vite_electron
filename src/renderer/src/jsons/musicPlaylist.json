@@ -35,6 +35,11 @@
     "role": "menu"
   },
   {
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1736522373/babelfest/musiques/The_Finals_-_The_Rising_Star.mp3",
+    "name": "THE FINALS - The Rising Star",
+    "role": "menu"
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726045501/babelfest/musiques/dreamer.mp3",
     "name": "Throttle - Dreamer",
     "role": "menu"
@@ -80,7 +85,7 @@
     "role": "ingame"
   },
   {
-    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1734954071/babelfest/musiques/Babelfest_OST_-_Combat_d%C3%A9tendu.mp3",
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1736189799/babelfest/musiques/Babelfest_OST_-_Combat_d%C3%A9tendu.wav",
     "name": "Babelfest OST - Combat détendu",
     "role": "ingame"
   },

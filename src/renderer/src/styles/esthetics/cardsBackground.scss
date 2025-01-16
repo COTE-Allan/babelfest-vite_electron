@@ -6,13 +6,13 @@
   overflow: hidden;
   height: 100vh;
   top: 0;
+  left: -100px;
   opacity: 25%;
   background-color: black;
 
   &-picture {
-    min-height: 100%;
-    width: 100%;
-
+    min-height: 105%;
+    width: 105%;
   }
 
   &-confettis {
@@ -20,9 +20,7 @@
     z-index: -2 !important;
     opacity: 70%;
   }
-
 }
-
 
 .card {
   // width: 100px;

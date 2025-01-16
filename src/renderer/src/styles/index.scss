@@ -330,6 +330,14 @@ select {
   text-align: center;
 }
 
+.placeholder-warning {
+  border-color: red;
+}
+.placeholder-warning::placeholder {
+  color: $red;
+  opacity: 0.8;
+}
+
 .green {
   color: green;
 }

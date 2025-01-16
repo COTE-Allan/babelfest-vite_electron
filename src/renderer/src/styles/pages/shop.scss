@@ -70,13 +70,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Définit un espacement constant entre les éléments */
-    justify-content: space-between; /* Applique un espacement uniforme entre les éléments */
+    // justify-content: space-between; /* Applique un espacement uniforme entre les éléments */
     padding: 0 10px;
     padding-top: 10px;
     &::after {
       content: '';
       flex-grow: 1;
-      max-width: 10px; /* Limite la taille de l'espace fantôme */
+      // max-width: 10px; /* Limite la taille de l'espace fantôme */
     }
     &-wrapper {
       overflow-y: auto;
@@ -89,7 +89,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      width: calc(20% - 10px);
+      margin-bottom: 30px;
       & img {
         border: 3px solid white;
         border-radius: 5px;
@@ -97,7 +98,7 @@
         border: 3px solid transparent;
         border-radius: 5px;
         position: relative;
-        width: 210px;
+        width: 100%;
 
         &:hover {
           transform: scale(1.05);
@@ -120,9 +121,39 @@
         }
       }
 
+      &.Avatar,
+      &.Cadre {
+        margin: 0 15px;
+        margin-bottom: 30px;
+        width: calc(15% - 15px);
+        & img {
+          width: 100%;
+        }
+      }
       &.Bannière {
+        width: calc(20% - 10px);
         & img {
           width: 250px;
+        }
+      }
+
+      &.Cadre {
+        & .skin {
+          &-img-container {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            & img {
+              top: 0;
+              position: absolute;
+            }
+          }
+          &-avatar {
+            z-index: 0;
+          }
+          &-main {
+            z-index: 1;
+          }
         }
       }
 

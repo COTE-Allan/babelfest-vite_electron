@@ -1,102 +1,99 @@
 .matchSummaries {
-    font-family: 'Kimberly Bl', sans-serif;
+  font-family: 'Kimberly Bl', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+
+  & .leaderboardPlayerBanner-banner {
+    max-width: 220px;
+    object-fit: cover;
+  }
+
+  &-item {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px;
+    width: calc(33% - 35px);
+    border: 2.5px transparent solid;
+    transition: border-color 150ms ease-in-out;
+    overflow: hidden;
 
-    & .leaderboardPlayerBanner-banner {
-        max-width: 220px;
-        object-fit: cover;
+    &:hover {
+      cursor: url('../../assets/svg/pointer.svg'), auto;
+      border-color: rgba(255, 255, 255, 0.505);
     }
 
-    &-item {
+    &-date {
+      margin-bottom: 10px;
+      padding: 0 10px;
+      font-size: 15px;
+    }
+
+    &-user {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      &-tags {
         display: flex;
-        flex-direction: column;
+        // flex-direction: column;
+        // width: 100px;
+        margin-right: 10px;
+      }
+
+      & span.tag {
+        font-size: 15px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 0 2.5px;
+
+        &.mode {
+          &.custom {
+            background-color: #2a6fc9;
+          }
+
+          &.quick {
+            background-color: #c9992a;
+          }
+
+          &.ranked {
+            background-color: #c9542a;
+          }
+        }
+
+        &.versus {
+          &.defeat {
+            background-color: #e62e31;
+          }
+
+          &.victory {
+            background-color: green;
+          }
+        }
+      }
+
+      .playerBanner {
         position: relative;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 15px;
-        padding: 10px;
-        margin: 5px;
-        width: calc(33% - 35px);
-        border: 2.5px transparent solid;
-        transition: border-color 150ms ease-in-out;
-        overflow: hidden;
-
-        &:hover {
-            cursor: url('../../assets/svg/pointer.svg'), auto;
-            ;
-            border-color: rgba(255, 255, 255, 0.505);
-        }
-
-        &-date {
-            margin-bottom: 10px;
-            padding: 0 10px;
-            font-size: 15px;
-        }
-
-        &-user {
-            display: flex;
-            align-items: center;
-            width: 100%;
-
-            &-tags {
-                display: flex;
-                flex-direction: column;
-                width: 100px;
-                margin-right: 10px;
-            }
-
-            & span.tag {
-                font-size: 18px;
-                padding: 5px 10px;
-                border-radius: 5px;
-                text-transform: uppercase;
-                text-align: center;
-                margin: 5px;
-
-                &.mode {
-                    &.custom {
-                        background-color: #2a6fc9;
-                    }
-
-                    &.quick {
-                        background-color: #c9992a;
-                    }
-
-                    &.ranked {
-                        background-color: #c9542a;
-
-                    }
-                }
-
-                &.versus {
-
-                    &.defeat {
-                        background-color: #e62e31;
-                    }
-
-                    &.victory {
-                        background-color: green;
-                    }
-                }
-            }
-
-            .playerBanner {
-                position: relative;
-                display: flex;
-                width: 100%;
-            }
-        }
+        display: flex;
+        width: 100%;
+      }
     }
+  }
 
-    &-container {
-        height: 90%;
-        overflow-y: auto;
+  &-container {
+    height: 90%;
+    overflow-y: auto;
 
-        & h2 {
-            font-family: 'Kimberly Bl', sans-serif;
-            font-size: 30px;
-            margin: 5px 10px;
-            margin-top: 10px;
-        }
+    & h2 {
+      font-family: 'Kimberly Bl', sans-serif;
+      font-size: 30px;
+      margin: 5px 10px;
+      margin-top: 10px;
     }
+  }
 }

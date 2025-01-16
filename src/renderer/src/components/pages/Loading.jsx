@@ -4,11 +4,13 @@ import { useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import useCheckForAchievements from '../controllers/AchievementsController'
+import { ServerContext } from '../../ServerContext'
 
 export default function Loading(params) {
   const { loading, userInfo, updateOnlineStatus, user, tryAuth } = useContext(AuthContext)
   const navigate = useNavigate()
   const checkForAchievements = useCheckForAchievements()
+  const { serverStatus } = useContext(ServerContext)
 
   async function handleUpdateOnlineStatus() {
     tryAuth()
@@ -26,6 +28,11 @@ export default function Loading(params) {
   useEffect(() => {
     const connectPlayer = async () => {
       let askToRejoin = false
+      if (serverStatus === 'offline') {
+        toast.error('Les serveurs sont fermés pour le moment.')
+        navigate('/login')
+        return
+      }
       if (user && userInfo && (userInfo?.status?.state !== 'online' || !userInfo.status)) {
         if (userInfo?.status?.state === 'disconnecting' && userInfo?.currentLobby) {
           askToRejoin = userInfo?.currentLobby.id

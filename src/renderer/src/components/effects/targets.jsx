@@ -39,11 +39,12 @@ export function getAdjacentCells(originCell, type, pattern) {
   })
 }
 
-export function getAllCardsOnArena(originCell, type, pattern, onBase = true) {
+export function getAllCardsOnArena(originCell, type, pattern, onBase = true, self = true) {
   // Filtrer les cells en fonction du type
   return pattern.filter((cell) => {
     // Vérifier les conditions générales
     if (!onBase && cell.base) return false
+    if (!self && cell.id === originCell.id) return false
 
     // Comparaison en fonction du type
     switch (type) {

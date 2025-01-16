@@ -88,8 +88,8 @@ const Shop = () => {
             <span className="hidden-span">Cosmétiques</span>
           </HudNavLink>
           <HudNavLink
-            className="prestige"
-            onClick={() => setPage(3)}
+            className="prestige disabled"
+            // onClick={() => setPage(3)}
             selected={page === 3}
             permOpen
           >
@@ -181,6 +181,7 @@ const Shop = () => {
                   {filteredShopSkinsByType.map(([type, skins]) => {
                     // S'il n'y a aucun skin après filtrage, on saute
                     if (!skins || !skins.length) return null
+                    let isBorder = type === 'Cadre'
 
                     return (
                       <div key={type} className="menuShop-typeSection">
@@ -214,7 +215,16 @@ const Shop = () => {
                                   </>
                                 )}
                               </span>
-                              <img className="skin" src={skin.url} alt={skin.shopFlag} />
+                              <div className="skin-img-container">
+                                <img
+                                  className="skin skin-main"
+                                  src={skin.url}
+                                  alt={skin.shopFlag}
+                                />
+                                {isBorder && (
+                                  <img className="skin-avatar" src={userInfo.skin.avatar} />
+                                )}
+                              </div>
                               <h1>{skin.name}</h1>
                               <h3>Par {skin.author}</h3>
                             </div>

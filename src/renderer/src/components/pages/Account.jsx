@@ -27,6 +27,8 @@ const Account = () => {
       const rank = await getPlayerRank(userId)
       userInfo.rank = rank
       setTargetUser(userInfo)
+    } else {
+      setTargetUser('nan')
     }
   }
 

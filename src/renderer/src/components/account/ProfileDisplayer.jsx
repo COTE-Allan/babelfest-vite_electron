@@ -43,7 +43,7 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
     <div className="profileDisplayer">
       <BackButton />
       <div className="profileDisplayer-wrapper">
-        {userInfo ? (
+        {userInfo && userInfo !== 'nan' ? (
           <>
             <div className="profileDisplayer-user">
               <div className="profileDisplayer-user-banner">
@@ -146,6 +146,11 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
               )}
             </TransitionGroup>
           </>
+        ) : userInfo === 'nan' ? (
+          <div className="profileDisplayer-notFound">
+            <h1 className="">Joueur introuvable</h1>
+            <h2>Ce compte à peut-être été supprimé, ou quelque chose ne va pas.</h2>
+          </div>
         ) : (
           <div className="profileDisplayer-loading">
             <LoadingLogo />

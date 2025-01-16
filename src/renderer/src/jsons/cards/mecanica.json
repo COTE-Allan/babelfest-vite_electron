@@ -204,7 +204,8 @@
         "target": "any",
         "spawnUsed": false,
         "choice": "target",
-        "base": false
+        "base": false,
+        "self": false
       }
     ]
   },
@@ -255,6 +256,14 @@
     "author": "Ciryto",
     "shiny": "gold",
     "healer": true,
+    "alternates": [
+      {
+        "altId": "mec10-alt-1",
+        "url": "./cards/alternates/babelfest_mecanica10_2.png",
+        "author": "Kiba",
+        "cost": 1000
+      }
+    ],
     "effects": [
       {
         "when": ["spawn"],

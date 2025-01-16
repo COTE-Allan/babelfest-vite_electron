@@ -9,11 +9,14 @@ import {
 import { doc, getDocs, setDoc } from 'firebase/firestore'
 
 import '../../styles/pages/home.scss'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from '../items/Button'
 import CardsBackground from '../esthetics/CardsBackground'
+import { ServerContext } from '../../ServerContext'
+import Logo from '../../assets/svg/babelfest.svg'
+import { useSendMessage } from '../others/toolBox'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -27,13 +30,19 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
   const [isRegisterMode, setIsRegisterMode] = useState(false)
   const navigate = useNavigate()
-
+  const { serverStatus } = useContext(ServerContext)
+  const sendMessage = useSendMessage()
   // Refs pour gérer le focus automatique
   const emailInputRef = useRef(null)
   const usernameInputRef = useRef(null)
 
   // Réinitialiser les erreurs et gérer le focus lors du changement de mode
   useEffect(() => {
+    window.api.invoke('get-mail').then((savedEmail) => {
+      console.log(savedEmail)
+      setEmail(savedEmail)
+    })
+
     setErrorEmail('')
     setErrorPassword('')
     setErrorConfirmPassword('')
@@ -83,6 +92,18 @@ const Login = () => {
     return valid
   }
 
+  const handleKeyPress = (e) => {
+    console.log(e.key)
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      if (isRegisterMode) {
+        handleRegister()
+      } else {
+        handleLogin()
+      }
+    }
+  }
+
   const handleFirebaseError = (errorCode) => {
     console.log(errorCode)
     switch (errorCode) {
@@ -98,6 +119,8 @@ const Login = () => {
         return 'Ce compte a été désactivé.'
       case 'auth/weak-password':
         return 'Le mot de passe est trop faible.'
+      case 'auth/too-many-requests':
+        return 'Veuillez vérifier votre email avant de vous connecter. Un nouvel email de vérification a été envoyé.'
       default:
         return 'Erreur lors de la connexion. Veuillez réessayer.'
     }
@@ -108,6 +131,10 @@ const Login = () => {
 
     setLoading(true)
     try {
+      if (serverStatus === 'offline') {
+        toast.error('Les serveurs sont fermés pour le moment.')
+        return
+      }
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
       const user = userCredential.user
 
@@ -118,6 +145,7 @@ const Login = () => {
         )
         toast.error('Veuillez vérifier votre email avant de vous connecter.')
       } else {
+        window.api.send('save-mail', email)
         toast.success('Vous êtes maintenant connecté, bonne visite !')
         setTimeout(() => {
           navigate('/')
@@ -187,7 +215,10 @@ const Login = () => {
 
   const handlePasswordReset = async () => {
     if (!email) {
-      setErrorEmail('Veuillez entrer votre adresse email pour réinitialiser votre mot de passe.')
+      sendMessage(
+        'Veuillez entrer votre adresse email pour réinitialiser votre mot de passe.',
+        'error'
+      )
       return
     }
 
@@ -206,84 +237,96 @@ const Login = () => {
 
   return (
     <div className="home fullscreen">
-      <div className="home-content">
-        <h1>{isRegisterMode ? 'Inscription' : 'Connexion'}</h1>
-        <div className="home-form">
-          {isRegisterMode && (
+      {serverStatus === 'offline' ? (
+        <div className="home-content">
+          <img src={Logo} className="logo" alt="Babelfest Logo" width={400} />
+          <h1>Les serveurs du jeu sont actuellements fermés.</h1>
+          <h2>Revenez plus tard !</h2>
+        </div>
+      ) : (
+        <div className="home-content">
+          <img src={Logo} className="logo" alt="Babelfest Logo" width={400} />
+          <h1>{isRegisterMode ? 'Inscription' : 'Connexion'}</h1>
+          <div className="home-form" onKeyDown={handleKeyPress}>
+            {isRegisterMode && (
+              <div className="home-form-input">
+                <input
+                  className={errorUsername && 'placeholder-warning'}
+                  type="text"
+                  value={username}
+                  maxLength={10} // Limite le nombre de caractères à 10
+                  onChange={(e) => {
+                    const value = e.target.value
+                    if (value.length <= 10) {
+                      setUsername(value)
+                    }
+                  }}
+                  placeholder={errorUsername ? errorUsername : "Nom d'utilisateur"}
+                  ref={usernameInputRef}
+                />
+              </div>
+            )}
             <div className="home-form-input">
               <input
-                type="text"
-                value={username}
-                maxLength={10} // Limite le nombre de caractères à 10
-                onChange={(e) => {
-                  const value = e.target.value
-                  if (value.length <= 10) {
-                    setUsername(value)
-                  }
-                }}
-                placeholder="Nom d'utilisateur"
-                ref={usernameInputRef}
+                className={errorEmail && 'placeholder-warning'}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={errorEmail ? errorEmail : 'Adresse email'}
+                ref={emailInputRef}
               />
-              {errorUsername && <div className="error-message">{errorUsername}</div>}
             </div>
-          )}
-          <div className="home-form-input">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Adresse email"
-              ref={emailInputRef}
-            />
-            {errorEmail && <div className="error-message">{errorEmail}</div>}
-          </div>
-          <div className="home-form-input">
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Mot de passe"
-            />
-            {errorPassword && <div className="error-message">{errorPassword}</div>}
-          </div>
-          {isRegisterMode && (
             <div className="home-form-input">
               <input
+                className={errorPassword && 'placeholder-warning'}
                 type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirmer le mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={errorPassword ? errorPassword : 'Mot de passe'}
               />
-              {errorConfirmPassword && <div className="error-message">{errorConfirmPassword}</div>}
             </div>
-          )}
-          <Button
-            className="home-button"
-            onClick={isRegisterMode ? handleRegister : handleLogin}
-            disabled={loading}
-          >
-            {loading ? 'Envoi en cours...' : isRegisterMode ? 'Inscription' : 'Connexion'}
-          </Button>
-          {!isRegisterMode && (
+            {isRegisterMode && (
+              <div className="home-form-input">
+                <input
+                  className={errorConfirmPassword && 'placeholder-warning'}
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder={
+                    errorConfirmPassword ? errorConfirmPassword : 'Confirmer le mot de passe'
+                  }
+                />
+              </div>
+            )}
             <Button
-              className="forgot-password-button"
-              onClick={handlePasswordReset}
+              className="home-button"
+              type="submit"
+              onClick={isRegisterMode ? handleRegister : handleLogin}
               disabled={loading}
             >
-              {loading ? 'Envoi en cours...' : 'Mot de passe oublié ?'}
+              {loading ? 'Envoi en cours...' : isRegisterMode ? 'Inscription' : 'Connexion'}
             </Button>
-          )}
-          <NavLink
-            to="#"
-            onClick={() => setIsRegisterMode(!isRegisterMode)}
-            className="switch-mode-link"
-          >
-            {isRegisterMode
-              ? 'Vous avez déjà un compte ? Connectez-vous ici !'
-              : "Vous n'avez pas de compte ? Inscrivez-vous ici !"}
-          </NavLink>
+            {!isRegisterMode && (
+              <Button
+                className="forgot-password-button"
+                onClick={handlePasswordReset}
+                disabled={loading}
+              >
+                Mot de passe oublié ?
+              </Button>
+            )}
+            <NavLink
+              to="#"
+              onClick={() => setIsRegisterMode(!isRegisterMode)}
+              className="switch-mode-link"
+            >
+              {isRegisterMode
+                ? 'Vous avez déjà un compte ? Connectez-vous ici !'
+                : "Vous n'avez pas de compte ? Inscrivez-vous ici !"}
+            </NavLink>
+          </div>
         </div>
-      </div>
+      )}
       {/* <CardsBackground animate={false} /> */}
     </div>
   )

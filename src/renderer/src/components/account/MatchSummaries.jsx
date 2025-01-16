@@ -15,8 +15,7 @@ export default function MatchSummaries({ summaries = [] }) {
   const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const { goForward } = useTransition()
-  const [playersData, setPlayersData] = useState({})
-
+  console.log(summaries)
   const modes = {
     custom: 'CUSTOM',
     quick: 'RAPIDE',
@@ -28,34 +27,6 @@ export default function MatchSummaries({ summaries = [] }) {
     victory: 'Victoire'
   }
 
-  useEffect(() => {
-    const fetchMissingPlayers = async () => {
-      // Gather unique player IDs from summaries
-      const uniquePlayerIds = [
-        ...new Set(summaries.map((summary) => summary.opponent.id).filter((id) => !playersData[id]))
-      ]
-
-      if (uniquePlayerIds.length > 0) {
-        // Query Firestore to fetch all missing player data in a single batch
-        const playersQuery = query(
-          collection(db, 'users'),
-          where('__name__', 'in', uniquePlayerIds)
-        )
-        const querySnapshot = await getDocs(playersQuery)
-
-        // Process and cache player data
-        const newPlayerData = {}
-        querySnapshot.forEach((doc) => {
-          newPlayerData[doc.id] = doc.data()
-        })
-
-        setPlayersData((prev) => ({ ...prev, ...newPlayerData }))
-      }
-    }
-
-    fetchMissingPlayers()
-  }, [summaries, playersData])
-
   return (
     <div className="matchSummaries">
       {summaries
@@ -64,7 +35,8 @@ export default function MatchSummaries({ summaries = [] }) {
         .map((summary, index) => {
           const gameDetails = summary.gameDetails
           const player = summary.player
-          const rival = playersData[summary.opponent.id] // Retrieve fetched player data
+          const rival = summary.opponent
+          const tours = gameDetails.turnCount !== 1 ? 'tours' : 'tour'
 
           return (
             <div
@@ -77,8 +49,8 @@ export default function MatchSummaries({ summaries = [] }) {
               }}
             >
               <div className="matchSummaries-item-date">
-                Le {format(new Date(gameDetails.timestamp), 'dd/MM/yy à HH:mm')} | Tour{' '}
-                {gameDetails.turnCount} | XP +{player.xpGained}{' '}
+                Le {format(new Date(gameDetails.timestamp), 'dd/MM/yy à HH:mm')} |{' '}
+                {gameDetails.turnCount} {tours} | XP +{player.xpGained}{' '}
                 {gameDetails.mode !== 'custom' && `| MMR ${player.mmrGained}`}
                 {gameDetails.mode === 'ranked' && ` | PR ${player.prGained}`}
               </div>
@@ -89,7 +61,7 @@ export default function MatchSummaries({ summaries = [] }) {
                     {result[gameDetails.result]}
                   </span>
                 </div>
-                {rival ? <LeaderboardPlayerBanner user={rival} /> : <div>Loading...</div>}
+                VS {rival.name ?? 'Joueur introuvable'}
               </div>
             </div>
           )

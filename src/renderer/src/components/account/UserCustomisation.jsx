@@ -283,8 +283,7 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
                                   lock: false,
                                   name: 'Niveau ' + userInfo.stats.level,
                                   trueName: 'level',
-                                  unlockTip: 'Affichez votre niveau actuel.',
-                                  remove: true
+                                  unlockTip: 'Affichez votre niveau actuel.'
                                 }}
                               >
                                 <div className="prestige prestige-default">
@@ -559,9 +558,14 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
     let updatedUserInfo = customizedUserInfo ? { ...customizedUserInfo } : { ...user }
 
     // On applique la bonne valeur
+    console.log(skin.remove)
     if (relatedSkinsParams[type]) {
       const paramKey = relatedSkinsParams[type]
-      updatedUserInfo.skin[paramKey] = relatedSkinValue[type]
+      if (skin.remove) {
+        updatedUserInfo.skin[paramKey] = 'none'
+      } else {
+        updatedUserInfo.skin[paramKey] = relatedSkinValue[type]
+      }
     }
 
     setCustomizedUserInfo(updatedUserInfo)

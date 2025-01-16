@@ -19,10 +19,13 @@ import successSound from '../../assets/sfx/success_bell.mp3'
 import useSound from 'use-sound'
 import { useLocation } from 'react-router-dom'
 import { useTransition } from '../../TransitionContext'
+import { ServerContext } from '../../ServerContext'
+import { useSendMessage } from '../others/toolBox'
 
 export const MatchmakingContext = createContext()
 
 export const MatchmakingProvider = ({ children }) => {
+  const { serverStatus } = useContext(ServerContext)
   const [currentUser, setCurrentUser] = useState(null)
   const [match, setMatch] = useState(null)
   const [matchmakingSearch, setMatchmakingSearch] = useState(false)
@@ -37,9 +40,9 @@ export const MatchmakingProvider = ({ children }) => {
   const createLobby = useCreateLobby()
   const joinLobby = useJoinLobby()
   const verName = changelog.slice(-1)[0].title
+  const sendMessage = useSendMessage()
 
   const location = useLocation()
-  const { goHome } = useTransition()
 
   const intervalTime = 10000
 
@@ -67,6 +70,13 @@ export const MatchmakingProvider = ({ children }) => {
       clearInterval(playQueueTimer)
     }
   }, [matchmakingSearch])
+
+  useEffect(() => {
+    if (serverStatus !== 'online') {
+      sendMessage('Les serveurs sont désactivés pour le moment.', 'error')
+      handleStopMatchmaking()
+    }
+  }, [serverStatus])
 
   useEffect(() => {
     const handleSnapshot = async (snapshot) => {
