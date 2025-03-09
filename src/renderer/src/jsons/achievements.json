@@ -176,5 +176,11 @@
     "name": "Acheteur compulsif",
     "desc": "Achetez 10 choses dans la boutique.",
     "url": "./skins/avatars/avatar_hiroshi_alt.png"
+  },
+  {
+    "id": "HF_shopBuy20",
+    "name": "Lèche-vitrine",
+    "desc": "Achetez 20 choses dans la boutique.",
+    "url": "./skins/avatars/avatar_nemid_alternatif.png"
   }
 ]

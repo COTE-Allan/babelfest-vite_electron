@@ -89,8 +89,7 @@ export function Plongeon({ item, effectInfos }) {
       effectInfos: effectInfos,
       result: {
         custom: true,
-        icon: effectInfos.icon,
-        value: `${target.card.diving ? "s'active" : 'se désactive'}.`
+        icon: effectInfos.icon
       }
     },
     executor: item

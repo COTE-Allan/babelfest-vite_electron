@@ -115,6 +115,11 @@
     "role": "ingame"
   },
   {
+    "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1737297598/babelfest/musiques/meganeko_-_Violent_Purple.mp3",
+    "name": "meganeko - Violent Purple",
+    "role": "ingame"
+  },
+  {
     "url": "https://res.cloudinary.com/dxdtcakuv/video/upload/v1726750774/babelfest/musiques/Babelfest_OST_-_Tuto_avec_Tuto.mp3",
     "name": "Babelfest OST - Tuto avec Tuto",
     "role": "tutorial"

@@ -11,7 +11,6 @@ import { AuthContext } from '../../AuthContext'
 import LeaderboardPlayerBanner from '../items/LeaderboardPlayerBanner'
 import LoadingLogo from '../items/LoadingLogo'
 import useSound from 'use-sound'
-import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
 import BackButton from '../items/BackButton'
 import HudNavLink from '../items/hudNavLink'
@@ -26,7 +25,6 @@ const Leaderboards = () => {
   const [myRank, setMyRank] = useState(null)
   const myId = user.uid
 
-  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
 
   const [selectedLeaderboard, setSelectedLeaderboard] = useState('MMR')
@@ -116,7 +114,6 @@ const Leaderboards = () => {
                   <div
                     key={user.id}
                     className="leaderboard-list-item"
-                    onMouseEnter={hover}
                     onClick={() => {
                       select()
                     }}

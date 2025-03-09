@@ -18,6 +18,7 @@ import babelfish from '../../jsons/cards/babelfish.json'
 import mecanicaCards from '../../jsons/cards/mecanica.json'
 import promoCards from '../../jsons/cards/promo.json'
 import twentyfourCards from '../../jsons/cards/infini_2024.json'
+import twentyfiveCards from '../../jsons/cards/infini_2025.json'
 
 import bordersData from '../../jsons/skins/borders.json'
 import colorsData from '../../jsons/skins/colors.json'
@@ -118,7 +119,8 @@ export function getAllCards(getSpecials = true) {
     ...babelfish.map(addUniqueId),
     ...mecanicaCards.map(addUniqueId),
     ...promoCards.map(addUniqueId),
-    ...twentyfourCards.map(addUniqueId)
+    ...twentyfourCards.map(addUniqueId),
+    ...twentyfiveCards.map(addUniqueId)
   )
 
   if (!getSpecials) cards = cards.filter((card) => card.rarity !== 5)
@@ -823,7 +825,7 @@ export function createUserInfo(userData, decks = null, email = null, id = null, 
 
 export const getCurrentSeason = () => {
   if (!rankedSeasons || rankedSeasons.length === 0) {
-    return null // ou une valeur par défaut
+    return null
   }
 
   // Trier les saisons par date de début pour garantir l'ordre chronologique
@@ -837,7 +839,7 @@ export const getCurrentSeason = () => {
   // Si aucune saison actuelle n'est trouvée, renvoyer la dernière saison si elle est encore active
   if (!currentSeason) {
     const lastSeason = rankedSeasons[rankedSeasons.length - 1]
-    return currentTime < lastSeason.endDate ? lastSeason : null
+    return lastSeason
   }
 
   return currentSeason
@@ -894,7 +896,8 @@ export function getAllAlternates() {
     ...babelfish,
     ...mecanicaCards,
     ...promoCards,
-    ...twentyfourCards
+    ...twentyfourCards,
+    ...twentyfiveCards
   ]
 
   // 2. On parcourt chaque carte et on accumule toutes les alternates

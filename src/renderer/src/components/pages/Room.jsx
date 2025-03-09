@@ -23,6 +23,7 @@ import ClassicModal from '../items/ClassicModal'
 import ScenesMaker from '../interface/inGame/ScenesMaker'
 import { getBackgroundStyle } from '../others/toolBox'
 import MatchIntro from '../esthetics/MatchIntro'
+import { finishStandby } from '../others/standbySystem'
 
 export default function Room() {
   const {
@@ -45,7 +46,16 @@ export default function Room() {
     isSpectator,
     winner
   } = useContext(GlobalContext)
+
   const placeCardOnArena = usePlaceCardOnArea()
+
+  const [standbySyncTimer, setStandbySyncTimer] = useState(30)
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false)
+
+  const handleSyncRequest = async () => {
+    console.log('Sync request triggered')
+    await finishStandby(room)
+  }
 
   useEffect(() => {
     if (phase === 3 && !isSpectator) {
@@ -82,12 +92,29 @@ export default function Room() {
     }
   }, [])
 
+  useEffect(() => {
+    if (standby[0] === playerID) {
+      const standbyInterval = setInterval(() => {
+        setStandbySyncTimer((prev) => {
+          const newTime = prev - 1
+          if (newTime <= 0) {
+            clearInterval(standbyInterval)
+            setIsButtonEnabled(true)
+          }
+          return newTime > 0 ? newTime : 0
+        })
+      }, 1000)
+
+      return () => clearInterval(standbyInterval)
+    }
+  }, [standby, playerID])
+
   return (
     <>
       {(playerSelf.disconnected || !isOnline) && !isSpectator && (
         <ClassicModal>
-          Vous avez été déconnecté, vérifiez votre connexion et rechargez votre navigateur dans les
-          30 secondes pour revenir dans la partie sous peine de défaite.
+          Vous avez été déconnecté, vérifiez votre connexion et redémmarez votre jeu dans les 30
+          secondes pour revenir dans la partie sous peine de défaite.
         </ClassicModal>
       )}
       <div
@@ -125,6 +152,14 @@ export default function Room() {
                   <Modal>
                     <img src={LogoAnimate} alt="logo animé de chargement" className="spinner" />
                     En attente de l'autre joueur...
+                    <Button
+                      className={!isButtonEnabled && 'disabled'}
+                      onClick={handleSyncRequest}
+                      disabled={!isButtonEnabled}
+                    >
+                      [{standbySyncTimer !== 0 ? standbySyncTimer : 'PRÊT'}] Demande de
+                      synchronisation
+                    </Button>
                   </Modal>
                 )}
                 {askForRectoVerso !== false && (

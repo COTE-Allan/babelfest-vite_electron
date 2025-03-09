@@ -598,7 +598,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Erin",
     "title": "L'Éclat d'Espoir",
     "atk": 3,
@@ -619,7 +618,7 @@
         "altId": "inf24-24-alt-1",
         "url": "./cards/alternates/babelfest_2024series24-2.png",
         "author": "Ayuumiko",
-        "cost": 1000
+        "cost": 700
       }
     ],
     "effects": [
@@ -773,7 +772,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Cipher",
     "title": "L'immergé",
     "atk": 3,
@@ -848,7 +846,7 @@
         "altId": "inf24-32-alt-1",
         "url": "./cards/alternates/babelfest_2024series32-2.png",
         "author": "RID",
-        "cost": 1000
+        "cost": 700
       }
     ],
     "effects": [

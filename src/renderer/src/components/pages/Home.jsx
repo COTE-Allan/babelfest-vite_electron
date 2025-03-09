@@ -172,7 +172,6 @@ const Home = () => {
                   >
                     <div className="img-container">
                       <img
-                        onMouseEnter={hover}
                         onClick={() => {
                           select()
                           goForward('/catalog', { state: { selected: card } })
@@ -194,7 +193,6 @@ const Home = () => {
           <div className="home-socials-list">
             <a
               className="home-socials-list-item"
-              onMouseEnter={hover}
               onClick={select}
               href="https://x.com/babelfest_"
               target="_blank"
@@ -203,7 +201,6 @@ const Home = () => {
             </a>
             <a
               className="home-socials-list-item"
-              onMouseEnter={hover}
               onClick={select}
               href="https://discord.com/invite/WYCuMDTt45"
               target="_blank"
@@ -212,7 +209,6 @@ const Home = () => {
             </a>
             <a
               className="home-socials-list-item"
-              onMouseEnter={hover}
               onClick={select}
               href="https://www.youtube.com/channel/UCxZ85Kq0CvJXQu9jAzcNzEw"
               target="_blank"
@@ -228,7 +224,6 @@ const Home = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="home-news"
-            onMouseEnter={hover}
             onClick={select}
           >
             <span>{lastBlogPost.title.rendered}</span>

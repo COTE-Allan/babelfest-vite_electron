@@ -469,6 +469,7 @@ export function removeEffects(target) {
   delete target.card.dieTogether
   delete target.card.diving
   delete target.card.deathCounter
+  delete target.card.freeze
   return target
 }
 

@@ -176,6 +176,9 @@ export function useLeaveLobby() {
           } else {
             console.error('Game document does not exist!')
           }
+        } else {
+          const userRef = doc(db, 'users', user.uid)
+          batch.update(userRef, { currentLobby: null })
         }
       } else {
         console.error('Lobby document does not exist!')

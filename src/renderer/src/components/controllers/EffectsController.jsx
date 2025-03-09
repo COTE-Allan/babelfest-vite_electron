@@ -294,13 +294,14 @@ export const useTryEffect = () => {
       }
       if (result.log) {
         await pushLogsIntoBatch(batch, result.log, result.executor.owner)
+        console.log(result.log)
         await pushSceneIntoBatch(batch, {
           cards: [result.executor.card],
-          action: result.log.effectInfos.name,
-          desc: result.log.effectInfos.desc,
           icon: result.log.effectInfos.icon,
+          value: result.log.result?.value ?? null,
           isEffect: true,
-          sound: 'effect'
+          sound: 'effect',
+          targets: result.log.targets ? result.log.targets : null
         })
       }
 

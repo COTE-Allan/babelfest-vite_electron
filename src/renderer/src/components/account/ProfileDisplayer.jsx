@@ -27,18 +27,6 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
   const [customizedUserInfo, setCustomizedUserInfo] = useState(null)
   const { updateUser } = useContext(AuthContext)
 
-  const handleUpdateUser = async () => {
-    let updatesUserInfo = structuredClone(customizedUserInfo)
-    delete updatesUserInfo.pastSeasons
-    delete updatesUserInfo.stats.defeats
-    delete updatesUserInfo.stats.totalGamesPlayed
-    delete updatesUserInfo.stats.winPercentage
-    delete updatesUserInfo.rank
-    await updateUser(updatesUserInfo)
-    setUser(customizedUserInfo)
-    setCustomizedUserInfo(null)
-  }
-
   return (
     <div className="profileDisplayer">
       <BackButton />
@@ -58,22 +46,6 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
               {!isMine && (
                 <div className="profileDisplayer-user-controller">
                   <HonorButton targetUser={userInfo} targetUserId={userInfo.id} />
-                </div>
-              )}
-              {customizedUserInfo && (
-                <div className="profileDisplayer-user-controller">
-                  <HudNavLink permOpen onClick={handleUpdateUser} className="fade-in save">
-                    <span className="hidden-span">Valider le skin</span>
-                    <FaSave size={30} />
-                  </HudNavLink>
-                  <HudNavLink
-                    permOpen
-                    onClick={() => setCustomizedUserInfo(null)}
-                    className="fade-in unsave"
-                  >
-                    <span className="hidden-span">Annuler</span>
-                    <ImCross size={30} />
-                  </HudNavLink>
                 </div>
               )}
             </div>
@@ -131,6 +103,7 @@ export default function ProfileDisplayer({ userInfo, isMine, setUser, defaultPag
                     user={userInfo}
                     customizedUserInfo={customizedUserInfo}
                     setCustomizedUserInfo={setCustomizedUserInfo}
+                    setUser={setUser}
                   />
                 </CSSTransition>
               )}

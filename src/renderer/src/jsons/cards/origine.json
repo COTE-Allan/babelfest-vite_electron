@@ -731,7 +731,7 @@
         "altId": "ori33-alt-1",
         "url": "./cards/alternates/babelfest_origine33-2.png",
         "author": "Cielesis",
-        "cost": 250
+        "cost": 200
       }
     ],
     "effects": [
@@ -943,13 +943,19 @@
         "altId": "ori41-alt-1",
         "url": "./cards/alternates/babelfest_origine41-2.png",
         "author": "Cielesis",
-        "cost": 100
+        "cost": 50
       },
       {
         "altId": "ori41-alt-2",
         "url": "./cards/alternates/babelfest_origine41-3.png",
         "author": "Cielesis",
-        "cost": 500
+        "cost": 400
+      },
+      {
+        "altId": "ori41-alt-3",
+        "url": "./cards/alternates/babelfest_origine41-4.png",
+        "author": "TheHug0Geek",
+        "cost": 300
       }
     ],
     "rarity": 3,
@@ -1078,6 +1084,14 @@
     "year": 2023,
     "author": "Kiba",
     "reach": 1,
+    "alternates": [
+      {
+        "altId": "ori-45-alt-1",
+        "url": "./cards/alternates/babelfest_origine45-2.png",
+        "author": "Ayuumiko",
+        "cost": 400
+      }
+    ],
     "effects": [
       {
         "type": "moreReach"
@@ -1164,7 +1178,7 @@
         "altId": "ori48-alt-1",
         "url": "./cards/alternates/babelfest_origine48-2.png",
         "author": "Adsanman & Clem-san",
-        "cost": 500
+        "cost": 400
       }
     ],
     "rarity": 3,

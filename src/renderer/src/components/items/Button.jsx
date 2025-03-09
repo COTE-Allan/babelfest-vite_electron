@@ -26,7 +26,7 @@ export default function Button(props) {
         }
       }}
       onMouseEnter={() => {
-        hover()
+        if (!props.nohover) hover()
         if (props.onMouseEnter) {
           props.onMouseEnter()
         }

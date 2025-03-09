@@ -221,7 +221,7 @@
     "name": "Ame résolue",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_rid_1",
-    "cost": 250,
+    "cost": 200,
     "author": "RID"
   },
   {
@@ -229,7 +229,7 @@
     "name": "Noblesse oblige",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_rid_2",
-    "cost": 250,
+    "cost": 200,
     "author": "RID"
   },
   {
@@ -237,7 +237,7 @@
     "name": "Hiroshi Alternatif",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_rid_3",
-    "cost": 250,
+    "cost": 200,
     "author": "RID"
   },
   {
@@ -245,7 +245,7 @@
     "name": "Clémentine la sorcière",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_clemween",
-    "cost": 250,
+    "cost": 200,
     "author": "Cielesis"
   },
   {
@@ -253,7 +253,7 @@
     "name": "Mandarine Alternatif",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_mandarine_alt",
-    "cost": 250,
+    "cost": 200,
     "author": "Adsanman & Clem-san"
   },
   {
@@ -261,7 +261,7 @@
     "name": "Erin Alternatif",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_erin_alt",
-    "cost": 250,
+    "cost": 200,
     "author": "Ayuumiko"
   },
   {
@@ -269,7 +269,31 @@
     "name": "Clémentine Cramoisie",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "banner_clem_bloody",
-    "cost": 250,
+    "cost": 200,
     "author": "RID"
+  },
+  {
+    "url": "./skins/banners/banner_yujo_alternatif.png",
+    "name": "Yujo Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_hugo_yujo",
+    "cost": 200,
+    "author": "TheHug0Geek"
+  },
+  {
+    "url": "./skins/banners/banner_clemerde_alternative.png",
+    "name": "Clémerde Alternative",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_hugo_clem",
+    "cost": 200,
+    "author": "TheHug0Geek"
+  },
+  {
+    "url": "./skins/banners/banner_shape_alternatif.png",
+    "name": "Shape Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_shape_alternatif",
+    "cost": 200,
+    "author": "Ayuumiko"
   }
 ]

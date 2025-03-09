@@ -59,9 +59,10 @@
 
   &-coords {
     position: absolute;
-    width: 150%;
-    height: 125%;
-    top: 50%;
+    font-family: 'Kimberly Bl', sans-serif;
+    width: 140%;
+    height: 123%;
+    top: 51%;
     left: 50%;
     z-index: -2;
     transform: translate(-50%, -50%);
@@ -101,8 +102,8 @@
 
   &-borders {
     position: absolute;
-    width: 130%;
-    height: 115%;
+    width: 120%;
+    height: 110%;
     top: 50%;
     left: 50%;
     z-index: -1;

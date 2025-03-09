@@ -96,28 +96,14 @@
   {
     "type": "randomATK",
     "when": ["spawn", 1],
-    "range": [1, 1, 1, 1, 2, 3],
+    "range": [1, 2, 2, 3, 4],
     "name": "Attaque désordonnée",
     "spawnUsed": false
   },
   {
     "type": "randomDEP",
     "when": ["spawn", 1],
-    "range": [1, 1, 1, 1, 2, 3],
-    "name": "Déplacement désordonné",
-    "spawnUsed": false
-  },
-  {
-    "type": "randomATK",
-    "when": ["spawn", 1],
-    "range": [1, 1, 1, 1, 1, 2, 2, 3, 4],
-    "name": "Attaque désordonnée",
-    "spawnUsed": false
-  },
-  {
-    "type": "randomDEP",
-    "when": ["spawn", 1],
-    "range": [1, 1, 1, 1, 1, 2, 2, 3, 4],
+    "range": [1, 2, 2, 3, 4],
     "name": "Déplacement désordonné",
     "spawnUsed": false
   },
@@ -208,7 +194,7 @@
   {
     "type": "randomHP",
     "when": ["spawn"],
-    "range": [1, 2, 3, 4],
+    "range": [2, 3, 4],
     "spawnUsed": false,
     "name": "Médecine douteuse"
   }

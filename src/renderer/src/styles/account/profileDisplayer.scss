@@ -92,10 +92,13 @@
     }
 
     &-controller {
+      margin-top: 30px;
       & .hudNavLink {
-        margin: 10px 0;
-        justify-content: flex-end;
-
+        margin: 0;
+        // justify-content: flex-end;
+        & span {
+          font-size: 17px !important;
+        }
         &.save {
           color: $blue;
 
@@ -181,7 +184,7 @@
 
   &-nav {
     margin-right: 15px;
-
+    height: 100%;
     & .hudNavLink {
       margin-bottom: 10px;
     }

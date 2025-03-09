@@ -7,7 +7,7 @@
   height: 110px;
   width: 110px;
   position: relative;
-  border: white 7px solid;
+  border: white 10px solid;
   transform: rotate(var(--rotation));
   display: flex;
   align-items: center;
@@ -195,6 +195,13 @@
   &.tired {
     background-color: rgb(226, 226, 226) !important;
     transform: rotate(calc(var(--rotation) + 5deg));
+  }
+
+  &.sceneTrigger {
+    animation: cell-golden-aura 1.8s ease-in-out both;
+    &.reversed {
+      animation: cell-golden-aura-reversed 1.8s ease-in-out both;
+    }
   }
 
   &.freeze &-card-visual {

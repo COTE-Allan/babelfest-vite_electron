@@ -30,11 +30,11 @@ export const MatchmakingProvider = ({ children }) => {
   const [match, setMatch] = useState(null)
   const [matchmakingSearch, setMatchmakingSearch] = useState(false)
   const [searchTime, setSearchTime] = useState(0)
+  const [quickQueuePlayerAmount, setQuickQueuePlayerAmount] = useState(0)
+  const [rankedQueuePlayerAmount, setRankedQueuePlayerAmount] = useState(0)
   const { userInfo, user, userSettings } = useContext(AuthContext)
   const [playQueue] = useSound(queueSound, { volume: userSettings.sfxVolume })
-  const [successQueue] = useSound(successSound, {
-    volume: userSettings.sfxVolume
-  })
+  const [successQueue] = useSound(successSound, { volume: userSettings.sfxVolume })
   const [cancel] = useSound(cancelSfx, { volume: userSettings.sfxVolume })
 
   const createLobby = useCreateLobby()
@@ -85,7 +85,7 @@ export const MatchmakingProvider = ({ children }) => {
         await deleteDoc(doc(db, 'matchmaking', user.uid))
         successQueue()
         setTimeout(() => {
-          joinLobby(data.lobbyFound, false, currentUser.deck) // Passer le deck ici
+          joinLobby(data.lobbyFound, false, currentUser.deck)
         }, 1000)
       }
     }
@@ -101,6 +101,27 @@ export const MatchmakingProvider = ({ children }) => {
     }
   }, [currentUser])
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'matchmaking'), (snapshot) => {
+      let quickCount = 0
+      let rankedCount = 0
+
+      snapshot.docs.forEach((doc) => {
+        const data = doc.data()
+        if (data.mode === 'quick') {
+          quickCount++
+        } else if (data.mode === 'ranked') {
+          rankedCount++
+        }
+      })
+
+      setQuickQueuePlayerAmount(quickCount)
+      setRankedQueuePlayerAmount(rankedCount)
+    })
+
+    return () => unsubscribe()
+  }, [])
+
   const findMatch = async (player) => {
     let matchFound = false
     let prRange = 100
@@ -110,7 +131,6 @@ export const MatchmakingProvider = ({ children }) => {
       let playersQuery
 
       if (player.mode === 'quick') {
-        // Pour le mode rapide, on recherche sur le MMR
         const lowerMMRBound = player.mmr - mmrRange
         const upperMMRBound = player.mmr + mmrRange
 
@@ -122,7 +142,6 @@ export const MatchmakingProvider = ({ children }) => {
           where('verName', '==', player.verName)
         )
       } else if (player.mode === 'ranked') {
-        // Pour le mode classé, on recherche sur le PR
         const lowerPRBound = player.pr - prRange
         const upperPRBound = player.pr + prRange
 
@@ -141,12 +160,10 @@ export const MatchmakingProvider = ({ children }) => {
         const potentialMatch = docSnapshot.data()
         if (potentialMatch && potentialMatch.id !== player.id) {
           if (player.mode === 'quick') {
-            // On accepte le match directement en mode rapide
             setMatch(potentialMatch)
             matchFound = true
             break
           } else if (player.mode === 'ranked') {
-            // En mode classé, on filtre sur le MMR côté code
             const mmrDifference = Math.abs(player.mmr - potentialMatch.mmr)
             if (mmrDifference <= mmrRange) {
               setMatch(potentialMatch)
@@ -158,14 +175,13 @@ export const MatchmakingProvider = ({ children }) => {
       }
 
       if (!matchFound) {
-        // Augmenter les plages si aucun match n'est trouvé
         if (player.mode === 'quick') {
           mmrRange += 50
         } else if (player.mode === 'ranked') {
           prRange += 300
           mmrRange += 200
         }
-        await new Promise((resolve) => setTimeout(resolve, 10000)) // Attendre 10 secondes
+        await new Promise((resolve) => setTimeout(resolve, 10000))
       }
     }
   }
@@ -228,7 +244,9 @@ export const MatchmakingProvider = ({ children }) => {
     handleStartMatchmaking,
     handleStopMatchmaking,
     matchmakingSearch,
-    searchTime: formatTime(searchTime)
+    searchTime: formatTime(searchTime),
+    quickQueuePlayerAmount,
+    rankedQueuePlayerAmount
   }
 
   return <MatchmakingContext.Provider value={contextValue}>{children}</MatchmakingContext.Provider>

@@ -274,7 +274,7 @@
     "name": "Clémentine la sorcière",
     "unlockTip": "Acheté en boutique.",
     "shopFlag": "clem_ween_1",
-    "cost": 200,
+    "cost": 100,
     "author": "Cielesis"
   },
   {
@@ -326,10 +326,33 @@
     "cost": 100
   },
   {
+    "url": "./skins/avatars/avatar_clémerde.png",
+    "name": "Clémerde Alternative",
+    "unlockTip": "Acheté en boutique.",
+    "author": "TheHug0Geek",
+    "shopFlag": "avatar_clemerde_1",
+    "cost": 100
+  },
+  {
+    "url": "./skins/avatars/avatar_shape_alternatif.png",
+    "name": "Shape Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "author": "Ayuumiko",
+    "shopFlag": "avatar_shape_alternatif",
+    "cost": 100
+  },
+  {
     "url": "./skins/avatars/avatar_hiroshi_alt.png",
     "name": "Hiroshi Alternatif",
     "unlockTip": "Obtenu en récompense du succès : 'Acheteur compulsif'",
     "achievement": "HF_shopBuy10",
     "author": "RID"
+  },
+  {
+    "url": "./skins/avatars/avatar_nemid_alternatif.png",
+    "name": "Némid Alternatif",
+    "unlockTip": "Obtenu en récompense du succès : 'Lèche-vitrine'",
+    "achievement": "HF_shopBuy20",
+    "author": "Kiba"
   }
 ]

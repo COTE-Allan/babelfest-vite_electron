@@ -149,7 +149,7 @@ export function processorAlly({ item, effect, pattern, effectInfos }) {
       trigger: item.card,
       action: 'effect',
       effectInfos: effectInfos,
-      result: { icon: 'atk', value: `+${totalIncrease}` }
+      result: { icon: 'atk', value: `+ ${totalIncrease}` }
     },
     executor: item
   }
@@ -181,7 +181,7 @@ export function processorRival({ item, effect, pattern, effectInfos }) {
       trigger: item.card,
       action: 'effect',
       effectInfos: effectInfos,
-      result: { icon: 'atk', value: `+${totalIncrease}` }
+      result: { icon: 'atk', value: `+ ${totalIncrease}` }
     },
     executor: item
   }

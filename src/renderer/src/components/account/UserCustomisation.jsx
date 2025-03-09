@@ -11,14 +11,20 @@ import { BiSolidUserRectangle } from 'react-icons/bi'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { getSkins, isUnlocked, useSendMessage } from '../others/toolBox'
 import useSound from 'use-sound'
-import hoverSfx from '../../assets/sfx/button_hover.wav'
 import selectSfx from '../../assets/sfx/menu_select.wav'
+import { FaSave } from 'react-icons/fa'
+import { ImCross } from 'react-icons/im'
 
 /** Contexte utilisé pour partager customizedUserInfo au sein du composant */
 const CustomizedUserInfoContext = createContext()
 
-export default function UserCustomisation({ user, customizedUserInfo, setCustomizedUserInfo }) {
-  const { userInfo } = useContext(AuthContext)
+export default function UserCustomisation({
+  user,
+  customizedUserInfo,
+  setCustomizedUserInfo,
+  setUser
+}) {
+  const { userInfo, updateUser } = useContext(AuthContext)
   const [page, setPage] = useState(1)
   const [hoveredSkin, setHoveredSkin] = useState(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -27,10 +33,18 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
 
   const skins = getSkins()
 
-  /**
-   * Filtre les skins en fonction de l'option "Uniquement débloqué"
-   * et du type de skin. Regroupe ensuite par catégorie via groupByCategory.
-   */
+  const handleUpdateUser = async () => {
+    let updatesUserInfo = structuredClone(customizedUserInfo)
+    delete updatesUserInfo.pastSeasons
+    delete updatesUserInfo.stats.defeats
+    delete updatesUserInfo.stats.totalGamesPlayed
+    delete updatesUserInfo.stats.winPercentage
+    delete updatesUserInfo.rank
+    await updateUser(updatesUserInfo)
+    setUser(customizedUserInfo)
+    setCustomizedUserInfo(null)
+  }
+
   function filterSkinsByType(type) {
     const base = skins.filter((skin) => skin.type === type)
     const filtered = showUnlocked
@@ -137,6 +151,22 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
             <AiFillGold size={45} />
             <span className="hidden-span">Prestige</span>
           </HudNavLink>
+          {customizedUserInfo && (
+            <div className="profileDisplayer-user-controller">
+              <HudNavLink permOpen onClick={handleUpdateUser} className="fade-in save">
+                <FaSave size={30} />
+                <span className="hidden-span">Sauvegarder</span>
+              </HudNavLink>
+              <HudNavLink
+                permOpen
+                onClick={() => setCustomizedUserInfo(null)}
+                className="fade-in unsave"
+              >
+                <ImCross size={30} />
+                <span className="hidden-span">Annuler</span>
+              </HudNavLink>
+            </div>
+          )}
         </nav>
 
         <TransitionGroup className="customize-content">
@@ -500,7 +530,6 @@ export default function UserCustomisation({ user, customizedUserInfo, setCustomi
 function SkinItem({ skin, type, children, setHoveredSkin }) {
   const { userSettings, userInfo } = useContext(AuthContext)
   const { customizedUserInfo, setCustomizedUserInfo, user } = useContext(CustomizedUserInfoContext)
-  const [hover] = useSound(hoverSfx, { volume: userSettings.sfxVolume })
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const sendMessage = useSendMessage()
 
@@ -538,7 +567,6 @@ function SkinItem({ skin, type, children, setHoveredSkin }) {
   }
 
   const handleEnter = () => {
-    hover()
     setHoveredSkin(skin)
   }
 

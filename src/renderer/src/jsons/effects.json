@@ -14,10 +14,10 @@
     "type": "Débuffs"
   },
   {
-    "slug": "freeze",
-    "name": "Congelé",
+    "slug": "freezed",
+    "name": "Départ Congelé",
     "icon": "./effects/freeze.png",
-    "desc": "Cette carte ne peut plus se déplacer pendant encore X tour(s).",
+    "desc": "Cette carte commencera avec l'effet 'Congelé' pendant le nombre de tour indiqué.",
     "type": "Débuffs"
   },
   {

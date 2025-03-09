@@ -284,8 +284,7 @@ export default function Winner() {
       if (gameMode === 'ranked') {
         userUpdates['stats.pr'] = newPR
         let currentSeason = getCurrentSeason()
-        if (!userInfo.stats.prSeasonId || userInfo.stats.prSeasonId !== currentSeason.id)
-          userUpdates['stats.prSeasonId'] = currentSeason.id
+        userUpdates['stats.prSeasonId'] = currentSeason.id
 
         if (newPR > userInfo.stats.maxPr) userUpdates['stats.maxPr'] = newPR
       }

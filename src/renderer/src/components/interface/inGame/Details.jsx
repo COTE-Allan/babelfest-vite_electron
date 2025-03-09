@@ -80,9 +80,9 @@ export default function Details({ detailCard, noRightClick }) {
               Carte de la collection {detailCard.collection}, dessinée par {detailCard.author}
             </span>
             <CardEffects detailCard={detailCard} />
-            {!noRightClick &&
-            <span className="details-card-more">Clic droit pour plus d'infos...</span>
-            }
+            {!noRightClick && (
+              <span className="details-card-more">Clic droit pour plus d'infos...</span>
+            )}
           </div>
         </div>
       )}

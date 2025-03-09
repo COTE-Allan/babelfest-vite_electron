@@ -115,7 +115,9 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   // overflow: hidden;
-
+  .musicPlayer-container {
+    border: white solid 3px;
+  }
   &-filter,
   &-bg {
     position: absolute;
@@ -421,12 +423,12 @@ button.alert {
   overflow: hidden;
   position: absolute;
   overflow-y: auto;
-  top: 50%;
+  top: 52%;
   padding: 20px;
   transform: translateY(-50%);
   z-index: 1;
   width: 22vw;
-  height: 65%;
+  height: 55%;
   background-color: $black;
   display: flex;
   align-items: center;

@@ -61,7 +61,7 @@ export function RandomATK({ item, effect, effectInfos }) {
       effectInfos: effectInfos,
       result: {
         icon: 'atk',
-        value: newValue
+        value: '= ' + newValue
       }
     },
     executor: item
@@ -82,7 +82,7 @@ export function RandomDEP({ item, effect, effectInfos }) {
       effectInfos: effectInfos,
       result: {
         icon: 'dep',
-        value: newValue
+        value: '= ' + newValue
       }
     },
     executor: item
@@ -103,7 +103,7 @@ export function RandomHP({ item, effect, effectInfos }) {
       effectInfos: effectInfos,
       result: {
         icon: 'hp',
-        value: newValue
+        value: '= ' + newValue
       }
     },
     executor: item

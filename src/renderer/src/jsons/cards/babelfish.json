@@ -15,6 +15,14 @@
     "collection": "Babelfish",
     "year": 2024,
     "author": "Cielesis",
+    "alternates": [
+      {
+        "altId": "fish1-alt-1",
+        "url": "./cards/alternates/babelfest_babelfish1-2.png",
+        "author": "TheHug0Geek",
+        "cost": 700
+      }
+    ],
     "effects": [
       {
         "when": ["spawn"],

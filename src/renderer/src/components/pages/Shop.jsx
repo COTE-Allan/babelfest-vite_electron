@@ -120,9 +120,6 @@ const Shop = () => {
                         userInfo.alternates.includes(card.altId) && 'sold'
                       }`}
                       key={card.altId}
-                      onMouseEnter={() => {
-                        if (!userInfo.alternates.includes(card.altId)) hover()
-                      }}
                       onClick={() => {
                         if (!userInfo.alternates.includes(card.altId)) {
                           select()
@@ -193,9 +190,6 @@ const Shop = () => {
                                 userInfo.shopFlags.includes(skin.shopFlag) && 'sold'
                               } ${skin.type}`}
                               key={skin.shopFlag}
-                              onMouseEnter={() => {
-                                if (!userInfo.shopFlags.includes(skin.shopFlag)) hover()
-                              }}
                               onClick={() => {
                                 if (!userInfo.shopFlags.includes(skin.shopFlag)) {
                                   select()
@@ -328,7 +322,7 @@ const Shop = () => {
                   'alternates',
                   buyingAlternate.altId,
                   buyingAlternate.cost,
-                  userInfo.alternates.length
+                  userInfo.alternates.length + userInfo.shopFlags.length
                 )
                 setBuyingAlternate(null)
               }}
@@ -362,7 +356,7 @@ const Shop = () => {
                   'shopFlags',
                   buyingSkin.shopFlag,
                   buyingSkin.cost,
-                  userInfo.alternates.length
+                  userInfo.alternates.length + userInfo.shopFlags.length
                 )
                 setBuyingSkin(null)
               }}

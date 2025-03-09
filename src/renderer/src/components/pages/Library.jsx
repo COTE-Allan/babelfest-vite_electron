@@ -46,8 +46,8 @@ export default function Library({ editorMode, deck }) {
   const [select] = useSound(selectSfx, { volume: userSettings.sfxVolume })
   const [allCards, setAllCards] = useState(getAllCards())
   const [cards, setCards] = useState(getAllCards)
-  const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
   const [selectedCollections, setSelectedCollections] = useState([])
   const [selectedRarities, setSelectedRarities] = useState([])
   const [selectedYears, setSelectedYears] = useState([])
@@ -511,6 +511,14 @@ export default function Library({ editorMode, deck }) {
     link.click()
   }
 
+  function resetFilters() {
+    setSearch('')
+    setSelectedCollections([])
+    setSelectedEffects([])
+    setSelectedYears([])
+    setSelectedRarities([])
+  }
+
   return (
     <>
       {shareMode ? (
@@ -676,7 +684,6 @@ export default function Library({ editorMode, deck }) {
                           {cardsByRarity[rarity].map((card) => (
                             <div
                               onMouseEnter={() => {
-                                hover()
                                 if (editorMode) setDetailCard(card)
                               }}
                               onMouseLeave={() => {
@@ -797,7 +804,13 @@ export default function Library({ editorMode, deck }) {
                             {deckByRarity[rarity].map((card) => (
                               <div
                                 key={card.id}
-                                onMouseEnter={hover}
+                                onMouseEnter={() => {
+                                  hover()
+                                  setDetailCard(getCardBasedOnNameAndTitle(card))
+                                }}
+                                onMouseLeave={() => {
+                                  setDetailCard(null)
+                                }}
                                 className="library-deck-card"
                                 onClick={() => {
                                   select()
@@ -951,7 +964,10 @@ export default function Library({ editorMode, deck }) {
                                         key={idx}
                                         className={`other-card txt-rarity-${card.rarity}`}
                                         onClick={() => {
-                                          setSelected(card)
+                                          resetFilters()
+                                          setTimeout(() => {
+                                            setSelected(card)
+                                          }, 50)
                                         }}
                                       >
                                         {card.name} : {card.title}

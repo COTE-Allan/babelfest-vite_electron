@@ -67,6 +67,14 @@
     "year": 2024,
     "author": "TheHug0Geek",
     "healer": true,
+    "alternates": [
+      {
+        "altId": "renf3-alt-1",
+        "url": "./cards/alternates/babelfest_renfort3-2.png",
+        "author": "TheHug0Geek",
+        "cost": 300
+      }
+    ],
     "effects": [
       {
         "type": "rageSwordAlly",
@@ -263,7 +271,7 @@
         "altId": "renf11-alt-1",
         "url": "./cards/alternates/babelfest_renfort11-2.png",
         "author": "Antoine Bordon",
-        "cost": 500
+        "cost": 400
       }
     ],
     "rarity": 2,
@@ -384,6 +392,14 @@
     "collection": "Renfort",
     "year": 2024,
     "author": "Fusette",
+    "alternates": [
+      {
+        "altId": "renf15-alt-1",
+        "url": "./cards/alternates/babelfest_renfort15-2.png",
+        "author": "Kiba",
+        "cost": 300
+      }
+    ],
     "effects": [
       {
         "when": ["death"],

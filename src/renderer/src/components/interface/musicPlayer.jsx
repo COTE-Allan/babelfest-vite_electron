@@ -53,23 +53,23 @@ export default function MusicPlayer({ role }) {
 
       <div className="musicPlayer-controller">
         <div className="musicPlayer-controller-buttons">
-          <Button onClick={() => setMute(!mute)}>
+          <Button onClick={() => setMute(!mute)} nohover>
             {mute ? (
               <IoVolumeMute size={25} color="white" />
             ) : (
               <IoVolumeHigh size={25} color="white" />
             )}
           </Button>
-          <Button onClick={playPrevious}>
+          <Button onClick={playPrevious} nohover>
             <IoPlaySkipBack size={25} color="white" />
           </Button>
-          <Button onClick={togglePlay}>
+          <Button onClick={togglePlay} nohover>
             {isPlaying ? <IoPause size={25} color="white" /> : <IoPlay size={25} color="white" />}
           </Button>
-          <Button onClick={playNext}>
+          <Button onClick={playNext} nohover>
             <IoPlaySkipForward size={25} color="white" />
           </Button>
-          <Button onClick={() => setRepeat(!repeat)}>
+          <Button onClick={() => setRepeat(!repeat)} nohover>
             {repeat ? (
               <MdRepeatOne size={25} color="white" />
             ) : (

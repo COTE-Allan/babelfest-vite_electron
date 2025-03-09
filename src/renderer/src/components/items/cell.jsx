@@ -35,7 +35,8 @@ export default function Cell({ active, confirmModal, cell }) {
     rightWindow,
     setRightWindow,
     playerID,
-    isSpectator
+    isSpectator,
+    scenes
   } = useContext(GlobalContext)
   const id = cell.id
   const team = cell.side
@@ -43,6 +44,8 @@ export default function Cell({ active, confirmModal, cell }) {
   const card = cell.card
   const owner = cell.owner
   const player = host ? 1 : 2
+  const sceneTrigger = scenes[0]?.isEffect ? scenes[0].cards[0] : null
+
   let stats, basestats
   if (card != null) {
     stats = [card.atk, card.dep, card.hp]
@@ -118,8 +121,9 @@ export default function Cell({ active, confirmModal, cell }) {
       ${cell.burn ? 'burn' : ''}
       ${tiredClass}
       ${card && card.isRecto && card.diving ? 'diving' : ''}
+      ${sceneTrigger && sceneTrigger?.name === cell.card?.name && sceneTrigger?.title === cell.card?.title ? 'sceneTrigger' : ''}
       `
-  }, [cell, card, owner, isSelected, isBase, team, player, phase, confirmModal])
+  }, [cell, card, owner, isSelected, isBase, team, player, phase, confirmModal, sceneTrigger])
 
   const bgColor = useMemo(() => {
     if (isBase) {
@@ -155,7 +159,7 @@ export default function Cell({ active, confirmModal, cell }) {
       style={{
         background: bgColor,
         '--rotation': `${host ? '0deg' : '180deg'}`,
-        border: 'double 5px transparent',
+        border: 'double 7px transparent',
         backgroundImage:
           !card || !owner
             ? 'none'

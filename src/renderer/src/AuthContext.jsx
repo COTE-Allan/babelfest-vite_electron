@@ -448,7 +448,9 @@ export const AuthProvider = ({ children }) => {
       // 6. Message de succès
       sendMessage?.(coinsCost > 0 ? `Achat réussi !` : `Récompense obtenue.`, 'success')
       if (coinsCost > 0) await giveAchievement('HF_shopBuy')
+      console.log(amountOfItemBuyed)
       if (amountOfItemBuyed + 1 >= 10) await giveAchievement('HF_shopBuy10')
+      if (amountOfItemBuyed + 1 >= 20) await giveAchievement('HF_shopBuy20')
     } catch (error) {
       console.error(`Erreur lors de l’ajout de l’ID "${itemId}" à "${field}" :`, error)
       sendMessage?.(`Erreur lors de l’ajout de "${itemId}".`, 'error')
