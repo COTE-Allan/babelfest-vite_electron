@@ -120,7 +120,7 @@ const Settings = () => {
                       min={0}
                       max={1}
                       value={userSettings.sfxVolume}
-                      step={0.05}
+                      step={0.1}
                       railStyle={{ backgroundColor: 'rgba(255,255,255, 0.5)' }}
                       handleStyle={{ borderColor: 'white', backgroundColor: 'white' }}
                       trackStyle={{ backgroundColor: 'white' }}
@@ -135,7 +135,7 @@ const Settings = () => {
                       min={0}
                       max={0.5}
                       value={userSettings.musicVolume}
-                      step={0.01}
+                      step={0.1}
                       railStyle={{ backgroundColor: 'rgba(255,255,255, 0.5)' }}
                       handleStyle={{ borderColor: 'white', backgroundColor: 'white' }}
                       trackStyle={{ backgroundColor: 'white' }}

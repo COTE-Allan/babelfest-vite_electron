@@ -19,6 +19,14 @@
     cursor: url('../../assets/svg/pointer.svg'), auto;
   }
 
+  &.isBase {
+    border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+    & .img-container,
+    & .cell-card {
+      border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+    }
+  }
+
   & .above {
     position: absolute;
     top: 50%;

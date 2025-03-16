@@ -171,6 +171,14 @@
     "year": 2024,
     "author": "RID",
     "diving": true,
+    "alternates": [
+      {
+        "altId": "renf7-alt-1",
+        "url": "./cards/alternates/babelfest_renfort7-2.png",
+        "author": "RID",
+        "cost": 400
+      }
+    ],
     "effects": [
       {
         "when": [3],

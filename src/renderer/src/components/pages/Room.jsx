@@ -49,13 +49,19 @@ export default function Room() {
 
   const placeCardOnArena = usePlaceCardOnArea()
 
-  const [standbySyncTimer, setStandbySyncTimer] = useState(30)
+  const [standbySyncTimer, setStandbySyncTimer] = useState(60)
   const [isButtonEnabled, setIsButtonEnabled] = useState(false)
 
   const handleSyncRequest = async () => {
     console.log('Sync request triggered')
     await finishStandby(room)
   }
+
+  useEffect(() => {
+    if (standby[0] === playerID) {
+      setStandbySyncTimer(60)
+    }
+  }, [standby])
 
   useEffect(() => {
     if (phase === 3 && !isSpectator) {

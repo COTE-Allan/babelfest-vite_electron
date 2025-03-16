@@ -120,6 +120,7 @@ export default function Cell({ active, confirmModal, cell }) {
       ${card && card.freeze ? 'freeze' : ''}
       ${cell.burn ? 'burn' : ''}
       ${tiredClass}
+      ${isBase ? 'isBase' : ''}
       ${card && card.isRecto && card.diving ? 'diving' : ''}
       ${sceneTrigger && sceneTrigger?.name === cell.card?.name && sceneTrigger?.title === cell.card?.title ? 'sceneTrigger' : ''}
       `

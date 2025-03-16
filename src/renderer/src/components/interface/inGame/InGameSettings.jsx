@@ -35,6 +35,14 @@ export default function InGameSettings() {
     setSmthChanged(true)
   }
 
+  const handleDisplaySettingsChange = (key, value) => {
+    setUserSettings((prevSettings) => ({
+      ...prevSettings,
+      [key]: value
+    }))
+    setSmthChanged(true)
+  }
+
   const handleSave = () => {
     saveSettings()
     setSmthChanged(false)
@@ -56,7 +64,7 @@ export default function InGameSettings() {
             min={0}
             max={1}
             value={userSettings.sfxVolume}
-            step={0.05}
+            step={0.1}
             railStyle={{ backgroundColor: 'rgba(255,255,255, 0.5)' }}
             handleStyle={{ borderColor: 'white', backgroundColor: 'white' }}
             trackStyle={{ backgroundColor: 'white' }}
@@ -69,13 +77,38 @@ export default function InGameSettings() {
             min={0}
             max={0.5}
             value={userSettings.musicVolume}
-            step={0.01}
+            step={0.1}
             railStyle={{ backgroundColor: 'rgba(255,255,255, 0.5)' }}
             handleStyle={{ borderColor: 'white', backgroundColor: 'white' }}
             trackStyle={{ backgroundColor: 'white' }}
           />
         </div>
       </div>
+      <div className="settings-list-item">
+        <label className="settings-list-item-label">Mode d'écran</label>
+        <div className="settings-list-item-input">
+          <select
+            value={userSettings.screenMode}
+            onChange={(e) => handleDisplaySettingsChange('screenMode', e.target.value)}
+          >
+            <option value="windowed">Fenêtré</option>
+            <option value="fullscreen">Plein écran</option>
+          </select>
+        </div>
+      </div>
+      <div className="settings-list-item">
+        <label className="settings-list-item-label">Résolution fenêtré</label>
+        <div className="settings-list-item-input">
+          <select
+            value={userSettings.resolution}
+            onChange={(e) => handleDisplaySettingsChange('resolution', e.target.value)}
+          >
+            <option value="1536x864">1536x864</option>
+            <option value="1600x900">1600x900</option>
+            <option value="1920x1080">1920x1080</option>
+          </select>
+        </div>
+      </div>{' '}
       {smthChanged && (
         <div className="settings-confirm">
           <span>Vous avez des changements non sauvegardés !</span>
