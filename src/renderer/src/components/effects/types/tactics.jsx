@@ -1,5 +1,5 @@
 import { getEffectInfo } from '../basics'
-import { hpEdit } from '../editCards'
+import { hpEdit, setAtk } from '../editCards'
 import { getAdjacentCells, getClosestEmptyCells } from '../targets'
 
 export function Inversion({ item, effectInfos }) {
@@ -80,6 +80,26 @@ export function Grappin({ item, targets, pattern, effectInfos }) {
 export function Plongeon({ item, effectInfos }) {
   let target = item
   target.card.diving = !target.card.diving
+
+  return {
+    targets: [target],
+    log: {
+      trigger: item.card,
+      action: 'effect',
+      effectInfos: effectInfos,
+      result: {
+        custom: true,
+        icon: effectInfos.icon
+      }
+    },
+    executor: item
+  }
+}
+
+export function atkModifier({ item, effectInfos, effect }) {
+  let target = item
+  let value = target.card.baseatk + effect.value
+  target = setAtk(target, value <= 0 ? value : 0)
 
   return {
     targets: [target],

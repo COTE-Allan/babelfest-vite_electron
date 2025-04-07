@@ -88,8 +88,8 @@ const Shop = () => {
             <span className="hidden-span">Cosmétiques</span>
           </HudNavLink>
           <HudNavLink
-            className="prestige disabled"
-            // onClick={() => setPage(3)}
+            className="prestige"
+            onClick={() => setPage(3)}
             selected={page === 3}
             permOpen
           >

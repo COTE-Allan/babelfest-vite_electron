@@ -400,6 +400,12 @@ export default function Library({ editorMode, deck }) {
             return a.name.localeCompare(b.name)
           case 'cost':
             return a.cost - b.cost
+          case 'atk':
+            return a.baseatk - b.baseatk
+          case 'dep':
+            return a.basedep - b.basedep
+          case 'hp':
+            return a.basehp - b.basehp
           default:
             return 0
         }
@@ -603,6 +609,9 @@ export default function Library({ editorMode, deck }) {
                     <option value="number">Trier par numéro</option>
                     <option value="name">Trier par nom</option>
                     <option value="cost">Trier par coût</option>
+                    <option value="atk">Trier par attaque</option>
+                    <option value="dep">Trier par déplacement</option>
+                    <option value="hp">Trier par point de vie</option>
                   </select>
                 </div>
                 <div className="library-controller-inputs-item">

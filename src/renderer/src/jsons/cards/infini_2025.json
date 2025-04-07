@@ -28,7 +28,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Léxa",
     "title": "Cheffe de la Falaise",
     "atk": 3,
@@ -98,7 +97,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Luna Étherial",
     "title": "L'anxieuse aux écouteurs",
     "atk": 1,
@@ -156,6 +154,30 @@
         "when": ["attack"],
         "type": "areaAttack",
         "target": "rival"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Maze Kayzerbach",
+    "title": "Reine en fuite",
+    "atk": 4,
+    "dep": 2,
+    "hp": 2,
+    "baseatk": 4,
+    "basedep": 2,
+    "basehp": 2,
+    "url": "./cards/series25/babelfest_2025series6.png",
+    "rarity": 1,
+    "cost": 3,
+    "collection": "Série Infinie 2025",
+    "year": 2025,
+    "author": "Kula",
+    "effects": [
+      {
+        "when": [1],
+        "type": "atkModifier",
+        "value": -1
       }
     ]
   }

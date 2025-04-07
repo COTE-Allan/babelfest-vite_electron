@@ -403,7 +403,7 @@ export const Tutorial = () => {
                     return (
                       <div
                         key={index}
-                        className={`cell ${tutorialStep.highlightedElements?.includes('cell-' + cell.id) && 'important'} ${tutorialStep.selected?.includes('cell-' + cell.id) && 'selected'} ${tutorialStep.tired?.includes('cell-' + cell.id) && 'tired'}`}
+                        className={`cell ${tutorialStep.highlightedElements?.includes('cell-' + cell.id) && 'important'} ${tutorialStep.selected?.includes('cell-' + cell.id) && 'selected'} ${tutorialStep.tired?.includes('cell-' + cell.id) && 'tired'} ${cell.base && 'isBase'}`}
                         id={cell.id}
                         data-team={cell.side}
                         style={{

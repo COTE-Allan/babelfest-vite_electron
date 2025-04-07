@@ -93,7 +93,6 @@ const Login = () => {
   }
 
   const handleKeyPress = (e) => {
-    console.log(e.key)
     if (e.key === 'Enter') {
       e.preventDefault()
       if (isRegisterMode) {
@@ -130,6 +129,7 @@ const Login = () => {
     if (!validateForm()) return
 
     setLoading(true)
+
     try {
       if (serverStatus === 'offline') {
         toast.error('Les serveurs sont fermés pour le moment.')
@@ -148,7 +148,7 @@ const Login = () => {
         window.api.send('save-mail', email)
         toast.success('Vous êtes maintenant connecté, bonne visite !')
         setTimeout(() => {
-          navigate('/')
+          navigate('/', { state: { login: true } })
         }, 500)
       }
     } catch (error) {
@@ -197,7 +197,7 @@ const Login = () => {
         },
         achievements: [],
         matchSummaries: [],
-        flags: ['betaTest', 'stressRush']
+        flags: []
       })
 
       await sendEmailVerification(user)

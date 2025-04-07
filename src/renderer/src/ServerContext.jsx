@@ -19,7 +19,12 @@ export const ServerProvider = ({ children }) => {
       (docSnapshot) => {
         if (docSnapshot.exists()) {
           const data = docSnapshot.data()
-          setServerStatus(data.status) // Mettre à jour le statut du serveur
+          const TESTMODE = true
+          if (TESTMODE) {
+            setServerStatus('online')
+          } else {
+            setServerStatus(data.status)
+          }
           setServerMessage(data.message)
         } else {
           console.error("Le document 'main_server' n'existe pas.")

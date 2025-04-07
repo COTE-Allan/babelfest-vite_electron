@@ -800,7 +800,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Yasushi",
     "title": "Allié tonitruant",
     "atk": 2,
@@ -825,7 +824,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Hiroshi",
     "title": "Feu du ciel",
     "atk": 5,

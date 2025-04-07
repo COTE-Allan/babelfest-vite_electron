@@ -56,7 +56,8 @@ export const useTryEffect = () => {
     grapple: Tactics.Grappin,
     diving: Tactics.Plongeon,
     flame: Offensives.Surchauffe,
-    fireball: Offensives.Fireball
+    fireball: Offensives.Fireball,
+    atkModifier: Tactics.atkModifier
   }
 
   const {

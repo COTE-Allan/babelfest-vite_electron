@@ -384,7 +384,26 @@ button.alert {
   height: 100vh;
   width: 100vw;
   flex-direction: column;
+  & .startScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    animation: fade-in 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 
+    & img {
+      height: 40%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    & p {
+      animation: blink 2s ease-in-out infinite both;
+      font-family: 'Kimberly Bl', sans-serif;
+      font-size: 30px;
+    }
+  }
   & h1 {
     margin: 0;
     margin-top: 10px;

@@ -50,5 +50,27 @@
     "collection": "Babelfish",
     "year": 2024,
     "author": "Cielesis"
+  },
+  {
+    "featured": true,
+    "name": "Floki",
+    "title": "Oiia Cat",
+    "atk": 1,
+    "dep": 1,
+    "hp": 1,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 1,
+    "cost": 0,
+    "url": "./cards/babelfish/babelfest_babelfish3.png",
+    "rarity": 1,
+    "collection": "Babelfish",
+    "year": 2025,
+    "author": "Cielesis",
+    "effects": [
+      {
+        "type": "oiia"
+      }
+    ]
   }
 ]

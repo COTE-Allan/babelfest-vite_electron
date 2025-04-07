@@ -23,7 +23,7 @@
   {
     "slug": "swapStats",
     "name": "Inversion",
-    "desc": "Quand cette carte attaque, elle inverse son Attaque avec ses Points de Vie.",
+    "desc": "Quand cette carte attaque, elle inverse son attaque avec ses points de vie.",
     "icon": "./effects/inversion.png",
     "type": "Tactiques"
   },
@@ -341,5 +341,19 @@
     "desc": "À l’invocation, sélectionnez une case et brûlez-la. Une case brûlée inflige un dégât quand une carte se déplace dessus puis redevient normale.",
     "icon": "./effects/fireball.png",
     "type": "Pièges"
+  },
+  {
+    "slug": "atkModifier",
+    "name": "Lame malléable",
+    "desc": "Au début d'une phase de préparation, la valeur d'attaque de cette carte est modifiée de la valeur indiquée de façon permanente.",
+    "icon": "./effects/gooey-sword.png",
+    "type": "Tactiques"
+  },
+  {
+    "slug": "oiia",
+    "name": "Chat",
+    "desc": "C'est un chat. Vous lui trouverez bien une utilité.",
+    "icon": "./effects/cat.png",
+    "type": "Débuffs"
   }
 ]
