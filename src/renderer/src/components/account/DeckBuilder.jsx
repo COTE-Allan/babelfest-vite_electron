@@ -86,7 +86,7 @@ export default function DeckBuilder() {
                 </div>
                 <div className="deckBuilder-list-deck-infos">
                   <h2>{deck.name}</h2>
-                  <h3>Coût : {deck.cost}</h3>
+                  <h3>Coût : {deck?.cost > 0 ? deck.cost : '—'}</h3>
                 </div>
               </div>
             </div>

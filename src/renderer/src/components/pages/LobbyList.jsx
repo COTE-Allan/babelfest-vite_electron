@@ -87,7 +87,7 @@ export default function LobbyList() {
       if (!foundLobby.gameRef && !foundLobby.j1.id !== user.uid && !foundLobby.j2) {
         joinLobby(lobbyID)
       } else {
-        // handleJoinAsSpectator(lobbyID)
+        handleJoinAsSpectator(lobbyID)
       }
     }
   }

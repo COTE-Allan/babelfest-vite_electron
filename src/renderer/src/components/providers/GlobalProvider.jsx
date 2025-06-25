@@ -18,12 +18,12 @@ import { DefinePhaseRule } from '../controllers/PhaseController'
 import { useTradeCard } from '../effects/editCards'
 import LogoAnimate from '../../assets/svg/logo_babelfest_animated.svg'
 import { useLeaveLobby } from '../controllers/ManageLobbyAndGame'
-import { useSendMessage } from '../others/toolBox'
+import { CheckBatteryPack, useSendMessage } from '../others/toolBox'
 
 export const GlobalContext = createContext(null)
 export const GlobalProvider = () => {
   const { room } = useParams()
-  const { user, userSettings } = useContext(AuthContext)
+  const { user, userSettings, giveAchievement } = useContext(AuthContext)
   const leaveLobby = useLeaveLobby()
   const sendMessage = useSendMessage()
   const [host, setHost] = useState(false)

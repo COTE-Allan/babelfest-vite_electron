@@ -73,7 +73,7 @@ export const MatchmakingProvider = ({ children }) => {
 
   useEffect(() => {
     if (serverStatus !== 'online') {
-      sendMessage('Les serveurs sont désactivés pour le moment.', 'error')
+      // sendMessage('Les serveurs sont désactivés pour le moment.', 'error')
       handleStopMatchmaking()
     }
   }, [serverStatus])

@@ -204,6 +204,20 @@
     "author": "Cielesis"
   },
   {
+    "url": "./skins/banners/banner_amine_takemikazuchi.png",
+    "name": "Maîtrise de la furie",
+    "unlockTip": "Obtenu en récompense du succès : 'Maître darwinien'",
+    "achievement": "HF_5fury",
+    "author": "Cielesis"
+  },
+  {
+    "url": "./skins/banners/banner_grafiti_voyageur.png",
+    "name": "Maîtrise du Voyageur",
+    "unlockTip": "Obtenu en récompense du succès : 'Énergivore'",
+    "achievement": "HF_6energy",
+    "author": "Cielesis"
+  },
+  {
     "url": "./skins/banners/banner_fondateur.png",
     "name": "Akumu VS Odasun",
     "unlockTip": "Offert à ceux qui ont grandement aidé au développement du jeu.",
@@ -295,5 +309,13 @@
     "shopFlag": "banner_shape_alternatif",
     "cost": 200,
     "author": "Ayuumiko"
+  },
+  {
+    "url": "./skins/banners/banner_klrgh_alt.png",
+    "name": "Kl'rgh Alternatif",
+    "unlockTip": "Acheté en boutique.",
+    "shopFlag": "banner_klrgh_alternatif",
+    "cost": 200,
+    "author": "Kula"
   }
 ]

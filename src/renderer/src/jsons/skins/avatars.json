@@ -191,6 +191,13 @@
     "author": "Adsanman & Clem-san"
   },
   {
+    "url": "./skins/avatars/avatar_laura_fire.png",
+    "name": "Sekhmet",
+    "unlockTip": "Obtenu en atteignant le niveau 57.",
+    "level": 57,
+    "author": "Cielesis"
+  },
+  {
     "url": "./skins/avatars/avatar_tulip_2.png",
     "name": "Tulip sérieuse",
     "unlockTip": "Obtenu en atteignant le niveau 64.",

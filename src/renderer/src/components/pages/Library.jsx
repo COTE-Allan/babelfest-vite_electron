@@ -720,7 +720,7 @@ export default function Library({ editorMode, deck }) {
                                 <div className="card-cost">
                                   <span className={`txt-rarity-${card.rarity}`}>{card.rarity}</span>
                                 </div>
-                                {editorMode && card.cost && (
+                                {editorMode && card.cost >= 0 && (
                                   <div className="card-credits">
                                     <GiCreditsCurrency size={20} />
                                     {card.cost}

@@ -75,12 +75,12 @@ function createWindow() {
     mainWindow.webContents.send('fullscreen-changed', false)
   })
   mainWindow.webContents.on('did-finish-load', () => {
-    // Ouvre DevTools avec F12
-    mainWindow.webContents.on('before-input-event', (event, input) => {
-      if (input.key === 'F12' && input.type === 'keyDown') {
-        mainWindow.webContents.openDevTools()
-      }
-    })
+    // DEBUGMODE : Ouvre DevTools avec F12
+    // mainWindow.webContents.on('before-input-event', (event, input) => {
+    //   if (input.key === 'F12' && input.type === 'keyDown') {
+    //     mainWindow.webContents.openDevTools()
+    //   }
+    // })
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {

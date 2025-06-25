@@ -238,3 +238,41 @@ export function permHP({ item, effect, pattern, effectInfos }) {
     executor: item
   }
 }
+
+export async function darwinBoost({ item, effectInfos, pattern, playerID }) {
+  let count = 0
+  let ach = false
+
+  for (const { id, card, owner } of pattern) {
+    if (id === item.id) continue
+    if (owner !== playerID || !card?.effects) continue
+    for (const effect of card.effects) {
+      if (effect.type === 'darwinien') {
+        count++
+      }
+    }
+  }
+
+  let target = atkEdit(item.card.name, count, [item])
+  target = depEdit(item.card.name, count, [item])
+
+  if (count >= 4) {
+    ach = 'HF_5fury'
+  }
+
+  return {
+    ach: ach,
+    targets: target,
+    log: {
+      trigger: item.card,
+      action: 'effect',
+      effectInfos,
+      result: {
+        custom: true,
+        icon: effectInfos.icon,
+        value: `+ ${count}`
+      }
+    },
+    executor: item
+  }
+}

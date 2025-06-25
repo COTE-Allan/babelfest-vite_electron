@@ -197,5 +197,9 @@
     "range": [2, 3, 4],
     "spawnUsed": false,
     "name": "Médecine douteuse"
+  },
+  {
+    "when": [1],
+    "type": "darwinien"
   }
 ]

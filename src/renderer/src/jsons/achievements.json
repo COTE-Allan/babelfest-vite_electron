@@ -182,5 +182,17 @@
     "name": "Lèche-vitrine",
     "desc": "Achetez 20 choses dans la boutique.",
     "url": "./skins/avatars/avatar_nemid_alternatif.png"
+  },
+  {
+    "id": "HF_5fury",
+    "name": "Maître darwinien",
+    "desc": "Démarrez un tour avec 5 cartes 'Furie Darwinienne' dans votre arène.",
+    "url": "./skins/banners/banner_amine_takemikazuchi.png"
+  },
+  {
+    "id": "HF_6energy",
+    "name": "Énergivore",
+    "desc": "Démarrez un tour avec 6 énergies.",
+    "url": "./skins/banners/banner_grafiti_voyageur.png"
   }
 ]

@@ -19,6 +19,7 @@ import mecanicaCards from '../../jsons/cards/mecanica.json'
 import promoCards from '../../jsons/cards/promo.json'
 import twentyfourCards from '../../jsons/cards/infini_2024.json'
 import twentyfiveCards from '../../jsons/cards/infini_2025.json'
+import darwinienCards from '../../jsons/cards/furie_darwinien.json'
 
 import bordersData from '../../jsons/skins/borders.json'
 import colorsData from '../../jsons/skins/colors.json'
@@ -120,7 +121,8 @@ export function getAllCards(getSpecials = true) {
     ...mecanicaCards.map(addUniqueId),
     ...promoCards.map(addUniqueId),
     ...twentyfourCards.map(addUniqueId),
-    ...twentyfiveCards.map(addUniqueId)
+    ...twentyfiveCards.map(addUniqueId),
+    ...darwinienCards.map(addUniqueId)
   )
 
   if (!getSpecials) cards = cards.filter((card) => card.rarity !== 5)
@@ -897,7 +899,8 @@ export function getAllAlternates() {
     ...mecanicaCards,
     ...promoCards,
     ...twentyfourCards,
-    ...twentyfiveCards
+    ...twentyfiveCards,
+    ...darwinienCards
   ]
 
   // 2. On parcourt chaque carte et on accumule toutes les alternates
@@ -923,4 +926,17 @@ export function getAllAlternates() {
 
 export function getAllShopSkin() {
   return allSkins.filter((skin) => skin.shopFlag != null)
+}
+
+export function CheckBatteryPack(pattern, playerID) {
+  let batteryPack = 0
+  for (const { card, owner } of pattern) {
+    if (owner !== playerID || !card?.effects) continue
+    for (const effect of card.effects) {
+      if (effect.type === 'batterypack') {
+        batteryPack++
+      }
+    }
+  }
+  return batteryPack
 }

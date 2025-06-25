@@ -70,6 +70,7 @@ export default function InGameMenus() {
         </IconButton>
 
         {phase === 4 && myTurn && !isSpectator && (
+          // TODO: trade gratuit avec batterie
           <IconButton
             onClick={() => {
               if (isExchangeValid && selectedShopCards.length !== 0 && selectedCards.length !== 0) {

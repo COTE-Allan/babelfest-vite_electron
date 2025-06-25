@@ -19,8 +19,9 @@ export const ServerProvider = ({ children }) => {
       (docSnapshot) => {
         if (docSnapshot.exists()) {
           const data = docSnapshot.data()
-          const TESTMODE = true
-          if (TESTMODE) {
+          // DEBUGMODE : Test mode
+          const DEBUGMODE = false
+          if (DEBUGMODE) {
             setServerStatus('online')
           } else {
             setServerStatus(data.status)

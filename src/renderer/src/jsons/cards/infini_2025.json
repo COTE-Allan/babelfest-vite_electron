@@ -1,6 +1,5 @@
 [
   {
-    "featured": true,
     "name": "Clémie",
     "title": "Chibi Joyeuse",
     "atk": 1,
@@ -38,7 +37,7 @@
     "basehp": 2,
     "url": "./cards/series25/babelfest_2025series2.png",
     "rarity": 2,
-    "cost": 6,
+    "cost": 4,
     "collection": "Série Infinie 2025",
     "year": 2025,
     "author": "Cielesis",
@@ -68,7 +67,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Le squelette",
     "title": "avec les épées là",
     "atk": 1,
@@ -130,7 +128,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Lyris",
     "title": "L'enfant de la lune",
     "atk": 2,
@@ -158,7 +155,6 @@
     ]
   },
   {
-    "featured": true,
     "name": "Maze Kayzerbach",
     "title": "Reine en fuite",
     "atk": 4,

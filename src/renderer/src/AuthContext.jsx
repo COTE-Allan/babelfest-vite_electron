@@ -246,33 +246,45 @@ export const AuthProvider = ({ children }) => {
     console.log('Utilisateur assigné au lobby avec succès')
   }
 
+  let localAchievements = new Set()
+
   const giveAchievement = async (achievementName) => {
     if (!user && !userInfo) return
-    const achievement = getAchievementById(achievementName)
 
-    if (userInfo.achievements && userInfo.achievements.includes(achievement.id)) {
+    const achievement = getAchievementById(achievementName)
+    console.log(userInfo.achievements)
+
+    // Check dans userInfo + dans localAchievements
+    if (userInfo.achievements?.includes(achievement.id) || localAchievements.has(achievement.id)) {
       return
     }
 
+    localAchievements.add(achievement.id) // Marquer comme déjà donné localement
+
     const userRef = doc(db, 'users', user.uid)
+
     await updateDoc(userRef, {
       achievements: arrayUnion(achievement.id)
     })
 
     playAchievementSound()
+
     toast.success(
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img width={50} style={{ marginRight: '10px' }} src={achievement.url} />
+        <img
+          width={50}
+          style={{ marginRight: '10px' }}
+          src={achievement.url}
+          alt={achievement.name}
+        />
         <span>Succès obtenu : {achievement.name}</span>
       </div>,
-      {
-        icon: false
-      }
+      { icon: false }
     )
 
     setUserInfo((prev) => ({
       ...prev,
-      achievements: [...prev.achievements, achievement.id]
+      achievements: [...(prev.achievements || []), achievement.id]
     }))
   }
 

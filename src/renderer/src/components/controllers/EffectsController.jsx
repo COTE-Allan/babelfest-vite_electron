@@ -57,7 +57,8 @@ export const useTryEffect = () => {
     diving: Tactics.Plongeon,
     flame: Offensives.Surchauffe,
     fireball: Offensives.Fireball,
-    atkModifier: Tactics.atkModifier
+    atkModifier: Tactics.atkModifier,
+    darwinien: Buffs.darwinBoost
   }
 
   const {
@@ -206,6 +207,7 @@ export const useTryEffect = () => {
                 defender: participants?.defender,
                 updatedDeadCell,
                 room,
+                playerID,
                 killer: killer,
                 shop,
                 effectInfos,

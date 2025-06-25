@@ -54,5 +54,19 @@
       { "name": "Boadicée", "title": "Cheffe de guerre" },
       { "name": "Erin", "title": "L'Éclat d'Espoir" }
     ]
+  },
+  {
+    "name": "Furie darwinienne",
+    "creator": "Cielesis",
+    "content": [
+      { "name": "Clémentine", "title": "Furie blanche" },
+      { "name": "Clémie", "title": "Chibi Joyeuse" },
+      { "name": "Amine", "title": "Sous-chef de La Falaise" },
+      { "name": "Lukas", "title": "à bout de force" },
+      { "name": "Léxa", "title": "Cheffe de la Falaise" },
+      { "name": "Laura", "title": "Sekhmet" },
+      { "name": "Amine", "title": "Takemikazuchi" },
+      { "name": "Le Voyageur", "title": "Mythe dessiné" }
+    ]
   }
 ]

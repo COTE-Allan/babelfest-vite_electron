@@ -355,5 +355,19 @@
     "desc": "C'est un chat. Vous lui trouverez bien une utilité.",
     "icon": "./effects/cat.png",
     "type": "Débuffs"
+  },
+  {
+    "slug": "darwinien",
+    "name": "Furie darwinienne",
+    "desc": "Au début d'une phase de préparation et jusqu'à la fin du tour, augmentez la valeur d'attaque et de déplacement de cette carte pour chacune de vos autres 'Furie darwinienne'.",
+    "icon": "./effects/furie-darwinien.png",
+    "type": "Buffs"
+  },
+  {
+    "slug": "batterypack",
+    "name": "Batterie surchargée",
+    "desc": "À partir du tour suivant l'invocation de cette carte, obtenez une énergie d'invocation et de déplacement supplémentaire tant que cette carte est dans l'arène.",
+    "icon": "./effects/battery-pack.png",
+    "type": "Tactiques"
   }
 ]

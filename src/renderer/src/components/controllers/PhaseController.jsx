@@ -3,6 +3,8 @@ import { GlobalContext } from '../providers/GlobalProvider'
 import { db } from '../../Firebase'
 import { setDoc, doc, updateDoc, writeBatch } from 'firebase/firestore'
 import { usePushLogsIntoBatch } from './LogsController'
+import { CheckBatteryPack } from '../others/toolBox'
+import { AuthContext } from '../../AuthContext'
 // Gérer toute les règles de controle autorisé pendant une phase précise
 // maxSelectableCardInHand : Nombre de carte selectionnable pendant la phase
 export function DefinePhaseRule(phase, cardPerHand) {
@@ -65,6 +67,7 @@ export const useEndTurn = () => {
     playerSelf,
     playerRival
   } = useContext(GlobalContext)
+  const { giveAchievement } = useContext(AuthContext)
   const pushLogsIntoBatch = usePushLogsIntoBatch()
 
   function switchActivePlayer() {
@@ -154,11 +157,18 @@ export const useEndTurn = () => {
       }
     }
 
-    if (phase === 1) {
-      updates[host ? 'player1.placementLeft' : 'player2.placementLeft'] = 4
+    // TODO: Crédit en plus via batterie ici
+    let batteries = CheckBatteryPack(pattern, playerID)
+
+    if (phase === 1 || phase === 4) {
+      updates[host ? 'player1.placementLeft' : 'player2.placementLeft'] = 4 + batteries
     }
-    if (phase === 2) {
-      updates[host ? 'player1.movesLeft' : 'player2.movesLeft'] = 4
+    if (phase === 2 || phase === 4) {
+      updates[host ? 'player1.movesLeft' : 'player2.movesLeft'] = 4 + batteries
+    }
+
+    if (phase === FINAL_PHASE && batteries >= 2) {
+      await giveAchievement('HF_6energy')
     }
 
     if (rivalEndedAttack) {

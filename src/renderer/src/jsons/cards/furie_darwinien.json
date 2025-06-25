@@ -1,0 +1,104 @@
+[
+  {
+    "featured": true,
+    "name": "Clémentine",
+    "title": "Furie blanche",
+    "atk": 1,
+    "dep": 1,
+    "hp": 2,
+    "baseatk": 1,
+    "basedep": 1,
+    "basehp": 2,
+    "url": "./cards/darwinien/furie_darwinienne_1.png",
+    "rarity": 1,
+    "cost": 2,
+    "collection": "Furie darwinienne",
+    "year": 2025,
+    "author": "Cielesis",
+    "effects": [
+      {
+        "when": [1],
+        "type": "darwinien"
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Laura",
+    "title": "Sekhmet",
+    "atk": 2,
+    "dep": 3,
+    "hp": 2,
+    "baseatk": 2,
+    "basedep": 3,
+    "basehp": 2,
+    "url": "./cards/darwinien/furie_darwinienne_2.png",
+    "rarity": 2,
+    "cost": 3,
+    "collection": "Furie darwinienne",
+    "year": 2025,
+    "author": "Cielesis",
+    "effects": [
+      {
+        "when": [1],
+        "type": "darwinien"
+      },
+      {
+        "when": ["cardDeath"],
+        "byme": true,
+        "type": "flame",
+        "alreadyUsed": false
+      }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Amine",
+    "title": "Takemikazuchi",
+    "atk": 3,
+    "dep": 3,
+    "hp": 3,
+    "baseatk": 3,
+    "basedep": 3,
+    "basehp": 3,
+    "url": "./cards/darwinien/furie_darwinienne_3.png",
+    "rarity": 3,
+    "cost": 10,
+    "collection": "Furie darwinienne",
+    "year": 2025,
+    "author": "Cielesis",
+    "effects": [
+      {
+        "when": [1],
+        "type": "darwinien"
+      },
+      { "when": ["attacked"], "type": "trap", "reusable": true }
+    ]
+  },
+  {
+    "featured": true,
+    "name": "Le Voyageur",
+    "title": "Mythe dessiné",
+    "atk": 0,
+    "dep": 0,
+    "hp": 5,
+    "baseatk": 0,
+    "basedep": 0,
+    "basehp": 5,
+    "url": "./cards/darwinien/furie_darwinienne_4.png",
+    "rarity": 4,
+    "cost": 20,
+    "collection": "Furie darwinienne",
+    "year": 2025,
+    "author": "Cielesis",
+    "effects": [
+      {
+        "type": "batterypack"
+      },
+      {
+        "when": [1],
+        "type": "darwinien"
+      }
+    ]
+  }
+]

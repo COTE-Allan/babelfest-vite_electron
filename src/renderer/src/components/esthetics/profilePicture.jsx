@@ -10,6 +10,9 @@ export default function ProfilePicture({ size, customUser, border }) {
     height: size
   }
 
+  const defaultBorder = ''
+  const defaultAvatar = ''
+
   if (border) {
     // Si border est un string, on assume qu'il s'agit du hex
     const borderHex = typeof border === 'string' ? border : border.hex
@@ -27,13 +30,13 @@ export default function ProfilePicture({ size, customUser, border }) {
 
   return (
     <div className="profilePic" style={style}>
-      {defUser.skin.border && (
+      {(defUser.skin?.border ?? defaultBorder) && (
         <div
           className="profilePic-border"
-          style={{ borderImage: `url(${defUser.skin.border}) 0 fill` }}
+          style={{ borderImage: `url(${defUser.skin?.border ?? defaultBorder}) 0 fill` }}
         ></div>
       )}
-      <img src={defUser.skin.avatar} alt="Image de profil de l'utilisateur" />
+      <img src={defUser.skin?.avatar ?? defaultAvatar} alt="Image de profil de l'utilisateur" />
     </div>
   )
 }

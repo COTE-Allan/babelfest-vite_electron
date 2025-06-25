@@ -200,5 +200,3 @@ export default function ScenesMaker() {
     )
   }
 }
-
-// TODO: OPTI CETTE MERDE
